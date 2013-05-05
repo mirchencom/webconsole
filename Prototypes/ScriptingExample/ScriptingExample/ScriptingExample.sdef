@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+
+<dictionary title="ScriptingExample Terminology">
+	<suite name="ScriptingExample Suite" code="SExa"
+		description="Classes for the ScriptingExample Application">
+		<class name="application" code="capp"  description="Our simple application class." inherits="application">
+			<cocoa class="NSApplication"/>
+			<property name="ready" code="Redy" type="boolean" access="r" description="ready"/>
+		</class>
+	</suite>
+</dictionary>
