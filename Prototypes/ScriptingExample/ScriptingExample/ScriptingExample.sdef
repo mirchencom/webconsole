@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
 
-<dictionary title="ScriptingExample Terminology">
+<!-- <dictionary title="ScriptingExample Terminology"> -->
+
+<!-- declare the namespace for using XInclude so we can include the standard suite -->
+<dictionary xmlns:xi="http://www.w3.org/2003/XInclude">
+    
+    
+    <!-- use XInclude to include the standard suite -->
+	<xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite)"/>
+
+
 	<suite name="ScriptingExample Suite" code="SExa"
 		description="Classes for the ScriptingExample Application">
 		<class name="application" code="capp"  description="Our simple application class." inherits="application">

@@ -18,6 +18,7 @@
 		4530B1391736F36A000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B1371736F36A000A52E2 /* InfoPlist.strings */; };
 		4530B13C1736F36A000A52E2 /* ScriptingExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B13B1736F36A000A52E2 /* ScriptingExampleTests.m */; };
 		4530B1461736FCF6000A52E2 /* ScriptingExample.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 4530B1451736FCF6000A52E2 /* ScriptingExample.sdef */; };
+		4530B14917370CBD000A52E2 /* NSApplication+ScriptingExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B14817370CBD000A52E2 /* NSApplication+ScriptingExample.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		4530B13A1736F36A000A52E2 /* ScriptingExampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptingExampleTests.h; sourceTree = "<group>"; };
 		4530B13B1736F36A000A52E2 /* ScriptingExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScriptingExampleTests.m; sourceTree = "<group>"; };
 		4530B1451736FCF6000A52E2 /* ScriptingExample.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ScriptingExample.sdef; sourceTree = "<group>"; };
+		4530B14717370CBD000A52E2 /* NSApplication+ScriptingExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+ScriptingExample.h"; sourceTree = "<group>"; };
+		4530B14817370CBD000A52E2 /* NSApplication+ScriptingExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+ScriptingExample.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,8 @@
 			children = (
 				4530B1231736F369000A52E2 /* AppDelegate.h */,
 				4530B1241736F369000A52E2 /* AppDelegate.m */,
+				4530B14717370CBD000A52E2 /* NSApplication+ScriptingExample.h */,
+				4530B14817370CBD000A52E2 /* NSApplication+ScriptingExample.m */,
 				4530B1261736F369000A52E2 /* MainMenu.xib */,
 				4530B1181736F369000A52E2 /* Supporting Files */,
 			);
@@ -267,6 +272,7 @@
 			files = (
 				4530B11E1736F369000A52E2 /* main.m in Sources */,
 				4530B1251736F369000A52E2 /* AppDelegate.m in Sources */,
+				4530B14917370CBD000A52E2 /* NSApplication+ScriptingExample.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +462,7 @@
 				4530B1411736F36A000A52E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4530B1421736F36A000A52E2 /* Build configuration list for PBXNativeTarget "ScriptingExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +471,7 @@
 				4530B1441736F36A000A52E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
