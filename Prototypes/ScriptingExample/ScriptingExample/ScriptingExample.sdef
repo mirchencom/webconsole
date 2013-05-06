@@ -7,13 +7,71 @@
  <dictionary xmlns:xi="http://www.w3.org/2003/XInclude">
     <xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite)"/>
 -->
-
-
 	<suite name="ScriptingExample Suite" code="SExa"
 		description="Classes for the ScriptingExample Application">
-		<class name="application" code="capp"  description="Our simple application class.">
+
+        <class name="application" code="capp"  description="Our simple application class.">
 			<cocoa class="NSApplication"/>
 			<property name="ready" code="Redy" type="boolean" access="r" description="ready"/>
 		</class>
-	</suite>
+
+		<enumeration name="preferredhands" code="LRnd">
+			<cocoa name="PreferredHands"/>
+			<enumerator name="Left Hand" code="LHrn" description="Prefers Left Hand">
+				<cocoa name="LeftHand"/>
+			</enumerator>
+			<enumerator name="Right Hand" code="RHrn" description="Prefers Right Hand">
+				<cocoa name="RightHand"/>
+			</enumerator>
+		</enumeration>
+        
+		<command name="do simple command" code="SVrbSimp" description="run a simple command with no parameters">
+			<cocoa class="SimpleCommand"/>
+			<result type="integer" description="returns the number seven"/>
+		</command>
+		
+		<command name="do direct parameter command" code="SVrbDpCm" description="run a simple command with a direct parameter">
+			<cocoa class="DirectParameterCommand"/>
+			<direct-parameter description="a text parameter passed to the command">
+				<type type="text"/>
+			</direct-parameter>
+			<result type="text" description="the direct parameter enclosed in quotes"/>
+		</command>
+		
+		<command name="do command with args" code="SVrbAgCm" description="run a command with a bunch of arguments">
+			<cocoa class="CommandWithArgs"/>
+			
+			<direct-parameter description="a text parameter passed to the command">
+				<type type="text"/>
+			</direct-parameter>
+			
+			<parameter name="blinking" code="savo" type="boolean" optional="yes"
+				description="a boolean parameter.">
+				<cocoa key="SaveOptions"/>
+			</parameter>
+			
+			<parameter name="preferred hand" code="LRnd" type="preferredhands" optional="yes"
+				description="a parameter using our enumeration.">
+				<cocoa key="TheHand"/>
+			</parameter>
+			
+			<parameter name="prose" code="Pros" type="text" optional="yes"
+				description="a text parameter.">
+				<cocoa key="ProseText"/>
+			</parameter>
+			
+			<parameter name="ivalue" code="iVal" type="integer" optional="yes"
+				description="an integer parameter.">
+				<cocoa key="IntegerValue"/>
+			</parameter>
+			
+			<parameter name="rvalue" code="rVal" type="real" optional="yes"
+				description="an real number parameter.">
+				<cocoa key="RealValue"/>
+			</parameter>
+			
+			<result type="text" description="the direct parameter enclosed in quotes"/>
+		</command>
+    
+    </suite>
 </dictionary>

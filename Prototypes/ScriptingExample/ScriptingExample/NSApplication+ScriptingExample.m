@@ -9,6 +9,7 @@
 #import "NSApplication+ScriptingExample.h"
 
 @implementation NSApplication (ScriptingExample)
+
 - (NSNumber*) ready {
     
     /* output to the log */
@@ -17,4 +18,5 @@
     /* return always ready */
 	return [NSNumber numberWithBool:YES];
 }
+
 @end

@@ -19,6 +19,9 @@
 		4530B13C1736F36A000A52E2 /* ScriptingExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B13B1736F36A000A52E2 /* ScriptingExampleTests.m */; };
 		4530B1461736FCF6000A52E2 /* ScriptingExample.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 4530B1451736FCF6000A52E2 /* ScriptingExample.sdef */; };
 		4530B14917370CBD000A52E2 /* NSApplication+ScriptingExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B14817370CBD000A52E2 /* NSApplication+ScriptingExample.m */; };
+		455EA8091737320C00E3C0D0 /* SimpleCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455EA8081737320C00E3C0D0 /* SimpleCommand.m */; };
+		455EA80C1737325300E3C0D0 /* CommandWithArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = 455EA80B1737325300E3C0D0 /* CommandWithArgs.m */; };
+		455EA80F1737329D00E3C0D0 /* DirectParameterCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455EA80E1737329D00E3C0D0 /* DirectParameterCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,12 @@
 		4530B1451736FCF6000A52E2 /* ScriptingExample.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ScriptingExample.sdef; sourceTree = "<group>"; };
 		4530B14717370CBD000A52E2 /* NSApplication+ScriptingExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+ScriptingExample.h"; sourceTree = "<group>"; };
 		4530B14817370CBD000A52E2 /* NSApplication+ScriptingExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+ScriptingExample.m"; sourceTree = "<group>"; };
+		455EA8071737320C00E3C0D0 /* SimpleCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCommand.h; sourceTree = "<group>"; };
+		455EA8081737320C00E3C0D0 /* SimpleCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleCommand.m; sourceTree = "<group>"; };
+		455EA80A1737325300E3C0D0 /* CommandWithArgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandWithArgs.h; sourceTree = "<group>"; };
+		455EA80B1737325300E3C0D0 /* CommandWithArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandWithArgs.m; sourceTree = "<group>"; };
+		455EA80D1737329D00E3C0D0 /* DirectParameterCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectParameterCommand.h; sourceTree = "<group>"; };
+		455EA80E1737329D00E3C0D0 /* DirectParameterCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectParameterCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +128,12 @@
 		4530B1171736F369000A52E2 /* ScriptingExample */ = {
 			isa = PBXGroup;
 			children = (
+				455EA8071737320C00E3C0D0 /* SimpleCommand.h */,
+				455EA8081737320C00E3C0D0 /* SimpleCommand.m */,
+				455EA80A1737325300E3C0D0 /* CommandWithArgs.h */,
+				455EA80B1737325300E3C0D0 /* CommandWithArgs.m */,
+				455EA80D1737329D00E3C0D0 /* DirectParameterCommand.h */,
+				455EA80E1737329D00E3C0D0 /* DirectParameterCommand.m */,
 				4530B1231736F369000A52E2 /* AppDelegate.h */,
 				4530B1241736F369000A52E2 /* AppDelegate.m */,
 				4530B14717370CBD000A52E2 /* NSApplication+ScriptingExample.h */,
@@ -273,6 +288,9 @@
 				4530B11E1736F369000A52E2 /* main.m in Sources */,
 				4530B1251736F369000A52E2 /* AppDelegate.m in Sources */,
 				4530B14917370CBD000A52E2 /* NSApplication+ScriptingExample.m in Sources */,
+				455EA8091737320C00E3C0D0 /* SimpleCommand.m in Sources */,
+				455EA80C1737325300E3C0D0 /* CommandWithArgs.m in Sources */,
+				455EA80F1737329D00E3C0D0 /* DirectParameterCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
