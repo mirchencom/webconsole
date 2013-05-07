@@ -17,6 +17,8 @@
 		458B431117388AF400A4B32C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458B42F117388AF400A4B32C /* Cocoa.framework */; };
 		458B431917388AF400A4B32C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 458B431717388AF400A4B32C /* InfoPlist.strings */; };
 		458B431C17388AF400A4B32C /* WebViewScriptingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 458B431B17388AF400A4B32C /* WebViewScriptingTests.m */; };
+		458B432617388B8200A4B32C /* WebViewScripting.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 458B432517388B8200A4B32C /* WebViewScripting.sdef */; };
+		458B432917388F5B00A4B32C /* LoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 458B432817388F5B00A4B32C /* LoadHTMLScriptCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,9 @@
 		458B431817388AF400A4B32C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		458B431A17388AF400A4B32C /* WebViewScriptingTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewScriptingTests.h; sourceTree = "<group>"; };
 		458B431B17388AF400A4B32C /* WebViewScriptingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewScriptingTests.m; sourceTree = "<group>"; };
+		458B432517388B8200A4B32C /* WebViewScripting.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewScripting.sdef; sourceTree = "<group>"; };
+		458B432717388F5B00A4B32C /* LoadHTMLScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadHTMLScriptCommand.h; sourceTree = "<group>"; };
+		458B432817388F5B00A4B32C /* LoadHTMLScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadHTMLScriptCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +119,8 @@
 		458B42F717388AF400A4B32C /* WebViewScripting */ = {
 			isa = PBXGroup;
 			children = (
+				458B432717388F5B00A4B32C /* LoadHTMLScriptCommand.h */,
+				458B432817388F5B00A4B32C /* LoadHTMLScriptCommand.m */,
 				458B430317388AF400A4B32C /* AppDelegate.h */,
 				458B430417388AF400A4B32C /* AppDelegate.m */,
 				458B430617388AF400A4B32C /* MainMenu.xib */,
@@ -130,6 +137,7 @@
 				458B42FD17388AF400A4B32C /* main.m */,
 				458B42FF17388AF400A4B32C /* WebViewScripting-Prefix.pch */,
 				458B430017388AF400A4B32C /* Credits.rtf */,
+				458B432517388B8200A4B32C /* WebViewScripting.sdef */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -227,6 +235,7 @@
 				458B42FC17388AF400A4B32C /* InfoPlist.strings in Resources */,
 				458B430217388AF400A4B32C /* Credits.rtf in Resources */,
 				458B430817388AF400A4B32C /* MainMenu.xib in Resources */,
+				458B432617388B8200A4B32C /* WebViewScripting.sdef in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +272,7 @@
 			files = (
 				458B42FE17388AF400A4B32C /* main.m in Sources */,
 				458B430517388AF400A4B32C /* AppDelegate.m in Sources */,
+				458B432917388F5B00A4B32C /* LoadHTMLScriptCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
