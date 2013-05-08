@@ -8,7 +8,9 @@
 
 #import "WebWindowController.h"
 
-@interface WebWindowController ()
+#import "WebWindowsController.h"
+
+@interface WebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
 @end
 
@@ -35,6 +37,12 @@
     
     NSLog(@"Got here");
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+}
+
+#pragma mark - NSWindowDelegate
+
+- (void)windowWillClose:(NSNotification *)notification {
+    [[WebWindowsController sharedWebWindowsController] removeWebWindowController:self];
 }
 
 @end

@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "WebWindowController.h"
+@class WebWindowController;
 
 @interface WebWindowsController : NSObject
 
 + (id)sharedWebWindowsController;
 - (void)addWebWindowWithHTML:(NSString *)HTML;
-
+- (void)removeWebWindowController:(WebWindowController *)webWindowController;
 @end

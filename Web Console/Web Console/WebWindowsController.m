@@ -8,9 +8,11 @@
 
 #import "WebWindowsController.h"
 
+#import "Web"
+
 #define kWebWindowNibName @"WebWindow"
 
-@interface WebWindowsController () <NSWindowDelegate>
+@interface WebWindowsController ()
 @property (nonatomic, strong) NSMutableArray *webWindowControllers;
 
 @end
@@ -38,17 +40,13 @@
 - (void)addWebWindowWithHTML:(NSString *)HTML {
     WebWindowController *webWindowController = [[WebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
-
     [webWindowController showWindow:self];
 	[webWindowController loadHTML:HTML];
     
     [self.webWindowControllers addObject:webWindowController];
 }
 
-#pragma mark - NSWindowDelegate
-
-- (void)windowWillClose:(NSNotification *)notification {
-    WebWindowsController *webWindowController = [notification object];
+- (void)removeWebWindowController:(WebWindowController *)webWindowController {
     [self.webWindowControllers removeObject:webWindowController];
 }
 
