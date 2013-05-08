@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+
+<dictionary title="Web Console Terminology">
+    <suite name="Web Console Suite" code="WCSC" description="Classes for the Web Console Application">
+        <class name="application" code="WCAD" description="Application class">
+            <cocoa class="NSApplication" />
+            <responds-to name="load HTML">
+                <cocoa method="loadHTML:" />
+            </responds-to>
+        </class>
+
+        <command name="load HTML" code="WCSCLHTM" description="Loads a string of HTML.">
+			<direct-parameter description="The HTML to load.">
+				<type type="text"/>
+			</direct-parameter>
+		</command>
+    </suite>
+</dictionary>
