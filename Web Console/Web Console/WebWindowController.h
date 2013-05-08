@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface WebWindowController : NSWindowController
+#import <WebKit/WebKit.h>
 
+@interface WebWindowController : NSWindowController
+- (void)loadHTML:(NSString *)HTML;
 @end

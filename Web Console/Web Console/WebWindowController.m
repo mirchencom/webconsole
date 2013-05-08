@@ -9,7 +9,7 @@
 #import "WebWindowController.h"
 
 @interface WebWindowController ()
-
+@property (weak) IBOutlet WebView *webView;
 @end
 
 @implementation WebWindowController
@@ -22,6 +22,10 @@
     }
     
     return self;
+}
+
+- (void)loadHTML:(NSString *)HTML {
+    [self.webView.mainFrame loadHTMLString:HTML baseURL:nil];
 }
 
 - (void)windowDidLoad

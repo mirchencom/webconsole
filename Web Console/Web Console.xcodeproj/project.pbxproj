@@ -22,6 +22,7 @@
 		45ADD9091739E73A008A6AE7 /* NSApplication+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD9081739E73A008A6AE7 /* NSApplication+AppleScript.m */; };
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
+		45ADD9111739F257008A6AE7 /* WebWindowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD9101739F257008A6AE7 /* WebWindowsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		45ADD90A1739E883008A6AE7 /* WebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowController.m; sourceTree = "<group>"; };
 		45ADD90D1739EA58008A6AE7 /* WebWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebWindow.xib; sourceTree = "<group>"; };
+		45ADD90F1739F257008A6AE7 /* WebWindowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowsController.h; sourceTree = "<group>"; };
+		45ADD9101739F257008A6AE7 /* WebWindowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,8 @@
 				45ADD90A1739E883008A6AE7 /* WebWindowController.h */,
 				45ADD90B1739E883008A6AE7 /* WebWindowController.m */,
 				45ADD90D1739EA58008A6AE7 /* WebWindow.xib */,
+				45ADD90F1739F257008A6AE7 /* WebWindowsController.h */,
+				45ADD9101739F257008A6AE7 /* WebWindowsController.m */,
 			);
 			path = "Web Console";
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				4530B0E31736E2A6000A52E2 /* AppDelegate.m in Sources */,
 				45ADD9091739E73A008A6AE7 /* NSApplication+AppleScript.m in Sources */,
 				45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */,
+				45ADD9111739F257008A6AE7 /* WebWindowsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
