@@ -1,19 +1,27 @@
 file_path_1: # File Path
   1: # Line number
-    - start: 1 # Match start
-      length: 2 # Match length
-    - start: 3
-      length: 4
+    text: Match 1
+    matches:
+      - start: 1 # Match start
+        length: 2 # Match length
+      - start: 3
+        length: 4
 file_path_2:
   2:
-    - start: 1
-      length: 2
-    - start: 3
-      length: 4
+    text: Match 2
+    matches:
+      - start: 1
+        length: 2
+      - start: 3
+        length: 4
   3: 
-    - start: 1
-      length: 2
+    text: Match 3
+    matches:
+      - start: 1
+        length: 2
 file_path_3:
   5: 
-    - start: 2
-      length: 4
+    text: Match 3
+    matches:
+      - start: 2
+        length: 4

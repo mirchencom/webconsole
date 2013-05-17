@@ -6,16 +6,18 @@ module WcAck
 
   def self.import_yml(file)
     file_hash = YAML.load_file(file)
+
     files = Array.new
-    file_hash.keys.each do |file_path|
+    file_hash.each do |file_path, line_hashes|
 
       file = WcAck::Match::File.new(file_path)
-      file_hash[file_path].each { |line_number, matches_hashes|
+      
+      line_hashes.each { |line_number, line_hash|
 
-        line = WcAck::Match::File::Line.new(line_number)
+        line = WcAck::Match::File::Line.new(line_number, line_hash["text"])
         file.lines.push(line)
 
-        matches_hashes.each { |match_hash|
+        line_hash["matches"].each { |match_hash|
           match = WcAck::Match::File::Line::Match.new(match_hash["start"], match_hash["length"])
           line.matches.push(match)
         }

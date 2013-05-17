@@ -8,9 +8,10 @@ module WcAck
       end
 
       class Line
-        attr_reader :line_number, :matches
-        def initialize(line_number)
+        attr_reader :line_number, :text, :matches
+        def initialize(line_number, text)
           @line_number = line_number
+          @text = text
           @matches = Array.new
         end
 
