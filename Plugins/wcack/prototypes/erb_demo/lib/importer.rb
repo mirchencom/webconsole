@@ -9,14 +9,14 @@ module WcAck
     files = Array.new
     file_hash.keys.each do |file_path|
 
-      file = WcAck::File.new(file_path)
+      file = WcAck::Match::File.new(file_path)
       file_hash[file_path].each { |line_number, matches_hashes|
 
-        line = WcAck::File::Line.new(line_number)
+        line = WcAck::Match::File::Line.new(line_number)
         file.lines.push(line)
 
         matches_hashes.each { |match_hash|
-          match = WcAck::File::Line::Match.new(match_hash["start"], match_hash["length"])
+          match = WcAck::Match::File::Line::Match.new(match_hash["start"], match_hash["length"])
           line.matches.push(match)
         }
 

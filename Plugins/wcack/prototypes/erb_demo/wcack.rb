@@ -1,4 +1,5 @@
 require "./lib/importer"
+require "./lib/template"
 
 # puts file_hash.inspect
 
@@ -10,4 +11,6 @@ YML_FILE="./support/test_data.yml"
 
 files = WcAck::import_yml(YML_FILE)
 
-WcAck::dump_files(files)
+# WcAck::dump_files(files)
+
+WcAck::render_files(files)
