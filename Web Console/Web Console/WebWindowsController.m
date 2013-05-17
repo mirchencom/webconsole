@@ -8,7 +8,7 @@
 
 #import "WebWindowsController.h"
 
-#import "Web"
+#import "WebWindowController.h"
 
 #define kWebWindowNibName @"WebWindow"
 
