@@ -1,6 +1,6 @@
 require "yaml"
 
-require "./lib/model"
+require File.join(File.dirname(__FILE__), 'model')
 
 module WcAck
 
