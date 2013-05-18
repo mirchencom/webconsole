@@ -3,17 +3,9 @@ require "yaml"
 
 require File.join(File.dirname(__FILE__), 'lib', 'parser')
 
-# TEST_DIRECTORY="./support/tests/data"
-# TEST_DATA_GENERATED=TEST_DIRECTORY + "/test_data_generated.yml"
-# TEST_DATA=TEST_DIRECTORY + "/test_data.yml"
-
 TEST_DIRECTORY=File.join(File.dirname(__FILE__), 'support', 'tests', 'data')
 TEST_DATA_GENERATED=File.join(TEST_DIRECTORY, 'test_data_generated.yml')
 TEST_DATA=File.join(TEST_DIRECTORY, 'test_data.yml')
-
-# TEST_DATA_GENERATED=File.join(File.dirname(__FILE__), 'support', 'tests', 'data', 'test_data_generated.yml')
-# TEST_DATA=File.join(File.dirname(__FILE__), 'support', 'tests', 'data', 'delete.yml')
-
 
 
 class TestWCACK < Test::Unit::TestCase
