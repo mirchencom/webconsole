@@ -8,11 +8,11 @@ require File.join(File.dirname(__FILE__), 'lib', 'parser')
 # TEST_DATA=TEST_DIRECTORY + "/test_data.yml"
 
 TEST_DIRECTORY=File.join(File.dirname(__FILE__), 'support', 'tests', 'data')
-# TEST_DATA_GENERATED=File.join(TEST_DIRECTORY, 'test_data_generated.yml')
-# TEST_DATA=File.join(TEST_DIRECTORY, 'test_data.yml')
+TEST_DATA_GENERATED=File.join(TEST_DIRECTORY, 'test_data_generated.yml')
+TEST_DATA=File.join(TEST_DIRECTORY, 'test_data.yml')
 
-TEST_DATA_GENERATED=File.join(File.dirname(__FILE__), 'support', 'tests', 'data', 'test_data_generated.yml')
-TEST_DATA=File.join(File.dirname(__FILE__), 'support', 'tests', 'data', 'test_data.yml')
+# TEST_DATA_GENERATED=File.join(File.dirname(__FILE__), 'support', 'tests', 'data', 'test_data_generated.yml')
+# TEST_DATA=File.join(File.dirname(__FILE__), 'support', 'tests', 'data', 'delete.yml')
 
 
 
@@ -32,6 +32,7 @@ class TestWCACK < Test::Unit::TestCase
 
   def test_test_data
     test_file_hash = YAML.load_file(TEST_DATA)
+
     test_data = TestDataFactory.test_data_from_test_file_hash(test_file_hash)
 
     match = Match.new(test_data.line)

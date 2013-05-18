@@ -16,8 +16,7 @@ MATCH=`ack -h -o -1 "ei.*?od" testfile.txt`
 
 LINENUMBER=`ack -H -o -1 "ei.*?od" testfile.txt`
 LINENUMBER=`echo $LINENUMBER | sed -n 's/.*:\(.*\):.*/\1/p'`
-
-LINE=`ack --color -H -1 "ei.*?od" testfile.txt`
+LINE=`ack --color -H -1 "ei.*?od" testfile.txt | sed 's//\\\x1b/g'`
 
 cat <<EOF > $OUTPUTFILE
 test:
