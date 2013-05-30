@@ -6,7 +6,21 @@ class Match
   METADATA_REGEXP = Regexp.new(ANSI_WRAPPER_REGEXP.source + ":#{ANSI_ESCAPE}[0-9]+#{ANSI_ESCAPE}:")
 
   def initialize(line)
+
+
+puts "line = " + line.to_s
+test = line.scan(Regexp.new("#{ANSI_ESCAPE}"))
+puts "test = " + test.to_s
+
+
+
     ansi_wrapped = line.scan(ANSI_WRAPPER_REGEXP)
+
+
+    # This array is empty
+puts "ansi_wrapped = " + ansi_wrapped.to_s
+
+
     @file_path = ansi_wrapped[0][0]
     @line_number = ansi_wrapped[1][0].to_i
     

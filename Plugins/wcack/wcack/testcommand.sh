@@ -14,6 +14,7 @@ usage () {
 RUN=false
 COLOR=false
 SMALL=false
+GENERATE=false
 while getopts srchg option; do
 	case "$option" in
 		c) 	COLOR=true

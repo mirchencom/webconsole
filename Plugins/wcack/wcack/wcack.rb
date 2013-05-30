@@ -14,6 +14,9 @@ ARGF.each do |line|
 
   match = Match.new(line)
 
+puts "match = " + match.inspect
+
+
   # puts match.filepath
   # puts match.line_number
 
