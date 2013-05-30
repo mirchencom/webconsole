@@ -10,17 +10,19 @@
 TERM="ei.*?od"
 TESTFILE="testfile.txt"
 OUTPUTFILE="test_data_generated.yml"
+LINEOUTPUTFILE="lineoutputfile"
 
 FILENAME=`ack -l -1 $TERM $TESTFILE`
-MATCH=`ack -h -o -1 "ei.*?od" testfile.txt`
+MATCH=`ack -h -o -1 $TERM $TESTFILE`
 
-LINENUMBER=`ack -H -o -1 "ei.*?od" testfile.txt`
+LINENUMBER=`ack -H -o -1 $TERM $TESTFILE`
 LINENUMBER=`echo $LINENUMBER | sed -n 's/.*:\(.*\):.*/\1/p'`
-LINE=`ack --color -H -1 "ei.*?od" testfile.txt | sed 's//\\\x1b/g'`
+
+ack --color -H -1 $TERM $TESTFILE > $LINEOUTPUTFILE
 
 cat <<EOF > $OUTPUTFILE
 test:
-  line: $LINE
+  lineoutputfile: $LINEOUTPUTFILE
   term: $TERM
 result:
   filename: $FILENAME

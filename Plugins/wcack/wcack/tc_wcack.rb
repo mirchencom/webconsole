@@ -18,20 +18,7 @@ class TestWCACK < Test::Unit::TestCase
 
     assert_equal(match.file_path, test_result.filename, "File path doesn't match.")
     assert_equal(match.line_number, test_result.line_number, "Line number doesn't match.")
-
-    # Add tests for individual matches here?
   end 
-
-  def test_test_data
-    test_file_hash = YAML.load_file(TEST_DATA)
-
-    test_data = TestDataFactory.test_data_from_test_file_hash(test_file_hash)
-
-    match = Match.new(test_data.line)
-    
-    puts match.inspect
-
-  end
 end
 
 # Helpers
@@ -48,7 +35,8 @@ end
 class TestData
   attr_reader :term, :line
   def initialize(test_data)
-    @line = test_data["line"]
+    line_output_file=File.join(TEST_DIRECTORY, test_data["lineoutputfile"])
+    @line = `cat "#{line_output_file}"`
     @term = test_data["term"]
   end
 end
