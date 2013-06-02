@@ -43,9 +43,9 @@ class TestData
 end
 
 class TestResult
-  attr_reader :line_number, :filename, :match
+  attr_reader :line_number, :file_path, :match
   def initialize(test_results)
-    @line_number = test_results["linenumber"]
+    @file_path = test_results["file_path"]
     @filename = test_results["filename"]
     @match = test_results["match"]
   end
