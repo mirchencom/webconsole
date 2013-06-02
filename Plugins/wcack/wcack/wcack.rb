@@ -12,10 +12,9 @@ require "./lib/parser"
 ARGF.each do |line|
   # puts line + "\n\nANEWLINE\n\n"
 
-  match = Match.new(line)
+  parsed_line = ParsedLine.new(line)
 
-puts "match = " + match.inspect
-
+puts "parsed_line = " + parsed_line.inspect
 
   # puts match.filepath
   # puts match.line_number

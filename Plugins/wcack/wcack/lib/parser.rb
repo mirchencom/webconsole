@@ -1,4 +1,4 @@
-class Match
+class ParsedLine
   attr_reader :file_path, :line_number
 
   ANSI_ESCAPE = '\x1b[^m]*m'
@@ -10,5 +10,7 @@ class Match
     @file_path = ansi_wrapped[0][0]
     @line_number = ansi_wrapped[1][0].to_i
     match = line.sub(METADATA_REGEXP, '')
+
+    puts match.inspect
   end
 end

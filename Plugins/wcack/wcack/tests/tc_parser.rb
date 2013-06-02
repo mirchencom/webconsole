@@ -1,12 +1,13 @@
 require "test/unit"
 require "yaml"
 
-require File.join(File.dirname(__FILE__), 'lib', 'parser')
+PARSER_FILE = File.join(File.dirname(__FILE__), '..', 'lib', 'parser')
+puts PARSER_FILE
+require PARSER_FILE
 
-TEST_DIRECTORY=File.join(File.dirname(__FILE__), 'support', 'tests', 'data')
+TEST_DIRECTORY=File.join(File.dirname(__FILE__), 'data')
 TEST_DATA_GENERATED=File.join(TEST_DIRECTORY, 'test_data_generated.yml')
 TEST_DATA=File.join(TEST_DIRECTORY, 'test_data.yml')
-
 
 class TestWCACK < Test::Unit::TestCase
   def test_test_data_generated
@@ -14,10 +15,10 @@ class TestWCACK < Test::Unit::TestCase
     test_data = TestDataFactory.test_data_from_test_file_hash(test_file_hash)
     test_result = TestDataFactory.test_result_from_test_file_hash(test_file_hash)
 
-    match = Match.new(test_data.line)
+    parse_line = ParsedLine.new(test_data.line)
 
-    assert_equal(match.file_path, test_result.filename, "File path doesn't match.")
-    assert_equal(match.line_number, test_result.line_number, "Line number doesn't match.")
+    assert_equal(parse_line.file_path, test_result.filename, "File path doesn't match.")
+    assert_equal(parse_line.line_number, test_result.line_number, "Line number doesn't match.")
   end 
 end
 
