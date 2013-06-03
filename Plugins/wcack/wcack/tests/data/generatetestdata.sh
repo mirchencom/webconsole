@@ -7,10 +7,20 @@
 # ack -h -o -1 "ei.*?od" testfile.txt  : returns just the match
 # ack -H -o -1 "ei.*?od" testfile.txt : As close as I can get to the line number
 
+# Add an option either to print to stdout or write to file
+
+
+
 SEARCH_TERM="ei.*?od"
 OUTPUT_YAML_FILE="test_data_generated.yml"
-OUTPUT_DATA_FILE="line_output_file"
+OUTPUT_INPUT_FILE="test_data_input_file"
 TEST_FILES=(testfile.txt testfile2.txt)
+
+exec > $OUTPUT_YAML_FILE
+
+ack --color --with-filename $SEARCH_TERM ${TEST_FILES[@]} > $OUTPUT_INPUT_FILE
+echo "input_file: $OUTPUT_INPUT_FILE"
+echo "results:"
 
 function GENERATE_TEST_DATA () {
 	TERM=$1
@@ -18,47 +28,21 @@ function GENERATE_TEST_DATA () {
 
 	FILE_PATH=`ack --files-with-matches $TERM $TEST_FILE`
 
-	echo $FILE_PATH
-	TEXT_MATCHES=(`ack --no-filename -o $TERM $thisTEST_FILE`)
-ack --with-filename --noheading --nocolor -o 	
 
+	LINE_MATCHES=(`ack --with-filename --noheading --nocolor -o $TERM $thisTEST_FILE`)
 	
-	for thisTEXT_MATCH in ${TEXT_MATCHES[*]}; do
-		LINE_NUMBER=`ack --with-filename -o -1 $TERM $TESTFILE`
-		LINENUMBER=`echo $LINENUMBER | sed -n 's/.*:\(.*\):.*/\1/p'`
+	for thisLINE_MATCH in ${LINE_MATCHES[*]}; do
+		LINE_NUMBER=`echo $thisLINE_MATCH | sed -n 's/.*:\(.*\):.*/\1/p'`
 
-		# echo $thisTEXT_MATCH
+
+		MATCHED_TEXT=`echo $thisLINE_MATCH | sed -n 's/.*:.*:\(.*\)/\1/p'`
+
+		echo "    - file_path: $FILE_PATH"
+		echo "      line_number:  $LINE_NUMBER"
+		echo "      matched_text: $MATCHED_TEXT"
 	done
 }
-
 
 for thisTEST_FILE in ${TEST_FILES[*]}; do
 	GENERATE_TEST_DATA "$SEARCH_TERM" "$thisTEST_FILE"
 done
-
-exit 0
-
-
-
-# Per match
-
-# Convert this to parsing each line of output
-
-
-
-ack --with-filename -o "ei.*?od" "testfile.txt"
-
-# ack --with-filename --noheading --nocolor -o "ei.*?od" testfile.txt testfile2.txt
-
-# Output the line to separate file because 
-ack --color --with-filename -1 $TERM $TESTFILE > $LINEOUTPUTFILE
-
-cat <<EOF > $OUTPUTFILE
-test_data:
-  line_output_file: $LINEOUTPUTFILE
-  search_term: $TERM
-result_data:
-  file_path: $FILEPATH
-  matched_text: $MATCHEDTEXT
-  line_number: $LINENUMBER
-EOF
