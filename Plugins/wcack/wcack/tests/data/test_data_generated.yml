@@ -1,3 +1,5 @@
+input_file: test_data_input_file
+results:
     - file_path: testfile.txt
       line_number:  1
       matched_text: eiusmod

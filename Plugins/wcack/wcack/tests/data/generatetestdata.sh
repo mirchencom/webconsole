@@ -1,22 +1,34 @@
-#!/bin/sh
-
-# This would be better served if ack worked as a subprocess of a shell script, but it doesn't
-
-# "ei.*?od" 
-# ack -l -1 "ei.*?od" testfile.txt : return filename
-# ack -h -o -1 "ei.*?od" testfile.txt  : returns just the match
-# ack -H -o -1 "ei.*?od" testfile.txt : As close as I can get to the line number
-
-# Add an option either to print to stdout or write to file
-
-
+#!/bin/bash
 
 SEARCH_TERM="ei.*?od"
 OUTPUT_YAML_FILE="test_data_generated.yml"
 OUTPUT_INPUT_FILE="test_data_input_file"
 TEST_FILES=(testfile.txt testfile2.txt)
 
-exec > $OUTPUT_YAML_FILE
+usage () {
+	echo "Usage: generatetestdata [-v]"
+}
+
+VERBOSE=false
+while getopts vh option; do
+	case "$option" in
+	    v)  VERBOSE=true
+			;;
+	    h)  usage
+	        exit 0 
+	        ;;
+	    \?) echo "Invalid option or missing argument"
+			usage
+	        exit 1
+	        ;;
+	esac
+done
+
+if $VERBOSE; then
+	exec > >(tee $OUTPUT_YAML_FILE)
+else
+	exec > $OUTPUT_YAML_FILE
+fi
 
 ack --color --with-filename $SEARCH_TERM ${TEST_FILES[@]} > $OUTPUT_INPUT_FILE
 echo "input_file: $OUTPUT_INPUT_FILE"
