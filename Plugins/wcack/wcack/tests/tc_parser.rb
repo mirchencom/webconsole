@@ -10,14 +10,16 @@ TEST_DATA_GENERATED=File.join(TEST_DIRECTORY, 'test_data_generated.yml')
 class TestWCACK < Test::Unit::TestCase
   def test_test_data_generated
     test_file_hash = YAML.load_file(TEST_DATA_GENERATED)
-    
-    # test_results = 
-
     test_data = TestDataFactory.get_input_data(test_file_hash)
+    test_results = TestDataFactory.get_test_results(test_file_hash)
 
-    test_results = TestDataFactory.test_result_from_test_file_hash(test_file_hash)
+#     test_results.each { |test_result|
+# puts "test_result.file_path = " + test_result.file_path.to_s
+# puts "test_result.line_number = " + test_result.line_number.to_s
+# puts "test_result.matched_text = " + test_result.matched_text.to_s
+#     }
 
-    # WcACK.load()
+    WcAck.load(test_data)
 
     # parse_line = ParsedLine.new(test_data.line)
 
@@ -35,16 +37,19 @@ class TestDataFactory
     input_file=File.join(TEST_DIRECTORY, hash[INPUT_FILE_KEY])
     `cat "#{input_file}"`
   end
-  def self.test_result_from_test_file_hash(test_file_hash)
-    TestResult.new(test_file_hash[RESULTS_KEY])
+  def self.get_test_results(test_file_hash)
+    test_results_hashes = test_file_hash[RESULTS_KEY]
+    Array.new(test_results_hashes.count) { |i|
+      TestResult.new(test_results_hashes[i])
+    }    
   end
 end
 
 class TestResult
-  attr_reader :line_number, :file_path, :match
-  def initialize(test_results)
-    @file_path = test_results["file_path"]
-    @filename = test_results["filename"]
-    @match = test_results["match"]
+  attr_reader  :file_path, :line_number, :matched_text
+  def initialize(test_results_hash)
+    @file_path = test_results_hash["file_path"]
+    @line_number = test_results_hash["line_number"]
+    @matched_text = test_results_hash["matched_text"]
   end
 end

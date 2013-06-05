@@ -1,9 +1,15 @@
 module WcAck
   def self.load data
-    puts data
-    
-  end
 
+    just_one = true
+    data.each_line { |line|
+      if just_one
+        parsed_line = ParsedLine.new(line)
+        puts parsed_line
+        just_one = false
+      end
+    }    
+  end
 
   class ParsedLine
     attr_reader :file_path, :line_number
