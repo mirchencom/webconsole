@@ -10,7 +10,7 @@ module WcAck
     files = Array.new
     file_hash.each do |file_path, line_hashes|
 
-      file = WcAck::Match::File.new(file_path)
+      file = WcAck::fl
       
       line_hashes.each { |line_number, line_hash|
 
