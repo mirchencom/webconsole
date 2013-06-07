@@ -19,7 +19,9 @@ class TestWCACK < Test::Unit::TestCase
 # puts "test_result.matched_text = " + test_result.matched_text.to_s
 #     }
 
-    WcAck.load(test_data)
+    files_hash = WcAck.load(test_data)
+
+    puts files_hash
 
     # parse_line = ParsedLine.new(test_data.line)
 

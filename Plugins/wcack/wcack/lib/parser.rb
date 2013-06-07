@@ -15,7 +15,8 @@ module WcAck
     LINE_ENDING_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '\x1b\[K')
 
     def initialize
-      @match_manager = MatchManager.new      
+      @files_hash = Hash.new
+      # @match_manager = MatchManager.new      
     end
     
     def parse(data)
@@ -26,59 +27,60 @@ module WcAck
           just_one = false
         end
       }
+      return @files_hash
     end
 
     private
 
-    def parse_line(line)
-puts "line = " + line.to_s
+    def parse_line(raw_line)
+      ansi_wrapped = raw_line.scan(ANSI_WRAPPER_REGEXP)
 
-
-        ansi_wrapped = line.scan(ANSI_WRAPPER_REGEXP)
-        text = line.sub(METADATA_REGEXP, '')
-
-        index = 0
-        while index && index < text.length
-puts "index = " + index.to_s
-puts "text = " + text.to_s
-
-          index = text.index(ANSI_WRAPPER_REGEXP)
-          if index
-            matched_text = text.match(ANSI_WRAPPER_REGEXP)[1]
-            text.sub!(ANSI_WRAPPER_REGEXP, matched_text)
-            puts "matched_text.length = " + matched_text.length.to_s
-          end                 
-        end
-        text.sub!(LINE_ENDING_REGEXP, '') 
-        text.rstrip!
-
-
-
-
-
-
-        file_path = ansi_wrapped[0][0]
-        file = @match_manager.file_with_file_path(file_path)
-
-        line_number = ansi_wrapped[1][0].to_i        
-
-# puts "ansi_wrapped = " + ansi_wrapped.to_s    
-    end
-
-    class MatchManager
-      def initialize
-        @files_hash = Hash.new
+      file_path = ansi_wrapped[0][0]
+      # file = @match_manager.file_with_file_path(file_path)
+      file = @files_hash[file_path]
+      if !file
+        file = Match::File.new(file_path)
+        @files_hash[file_path] = file
       end
 
-      def file_with_file_path(file_path)
-        file = @files_hash[file_path]
-        if !file
-          file = Match::File.new(file_path)
-          @files_hash[file_path] = file
-        end
+      line_number = ansi_wrapped[1][0].to_i
+      line = Match::File::Line.new(line_number)
+      file.lines.push(line)
 
-        return file
+      text = raw_line.sub(METADATA_REGEXP, '')
+      index = 0
+      while index && index < text.length
+        index = text.index(ANSI_WRAPPER_REGEXP)
+        if index
+          matched_text = text.match(ANSI_WRAPPER_REGEXP)[1]
+          text.sub!(ANSI_WRAPPER_REGEXP, matched_text)
+          length = matched_text.length
+
+          match = Match::File::Line::Match.new(index, length)
+
+          line.matches.push(match)
+        end                 
       end
+      text.sub!(LINE_ENDING_REGEXP, '') 
+      text.rstrip!
+
+      line.text = text
     end
+
+    # class MatchManager
+    #   def initialize
+    #     @files_hash = Hash.new
+    #   end
+    # 
+    #   def file_with_file_path(file_path)
+    #     file = @files_hash[file_path]
+    #     if !file
+    #       file = Match::File.new(file_path)
+    #       @files_hash[file_path] = file
+    #     end
+    # 
+    #     return file
+    #   end
+    # end
   end
 end
