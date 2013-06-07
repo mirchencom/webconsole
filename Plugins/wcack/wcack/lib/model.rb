@@ -16,9 +16,9 @@ module WcAck
         end
 
         class Match
-          attr_reader :start, :length
-          def initialize(start, length)
-            @start = start
+          attr_reader :index, :length
+          def initialize(index, length)
+            @index = index
             @length = length
           end
         end

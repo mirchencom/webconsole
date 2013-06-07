@@ -9,6 +9,7 @@ module WcAck
 
   class Parser
     ANSI_ESCAPE = '\x1b[^m]*m'
+    ANSI_ESCAPE_REGEXP = Regexp.new("#{ANSI_ESCAPE}")
     ANSI_WRAPPER_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '(.+?)' + "#{ANSI_ESCAPE}")
     METADATA_REGEXP = Regexp.new(ANSI_WRAPPER_REGEXP.source + ":#{ANSI_ESCAPE}[0-9]+#{ANSI_ESCAPE}:")
 
@@ -29,35 +30,49 @@ module WcAck
     private
 
     def parse_line(line)
-  puts "line = " + line.to_s
+puts "line = " + line.to_s
 
 
         ansi_wrapped = line.scan(ANSI_WRAPPER_REGEXP)
-        raw_text = line.sub(METADATA_REGEXP, '')
+        text = line.sub(METADATA_REGEXP, '')
 
-puts "raw_text = " + raw_text
+        index = 0
+        while index && index < text.length
+puts "index = " + index.to_s
+puts "text = " + text.to_s
+
+          index = text.index(ANSI_ESCAPE_REGEXP)
+          text.sub!(ANSI_ESCAPE_REGEXP, '')
+
+
+
+          # matched_text = text.pattern(ANSI_WRAPPER_REGEXP, offset)
+          # index = text.index(ANSI_ESCAPE_REGEXP)
+          # text.sub!(ANSI_WRAPPER_REGEXP, match)
+          # length = matched_text.length
+
+          # Find substring regular expression, remove it and store the match
+                    
+        end
+
+
+# puts "raw_text = " + raw_text
+
+
+# 1. Use regular expressions to find the beginning and end of each match
+# 2. Remove the ANSI_ESCAPE codes as I iterate through and find them
+
+
+
+
+
 
         file_path = ansi_wrapped[0][0]
-
         file = @match_manager.file_with_file_path(file_path)
 
         line_number = ansi_wrapped[1][0].to_i        
-        
 
-
-
-
-
-
-
-  puts "ansi_wrapped = " + ansi_wrapped.to_s
-
-
-
-
-
-
-    
+# puts "ansi_wrapped = " + ansi_wrapped.to_s    
     end
 
     class MatchManager
