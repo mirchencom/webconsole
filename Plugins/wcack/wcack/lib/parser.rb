@@ -16,16 +16,15 @@ module WcAck
 
     def initialize
       @files_hash = Hash.new
-      # @match_manager = MatchManager.new      
     end
     
     def parse(data)
       just_one = true
       data.each_line { |line|
-        if just_one
+        # if just_one
           parse_line(line)
-          just_one = false
-        end
+          # just_one = false
+        # end
       }
       return @files_hash
     end
@@ -36,7 +35,6 @@ module WcAck
       ansi_wrapped = raw_line.scan(ANSI_WRAPPER_REGEXP)
 
       file_path = ansi_wrapped[0][0]
-      # file = @match_manager.file_with_file_path(file_path)
       file = @files_hash[file_path]
       if !file
         file = Match::File.new(file_path)
@@ -66,21 +64,5 @@ module WcAck
 
       line.text = text
     end
-
-    # class MatchManager
-    #   def initialize
-    #     @files_hash = Hash.new
-    #   end
-    # 
-    #   def file_with_file_path(file_path)
-    #     file = @files_hash[file_path]
-    #     if !file
-    #       file = Match::File.new(file_path)
-    #       @files_hash[file_path] = file
-    #     end
-    # 
-    #     return file
-    #   end
-    # end
   end
 end
