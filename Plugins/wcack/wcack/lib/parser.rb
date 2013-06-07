@@ -12,6 +12,7 @@ module WcAck
     ANSI_ESCAPE_REGEXP = Regexp.new("#{ANSI_ESCAPE}")
     ANSI_WRAPPER_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '(.+?)' + "#{ANSI_ESCAPE}")
     METADATA_REGEXP = Regexp.new(ANSI_WRAPPER_REGEXP.source + ":#{ANSI_ESCAPE}[0-9]+#{ANSI_ESCAPE}:")
+    LINE_ENDING_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '\x1b\[K')
 
     def initialize
       @match_manager = MatchManager.new      
@@ -46,36 +47,10 @@ puts "text = " + text.to_s
             matched_text = text.match(ANSI_WRAPPER_REGEXP)[1]
             text.sub!(ANSI_WRAPPER_REGEXP, matched_text)
             puts "matched_text.length = " + matched_text.length.to_s
-          end
-
-
-          
-
-
-
-          # index = text.index(ANSI_ESCAPE_REGEXP)
-
-
-          
-
-
-
-
-          # matched_text = text.pattern(ANSI_WRAPPER_REGEXP, offset)
-          # index = text.index(ANSI_ESCAPE_REGEXP)
-          # text.sub!(ANSI_WRAPPER_REGEXP, match)
-          # length = matched_text.length
-
-          # Find substring regular expression, remove it and store the match
-                    
+          end                 
         end
-
-
-# puts "raw_text = " + raw_text
-
-
-# 1. Use regular expressions to find the beginning and end of each match
-# 2. Remove the ANSI_ESCAPE codes as I iterate through and find them
+        text.sub!(LINE_ENDING_REGEXP, '') 
+        text.rstrip!
 
 
 
