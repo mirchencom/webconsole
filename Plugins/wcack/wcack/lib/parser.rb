@@ -41,8 +41,20 @@ puts "line = " + line.to_s
 puts "index = " + index.to_s
 puts "text = " + text.to_s
 
-          index = text.index(ANSI_ESCAPE_REGEXP)
+
+          matched_text = text[ANSI_WRAPPER_REGEXP]
+puts "matched_text = " + matched_text.to_s
+          matched_text = text.match(ANSI_WRAPPER_REGEXP)[1]
+puts "matched_text = " + matched_text.to_s
+
+
+          index = text.index(ANSI_WRAPPER_REGEXP)
+
+          # index = text.index(ANSI_ESCAPE_REGEXP)
           text.sub!(ANSI_ESCAPE_REGEXP, '')
+
+          
+
 
 
 
