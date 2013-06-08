@@ -24,7 +24,7 @@ module WcAck
           end
 
           def text
-            @line.text[index..index + length]
+            @line.text[index..(index + length - 1)]
           end
         end
 

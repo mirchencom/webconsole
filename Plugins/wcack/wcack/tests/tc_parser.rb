@@ -23,9 +23,6 @@ class TestWCACK < Test::Unit::TestCase
         assert_equal(test_line.line_number, line.line_number, "Line numbers don't match.")
         assert_equal(test_line.matches.count, line.matches.count, "Match counts don't match")
         test_line.matches.zip(line.matches).each do |test_match, match|
-puts "test_match.text = " + test_match.text.to_s + "."
-puts "match.text = " + match.text.to_s + "."
-
           assert_equal(test_match.text, match.text, "Matched text doesn't match")
         end
       end
