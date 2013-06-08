@@ -19,7 +19,7 @@ module WcAck
     end
     
     def parse(data)
-      just_one = true
+      # just_one = true
       data.each_line { |line|
         # if just_one
           parse_line(line)
@@ -54,7 +54,7 @@ module WcAck
           text.sub!(ANSI_WRAPPER_REGEXP, matched_text)
           length = matched_text.length
 
-          match = Match::File::Line::Match.new(index, length)
+          match = Match::File::Line::Match.new(index, length, line)
 
           line.matches.push(match)
         end                 

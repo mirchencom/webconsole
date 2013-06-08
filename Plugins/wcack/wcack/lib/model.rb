@@ -1,11 +1,12 @@
 module WcAck
   module Match
     class File
-      attr_reader :path, :lines
-      def initialize(path)
-        @path = path
+      attr_reader :file_path, :lines
+      def initialize(file_path)
+        @file_path = file_path
         @lines = Array.new
       end
+
 
       class Line
         attr_reader :line_number, :matches
@@ -15,11 +16,20 @@ module WcAck
           @matches = Array.new
         end
 
+        def matched_text(index)
+          match = @matches[index]
+        end
+
         class Match
-          attr_reader :index, :length
-          def initialize(index, length)
+          attr_reader :index, :length, :text
+          def initialize(index, length, line)
             @index = index
             @length = length
+            @line = line
+          end
+
+          def text
+            @line.text[index..index + length]
           end
         end
 

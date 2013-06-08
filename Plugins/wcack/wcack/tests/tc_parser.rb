@@ -13,15 +13,39 @@ class TestWCACK < Test::Unit::TestCase
     test_data = TestDataFactory.get_input_data(test_file_hash)
     test_results = TestDataFactory.get_test_results(test_file_hash)
 
-#     test_results.each { |test_result|
+    files_hash = WcAck.load(test_data)
+
+    just_one = true
+    test_results.each { |test_result|
+        if just_one
+          just_one = false
+
+
+          file_path = test_result.file_path
+          file = files_hash[file_path]
+        
+          # Inspect one file
+        
+          file.lines.each { |line|
+            line.matches.each { |match|
+              puts "match.text = " + match.text.to_s
+            }
+          }
+        end
+
 # puts "test_result.file_path = " + test_result.file_path.to_s
 # puts "test_result.line_number = " + test_result.line_number.to_s
 # puts "test_result.matched_text = " + test_result.matched_text.to_s
-#     }
 
-    files_hash = WcAck.load(test_data)
+      
+    }
 
-    puts files_hash
+
+
+    
+
+# puts "files_hash = " + files_hash.to_s
+
 
     # parse_line = ParsedLine.new(test_data.line)
 
