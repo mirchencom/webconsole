@@ -10,12 +10,22 @@ TEST_DATA_GENERATED=File.join(TEST_DIRECTORY, 'test_data_generated.yml')
 class TestWCACK < Test::Unit::TestCase
   def test_test_data_generated
     test_data_hash = YAML.load_file(TEST_DATA_GENERATED)
-    test_data = TestDataFactory.get_input_data(test_data_hash)
-    test_files_hash = TestDataFactory.get_test_results(test_data_hash)
+    test_data = TestData.get_input_data(test_data_hash)
+    test_files_hash = TestData.get_test_results(test_data_hash)
 
     files_hash = WcAck.load(test_data)
 
-puts "test_files_hash.inspect = " + test_files_hash.inspect.to_s
+# Parse the test_files_hash and iterate through them comparing to the corresponding real data results
+
+    test_files_hash.keys.each do |file_path|
+      test_file = test_files_hash[file_path]
+      file = files_hash[file_path]
+      
+      test_file.lines.zip(file.lines).each do |test_line, line|
+        assert_equal(line.line_number, test_line.line_number, "Line numbers don't match.")
+        # test_file.lines.zip(file.lines).each do |test_line, line|
+      end
+    end
 
 
 #     just_one = true
@@ -67,9 +77,13 @@ end
 
 # Helpers
 
-INPUT_FILE_KEY = "input_file"
-RESULTS_KEY = "results"
-class TestDataFactory
+class TestData
+  INPUT_FILE_KEY = "input_file"
+  RESULTS_KEY = "results"
+  FILE_PATH_KEY = "file_path"
+  LINE_NUMBER_KEY = "line_number"
+  MATCHED_TEXT_KEY = "matched_text"
+
   def self.get_input_data(hash)
     input_file=File.join(TEST_DIRECTORY, hash[INPUT_FILE_KEY])
     `cat "#{input_file}"`
@@ -78,25 +92,50 @@ class TestDataFactory
     test_results_hashes = test_data_hash[RESULTS_KEY]
 
     test_files_hash = Hash.new
+    test_lines_hash = Hash.new
     test_results_hashes.each { |test_results_hash|
-      file_path = test_results_hash["file_path"]
-      line_number = test_results_hash["line_number"]
-      matched_text = test_results_hash["matched_text"]
+      file_path = test_results_hash[FILE_PATH_KEY]
+      line_number = test_results_hash[LINE_NUMBER_KEY]
+      matched_text = test_results_hash[MATCHED_TEXT_KEY]
 
-      test_file_lines_hash = test_files_hash[file_path]
-      if !test_file_lines_hash
-        test_file_lines_hash = Hash.new
-        test_files_hash[file_path] = test_file_lines_hash
+      test_file = test_files_hash[file_path]
+      if !test_file
+        test_file = TestFile.new(file_path)
+        test_files_hash[file_path] = test_file
       end
-      
-      matched_text_array = test_file_lines_hash[line_number]
-      if !matched_text_array
-        matched_text_array = Array.new
-        test_file_lines_hash[line_number] = matched_text_array
+
+      test_line = test_lines_hash[line_number]
+      if !test_line
+        test_line = TestFile::TestLine.new(line_number)
+        test_lines_hash[line_number] = test_line
+        test_file.lines.push(test_line)
       end
-      matched_text_array.push(matched_text)
+
+      match = TestFile::TestLine::TestMatch.new(matched_text)
+      test_line.matches.push(match)
     }
     
     return test_files_hash
+  end
+
+  class TestFile
+    attr_reader :file_path, :lines
+    def initialize(file_path)
+      @file_path = file_path
+      @lines = Array.new
+    end
+    class TestLine
+      attr_reader :line_number, :matches
+      def initialize(line_number)
+        @line_number = line_number
+        @matches = Array.new
+      end
+      class TestMatch
+        attr_reader :text
+        def initialize(text)
+          @text = text
+        end
+      end
+    end
   end
 end
