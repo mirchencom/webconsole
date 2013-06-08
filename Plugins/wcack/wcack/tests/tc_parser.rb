@@ -15,87 +15,21 @@ class TestWCACK < Test::Unit::TestCase
 
     files_hash = WcAck.load(test_data)
 
-# puts "test_files_hash.inspect = " + test_files_hash.inspect.to_s
-
-
     test_files_hash.keys.each do |file_path|
       test_file = test_files_hash[file_path]
       file = files_hash[file_path]
-
-
       
       test_file.lines.zip(file.lines).each do |test_line, line|
         assert_equal(test_line.line_number, line.line_number, "Line numbers don't match.")
+        assert_equal(test_line.matches.count, line.matches.count, "Match counts don't match")
+        test_line.matches.zip(line.matches).each do |test_match, match|
+puts "test_match.text = " + test_match.text.to_s + "."
+puts "match.text = " + match.text.to_s + "."
 
-
-        # puts "Test"
-        # test_line.matches.each_with_index do |match, index| 
-        #   puts "#{index} = #{match.text}"
-        # end
-        # puts "Real"
-        # line.matches.each_with_index do |match, index| 
-        #   puts "#{index} = #{match.text}"
-        # end
-
-
-        # assert_equal(test_line.matches.count, line.matches.count, "Match counts don't match")
-
-
-
-
-#         test_line.matches.zip(line.matches).each do |test_match, match|
-# puts "test_match.text = " + test_match.text.to_s
-# puts "match.text = " + match.text.to_s
-#         end
-
+          assert_equal(test_match.text, match.text, "Matched text doesn't match")
+        end
       end
     end
-
-
-#     just_one = true
-#     test_results.each { |test_result|
-#         if just_one
-#           just_one = false
-# 
-# 
-#           # for loop based on count
-# 
-# 
-#           file_path = test_result.file_path
-#           file = files_hash[file_path]
-#         
-#           # Inspect one file
-#         
-#           file.lines.each { |line|
-#             line.matches.each { |match|
-# 
-# 
-# 
-#               puts "line.text = " + line.text.to_s
-#               puts "match.index = " + match.index.to_s
-#               puts "match.text = " + match.text.to_s
-#             }
-#           }
-#         end
-# 
-# # puts "test_result.file_path = " + test_result.file_path.to_s
-# # puts "test_result.line_number = " + test_result.line_number.to_s
-# # puts "test_result.matched_text = " + test_result.matched_text.to_s
-# 
-#       
-#     }
-
-
-
-    
-
-# puts "files_hash = " + files_hash.to_s
-
-
-    # parse_line = ParsedLine.new(test_data.line)
-
-    # assert_equal(parse_line.file_path, test_result.filename, "File path doesn't match.")
-    # assert_equal(parse_line.line_number, test_result.line_number, "Line number doesn't match.")
   end 
 end
 
