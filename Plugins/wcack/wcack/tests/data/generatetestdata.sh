@@ -37,16 +37,11 @@ echo "results:"
 function GENERATE_TEST_DATA () {
 	TERM=$1
 	TEST_FILE=$2
-
 	FILE_PATH=`ack --files-with-matches $TERM $TEST_FILE`
-
-
 	LINE_MATCHES=(`ack --with-filename --noheading --nocolor -o $TERM $thisTEST_FILE`)
 	
 	for thisLINE_MATCH in ${LINE_MATCHES[*]}; do
 		LINE_NUMBER=`echo $thisLINE_MATCH | sed -n 's/.*:\(.*\):.*/\1/p'`
-
-
 		MATCHED_TEXT=`echo $thisLINE_MATCH | sed -n 's/.*:.*:\(.*\)/\1/p'`
 
 		echo "    - file_path: $FILE_PATH"

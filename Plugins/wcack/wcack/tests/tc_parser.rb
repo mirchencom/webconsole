@@ -9,36 +9,47 @@ TEST_DATA_GENERATED=File.join(TEST_DIRECTORY, 'test_data_generated.yml')
 
 class TestWCACK < Test::Unit::TestCase
   def test_test_data_generated
-    test_file_hash = YAML.load_file(TEST_DATA_GENERATED)
-    test_data = TestDataFactory.get_input_data(test_file_hash)
-    test_results = TestDataFactory.get_test_results(test_file_hash)
+    test_data_hash = YAML.load_file(TEST_DATA_GENERATED)
+    test_data = TestDataFactory.get_input_data(test_data_hash)
+    test_files_hash = TestDataFactory.get_test_results(test_data_hash)
 
     files_hash = WcAck.load(test_data)
 
-    just_one = true
-    test_results.each { |test_result|
-        if just_one
-          just_one = false
+puts "test_files_hash.inspect = " + test_files_hash.inspect.to_s
 
 
-          file_path = test_result.file_path
-          file = files_hash[file_path]
-        
-          # Inspect one file
-        
-          file.lines.each { |line|
-            line.matches.each { |match|
-              puts "match.text = " + match.text.to_s
-            }
-          }
-        end
-
-# puts "test_result.file_path = " + test_result.file_path.to_s
-# puts "test_result.line_number = " + test_result.line_number.to_s
-# puts "test_result.matched_text = " + test_result.matched_text.to_s
-
-      
-    }
+#     just_one = true
+#     test_results.each { |test_result|
+#         if just_one
+#           just_one = false
+# 
+# 
+#           # for loop based on count
+# 
+# 
+#           file_path = test_result.file_path
+#           file = files_hash[file_path]
+#         
+#           # Inspect one file
+#         
+#           file.lines.each { |line|
+#             line.matches.each { |match|
+# 
+# 
+# 
+#               puts "line.text = " + line.text.to_s
+#               puts "match.index = " + match.index.to_s
+#               puts "match.text = " + match.text.to_s
+#             }
+#           }
+#         end
+# 
+# # puts "test_result.file_path = " + test_result.file_path.to_s
+# # puts "test_result.line_number = " + test_result.line_number.to_s
+# # puts "test_result.matched_text = " + test_result.matched_text.to_s
+# 
+#       
+#     }
 
 
 
@@ -63,19 +74,29 @@ class TestDataFactory
     input_file=File.join(TEST_DIRECTORY, hash[INPUT_FILE_KEY])
     `cat "#{input_file}"`
   end
-  def self.get_test_results(test_file_hash)
-    test_results_hashes = test_file_hash[RESULTS_KEY]
-    Array.new(test_results_hashes.count) { |i|
-      TestResult.new(test_results_hashes[i])
-    }    
-  end
-end
+  def self.get_test_results(test_data_hash)
+    test_results_hashes = test_data_hash[RESULTS_KEY]
 
-class TestResult
-  attr_reader  :file_path, :line_number, :matched_text
-  def initialize(test_results_hash)
-    @file_path = test_results_hash["file_path"]
-    @line_number = test_results_hash["line_number"]
-    @matched_text = test_results_hash["matched_text"]
+    test_files_hash = Hash.new
+    test_results_hashes.each { |test_results_hash|
+      file_path = test_results_hash["file_path"]
+      line_number = test_results_hash["line_number"]
+      matched_text = test_results_hash["matched_text"]
+
+      test_file_lines_hash = test_files_hash[file_path]
+      if !test_file_lines_hash
+        test_file_lines_hash = Hash.new
+        test_files_hash[file_path] = test_file_lines_hash
+      end
+      
+      matched_text_array = test_file_lines_hash[line_number]
+      if !matched_text_array
+        matched_text_array = Array.new
+        test_file_lines_hash[line_number] = matched_text_array
+      end
+      matched_text_array.push(matched_text)
+    }
+    
+    return test_files_hash
   end
 end

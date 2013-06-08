@@ -7,17 +7,12 @@ module WcAck
         @lines = Array.new
       end
 
-
       class Line
         attr_reader :line_number, :matches
         attr_accessor :text
         def initialize(line_number)
           @line_number = line_number
           @matches = Array.new
-        end
-
-        def matched_text(index)
-          match = @matches[index]
         end
 
         class Match
