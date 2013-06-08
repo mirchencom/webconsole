@@ -15,15 +15,39 @@ class TestWCACK < Test::Unit::TestCase
 
     files_hash = WcAck.load(test_data)
 
-# Parse the test_files_hash and iterate through them comparing to the corresponding real data results
+# puts "test_files_hash.inspect = " + test_files_hash.inspect.to_s
+
 
     test_files_hash.keys.each do |file_path|
       test_file = test_files_hash[file_path]
       file = files_hash[file_path]
+
+
       
       test_file.lines.zip(file.lines).each do |test_line, line|
-        assert_equal(line.line_number, test_line.line_number, "Line numbers don't match.")
-        # test_file.lines.zip(file.lines).each do |test_line, line|
+        assert_equal(test_line.line_number, line.line_number, "Line numbers don't match.")
+
+
+        # puts "Test"
+        # test_line.matches.each_with_index do |match, index| 
+        #   puts "#{index} = #{match.text}"
+        # end
+        # puts "Real"
+        # line.matches.each_with_index do |match, index| 
+        #   puts "#{index} = #{match.text}"
+        # end
+
+
+        # assert_equal(test_line.matches.count, line.matches.count, "Match counts don't match")
+
+
+
+
+#         test_line.matches.zip(line.matches).each do |test_match, match|
+# puts "test_match.text = " + test_match.text.to_s
+# puts "match.text = " + match.text.to_s
+#         end
+
       end
     end
 
@@ -90,9 +114,9 @@ class TestData
   end
   def self.get_test_results(test_data_hash)
     test_results_hashes = test_data_hash[RESULTS_KEY]
-
     test_files_hash = Hash.new
     test_lines_hash = Hash.new
+
     test_results_hashes.each { |test_results_hash|
       file_path = test_results_hash[FILE_PATH_KEY]
       line_number = test_results_hash[LINE_NUMBER_KEY]
@@ -102,6 +126,8 @@ class TestData
       if !test_file
         test_file = TestFile.new(file_path)
         test_files_hash[file_path] = test_file
+        # Create a new test_lines_hash, this will break if our test data isn't ordered
+        test_lines_hash = Hash.new
       end
 
       test_line = test_lines_hash[line_number]
@@ -114,7 +140,7 @@ class TestData
       match = TestFile::TestLine::TestMatch.new(matched_text)
       test_line.matches.push(match)
     }
-    
+
     return test_files_hash
   end
 
