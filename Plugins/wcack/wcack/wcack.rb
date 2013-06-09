@@ -2,8 +2,27 @@
 
 require "./lib/parser"
 
+module WcAck
+  class WebConsoleBridge
+    def added_file(file)
+puts "file.file_path = " + file.file_path.to_s
+    end
 
-WcAck.load(ARGF.read)
+    def added_line_to_file(line, file)
+puts "added line = #{line.to_s} to file = #{file.file_path.to_s}"
+    end
+  end
+end
+
+parser = WcAck::Parser.new
+parser.delegate = WcAck::WebConsoleBridge.new
+files = parser.parse(ARGF.read)
+
+# puts "files.inspect = " + files.inspect.to_s
+
+# WcAck.load(ARGF.read)
+
+
 
 # ARGF.each do |line|
 #   # puts line + "\n\nANEWLINE\n\n"

@@ -2,7 +2,7 @@ MODEL_FILE = File.join(File.dirname(__FILE__), 'model')
 require MODEL_FILE
 
 module WcAck
-  def self.load data
+  def self.load(data) 
     parser = Parser.new
     parser.parse(data)
   end
@@ -14,17 +14,14 @@ module WcAck
     METADATA_REGEXP = Regexp.new(ANSI_WRAPPER_REGEXP.source + ":#{ANSI_ESCAPE}[0-9]+#{ANSI_ESCAPE}:")
     LINE_ENDING_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '\x1b\[K')
 
+    attr_writer :delegate
     def initialize
       @files_hash = Hash.new
     end
     
     def parse(data)
-      # just_one = true
       data.each_line { |line|
-        # if just_one
           parse_line(line)
-          # just_one = false
-        # end
       }
       return @files_hash
     end
@@ -39,6 +36,8 @@ module WcAck
       if !file
         file = Match::File.new(file_path)
         @files_hash[file_path] = file
+
+        @delegate.added_file(file)
       end
 
       line_number = ansi_wrapped[1][0].to_i
@@ -63,6 +62,8 @@ module WcAck
       text.rstrip!
 
       line.text = text
+
+      @delegate.added_line_to_file(line, file)
     end
   end
 end
