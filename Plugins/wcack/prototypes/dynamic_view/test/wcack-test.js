@@ -1,12 +1,13 @@
 var buster = require("buster");
 
 require("../js/wcack.js")
+
 // Require jquery
 // Load dom
 // Require handlebars
 
 
-buster.testCase("My thing", {
+buster.testCase("Test string methods", {
     "Replace subString works": function () {
 		var testString = "Replace foo with bar";
 		testString = testString.replaceSubstr(8, 3, "bar");
@@ -19,4 +20,7 @@ buster.testCase("My thing", {
 		console.log(testString);
         assert.equals(testString, "White space begone");
     }
-})
+});
+
+buster.testCase("Test string methods", {
+});

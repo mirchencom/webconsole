@@ -1,3 +1,5 @@
+// DOM Manipulation
+
 function addFile(file_path) {
 	var source   = $("#file-template").html();
 	var template = Handlebars.compile(source);
@@ -35,13 +37,7 @@ function addLineWithMatchesTest(line_number, text) {
 
 }
 
-String.prototype.replaceSubstr=function(start, length, newSubstring) {
-     return this.substr(0, start) + newSubstring + this.substr(start + length);
-}
-
-String.prototype.stripWhitespace=function() {
-	return this.replace(/(^\s+|\s+$)/g, '');
-}
+// String processing
 
 function textWithMatchesProcessed(text, startIndex, matches) {
 
@@ -62,36 +58,15 @@ function textWithMatchesProcessed(text, startIndex, matches) {
 
 		var nextStartIndex = match.index + match.length;
 		return textWithMatchSubstring + textWithMatchesProcessed(text, nextStartIndex, matches)
-
-
-
-		// console.log(textWithMatchSubstring);
-		// textToNextStartIndex = text.substr(startIndex, nextStartIndex)
-		// 
-		// 
-		// 
-		// var nextStartIndex = match.index + match.length;
-
-		// textWithMatchesProcessed(text, nextStartIndex, matches);
 	}
-
-
-
-
-
-
-		
-		
-		
-	
-
-		
-		// return textReplace.substr(0, text.)
-		// console.log(templatedMatchedText);
-			    //Do something
 }
 
+// Helpers
 
-// String.prototype.replaceAt=function(index, character) {
-//    return this.substr(0, index) + character + this.substr(index + character.length);
-// }
+String.prototype.replaceSubstr=function(start, length, newSubstring) {
+     return this.substr(0, start) + newSubstring + this.substr(start + length);
+}
+
+String.prototype.stripWhitespace=function() {
+	return this.replace(/(^\s+|\s+$)/g, '');
+}
