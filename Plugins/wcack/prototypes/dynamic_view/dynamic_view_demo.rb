@@ -25,4 +25,4 @@ addFile('#{file.file_path}');
 root_url = File.dirname(__FILE__)
 javascript = URI::encode(javascript)
 html = URI::encode(template_erb.result)
-STDOUT.puts `domrunner -e --eh #{Shellwords.escape(html)} --ej #{Shellwords.escape(javascript)} -u #{Shellwords.escape(root_url)}`
+STDOUT.puts `domrunner --eh #{Shellwords.escape(html)} --ej #{Shellwords.escape(javascript)} -u #{Shellwords.escape(root_url)}`

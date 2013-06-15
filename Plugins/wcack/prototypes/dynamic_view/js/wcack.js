@@ -1,20 +1,8 @@
-// Mousetrap.bind(['command+n'], function(e) {
-//     e.preventDefault();
-// 	testCall()
-//     return false;
-// });
-
 function addFile(file_path) {
-	// Add a dom element here
-	// $("<a/>", {
-	//     id: 'example-link',
-	//     href: 'http://www.example.com/',
-	//     text: 'Test Passed'
-	// }).appendTo("body");
-	console.log(file_path);
+	var source   = $("#some-template").html();
+	var template = Handlebars.compile(source);
+	var data = { 
+		file_path: file_path
+	};
+	$(template(data)).appendTo("body");
 }
-
-// window.addEventListener('load', function () { setup(); }, false);
-// function setup() {
-// 	testCall();
-// }
