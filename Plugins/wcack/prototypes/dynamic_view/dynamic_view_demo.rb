@@ -20,6 +20,10 @@ file = WcAck::Match::File.new(FILE_PATH)
 
 javascript = %Q[
 addFile('#{file.file_path}');
+addLine(10, "test");
+addLine(20, "test2");
+addFile('#{file.file_path}');
+addLine(30, "test3");
 ]
 
 root_url = File.dirname(__FILE__)
