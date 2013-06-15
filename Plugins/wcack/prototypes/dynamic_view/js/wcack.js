@@ -9,7 +9,10 @@ function addFile(file_path) {
 	$(template(data)).appendTo("body");
 }
 
-function addLine(line_number, text) {
+function addLine(line_number, text, matches) {
+	var matchesCopy = JSON.parse(JSON.stringify(matches));
+	text = textWithMatchesProcessed(text, 0, matchesCopy);
+
 	var source   = $("#line-template").html();
 	var template = Handlebars.compile(source);
 	var data = { 
@@ -18,23 +21,6 @@ function addLine(line_number, text) {
 	};
 	var list = $('section ul').last();
 	$(template(data)).appendTo(list);
-}
-
-function addLineWithMatchesTest(line_number, text) {
-	var matches = [
-		{
-			index: 0,
-			length: 5
-		},
-		{
-			index: 20,
-			length: 10
-		}
-	];
-
-	var testString = textWithMatchesProcessed(text, 0, matches);
-	console.log(testString);
-
 }
 
 // String processing
