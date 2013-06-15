@@ -18,15 +18,18 @@ template_erb = ERB.new(File.new(VIEW_TEMPLATE).read, nil, '-')
 FILE_PATH = "/Users/robenkleene/Dropbox/Text/Inbox/Web Console/AppleScript Support.md"
 file = WcAck::Match::File.new(FILE_PATH)
 
+
+lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 javascript = %Q[
 addFile('#{file.file_path}');
 addLine(10, "test");
 addLine(20, "test2");
 addFile('#{file.file_path}');
 addLine(30, "test3");
+addLineWithMatchesTest(20, '#{lorem}')
 ]
 
 root_url = File.dirname(__FILE__)
 javascript = URI::encode(javascript)
 html = URI::encode(template_erb.result)
-STDOUT.puts `domrunner --eh #{Shellwords.escape(html)} --ej #{Shellwords.escape(javascript)} -u #{Shellwords.escape(root_url)}`
+STDOUT.puts `domrunner -e --eh #{Shellwords.escape(html)} --ej #{Shellwords.escape(javascript)} -u #{Shellwords.escape(root_url)}`
