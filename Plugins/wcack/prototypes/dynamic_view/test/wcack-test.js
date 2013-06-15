@@ -22,5 +22,11 @@ buster.testCase("Test string methods", {
     }
 });
 
-buster.testCase("Test string methods", {
+buster.testCase("Test handlebars methods", {
+    setUp: function () {
+		console.log("running setup")
+    },
+    "Something works": function () {
+        assert(true);
+    }
 });
