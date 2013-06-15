@@ -40,12 +40,11 @@ function addLineWithMatchesTest(line_number, text) {
 // String processing
 
 function textWithMatchesProcessed(text, startIndex, matches) {
-
 	if (matches.length > 0) {
 		match = matches[0];
 		matches.splice(0,1);
 
-		var source   = $("#match-template").html();
+		var source = $("#match-template").html();
 		var template = Handlebars.compile(source);
 		var matchedText = text.substr(match.index, match.length);
 		var data = { 
@@ -59,6 +58,8 @@ function textWithMatchesProcessed(text, startIndex, matches) {
 		var nextStartIndex = match.index + match.length;
 		return textWithMatchSubstring + textWithMatchesProcessed(text, nextStartIndex, matches)
 	}
+
+	return text.substr(startIndex);
 }
 
 // Helpers

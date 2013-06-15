@@ -39,32 +39,42 @@ buster.testCase("Test handlebars methods", {
 					MutationEvents           : "2.0"
 				},
 				done: function (errors, window) {
-					// myWindow = window;
 					testCase.window = window;
-					// console.log(this.window);
-					// console.log(window.document.documentElement.outerHTML);
 					done();
 				}
 			});
 		});
     },
-    "Something works": function () {
+    "Text with matches processed works": function () {
+		window = this.window;
+		
+		// Real test data
 		var matches = [
 			{
 				index: 0,
-				length: 5
+				length: 4
 			},
 			{
-				index: 20,
-				length: 10
+				index: 35,
+				length: 4
 			}
 		];
+		var text = "This should be matched, as well as this."
+		var testString = window.textWithMatchesProcessed(text, 0, matches);
+		
+		// Fake test data
+		var source = window.$("#match-template").html();
+		var template = window.Handlebars.compile(source);
+		var data = { 
+			text: "This"
+		};
+		var templatedText1 = template(data).stripWhitespace();
+		data = { 
+			text: "this"
+		};
+		var templatedText2 = template(data).stripWhitespace();
+		var fakeTestString = templatedText1 + " should be matched, as well as " + templatedText2 + ".";
 
-		var text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-		var testString = this.window.textWithMatchesProcessed(text, 0, matches);
-		console.log(testString);
-
-
-        assert(true);
+        assert.equals(testString, fakeTestString);
     }
 });
