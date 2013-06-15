@@ -17,17 +17,10 @@ template_erb = ERB.new(File.new(VIEW_TEMPLATE).read, nil, '-')
 # Sample Data
 FILE_PATH = "/Users/robenkleene/Dropbox/Text/Inbox/Web Console/AppleScript Support.md"
 file = WcAck::Match::File.new(FILE_PATH)
-file_erb = ERB.new(File.new(FILE_PARTIAL).read, nil, '-')
 
-file_html = file_erb.result
-# javascript = %Q[
-# addFileHTML('#{FILE_PATH}');
-# ]
 javascript = %Q[
-addFileHTML('#{file_html}');
+addFile('#{file.file_path}');
 ]
-
-
 
 root_url = File.dirname(__FILE__)
 javascript = URI::encode(javascript)
