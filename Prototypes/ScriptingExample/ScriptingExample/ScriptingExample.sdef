@@ -3,10 +3,10 @@
 
 <dictionary title="ScriptingExample Terminology">
 
-<!--
- <dictionary xmlns:xi="http://www.w3.org/2003/XInclude">
-    <xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite)"/>
--->
+
+ <!-- <dictionary xmlns:xi="http://www.w3.org/2003/XInclude">
+    <xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite)"/> -->
+
 	<suite name="ScriptingExample Suite" code="SExa"
 		description="Classes for the ScriptingExample Application">
 
