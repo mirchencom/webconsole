@@ -9,10 +9,6 @@
 				<type type="file"/>
 				<type type="file" list="yes"/>
 			</direct-parameter>
-			<result description="The opened document(s).">
-				<type type="document"/>
-				<type type="document" list="yes"/>
-			</result>
 		</command>
         
 		<enumeration name="save options" code="savo">
@@ -39,10 +35,12 @@
 			<parameter name="in" code="kfil" type="file" optional="yes" description="The file in which to save the document.">
 				<cocoa key="File"/>
 			</parameter>
-			<parameter name="as" code="fltp" type="saveable file format" optional="yes" description="The file format to use.">
+			<!--
+            <parameter name="as" code="fltp" type="saveable file format" optional="yes" description="The file format to use.">
 				<cocoa key="FileType"/>
 			</parameter>
-		</command>
+            -->
+        </command>
         
 		<enumeration name="printing error handling" code="enum">
 			<enumerator name="standard" code="lwst" description="Standard PostScript error handling">
@@ -175,9 +173,6 @@
 				<cocoa key="isActive"/>
 			</property>
 			<property name="version" code="vers" type="text" access="r" description="The version number of the application."/>
-			<element type="document">
-				<cocoa key="orderedDocuments"/>
-			</element>
 			<element type="window" access="r">
 				<cocoa key="orderedWindows"/>
 			</element>
@@ -227,7 +222,6 @@
 			<property name="zoomed" code="pzum" type="boolean" description="Is the window zoomed right now?">
 				<cocoa key="isZoomed"/>
 			</property>
-			<property name="document" code="docu" type="document" access="r" description="The document whose contents are displayed in the window."/>
 			<responds-to command="close">
 				<cocoa method="handleCloseScriptCommand:"/>
 			</responds-to>
