@@ -19,6 +19,8 @@
 		4530B0FA1736E2A6000A52E2 /* Web_ConsoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0F91736E2A6000A52E2 /* Web_ConsoleTests.m */; };
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		455B0BFE176FF592007B75DD /* LoadHTMLCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* LoadHTMLCommand.m */; };
+		455B0C0117700AE9007B75DD /* Web_ConsoleScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C0017700AE9007B75DD /* Web_ConsoleScriptTests.m */; };
+		455B0C03177011D2007B75DD /* TestScripts in Resources */ = {isa = PBXBuildFile; fileRef = 455B0C02177011D2007B75DD /* TestScripts */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
@@ -58,6 +60,9 @@
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		455B0BFC176FF592007B75DD /* LoadHTMLCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadHTMLCommand.h; sourceTree = "<group>"; };
 		455B0BFD176FF592007B75DD /* LoadHTMLCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadHTMLCommand.m; sourceTree = "<group>"; };
+		455B0BFF17700AE9007B75DD /* Web_ConsoleScriptTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_ConsoleScriptTests.h; sourceTree = "<group>"; };
+		455B0C0017700AE9007B75DD /* Web_ConsoleScriptTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_ConsoleScriptTests.m; sourceTree = "<group>"; };
+		455B0C02177011D2007B75DD /* TestScripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestScripts; sourceTree = "<group>"; };
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowController.m; sourceTree = "<group>"; };
@@ -162,8 +167,11 @@
 		4530B0F21736E2A6000A52E2 /* Web ConsoleTests */ = {
 			isa = PBXGroup;
 			children = (
+				455B0C02177011D2007B75DD /* TestScripts */,
 				4530B0F81736E2A6000A52E2 /* Web_ConsoleTests.h */,
 				4530B0F91736E2A6000A52E2 /* Web_ConsoleTests.m */,
+				455B0BFF17700AE9007B75DD /* Web_ConsoleScriptTests.h */,
+				455B0C0017700AE9007B75DD /* Web_ConsoleScriptTests.m */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
 			);
 			path = "Web ConsoleTests";
@@ -262,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */,
+				455B0C03177011D2007B75DD /* TestScripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4530B0FA1736E2A6000A52E2 /* Web_ConsoleTests.m in Sources */,
+				455B0C0117700AE9007B75DD /* Web_ConsoleScriptTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
