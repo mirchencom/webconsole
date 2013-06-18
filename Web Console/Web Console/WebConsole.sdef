@@ -239,10 +239,12 @@
         
         <command name="load HTML" code="WCSCLHTM" description="Loads a string of HTML.">
             <cocoa class="LoadHTMLCommand"/>
-			<direct-parameter description="The HTML to load.">
-				<type type="text"/>
-			</direct-parameter>
-			<result type="window" description="The window the command was executed in." />
+            <direct-parameter type="text" description="The HTML to load." />
+			<parameter name="in" description="The window in which to load the HTML." code="kfil" optional="yes">
+				<cocoa key="Target" />
+				<type type="window" />
+			</parameter>
+			<result type="window" description="The window the HTML was loaded in." />
 		</command>
 
     </suite>

@@ -37,7 +37,7 @@
     return self;
 }
 
-- (WebWindowController *)addWebWindowWithHTML:(NSString *)HTML {
+- (WebWindowController *)webWindowWithHTML:(NSString *)HTML {
     WebWindowController *webWindowController = [[WebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
     [webWindowController showWindow:self];
@@ -45,6 +45,8 @@
     
     [self.webWindowControllers addObject:webWindowController];
 
+    NSLog(@"Added webWindowController = %@", webWindowController);
+    
     return webWindowController;
 }
 

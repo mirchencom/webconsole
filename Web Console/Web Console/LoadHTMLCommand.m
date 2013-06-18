@@ -11,11 +11,24 @@
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
 
+#define kLoadHTMLTargetKey @"Target"
+
 @implementation LoadHTMLCommand
 - (id)performDefaultImplementation {
-    NSLog(@"The direct parameter is: '%@'", [self directParameter]);
-    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addWebWindowWithHTML:[self directParameter]];
+	NSDictionary *argumentsDictionary = [self evaluatedArguments];
 
-    return webWindowController.window;
+    NSString *HTML = [self directParameter];
+    
+    NSWindow *window = [argumentsDictionary objectForKey:kLoadHTMLTargetKey];
+    
+    if (window) {
+        WebWindowController *webWindowController = (WebWindowController *)window.windowController;
+        [webWindowController loadHTML:HTML];
+    } else {
+        WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] webWindowWithHTML:HTML];
+        window = webWindowController.window;
+    }
+
+    return window;
 }
 @end
