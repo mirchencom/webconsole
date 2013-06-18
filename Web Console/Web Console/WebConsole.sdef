@@ -236,18 +236,13 @@
     </suite>
 
     <suite name="Web Console Suite" code="WCSC" description="Classes just for the Web Console Application">
-
-        <class name="application" code="WCAD" description="Application class" inherits="application">
-            <cocoa class="NSApplication" />
-            <responds-to name="load HTML">
-                <cocoa method="loadHTML:" />
-            </responds-to>
-        </class>
-
+        
         <command name="load HTML" code="WCSCLHTM" description="Loads a string of HTML.">
+            <cocoa class="LoadHTMLCommand"/>
 			<direct-parameter description="The HTML to load.">
 				<type type="text"/>
 			</direct-parameter>
+			<result type="window" description="The window the command was executed in." />
 		</command>
 
     </suite>

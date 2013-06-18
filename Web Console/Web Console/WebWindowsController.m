@@ -37,13 +37,15 @@
     return self;
 }
 
-- (void)addWebWindowWithHTML:(NSString *)HTML {
+- (WebWindowController *)addWebWindowWithHTML:(NSString *)HTML {
     WebWindowController *webWindowController = [[WebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
     [webWindowController showWindow:self];
 	[webWindowController loadHTML:HTML];
     
     [self.webWindowControllers addObject:webWindowController];
+
+    return webWindowController;
 }
 
 - (void)removeWebWindowController:(WebWindowController *)webWindowController {
