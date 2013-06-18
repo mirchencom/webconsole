@@ -44,8 +44,6 @@
 	[webWindowController loadHTML:HTML];
     
     [self.webWindowControllers addObject:webWindowController];
-
-    NSLog(@"Added webWindowController = %@", webWindowController);
     
     return webWindowController;
 }

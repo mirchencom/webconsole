@@ -30,15 +30,6 @@
     [self.webView.mainFrame loadHTMLString:HTML baseURL:nil];
 }
 
-- (void)windowDidLoad
-{
-    [super windowDidLoad];
-    
-    
-    NSLog(@"windowDidLoad");
-
-}
-
 #pragma mark - NSWindowDelegate
 
 - (void)windowWillClose:(NSNotification *)notification {
