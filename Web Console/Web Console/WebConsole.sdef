@@ -237,7 +237,7 @@
 
     <suite name="Web Console Suite" code="WCSC" description="Classes just for the Web Console Application">
 
-        <class name="application" code="WCAD" description="Application class">
+        <class name="application" code="WCAD" description="Application class" inherits="application">
             <cocoa class="NSApplication" />
             <responds-to name="load HTML">
                 <cocoa method="loadHTML:" />
