@@ -7,9 +7,8 @@
 //
 
 #import "AppleScriptHelper.h"
-
-#define kTestScriptsSubdirectory @"TestScripts"
-#define kTestScriptsExtension @"scpt"
+#import "Web_ConsoleTestsConstants.h"
+#import "Web_ConsoleTests.h"
 
 #ifndef kASAppleScriptSuite
 #define kASAppleScriptSuite 'ascr'
@@ -53,10 +52,7 @@
 }
 
 + (NSAppleScript *)appleScriptFromTestBundleWithName:(NSString *)name {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSURL *appleScriptFileURL = [bundle URLForResource:name
-                                          withExtension:kTestScriptsExtension
-                                           subdirectory:kTestScriptsSubdirectory];
+    NSURL *appleScriptFileURL = [Web_ConsoleTests fileURLForTestResource:name withExtension:kTestScriptsExtension];
     
     NSDictionary *errorInfo;
     NSAppleScript *appleScript = [[NSAppleScript alloc] initWithContentsOfURL:appleScriptFileURL error:&errorInfo];

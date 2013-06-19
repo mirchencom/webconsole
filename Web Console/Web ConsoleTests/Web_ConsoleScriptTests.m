@@ -9,7 +9,9 @@
 #import "Web_ConsoleScriptTests.h"
 #import "AppleScriptHelper.h"
 
-#define kTestScriptLoadHTMLFilename @"Test Load HTML"
+#import "Web_ConsoleTestsConstants.h"
+
+
 
 @interface Web_ConsoleScriptTests ()
 + (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber;
@@ -29,8 +31,26 @@
 // 3. Run with garbage data for both
 // 4. Run with good data for lad HTML and garbage data for the window
 
-//- (void)testLoadHTML
-//{
+- (void)testLoadHTML
+{
+    NSURL *HTMLFileURL = [Web_ConsoleTests fileURLForTestResource:kTestHTMLFilename withExtension:kTestHTMLExtension];
+
+    NSError *error;
+    NSString *HTML = [NSString stringWithContentsOfURL:HTMLFileURL encoding:NSUTF8StringEncoding error:&error];
+    NSString *errorMessage = [NSString stringWithFormat:@"Error loading HTML string %@", error];
+    STAssertNil(error, errorMessage);
+
+    NSAppleEventDescriptor *firstParameter = [NSAppleEventDescriptor descriptorWithString:HTML];
+    NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
+    [parameters insertDescriptor:firstParameter atIndex:1];
+    
+    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:@"Load HTML" parameters:parameters];
+    
+    NSInteger ID = [[[result descriptorForKeyword:'seld'] stringValue] intValue];
+    BOOL windowNumberExists = [[self class] windowWithWindowNumberExists:ID];
+
+    STAssertTrue(windowNumberExists, @"Window should exist.");
+    
 //    NSAppleScript *appleScript = [[self class] appleScriptFromTestBundleWithName:kTestScriptLoadHTMLFilename];
 //
 //    NSDictionary *errorInfo;
@@ -42,13 +62,11 @@
 //    BOOL windowNumberExists = [[self class] windowWithWindowNumberExists:ID];
 //    
 //    STAssertTrue(windowNumberExists, @"Window should exist.");
-//}
+}
 
 - (void)testAppleScript {
-
     NSString *message = @"Message from my app.";
     NSAppleEventDescriptor *firstParameter = [NSAppleEventDescriptor descriptorWithString:message];
-    
     NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
     [parameters insertDescriptor:firstParameter atIndex:1];
 

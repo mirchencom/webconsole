@@ -9,5 +9,5 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 @interface Web_ConsoleTests : SenTestCase
-
++ (NSURL *)fileURLForTestResource:(NSString *)name withExtension:(NSString *)ext;
 @end
