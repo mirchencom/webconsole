@@ -14,7 +14,6 @@
 #import "WebWindowController.h"
 
 @interface Web_ConsoleScriptTests ()
-//+ (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber;
 + (WebWindowController *)webWindowControllerForWindowWithWindowNumber:(NSInteger)windowNumber;
 @end
 
@@ -45,21 +44,16 @@
     NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
     [parameters insertDescriptor:firstParameter atIndex:1];
     
-    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:@"Load HTML" parameters:parameters];
-    
+    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:@"Load HTML"
+                                                                               parameters:parameters];
     NSInteger windowNumber = [[[result descriptorForKeyword:'seld'] stringValue] intValue];
-//    BOOL windowNumberExists = [[self class] windowWithWindowNumberExists:windowNumber];
-//    STAssertTrue(windowNumberExists, @"Window should exist.");
-
     WebWindowController *webWindowController = [Web_ConsoleScriptTests webWindowControllerForWindowWithWindowNumber:windowNumber];
 
     errorMessage = [NSString stringWithFormat:@"WebWindowController doesn't exist with windowNumber %li", (long)windowNumber];
     STAssertNotNil(webWindowController, errorMessage);
     
     WebView *webView = (WebView *)[webWindowController valueForKey:@"webView"];
-    
     NSString *source = [(DOMHTMLElement *)[[[webView mainFrame] DOMDocument] documentElement] outerHTML];
-
     NSLog(@"Source = %@", source);
 }
 
@@ -78,30 +72,14 @@
 #pragma mark - Helpers
 
 + (WebWindowController *)webWindowControllerForWindowWithWindowNumber:(NSInteger)windowNumber {
-    WebWindowController *webWindowController;
-
-    
+    WebWindowController *webWindowController;    
     for (NSWindow *aWindow in [[NSApplication sharedApplication] windows]) {
         if ([aWindow windowNumber] == windowNumber) {
             webWindowController = (WebWindowController *)[aWindow windowController];
             break;
         }
     }
-
     return webWindowController;
 }
-
-//+ (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber {
-//    BOOL windowExists = NO;
-//    
-//    for (NSWindow *aWindow in [[NSApplication sharedApplication] windows]) {
-//        if ([aWindow windowNumber] == windowNumber) {
-//            windowExists = YES;
-//            break;
-//        }
-//    }
-//
-//    return windowExists;
-//}
 
 @end
