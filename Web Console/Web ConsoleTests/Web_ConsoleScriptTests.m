@@ -11,10 +11,11 @@
 
 #import "Web_ConsoleTestsConstants.h"
 
-
+#import "WebWindowController.h"
 
 @interface Web_ConsoleScriptTests ()
-+ (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber;
+//+ (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber;
++ (WebWindowController *)webWindowControllerForWindowWithWindowNumber:(NSInteger)windowNumber;
 @end
 
 @implementation Web_ConsoleScriptTests
@@ -46,22 +47,20 @@
     
     NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:@"Load HTML" parameters:parameters];
     
-    NSInteger ID = [[[result descriptorForKeyword:'seld'] stringValue] intValue];
-    BOOL windowNumberExists = [[self class] windowWithWindowNumberExists:ID];
-
-    STAssertTrue(windowNumberExists, @"Window should exist.");
-    
-//    NSAppleScript *appleScript = [[self class] appleScriptFromTestBundleWithName:kTestScriptLoadHTMLFilename];
-//
-//    NSDictionary *errorInfo;
-//    NSAppleEventDescriptor *result = [appleScript executeAndReturnError:&errorInfo];
-//
-//    STAssertNil(errorInfo, @"errorInfo should be nil.");
-//    
-//    NSInteger ID = [[[result descriptorForKeyword:'seld'] stringValue] intValue];
-//    BOOL windowNumberExists = [[self class] windowWithWindowNumberExists:ID];
-//    
+    NSInteger windowNumber = [[[result descriptorForKeyword:'seld'] stringValue] intValue];
+//    BOOL windowNumberExists = [[self class] windowWithWindowNumberExists:windowNumber];
 //    STAssertTrue(windowNumberExists, @"Window should exist.");
+
+    WebWindowController *webWindowController = [Web_ConsoleScriptTests webWindowControllerForWindowWithWindowNumber:windowNumber];
+
+    errorMessage = [NSString stringWithFormat:@"WebWindowController doesn't exist with windowNumber %li", (long)windowNumber];
+    STAssertNotNil(webWindowController, errorMessage);
+    
+    WebView *webView = (WebView *)[webWindowController valueForKey:@"webView"];
+    
+    NSString *source = [(DOMHTMLElement *)[[[webView mainFrame] DOMDocument] documentElement] outerHTML];
+
+    NSLog(@"Source = %@", source);
 }
 
 - (void)testAppleScript {
@@ -78,17 +77,31 @@
 
 #pragma mark - Helpers
 
-+ (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber {
-    BOOL windowExists = NO;
++ (WebWindowController *)webWindowControllerForWindowWithWindowNumber:(NSInteger)windowNumber {
+    WebWindowController *webWindowController;
+
     
     for (NSWindow *aWindow in [[NSApplication sharedApplication] windows]) {
         if ([aWindow windowNumber] == windowNumber) {
-            windowExists = YES;
+            webWindowController = (WebWindowController *)[aWindow windowController];
             break;
         }
     }
 
-    return windowExists;
+    return webWindowController;
 }
+
+//+ (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber {
+//    BOOL windowExists = NO;
+//    
+//    for (NSWindow *aWindow in [[NSApplication sharedApplication] windows]) {
+//        if ([aWindow windowNumber] == windowNumber) {
+//            windowExists = YES;
+//            break;
+//        }
+//    }
+//
+//    return windowExists;
+//}
 
 @end
