@@ -237,15 +237,29 @@
 
     <suite name="Web Console Suite" code="WCSC" description="Classes just for the Web Console Application">
         
-        <command name="load HTML" code="WCSCLHTM" description="Loads a string of HTML.">
+        <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML.">
             <cocoa class="LoadHTMLCommand"/>
             <direct-parameter type="text" description="The HTML to load." />
-			<parameter name="in" description="The window in which to load the HTML." code="kfil" optional="yes">
+			<parameter name="in" description="The window to load the HTML in." code="kfil" optional="yes">
 				<cocoa key="Target" />
 				<type type="window" />
 			</parameter>
 			<result type="window" description="The window the HTML was loaded in." />
 		</command>
 
+        <command name="do JavaScript" code="WCSCJVSC" description="Runs JavaScript in a window.">
+            <cocoa class="DoJavaScriptCommand"/>
+            <direct-parameter type="text" description="The JavaScript to run." />
+			<parameter name="in" description="The window to run the JavaScript in." code="kfil">
+				<cocoa key="Target" />
+				<type type="window" />
+			</parameter>
+            <result>
+				<type type="any"/>
+				<type type="text"/>
+				<type type="real"/>
+				<type type="integer"/>
+			</result>
+		</command>        
     </suite>
 </dictionary>

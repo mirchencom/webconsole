@@ -22,6 +22,7 @@
 		455B0C0117700AE9007B75DD /* Web_ConsoleScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C0017700AE9007B75DD /* Web_ConsoleScriptTests.m */; };
 		455B0C03177011D2007B75DD /* TestScripts in Resources */ = {isa = PBXBuildFile; fileRef = 455B0C02177011D2007B75DD /* TestScripts */; };
 		455B0C0617714BCA007B75DD /* AppleScriptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C0517714BCA007B75DD /* AppleScriptHelper.m */; };
+		455B0C0A1771627A007B75DD /* DoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* DoJavaScriptCommand.m */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
@@ -67,6 +68,9 @@
 		455B0C0417714BCA007B75DD /* AppleScriptHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleScriptHelper.h; sourceTree = "<group>"; };
 		455B0C0517714BCA007B75DD /* AppleScriptHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleScriptHelper.m; sourceTree = "<group>"; };
 		455B0C07177150E0007B75DD /* Web_ConsoleTestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_ConsoleTestsConstants.h; sourceTree = "<group>"; };
+		455B0C081771627A007B75DD /* DoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoJavaScriptCommand.h; sourceTree = "<group>"; };
+		455B0C091771627A007B75DD /* DoJavaScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoJavaScriptCommand.m; sourceTree = "<group>"; };
+		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowController.m; sourceTree = "<group>"; };
@@ -140,6 +144,9 @@
 		4530B0D51736E2A6000A52E2 /* Web Console */ = {
 			isa = PBXGroup;
 			children = (
+				455B0C0B177162F0007B75DD /* WebConsoleConstants.h */,
+				455B0C081771627A007B75DD /* DoJavaScriptCommand.h */,
+				455B0C091771627A007B75DD /* DoJavaScriptCommand.m */,
 				455B0BFC176FF592007B75DD /* LoadHTMLCommand.h */,
 				455B0BFD176FF592007B75DD /* LoadHTMLCommand.m */,
 				4530B0E11736E2A6000A52E2 /* AppDelegate.h */,
@@ -309,6 +316,7 @@
 				45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */,
 				45ADD9111739F257008A6AE7 /* WebWindowsController.m in Sources */,
 				455B0BFE176FF592007B75DD /* LoadHTMLCommand.m in Sources */,
+				455B0C0A1771627A007B75DD /* DoJavaScriptCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

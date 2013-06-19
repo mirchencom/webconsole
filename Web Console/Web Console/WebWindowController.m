@@ -30,6 +30,10 @@
     [self.webView.mainFrame loadHTMLString:HTML baseURL:nil];
 }
 
+- (NSString *)doJavaScript:(NSString *)javaScript {
+    return [self.webView stringByEvaluatingJavaScriptFromString:javaScript];
+}
+
 #pragma mark - NSWindowDelegate
 
 - (void)windowWillClose:(NSNotification *)notification {

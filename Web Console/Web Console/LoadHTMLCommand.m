@@ -11,15 +11,14 @@
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
 
-#define kLoadHTMLTargetKey @"Target"
-
 @implementation LoadHTMLCommand
+
 - (id)performDefaultImplementation {
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
 
     NSString *HTML = [self directParameter];
     
-    NSWindow *window = [argumentsDictionary objectForKey:kLoadHTMLTargetKey];
+    NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     
     if (window) {
         WebWindowController *webWindowController = (WebWindowController *)window.windowController;
@@ -31,4 +30,5 @@
 
     return window;
 }
+
 @end

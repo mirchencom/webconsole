@@ -12,4 +12,5 @@
 
 @interface WebWindowController : NSWindowController
 - (void)loadHTML:(NSString *)HTML;
+- (NSString *)doJavaScript:(NSString *)javaScript;
 @end
