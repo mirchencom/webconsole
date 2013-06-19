@@ -12,6 +12,10 @@
 #define kTestScriptsExtension @"scpt"
 #define kTestScriptLoadHTMLFilename @"Test Load HTML"
 
+@interface Web_ConsoleScriptTests ()
++ (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber;
+@end
+
 @implementation Web_ConsoleScriptTests
 
 // Tests:
@@ -36,62 +40,35 @@
                                           withExtension:kTestScriptsExtension
                                            subdirectory:kTestScriptsSubdirectory];
     
-    NSLog(@"testLoadHTMLFileURL = %@", testLoadHTMLFileURL);
-
-    NSLog(@"break");
-    
-//    NSString *scriptSource = @"load HTML \"HTML\"";
-//    NSAppleScript *script = [[NSAppleScript alloc] initWithSource:scriptSource];
-
     NSDictionary *errorInfo;
     NSAppleScript *script = [[NSAppleScript alloc] initWithContentsOfURL:testLoadHTMLFileURL error:&errorInfo];
 
-    NSLog(@"errorInfo = %@", errorInfo);
+    STAssertNil(errorInfo, @"errorInfo should be nil.");
     
     NSAppleEventDescriptor *result = [script executeAndReturnError:&errorInfo];
+    NSInteger ID = [[[result descriptorForKeyword:'seld'] stringValue] intValue];
+    BOOL windowNumberExists = [[self class] windowWithWindowNumberExists:ID];
 
-    NSLog(@"errorInfo = %@", errorInfo);
+    STAssertNil(errorInfo, @"errorInfo should be nil.");
+    
+    STAssertTrue(windowNumberExists, @"Window should exist.");    
+}
 
-    NSLog(@"result = %@", result);
+#pragma mark - Helpers
 
-    NSLog(@"windows = %@", [[NSApplication sharedApplication] windows]);
++ (BOOL)windowWithWindowNumberExists:(NSInteger)windowNumber {
+    BOOL windowExists = NO;
     
     for (NSWindow *aWindow in [[NSApplication sharedApplication] windows]) {
-        NSLog(@"[aWindow windowNumber] = %li", (long)[aWindow windowNumber]);
+        if ([aWindow windowNumber] == windowNumber) {
+            windowExists = YES;
+            break;
+        }
     }
-    
-//    <NSAppleEventDescriptor: 'obj '{ 'form':'ID  ', 'want':'cwin', 'seld':59227, 'from':null() }>
-  
-// Try taking this returned data and see if I can use the Scripting Bridge to get that window?
-    
-//    unsigned long i = 1;
-//    for (i=1; i <= [result numberOfItems]; i++) {
-//		AEKeyword keyword = [result keywordForDescriptorAtIndex:i];
-//
-//        NSString *key = nil;
-//        // This is a short list of Applescript keywords.  If it's not in this list, then we use the 4 char code.
-//        switch (keyword) {
-//            case 'pnam': key = @"name"; break;
-//            case 'url ': key = @"url"; break;
-//            case 'kywd': key = @"keyword"; break;
-//            case 'pALL': key = @"properties"; break;
-//            case 'capp': key = @"application"; break;
-//            case 'cwin': key = @"window"; break;
-//            case 'cmnu': key = @"menu"; break;
-//            case 'TEXT': key = @"string"; break;
-//            case 'reco': key = @"record"; break;
-//            case 'nmbr': key = @"number"; break;
-//        }
-//
-//        NSLog(@"key = %@", key);
-//    }
-    
-    
-//    NSError *error;
-//    NSUserAppleScriptTask *appleScriptTask = [[NSUserAppleScriptTask alloc] initWithURL:testLoadHTMLFileURL
-//                                                                                  error:&error];
-//    appleScriptTask executeWithAppleEvent:nil completionHandler:
-    
+
+    return windowExists;
 }
+
+
 
 @end
