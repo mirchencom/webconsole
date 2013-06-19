@@ -77,17 +77,24 @@
     // create an NSAppleEventDescriptor with the script's method name to call,
     // this is used for the script statement: "on show_message(user_message)"
     // Note that the routine name must be in lower case.
-    NSAppleEventDescriptor* handler = [NSAppleEventDescriptor descriptorWithString:[@"show_message" lowercaseString]];
+//    NSAppleEventDescriptor* handler = [NSAppleEventDescriptor descriptorWithString:[@"test" lowercaseString]];
 
 
     // create the event for an AppleScript subroutine,
     // set the method name and the list of parameters
-    NSAppleEventDescriptor *event = [NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
-                                             eventID:kASSubroutineEvent
-                                    targetDescriptor:target
-                                            returnID:kAutoGenerateReturnID
-                                       transactionID:kAnyTransactionID];
-    [event setParamDescriptor:handler forKeyword:keyASSubroutineName];
+//    NSAppleEventDescriptor *event = [NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
+//                                                                             eventID:kASSubroutineEvent
+//                                                                    targetDescriptor:target
+//                                                                            returnID:kAutoGenerateReturnID
+//                                                                       transactionID:kAnyTransactionID];
+    NSAppleEventDescriptor *event = [NSAppleEventDescriptor appleEventWithEventClass:kCoreEventClass
+                                                                             eventID:kAEOpenApplication
+                                                                    targetDescriptor:target
+                                                                            returnID:kAutoGenerateReturnID
+                                                                       transactionID:kAnyTransactionID];
+
+    
+//    [event setParamDescriptor:handler forKeyword:keyASSubroutineName];
     [event setParamDescriptor:parameters forKeyword:keyDirectObject];
 
 
@@ -101,6 +108,7 @@
     NSDictionary *errorInfo;
     NSAppleEventDescriptor *result = [appleScript executeAppleEvent:event error:&errorInfo];
 
+        NSLog(@"errorInfo = %@", errorInfo);
     NSLog(@"result = %@", result);
 }
 
