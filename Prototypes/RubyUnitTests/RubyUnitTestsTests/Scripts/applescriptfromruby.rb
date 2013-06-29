@@ -4,14 +4,28 @@ require "test/unit"
 require 'Shellwords'
 
 SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
-DODIRECTPARAMETER_APPLESCRIPT_FILENAME = "DoDirectParameter.scpt"
-DODIRECTPARAMETER_SCRIPT = File.join(SCRIPT_DIRECTORY, DODIRECTPARAMETER_APPLESCRIPT_FILENAME)
-
-puts "#{Shellwords.escape(DODIRECTPARAMETER_SCRIPT)}"
 
 class TestDoDirectParameter < Test::Unit::TestCase
-  def test_test_data_generated
-    result = `osascript #{Shellwords.escape(DODIRECTPARAMETER_SCRIPT)} "A string input"`
-    puts result
+  DODIRECTPARAMETER_APPLESCRIPT_FILENAME = "DoDirectParameter.scpt"
+  DODIRECTPARAMETER_SCRIPT = File.join(SCRIPT_DIRECTORY, DODIRECTPARAMETER_APPLESCRIPT_FILENAME)
+
+  def test_dodirectparamter
+    test_string = "A string input"
+    result = `osascript #{Shellwords.escape(DODIRECTPARAMETER_SCRIPT)} #{Shellwords.escape(test_string)}`
+    result.strip_applescript!
+
+    assert_equal(test_string, result, "Test string doesn't match result")
+  end
+end
+
+class String
+  def strip_applescript
+    newString = self.strip
+    newString.slice!(0)
+    newString.chomp!('\'')
+    newString
+  end
+  def strip_applescript!
+    replace(self.strip_applescript)
   end
 end
