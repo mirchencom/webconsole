@@ -37,7 +37,9 @@ module WcAck
         file = Match::File.new(file_path)
         @files_hash[file_path] = file
 
-        @delegate.added_file(file)
+        if @delegate 
+          @delegate.added_file(file)
+        end
       end
 
       line_number = ansi_wrapped[1][0].to_i
@@ -62,8 +64,10 @@ module WcAck
       text.rstrip!
 
       line.text = text
-
-      @delegate.added_line_to_file(line, file)
+      
+      if @delegate
+        @delegate.added_line_to_file(line, file)
+      end
     end
   end
 end
