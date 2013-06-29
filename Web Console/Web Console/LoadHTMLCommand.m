@@ -39,10 +39,6 @@
 
         [self resumeExecutionWithResult:window];
     }];
-
-    // SuspendExecution
-    // When the block finishes, return the window
-
     
     return nil;
 }

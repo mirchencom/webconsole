@@ -30,7 +30,17 @@
 		theResult = [NSString stringWithFormat:@"'%@'", [self directParameter]];
 	}
 	
-	return theResult;
+
+    NSLog(@"[NSScriptCommand currentCommand] = %@", [NSScriptCommand currentCommand]);
+    NSLog(@"[self] = %@", self);
+    
+    [self suspendExecution];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self resumeExecutionWithResult:theResult];
+    });
+
+	
+    return nil;
 }
 
 @end

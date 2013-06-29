@@ -72,17 +72,17 @@
 //    STAssertEquals(resultInteger, testResultInteger, errorMessage);
 //}
 
-- (void)testAppleScript {
-    NSString *message = @"Message from my app.";
-    NSAppleEventDescriptor *firstParameter = [NSAppleEventDescriptor descriptorWithString:message];
-    NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
-    [parameters insertDescriptor:firstParameter atIndex:1];
-
-    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:@"Test Arguments" parameters:parameters];
-    NSString *resultMessage = [result stringValue];
-    
-    STAssertTrue([message isEqualToString:resultMessage], @"Result string doesn't match");
-}
+//- (void)testAppleScript {
+//    NSString *message = @"Message from my app.";
+//    NSAppleEventDescriptor *firstParameter = [NSAppleEventDescriptor descriptorWithString:message];
+//    NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
+//    [parameters insertDescriptor:firstParameter atIndex:1];
+//
+//    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:@"Test Arguments" parameters:parameters];
+//    NSString *resultMessage = [result stringValue];
+//    
+//    STAssertTrue([message isEqualToString:resultMessage], @"Result string doesn't match");
+//}
 
 #pragma mark - Helpers
 
