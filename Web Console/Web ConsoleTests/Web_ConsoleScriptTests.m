@@ -15,6 +15,8 @@
 
 @interface Web_ConsoleScriptTests ()
 + (WebWindowController *)webWindowControllerForWindowWithWindowNumber:(NSInteger)windowNumber;
++ (WebWindowController *)webWindowControllerWithHTMLLoadedFromTestHTMLFilename:(NSString *)HTMLFilename;
++ (NSString *)stringFromEvaluatingJavaScriptFromString:(NSString *)script;
 @end
 
 @implementation Web_ConsoleScriptTests
@@ -33,28 +35,41 @@
 
 - (void)testLoadHTML
 {
-    NSURL *HTMLFileURL = [Web_ConsoleTests fileURLForTestResource:kTestHTMLFilename withExtension:kTestHTMLExtension];
-
-    NSError *error;
-    NSString *HTML = [NSString stringWithContentsOfURL:HTMLFileURL encoding:NSUTF8StringEncoding error:&error];
-    NSString *errorMessage = [NSString stringWithFormat:@"Error loading HTML string %@", error];
-    STAssertNil(error, errorMessage);
-
-    NSAppleEventDescriptor *firstParameter = [NSAppleEventDescriptor descriptorWithString:HTML];
-    NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
-    [parameters insertDescriptor:firstParameter atIndex:1];
-    
-    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:@"Load HTML"
-                                                                               parameters:parameters];
-    NSInteger windowNumber = [[[result descriptorForKeyword:'seld'] stringValue] intValue];
-    WebWindowController *webWindowController = [Web_ConsoleScriptTests webWindowControllerForWindowWithWindowNumber:windowNumber];
-
-    errorMessage = [NSString stringWithFormat:@"WebWindowController doesn't exist with windowNumber %li", (long)windowNumber];
-    STAssertNotNil(webWindowController, errorMessage);
+    WebWindowController *webWindowController = [Web_ConsoleScriptTests webWindowControllerWithHTMLLoadedFromTestHTMLFilename:kTestHTMLFilename];
     
     WebView *webView = (WebView *)[webWindowController valueForKey:@"webView"];
     NSString *source = [(DOMHTMLElement *)[[[webView mainFrame] DOMDocument] documentElement] outerHTML];
     NSLog(@"Source = %@", source);
+}
+
+- (void)testDoJavaScript
+{
+    WebWindowController *webWindowController = [Web_ConsoleScriptTests webWindowControllerWithHTMLLoadedFromTestHTMLFilename:kTestHTMLFilename];
+    NSInteger windowNumber = [webWindowController.window windowNumber];
+
+    NSURL *JavaScriptFileURL = [Web_ConsoleTests fileURLForTestResource:kTestSimpleJavaScriptFilename
+                                                          withExtension:kTestJavaScriptExtension];
+    
+    NSError *error;
+    NSString *javaScript = [NSString stringWithContentsOfURL:JavaScriptFileURL encoding:NSUTF8StringEncoding error:&error];
+    NSString *errorMessage = [NSString stringWithFormat:@"Error loading JavaScript string %@", error];
+    STAssertNil(error, errorMessage);
+    
+    NSAppleEventDescriptor *javaScriptParameter = [NSAppleEventDescriptor descriptorWithString:javaScript];
+    NSAppleEventDescriptor *windowIDParameter = [NSAppleEventDescriptor descriptorWithInt32:(int)windowNumber];
+    NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
+    [parameters insertDescriptor:javaScriptParameter atIndex:1];
+    [parameters insertDescriptor:windowIDParameter atIndex:2];
+    
+    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:kTestScriptDoJavaScriptFilename
+                                                                               parameters:parameters];
+    NSInteger resultInteger = (NSInteger)[result int32Value];
+    
+    NSString *testResult = [Web_ConsoleScriptTests stringFromEvaluatingJavaScriptFromString:javaScript];
+    NSInteger testResultInteger = [testResult intValue];
+    
+    errorMessage = [NSString stringWithFormat:@"JavaScript results don't match, %li != %li", resultInteger, testResultInteger];
+    STAssertEquals(resultInteger, testResultInteger, errorMessage);
 }
 
 - (void)testAppleScript {
@@ -70,6 +85,39 @@
 }
 
 #pragma mark - Helpers
+
++ (NSString *)stringFromEvaluatingJavaScriptFromString:(NSString *)script {
+
+    WebView *webView = [[WebView alloc] init];
+    
+    return [webView stringByEvaluatingJavaScriptFromString:script];
+}
+
++ (WebWindowController *)webWindowControllerWithHTMLLoadedFromTestHTMLFilename:(NSString *)HTMLFilename {
+
+    NSURL *HTMLFileURL = [Web_ConsoleTests fileURLForTestResource:HTMLFilename
+                                                    withExtension:kTestHTMLExtension];
+    
+    NSError *error;
+    NSString *HTML = [NSString stringWithContentsOfURL:HTMLFileURL encoding:NSUTF8StringEncoding error:&error];
+    NSString *errorMessage = [NSString stringWithFormat:@"Error loading HTML string %@", error];
+    NSAssert(!error, errorMessage);
+    
+    NSAppleEventDescriptor *HTMLParameter = [NSAppleEventDescriptor descriptorWithString:HTML];
+    NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
+    [parameters insertDescriptor:HTMLParameter atIndex:1];
+    
+    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:kTestScriptLoadHTMLFilename
+                                                                               parameters:parameters];
+    NSInteger windowNumber = [[[result descriptorForKeyword:'seld'] stringValue] intValue];
+
+    WebWindowController *webWindowController = [Web_ConsoleScriptTests webWindowControllerForWindowWithWindowNumber:windowNumber];
+    
+    errorMessage = [NSString stringWithFormat:@"WebWindowController doesn't exist with windowNumber %li", (long)windowNumber];
+    NSAssert(webWindowController, errorMessage);
+
+    return webWindowController;
+}
 
 + (WebWindowController *)webWindowControllerForWindowWithWindowNumber:(NSInteger)windowNumber {
     WebWindowController *webWindowController;    

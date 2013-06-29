@@ -53,11 +53,13 @@
 
 + (NSAppleScript *)appleScriptFromTestBundleWithName:(NSString *)name {
     NSURL *appleScriptFileURL = [Web_ConsoleTests fileURLForTestResource:name withExtension:kTestScriptsExtension];
-    
+    NSString *errorMessage = [NSString stringWithFormat:@"AppleScript file URL is nil"];
+    NSAssert(appleScriptFileURL, errorMessage);
+        
     NSDictionary *errorInfo;
     NSAppleScript *appleScript = [[NSAppleScript alloc] initWithContentsOfURL:appleScriptFileURL error:&errorInfo];
     
-    NSString *errorMessage = [NSString stringWithFormat:@"Error initializing AppleScript %@", errorInfo];
+    errorMessage = [NSString stringWithFormat:@"Error initializing AppleScript %@", errorInfo];
     NSAssert(!errorInfo, errorMessage);
     
     return appleScript;

@@ -14,7 +14,16 @@
 #pragma mark - Extensions
 #define kTestScriptsExtension @"scpt"
 #define kTestHTMLExtension @"html"
+#define kTestJavaScriptExtension @"js"
 
 #pragma mark - Resources
+
+#pragma mark AppleScripts
 #define kTestScriptLoadHTMLFilename @"Load HTML"
+#define kTestScriptDoJavaScriptFilename @"Do JavaScript"
+
+#pragma mark HTML
 #define kTestHTMLFilename @"index"
+
+#pragma mark JavaScript
+#define kTestSimpleJavaScriptFilename @"SimpleJavaScript"

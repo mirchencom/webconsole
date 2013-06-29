@@ -25,6 +25,13 @@
         [webWindowController loadHTML:HTML];
     } else {
         WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] webWindowWithHTML:HTML];
+
+#warning Debug code
+        WebView *webView = (WebView *)[webWindowController valueForKey:@"webView"];
+        NSString *source = [(DOMHTMLElement *)[[[webView mainFrame] DOMDocument] documentElement] outerHTML];
+        NSLog(@"Source = %@", source);
+
+        
         window = webWindowController.window;
     }
 

@@ -1,0 +1,1 @@
+function myValue() {return 10;} myValue();
