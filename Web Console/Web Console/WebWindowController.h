@@ -11,6 +11,6 @@
 #import <WebKit/WebKit.h>
 
 @interface WebWindowController : NSWindowController
-- (void)loadHTML:(NSString *)HTML;
+- (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler;
 - (NSString *)doJavaScript:(NSString *)javaScript;
 @end

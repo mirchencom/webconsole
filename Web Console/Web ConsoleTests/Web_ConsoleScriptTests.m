@@ -42,35 +42,35 @@
     NSLog(@"Source = %@", source);
 }
 
-- (void)testDoJavaScript
-{
-    WebWindowController *webWindowController = [Web_ConsoleScriptTests webWindowControllerWithHTMLLoadedFromTestHTMLFilename:kTestHTMLFilename];
-    NSInteger windowNumber = [webWindowController.window windowNumber];
-
-    NSURL *JavaScriptFileURL = [Web_ConsoleTests fileURLForTestResource:kTestSimpleJavaScriptFilename
-                                                          withExtension:kTestJavaScriptExtension];
-    
-    NSError *error;
-    NSString *javaScript = [NSString stringWithContentsOfURL:JavaScriptFileURL encoding:NSUTF8StringEncoding error:&error];
-    NSString *errorMessage = [NSString stringWithFormat:@"Error loading JavaScript string %@", error];
-    STAssertNil(error, errorMessage);
-    
-    NSAppleEventDescriptor *javaScriptParameter = [NSAppleEventDescriptor descriptorWithString:javaScript];
-    NSAppleEventDescriptor *windowIDParameter = [NSAppleEventDescriptor descriptorWithInt32:(int)windowNumber];
-    NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
-    [parameters insertDescriptor:javaScriptParameter atIndex:1];
-    [parameters insertDescriptor:windowIDParameter atIndex:2];
-    
-    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:kTestScriptDoJavaScriptFilename
-                                                                               parameters:parameters];
-    NSInteger resultInteger = (NSInteger)[result int32Value];
-    
-    NSString *testResult = [Web_ConsoleScriptTests stringFromEvaluatingJavaScriptFromString:javaScript];
-    NSInteger testResultInteger = [testResult intValue];
-    
-    errorMessage = [NSString stringWithFormat:@"JavaScript results don't match, %li != %li", resultInteger, testResultInteger];
-    STAssertEquals(resultInteger, testResultInteger, errorMessage);
-}
+//- (void)testDoJavaScript
+//{
+//    WebWindowController *webWindowController = [Web_ConsoleScriptTests webWindowControllerWithHTMLLoadedFromTestHTMLFilename:kTestHTMLFilename];
+//    NSInteger windowNumber = [webWindowController.window windowNumber];
+//
+//    NSURL *JavaScriptFileURL = [Web_ConsoleTests fileURLForTestResource:kTestSimpleJavaScriptFilename
+//                                                          withExtension:kTestJavaScriptExtension];
+//    
+//    NSError *error;
+//    NSString *javaScript = [NSString stringWithContentsOfURL:JavaScriptFileURL encoding:NSUTF8StringEncoding error:&error];
+//    NSString *errorMessage = [NSString stringWithFormat:@"Error loading JavaScript string %@", error];
+//    STAssertNil(error, errorMessage);
+//    
+//    NSAppleEventDescriptor *javaScriptParameter = [NSAppleEventDescriptor descriptorWithString:javaScript];
+//    NSAppleEventDescriptor *windowIDParameter = [NSAppleEventDescriptor descriptorWithInt32:(int)windowNumber];
+//    NSAppleEventDescriptor *parameters = [NSAppleEventDescriptor listDescriptor];
+//    [parameters insertDescriptor:javaScriptParameter atIndex:1];
+//    [parameters insertDescriptor:windowIDParameter atIndex:2];
+//    
+//    NSAppleEventDescriptor *result = [AppleScriptHelper resultOfRunningTestScriptWithName:kTestScriptDoJavaScriptFilename
+//                                                                               parameters:parameters];
+//    NSInteger resultInteger = (NSInteger)[result int32Value];
+//    
+//    NSString *testResult = [Web_ConsoleScriptTests stringFromEvaluatingJavaScriptFromString:javaScript];
+//    NSInteger testResultInteger = [testResult intValue];
+//    
+//    errorMessage = [NSString stringWithFormat:@"JavaScript results don't match, %li != %li", resultInteger, testResultInteger];
+//    STAssertEquals(resultInteger, testResultInteger, errorMessage);
+//}
 
 - (void)testAppleScript {
     NSString *message = @"Message from my app.";

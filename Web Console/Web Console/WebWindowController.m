@@ -12,6 +12,9 @@
 
 @interface WebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
+
+#warning Test implementation
+@property (nonatomic, strong) void (^completionHandler)(BOOL success);
 @end
 
 @implementation WebWindowController
@@ -26,8 +29,10 @@
     return self;
 }
 
-- (void)loadHTML:(NSString *)HTML {    
+- (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler {
     [self.webView.mainFrame loadHTMLString:HTML baseURL:nil];
+
+    self.completionHandler = completionHandler;
 }
 
 - (NSString *)doJavaScript:(NSString *)javaScript {
@@ -55,5 +60,19 @@
     [listener use];
 }
 
+#pragma mark - WebResourceLoadDelegate
+
+- (void)webView:(WebView *)sender resource:(id)identifier didFinishLoadingFromDataSource:(WebDataSource *)dataSource {
+    
+    
+    NSString *source = [(DOMHTMLElement *)[[[sender mainFrame] DOMDocument] documentElement] outerHTML];
+    
+    NSLog(@"identifier = %@", identifier);
+    NSLog(@"dataSource = %@", dataSource);
+    
+//    NSLog(@"Delegate source = %@", source);
+
+    self.completionHandler(YES);
+}
 
 @end

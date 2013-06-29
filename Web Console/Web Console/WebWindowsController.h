@@ -13,6 +13,6 @@
 @interface WebWindowsController : NSObject
 
 + (id)sharedWebWindowsController;
-- (WebWindowController *)webWindowWithHTML:(NSString *)HTML;
+- (WebWindowController *)addedWebWindowController;
 - (void)removeWebWindowController:(WebWindowController *)webWindowController;
 @end

@@ -17,25 +17,34 @@
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
 
     NSString *HTML = [self directParameter];
+
+    NSLog(@"Input HTML = %@", HTML);
     
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     
+    WebWindowController *webWindowController;
     if (window) {
-        WebWindowController *webWindowController = (WebWindowController *)window.windowController;
-        [webWindowController loadHTML:HTML];
+        webWindowController = (WebWindowController *)window.windowController;
     } else {
-        WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] webWindowWithHTML:HTML];
-
-#warning Debug code
-        WebView *webView = (WebView *)[webWindowController valueForKey:@"webView"];
-        NSString *source = [(DOMHTMLElement *)[[[webView mainFrame] DOMDocument] documentElement] outerHTML];
-        NSLog(@"Source = %@", source);
-
-        
+        webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
         window = webWindowController.window;
     }
 
-    return window;
+    [self suspendExecution];
+    [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
+#warning Debug code
+        WebView *webView = (WebView *)[webWindowController valueForKey:@"webView"];
+        NSString *source = [(DOMHTMLElement *)[[[webView mainFrame] DOMDocument] documentElement] outerHTML];
+        NSLog(@"Output Source = %@", source);
+
+        [self resumeExecutionWithResult:window];
+    }];
+
+    // SuspendExecution
+    // When the block finishes, return the window
+
+    
+    return nil;
 }
 
 @end

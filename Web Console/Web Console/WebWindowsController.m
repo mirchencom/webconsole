@@ -14,7 +14,6 @@
 
 @interface WebWindowsController ()
 @property (nonatomic, strong) NSMutableArray *webWindowControllers;
-
 @end
 
 @implementation WebWindowsController
@@ -37,11 +36,10 @@
     return self;
 }
 
-- (WebWindowController *)webWindowWithHTML:(NSString *)HTML {
+- (WebWindowController *)addedWebWindowController {
     WebWindowController *webWindowController = [[WebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
     [webWindowController showWindow:self];
-	[webWindowController loadHTML:HTML];
     
     [self.webWindowControllers addObject:webWindowController];
     
