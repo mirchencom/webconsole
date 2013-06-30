@@ -50,7 +50,14 @@
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
     NSURL *URL = [request URL];
     if ([[URL scheme] isEqualToString:@"file"]) {
-        [[NSWorkspace sharedWorkspace] openURL:[request URL]];
+        switch ([actionInformation[@"WebActionNavigationTypeKey"] intValue]) {
+            case WebNavigationTypeLinkClicked:
+                [[NSWorkspace sharedWorkspace] openURL:[request URL]];
+                break;
+            default:
+                [listener use];
+                break;
+        }
     } else {
         [listener use];
     }

@@ -20,6 +20,8 @@
 
 #pragma mark HTML
 #define kTestDataHTMLFilename @"index"
+#define kTestDataHTMLJQUERYFilename @"indexjquery"
+
 
 #pragma mark JavaScript
 #define kTestSimpleJavaScriptFilename @"SimpleJavaScript"

@@ -30,6 +30,32 @@
     [super tearDown];
 }
 
+- (void)testLoadHTMLWithBaseURL {
+    NSURL *fileURL = [self URLForResource:kTestDataHTMLJQUERYFilename
+                            withExtension:kTestDataHTMLExtension
+                             subdirectory:kTestDataSubdirectory];
+    NSError *error;
+    NSString *HTML = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
+    NSString *errorMessage = [NSString stringWithFormat:@"Error loading HTML string %@", error];
+    NSAssert(!error, errorMessage);
+
+    NSURL *baseURL = [fileURL URLByDeletingLastPathComponent];
+
+    __block BOOL completionHandlerRan = NO;
+    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+    [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
+        completionHandlerRan = YES;
+    }];
+
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeout];
+    while ([loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+        if (completionHandlerRan) break;
+    }
+	
+    STAssertTrue(completionHandlerRan, @"completionHandler did not run.");
+}
+
 - (void)testLoadHTMLTwice
 {
     NSURL *fileURL = [self URLForResource:kTestDataHTMLFilename
