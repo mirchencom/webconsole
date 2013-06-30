@@ -20,9 +20,6 @@
 		4530B0FA1736E2A6000A52E2 /* Web_ConsoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0F91736E2A6000A52E2 /* Web_ConsoleTests.m */; };
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		455B0BFE176FF592007B75DD /* LoadHTMLCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* LoadHTMLCommand.m */; };
-		455B0C0117700AE9007B75DD /* Web_ConsoleScriptTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C0017700AE9007B75DD /* Web_ConsoleScriptTests.m */; };
-		455B0C03177011D2007B75DD /* TestScripts in Resources */ = {isa = PBXBuildFile; fileRef = 455B0C02177011D2007B75DD /* TestScripts */; };
-		455B0C0617714BCA007B75DD /* AppleScriptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C0517714BCA007B75DD /* AppleScriptHelper.m */; };
 		455B0C0A1771627A007B75DD /* DoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* DoJavaScriptCommand.m */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
@@ -63,12 +60,6 @@
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		455B0BFC176FF592007B75DD /* LoadHTMLCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadHTMLCommand.h; sourceTree = "<group>"; };
 		455B0BFD176FF592007B75DD /* LoadHTMLCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadHTMLCommand.m; sourceTree = "<group>"; };
-		455B0BFF17700AE9007B75DD /* Web_ConsoleScriptTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_ConsoleScriptTests.h; sourceTree = "<group>"; };
-		455B0C0017700AE9007B75DD /* Web_ConsoleScriptTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_ConsoleScriptTests.m; sourceTree = "<group>"; };
-		455B0C02177011D2007B75DD /* TestScripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestScripts; sourceTree = "<group>"; };
-		455B0C0417714BCA007B75DD /* AppleScriptHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleScriptHelper.h; sourceTree = "<group>"; };
-		455B0C0517714BCA007B75DD /* AppleScriptHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleScriptHelper.m; sourceTree = "<group>"; };
-		455B0C07177150E0007B75DD /* Web_ConsoleTestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_ConsoleTestsConstants.h; sourceTree = "<group>"; };
 		455B0C081771627A007B75DD /* DoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoJavaScriptCommand.h; sourceTree = "<group>"; };
 		455B0C091771627A007B75DD /* DoJavaScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoJavaScriptCommand.m; sourceTree = "<group>"; };
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
@@ -180,15 +171,9 @@
 		4530B0F21736E2A6000A52E2 /* Web ConsoleTests */ = {
 			isa = PBXGroup;
 			children = (
-				455B0C02177011D2007B75DD /* TestScripts */,
 				4530B0F81736E2A6000A52E2 /* Web_ConsoleTests.h */,
 				4530B0F91736E2A6000A52E2 /* Web_ConsoleTests.m */,
-				455B0BFF17700AE9007B75DD /* Web_ConsoleScriptTests.h */,
-				455B0C0017700AE9007B75DD /* Web_ConsoleScriptTests.m */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
-				455B0C0417714BCA007B75DD /* AppleScriptHelper.h */,
-				455B0C0517714BCA007B75DD /* AppleScriptHelper.m */,
-				455B0C07177150E0007B75DD /* Web_ConsoleTestsConstants.h */,
 			);
 			path = "Web ConsoleTests";
 			sourceTree = "<group>";
@@ -286,7 +271,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */,
-				455B0C03177011D2007B75DD /* TestScripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,8 +311,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4530B0FA1736E2A6000A52E2 /* Web_ConsoleTests.m in Sources */,
-				455B0C0117700AE9007B75DD /* Web_ConsoleScriptTests.m in Sources */,
-				455B0C0617714BCA007B75DD /* AppleScriptHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

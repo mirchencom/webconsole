@@ -42,7 +42,7 @@ class TestData
   MATCHED_TEXT_KEY = "matched_text"
 
   def self.get_input_data(hash)
-    input_file=File.join(TEST_DIRECTORY, hash[INPUT_FILE_KEY])
+    input_file = File.join(TEST_DIRECTORY, hash[INPUT_FILE_KEY])
     `cat "#{input_file}"`
   end
   def self.get_test_results(test_data_hash)
