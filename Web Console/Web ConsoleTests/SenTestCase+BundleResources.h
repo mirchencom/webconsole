@@ -11,5 +11,6 @@
 @interface SenTestCase (BundleResources)
 
 - (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory;
+- (NSString *)stringWithContentsOfFileURL:(NSURL *)fileURL;
 
 @end

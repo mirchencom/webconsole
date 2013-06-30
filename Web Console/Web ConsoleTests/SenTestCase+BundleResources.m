@@ -11,9 +11,19 @@
 @implementation SenTestCase (BundleResources)
 
 - (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory {
-    return [[NSBundle bundleForClass:[self class]] URLForResource:name
-                                                    withExtension:ext
-                                                     subdirectory:subdirectory];
+    NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:name
+                                                              withExtension:ext
+                                                               subdirectory:subdirectory];
+    NSAssert(fileURL, @"fileURL should not be nil.");
+    return fileURL;
+}
+
+- (NSString *)stringWithContentsOfFileURL:(NSURL *)fileURL {
+    NSError *error;
+    NSString *contents = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
+    NSString *errorMessage = [NSString stringWithFormat:@"Error loading string %@", error];
+    NSAssert(!error, errorMessage);
+    return contents;
 }
 
 @end

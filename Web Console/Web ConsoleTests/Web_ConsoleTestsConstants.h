@@ -25,3 +25,4 @@
 
 #pragma mark JavaScript
 #define kTestSimpleJavaScriptFilename @"SimpleJavaScript"
+#define kTestJQueryJavaScriptFilename @"JQueryJavaScript"

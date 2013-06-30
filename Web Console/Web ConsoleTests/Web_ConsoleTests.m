@@ -34,11 +34,7 @@
     NSURL *fileURL = [self URLForResource:kTestDataHTMLJQUERYFilename
                             withExtension:kTestDataHTMLExtension
                              subdirectory:kTestDataSubdirectory];
-    NSError *error;
-    NSString *HTML = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
-    NSString *errorMessage = [NSString stringWithFormat:@"Error loading HTML string %@", error];
-    NSAssert(!error, errorMessage);
-
+    NSString *HTML = [self stringWithContentsOfFileURL:fileURL];
     NSURL *baseURL = [fileURL URLByDeletingLastPathComponent];
 
     __block BOOL completionHandlerRan = NO;
@@ -54,17 +50,19 @@
     }
 	
     STAssertTrue(completionHandlerRan, @"completionHandler did not run.");
+
+    NSString *javaScript = [self stringWithContentsOfTestDataFilename:kTestJQueryJavaScriptFilename
+                                                            extension:kTestDataJavaScriptExtension];
+    
+    NSString *result = [webWindowController doJavaScript:javaScript];
+
+    NSLog(@"result = %@", result);
+    STAssertNotNil(result, @"Result should not be nil.");
 }
 
 - (void)testLoadHTMLTwice
 {
-    NSURL *fileURL = [self URLForResource:kTestDataHTMLFilename
-                            withExtension:kTestDataHTMLExtension
-                             subdirectory:kTestDataSubdirectory];
-    NSError *error;
-    NSString *HTML = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
-    NSString *errorMessage = [NSString stringWithFormat:@"Error loading HTML string %@", error];
-    NSAssert(!error, errorMessage);
+    NSString *HTML = [self stringWithContentsOfTestDataFilename:kTestDataHTMLFilename extension:kTestDataHTMLExtension];
     
     WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
 
@@ -89,5 +87,15 @@
     STAssertTrue(completionHandlerRan1, @"completionHandler1 did not run.");
     STAssertTrue(completionHandlerRan2, @"completionHandler2 did not run.");    
 }
+
+#pragma mark - Helpers
+
+- (NSString *)stringWithContentsOfTestDataFilename:(NSString *)filename extension:(NSString *)extension {
+    NSURL *fileURL = [self URLForResource:filename
+                            withExtension:extension
+                             subdirectory:kTestDataSubdirectory];
+    return [self stringWithContentsOfFileURL:fileURL];
+}
+
 
 @end
