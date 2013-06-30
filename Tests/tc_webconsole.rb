@@ -8,8 +8,6 @@ WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "WebConsole", "WebConsole")
 require WEBCONSOLE_FILE
 DATA_DIRECTORY = File.join(File.dirname(__FILE__), "Data")
 
-
-
 class TestWebConsole < Test::Unit::TestCase
 
   TESTHTML_FILE = File.join(DATA_DIRECTORY, "index.html")
