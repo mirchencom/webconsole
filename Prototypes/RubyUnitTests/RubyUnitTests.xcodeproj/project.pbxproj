@@ -22,6 +22,9 @@
 		45F2574A177F86F900A3BF75 /* SimpleCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F25747177F86F900A3BF75 /* SimpleCommand.m */; };
 		45F2574C177F870C00A3BF75 /* RubyUnitTests.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45F2574B177F870C00A3BF75 /* RubyUnitTests.sdef */; };
 		45F2574F177F8B4000A3BF75 /* NSApplication+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F2574E177F8B4000A3BF75 /* NSApplication+AppleScript.m */; };
+		45F25752177F9E3400A3BF75 /* RubyTestUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F25751177F9E3400A3BF75 /* RubyTestUnit.m */; };
+		45F25754177FA2FF00A3BF75 /* Scripts in Resources */ = {isa = PBXBuildFile; fileRef = 45F25753177FA2FF00A3BF75 /* Scripts */; };
+		45F25757177FA49C00A3BF75 /* SenTestCase+BundleResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F25756177FA49C00A3BF75 /* SenTestCase+BundleResources.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,11 @@
 		45F2574B177F870C00A3BF75 /* RubyUnitTests.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RubyUnitTests.sdef; sourceTree = "<group>"; };
 		45F2574D177F8B4000A3BF75 /* NSApplication+AppleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+AppleScript.h"; sourceTree = "<group>"; };
 		45F2574E177F8B4000A3BF75 /* NSApplication+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+AppleScript.m"; sourceTree = "<group>"; };
+		45F25750177F9E3400A3BF75 /* RubyTestUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyTestUnit.h; sourceTree = "<group>"; };
+		45F25751177F9E3400A3BF75 /* RubyTestUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyTestUnit.m; sourceTree = "<group>"; };
+		45F25753177FA2FF00A3BF75 /* Scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scripts; sourceTree = "<group>"; };
+		45F25755177FA49C00A3BF75 /* SenTestCase+BundleResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SenTestCase+BundleResources.h"; sourceTree = "<group>"; };
+		45F25756177FA49C00A3BF75 /* SenTestCase+BundleResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SenTestCase+BundleResources.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,9 +168,14 @@
 		45F25731177F768700A3BF75 /* RubyUnitTestsTests */ = {
 			isa = PBXGroup;
 			children = (
+				45F25753177FA2FF00A3BF75 /* Scripts */,
 				45F25737177F768700A3BF75 /* RubyUnitTestsTests.h */,
 				45F25738177F768700A3BF75 /* RubyUnitTestsTests.m */,
 				45F25732177F768700A3BF75 /* Supporting Files */,
+				45F25750177F9E3400A3BF75 /* RubyTestUnit.h */,
+				45F25751177F9E3400A3BF75 /* RubyTestUnit.m */,
+				45F25755177FA49C00A3BF75 /* SenTestCase+BundleResources.h */,
+				45F25756177FA49C00A3BF75 /* SenTestCase+BundleResources.m */,
 			);
 			path = RubyUnitTestsTests;
 			sourceTree = "<group>";
@@ -259,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45F25736177F768700A3BF75 /* InfoPlist.strings in Resources */,
+				45F25754177FA2FF00A3BF75 /* Scripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +313,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				45F25739177F768700A3BF75 /* RubyUnitTestsTests.m in Sources */,
+				45F25752177F9E3400A3BF75 /* RubyTestUnit.m in Sources */,
+				45F25757177FA49C00A3BF75 /* SenTestCase+BundleResources.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
