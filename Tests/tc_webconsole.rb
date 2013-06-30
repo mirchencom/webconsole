@@ -26,11 +26,26 @@ class TestWebConsole < Test::Unit::TestCase
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @webconsole.do_javascript(javascript)
     expected = `node #{Shellwords.escape(SIMPLEJAVASCRIPT_FILE)}`
-    assert_equal(expected.to_i, result.to_i, "Expected doesn't match result")
+    assert_equal(expected.to_i, result.to_i, "Result doesn't match expected.")
   end
-
-  # def test_load_html
-  #   # Test result of do javascript
-  # end
 end
 
+class TestLoadHTML < Test::Unit::TestCase
+  def setup
+    @webconsole = WebConsole.new
+  end
+
+  def teardown
+    @webconsole.close
+  end
+
+  def test_load_html
+    testString = "This is a test string"
+    html = "<html><body>" + testString + "</body></html>"
+    javascript = "document.getElementsByTagName('body')[0].innerHTML;"
+    @webconsole.load_html(html)
+    result = @webconsole.do_javascript(javascript)
+    result.strip! # Remove line break
+    assert_equal(testString, result, "Result doesn't match test string.")
+  end
+end
