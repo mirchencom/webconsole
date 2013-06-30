@@ -8,6 +8,9 @@
 
 #import "Web_ConsoleTests.h"
 
+#import "SenTestCase+BundleResources.h"
+#import "Web_ConsoleTestsConstants.h"
+
 @implementation Web_ConsoleTests
 
 - (void)setUp
@@ -24,8 +27,13 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testLoadHTMLTwice
 {
+    NSURL *fileURL = [self URLForResource:kTestDataHTMLFilename
+                            withExtension:kTestDataHTMLExtension
+                             subdirectory:kTestDataSubdirectory];
+
+NSLog(@"fileURL = %@", fileURL);
     STFail(@"Unit tests are not implemented yet in Web ConsoleTests");
 }
 

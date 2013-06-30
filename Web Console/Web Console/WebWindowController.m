@@ -64,13 +64,10 @@
 
 - (void)webView:(WebView *)sender resource:(id)identifier didFinishLoadingFromDataSource:(WebDataSource *)dataSource {
     
-    
     NSString *source = [(DOMHTMLElement *)[[[sender mainFrame] DOMDocument] documentElement] outerHTML];
     
     NSLog(@"identifier = %@", identifier);
     NSLog(@"dataSource = %@", dataSource);
-    
-//    NSLog(@"Delegate source = %@", source);
 
     self.completionHandler(YES);
 }
