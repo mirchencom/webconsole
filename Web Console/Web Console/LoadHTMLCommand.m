@@ -17,8 +17,6 @@
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
 
     NSString *HTML = [self directParameter];
-
-    NSLog(@"Input HTML = %@", HTML);
     
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     
@@ -32,11 +30,6 @@
 
     [self suspendExecution];
     [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
-#warning Debug code
-        WebView *webView = (WebView *)[webWindowController valueForKey:@"webView"];
-        NSString *source = [(DOMHTMLElement *)[[[webView mainFrame] DOMDocument] documentElement] outerHTML];
-        NSLog(@"Output Source = %@", source);
-
         [self resumeExecutionWithResult:window];
     }];
     

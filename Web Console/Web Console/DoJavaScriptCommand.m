@@ -17,7 +17,7 @@
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
     
     NSString *javaScript = [self directParameter];
-    
+        
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     
     WebWindowController *webWindowController = (WebWindowController *)window.windowController;

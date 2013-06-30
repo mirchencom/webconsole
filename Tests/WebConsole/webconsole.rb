@@ -12,19 +12,15 @@ class WebConsole
   LOADHTML_FILENAME = "Load HTML.scpt"
   LOADHTML_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, LOADHTML_FILENAME)
   def load_html(html)
-
     # load_html should use the current window if it has one and new one if not
     result = self.class.run_applescript(LOADHTML_SCRIPT, [html])
-
     @window_id = self.class.window_id_from_result(result)
-puts "@window_id = " + @window_id.to_s
-
   end
 
   DOJAVASCRIPT_FILENAME = "Do JavaScript.scpt"
   DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, DOJAVASCRIPT_FILENAME)
   def do_javascript(javascript)
-    
+    self.class.run_applescript(DOJAVASCRIPT_SCRIPT, [javascript, @window_id])
   end
 
   CLOSEWINDOW_FILENAME = "Close Window.scpt"
