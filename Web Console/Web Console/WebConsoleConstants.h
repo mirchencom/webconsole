@@ -7,3 +7,4 @@
 //
 
 #define kAppleScriptTargetKey @"Target"
+#define kBaseURLKey @"BaseURL"

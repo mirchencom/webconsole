@@ -12,8 +12,6 @@
 
 @interface WebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
-
-#warning Test implementation
 @property (nonatomic, strong) void (^completionHandler)(BOOL success);
 @end
 
@@ -29,8 +27,12 @@
     return self;
 }
 
-- (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler {    
-    [self.webView.mainFrame loadHTMLString:HTML baseURL:nil];
+- (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL))completionHandler {
+    [self loadHTML:HTML baseURL:nil completionHandler:completionHandler];
+}
+
+- (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {    
+    [self.webView.mainFrame loadHTMLString:HTML baseURL:baseURL];
 
     self.completionHandler = completionHandler;
 }

@@ -39,7 +39,7 @@ addLine(30, '#{text}', matches);
 ]
 
 # Run the JavaScript
-root_url = File.dirname(__FILE__)
+root_url = File.expand_path(File.dirname(__FILE__))
 javascript = URI::encode(javascript)
 html = URI::encode(template_erb.result)
 STDOUT.puts `domrunner --eh #{Shellwords.escape(html)} --ej #{Shellwords.escape(javascript)} -u #{Shellwords.escape(root_url)}`

@@ -11,6 +11,8 @@
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
 
+#define kFileURLPrefix @"file://"
+
 @implementation LoadHTMLCommand
 
 - (id)performDefaultImplementation {
@@ -19,7 +21,15 @@
     NSString *HTML = [self directParameter];
     
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
+    NSString *baseURLString = [argumentsDictionary objectForKey:kBaseURLKey];
     
+    NSURL *baseURL;
+    if ([baseURLString hasPrefix:kFileURLPrefix]) {
+        baseURL = [NSURL fileURLWithPath:[baseURLString substringFromIndex:kFileURLPrefix.length - 1]];
+    } else {
+        baseURL = [NSURL URLWithString:baseURLString];
+    }
+
     WebWindowController *webWindowController;
     if (window) {
         webWindowController = (WebWindowController *)window.windowController;
@@ -29,7 +39,7 @@
     }
 
     [self suspendExecution];
-    [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
+    [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
         [self resumeExecutionWithResult:window];
     }];
     

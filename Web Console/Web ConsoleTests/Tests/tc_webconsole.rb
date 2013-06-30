@@ -49,3 +49,25 @@ class TestLoadHTML < Test::Unit::TestCase
     assert_equal(testString, result, "Result doesn't match test string.")
   end
 end
+
+class TestLoadHTMLWithBaseURL < Test::Unit::TestCase
+  TESTHTMLJQUERY_FILE = File.join(DATA_DIRECTORY, "indexjquery.html")
+  def setup
+    html = File.read(TESTHTMLJQUERY_FILE)
+    @webconsole = WebConsole.new
+    @webconsole.base_url_path = File.expand_path(File.dirname(TESTHTMLJQUERY_FILE))
+    @webconsole.load_html(html)
+  end
+
+  def teardown
+    @webconsole.close
+  end
+
+  TESTJQUERYJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "JQueryJavaScript.js")
+  def test_load_from_base_url
+    javascript = File.read(TESTJQUERYJAVASCRIPT_FILE)
+    result = @webconsole.do_javascript(javascript)
+puts "result = " + result.to_s
+
+  end
+end

@@ -4,16 +4,24 @@ class WebConsole
   SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
   APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "AppleScript")
 
-
+  attr_writer :base_url
   def initialize
-    @window_id
+  end
+
+  def base_url_path=(value)
+    @base_url = "file://" + value
   end
 
   LOADHTML_FILENAME = "Load HTML.scpt"
   LOADHTML_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, LOADHTML_FILENAME)
+  LOADHTMLWITHBASEURL_FILENAME = "Load HTML With Base URL.scpt"
+  LOADHTMLWITHBASEURL_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, LOADHTMLWITHBASEURL_FILENAME)
   def load_html(html)
-    # load_html should use the current window if it has one and new one if not
-    result = self.class.run_applescript(LOADHTML_SCRIPT, [html])
+    if @base_url
+      result = self.class.run_applescript(LOADHTMLWITHBASEURL_SCRIPT, [html, @base_url])
+    else
+      result = self.class.run_applescript(LOADHTML_SCRIPT, [html])
+    end
     @window_id = self.class.window_id_from_result(result)
   end
 

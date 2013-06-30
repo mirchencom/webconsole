@@ -244,6 +244,10 @@
 				<cocoa key="Target" />
 				<type type="window" />
 			</parameter>
+			<parameter name="with base URL" description="The base URL to load resources from." code="burl" optional="yes">
+				<cocoa key="BaseURL" />
+				<type type="text" />
+			</parameter>
 			<result type="window" description="The window the HTML was loaded in." />
 		</command>
 
