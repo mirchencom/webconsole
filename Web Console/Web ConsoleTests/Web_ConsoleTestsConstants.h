@@ -9,6 +9,7 @@
 #import "Web_ConsoleTests.h"
 
 #pragma mark - General
+#define kTestTimeout 1
 #define kTestDataSubdirectory @"Data"
 
 #pragma mark - Extensions

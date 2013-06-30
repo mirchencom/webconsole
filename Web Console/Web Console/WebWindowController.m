@@ -29,7 +29,7 @@
     return self;
 }
 
-- (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler {
+- (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler {    
     [self.webView.mainFrame loadHTMLString:HTML baseURL:nil];
 
     self.completionHandler = completionHandler;
@@ -63,13 +63,11 @@
 #pragma mark - WebResourceLoadDelegate
 
 - (void)webView:(WebView *)sender resource:(id)identifier didFinishLoadingFromDataSource:(WebDataSource *)dataSource {
-    
-    NSString *source = [(DOMHTMLElement *)[[[sender mainFrame] DOMDocument] documentElement] outerHTML];
-    
-    NSLog(@"identifier = %@", identifier);
-    NSLog(@"dataSource = %@", dataSource);
-
     self.completionHandler(YES);
+}
+
+- (void)webView:(WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource {
+    self.completionHandler(NO);
 }
 
 @end
