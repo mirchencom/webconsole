@@ -24,5 +24,8 @@
 
 
 #pragma mark JavaScript
-#define kTestSimpleJavaScriptFilename @"SimpleJavaScript"
-#define kTestJQueryJavaScriptFilename @"JQueryJavaScript"
+#define kTestJavaScriptNoDOMFilename @"JavaScriptNoDOM"
+#define kTestJavaScriptBodyJQueryFilename @"JavaScriptBodyJQuery"
+#define kTestJavaScriptBodyFilename @"JavaScriptBody"
+#define kTestJavaScriptTextJQueryFilename @"JavaScriptTextJQuery"
+#define kTestJavaScriptTextFilename @"JavaScriptText"

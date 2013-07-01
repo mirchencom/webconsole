@@ -21,7 +21,7 @@ class TestWebConsole < Test::Unit::TestCase
     @webconsole.close
   end
 
-  SIMPLEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "SimpleJavaScript.js")
+  SIMPLEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "JavaScriptNoDOM.js")
   def test_do_javascript
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @webconsole.do_javascript(javascript)
@@ -63,11 +63,20 @@ class TestLoadHTMLWithBaseURL < Test::Unit::TestCase
     @webconsole.close
   end
 
-  TESTJQUERYJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "JQueryJavaScript.js")
+  TESTJAVASCRIPTTEXTJQUERY_FILE = File.join(DATA_DIRECTORY, "JavaScriptTextJQuery.js")
+  TESTJAVASCRIPTTEXT_FILE = File.join(DATA_DIRECTORY, "JavaScriptText.js")
   def test_load_from_base_url
-    javascript = File.read(TESTJQUERYJAVASCRIPT_FILE)
+    javascript = File.read(TESTJAVASCRIPTTEXTJQUERY_FILE)
     result = @webconsole.do_javascript(javascript)
+
 puts "result = " + result.to_s
+
+    test_javascript = File.read(TESTJAVASCRIPTTEXT_FILE)
+    expectedResult = @webconsole.do_javascript(test_javascript)
+
+puts "expectedResult = " + expectedResult.to_s
+
+
 
   end
 end

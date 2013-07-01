@@ -27,6 +27,7 @@
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
 		45ADD9111739F257008A6AE7 /* WebWindowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD9101739F257008A6AE7 /* WebWindowsController.m */; };
+		45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F826421780F99100DD7DF6 /* WebView+Source.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		45ADD90D1739EA58008A6AE7 /* WebWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebWindow.xib; sourceTree = "<group>"; };
 		45ADD90F1739F257008A6AE7 /* WebWindowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowsController.h; sourceTree = "<group>"; };
 		45ADD9101739F257008A6AE7 /* WebWindowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowsController.m; sourceTree = "<group>"; };
+		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
+		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,8 @@
 				451D5F8D1780B55D0051F974 /* Data */,
 				451D5F8A1780B5450051F974 /* SenTestCase+BundleResources.h */,
 				451D5F8B1780B5450051F974 /* SenTestCase+BundleResources.m */,
+				45F826411780F99000DD7DF6 /* WebView+Source.h */,
+				45F826421780F99100DD7DF6 /* WebView+Source.m */,
 				4530B0F81736E2A6000A52E2 /* Web_ConsoleTests.h */,
 				4530B0F91736E2A6000A52E2 /* Web_ConsoleTests.m */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
@@ -323,6 +328,7 @@
 			files = (
 				4530B0FA1736E2A6000A52E2 /* Web_ConsoleTests.m in Sources */,
 				451D5F8C1780B5450051F974 /* SenTestCase+BundleResources.m in Sources */,
+				45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
