@@ -26,7 +26,7 @@ class TestWebConsole < Test::Unit::TestCase
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @webconsole.do_javascript(javascript)
     expected = `node #{Shellwords.escape(SIMPLEJAVASCRIPT_FILE)}`
-    assert_equal(expected.to_i, result.to_i, "Result doesn't match expected.")
+    assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
   end
 end
 
@@ -46,7 +46,7 @@ class TestLoadHTML < Test::Unit::TestCase
     @webconsole.load_html(html)
     result = @webconsole.do_javascript(javascript)
     result.strip! # Remove line break
-    assert_equal(testString, result, "Result doesn't match test string.")
+    assert_equal(testString, result, "The result should match the test string.")
   end
 end
 
@@ -69,14 +69,9 @@ class TestLoadHTMLWithBaseURL < Test::Unit::TestCase
     javascript = File.read(TESTJAVASCRIPTTEXTJQUERY_FILE)
     result = @webconsole.do_javascript(javascript)
 
-puts "result = " + result.to_s
-
     test_javascript = File.read(TESTJAVASCRIPTTEXT_FILE)
-    expectedResult = @webconsole.do_javascript(test_javascript)
+    expected = @webconsole.do_javascript(test_javascript)
 
-puts "expectedResult = " + expectedResult.to_s
-
-
-
+    assert_equal(expected, result, "The result should equal expected result.")
   end
 end
