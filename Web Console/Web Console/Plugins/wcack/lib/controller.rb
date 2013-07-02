@@ -18,9 +18,8 @@ module WcAck
     end
 
     def added_file(file)
-# JavaScript to add file
-
-puts "file.file_path = " + file.file_path.to_s
+      javascript = "addFile('#{file.file_path}');"
+      @delegate.do_javascript(javascript)
     end
 
     def added_line_to_file(line, file)
