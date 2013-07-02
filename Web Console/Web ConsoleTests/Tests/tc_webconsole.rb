@@ -4,7 +4,7 @@ require "test/unit"
 require 'Shellwords'
 
 SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
-WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "WebConsole", "WebConsole")
+WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "../..", "Web Console", "Plugins", "WebConsole", "WebConsole")
 require WEBCONSOLE_FILE
 DATA_DIRECTORY = File.join(File.dirname(__FILE__), "Data")
 
