@@ -25,6 +25,10 @@ module WcAck
     def added_line_to_file(line, file)
 # JavaScript to add line to file
 
+puts "line.text = " + line.text.to_s
+puts "line.line_number = " + line.line_number.to_s
+
+
 puts "added line = #{line.to_s} to file = #{file.file_path.to_s}"
     end
 
