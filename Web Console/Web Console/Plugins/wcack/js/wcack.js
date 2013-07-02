@@ -9,14 +9,14 @@ function addFile(file_path) {
 	$(template(data)).appendTo("body");
 }
 
-function addLine(line_number, text, matches) {
+function addLine(number, text, matches) {
 	var matchesCopy = JSON.parse(JSON.stringify(matches));
 	text = textWithMatchesProcessed(text, 0, matchesCopy);
 
 	var source   = $("#line-template").html();
 	var template = Handlebars.compile(source);
 	var data = { 
-		line_number: line_number,
+		number: number,
 		text: text
 	};
 	var list = $('section ul').last();

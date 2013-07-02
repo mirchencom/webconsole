@@ -42,8 +42,8 @@ module WcAck
         end
       end
 
-      line_number = ansi_wrapped[1][0].to_i
-      line = Match::File::Line.new(line_number)
+      number = ansi_wrapped[1][0].to_i
+      line = Match::File::Line.new(number)
       file.lines.push(line)
 
       text = raw_line.sub(METADATA_REGEXP, '')

@@ -23,15 +23,27 @@ module WcAck
     end
 
     def added_line_to_file(line, file)
-# JavaScript to add line to file
+      matches_javascript = ""
+      line.matches.each { |match|
+        match_javascript = %Q[ 
+  {
+    index: #{match.index},
+    length: #{match.length}
+  },]
+        matches_javascript << match_javascript
+      }
 
-puts "line.text = " + line.text.to_s
-puts "line.line_number = " + line.line_number.to_s
+puts "matches_javascript = " + matches_javascript.to_s
 
+      matches_javascript.chomp!(',');
+      javascript = %Q[
+var matches = [#{matches_javascript}  
+];
+addLine(#{line.number}, '#{line.text}', matches);
+]
+# puts "javascript = " + javascript.to_s
 
-puts "added line = #{line.to_s} to file = #{file.file_path.to_s}"
     end
-
   end    
 end
 

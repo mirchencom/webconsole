@@ -22,7 +22,7 @@ class TestWCACK < Test::Unit::TestCase
       file = files_hash[file_path]
       
       test_file.lines.zip(file.lines).each do |test_line, line|
-        assert_equal(test_line.line_number, line.line_number, "Line numbers don't match.")
+        assert_equal(test_line.number, line.number, "Line numbers don't match.")
         assert_equal(test_line.matches.count, line.matches.count, "Match counts don't match")
         test_line.matches.zip(line.matches).each do |test_match, match|
           assert_equal(test_match.text, match.text, "Matched text doesn't match")
@@ -38,7 +38,7 @@ class TestData
   INPUT_FILE_KEY = "input_file"
   RESULTS_KEY = "results"
   FILE_PATH_KEY = "file_path"
-  LINE_NUMBER_KEY = "line_number"
+  LINE_NUMBER_KEY = "number"
   MATCHED_TEXT_KEY = "matched_text"
 
   def self.get_input_data(hash)
@@ -52,7 +52,7 @@ class TestData
 
     test_results_hashes.each { |test_results_hash|
       file_path = test_results_hash[FILE_PATH_KEY]
-      line_number = test_results_hash[LINE_NUMBER_KEY]
+      number = test_results_hash[LINE_NUMBER_KEY]
       matched_text = test_results_hash[MATCHED_TEXT_KEY]
 
       test_file = test_files_hash[file_path]
@@ -63,10 +63,10 @@ class TestData
         test_lines_hash = Hash.new
       end
 
-      test_line = test_lines_hash[line_number]
+      test_line = test_lines_hash[number]
       if !test_line
-        test_line = TestFile::TestLine.new(line_number)
-        test_lines_hash[line_number] = test_line
+        test_line = TestFile::TestLine.new(number)
+        test_lines_hash[number] = test_line
         test_file.lines.push(test_line)
       end
 
@@ -84,9 +84,9 @@ class TestData
       @lines = Array.new
     end
     class TestLine
-      attr_reader :line_number, :matches
-      def initialize(line_number)
-        @line_number = line_number
+      attr_reader :number, :matches
+      def initialize(number)
+        @number = number
         @matches = Array.new
       end
       class TestMatch

@@ -45,7 +45,7 @@ function GENERATE_TEST_DATA () {
 		MATCHED_TEXT=`echo $thisLINE_MATCH | sed -n 's/.*:.*:\(.*\)/\1/p'`
 
 		echo "    - file_path: $FILE_PATH"
-		echo "      line_number:  $LINE_NUMBER"
+		echo "      number:  $LINE_NUMBER"
 		echo "      matched_text: $MATCHED_TEXT"
 	done
 }
