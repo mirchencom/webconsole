@@ -4,9 +4,9 @@ require "test/unit"
 require 'Shellwords'
 
 SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
-WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "../..", "Web Console", "Plugins", "WebConsole", "WebConsole")
+WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "..", "webconsole")
 require WEBCONSOLE_FILE
-DATA_DIRECTORY = File.join(File.dirname(__FILE__), "Data")
+DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "../../../../../", "Web Console", "Web ConsoleTests", "Data")
 
 class TestWebConsole < Test::Unit::TestCase
 

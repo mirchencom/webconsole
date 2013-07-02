@@ -1,45 +1,20 @@
 #!/usr/bin/env ruby
 
-require "./lib/parser"
+BASE_DIRECTORY = File.join(File.dirname(__FILE__))
+LIB_DIRECTORY = File.join(BASE_DIRECTORY, "lib")
+PARSER_FILE = File.join(LIB_DIRECTORY, "parser")
+require PARSER_FILE
+CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
+require CONTROLLER_FILE
+WEBCONSOLE_FILE = File.join(BASE_DIRECTORY, "..", "webconsole", "webconsole")
+require WEBCONSOLE_FILE
 
-module WcAck
-  class WebConsoleBridge
-    def added_file(file)
-puts "file.file_path = " + file.file_path.to_s
-    end
+# Web Console
+BASE_PATH = File.expand_path(BASE_DIRECTORY)
+webconsole = WebConsole.new
+webconsole.base_url_path = BASE_PATH
 
-    def added_line_to_file(line, file)
-puts "added line = #{line.to_s} to file = #{file.file_path.to_s}"
-    end
-  end
-end
-
+# Parser
 parser = WcAck::Parser.new
-parser.delegate = WcAck::WebConsoleBridge.new
-files = parser.parse(ARGF.read)
-
-# puts "files.inspect = " + files.inspect.to_s
-
-# WcAck.load(ARGF.read)
-
-
-
-# ARGF.each do |line|
-#   # puts line + "\n\nANEWLINE\n\n"
-# 
-#   parsed_line = ParsedLine.new(line)
-# 
-# puts "parsed_line = " + parsed_line.inspect
-# 
-#   # puts match.filepath
-#   # puts match.line_number
-# 
-#   # Parse a line:
-# 
-#   # 1. if the filepath doesn't match the current filepath, create a new data structure
-# 
-# 
-#   # processed_line = line
-#   # processed_line.gsub!(/\[1.+?m(.*)$/, '<a>\1</a>')
-#   # puts processed_line
-# end
+parser.delegate = WcAck::Controller.new(webconsole)
+parser.parse(ARGF.read)
