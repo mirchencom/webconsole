@@ -32,17 +32,13 @@ module WcAck
   },]
         matches_javascript << match_javascript
       }
-
-puts "matches_javascript = " + matches_javascript.to_s
-
-      matches_javascript.chomp!(',');
+      matches_javascript.chomp!(",");
       javascript = %Q[
 var matches = [#{matches_javascript}  
 ];
 addLine(#{line.number}, '#{line.text}', matches);
 ]
-# puts "javascript = " + javascript.to_s
-
+      @delegate.do_javascript(javascript)
     end
   end    
 end
