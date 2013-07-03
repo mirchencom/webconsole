@@ -18,7 +18,8 @@ module WcAck
     end
 
     def added_file(file)
-      javascript = "addFile('#{file.file_path}');"
+      # Escape '
+      javascript = "addFile('#{file.file_path.gsub("'", "\\\\'")}');"
       @delegate.do_javascript(javascript)
     end
 
@@ -36,30 +37,10 @@ module WcAck
       javascript = %Q[
 var matches = [#{matches_javascript}  
 ];
-addLine(#{line.number}, '#{line.text}', matches);
+addLine(#{line.number}, '#{line.text.gsub("'", "\\\\'")}', matches);
 ]
+      # Escape '
       @delegate.do_javascript(javascript)
     end
   end    
 end
-
-
-
-
-# javascript = %Q[
-# var matches = [
-#   {
-#     index: 24,
-#     length: 10
-#   },
-#   {
-#     index: 136,
-#     length: 10
-#   }
-# ];
-# addFile('#{file.file_path}');
-# addLine(10, '#{text}', matches);
-# addLine(20, '#{text}', matches);
-# addFile('#{file.file_path}');
-# addLine(30, '#{text}', matches);
-# ]
