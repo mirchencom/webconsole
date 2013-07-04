@@ -22,6 +22,7 @@
 		45898B861784FAE000AE365A /* ExamplePlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B7A1784FAAD00AE365A /* ExamplePlugin.bundle */; };
 		45898B891785052100AE365A /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898B881785052100AE365A /* Plugin.m */; };
 		45898B8F1785074800AE365A /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898B8E1785074800AE365A /* PluginManager.m */; };
+		45898B911785180400AE365A /* script in Resources */ = {isa = PBXBuildFile; fileRef = 45898B901785180400AE365A /* script */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		45898B881785052100AE365A /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		45898B8D1785074800AE365A /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginManager.h; sourceTree = "<group>"; };
 		45898B8E1785074800AE365A /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginManager.m; sourceTree = "<group>"; };
+		45898B901785180400AE365A /* script */ = {isa = PBXFileReference; lastKnownFileType = folder; path = script; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 		45898B7C1784FAAD00AE365A /* ExamplePlugin */ = {
 			isa = PBXGroup;
 			children = (
+				45898B901785180400AE365A /* script */,
 				45898B7D1784FAAD00AE365A /* Supporting Files */,
 			);
 			path = ExamplePlugin;
@@ -322,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45898B811784FAAD00AE365A /* InfoPlist.strings in Resources */,
+				45898B911785180400AE365A /* script in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
