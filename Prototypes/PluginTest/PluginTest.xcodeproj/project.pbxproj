@@ -20,6 +20,8 @@
 		45898B7B1784FAAD00AE365A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45898B231783CD1500AE365A /* Cocoa.framework */; };
 		45898B811784FAAD00AE365A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45898B7F1784FAAD00AE365A /* InfoPlist.strings */; };
 		45898B861784FAE000AE365A /* ExamplePlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B7A1784FAAD00AE365A /* ExamplePlugin.bundle */; };
+		45898B891785052100AE365A /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898B881785052100AE365A /* Plugin.m */; };
+		45898B8F1785074800AE365A /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898B8E1785074800AE365A /* PluginManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,10 @@
 		45898B7E1784FAAD00AE365A /* ExamplePlugin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExamplePlugin-Info.plist"; sourceTree = "<group>"; };
 		45898B801784FAAD00AE365A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		45898B821784FAAD00AE365A /* ExamplePlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExamplePlugin-Prefix.pch"; sourceTree = "<group>"; };
+		45898B871785052100AE365A /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
+		45898B881785052100AE365A /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
+		45898B8D1785074800AE365A /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginManager.h; sourceTree = "<group>"; };
+		45898B8E1785074800AE365A /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,10 @@
 				45898B361783CD1500AE365A /* AppDelegate.m */,
 				45898B381783CD1500AE365A /* MainMenu.xib */,
 				45898B2A1783CD1500AE365A /* Supporting Files */,
+				45898B871785052100AE365A /* Plugin.h */,
+				45898B881785052100AE365A /* Plugin.m */,
+				45898B8D1785074800AE365A /* PluginManager.h */,
+				45898B8E1785074800AE365A /* PluginManager.m */,
 			);
 			path = PluginTest;
 			sourceTree = "<group>";
@@ -340,6 +350,8 @@
 			files = (
 				45898B301783CD1500AE365A /* main.m in Sources */,
 				45898B371783CD1500AE365A /* AppDelegate.m in Sources */,
+				45898B891785052100AE365A /* Plugin.m in Sources */,
+				45898B8F1785074800AE365A /* PluginManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

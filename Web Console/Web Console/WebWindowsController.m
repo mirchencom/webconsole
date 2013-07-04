@@ -18,7 +18,8 @@
 
 @implementation WebWindowsController
 
-+ (id)sharedWebWindowsController {
++ (id)sharedWebWindowsController
+{
     static dispatch_once_t pred;
     static WebWindowsController *webWindowsController = nil;
     
@@ -36,7 +37,8 @@
     return self;
 }
 
-- (WebWindowController *)addedWebWindowController {
+- (WebWindowController *)addedWebWindowController
+{
     WebWindowController *webWindowController = [[WebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
     [webWindowController showWindow:self];
@@ -46,7 +48,8 @@
     return webWindowController;
 }
 
-- (void)removeWebWindowController:(WebWindowController *)webWindowController {
+- (void)removeWebWindowController:(WebWindowController *)webWindowController
+{
     [self.webWindowControllers removeObject:webWindowController];
 }
 

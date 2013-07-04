@@ -8,14 +8,19 @@
 
 #import "AppDelegate.h"
 
+#import "PluginManager.h"
+#import "Plugin.h"
+
+
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSString *plugInPath = [[NSBundle mainBundle] builtInPlugInsPath];
-    NSLog(@"plugInPath = %@", plugInPath);
+    [[PluginManager sharedPluginManager] loadPlugins];
+    Plugin *plugin = [[PluginManager sharedPluginManager] pluginWithName:@"Example"];
+
     
-    // Insert code here to initialize your application
+    [plugin run];
 }
 
 @end

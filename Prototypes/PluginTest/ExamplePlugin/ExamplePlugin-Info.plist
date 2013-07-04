@@ -25,6 +25,10 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 Roben Kleene. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string></string>
+	<string>Plugin</string>
+	<key>Command</key>
+	<string>example.rb</string>
+	<key>Name</key>
+	<string>Example</string>
 </dict>
 </plist>
