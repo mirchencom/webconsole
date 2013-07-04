@@ -17,9 +17,9 @@
 		45898B431783CD1600AE365A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45898B231783CD1500AE365A /* Cocoa.framework */; };
 		45898B4B1783CD1600AE365A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45898B491783CD1600AE365A /* InfoPlist.strings */; };
 		45898B4E1783CD1600AE365A /* PluginTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898B4D1783CD1600AE365A /* PluginTestTests.m */; };
-		45898B5D1783CD8500AE365A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45898B5C1783CD8500AE365A /* CoreFoundation.framework */; };
-		45898B631783CD8500AE365A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45898B611783CD8500AE365A /* InfoPlist.strings */; };
-		45898B721783D52500AE365A /* ExamplePlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B5B1783CD8500AE365A /* ExamplePlugin.bundle */; };
+		45898B7B1784FAAD00AE365A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45898B231783CD1500AE365A /* Cocoa.framework */; };
+		45898B811784FAAD00AE365A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45898B7F1784FAAD00AE365A /* InfoPlist.strings */; };
+		45898B861784FAE000AE365A /* ExamplePlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B7A1784FAAD00AE365A /* ExamplePlugin.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,13 +30,6 @@
 			remoteGlobalIDString = 45898B1F1783CD1500AE365A;
 			remoteInfo = PluginTest;
 		};
-		45898B6D1783D3BC00AE365A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45898B181783CD1500AE365A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 45898B5A1783CD8500AE365A;
-			remoteInfo = ExamplePlugin;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,7 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				45898B721783D52500AE365A /* ExamplePlugin.bundle in CopyFiles */,
+				45898B861784FAE000AE365A /* ExamplePlugin.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,11 +65,11 @@
 		45898B4A1783CD1600AE365A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		45898B4C1783CD1600AE365A /* PluginTestTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PluginTestTests.h; sourceTree = "<group>"; };
 		45898B4D1783CD1600AE365A /* PluginTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PluginTestTests.m; sourceTree = "<group>"; };
-		45898B5B1783CD8500AE365A /* ExamplePlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamplePlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		45898B5C1783CD8500AE365A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		45898B601783CD8500AE365A /* ExamplePlugin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExamplePlugin-Info.plist"; sourceTree = "<group>"; };
-		45898B621783CD8500AE365A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		45898B641783CD8500AE365A /* ExamplePlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExamplePlugin-Prefix.pch"; sourceTree = "<group>"; };
+		45898B7A1784FAAD00AE365A /* ExamplePlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamplePlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		45898B7E1784FAAD00AE365A /* ExamplePlugin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExamplePlugin-Info.plist"; sourceTree = "<group>"; };
+		45898B801784FAAD00AE365A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45898B821784FAAD00AE365A /* ExamplePlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExamplePlugin-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +90,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45898B581783CD8500AE365A /* Frameworks */ = {
+		45898B771784FAAD00AE365A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45898B5D1783CD8500AE365A /* CoreFoundation.framework in Frameworks */,
+				45898B7B1784FAAD00AE365A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +106,7 @@
 			children = (
 				45898B291783CD1500AE365A /* PluginTest */,
 				45898B461783CD1600AE365A /* PluginTestTests */,
-				45898B5E1783CD8500AE365A /* ExamplePlugin */,
+				45898B7C1784FAAD00AE365A /* ExamplePlugin */,
 				45898B221783CD1500AE365A /* Frameworks */,
 				45898B211783CD1500AE365A /* Products */,
 			);
@@ -124,7 +117,7 @@
 			children = (
 				45898B201783CD1500AE365A /* PluginTest.app */,
 				45898B401783CD1600AE365A /* PluginTestTests.octest */,
-				45898B5B1783CD8500AE365A /* ExamplePlugin.bundle */,
+				45898B7A1784FAAD00AE365A /* ExamplePlugin.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,20 +185,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		45898B5E1783CD8500AE365A /* ExamplePlugin */ = {
+		45898B7C1784FAAD00AE365A /* ExamplePlugin */ = {
 			isa = PBXGroup;
 			children = (
-				45898B5F1783CD8500AE365A /* Supporting Files */,
+				45898B7D1784FAAD00AE365A /* Supporting Files */,
 			);
 			path = ExamplePlugin;
 			sourceTree = "<group>";
 		};
-		45898B5F1783CD8500AE365A /* Supporting Files */ = {
+		45898B7D1784FAAD00AE365A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				45898B601783CD8500AE365A /* ExamplePlugin-Info.plist */,
-				45898B611783CD8500AE365A /* InfoPlist.strings */,
-				45898B641783CD8500AE365A /* ExamplePlugin-Prefix.pch */,
+				45898B7E1784FAAD00AE365A /* ExamplePlugin-Info.plist */,
+				45898B7F1784FAAD00AE365A /* InfoPlist.strings */,
+				45898B821784FAAD00AE365A /* ExamplePlugin-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -225,7 +218,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				45898B6E1783D3BC00AE365A /* PBXTargetDependency */,
 			);
 			name = PluginTest;
 			productName = PluginTest;
@@ -251,13 +243,13 @@
 			productReference = 45898B401783CD1600AE365A /* PluginTestTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		45898B5A1783CD8500AE365A /* ExamplePlugin */ = {
+		45898B791784FAAD00AE365A /* ExamplePlugin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45898B651783CD8500AE365A /* Build configuration list for PBXNativeTarget "ExamplePlugin" */;
+			buildConfigurationList = 45898B831784FAAD00AE365A /* Build configuration list for PBXNativeTarget "ExamplePlugin" */;
 			buildPhases = (
-				45898B571783CD8500AE365A /* Sources */,
-				45898B581783CD8500AE365A /* Frameworks */,
-				45898B591783CD8500AE365A /* Resources */,
+				45898B761784FAAD00AE365A /* Sources */,
+				45898B771784FAAD00AE365A /* Frameworks */,
+				45898B781784FAAD00AE365A /* Resources */,
 			);
 			buildRules = (
 			);
@@ -265,7 +257,7 @@
 			);
 			name = ExamplePlugin;
 			productName = ExamplePlugin;
-			productReference = 45898B5B1783CD8500AE365A /* ExamplePlugin.bundle */;
+			productReference = 45898B7A1784FAAD00AE365A /* ExamplePlugin.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -291,7 +283,7 @@
 			targets = (
 				45898B1F1783CD1500AE365A /* PluginTest */,
 				45898B3F1783CD1600AE365A /* PluginTestTests */,
-				45898B5A1783CD8500AE365A /* ExamplePlugin */,
+				45898B791784FAAD00AE365A /* ExamplePlugin */,
 			);
 		};
 /* End PBXProject section */
@@ -315,11 +307,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45898B591783CD8500AE365A /* Resources */ = {
+		45898B781784FAAD00AE365A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45898B631783CD8500AE365A /* InfoPlist.strings in Resources */,
+				45898B811784FAAD00AE365A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +351,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45898B571783CD8500AE365A /* Sources */ = {
+		45898B761784FAAD00AE365A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -373,11 +365,6 @@
 			isa = PBXTargetDependency;
 			target = 45898B1F1783CD1500AE365A /* PluginTest */;
 			targetProxy = 45898B441783CD1600AE365A /* PBXContainerItemProxy */;
-		};
-		45898B6E1783D3BC00AE365A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 45898B5A1783CD8500AE365A /* ExamplePlugin */;
-			targetProxy = 45898B6D1783D3BC00AE365A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -414,10 +401,10 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		45898B611783CD8500AE365A /* InfoPlist.strings */ = {
+		45898B7F1784FAAD00AE365A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				45898B621783CD8500AE365A /* en */,
+				45898B801784FAAD00AE365A /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -538,7 +525,7 @@
 			};
 			name = Release;
 		};
-		45898B661783CD8500AE365A /* Debug */ = {
+		45898B841784FAAD00AE365A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -551,7 +538,7 @@
 			};
 			name = Debug;
 		};
-		45898B671783CD8500AE365A /* Release */ = {
+		45898B851784FAAD00AE365A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -592,11 +579,11 @@
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		45898B651783CD8500AE365A /* Build configuration list for PBXNativeTarget "ExamplePlugin" */ = {
+		45898B831784FAAD00AE365A /* Build configuration list for PBXNativeTarget "ExamplePlugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				45898B661783CD8500AE365A /* Debug */,
-				45898B671783CD8500AE365A /* Release */,
+				45898B841784FAAD00AE365A /* Debug */,
+				45898B851784FAAD00AE365A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
