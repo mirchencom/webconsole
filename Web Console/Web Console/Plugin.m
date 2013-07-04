@@ -61,6 +61,8 @@
 
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath
 {
+    NSLog(@"arguments = %@", arguments);
+    NSLog(@"directoryPath = %@", directoryPath);
     
 }
 

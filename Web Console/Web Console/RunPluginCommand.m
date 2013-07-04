@@ -9,6 +9,7 @@
 #import "RunPluginCommand.h"
 
 #import "PluginManager.h"
+#import "Plugin.h"
 
 @implementation RunPluginCommand
 
@@ -20,14 +21,13 @@
     NSArray *arguments = [argumentsDictionary objectForKey:kArgumentsKey];
 
     NSURL *directoryURL = [argumentsDictionary objectForKey:kDirectoryKey];
+
+    Plugin *plugin = [[PluginManager sharedPluginManager] pluginWithName:name];
+
+#warning Return an error if the plugin doesn't exist
+#warning Return an error if the directory doesn't exist
     
-    NSLog(@"name = %@, arguments = %@, directory = %@", name, arguments, directoryURL);
-
-    NSLog(@"[directory class] = %@", [directoryURL class]);
-
-//    Plugin *plugin = [[PluginManager sharedPluginManager] pluginWithName:@"Example"];
-//    
-//    [plugin run];
+    [plugin runWithArguments:arguments inDirectoryPath:[directoryURL path]];
 
     return nil;
 }

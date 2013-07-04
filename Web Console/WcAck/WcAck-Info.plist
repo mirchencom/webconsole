@@ -29,6 +29,6 @@
 	<key>Command</key>
 	<string>script/example.rb</string>
 	<key>Name</key>
-	<string>Example</string>
+	<string>wcack</string>
 </dict>
 </plist>

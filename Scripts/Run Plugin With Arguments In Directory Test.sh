@@ -2,4 +2,4 @@
 
 DIRECTORY=`pwd`
 
-osascript Run\ Plugin\ With\ Arguments\ In\ Directory.scpt "test" "test2" "test3" "$DIRECTORY"
+osascript Run\ Plugin\ With\ Arguments\ In\ Directory.scpt "wcack" "test2" "test3" "$DIRECTORY"
