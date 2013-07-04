@@ -73,7 +73,7 @@
 			<result type="text" description="the direct parameter enclosed in quotes"/>
 		</command>
 
-        <command name="run plugin" code="runplgin" description="Run a plugin.">
+        <command name="Run Plugin" code="runplgin" description="Run a plugin.">
 			<cocoa class="RunPluginCommand"/>
 
 			<direct-parameter description="The name of the plugin to run.">
