@@ -72,6 +72,19 @@
 			
 			<result type="text" description="the direct parameter enclosed in quotes"/>
 		</command>
+
+        <command name="run plugin" code="runplgin" description="Run a plugin.">
+			<cocoa class="RunPluginCommand"/>
+
+			<direct-parameter description="The name of the plugin to run.">
+				<type type="text"/>
+			</direct-parameter>
+
+            <parameter name="with arguments" code="agmt" description="The arguments to pass to the plugin." optional="yes">
+				<cocoa key="Arguments"/>
+				<type type="text" list="yes"/>
+			</parameter>
+		</command>
     
     </suite>
 </dictionary>

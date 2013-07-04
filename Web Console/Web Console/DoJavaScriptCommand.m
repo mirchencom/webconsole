@@ -14,10 +14,10 @@
 @implementation DoJavaScriptCommand
 
 - (id)performDefaultImplementation {
-	NSDictionary *argumentsDictionary = [self evaluatedArguments];
-    
+
     NSString *javaScript = [self directParameter];
         
+	NSDictionary *argumentsDictionary = [self evaluatedArguments];
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     
     WebWindowController *webWindowController = (WebWindowController *)window.windowController;

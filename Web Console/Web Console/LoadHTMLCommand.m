@@ -16,10 +16,10 @@
 @implementation LoadHTMLCommand
 
 - (id)performDefaultImplementation {
-	NSDictionary *argumentsDictionary = [self evaluatedArguments];
 
     NSString *HTML = [self directParameter];
-    
+
+    NSDictionary *argumentsDictionary = [self evaluatedArguments];
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     NSString *baseURLString = [argumentsDictionary objectForKey:kBaseURLKey];
     

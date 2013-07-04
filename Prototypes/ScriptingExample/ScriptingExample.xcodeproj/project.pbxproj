@@ -22,6 +22,7 @@
 		455EA8091737320C00E3C0D0 /* SimpleCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455EA8081737320C00E3C0D0 /* SimpleCommand.m */; };
 		455EA80C1737325300E3C0D0 /* CommandWithArgs.m in Sources */ = {isa = PBXBuildFile; fileRef = 455EA80B1737325300E3C0D0 /* CommandWithArgs.m */; };
 		455EA80F1737329D00E3C0D0 /* DirectParameterCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455EA80E1737329D00E3C0D0 /* DirectParameterCommand.m */; };
+		45898B94178525F700AE365A /* RunPluginCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898B93178525F700AE365A /* RunPluginCommand.m */; };
 		45F25701177F5E3C00A3BF75 /* TestScripts in Resources */ = {isa = PBXBuildFile; fileRef = 45F25700177F5E3C00A3BF75 /* TestScripts */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,8 @@
 		455EA80B1737325300E3C0D0 /* CommandWithArgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandWithArgs.m; sourceTree = "<group>"; };
 		455EA80D1737329D00E3C0D0 /* DirectParameterCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectParameterCommand.h; sourceTree = "<group>"; };
 		455EA80E1737329D00E3C0D0 /* DirectParameterCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectParameterCommand.m; sourceTree = "<group>"; };
+		45898B92178525F700AE365A /* RunPluginCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunPluginCommand.h; sourceTree = "<group>"; };
+		45898B93178525F700AE365A /* RunPluginCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunPluginCommand.m; sourceTree = "<group>"; };
 		45F25700177F5E3C00A3BF75 /* TestScripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestScripts; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +145,8 @@
 				4530B14817370CBD000A52E2 /* NSApplication+ScriptingExample.m */,
 				4530B1261736F369000A52E2 /* MainMenu.xib */,
 				4530B1181736F369000A52E2 /* Supporting Files */,
+				45898B92178525F700AE365A /* RunPluginCommand.h */,
+				45898B93178525F700AE365A /* RunPluginCommand.m */,
 			);
 			path = ScriptingExample;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				455EA8091737320C00E3C0D0 /* SimpleCommand.m in Sources */,
 				455EA80C1737325300E3C0D0 /* CommandWithArgs.m in Sources */,
 				455EA80F1737329D00E3C0D0 /* DirectParameterCommand.m in Sources */,
+				45898B94178525F700AE365A /* RunPluginCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
