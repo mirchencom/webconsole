@@ -264,6 +264,26 @@
 				<type type="real"/>
 				<type type="integer"/>
 			</result>
-		</command>        
+		</command>
+
+        <command name="run plugin" code="runplgin" description="Run a plugin.">
+			<cocoa class="RunPluginCommand"/>
+            
+			<direct-parameter description="The name of the plugin to run.">
+				<type type="text"/>
+			</direct-parameter>
+            
+            <parameter name="with arguments" code="agmt" description="The arguments to pass to the plugin." optional="yes">
+				<cocoa key="Arguments"/>
+				<type type="text" list="yes"/>
+			</parameter>
+
+            <parameter name="in directory" code="drct" description="A file reference to the directory to run the plugin in." optional="yes">
+				<cocoa key="Directory"/>
+                <type type="file"/>
+            </parameter>
+
+        </command>
+
     </suite>
 </dictionary>

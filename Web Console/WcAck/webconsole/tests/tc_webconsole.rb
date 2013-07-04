@@ -6,7 +6,7 @@ require 'Shellwords'
 SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
 WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "..", "webconsole")
 require WEBCONSOLE_FILE
-DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "../../../../../", "Web Console", "Web ConsoleTests", "Data")
+DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "Data")
 
 class TestWebConsole < Test::Unit::TestCase
 

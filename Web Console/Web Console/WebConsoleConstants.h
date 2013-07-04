@@ -8,3 +8,5 @@
 
 #define kAppleScriptTargetKey @"Target"
 #define kBaseURLKey @"BaseURL"
+#define kArgumentsKey @"Arguments"
+#define kDirectoryKey @"Directory"
