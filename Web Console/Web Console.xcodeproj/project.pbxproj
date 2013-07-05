@@ -25,7 +25,7 @@
 		45898B9717852F2F00AE365A /* RunPluginCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898B9617852F2F00AE365A /* RunPluginCommand.m */; };
 		45898B9D1785302D00AE365A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		45898BA31785302D00AE365A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45898BA11785302D00AE365A /* InfoPlist.strings */; };
-		45898BA91785306100AE365A /* WcAck.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B9C1785302C00AE365A /* WcAck.bundle */; };
+		45898BA91785306100AE365A /* Ack.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B9C1785302C00AE365A /* Ack.bundle */; };
 		45898BAC1785319600AE365A /* wcack in Resources */ = {isa = PBXBuildFile; fileRef = 45898BAA1785319600AE365A /* wcack */; };
 		45898BB21785325B00AE365A /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 45898BB11785325B00AE365A /* Data */; };
 		45898BB7178532EC00AE365A /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB4178532EC00AE365A /* Plugin.m */; };
@@ -54,7 +54,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				45898BA91785306100AE365A /* WcAck.bundle in CopyFiles */,
+				45898BA91785306100AE365A /* Ack.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,10 +91,10 @@
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
 		45898B9517852F2F00AE365A /* RunPluginCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunPluginCommand.h; sourceTree = "<group>"; };
 		45898B9617852F2F00AE365A /* RunPluginCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunPluginCommand.m; sourceTree = "<group>"; };
-		45898B9C1785302C00AE365A /* WcAck.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WcAck.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		45898BA01785302D00AE365A /* WcAck-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WcAck-Info.plist"; sourceTree = "<group>"; };
+		45898B9C1785302C00AE365A /* Ack.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ack.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		45898BA01785302D00AE365A /* Ack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ack-Info.plist"; sourceTree = "<group>"; };
 		45898BA21785302D00AE365A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		45898BA41785302D00AE365A /* WcAck-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WcAck-Prefix.pch"; sourceTree = "<group>"; };
+		45898BA41785302D00AE365A /* Ack-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ack-Prefix.pch"; sourceTree = "<group>"; };
 		45898BAA1785319600AE365A /* wcack */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcack; sourceTree = "<group>"; };
 		45898BB11785325B00AE365A /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		45898BB3178532EC00AE365A /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			children = (
 				4530B0D51736E2A6000A52E2 /* Web Console */,
 				4530B0F21736E2A6000A52E2 /* Web ConsoleTests */,
-				45898B9E1785302D00AE365A /* WcAck */,
+				45898B9E1785302D00AE365A /* Ack */,
 				4530B0CE1736E2A6000A52E2 /* Frameworks */,
 				4530B0CD1736E2A6000A52E2 /* Products */,
 			);
@@ -158,7 +158,7 @@
 			children = (
 				4530B0CC1736E2A6000A52E2 /* Web Console.app */,
 				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.octest */,
-				45898B9C1785302C00AE365A /* WcAck.bundle */,
+				45898B9C1785302C00AE365A /* Ack.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,21 +249,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		45898B9E1785302D00AE365A /* WcAck */ = {
+		45898B9E1785302D00AE365A /* Ack */ = {
 			isa = PBXGroup;
 			children = (
 				45898BAA1785319600AE365A /* wcack */,
 				45898B9F1785302D00AE365A /* Supporting Files */,
 			);
-			path = WcAck;
+			name = Ack;
+			path = Ack;
 			sourceTree = "<group>";
 		};
 		45898B9F1785302D00AE365A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				45898BA01785302D00AE365A /* WcAck-Info.plist */,
+				45898BA01785302D00AE365A /* Ack-Info.plist */,
 				45898BA11785302D00AE365A /* InfoPlist.strings */,
-				45898BA41785302D00AE365A /* WcAck-Prefix.pch */,
+				45898BA41785302D00AE365A /* Ack-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -308,9 +309,9 @@
 			productReference = 4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		45898B9B1785302C00AE365A /* WcAck */ = {
+		45898B9B1785302C00AE365A /* Ack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45898BA51785302D00AE365A /* Build configuration list for PBXNativeTarget "WcAck" */;
+			buildConfigurationList = 45898BA51785302D00AE365A /* Build configuration list for PBXNativeTarget "Ack" */;
 			buildPhases = (
 				45898B981785302C00AE365A /* Sources */,
 				45898B991785302C00AE365A /* Frameworks */,
@@ -320,9 +321,9 @@
 			);
 			dependencies = (
 			);
-			name = WcAck;
-			productName = WcAck;
-			productReference = 45898B9C1785302C00AE365A /* WcAck.bundle */;
+			name = Ack;
+			productName = Ack;
+			productReference = 45898B9C1785302C00AE365A /* Ack.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -348,7 +349,7 @@
 			targets = (
 				4530B0CB1736E2A6000A52E2 /* Web Console */,
 				4530B0EB1736E2A6000A52E2 /* Web ConsoleTests */,
-				45898B9B1785302C00AE365A /* WcAck */,
+				45898B9B1785302C00AE365A /* Ack */,
 			);
 		};
 /* End PBXProject section */
@@ -608,8 +609,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WcAck/WcAck-Prefix.pch";
-				INFOPLIST_FILE = "WcAck/WcAck-Info.plist";
+				GCC_PREFIX_HEADER = "Ack/Ack-Prefix.pch";
+				INFOPLIST_FILE = "Ack/Ack-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -621,8 +622,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WcAck/WcAck-Prefix.pch";
-				INFOPLIST_FILE = "WcAck/WcAck-Info.plist";
+				GCC_PREFIX_HEADER = "Ack/Ack-Prefix.pch";
+				INFOPLIST_FILE = "Ack/Ack-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -659,7 +660,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45898BA51785302D00AE365A /* Build configuration list for PBXNativeTarget "WcAck" */ = {
+		45898BA51785302D00AE365A /* Build configuration list for PBXNativeTarget "Ack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45898BA61785302D00AE365A /* Debug */,
