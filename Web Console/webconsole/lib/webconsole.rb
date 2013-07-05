@@ -1,6 +1,21 @@
 require 'Shellwords'
 
 module WebConsole
+  SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
+  APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "applescript")
+
+  RUN_PLUGIN_WITH_ARGUMENTS_IN_DIRECTORY_FILENAME = "run_plugin_with_arguments_in_directory.scpt"
+  RUN_PLUGIN_WITH_ARGUMENTS_IN_DIRECTORY_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, RUN_PLUGIN_WITH_ARGUMENTS_IN_DIRECTORY_FILENAME)
+  def self.run_plugin(name, arguments = nil, directory = nil)
+    parameters = [name]
+    if arguments
+      parameters = parameters + arguments
+    end
+    if directory
+      parameters.push(directory)
+    end
+    self.run_applescript(RUN_PLUGIN_WITH_ARGUMENTS_IN_DIRECTORY_SCRIPT, parameters)
+  end
 
   private
 
@@ -14,8 +29,6 @@ module WebConsole
   end
 
   class WindowManager
-    SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
-    APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "applescript")
 
     attr_writer :base_url
     def initialize
