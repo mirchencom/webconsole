@@ -11,5 +11,6 @@ Gem::Specification.new do |s|
     lib/applescript/do_javascript.scpt
     lib/applescript/load_html.scpt
     lib/applescript/load_html_with_base_url.scpt
+    lib/applescript/run_plugin_with_arguments_in_directory.scpt
   ]
 end
