@@ -27,7 +27,6 @@
 		45898BA31785302D00AE365A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45898BA11785302D00AE365A /* InfoPlist.strings */; };
 		45898BA91785306100AE365A /* WcAck.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B9C1785302C00AE365A /* WcAck.bundle */; };
 		45898BAC1785319600AE365A /* wcack in Resources */ = {isa = PBXBuildFile; fileRef = 45898BAA1785319600AE365A /* wcack */; };
-		45898BAD1785319600AE365A /* webconsole in Resources */ = {isa = PBXBuildFile; fileRef = 45898BAB1785319600AE365A /* webconsole */; };
 		45898BB21785325B00AE365A /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 45898BB11785325B00AE365A /* Data */; };
 		45898BB7178532EC00AE365A /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB4178532EC00AE365A /* Plugin.m */; };
 		45898BB8178532EC00AE365A /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB6178532EC00AE365A /* PluginManager.m */; };
@@ -97,7 +96,6 @@
 		45898BA21785302D00AE365A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		45898BA41785302D00AE365A /* WcAck-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WcAck-Prefix.pch"; sourceTree = "<group>"; };
 		45898BAA1785319600AE365A /* wcack */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcack; sourceTree = "<group>"; };
-		45898BAB1785319600AE365A /* webconsole */ = {isa = PBXFileReference; lastKnownFileType = folder; path = webconsole; sourceTree = "<group>"; };
 		45898BB11785325B00AE365A /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		45898BB3178532EC00AE365A /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
 		45898BB4178532EC00AE365A /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
@@ -255,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				45898BAA1785319600AE365A /* wcack */,
-				45898BAB1785319600AE365A /* webconsole */,
 				45898B9F1785302D00AE365A /* Supporting Files */,
 			);
 			path = WcAck;
@@ -384,7 +381,6 @@
 			files = (
 				45898BA31785302D00AE365A /* InfoPlist.strings in Resources */,
 				45898BAC1785319600AE365A /* wcack in Resources */,
-				45898BAD1785319600AE365A /* webconsole in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +666,7 @@
 				45898BA71785302D00AE365A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
