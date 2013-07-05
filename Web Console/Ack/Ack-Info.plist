@@ -27,7 +27,7 @@
 	<key>NSPrincipalClass</key>
 	<string>Plugin</string>
 	<key>Command</key>
-	<string>script/example.rb</string>
+	<string>wcack/wcack.sh</string>
 	<key>Name</key>
 	<string>Ack</string>
 </dict>

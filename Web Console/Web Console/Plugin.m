@@ -61,38 +61,39 @@
 
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath
 {
+    NSString *commandPath = [self commandPath];
+    
     NSLog(@"arguments = %@", arguments);
     NSLog(@"directoryPath = %@", directoryPath);
+    NSLog(@"commandPath = %@", commandPath);
+    
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:commandPath];
+    
+    if (directoryPath) {
+        [task setCurrentDirectoryPath:directoryPath];
+    }
+
+    if (arguments) {
+        [task setArguments:arguments];
+    }
+    
+    task.standardOutput = [NSPipe pipe];
+    
+    [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
+        NSData *data = [file availableData];
+        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }];
+    
+    [task setTerminationHandler:^(NSTask *task) {
+        [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
+        //        [task.standardError fileHandleForReading].readabilityHandler = nil;
+        //        BOOL success = [task terminationStatus] == 0;
+        //        completionHandler(success);
+    }];
+    
+    [task launch];
     
 }
-
-//- (void)run
-//{
-//    NSString *commandPath = [self commandPath];
-//    
-//
-//
-//    NSTask *task = [[NSTask alloc] init];
-//    [task setLaunchPath:commandPath];
-//
-////    [task currentDirectoryPath] // Working directory
-////    [task setArguments:@[[URL path]]];
-//
-//    task.standardOutput = [NSPipe pipe];
-//    
-//    [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
-//        NSData *data = [file availableData];
-//        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-//    }];
-//    
-//    [task setTerminationHandler:^(NSTask *task) {
-//        [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
-//        //        [task.standardError fileHandleForReading].readabilityHandler = nil;
-////        BOOL success = [task terminationStatus] == 0;
-////        completionHandler(success);
-//    }];
-//    
-//    [task launch];
-//}
 
 @end
