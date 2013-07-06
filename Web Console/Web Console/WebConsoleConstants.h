@@ -10,3 +10,6 @@
 #define kBaseURLKey @"BaseURL"
 #define kArgumentsKey @"Arguments"
 #define kDirectoryKey @"Directory"
+
+#define kEnvironmentVariablePathKey @"PATH"
+#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";

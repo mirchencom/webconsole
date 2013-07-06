@@ -67,6 +67,7 @@
     NSLog(@"directoryPath = %@", directoryPath);
     NSLog(@"commandPath = %@", commandPath);
     
+    
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
     
@@ -77,6 +78,10 @@
     if (arguments) {
         [task setArguments:arguments];
     }
+
+    NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
+    environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
+    [task setEnvironment:environmentDictionary];
     
     task.standardOutput = [NSPipe pipe];
     
