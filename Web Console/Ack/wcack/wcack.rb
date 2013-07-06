@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'Shellwords'
 require 'webconsole'
 
 BASE_DIRECTORY = File.join(File.dirname(__FILE__))
@@ -17,4 +18,12 @@ window_manager.base_url_path = BASE_PATH
 # Parser
 parser = WcAck::Parser.new
 parser.delegate = WcAck::Controller.new(window_manager)
-parser.parse(ARGF.read)
+
+# Parse
+term = ARGV[0]
+directory = `pwd`
+directory.chomp!
+pipe = IO.popen("ack --color #{Shellwords.escape(term)} #{Shellwords.escape(directory)}")
+while (line = pipe.gets)
+  parser.parse_line(line)
+end

@@ -26,8 +26,6 @@ module WcAck
       return @files_hash
     end
 
-    private
-
     def parse_line(raw_line)
       ansi_wrapped = raw_line.scan(ANSI_WRAPPER_REGEXP)
 
