@@ -82,8 +82,8 @@
 
 #pragma mark - WebFrameLoadDelegate
 
-//- (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame {
-//    [self.window setTitle:title];
-//}
+- (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame {
+    [self.window setTitle:title];
+}
 
 @end
