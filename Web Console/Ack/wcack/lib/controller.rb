@@ -1,5 +1,5 @@
 require 'erb'
-
+require 'cgi'
 
 # Controller has a delegate, either domrunner or WebConsole
 module WcAck
@@ -34,12 +34,12 @@ module WcAck
         matches_javascript << match_javascript
       }
       matches_javascript.chomp!(",");
+      text = CGI.escapeHTML(line.text)
       javascript = %Q[
 var matches = [#{matches_javascript}  
 ];
-addLine(#{line.number}, '#{line.text.gsub("'", "\\\\'")}', matches);
+addLine(#{line.number}, '#{text}', matches);
 ]
-      # Escape '
       @delegate.do_javascript(javascript)
     end
   end    

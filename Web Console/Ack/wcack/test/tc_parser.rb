@@ -3,13 +3,14 @@
 require "test/unit"
 require "yaml"
 
-PARSER_FILE = File.join(File.dirname(__FILE__), '..', 'lib', 'parser')
+CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'test_constants')
+require CONSTANTS_FILE
 require PARSER_FILE
 
 TEST_DIRECTORY=File.join(File.dirname(__FILE__), 'data')
 TEST_DATA_GENERATED=File.join(TEST_DIRECTORY, 'test_data_generated.yml')
 
-class TestWCACK < Test::Unit::TestCase
+class TestParser < Test::Unit::TestCase
   def test_test_data_generated
     test_data_hash = YAML.load_file(TEST_DATA_GENERATED)
     test_data = TestData.get_input_data(test_data_hash)
