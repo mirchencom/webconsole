@@ -9,4 +9,5 @@ SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # echo "SCRIPT_DIRECTORY = $SCRIPT_DIRECTORY"
 
-ack --color $1 | "$SCRIPT_DIRECTORY/wcack.rb"
+# `pwd` to print the full path
+ack --color $1 `pwd` | "$SCRIPT_DIRECTORY/wcack.rb"
