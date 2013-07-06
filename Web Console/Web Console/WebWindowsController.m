@@ -41,6 +41,8 @@
 {
     WebWindowController *webWindowController = [[WebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
+    [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
+    
     [webWindowController showWindow:self];
     
     [self.webWindowControllers addObject:webWindowController];
