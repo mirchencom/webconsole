@@ -586,6 +586,7 @@
 				45898B531783CD1600AE365A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45898B541783CD1600AE365A /* Build configuration list for PBXNativeTarget "PluginTestTests" */ = {
 			isa = XCConfigurationList;
@@ -594,6 +595,7 @@
 				45898B561783CD1600AE365A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45898B831784FAAD00AE365A /* Build configuration list for PBXNativeTarget "ExamplePlugin" */ = {
 			isa = XCConfigurationList;
@@ -602,6 +604,7 @@
 				45898B851784FAAD00AE365A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

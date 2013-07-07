@@ -205,7 +205,6 @@
 				45898B9E1785302D00AE365A /* Ack */,
 			);
 			name = Plugins;
-			path = "Web Console";
 			sourceTree = "<group>";
 		};
 		452E2F8A1789C7B800EAD55B /* Test Plugins */ = {
@@ -333,8 +332,7 @@
 				45898BAA1785319600AE365A /* wcack */,
 				45898B9F1785302D00AE365A /* Supporting Files */,
 			);
-			name = Ack;
-			path = ../Ack;
+			path = Ack;
 			sourceTree = "<group>";
 		};
 		45898B9F1785302D00AE365A /* Supporting Files */ = {
@@ -795,6 +793,7 @@
 				452E2F841788F62500EAD55B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4530B0C71736E2A6000A52E2 /* Build configuration list for PBXProject "Web Console" */ = {
 			isa = XCConfigurationList;
