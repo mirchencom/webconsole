@@ -85,7 +85,10 @@
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
 
     WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
-    environmentDictionary[kEnvironmentVariableWindowIDKey] = webWindowController.window.identifier;    
+
+    NSLog(@"Starting task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
+
+    environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
     
     [task setEnvironment:environmentDictionary];
     
@@ -98,8 +101,13 @@
     
     [task setTerminationHandler:^(NSTask *task) {
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
+        
+        
+        NSLog(@"Ending task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
         if (![webWindowController.window isVisible]) {
             // Remove the WebWindowController if the window was never shown
+            NSLog(@"Removing a window");
+            
             [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
         }
         

@@ -31,7 +31,8 @@ module WebConsole
   class WindowManager
 
     attr_writer :base_url
-    def initialize
+    def initialize(window_id = nil)
+      @window_id = window_id
     end
 
     def base_url_path=(value)
@@ -52,11 +53,7 @@ module WebConsole
       end
 
       result = WebConsole::run_applescript(LOADHTML_SCRIPT, arguments)
-      window_id = self.class.window_id_from_result(result)
-
-      if !@window_id
-        @window_id = window_id
-      end
+      @window_id = self.class.window_id_from_result(result)
     end
 
     DOJAVASCRIPT_FILENAME = "do_javascript_in.scpt"
