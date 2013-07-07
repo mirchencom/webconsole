@@ -10,6 +10,8 @@ require PARSER_FILE
 CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
 require CONTROLLER_FILE
 
+# "WINDOWID"
+
 # Window Manager
 BASE_PATH = File.expand_path(BASE_DIRECTORY)
 window_manager = WebConsole::WindowManager.new

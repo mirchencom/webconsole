@@ -43,8 +43,6 @@
 
     [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
     
-    [webWindowController showWindow:self];
-    
     [self.webWindowControllers addObject:webWindowController];
     
     return webWindowController;

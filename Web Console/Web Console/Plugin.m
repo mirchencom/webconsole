@@ -8,6 +8,9 @@
 
 #import "Plugin.h"
 
+#import "WebWindowsController.h"
+#import "WebWindowController.h"
+
 #define kPluginNameKey @"Name"
 #define kPluginCommandKey @"Command"
 
@@ -67,7 +70,6 @@
     NSLog(@"directoryPath = %@", directoryPath);
     NSLog(@"commandPath = %@", commandPath);
     
-    
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
     
@@ -81,6 +83,10 @@
 
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
+
+    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+    environmentDictionary[kEnvironmentVariableWindowIDKey] = webWindowController.window.identifier;    
+    
     [task setEnvironment:environmentDictionary];
     
     task.standardOutput = [NSPipe pipe];
@@ -92,6 +98,11 @@
     
     [task setTerminationHandler:^(NSTask *task) {
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
+        if (![webWindowController.window isVisible]) {
+            // Remove the WebWindowController if the window was never shown
+            [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
+        }
+        
         //        [task.standardError fileHandleForReading].readabilityHandler = nil;
         //        BOOL success = [task terminationStatus] == 0;
         //        completionHandler(success);

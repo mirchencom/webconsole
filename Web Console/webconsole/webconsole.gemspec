@@ -8,9 +8,8 @@ Gem::Specification.new do |s|
   s.email = 'roben@1percenter.com'
   s.files = %w[
     lib/webconsole.rb
-    lib/applescript/do_javascript.scpt
+    lib/applescript/do_javascript_in.scpt
     lib/applescript/load_html.scpt
-    lib/applescript/load_html_with_base_url.scpt
     lib/applescript/run_plugin_with_arguments_in_directory.scpt
   ]
 end

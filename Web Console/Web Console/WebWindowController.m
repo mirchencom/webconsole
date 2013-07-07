@@ -31,9 +31,11 @@
     [self loadHTML:HTML baseURL:nil completionHandler:completionHandler];
 }
 
-- (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {    
+- (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {
     [self.webView.mainFrame loadHTMLString:HTML baseURL:baseURL];
 
+    [self showWindow:self];
+    
     self.completionHandler = completionHandler;
 }
 
@@ -44,6 +46,9 @@
 #pragma mark - NSWindowDelegate
 
 - (void)windowWillClose:(NSNotification *)notification {
+
+    NSLog(@"Window will close");
+
     [[WebWindowsController sharedWebWindowsController] removeWebWindowController:self];
 }
 

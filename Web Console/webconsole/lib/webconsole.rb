@@ -40,18 +40,26 @@ module WebConsole
 
     LOADHTML_FILENAME = "load_html.scpt"
     LOADHTML_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, LOADHTML_FILENAME)
-    LOADHTMLWITHBASEURL_FILENAME = "load_html_with_base_url.scpt"
-    LOADHTMLWITHBASEURL_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, LOADHTMLWITHBASEURL_FILENAME)
     def load_html(html)
+      arguments = [html]
+
       if @base_url
-        result = WebConsole::run_applescript(LOADHTMLWITHBASEURL_SCRIPT, [html, @base_url])
-      else
-        result = WebConsole::run_applescript(LOADHTML_SCRIPT, [html])
+        arguments.push(@base_url)
       end
-      @window_id = self.class.window_id_from_result(result)
+
+      if @window_id
+        arguments.push(@window_id)
+      end
+
+      result = WebConsole::run_applescript(LOADHTML_SCRIPT, arguments)
+      window_id = self.class.window_id_from_result(result)
+
+      if !@window_id
+        @window_id = window_id
+      end
     end
 
-    DOJAVASCRIPT_FILENAME = "do_javascript.scpt"
+    DOJAVASCRIPT_FILENAME = "do_javascript_in.scpt"
     DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, DOJAVASCRIPT_FILENAME)
     def do_javascript(javascript)
       WebConsole::run_applescript(DOJAVASCRIPT_SCRIPT, [javascript, @window_id])

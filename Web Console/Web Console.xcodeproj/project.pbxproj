@@ -255,7 +255,6 @@
 				45898BAA1785319600AE365A /* wcack */,
 				45898B9F1785302D00AE365A /* Supporting Files */,
 			);
-			name = Ack;
 			path = Ack;
 			sourceTree = "<group>";
 		};
