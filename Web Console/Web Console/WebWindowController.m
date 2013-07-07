@@ -32,9 +32,9 @@
 }
 
 - (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {
-    [self.webView.mainFrame loadHTMLString:HTML baseURL:baseURL];
+    [self showWindow:self]; // If showWindow is not before loadHTMLString, then failure completion handler will not fire.
 
-    [self showWindow:self];
+    [self.webView.mainFrame loadHTMLString:HTML baseURL:baseURL];
     
     self.completionHandler = completionHandler;
 }
@@ -80,7 +80,7 @@
     self.completionHandler(YES);
 }
 
-- (void)webView:(WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource {
+- (void)webView:(WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource {    
     self.completionHandler(NO);
 }
 
