@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface Web_ConsoleTests : SenTestCase
+@interface WebWindowControllerTests : SenTestCase
 
 @end

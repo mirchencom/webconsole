@@ -13,6 +13,7 @@
 
 @interface PluginManager ()
 @property (nonatomic, strong) NSMutableDictionary *plugins;
+- (void)loadPluginsInDirectory:(NSString *)plugInsPath;
 @end
 
 @implementation PluginManager
@@ -36,9 +37,20 @@
     return self;
 }
 
-- (void)loadPlugins {
+- (void)loadPlugins
+{
     NSString *builtInPlugInsPath = [[NSBundle mainBundle] builtInPlugInsPath];
-    NSArray *bundlePaths = [NSBundle pathsForResourcesOfType:kPlugInExtension inDirectory:builtInPlugInsPath];
+    [self loadPluginsInDirectory:builtInPlugInsPath];
+//    NSArray *bundlePaths = [NSBundle pathsForResourcesOfType:kPlugInExtension inDirectory:builtInPlugInsPath];
+//    
+//    for (NSString *path in bundlePaths) {
+//        (void)[[PluginManager sharedPluginManager] addedPluginWithPath:path];
+//    }
+}
+
+- (void)loadPluginsInDirectory:(NSString *)plugInsPath
+{
+    NSArray *bundlePaths = [NSBundle pathsForResourcesOfType:kPlugInExtension inDirectory:plugInsPath];
     
     for (NSString *path in bundlePaths) {
         (void)[[PluginManager sharedPluginManager] addedPluginWithPath:path];

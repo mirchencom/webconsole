@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "Web_ConsoleTests.h"
+#import "WebWindowControllerTests.h"
 
 #import "SenTestCase+BundleResources.h"
 #import "Web_ConsoleTestsConstants.h"
@@ -20,7 +20,7 @@
 @property (nonatomic, readonly) WebView *webView;
 @end
 
-@implementation Web_ConsoleTests
+@implementation WebWindowControllerTests
 
 - (void)setUp
 {

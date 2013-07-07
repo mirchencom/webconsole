@@ -6,26 +6,36 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "Web_ConsoleTests.h"
+#import "WebWindowControllerTests.h"
+
 
 #pragma mark - General
+
 #define kTestTimeout 1
+
+
+#pragma mark - Test Data
+
 #define kTestDataSubdirectory @"Data"
 
-#pragma mark - Extensions
+#pragma mark Extensions
 #define kTestDataHTMLExtension @"html"
 #define kTestDataJavaScriptExtension @"js"
 
-#pragma mark - Resources
-
-#pragma mark HTML
+#pragma mark HTML Resources
 #define kTestDataHTMLFilename @"index"
 #define kTestDataHTMLJQUERYFilename @"indexjquery"
 
-
-#pragma mark JavaScript
+#pragma mark JavaScript Resources
 #define kTestJavaScriptNoDOMFilename @"JavaScriptNoDOM"
 #define kTestJavaScriptBodyJQueryFilename @"JavaScriptBodyJQuery"
 #define kTestJavaScriptBodyFilename @"JavaScriptBody"
 #define kTestJavaScriptTextJQueryFilename @"JavaScriptTextJQuery"
 #define kTestJavaScriptTextFilename @"JavaScriptText"
+
+
+#pragma mark - Plugins
+
+#define kAllPlugins [kPlugins arrayByAddingObjectsFromArray:kTestPlugins]
+#define kPlugins @[@"Ack"]
+#define kTestPlugins @[@"NoWindowTest"]
