@@ -47,7 +47,7 @@
     }
 }
 
-- (void)testNoWindowTestPlugin
+- (void)testNoWindowTest
 {
     Plugin *noWindowTestPlugin = [[PluginManager sharedPluginManager] pluginWithName:@"NoWindowTest"];
 
