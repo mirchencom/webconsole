@@ -54,4 +54,16 @@
     [noWindowTestPlugin runWithArguments:nil inDirectoryPath:nil];
 }
 
+//+ (WebWindowController *)webWindowControllerForWindowWithWindowNumber:(NSInteger)windowNumber {
+//    WebWindowController *webWindowController;
+//    for (NSWindow *aWindow in [[NSApplication sharedApplication] windows]) {
+//        if ([aWindow windowNumber] == windowNumber) {
+//            webWindowController = (WebWindowController *)[aWindow windowController];
+//            break;
+//        }
+//    }
+//    return webWindowController;
+//}
+
+
 @end
