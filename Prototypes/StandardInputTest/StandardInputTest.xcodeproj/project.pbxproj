@@ -19,6 +19,8 @@
 		45029C83178CF8FA002EB6B5 /* StandardInputTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45029C82178CF8FA002EB6B5 /* StandardInputTestTests.m */; };
 		45029C8D178CF92F002EB6B5 /* StandardInputTest.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45029C8C178CF92F002EB6B5 /* StandardInputTest.sdef */; };
 		45029C90178CF9DC002EB6B5 /* PassTextCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 45029C8F178CF9DC002EB6B5 /* PassTextCommand.m */; };
+		45029C93178E33DB002EB6B5 /* Scripts in Resources */ = {isa = PBXBuildFile; fileRef = 45029C92178E33DB002EB6B5 /* Scripts */; };
+		45029C96178E40C4002EB6B5 /* TaskWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45029C95178E40C4002EB6B5 /* TaskWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 		45029C8C178CF92F002EB6B5 /* StandardInputTest.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StandardInputTest.sdef; sourceTree = "<group>"; };
 		45029C8E178CF9DC002EB6B5 /* PassTextCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassTextCommand.h; sourceTree = "<group>"; };
 		45029C8F178CF9DC002EB6B5 /* PassTextCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassTextCommand.m; sourceTree = "<group>"; };
+		45029C91178E330C002EB6B5 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		45029C92178E33DB002EB6B5 /* Scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scripts; sourceTree = "<group>"; };
+		45029C94178E40C4002EB6B5 /* TaskWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskWrapper.h; sourceTree = "<group>"; };
+		45029C95178E40C4002EB6B5 /* TaskWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,12 +125,16 @@
 		45029C5E178CF8FA002EB6B5 /* StandardInputTest */ = {
 			isa = PBXGroup;
 			children = (
+				45029C92178E33DB002EB6B5 /* Scripts */,
+				45029C91178E330C002EB6B5 /* Constants.h */,
 				45029C6A178CF8FA002EB6B5 /* AppDelegate.h */,
 				45029C6B178CF8FA002EB6B5 /* AppDelegate.m */,
 				45029C6D178CF8FA002EB6B5 /* MainMenu.xib */,
 				45029C5F178CF8FA002EB6B5 /* Supporting Files */,
 				45029C8E178CF9DC002EB6B5 /* PassTextCommand.h */,
 				45029C8F178CF9DC002EB6B5 /* PassTextCommand.m */,
+				45029C94178E40C4002EB6B5 /* TaskWrapper.h */,
+				45029C95178E40C4002EB6B5 /* TaskWrapper.m */,
 			);
 			path = StandardInputTest;
 			sourceTree = "<group>";
@@ -236,6 +246,7 @@
 				45029C69178CF8FA002EB6B5 /* Credits.rtf in Resources */,
 				45029C6F178CF8FA002EB6B5 /* MainMenu.xib in Resources */,
 				45029C8D178CF92F002EB6B5 /* StandardInputTest.sdef in Resources */,
+				45029C93178E33DB002EB6B5 /* Scripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +284,7 @@
 				45029C65178CF8FA002EB6B5 /* main.m in Sources */,
 				45029C6C178CF8FA002EB6B5 /* AppDelegate.m in Sources */,
 				45029C90178CF9DC002EB6B5 /* PassTextCommand.m in Sources */,
+				45029C96178E40C4002EB6B5 /* TaskWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

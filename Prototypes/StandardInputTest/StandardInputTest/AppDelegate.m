@@ -8,19 +8,34 @@
 
 #import "AppDelegate.h"
 
+#import "TaskWrapper.h"
+
 @interface AppDelegate ()
-- (void)run;
+@property (nonatomic, strong) TaskWrapper *taskWrapper;
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
-}
+    NSString *commandPath = [[NSBundle mainBundle] pathForResource:kCommandName ofType:kCommandExtension inDirectory:kCommandDirectory];
 
-- (void)run
-{
+    self.taskWrapper = [[TaskWrapper alloc] init];
+    [self.taskWrapper runCommandAtPath:commandPath];
+    [self.taskWrapper passTextToCommand:@"1 + 1\n\n"];
+    
+    
+//    NSLog(@"commandPath = %@", commandPath);
+//    NSString *directoryPath = [commandPath stringByDeletingLastPathComponent];
+//    NSLog(@"directoryPath = %@", directoryPath);
+
+
+//    inputPipe = [[NSPipe alloc] init];
+//    inputHandle = [inputPipe fileHandleForWriting];
+//[myTask setStandardInput:inputPipe];
+//    [inputHandle writeData:[[kci UserPass] dataUsingEncoding:NSUTF8StringEncoding]];
+
+    
     
 }
 
