@@ -13,7 +13,7 @@
 //#define kCommandExtension @"sh"
 //#define kCommandName @"print"
 //#define kCommandExtension @"rb"
-#define kCommandName @"printstdin"
+#define kCommandName @"displaydialog"
 #define kCommandExtension @"rb"
 
 

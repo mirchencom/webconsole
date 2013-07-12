@@ -22,7 +22,7 @@
 
     self.taskWrapper = [[TaskWrapper alloc] init];
     [self.taskWrapper runCommandAtPath:commandPath];
-    [self.taskWrapper passTextToCommand:@"1 + 1\n\n"];
+
     
     
 //    NSLog(@"commandPath = %@", commandPath);
@@ -35,8 +35,18 @@
 //[myTask setStandardInput:inputPipe];
 //    [inputHandle writeData:[[kci UserPass] dataUsingEncoding:NSUTF8StringEncoding]];
 
-    
-    
+    [self performSelector:@selector(testIt:) withObject:nil afterDelay:1.0];
+
+//    [self performSelector:@selector(endIt:) withObject:nil afterDelay:2.0];
 }
+
+- (void)testIt:(id)sender {
+    [self.taskWrapper passTextToCommand:@"1 + 1\n"];
+}
+
+//- (void)endIt:(id)sender {
+//    [self.taskWrapper.task interrupt];
+//}
+
 
 @end
