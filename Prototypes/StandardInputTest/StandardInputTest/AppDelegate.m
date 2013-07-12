@@ -35,18 +35,19 @@
 //[myTask setStandardInput:inputPipe];
 //    [inputHandle writeData:[[kci UserPass] dataUsingEncoding:NSUTF8StringEncoding]];
 
+    [self.taskWrapper passTextToCommand:@"value = 1 + 1\n"];
+    
     [self performSelector:@selector(testIt:) withObject:nil afterDelay:1.0];
 
     [self performSelector:@selector(endIt:) withObject:nil afterDelay:2.0];
 }
 
 - (void)testIt:(id)sender {
-    [self.taskWrapper passTextToCommand:@"1 + 1\n"];
+    [self.taskWrapper passTextToCommand:@"value + 2\n"];
 }
 
 - (void)endIt:(id)sender {
-    [self.taskWrapper passTextToCommand:@"2 + 2\n"];
-//    [self.taskWrapper.task interrupt];
+    [self.taskWrapper.task interrupt];
 }
 
 
