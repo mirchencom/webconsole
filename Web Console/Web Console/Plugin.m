@@ -16,9 +16,12 @@
 
 @interface Plugin ()
 @property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, strong) NSMutableArray *webWindowControllers;
 - (NSString *)commandPath;
 - (NSString *)command;
 - (NSString *)resourcePath;
+- (WebWindowController *)addedWebWindowController;
+- (void)removeWebWindowController:(WebWindowController *)webWindowController;
 @end
 
 @implementation Plugin
@@ -28,7 +31,8 @@
     self = [super init];
     if (self) {
         _bundle = [NSBundle bundleWithPath:path];
-
+        _webWindowControllers = [NSMutableArray array];
+        
         // Bundle Validation
         if (!_bundle
             || !([self name] > 0)) {
@@ -38,6 +42,9 @@
     
     return self;
 }
+
+#pragma mark - Dictionary
+
 
 - (NSString *)name
 {
@@ -62,8 +69,31 @@
     return [[self resourcePath] stringByAppendingPathComponent:command];
 }
 
+#pragma mark - WebWindowController
+
+
+- (WebWindowController *)addedWebWindowController
+{
+    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+
+    [self.webWindowControllers addObject:webWindowController];
+
+    return webWindowController;
+}
+
+- (void)removeWebWindowController:(WebWindowController *)webWindowController
+{
+    [self.webWindowControllers removeObject:webWindowController];
+    [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
+}
+
+
+#pragma mark - Task
+
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath
 {
+
+    // Configuration
     NSString *commandPath = [self commandPath];
     
     NSLog(@"arguments = %@", arguments);
@@ -81,43 +111,49 @@
         [task setArguments:arguments];
     }
 
+    // Environment Dictionary
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
 
-    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
-
-    NSLog(@"Starting task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
-
+    // Web Window Controller
+    WebWindowController *webWindowController = [self addedWebWindowController];
     environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
-    
+    [webWindowController.tasks addObject:task];
     [task setEnvironment:environmentDictionary];
     
+    // Standard Output
     task.standardOutput = [NSPipe pipe];
-    
     [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }];
     
+    // Standard Error
+    task.standardError = [NSPipe pipe];
+    [[task.standardError fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
+        NSData *data = [file availableData];
+        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }];
+    
+    // Termination handler
     [task setTerminationHandler:^(NSTask *task) {
-        [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
-        
-        
         NSLog(@"Ending task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
+        
+        // Standard Input, Output & Error
+        [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
+        [[task.standardError fileHandleForReading] setReadabilityHandler:nil];
+        
+        // Web Window Controller
         if (![webWindowController.window isVisible]) {
             // Remove the WebWindowController if the window was never shown
             NSLog(@"Removing a window");
-            
-            [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
+            [self removeWebWindowController:webWindowController];
         }
-        
-        //        [task.standardError fileHandleForReading].readabilityHandler = nil;
-        //        BOOL success = [task terminationStatus] == 0;
-        //        completionHandler(success);
+        [webWindowController.tasks removeObject:task];        
     }];
     
+    NSLog(@"Starting task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
     [task launch];
-    
 }
 
 @end

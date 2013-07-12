@@ -36,6 +36,7 @@
 		45898BB21785325B00AE365A /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 45898BB11785325B00AE365A /* Data */; };
 		45898BB7178532EC00AE365A /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB4178532EC00AE365A /* Plugin.m */; };
 		45898BB8178532EC00AE365A /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB6178532EC00AE365A /* PluginManager.m */; };
+		4596C053178FA6E8005FC51A /* ReadFromStandardInputCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596C052178FA6E8005FC51A /* ReadFromStandardInputCommand.m */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
@@ -131,6 +132,8 @@
 		45898BB4178532EC00AE365A /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		45898BB5178532EC00AE365A /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginManager.h; sourceTree = "<group>"; };
 		45898BB6178532EC00AE365A /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginManager.m; sourceTree = "<group>"; };
+		4596C051178FA6E8005FC51A /* ReadFromStandardInputCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadFromStandardInputCommand.h; sourceTree = "<group>"; };
+		4596C052178FA6E8005FC51A /* ReadFromStandardInputCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadFromStandardInputCommand.m; sourceTree = "<group>"; };
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowController.m; sourceTree = "<group>"; };
@@ -268,6 +271,8 @@
 				45898BB6178532EC00AE365A /* PluginManager.m */,
 				45898B9517852F2F00AE365A /* RunPluginCommand.h */,
 				45898B9617852F2F00AE365A /* RunPluginCommand.m */,
+				4596C051178FA6E8005FC51A /* ReadFromStandardInputCommand.h */,
+				4596C052178FA6E8005FC51A /* ReadFromStandardInputCommand.m */,
 				455B0C0B177162F0007B75DD /* WebConsoleConstants.h */,
 				455B0C081771627A007B75DD /* DoJavaScriptCommand.h */,
 				455B0C091771627A007B75DD /* DoJavaScriptCommand.m */,
@@ -530,6 +535,7 @@
 				45898B9717852F2F00AE365A /* RunPluginCommand.m in Sources */,
 				45898BB7178532EC00AE365A /* Plugin.m in Sources */,
 				45898BB8178532EC00AE365A /* PluginManager.m in Sources */,
+				4596C053178FA6E8005FC51A /* ReadFromStandardInputCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

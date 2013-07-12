@@ -84,11 +84,18 @@
     self.completionHandler(NO);
 }
 
-
 #pragma mark - WebFrameLoadDelegate
 
 - (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame {
     [self.window setTitle:title];
+}
+
+#pragma mark - Tasks
+
+- (NSArray *)tasks {
+    if (_tasks) return _tasks;    
+    _tasks = [NSMutableArray array];
+    return _tasks;
 }
 
 @end

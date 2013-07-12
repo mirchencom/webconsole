@@ -14,4 +14,5 @@
 - (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler;
 - (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler;
 - (NSString *)doJavaScript:(NSString *)javaScript;
+@property (nonatomic, strong) NSMutableArray *tasks;
 @end

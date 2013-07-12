@@ -284,6 +284,20 @@
             </parameter>
 
         </command>
+        
+        <command name="read from standard input" code="readstin" description="Read text from standard input.">
+
+			<cocoa class="ReadFromStandardInputCommand"/>
+            
+			<direct-parameter description="The text to read from standard input.">
+				<type type="text"/>
+			</direct-parameter>
+            
+            <parameter name="plugin" code="plgn" description="The name of the plugin.">
+				<cocoa key="Plugin"/>
+			</parameter>
+
+        </command>
 
     </suite>
 </dictionary>
