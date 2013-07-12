@@ -53,10 +53,6 @@
     NSPipe *inputPipe = [NSPipe pipe];
     self.fileHandleForWriting = [inputPipe fileHandleForWriting];
 
-    
-    [self.fileHandleForWriting writeData:[@"1+1" dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    
     [self.task setStandardInput:inputPipe];
     
     self.task.standardOutput = [NSPipe pipe];
