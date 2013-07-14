@@ -15,4 +15,5 @@
 - (void)loadPlugins;
 - (Plugin *)addedPluginWithPath:(NSString *)path;
 - (Plugin *)pluginWithName:(NSString *)name;
+- (NSArray *)plugins;
 @end

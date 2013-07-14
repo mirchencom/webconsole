@@ -11,6 +11,8 @@
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
 
+#import "NSApplication+AppleScript.h"
+
 #define kPluginNameKey @"Name"
 #define kPluginCommandKey @"Command"
 
@@ -87,6 +89,33 @@
     [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
 }
 
+#pragma mark - AppleScript
+
+- (NSScriptObjectSpecifier *)objectSpecifier {
+    NSLog(@"name = %@", [self name]);
+    
+    NSScriptClassDescription *containerClassDescription = (NSScriptClassDescription *)[NSScriptClassDescription classDescriptionForClass:[NSApp class]];
+	return [[NSNameSpecifier alloc] initWithContainerClassDescription:containerClassDescription
+                                                   containerSpecifier:nil
+                                                                  key:@"plugins"
+                                                                 name:[self name]];
+}
+
+- (NSArray *)orderedWindows {
+    NSArray *pluginWindows = [self.webWindowControllers valueForKeyPath:@"window"];
+    NSArray *applicationWindows = [[NSApplication sharedApplication] orderedWindows];
+    NSMutableArray *windows = [[NSMutableArray alloc] init];
+    
+    for (NSWindow *window in applicationWindows) {
+        if ([pluginWindows containsObject:window]) {
+            [windows addObject:window];
+        }
+    }
+    
+    NSLog(@"windows = %@", windows);
+
+    return windows;
+}
 
 #pragma mark - Task
 
@@ -172,7 +201,8 @@
 
     NSPipe *pipe = (NSPipe *)task.standardInput;
 
-#warning Make it work
+
+// TODO: Make it work
 NSLog(@"pipe.fileHandleForWriting = %@", pipe.fileHandleForWriting);
 NSLog(@"text = %@", text);
     //    [pipe.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];

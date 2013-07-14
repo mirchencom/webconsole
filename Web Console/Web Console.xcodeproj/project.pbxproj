@@ -41,6 +41,7 @@
 		4596C0621792316B005FC51A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4596C0601792316B005FC51A /* InfoPlist.strings */; };
 		4596C06717923187005FC51A /* IRB.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4596C05B1792316B005FC51A /* IRB.bundle */; };
 		4596C06A179246CF005FC51A /* wcirb in Resources */ = {isa = PBXBuildFile; fileRef = 4596C068179231C3005FC51A /* wcirb */; };
+		4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
@@ -144,6 +145,8 @@
 		4596C0611792316B005FC51A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4596C0631792316B005FC51A /* IRB-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IRB-Prefix.pch"; sourceTree = "<group>"; };
 		4596C068179231C3005FC51A /* wcirb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcirb; sourceTree = "<group>"; };
+		4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+AppleScript.h"; sourceTree = "<group>"; };
+		4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+AppleScript.m"; sourceTree = "<group>"; };
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowController.m; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 		4530B0D51736E2A6000A52E2 /* Web Console */ = {
 			isa = PBXGroup;
 			children = (
+				4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */,
+				4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */,
 				45898BB3178532EC00AE365A /* Plugin.h */,
 				45898BB4178532EC00AE365A /* Plugin.m */,
 				45898BB5178532EC00AE365A /* PluginManager.h */,
@@ -602,6 +607,7 @@
 				45898BB7178532EC00AE365A /* Plugin.m in Sources */,
 				45898BB8178532EC00AE365A /* PluginManager.m in Sources */,
 				4596C053178FA6E8005FC51A /* ReadFromStandardInputCommand.m in Sources */,
+				4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

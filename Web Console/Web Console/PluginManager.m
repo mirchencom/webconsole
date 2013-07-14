@@ -12,7 +12,7 @@
 #define kPlugInExtension @"bundle"
 
 @interface PluginManager ()
-@property (nonatomic, strong) NSMutableDictionary *plugins;
+@property (nonatomic, strong) NSMutableDictionary *nameToPluginDictionary;
 - (void)loadPluginsInDirectory:(NSString *)plugInsPath;
 @end
 
@@ -31,7 +31,7 @@
 {
     self = [super init];
     if (self) {
-        _plugins = [[NSMutableDictionary alloc] init];
+        _nameToPluginDictionary = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -64,16 +64,20 @@
     if (!plugin) return nil;
     
     // Allow only one plugin with a name
-    if (self.plugins[plugin.name]) return nil;
+    if (self.nameToPluginDictionary[plugin.name]) return nil;
     
-    self.plugins[plugin.name] = plugin;
+    self.nameToPluginDictionary[plugin.name] = plugin;
     
     return plugin;
 }
 
 - (Plugin *)pluginWithName:(NSString *)name
 {
-    return self.plugins[name];
+    return self.nameToPluginDictionary[name];
+}
+
+- (NSArray *)plugins {
+    return [self.nameToPluginDictionary allValues];
 }
 
 @end

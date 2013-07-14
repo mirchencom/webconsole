@@ -237,6 +237,23 @@
 
     <suite name="Web Console Suite" code="WCSC" description="Classes just for the Web Console Application">
         
+		<class name="application" code="capp" description="The application&apos;s top-level scripting object." inherits="application">
+			<cocoa class="NSApplication"/>
+			<element type="plugin" access="r">
+				<cocoa key="plugins"/>
+			</element>
+		</class>
+
+        <class name="plugin" code="plgn" description="A Web Console plugin.">
+			<cocoa class="Plugin"/>
+			<property name="name" code="pnam" type="text" access="r">
+				<cocoa key="name"/>
+			</property>
+			<element type="window" access="r">
+				<cocoa key="orderedWindows"/>
+			</element>
+		</class>
+        
         <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML.">
             <cocoa class="LoadHTMLCommand"/>
             <direct-parameter type="text" description="The HTML to load." />
@@ -293,7 +310,7 @@
 				<type type="text"/>
 			</direct-parameter>
             
-            <parameter name="plugin" code="plgn" description="The name of the plugin.">
+            <parameter name="plugin" code="plnm" description="The name of the plugin.">
 				<cocoa key="Plugin"/>
                 <type type="text"/>
 			</parameter>

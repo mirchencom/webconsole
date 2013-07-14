@@ -49,7 +49,7 @@
 
     [[WebWindowsController sharedWebWindowsController] removeWebWindowController:self];
 
-#warning Flesh this out, want to not close the window until all tasks are closed
+// TODO: Flesh this out, want to not close the window until all tasks are closed
     for (NSTask *task in self.tasks) {
         [task interrupt];
     }
