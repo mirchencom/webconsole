@@ -10,6 +10,6 @@ Gem::Specification.new do |s|
     lib/webconsole.rb
     lib/applescript/do_javascript_in.scpt
     lib/applescript/load_html.scpt
-    lib/applescript/run_plugin_with_arguments_in_directory.scpt
+    lib/applescript/run_plugin.scpt
   ]
 end

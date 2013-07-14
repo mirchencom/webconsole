@@ -37,6 +37,10 @@
 		45898BB7178532EC00AE365A /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB4178532EC00AE365A /* Plugin.m */; };
 		45898BB8178532EC00AE365A /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB6178532EC00AE365A /* PluginManager.m */; };
 		4596C053178FA6E8005FC51A /* ReadFromStandardInputCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596C052178FA6E8005FC51A /* ReadFromStandardInputCommand.m */; };
+		4596C05C1792316B005FC51A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
+		4596C0621792316B005FC51A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4596C0601792316B005FC51A /* InfoPlist.strings */; };
+		4596C06717923187005FC51A /* IRB.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4596C05B1792316B005FC51A /* IRB.bundle */; };
+		4596C06A179246CF005FC51A /* wcirb in Resources */ = {isa = PBXBuildFile; fileRef = 4596C068179231C3005FC51A /* wcirb */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
@@ -78,6 +82,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				4596C06717923187005FC51A /* IRB.bundle in CopyFiles */,
 				45898BA91785306100AE365A /* Ack.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +139,11 @@
 		45898BB6178532EC00AE365A /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginManager.m; sourceTree = "<group>"; };
 		4596C051178FA6E8005FC51A /* ReadFromStandardInputCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadFromStandardInputCommand.h; sourceTree = "<group>"; };
 		4596C052178FA6E8005FC51A /* ReadFromStandardInputCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadFromStandardInputCommand.m; sourceTree = "<group>"; };
+		4596C05B1792316B005FC51A /* IRB.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRB.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		4596C05F1792316B005FC51A /* IRB-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRB-Info.plist"; sourceTree = "<group>"; };
+		4596C0611792316B005FC51A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4596C0631792316B005FC51A /* IRB-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IRB-Prefix.pch"; sourceTree = "<group>"; };
+		4596C068179231C3005FC51A /* wcirb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcirb; sourceTree = "<group>"; };
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowController.m; sourceTree = "<group>"; };
@@ -180,6 +190,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4596C0581792316B005FC51A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4596C05C1792316B005FC51A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -205,6 +223,7 @@
 		452E2F891789C79300EAD55B /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				4596C05D1792316B005FC51A /* IRB */,
 				45898B9E1785302D00AE365A /* Ack */,
 			);
 			name = Plugins;
@@ -237,6 +256,7 @@
 				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.octest */,
 				45898B9C1785302C00AE365A /* Ack.bundle */,
 				452E2F791788F62500EAD55B /* NoWindowTest.bundle */,
+				4596C05B1792316B005FC51A /* IRB.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,6 +370,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4596C05D1792316B005FC51A /* IRB */ = {
+			isa = PBXGroup;
+			children = (
+				4596C068179231C3005FC51A /* wcirb */,
+				4596C05E1792316B005FC51A /* Supporting Files */,
+			);
+			path = IRB;
+			sourceTree = "<group>";
+		};
+		4596C05E1792316B005FC51A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4596C05F1792316B005FC51A /* IRB-Info.plist */,
+				4596C0601792316B005FC51A /* InfoPlist.strings */,
+				4596C0631792316B005FC51A /* IRB-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -426,6 +465,23 @@
 			productReference = 45898B9C1785302C00AE365A /* Ack.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		4596C05A1792316B005FC51A /* IRB */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */;
+			buildPhases = (
+				4596C0571792316B005FC51A /* Sources */,
+				4596C0581792316B005FC51A /* Frameworks */,
+				4596C0591792316B005FC51A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IRB;
+			productName = IRB;
+			productReference = 4596C05B1792316B005FC51A /* IRB.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -451,6 +507,7 @@
 				4530B0EB1736E2A6000A52E2 /* Web ConsoleTests */,
 				45898B9B1785302C00AE365A /* Ack */,
 				452E2F781788F62500EAD55B /* NoWindowTest */,
+				4596C05A1792316B005FC51A /* IRB */,
 			);
 		};
 /* End PBXProject section */
@@ -493,6 +550,15 @@
 			files = (
 				45898BA31785302D00AE365A /* InfoPlist.strings in Resources */,
 				45898BAC1785319600AE365A /* wcack in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4596C0591792316B005FC51A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4596C0621792316B005FC51A /* InfoPlist.strings in Resources */,
+				4596C06A179246CF005FC51A /* wcirb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +617,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		45898B981785302C00AE365A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4596C0571792316B005FC51A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -617,6 +690,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				45898BA21785302D00AE365A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4596C0601792316B005FC51A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4596C0611792316B005FC51A /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -789,6 +870,32 @@
 			};
 			name = Release;
 		};
+		4596C0641792316B005FC51A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IRB/IRB-Prefix.pch";
+				INFOPLIST_FILE = "IRB/IRB-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		4596C0651792316B005FC51A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IRB/IRB-Prefix.pch";
+				INFOPLIST_FILE = "IRB/IRB-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -836,6 +943,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4596C0641792316B005FC51A /* Debug */,
+				4596C0651792316B005FC51A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

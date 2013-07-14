@@ -114,7 +114,8 @@
     // Environment Dictionary
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
-
+    environmentDictionary[kEnvironmentVariablePluginDirectoryKey] = [self resourcePath];
+    
     // Web Window Controller
     WebWindowController *webWindowController = [self addedWebWindowController];
     environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];

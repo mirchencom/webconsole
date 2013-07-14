@@ -47,8 +47,6 @@
 
 - (void)windowWillClose:(NSNotification *)notification {
 
-    NSLog(@"Window will close");
-
     [[WebWindowsController sharedWebWindowsController] removeWebWindowController:self];
 
 #warning Flesh this out, want to not close the window until all tasks are closed
