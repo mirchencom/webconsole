@@ -12,4 +12,5 @@
 - (id)initWithPath:(NSString *)path;
 - (NSString *)name;
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath;
+- (void)readFromStandardInput:(NSString *)text;
 @end

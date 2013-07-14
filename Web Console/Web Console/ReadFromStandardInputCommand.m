@@ -9,6 +9,7 @@
 #import "ReadFromStandardInputCommand.h"
 
 #import "PluginManager.h"
+#import "Plugin.h"
 
 @implementation ReadFromStandardInputCommand
 
@@ -21,6 +22,7 @@
 
     Plugin *plugin = [[PluginManager sharedPluginManager] pluginWithName:name];
 
+    [plugin readFromStandardInput:text];
     
     return nil;
 }

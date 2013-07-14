@@ -135,6 +135,9 @@
         NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }];
     
+    // Standard Input
+    task.standardInput = [NSPipe pipe];
+    
     // Termination handler
     [task setTerminationHandler:^(NSTask *task) {
         NSLog(@"Ending task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
@@ -154,6 +157,24 @@
     
     NSLog(@"Starting task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
     [task launch];
+}
+
+- (void)readFromStandardInput:(NSString *)text {
+
+    if (![self.webWindowControllers count]) return;
+    
+    WebWindowController *webWindowController = self.webWindowControllers[0];
+
+    if (![webWindowController.tasks count]) return;
+    
+    NSTask *task = webWindowController.tasks[0];
+
+    NSPipe *pipe = (NSPipe *)task.standardInput;
+
+#warning Make it work
+NSLog(@"pipe.fileHandleForWriting = %@", pipe.fileHandleForWriting);
+NSLog(@"text = %@", text);
+    //    [pipe.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 @end

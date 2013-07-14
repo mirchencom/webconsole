@@ -295,6 +295,7 @@
             
             <parameter name="plugin" code="plgn" description="The name of the plugin.">
 				<cocoa key="Plugin"/>
+                <type type="text"/>
 			</parameter>
 
         </command>
