@@ -307,5 +307,18 @@
 
         </command>
 
+        <command name="read from standard input" code="readstin" description="Read text from standard input.">
+
+			<direct-parameter description="The plugin to run.">
+				<type type="plugin"/>
+			</direct-parameter>
+
+            <parameter name="text" code="sitx" description="The text to read from standard input.">
+				<cocoa key="Text"/>
+				<type type="text"/>
+			</parameter>
+
+        </command>
+        
     </suite>
 </dictionary>

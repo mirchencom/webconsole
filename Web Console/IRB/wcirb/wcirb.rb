@@ -19,5 +19,6 @@ window_manager.base_url_path = BASE_PATH
 controller = WcIrb::Controller.new(window_manager)
 
 ARGF.each do |line|
+  string = "from ruby = " + line
   controller.parse_line(line)
 end

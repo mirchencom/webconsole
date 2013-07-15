@@ -18,12 +18,9 @@
 
 @interface Plugin ()
 @property (nonatomic, strong) NSBundle *bundle;
-@property (nonatomic, strong) NSMutableArray *webWindowControllers;
 - (NSString *)commandPath;
 - (NSString *)command;
 - (NSString *)resourcePath;
-- (WebWindowController *)addedWebWindowController;
-- (void)removeWebWindowController:(WebWindowController *)webWindowController;
 @end
 
 @implementation Plugin
@@ -33,7 +30,6 @@
     self = [super init];
     if (self) {
         _bundle = [NSBundle bundleWithPath:path];
-        _webWindowControllers = [NSMutableArray array];
         
         // Bundle Validation
         if (!_bundle
@@ -174,13 +170,19 @@
 
 - (void)readFromStandardInput:(NSScriptCommand *)command
 {
-    NSString *text = [command directParameter];
+	NSDictionary *argumentsDictionary = [command evaluatedArguments];
+    NSString *text = [argumentsDictionary objectForKey:kTextKey];
+
+NSLog(@"text = %@", text);
+    
     
 //	NSDictionary *argumentsDictionary = [command evaluatedArguments];
+
+    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
     
-    if (![self.webWindowControllers count]) return;
+    if (![webWindowControllers count]) return;
     
-    WebWindowController *webWindowController = self.webWindowControllers[0];
+    WebWindowController *webWindowController = webWindowControllers[0];
 
     if (![webWindowController.tasks count]) return;
     
@@ -191,8 +193,25 @@
 
 // TODO: Make it work
 NSLog(@"pipe.fileHandleForWriting = %@", pipe.fileHandleForWriting);
-NSLog(@"text = %@", text);
-    //    [pipe.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
+NSLog(@"text ready to write = %@", text);
+    [pipe.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
+
+//    [self performSelector:@selector(endIt:) withObject:nil afterDelay:2.0];
 }
+
+//- (void)endIt:(id)sender {
+//    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
+//    
+//    if (![webWindowControllers count]) return;
+//    
+//    WebWindowController *webWindowController = webWindowControllers[0];
+//    
+//    if (![webWindowController.tasks count]) return;
+//    
+//    NSTask *task = webWindowController.tasks[0];
+//
+//    [task interrupt];
+//}
+
 
 @end

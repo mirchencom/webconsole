@@ -61,10 +61,16 @@
     [self.webWindowControllers removeObject:webWindowController];
 }
 
-- (NSArray *)windowsForPlugin:(Plugin *)plugin
+- (NSArray *)webWindowControllersForPlugin:(Plugin *)plugin
 {
     NSPredicate *pluginPredicate = [NSPredicate predicateWithFormat:@"(plugin = %@)", plugin];
-    NSArray *pluginWebWindowControllers = [self.webWindowControllers filteredArrayUsingPredicate:pluginPredicate];
+    return [self.webWindowControllers filteredArrayUsingPredicate:pluginPredicate];
+}
+
+- (NSArray *)windowsForPlugin:(Plugin *)plugin
+{
+    NSArray *pluginWebWindowControllers = [self webWindowControllersForPlugin:plugin];
+    
     NSArray *pluginWindows = [pluginWebWindowControllers valueForKeyPath:@"window"];
 
     NSArray *applicationWindows = [[NSApplication sharedApplication] orderedWindows];
