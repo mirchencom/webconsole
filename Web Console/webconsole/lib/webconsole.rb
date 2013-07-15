@@ -4,8 +4,7 @@ module WebConsole
   SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
   APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "applescript")
 
-  RUN_FILENAME = "run.scpt"
-  RUN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, RUN_FILENAME)
+  RUN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run.scpt")
   def self.run_plugin(name, directory = nil, arguments = nil)
     parameters = [name]
     if directory
@@ -15,6 +14,17 @@ module WebConsole
       parameters = parameters + arguments
     end
     self.run_applescript(RUN_SCRIPT, parameters)
+  end
+
+  PLUGIN_IS_RUNNING_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_is_running.scpt")
+  def self.plugin_is_running(name)
+    result = self.run_applescript(PLUGIN_IS_RUNNING_SCRIPT, [name])
+    result.chomp!
+    if result == "true"
+      return true
+    else
+      return false
+    end
   end
 
   private
@@ -39,8 +49,7 @@ module WebConsole
       @base_url = "file://" + value
     end
 
-    LOADHTML_FILENAME = "load_html.scpt"
-    LOADHTML_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, LOADHTML_FILENAME)
+    LOADHTML_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_html.scpt")
     def load_html(html)
       arguments = [html]
 
@@ -56,14 +65,12 @@ module WebConsole
       @window_id = self.class.window_id_from_result(result)
     end
 
-    DOJAVASCRIPT_FILENAME = "do_javascript_in.scpt"
-    DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, DOJAVASCRIPT_FILENAME)
+    DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "do_javascript_in.scpt")
     def do_javascript(javascript)
       WebConsole::run_applescript(DOJAVASCRIPT_SCRIPT, [javascript, @window_id])
     end
 
-    CLOSEWINDOW_FILENAME = "close_window.scpt"
-    CLOSEWINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, CLOSEWINDOW_FILENAME)
+    CLOSEWINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "close_window.scpt")
     def close
       WebConsole::run_applescript(CLOSEWINDOW_SCRIPT, [@window_id])
     end

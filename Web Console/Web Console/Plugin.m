@@ -74,9 +74,7 @@
 
 #pragma mark - AppleScript
 
-- (NSScriptObjectSpecifier *)objectSpecifier {
-    NSLog(@"name = %@", [self name]);
-    
+- (NSScriptObjectSpecifier *)objectSpecifier {    
     NSScriptClassDescription *containerClassDescription = (NSScriptClassDescription *)[NSScriptClassDescription classDescriptionForClass:[NSApp class]];
 	return [[NSNameSpecifier alloc] initWithContainerClassDescription:containerClassDescription
                                                    containerSpecifier:nil
