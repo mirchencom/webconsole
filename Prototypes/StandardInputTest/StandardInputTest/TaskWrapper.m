@@ -13,28 +13,11 @@
 - (void)passTextToCommand:(NSString *)text
 {
     // I can do this just by accessing task.standardInput
-    [self.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
+//    [self.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
 
-    
-//    [self.fileHandleForWriting closeFile];
-//[self.fileHandleForWriting synchronizeFile];
-    
-    
-    
-    
-    //NSLog(@"self.fileHandleForWriting = %@", self.fileHandleForWriting);
-//NSLog(@"self.task.standardInput = %@", self.task.standardInput);
-//    
-//    NSData *data = [self.fileHandleForWriting availableData];
-//    NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-//
-//    NSString *output = [[NSString alloc] initWithData:[self.fileHandleForWriting readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-//    NSLog(@"output = %@", output);
-//    [self.task interrupt];
-//    [self.task terminate];
 
-    
-//    NSLog(@"Passing Text %@", text);
+    NSPipe *pipe = (NSPipe *)self.task.standardInput;
+    [pipe.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)runCommandAtPath:(NSString *)commandPath
@@ -50,10 +33,10 @@
     [self.task setEnvironment:environmentDictionary];
 
     // I can do this just by accessing task.standardInput
-    NSPipe *inputPipe = [NSPipe pipe];
-    self.fileHandleForWriting = [inputPipe fileHandleForWriting];
+//    NSPipe *inputPipe = [NSPipe pipe];
+//    self.fileHandleForWriting = [inputPipe fileHandleForWriting];
 
-    [self.task setStandardInput:inputPipe];
+    [self.task setStandardInput:[NSPipe pipe]];
     
     self.task.standardOutput = [NSPipe pipe];
     

@@ -131,7 +131,7 @@
     }];
     
     // Standard Input
-    task.standardInput = [NSPipe pipe];
+    [task setStandardInput:[NSPipe pipe]];
     
     // Termination handler
     [task setTerminationHandler:^(NSTask *task) {

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface TaskWrapper : NSObject
-@property (nonatomic, strong) NSFileHandle *fileHandleForWriting;
+//@property (nonatomic, strong) NSFileHandle *fileHandleForWriting;
 @property (nonatomic, strong) NSTask *task;
 
 - (void)passTextToCommand:(NSString *)text;
