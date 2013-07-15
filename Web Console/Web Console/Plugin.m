@@ -71,23 +71,6 @@
     return [[self resourcePath] stringByAppendingPathComponent:command];
 }
 
-#pragma mark - WebWindowController
-
-
-- (WebWindowController *)addedWebWindowController
-{
-    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
-
-    [self.webWindowControllers addObject:webWindowController];
-
-    return webWindowController;
-}
-
-- (void)removeWebWindowController:(WebWindowController *)webWindowController
-{
-    [self.webWindowControllers removeObject:webWindowController];
-    [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
-}
 
 #pragma mark - AppleScript
 
@@ -102,19 +85,7 @@
 }
 
 - (NSArray *)orderedWindows {
-    NSArray *pluginWindows = [self.webWindowControllers valueForKeyPath:@"window"];
-    NSArray *applicationWindows = [[NSApplication sharedApplication] orderedWindows];
-    NSMutableArray *windows = [[NSMutableArray alloc] init];
-    
-    for (NSWindow *window in applicationWindows) {
-        if ([pluginWindows containsObject:window]) {
-            [windows addObject:window];
-        }
-    }
-    
-    NSLog(@"windows = %@", windows);
-
-    return windows;
+    return [[WebWindowsController sharedWebWindowsController] windowsForPlugin:self];
 }
 
 #pragma mark - Task
@@ -146,7 +117,7 @@
     environmentDictionary[kEnvironmentVariablePluginDirectoryKey] = [self resourcePath];
     
     // Web Window Controller
-    WebWindowController *webWindowController = [self addedWebWindowController];
+    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
     environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
     [webWindowController.tasks addObject:task];
     [task setEnvironment:environmentDictionary];
@@ -180,7 +151,7 @@
         if (![webWindowController.window isVisible]) {
             // Remove the WebWindowController if the window was never shown
             NSLog(@"Removing a window");
-            [self removeWebWindowController:webWindowController];
+            [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
         }
         [webWindowController.tasks removeObject:task];        
     }];

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @class WebWindowController;
+@class Plugin;
 
 @interface WebWindowsController : NSObject
 
 + (id)sharedWebWindowsController;
 - (WebWindowController *)addedWebWindowController;
+- (WebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin;
 - (void)removeWebWindowController:(WebWindowController *)webWindowController;
+- (NSArray *)windowsForPlugin:(Plugin *)plugin;
 @end

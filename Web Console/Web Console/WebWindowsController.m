@@ -9,6 +9,7 @@
 #import "WebWindowsController.h"
 
 #import "WebWindowController.h"
+#import "Plugin.h"
 
 #define kWebWindowNibName @"WebWindow"
 
@@ -37,6 +38,13 @@
     return self;
 }
 
+- (WebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin
+{
+    WebWindowController *webWindowController = [self addedWebWindowController];
+    webWindowController.plugin = plugin;
+    return webWindowController;
+}
+
 - (WebWindowController *)addedWebWindowController
 {
     WebWindowController *webWindowController = [[WebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
@@ -51,6 +59,25 @@
 - (void)removeWebWindowController:(WebWindowController *)webWindowController
 {
     [self.webWindowControllers removeObject:webWindowController];
+}
+
+- (NSArray *)windowsForPlugin:(Plugin *)plugin
+{
+    NSPredicate *pluginPredicate = [NSPredicate predicateWithFormat:@"(plugin = %@)", plugin];
+    NSArray *pluginWebWindowControllers = [self.webWindowControllers filteredArrayUsingPredicate:pluginPredicate];
+    NSArray *pluginWindows = [pluginWebWindowControllers valueForKeyPath:@"window"];
+
+    NSArray *applicationWindows = [[NSApplication sharedApplication] orderedWindows];
+    NSMutableArray *windows = [[NSMutableArray alloc] init];
+    for (NSWindow *window in applicationWindows) {
+        if ([pluginWindows containsObject:window]) {
+            [windows addObject:window];
+        }
+    }
+    
+    NSLog(@"windows = %@", windows);
+    
+    return windows;
 }
 
 @end
