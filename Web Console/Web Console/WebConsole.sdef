@@ -252,6 +252,12 @@
 			<element type="window" access="r">
 				<cocoa key="orderedWindows"/>
 			</element>
+            <responds-to command="read from standard input">
+                <cocoa method="readFromStandardInput:"/>
+            </responds-to>
+            <responds-to command="run">
+                <cocoa method="run:"/>
+            </responds-to>
 		</class>
         
         <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML.">
@@ -283,13 +289,12 @@
 			</result>
 		</command>
 
-        <command name="run plugin" code="runplgin" description="Run a plugin.">
-			<cocoa class="RunPluginCommand"/>
+        <command name="run" code="runplgin" description="Run a plugin.">
             
-			<direct-parameter description="The name of the plugin to run.">
-				<type type="text"/>
+			<direct-parameter description="The plugin to run.">
+				<type type="plugin"/>
 			</direct-parameter>
-            
+
             <parameter name="with arguments" code="agmt" description="The arguments to pass to the plugin." optional="yes">
 				<cocoa key="Arguments"/>
 				<type type="text" list="yes"/>
@@ -299,21 +304,6 @@
 				<cocoa key="Directory"/>
                 <type type="file"/>
             </parameter>
-
-        </command>
-        
-        <command name="read from standard input" code="readstin" description="Read text from standard input.">
-
-			<cocoa class="ReadFromStandardInputCommand"/>
-            
-			<direct-parameter description="The text to read from standard input.">
-				<type type="text"/>
-			</direct-parameter>
-            
-            <parameter name="plugin" code="plnm" description="The name of the plugin.">
-				<cocoa key="Plugin"/>
-                <type type="text"/>
-			</parameter>
 
         </command>
 

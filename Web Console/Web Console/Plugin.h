@@ -12,5 +12,7 @@
 - (id)initWithPath:(NSString *)path;
 - (NSString *)name;
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath;
-- (void)readFromStandardInput:(NSString *)text;
+#pragma mark - AppleScript
+- (void)run:(NSScriptCommand *)command;
+- (void)readFromStandardInput:(NSScriptCommand *)command;
 @end

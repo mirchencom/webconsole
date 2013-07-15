@@ -188,9 +188,27 @@
     NSLog(@"Starting task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
     [task launch];
 }
+#pragma mark - AppleScript
 
-- (void)readFromStandardInput:(NSString *)text {
+- (void)run:(NSScriptCommand *)command
+{
+	NSDictionary *argumentsDictionary = [command evaluatedArguments];
+    NSArray *arguments = [argumentsDictionary objectForKey:kArgumentsKey];
+    
+    NSURL *directoryURL = [argumentsDictionary objectForKey:kDirectoryKey];
+    
+    // TODO: Return an error if the plugin doesn't exist
+    // TODO: Return an error if the directory doesn't exist
+    
+    [self runWithArguments:arguments inDirectoryPath:[directoryURL path]];
+}
 
+- (void)readFromStandardInput:(NSScriptCommand *)command
+{
+    NSString *text = [command directParameter];
+    
+//	NSDictionary *argumentsDictionary = [command evaluatedArguments];
+    
     if (![self.webWindowControllers count]) return;
     
     WebWindowController *webWindowController = self.webWindowControllers[0];
