@@ -15,4 +15,5 @@
 #pragma mark - AppleScript
 - (void)run:(NSScriptCommand *)command;
 - (void)readFromStandardInput:(NSScriptCommand *)command;
+- (NSArray *)orderedWindows;
 @end

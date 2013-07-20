@@ -80,9 +80,7 @@
             [windows addObject:window];
         }
     }
-    
-    NSLog(@"windows = %@", windows);
-    
+
     return windows;
 }
 
