@@ -27,6 +27,11 @@ module WebConsole
     end
   end
 
+  PLUGIN_READ_FROM_STANDARD_INPUT = File.join(APPLESCRIPT_DIRECTORY, "plugin_read_from_standard_input.scpt")
+  def self.plugin_read_from_standard_input(name, text)
+    self.run_applescript(PLUGIN_READ_FROM_STANDARD_INPUT, [name, text])
+  end
+
   private
 
   def self.run_applescript(script, arguments)

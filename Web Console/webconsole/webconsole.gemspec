@@ -12,5 +12,6 @@ Gem::Specification.new do |s|
     lib/applescript/load_html.scpt
     lib/applescript/run.scpt
     lib/applescript/plugin_is_running.scpt
+    lib/applescript/plugin_read_from_standard_input.scpt
   ]
 end
