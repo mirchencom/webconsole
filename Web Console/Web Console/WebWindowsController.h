@@ -19,4 +19,5 @@
 - (void)removeWebWindowController:(WebWindowController *)webWindowController;
 - (NSArray *)webWindowControllersForPlugin:(Plugin *)plugin;
 - (NSArray *)windowsForPlugin:(Plugin *)plugin;
+- (NSArray *)tasks;
 @end

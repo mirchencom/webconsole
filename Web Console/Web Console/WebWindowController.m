@@ -78,17 +78,26 @@
 {
     if (returnCode != NSAlertFirstButtonReturn) return;
     
+    
+    void (^closeWindowBlock)() = ^void ()
+    {
+        if (![self.tasks count]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.window close];
+            });
+        }
+    };
+
     for (NSTask *task in self.tasks) {
         [task interruptWithCompletionHandler:^(BOOL success) {
             if (!success) {
-#warning Terminate here
+                [task terminateWithCompletionHandler:^(BOOL success) {
+                    NSAssert(success, @"Terminating should always succeed");
+                    closeWindowBlock();
+                }];
             } else {
-                if (![self.tasks count]) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.window close];
-                    });
-                }
-            }        
+                closeWindowBlock();
+            }
         }];
     }
 }

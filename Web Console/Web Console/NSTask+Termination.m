@@ -11,14 +11,14 @@
 @implementation NSTask (Termination)
 
 - (void)terminateWithCompletionHandler:(void (^)(BOOL success))completionHandler {
-    [self terminateShouldInterrupt:NO completionHandler:completionHandler];
+    [self terminateUseInterrupt:NO completionHandler:completionHandler];
 }
 
 - (void)interruptWithCompletionHandler:(void (^)(BOOL success))completionHandler {
-    [self terminateShouldInterrupt:YES completionHandler:completionHandler];
+    [self terminateUseInterrupt:YES completionHandler:completionHandler];
 }
 
-- (void)terminateShouldInterrupt:(BOOL)shouldInterrupt completionHandler:(void (^)(BOOL success))completionHandler {
+- (void)terminateUseInterrupt:(BOOL)useInterrupt completionHandler:(void (^)(BOOL success))completionHandler {
 
     __block BOOL didTerminate = NO;
     __block id observer;
@@ -44,7 +44,7 @@
         }
     });
     
-    if (shouldInterrupt) {
+    if (useInterrupt) {
         [self interrupt];
     } else {
         [self terminate];

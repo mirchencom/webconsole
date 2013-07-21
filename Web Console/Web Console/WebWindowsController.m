@@ -84,4 +84,13 @@
     return windows;
 }
 
+- (NSArray *)tasks
+{
+    NSMutableArray *tasks = [NSMutableArray array];
+    for (WebWindowController *webWindowController in self.webWindowControllers) {
+        [tasks addObjectsFromArray:webWindowController.tasks];
+    }
+    return tasks;
+}
+
 @end
