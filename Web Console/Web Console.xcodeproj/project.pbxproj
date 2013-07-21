@@ -44,6 +44,8 @@
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
 		45ADD9111739F257008A6AE7 /* WebWindowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD9101739F257008A6AE7 /* WebWindowsController.m */; };
+		45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */; };
+		45B375C6179B7517002BCEF6 /* UserInterfaceTextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */; };
 		45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F826421780F99100DD7DF6 /* WebView+Source.m */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +149,10 @@
 		45ADD90D1739EA58008A6AE7 /* WebWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebWindow.xib; sourceTree = "<group>"; };
 		45ADD90F1739F257008A6AE7 /* WebWindowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowsController.h; sourceTree = "<group>"; };
 		45ADD9101739F257008A6AE7 /* WebWindowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowsController.m; sourceTree = "<group>"; };
+		45B375C1179B3CA7002BCEF6 /* NSTask+Termination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTask+Termination.h"; sourceTree = "<group>"; };
+		45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Termination.m"; sourceTree = "<group>"; };
+		45B375C4179B7517002BCEF6 /* UserInterfaceTextHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInterfaceTextHelper.h; sourceTree = "<group>"; };
+		45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInterfaceTextHelper.m; sourceTree = "<group>"; };
 		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
 		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -282,6 +288,8 @@
 		4530B0D51736E2A6000A52E2 /* Web Console */ = {
 			isa = PBXGroup;
 			children = (
+				45B375C1179B3CA7002BCEF6 /* NSTask+Termination.h */,
+				45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */,
 				4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */,
 				4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */,
 				45898BB3178532EC00AE365A /* Plugin.h */,
@@ -302,6 +310,8 @@
 				45ADD90D1739EA58008A6AE7 /* WebWindow.xib */,
 				45ADD90F1739F257008A6AE7 /* WebWindowsController.h */,
 				45ADD9101739F257008A6AE7 /* WebWindowsController.m */,
+				45B375C4179B7517002BCEF6 /* UserInterfaceTextHelper.h */,
+				45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */,
 			);
 			path = "Web Console";
 			sourceTree = "<group>";
@@ -596,6 +606,8 @@
 				45898BB7178532EC00AE365A /* Plugin.m in Sources */,
 				45898BB8178532EC00AE365A /* PluginManager.m in Sources */,
 				4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */,
+				45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */,
+				45B375C6179B7517002BCEF6 /* UserInterfaceTextHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,6 +957,7 @@
 				4596C0651792316B005FC51A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

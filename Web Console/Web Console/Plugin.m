@@ -147,12 +147,16 @@
             NSLog(@"Removing a window");
             [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
         }
-        [webWindowController.tasks removeObject:task];        
+        [webWindowController.tasks removeObject:task];
+        
+        // As per NSTask.h, NSTaskDidTerminateNotification is not posted if a termination handler is set, so post it here.
+        [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
     }];
     
     NSLog(@"Starting task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
     [task launch];
 }
+
 #pragma mark - AppleScript
 
 - (void)run:(NSScriptCommand *)command

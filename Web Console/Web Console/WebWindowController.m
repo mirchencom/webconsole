@@ -10,6 +10,10 @@
 
 #import "WebWindowsController.h"
 
+#import "NSTask+Termination.h"
+
+#import "UserInterfaceTextHelper.h"
+
 @interface WebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
 @property (nonatomic, strong) void (^completionHandler)(BOOL success);
@@ -45,15 +49,51 @@
 
 #pragma mark - NSWindowDelegate
 
+- (BOOL)windowShouldClose:(id)sender {
+    if ([self.tasks count]) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Close"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText:@"Do you want to close this window?"];
+        
+        NSString *informativeText = [UserInterfaceTextHelper closeWindowWithTasksInformativeTextForTasks:self.tasks];
+        [alert setInformativeText:informativeText];
+        [alert beginSheetModalForWindow:self.window
+                          modalDelegate:self
+                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+                            contextInfo:NULL];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void)windowWillClose:(NSNotification *)notification {
-
     [[WebWindowsController sharedWebWindowsController] removeWebWindowController:self];
+}
 
-// TODO: Flesh this out, want to not close the window until all tasks are closed
+#pragma mark - modalDelegate
+
+- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    if (returnCode != NSAlertFirstButtonReturn) return;
+    
     for (NSTask *task in self.tasks) {
-        [task interrupt];
+        [task interruptWithCompletionHandler:^(BOOL success) {
+            if (!success) {
+#warning Terminate here
+            } else {
+                if (![self.tasks count]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.window close];
+                    });
+                }
+            }        
+        }];
     }
 }
+
+#pragma mark - WebPolicyDelegate
 
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
     NSURL *URL = [request URL];
