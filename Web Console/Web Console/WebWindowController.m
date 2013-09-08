@@ -10,13 +10,14 @@
 
 #import "WebWindowsController.h"
 
-#import "NSTask+Termination.h"
-
 #import "UserInterfaceTextHelper.h"
+
+#import "TaskHelper.h"
 
 @interface WebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
 @property (nonatomic, strong) void (^completionHandler)(BOOL success);
+- (void)terminateTasksAndCloseWindow;
 @end
 
 @implementation WebWindowController
@@ -77,29 +78,24 @@
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
     if (returnCode != NSAlertFirstButtonReturn) return;
-    
-    
-    void (^closeWindowBlock)() = ^void ()
-    {
+
+    [self terminateTasksAndCloseWindow];
+}
+
+- (void)terminateTasksAndCloseWindow
+{
+    [TaskHelper terminateTasks:self.tasks completionHandler:^(BOOL success) {
+        NSAssert(success, @"Terminating tasks should always succeed");
         if (![self.tasks count]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.window close];
             });
+        } else {
+            // Another task could have started while terminating the initial set of tasks
+            // so call again recursively
+            [self terminateTasksAndCloseWindow];
         }
-    };
-
-    for (NSTask *task in self.tasks) {
-        [task interruptWithCompletionHandler:^(BOOL success) {
-            if (!success) {
-                [task terminateWithCompletionHandler:^(BOOL success) {
-                    NSAssert(success, @"Terminating should always succeed");
-                    closeWindowBlock();
-                }];
-            } else {
-                closeWindowBlock();
-            }
-        }];
-    }
+    }];
 }
 
 #pragma mark - WebPolicyDelegate

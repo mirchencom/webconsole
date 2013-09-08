@@ -46,6 +46,7 @@
 		45ADD9111739F257008A6AE7 /* WebWindowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD9101739F257008A6AE7 /* WebWindowsController.m */; };
 		45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */; };
 		45B375C6179B7517002BCEF6 /* UserInterfaceTextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */; };
+		45B375C9179B8347002BCEF6 /* TaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C8179B8347002BCEF6 /* TaskHelper.m */; };
 		45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F826421780F99100DD7DF6 /* WebView+Source.m */; };
 /* End PBXBuildFile section */
 
@@ -153,6 +154,8 @@
 		45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Termination.m"; sourceTree = "<group>"; };
 		45B375C4179B7517002BCEF6 /* UserInterfaceTextHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInterfaceTextHelper.h; sourceTree = "<group>"; };
 		45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInterfaceTextHelper.m; sourceTree = "<group>"; };
+		45B375C7179B8347002BCEF6 /* TaskHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHelper.h; sourceTree = "<group>"; };
+		45B375C8179B8347002BCEF6 /* TaskHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHelper.m; sourceTree = "<group>"; };
 		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
 		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -312,6 +315,8 @@
 				45ADD9101739F257008A6AE7 /* WebWindowsController.m */,
 				45B375C4179B7517002BCEF6 /* UserInterfaceTextHelper.h */,
 				45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */,
+				45B375C7179B8347002BCEF6 /* TaskHelper.h */,
+				45B375C8179B8347002BCEF6 /* TaskHelper.m */,
 			);
 			path = "Web Console";
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */,
 				45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */,
 				45B375C6179B7517002BCEF6 /* UserInterfaceTextHelper.m in Sources */,
+				45B375C9179B8347002BCEF6 /* TaskHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

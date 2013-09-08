@@ -12,9 +12,7 @@
 
 #import "WebWindowsController.h"
 
-@interface AppDelegate ()
-- (NSArray *)tasks;
-@end
+#import "TaskHelper.h"
 
 @implementation AppDelegate
 
@@ -25,19 +23,27 @@
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
-    NSLog(@"shouldTerminate");
 
     NSArray *tasks = [[WebWindowsController sharedWebWindowsController] tasks];
+    
     if (![tasks count]) return NSTerminateNow;
     
-    return NSTerminateNow;
+    [AppDelegate terminateTasksAndReplyToApplicationShouldTerminate:tasks];
+    
+    return NSTerminateLater;
 }
 
-
-- (NSArray *)tasks {
-    [[WebWindowsController sharedWebWindowsController] tasks];
-    
-    return nil;
++ (void)terminateTasksAndReplyToApplicationShouldTerminate:(NSArray *)tasks
+{
+    [TaskHelper terminateTasks:tasks completionHandler:^(BOOL sucess) {
+        NSAssert(sucess, @"Terminating tasks should always succeed");
+        NSArray *tasks = [[WebWindowsController sharedWebWindowsController] tasks];
+        if(![tasks count]) {
+            [NSApp replyToApplicationShouldTerminate:YES];
+        } else {
+            [AppDelegate terminateTasksAndReplyToApplicationShouldTerminate:tasks];
+        }
+    }];
 }
 
 @end
