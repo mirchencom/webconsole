@@ -14,7 +14,7 @@
 #define kWebWindowNibName @"WebWindow"
 
 @interface WebWindowsController ()
-@property (nonatomic, strong) NSMutableArray *webWindowControllers;
+@property (nonatomic, strong) NSMutableArray *mutableWebWindowControllers;
 @end
 
 @implementation WebWindowsController
@@ -32,10 +32,15 @@
 {
     self = [super init];
     if (self) {
-        _webWindowControllers = [[NSMutableArray alloc] init];
+        _mutableWebWindowControllers = [[NSMutableArray alloc] init];
     }
     
     return self;
+}
+
+- (NSArray *)webWindowControllers
+{
+    return [self.mutableWebWindowControllers copy];
 }
 
 - (WebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin
@@ -51,20 +56,20 @@
 
     [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
     
-    [self.webWindowControllers addObject:webWindowController];
+    [self.mutableWebWindowControllers addObject:webWindowController];
     
     return webWindowController;
 }
 
 - (void)removeWebWindowController:(WebWindowController *)webWindowController
 {
-    [self.webWindowControllers removeObject:webWindowController];
+    [self.mutableWebWindowControllers removeObject:webWindowController];
 }
 
 - (NSArray *)webWindowControllersForPlugin:(Plugin *)plugin
 {
     NSPredicate *pluginPredicate = [NSPredicate predicateWithFormat:@"(plugin = %@)", plugin];
-    return [self.webWindowControllers filteredArrayUsingPredicate:pluginPredicate];
+    return [self.mutableWebWindowControllers filteredArrayUsingPredicate:pluginPredicate];
 }
 
 - (NSArray *)windowsForPlugin:(Plugin *)plugin
@@ -87,7 +92,7 @@
 - (NSArray *)tasks
 {
     NSMutableArray *tasks = [NSMutableArray array];
-    for (WebWindowController *webWindowController in self.webWindowControllers) {
+    for (WebWindowController *webWindowController in self.mutableWebWindowControllers) {
         [tasks addObjectsFromArray:webWindowController.tasks];
     }
     return tasks;

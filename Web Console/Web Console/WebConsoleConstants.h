@@ -19,3 +19,4 @@
 #define kEnvironmentVariablePluginDirectoryKey @"PLUGIN_DIRECTORY"
 
 #define kTaskInterruptTimeout 1.0
+#define kApplicationTerminationTimeout 60.0

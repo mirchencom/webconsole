@@ -28,6 +28,7 @@
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		455B0BFE176FF592007B75DD /* LoadHTMLCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* LoadHTMLCommand.m */; };
 		455B0C0A1771627A007B75DD /* DoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* DoJavaScriptCommand.m */; };
+		4574725817DCCD8500AFD1D9 /* ApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* ApplicationTerminationHelper.m */; };
 		45898B9D1785302D00AE365A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		45898BA31785302D00AE365A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45898BA11785302D00AE365A /* InfoPlist.strings */; };
 		45898BA91785306100AE365A /* Ack.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B9C1785302C00AE365A /* Ack.bundle */; };
@@ -127,6 +128,8 @@
 		455B0C081771627A007B75DD /* DoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoJavaScriptCommand.h; sourceTree = "<group>"; };
 		455B0C091771627A007B75DD /* DoJavaScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoJavaScriptCommand.m; sourceTree = "<group>"; };
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
+		4574725617DCCD8500AFD1D9 /* ApplicationTerminationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationTerminationHelper.h; sourceTree = "<group>"; };
+		4574725717DCCD8500AFD1D9 /* ApplicationTerminationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationTerminationHelper.m; sourceTree = "<group>"; };
 		45898B9C1785302C00AE365A /* Ack.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ack.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		45898BA01785302D00AE365A /* Ack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ack-Info.plist"; sourceTree = "<group>"; };
 		45898BA21785302D00AE365A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -317,6 +320,8 @@
 				45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */,
 				45B375C7179B8347002BCEF6 /* TaskHelper.h */,
 				45B375C8179B8347002BCEF6 /* TaskHelper.m */,
+				4574725617DCCD8500AFD1D9 /* ApplicationTerminationHelper.h */,
+				4574725717DCCD8500AFD1D9 /* ApplicationTerminationHelper.m */,
 			);
 			path = "Web Console";
 			sourceTree = "<group>";
@@ -614,6 +619,7 @@
 				45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */,
 				45B375C6179B7517002BCEF6 /* UserInterfaceTextHelper.m in Sources */,
 				45B375C9179B8347002BCEF6 /* TaskHelper.m in Sources */,
+				4574725817DCCD8500AFD1D9 /* ApplicationTerminationHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

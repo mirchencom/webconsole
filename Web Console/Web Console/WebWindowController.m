@@ -51,7 +51,7 @@
 #pragma mark - NSWindowDelegate
 
 - (BOOL)windowShouldClose:(id)sender {
-    if ([self.tasks count]) {
+    if ([self hasTasks]) {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"Close"];
         [alert addButtonWithTitle:@"Cancel"];
@@ -86,7 +86,7 @@
 {
     [TaskHelper terminateTasks:self.tasks completionHandler:^(BOOL success) {
         NSAssert(success, @"Terminating tasks should always succeed");
-        if (![self.tasks count]) {
+        if (![self hasTasks]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.window close];
             });
@@ -140,10 +140,16 @@
 
 #pragma mark - Tasks
 
-- (NSArray *)tasks {
+- (NSArray *)tasks
+{
     if (_tasks) return _tasks;    
     _tasks = [NSMutableArray array];
     return _tasks;
+}
+
+- (BOOL)hasTasks
+{
+    return [self.tasks count] > 0;
 }
 
 @end

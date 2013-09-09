@@ -16,6 +16,7 @@
 - (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler;
 - (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler;
 - (NSString *)doJavaScript:(NSString *)javaScript;
+- (BOOL)hasTasks;
 @property (nonatomic, strong) NSMutableArray *tasks;
 @property (nonatomic, strong) Plugin *plugin;
 @end

@@ -14,6 +14,8 @@
 
 #import "TaskHelper.h"
 
+#import "ApplicationTerminationHelper.h"
+
 @implementation AppDelegate
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
@@ -24,26 +26,10 @@
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 
-    NSArray *tasks = [[WebWindowsController sharedWebWindowsController] tasks];
-    
-    if (![tasks count]) return NSTerminateNow;
-    
-    [AppDelegate terminateTasksAndReplyToApplicationShouldTerminate:tasks];
+    if ([ApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks]) return NSTerminateNow;
     
     return NSTerminateLater;
-}
 
-+ (void)terminateTasksAndReplyToApplicationShouldTerminate:(NSArray *)tasks
-{
-    [TaskHelper terminateTasks:tasks completionHandler:^(BOOL sucess) {
-        NSAssert(sucess, @"Terminating tasks should always succeed");
-        NSArray *tasks = [[WebWindowsController sharedWebWindowsController] tasks];
-        if(![tasks count]) {
-            [NSApp replyToApplicationShouldTerminate:YES];
-        } else {
-            [AppDelegate terminateTasksAndReplyToApplicationShouldTerminate:tasks];
-        }
-    }];
 }
 
 @end
