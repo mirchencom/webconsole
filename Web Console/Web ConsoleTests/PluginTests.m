@@ -51,19 +51,24 @@
 {
     Plugin *noWindowTestPlugin = [[PluginManager sharedPluginManager] pluginWithName:@"NoWindowTest"];
 
+    Plugin *noWindowTestPlugin2 = [[PluginManager sharedPluginManager] pluginWithName:@"NoWindowTest"];
+    
+    
     [noWindowTestPlugin runWithArguments:nil inDirectoryPath:nil];
+
+
+    
+    [noWindowTestPlugin2 runWithArguments:nil inDirectoryPath:nil];
+
+    // TODO: Analyze windows here
+    
+    
+    NSLog(@"Break");
+
+    // TODO: When the tasks finish, the window should be removed
 }
 
-//+ (WebWindowController *)webWindowControllerForWindowWithWindowNumber:(NSInteger)windowNumber {
-//    WebWindowController *webWindowController;
-//    for (NSWindow *aWindow in [[NSApplication sharedApplication] windows]) {
-//        if ([aWindow windowNumber] == windowNumber) {
-//            webWindowController = (WebWindowController *)[aWindow windowController];
-//            break;
-//        }
-//    }
-//    return webWindowController;
-//}
 
+// TODO: Create a plugin just like the above, but have it create two visible windows, analyze the webWindowNumbers
 
 @end

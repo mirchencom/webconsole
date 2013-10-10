@@ -86,13 +86,8 @@
 
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath
 {
-
     // Configuration
     NSString *commandPath = [self commandPath];
-    
-    NSLog(@"arguments = %@", arguments);
-    NSLog(@"directoryPath = %@", directoryPath);
-    NSLog(@"commandPath = %@", commandPath);
     
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
@@ -135,7 +130,7 @@
     
     // Termination handler
     [task setTerminationHandler:^(NSTask *task) {
-        NSLog(@"Ending task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
+        NSLog(@"Ending task webWindowController %@, window %@, windowNumber %ld", webWindowController, webWindowController.window, (long)webWindowController.window.windowNumber);
         
         // Standard Input, Output & Error
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
@@ -153,7 +148,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
     }];
     
-    NSLog(@"Starting task webWindowController.window.windowNumber = %ld", (long)webWindowController.window.windowNumber);
+    NSLog(@"Starting task webWindowController %@, window %@, windowNumber %ld", webWindowController, webWindowController.window, (long)webWindowController.window.windowNumber);
     [task launch];
 }
 
@@ -177,11 +172,6 @@
 	NSDictionary *argumentsDictionary = [command evaluatedArguments];
     NSString *text = [argumentsDictionary objectForKey:kTextKey];
 
-NSLog(@"text = %@", text);
-    
-    
-//	NSDictionary *argumentsDictionary = [command evaluatedArguments];
-
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
     
     if (![webWindowControllers count]) return;
@@ -194,28 +184,7 @@ NSLog(@"text = %@", text);
 
     NSPipe *pipe = (NSPipe *)task.standardInput;
 
-
-// TODO: Make it work
-NSLog(@"pipe.fileHandleForWriting = %@", pipe.fileHandleForWriting);
-NSLog(@"text ready to write = %@", text);
     [pipe.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
-
-//    [self performSelector:@selector(endIt:) withObject:nil afterDelay:2.0];
 }
-
-//- (void)endIt:(id)sender {
-//    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
-//    
-//    if (![webWindowControllers count]) return;
-//    
-//    WebWindowController *webWindowController = webWindowControllers[0];
-//    
-//    if (![webWindowController.tasks count]) return;
-//    
-//    NSTask *task = webWindowController.tasks[0];
-//
-//    [task interrupt];
-//}
-
 
 @end

@@ -12,7 +12,6 @@
 @class Plugin;
 
 @interface WebWindowsController : NSObject
-
 + (id)sharedWebWindowsController;
 - (WebWindowController *)addedWebWindowController;
 - (WebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin;
