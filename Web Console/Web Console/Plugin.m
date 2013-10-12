@@ -89,6 +89,8 @@
     // Configuration
     NSString *commandPath = [self commandPath];
     
+    NSLog(@"commandPath = %@", commandPath);
+    
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
     

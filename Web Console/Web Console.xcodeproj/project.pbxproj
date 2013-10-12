@@ -41,6 +41,8 @@
 		4596C06717923187005FC51A /* IRB.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4596C05B1792316B005FC51A /* IRB.bundle */; };
 		4596C06A179246CF005FC51A /* wcirb in Resources */ = {isa = PBXBuildFile; fileRef = 4596C068179231C3005FC51A /* wcirb */; };
 		4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */; };
+		459B2BBD1809D5EE00830DF3 /* TestWindow.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45B4330018081F0800ED8665 /* TestWindow.bundle */; };
+		459B2BBF1809D6CF00830DF3 /* script in Resources */ = {isa = PBXBuildFile; fileRef = 459B2BBE1809D6CF00830DF3 /* script */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
@@ -77,6 +79,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				459B2BBD1809D5EE00830DF3 /* TestWindow.bundle in CopyFiles */,
 				452E2F881788F7E800EAD55B /* TestNoWindow.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +152,7 @@
 		4596C068179231C3005FC51A /* wcirb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcirb; sourceTree = "<group>"; };
 		4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+AppleScript.h"; sourceTree = "<group>"; };
 		4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+AppleScript.m"; sourceTree = "<group>"; };
+		459B2BBE1809D6CF00830DF3 /* script */ = {isa = PBXFileReference; lastKnownFileType = folder; path = script; sourceTree = "<group>"; };
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowController.m; sourceTree = "<group>"; };
@@ -161,10 +165,10 @@
 		45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInterfaceTextHelper.m; sourceTree = "<group>"; };
 		45B375C7179B8347002BCEF6 /* TaskHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHelper.h; sourceTree = "<group>"; };
 		45B375C8179B8347002BCEF6 /* TaskHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHelper.m; sourceTree = "<group>"; };
-		45B4330018081F0800ED8665 /* WindowTest.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WindowTest.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		45B4330418081F0800ED8665 /* WindowTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WindowTest-Info.plist"; sourceTree = "<group>"; };
+		45B4330018081F0800ED8665 /* TestWindow.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestWindow.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		45B4330418081F0800ED8665 /* TestWindow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TestWindow-Info.plist"; sourceTree = "<group>"; };
 		45B4330618081F0800ED8665 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		45B4330818081F0800ED8665 /* WindowTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WindowTest-Prefix.pch"; sourceTree = "<group>"; };
+		45B4330818081F0800ED8665 /* TestWindow-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestWindow-Prefix.pch"; sourceTree = "<group>"; };
 		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
 		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,6 +259,7 @@
 		452E2F8A1789C7B800EAD55B /* Test Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				45B4330218081F0800ED8665 /* TestWindow */,
 				452E2F7B1788F62500EAD55B /* TestNoWindow */,
 			);
 			name = "Test Plugins";
@@ -267,7 +272,6 @@
 				4530B0F21736E2A6000A52E2 /* Web ConsoleTests */,
 				452E2F891789C79300EAD55B /* Plugins */,
 				452E2F8A1789C7B800EAD55B /* Test Plugins */,
-				45B4330218081F0800ED8665 /* WindowTest */,
 				4530B0CE1736E2A6000A52E2 /* Frameworks */,
 				4530B0CD1736E2A6000A52E2 /* Products */,
 			);
@@ -281,7 +285,7 @@
 				45898B9C1785302C00AE365A /* Ack.bundle */,
 				452E2F791788F62500EAD55B /* TestNoWindow.bundle */,
 				4596C05B1792316B005FC51A /* IRB.bundle */,
-				45B4330018081F0800ED8665 /* WindowTest.bundle */,
+				45B4330018081F0800ED8665 /* TestWindow.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -420,20 +424,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		45B4330218081F0800ED8665 /* WindowTest */ = {
+		45B4330218081F0800ED8665 /* TestWindow */ = {
 			isa = PBXGroup;
 			children = (
+				459B2BBE1809D6CF00830DF3 /* script */,
 				45B4330318081F0800ED8665 /* Supporting Files */,
 			);
-			path = WindowTest;
+			path = TestWindow;
 			sourceTree = "<group>";
 		};
 		45B4330318081F0800ED8665 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				45B4330418081F0800ED8665 /* WindowTest-Info.plist */,
+				45B4330418081F0800ED8665 /* TestWindow-Info.plist */,
 				45B4330518081F0800ED8665 /* InfoPlist.strings */,
-				45B4330818081F0800ED8665 /* WindowTest-Prefix.pch */,
+				45B4330818081F0800ED8665 /* TestWindow-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -531,9 +536,9 @@
 			productReference = 4596C05B1792316B005FC51A /* IRB.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		45B432FF18081F0800ED8665 /* WindowTest */ = {
+		45B432FF18081F0800ED8665 /* TestWindow */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45B4330B18081F0800ED8665 /* Build configuration list for PBXNativeTarget "WindowTest" */;
+			buildConfigurationList = 45B4330B18081F0800ED8665 /* Build configuration list for PBXNativeTarget "TestWindow" */;
 			buildPhases = (
 				45B432FC18081F0800ED8665 /* Sources */,
 				45B432FD18081F0800ED8665 /* Frameworks */,
@@ -543,9 +548,9 @@
 			);
 			dependencies = (
 			);
-			name = WindowTest;
-			productName = WindowTest;
-			productReference = 45B4330018081F0800ED8665 /* WindowTest.bundle */;
+			name = TestWindow;
+			productName = TestWindow;
+			productReference = 45B4330018081F0800ED8665 /* TestWindow.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -574,7 +579,7 @@
 				45898B9B1785302C00AE365A /* Ack */,
 				452E2F781788F62500EAD55B /* TestNoWindow */,
 				4596C05A1792316B005FC51A /* IRB */,
-				45B432FF18081F0800ED8665 /* WindowTest */,
+				45B432FF18081F0800ED8665 /* TestWindow */,
 			);
 		};
 /* End PBXProject section */
@@ -634,6 +639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B4330718081F0800ED8665 /* InfoPlist.strings in Resources */,
+				459B2BBF1809D6CF00830DF3 /* script in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -995,7 +1001,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WindowTest/WindowTest-Prefix.pch";
+				GCC_PREFIX_HEADER = "TestWindow/TestWindow-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1003,7 +1009,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "WindowTest/WindowTest-Info.plist";
+				INFOPLIST_FILE = "TestWindow/TestWindow-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -1019,11 +1025,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "WindowTest/WindowTest-Prefix.pch";
+				GCC_PREFIX_HEADER = "TestWindow/TestWindow-Prefix.pch";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "WindowTest/WindowTest-Info.plist";
+				INFOPLIST_FILE = "TestWindow/TestWindow-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -1087,13 +1093,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45B4330B18081F0800ED8665 /* Build configuration list for PBXNativeTarget "WindowTest" */ = {
+		45B4330B18081F0800ED8665 /* Build configuration list for PBXNativeTarget "TestWindow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45B4330918081F0800ED8665 /* Debug */,
 				45B4330A18081F0800ED8665 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

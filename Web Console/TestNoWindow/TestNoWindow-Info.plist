@@ -25,7 +25,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 Roben Kleene. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string>TestNoWindow</string>
+	<string>Plugin</string>
 	<key>Command</key>
 	<string>script/run.sh</string>
 	<key>Name</key>

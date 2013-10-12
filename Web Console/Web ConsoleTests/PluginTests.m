@@ -69,6 +69,24 @@
 }
 
 
-// TODO: Create a plugin just like the above, but have it create two visible windows, analyze the webWindowNumbers
-
+- (void)testTestWindow
+{
+    Plugin *testWindowPlugin = [[PluginManager sharedPluginManager] pluginWithName:@"TestWindow"];
+    
+    Plugin *testWindowPlugin2 = [[PluginManager sharedPluginManager] pluginWithName:@"TestWindow"];
+    
+    
+    [testWindowPlugin runWithArguments:nil inDirectoryPath:nil];
+    
+    
+    
+    [testWindowPlugin2 runWithArguments:nil inDirectoryPath:nil];
+    
+    // TODO: Analyze windows here
+    
+    
+    NSLog(@"Break");
+    
+    // TODO: When the tasks finish, the window should be removed
+}
 @end
