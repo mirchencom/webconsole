@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'Shellwords'
 require 'webconsole'
 
 BASE_DIRECTORY = File.join(File.dirname(__FILE__))
