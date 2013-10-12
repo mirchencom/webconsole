@@ -12,7 +12,7 @@
 		452E2F741788F3E000EAD55B /* PluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 452E2F731788F3E000EAD55B /* PluginTests.m */; };
 		452E2F7A1788F62500EAD55B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		452E2F801788F62500EAD55B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 452E2F7E1788F62500EAD55B /* InfoPlist.strings */; };
-		452E2F881788F7E800EAD55B /* NoWindowTest.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 452E2F791788F62500EAD55B /* NoWindowTest.bundle */; };
+		452E2F881788F7E800EAD55B /* TestNoWindow.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 452E2F791788F62500EAD55B /* TestNoWindow.bundle */; };
 		452E2F8D1789D30D00EAD55B /* Ack-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45898BA01785302D00AE365A /* Ack-Info.plist */; };
 		452E2F8E1789D42F00EAD55B /* script in Resources */ = {isa = PBXBuildFile; fileRef = 452E2F8B1789D2FE00EAD55B /* script */; };
 		4530B0D01736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
@@ -48,6 +48,8 @@
 		45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */; };
 		45B375C6179B7517002BCEF6 /* UserInterfaceTextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */; };
 		45B375C9179B8347002BCEF6 /* TaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C8179B8347002BCEF6 /* TaskHelper.m */; };
+		45B4330118081F0800ED8665 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
+		45B4330718081F0800ED8665 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45B4330518081F0800ED8665 /* InfoPlist.strings */; };
 		45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F826421780F99100DD7DF6 /* WebView+Source.m */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +59,7 @@
 			containerPortal = 4530B0C41736E2A6000A52E2 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 452E2F781788F62500EAD55B;
-			remoteInfo = NoWindowTest;
+			remoteInfo = TestNoWindow;
 		};
 		4530B0F01736E2A6000A52E2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -75,7 +77,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				452E2F881788F7E800EAD55B /* NoWindowTest.bundle in CopyFiles */,
+				452E2F881788F7E800EAD55B /* TestNoWindow.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,10 +100,10 @@
 		451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_ConsoleTestsConstants.h; sourceTree = "<group>"; };
 		452E2F721788F3E000EAD55B /* PluginTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginTests.h; sourceTree = "<group>"; };
 		452E2F731788F3E000EAD55B /* PluginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginTests.m; sourceTree = "<group>"; };
-		452E2F791788F62500EAD55B /* NoWindowTest.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoWindowTest.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		452E2F7D1788F62500EAD55B /* NoWindowTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NoWindowTest-Info.plist"; sourceTree = "<group>"; };
+		452E2F791788F62500EAD55B /* TestNoWindow.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestNoWindow.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		452E2F7D1788F62500EAD55B /* TestNoWindow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TestNoWindow-Info.plist"; sourceTree = "<group>"; };
 		452E2F7F1788F62500EAD55B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		452E2F811788F62500EAD55B /* NoWindowTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NoWindowTest-Prefix.pch"; sourceTree = "<group>"; };
+		452E2F811788F62500EAD55B /* TestNoWindow-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestNoWindow-Prefix.pch"; sourceTree = "<group>"; };
 		452E2F8B1789D2FE00EAD55B /* script */ = {isa = PBXFileReference; lastKnownFileType = folder; path = script; sourceTree = "<group>"; };
 		4530B0CC1736E2A6000A52E2 /* Web Console.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Web Console.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0CF1736E2A6000A52E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -159,6 +161,10 @@
 		45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInterfaceTextHelper.m; sourceTree = "<group>"; };
 		45B375C7179B8347002BCEF6 /* TaskHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHelper.h; sourceTree = "<group>"; };
 		45B375C8179B8347002BCEF6 /* TaskHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHelper.m; sourceTree = "<group>"; };
+		45B4330018081F0800ED8665 /* WindowTest.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WindowTest.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		45B4330418081F0800ED8665 /* WindowTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WindowTest-Info.plist"; sourceTree = "<group>"; };
+		45B4330618081F0800ED8665 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45B4330818081F0800ED8665 /* WindowTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WindowTest-Prefix.pch"; sourceTree = "<group>"; };
 		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
 		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,24 +213,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B432FD18081F0800ED8665 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B4330118081F0800ED8665 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		452E2F7B1788F62500EAD55B /* NoWindowTest */ = {
+		452E2F7B1788F62500EAD55B /* TestNoWindow */ = {
 			isa = PBXGroup;
 			children = (
 				452E2F8B1789D2FE00EAD55B /* script */,
 				452E2F7C1788F62500EAD55B /* Supporting Files */,
 			);
-			path = NoWindowTest;
+			path = TestNoWindow;
 			sourceTree = "<group>";
 		};
 		452E2F7C1788F62500EAD55B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				452E2F7D1788F62500EAD55B /* NoWindowTest-Info.plist */,
+				452E2F7D1788F62500EAD55B /* TestNoWindow-Info.plist */,
 				452E2F7E1788F62500EAD55B /* InfoPlist.strings */,
-				452E2F811788F62500EAD55B /* NoWindowTest-Prefix.pch */,
+				452E2F811788F62500EAD55B /* TestNoWindow-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -241,7 +255,7 @@
 		452E2F8A1789C7B800EAD55B /* Test Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				452E2F7B1788F62500EAD55B /* NoWindowTest */,
+				452E2F7B1788F62500EAD55B /* TestNoWindow */,
 			);
 			name = "Test Plugins";
 			sourceTree = "<group>";
@@ -253,6 +267,7 @@
 				4530B0F21736E2A6000A52E2 /* Web ConsoleTests */,
 				452E2F891789C79300EAD55B /* Plugins */,
 				452E2F8A1789C7B800EAD55B /* Test Plugins */,
+				45B4330218081F0800ED8665 /* WindowTest */,
 				4530B0CE1736E2A6000A52E2 /* Frameworks */,
 				4530B0CD1736E2A6000A52E2 /* Products */,
 			);
@@ -264,8 +279,9 @@
 				4530B0CC1736E2A6000A52E2 /* Web Console.app */,
 				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.octest */,
 				45898B9C1785302C00AE365A /* Ack.bundle */,
-				452E2F791788F62500EAD55B /* NoWindowTest.bundle */,
+				452E2F791788F62500EAD55B /* TestNoWindow.bundle */,
 				4596C05B1792316B005FC51A /* IRB.bundle */,
+				45B4330018081F0800ED8665 /* WindowTest.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -404,12 +420,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		45B4330218081F0800ED8665 /* WindowTest */ = {
+			isa = PBXGroup;
+			children = (
+				45B4330318081F0800ED8665 /* Supporting Files */,
+			);
+			path = WindowTest;
+			sourceTree = "<group>";
+		};
+		45B4330318081F0800ED8665 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				45B4330418081F0800ED8665 /* WindowTest-Info.plist */,
+				45B4330518081F0800ED8665 /* InfoPlist.strings */,
+				45B4330818081F0800ED8665 /* WindowTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		452E2F781788F62500EAD55B /* NoWindowTest */ = {
+		452E2F781788F62500EAD55B /* TestNoWindow */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 452E2F821788F62500EAD55B /* Build configuration list for PBXNativeTarget "NoWindowTest" */;
+			buildConfigurationList = 452E2F821788F62500EAD55B /* Build configuration list for PBXNativeTarget "TestNoWindow" */;
 			buildPhases = (
 				452E2F751788F62500EAD55B /* Sources */,
 				452E2F761788F62500EAD55B /* Frameworks */,
@@ -419,9 +453,9 @@
 			);
 			dependencies = (
 			);
-			name = NoWindowTest;
-			productName = NoWindowTest;
-			productReference = 452E2F791788F62500EAD55B /* NoWindowTest.bundle */;
+			name = TestNoWindow;
+			productName = TestNoWindow;
+			productReference = 452E2F791788F62500EAD55B /* TestNoWindow.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		4530B0CB1736E2A6000A52E2 /* Web Console */ = {
@@ -497,6 +531,23 @@
 			productReference = 4596C05B1792316B005FC51A /* IRB.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		45B432FF18081F0800ED8665 /* WindowTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45B4330B18081F0800ED8665 /* Build configuration list for PBXNativeTarget "WindowTest" */;
+			buildPhases = (
+				45B432FC18081F0800ED8665 /* Sources */,
+				45B432FD18081F0800ED8665 /* Frameworks */,
+				45B432FE18081F0800ED8665 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WindowTest;
+			productName = WindowTest;
+			productReference = 45B4330018081F0800ED8665 /* WindowTest.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -521,8 +572,9 @@
 				4530B0CB1736E2A6000A52E2 /* Web Console */,
 				4530B0EB1736E2A6000A52E2 /* Web ConsoleTests */,
 				45898B9B1785302C00AE365A /* Ack */,
-				452E2F781788F62500EAD55B /* NoWindowTest */,
+				452E2F781788F62500EAD55B /* TestNoWindow */,
 				4596C05A1792316B005FC51A /* IRB */,
+				45B432FF18081F0800ED8665 /* WindowTest */,
 			);
 		};
 /* End PBXProject section */
@@ -574,6 +626,14 @@
 			files = (
 				4596C0621792316B005FC51A /* InfoPlist.strings in Resources */,
 				4596C06A179246CF005FC51A /* wcirb in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45B432FE18081F0800ED8665 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B4330718081F0800ED8665 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,12 +708,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B432FC18081F0800ED8665 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		452E2F861788F7C200EAD55B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 452E2F781788F62500EAD55B /* NoWindowTest */;
+			target = 452E2F781788F62500EAD55B /* TestNoWindow */;
 			targetProxy = 452E2F851788F7C200EAD55B /* PBXContainerItemProxy */;
 		};
 		4530B0F11736E2A6000A52E2 /* PBXTargetDependency */ = {
@@ -720,6 +787,14 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		45B4330518081F0800ED8665 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45B4330618081F0800ED8665 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -728,8 +803,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NoWindowTest/NoWindowTest-Prefix.pch";
-				INFOPLIST_FILE = "NoWindowTest/NoWindowTest-Info.plist";
+				GCC_PREFIX_HEADER = "TestNoWindow/TestNoWindow-Prefix.pch";
+				INFOPLIST_FILE = "TestNoWindow/TestNoWindow-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -741,8 +816,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NoWindowTest/NoWindowTest-Prefix.pch";
-				INFOPLIST_FILE = "NoWindowTest/NoWindowTest-Info.plist";
+				GCC_PREFIX_HEADER = "TestNoWindow/TestNoWindow-Prefix.pch";
+				INFOPLIST_FILE = "TestNoWindow/TestNoWindow-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -912,10 +987,53 @@
 			};
 			name = Release;
 		};
+		45B4330918081F0800ED8665 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WindowTest/WindowTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "WindowTest/WindowTest-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		45B4330A18081F0800ED8665 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WindowTest/WindowTest-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "WindowTest/WindowTest-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		452E2F821788F62500EAD55B /* Build configuration list for PBXNativeTarget "NoWindowTest" */ = {
+		452E2F821788F62500EAD55B /* Build configuration list for PBXNativeTarget "TestNoWindow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				452E2F831788F62500EAD55B /* Debug */,
@@ -968,6 +1086,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		45B4330B18081F0800ED8665 /* Build configuration list for PBXNativeTarget "WindowTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45B4330918081F0800ED8665 /* Debug */,
+				45B4330A18081F0800ED8665 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

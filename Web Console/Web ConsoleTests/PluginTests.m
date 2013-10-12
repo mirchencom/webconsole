@@ -47,18 +47,18 @@
     }
 }
 
-- (void)testNoWindowTest
+- (void)testTestNoWindow
 {
-    Plugin *noWindowTestPlugin = [[PluginManager sharedPluginManager] pluginWithName:@"NoWindowTest"];
+    Plugin *testNoWindowPlugin = [[PluginManager sharedPluginManager] pluginWithName:@"TestNoWindow"];
 
-    Plugin *noWindowTestPlugin2 = [[PluginManager sharedPluginManager] pluginWithName:@"NoWindowTest"];
+    Plugin *testNoWindowPlugin2 = [[PluginManager sharedPluginManager] pluginWithName:@"TestNoWindow"];
     
     
-    [noWindowTestPlugin runWithArguments:nil inDirectoryPath:nil];
+    [testNoWindowPlugin runWithArguments:nil inDirectoryPath:nil];
 
 
     
-    [noWindowTestPlugin2 runWithArguments:nil inDirectoryPath:nil];
+    [testNoWindowPlugin2 runWithArguments:nil inDirectoryPath:nil];
 
     // TODO: Analyze windows here
     

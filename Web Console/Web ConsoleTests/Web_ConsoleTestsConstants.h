@@ -38,4 +38,4 @@
 
 #define kAllPlugins [kPlugins arrayByAddingObjectsFromArray:kTestPlugins]
 #define kPlugins @[@"Ack"]
-#define kTestPlugins @[@"NoWindowTest"]
+#define kTestPlugins @[@"TestNoWindow"]
