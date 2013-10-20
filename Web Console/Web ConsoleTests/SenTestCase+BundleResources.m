@@ -8,7 +8,7 @@
 
 #import "SenTestCase+BundleResources.h"
 
-@implementation SenTestCase (BundleResources)
+@implementation XCTestCase (BundleResources)
 
 - (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory {
     NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:name

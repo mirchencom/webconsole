@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface SenTestCase (BundleResources)
+@interface XCTestCase (BundleResources)
 
 - (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory;
 - (NSString *)stringWithContentsOfFileURL:(NSURL *)fileURL;

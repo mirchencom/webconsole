@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface WebWindowControllerTests : SenTestCase
+@interface WebWindowControllerTests : XCTestCase
 
 @end

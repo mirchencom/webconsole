@@ -15,7 +15,6 @@
 		4530B0E01736E2A6000A52E2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0DE1736E2A6000A52E2 /* Credits.rtf */; };
 		4530B0E31736E2A6000A52E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0E21736E2A6000A52E2 /* AppDelegate.m */; };
 		4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0E41736E2A6000A52E2 /* MainMenu.xib */; };
-		4530B0EE1736E2A6000A52E2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0ED1736E2A6000A52E2 /* SenTestingKit.framework */; };
 		4530B0EF1736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0F51736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B0FA1736E2A6000A52E2 /* WebWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0F91736E2A6000A52E2 /* WebWindowControllerTests.m */; };
@@ -42,6 +41,7 @@
 		45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */; };
 		45B375C6179B7517002BCEF6 /* UserInterfaceTextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */; };
 		45B375C9179B8347002BCEF6 /* TaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C8179B8347002BCEF6 /* TaskHelper.m */; };
+		45B81480181483400006AA05 /* PluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8147F181483400006AA05 /* PluginTests.m */; };
 		45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F826421780F99100DD7DF6 /* WebView+Source.m */; };
 /* End PBXBuildFile section */
 
@@ -95,8 +95,7 @@
 		4530B0E11736E2A6000A52E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4530B0E21736E2A6000A52E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4530B0E51736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Web ConsoleTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4530B0ED1736E2A6000A52E2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Web ConsoleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0F41736E2A6000A52E2 /* Web ConsoleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Web ConsoleTests-Info.plist"; sourceTree = "<group>"; };
 		4530B0F61736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4530B0F81736E2A6000A52E2 /* WebWindowControllerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebWindowControllerTests.h; sourceTree = "<group>"; };
@@ -138,6 +137,7 @@
 		45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInterfaceTextHelper.m; sourceTree = "<group>"; };
 		45B375C7179B8347002BCEF6 /* TaskHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHelper.h; sourceTree = "<group>"; };
 		45B375C8179B8347002BCEF6 /* TaskHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHelper.m; sourceTree = "<group>"; };
+		45B8147F181483400006AA05 /* PluginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginTests.m; sourceTree = "<group>"; };
 		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
 		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,7 +157,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4502BCE3177D159900F0A5C2 /* WebKit.framework in Frameworks */,
-				4530B0EE1736E2A6000A52E2 /* SenTestingKit.framework in Frameworks */,
 				4530B0EF1736E2A6000A52E2 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,7 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				4530B0CC1736E2A6000A52E2 /* Web Console.app */,
-				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.octest */,
+				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */,
 				45898B9C1785302C00AE365A /* Ack.bundle */,
 				4596C05B1792316B005FC51A /* IRB.bundle */,
 			);
@@ -216,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				4530B0CF1736E2A6000A52E2 /* Cocoa.framework */,
-				4530B0ED1736E2A6000A52E2 /* SenTestingKit.framework */,
 				4530B1031736E3F1000A52E2 /* WebKit.framework */,
 				4530B0D11736E2A6000A52E2 /* Other Frameworks */,
 			);
@@ -293,6 +291,7 @@
 				4530B0F81736E2A6000A52E2 /* WebWindowControllerTests.h */,
 				4530B0F91736E2A6000A52E2 /* WebWindowControllerTests.m */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
+				45B8147F181483400006AA05 /* PluginTests.m */,
 			);
 			path = "Web ConsoleTests";
 			sourceTree = "<group>";
@@ -382,8 +381,8 @@
 			);
 			name = "Web ConsoleTests";
 			productName = "Web ConsoleTests";
-			productReference = 4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		45898B9B1785302C00AE365A /* Ack */ = {
 			isa = PBXNativeTarget;
@@ -533,6 +532,7 @@
 			files = (
 				4530B0FA1736E2A6000A52E2 /* WebWindowControllerTests.m in Sources */,
 				451D5F8C1780B5450051F974 /* SenTestCase+BundleResources.m in Sources */,
+				45B81480181483400006AA05 /* PluginTests.m in Sources */,
 				45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,7 +705,6 @@
 				INFOPLIST_FILE = "Web ConsoleTests/Web ConsoleTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -720,7 +719,6 @@
 				INFOPLIST_FILE = "Web ConsoleTests/Web ConsoleTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
