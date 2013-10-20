@@ -56,7 +56,7 @@
         if (completionHandlerRan) break;
     }
 	
-    STAssertTrue(completionHandlerRan, @"completionHandler did not run.");
+    STAssertTrue(completionHandlerRan, @"completionHandler should run.");
 
     NSString *javaScript = [self stringWithContentsOfTestDataFilename:kTestJavaScriptTextJQueryFilename
                                                             extension:kTestDataJavaScriptExtension];
@@ -97,8 +97,40 @@
         if (completionHandlerRan1 && completionHandlerRan2) break;
     }
 	
-    STAssertTrue(completionHandlerRan1, @"completionHandler1 did not run.");
-    STAssertTrue(completionHandlerRan2, @"completionHandler2 did not run.");    
+    STAssertTrue(completionHandlerRan1, @"completionHandler1 should run.");
+    STAssertTrue(completionHandlerRan2, @"completionHandler2 should run.");
+}
+
+- (void)testLoadHTMLInSeparateWindows
+{
+    NSString *HTML = [self stringWithContentsOfTestDataFilename:kTestDataHTMLFilename extension:kTestDataHTMLExtension];
+    
+    WebWindowController *webWindowController1 = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+    __block BOOL completionHandlerRan1 = NO;
+    [webWindowController1 loadHTML:HTML completionHandler:^(BOOL success) {
+        completionHandlerRan1 = YES;
+        STAssertTrue(success, @"The first load should succeed.");
+    }];
+    
+    WebWindowController *webWindowController2 = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+    __block BOOL completionHandlerRan2 = NO;
+    [webWindowController2 loadHTML:HTML completionHandler:^(BOOL success) {
+        completionHandlerRan2 = YES;
+        STAssertTrue(success, @"The second load should succeed.");
+    }];
+    
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while ([loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+        if (completionHandlerRan1 && completionHandlerRan2) break;
+    }
+	
+    STAssertTrue(completionHandlerRan1, @"completionHandler1 should run.");
+    STAssertTrue(completionHandlerRan2, @"completionHandler2 should run.");
+    
+
+    STAssertTrue([[[WebWindowsController sharedWebWindowsController] webWindowControllers] count] == 2, @"There should be two webWindowContrllers");
+    STAssertTrue([[[NSApplication sharedApplication] windows] count] == 2, @"There should be two windows");
 }
 
 #pragma mark - Helpers
