@@ -37,8 +37,6 @@
 }
 
 - (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {
-    NSLog(@"Show Window");
-    
     [self showWindow:self]; // If showWindow is not before loadHTMLString, then failure completion handler will not fire.
 
     [self.webView.mainFrame loadHTMLString:HTML baseURL:baseURL];
