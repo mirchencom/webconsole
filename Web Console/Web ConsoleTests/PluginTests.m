@@ -26,9 +26,14 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testCloseWindow
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    
+}
+
+- (void)testCloseWindowWithRunningTask
+{
+    
 }
 
 @end

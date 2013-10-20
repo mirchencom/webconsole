@@ -134,16 +134,6 @@
     XCTAssertTrue([[[NSApplication sharedApplication] windows] count] == 2, @"There should be two windows");
 }
 
-- (void)testCloseWindow
-{
-    
-}
-
-- (void)testCloseWindowWithRunningTask
-{
-    
-}
-
 #pragma mark - Helpers
 
 - (NSString *)stringWithContentsOfTestDataFilename:(NSString *)filename extension:(NSString *)extension {
