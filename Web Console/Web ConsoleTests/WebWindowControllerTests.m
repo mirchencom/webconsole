@@ -50,7 +50,7 @@
         STAssertTrue(success, @"The load should succeed.");
     }];
 
-    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeout];
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
     while ([loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
         if (completionHandlerRan) break;
@@ -91,7 +91,7 @@
         STAssertTrue(success, @"The second load should succeed.");
     }];
 		
-    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeout];
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
     while ([loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
         if (completionHandlerRan1 && completionHandlerRan2) break;

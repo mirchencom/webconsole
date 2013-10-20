@@ -11,8 +11,7 @@
 
 #pragma mark - General
 
-#define kTestTimeout 1
-
+#define kTestTimeoutInterval 1
 
 #pragma mark - Test Data
 
@@ -32,10 +31,3 @@
 #define kTestJavaScriptBodyFilename @"JavaScriptBody"
 #define kTestJavaScriptTextJQueryFilename @"JavaScriptTextJQuery"
 #define kTestJavaScriptTextFilename @"JavaScriptText"
-
-
-#pragma mark - Plugins
-
-#define kAllPlugins [kPlugins arrayByAddingObjectsFromArray:kTestPlugins]
-#define kPlugins @[@"Ack"]
-#define kTestPlugins @[@"TestNoWindow"]
