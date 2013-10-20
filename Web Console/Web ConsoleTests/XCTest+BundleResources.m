@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "SenTestCase+BundleResources.h"
+#import "XCTest+BundleResources.h"
 
 @implementation XCTestCase (BundleResources)
 

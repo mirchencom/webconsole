@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4502BCE3177D159900F0A5C2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
-		451D5F8C1780B5450051F974 /* SenTestCase+BundleResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 451D5F8B1780B5450051F974 /* SenTestCase+BundleResources.m */; };
+		451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */; };
 		4530B0D01736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0DA1736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0D81736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B0DC1736E2A6000A52E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0DB1736E2A6000A52E2 /* main.m */; };
@@ -79,8 +79,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		451D5F8A1780B5450051F974 /* SenTestCase+BundleResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SenTestCase+BundleResources.h"; sourceTree = "<group>"; };
-		451D5F8B1780B5450051F974 /* SenTestCase+BundleResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SenTestCase+BundleResources.m"; sourceTree = "<group>"; };
+		451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTest+BundleResources.h"; sourceTree = "<group>"; };
+		451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTest+BundleResources.m"; sourceTree = "<group>"; };
 		451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_ConsoleTestsConstants.h; sourceTree = "<group>"; };
 		4530B0CC1736E2A6000A52E2 /* Web Console.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Web Console.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0CF1736E2A6000A52E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -98,7 +98,6 @@
 		4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Web ConsoleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0F41736E2A6000A52E2 /* Web ConsoleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Web ConsoleTests-Info.plist"; sourceTree = "<group>"; };
 		4530B0F61736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4530B0F81736E2A6000A52E2 /* WebWindowControllerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebWindowControllerTests.h; sourceTree = "<group>"; };
 		4530B0F91736E2A6000A52E2 /* WebWindowControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebWindowControllerTests.m; sourceTree = "<group>"; };
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		455B0BFC176FF592007B75DD /* LoadHTMLCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadHTMLCommand.h; sourceTree = "<group>"; };
@@ -284,11 +283,10 @@
 			children = (
 				45898BB11785325B00AE365A /* Data */,
 				451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */,
-				451D5F8A1780B5450051F974 /* SenTestCase+BundleResources.h */,
-				451D5F8B1780B5450051F974 /* SenTestCase+BundleResources.m */,
+				451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */,
+				451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */,
 				45F826411780F99000DD7DF6 /* WebView+Source.h */,
 				45F826421780F99100DD7DF6 /* WebView+Source.m */,
-				4530B0F81736E2A6000A52E2 /* WebWindowControllerTests.h */,
 				4530B0F91736E2A6000A52E2 /* WebWindowControllerTests.m */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
 				45B8147F181483400006AA05 /* PluginTests.m */,
@@ -531,7 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4530B0FA1736E2A6000A52E2 /* WebWindowControllerTests.m in Sources */,
-				451D5F8C1780B5450051F974 /* SenTestCase+BundleResources.m in Sources */,
+				451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */,
 				45B81480181483400006AA05 /* PluginTests.m in Sources */,
 				45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */,
 			);

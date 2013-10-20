@@ -6,15 +6,17 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WebWindowControllerTests.h"
+#import <XCTest/XCTest.h>
 
-#import "SenTestCase+BundleResources.h"
+#import "XCTest+BundleResources.h"
 #import "Web_ConsoleTestsConstants.h"
 #import "WebView+Source.h"
 
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
 
+@interface WebWindowControllerTests : XCTestCase
+@end
 
 @interface WebWindowController (TestingAdditions)
 @property (nonatomic, readonly) WebView *webView;

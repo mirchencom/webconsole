@@ -6,9 +6,6 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WebWindowControllerTests.h"
-
-
 #pragma mark - General
 
 #define kTestTimeoutInterval 1
