@@ -21,6 +21,10 @@
 - (NSString *)commandPath;
 - (NSString *)command;
 - (NSString *)resourcePath;
+- (void)runCommandPath:(NSString *)commandPath
+         withArguments:(NSArray *)arguments
+      withResourcePath:(NSString *)resourcePath
+       inDirectoryPath:(NSString *)directoryPath;
 @end
 
 @implementation Plugin
@@ -86,24 +90,34 @@
 
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath
 {
-    // Configuration
-    NSString *commandPath = [self commandPath];
-        
+    [self runCommandPath:[self commandPath]
+           withArguments:arguments
+        withResourcePath:[self resourcePath]
+         inDirectoryPath:directoryPath];
+}
+
+- (void)runCommandPath:(NSString *)commandPath
+         withArguments:(NSArray *)arguments
+      withResourcePath:(NSString *)resourcePath
+       inDirectoryPath:(NSString *)directoryPath
+{
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
     
     if (directoryPath) {
         [task setCurrentDirectoryPath:directoryPath];
     }
-
+    
     if (arguments) {
         [task setArguments:arguments];
     }
-
+    
     // Environment Dictionary
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
-    environmentDictionary[kEnvironmentVariablePluginDirectoryKey] = [self resourcePath];
+    if (resourcePath) {
+        environmentDictionary[kEnvironmentVariablePluginDirectoryKey] = [self resourcePath];
+    }
     
     // Web Window Controller
     WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
@@ -151,6 +165,7 @@
     NSLog(@"Starting task webWindowController %@, window %@, windowNumber %ld", webWindowController, webWindowController.window, (long)webWindowController.window.windowNumber);
     [task launch];
 }
+
 
 #pragma mark - AppleScript
 

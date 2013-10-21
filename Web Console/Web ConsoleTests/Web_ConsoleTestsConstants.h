@@ -14,17 +14,25 @@
 
 #define kTestDataSubdirectory @"Data"
 
-#pragma mark Extensions
-#define kTestDataHTMLExtension @"html"
-#define kTestDataJavaScriptExtension @"js"
 
+#pragma mark - HTML
+#define kTestDataHTMLExtension @"html"
 #pragma mark HTML Resources
 #define kTestDataHTMLFilename @"index"
 #define kTestDataHTMLJQUERYFilename @"indexjquery"
 
+
+#pragma mark - JavaScript
+#define kTestDataJavaScriptExtension @"js"
 #pragma mark JavaScript Resources
 #define kTestJavaScriptNoDOMFilename @"JavaScriptNoDOM"
 #define kTestJavaScriptBodyJQueryFilename @"JavaScriptBodyJQuery"
 #define kTestJavaScriptBodyFilename @"JavaScriptBody"
 #define kTestJavaScriptTextJQueryFilename @"JavaScriptTextJQuery"
 #define kTestJavaScriptTextFilename @"JavaScriptText"
+
+
+#pragma mark - Ruby
+#define kTestDataRubyExtension @"rb"
+#pragma mark Ruby Resources
+#define kTestDataRubyHelloWorld @"hello_world"

@@ -10,7 +10,17 @@
 
 @implementation XCTestCase (BundleResources)
 
-- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory {
+- (NSString *)pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory
+{
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:name
+                                                                      ofType:extension
+                                                                 inDirectory:subdirectory];
+    NSAssert(path, @"path should not be nil.");
+    return path;
+}
+
+- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory
+{
     NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:name
                                                               withExtension:ext
                                                                subdirectory:subdirectory];
