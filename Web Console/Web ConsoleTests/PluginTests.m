@@ -10,6 +10,10 @@
 
 #import "Web_ConsoleTestsConstants.h"
 #import "XCTest+BundleResources.h"
+#import "WebWindowControllerTestsHelper.h"
+
+#import "WebWindowsController.h"
+#import "WebWindowController.h"
 
 #import "Plugin.h"
 
@@ -34,7 +38,7 @@
 
 - (void)tearDown
 {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     [super tearDown];
 }
 
@@ -48,19 +52,35 @@
     
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
 
-    // Block until notification is received
 
+    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+
+    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
     
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    WebWindowController *webWindowController = webWindowControllers[0];
+
+    XCTAssertTrue([webWindowController.tasks count], @"The webWindowController should have a task");
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_semaphore_signal(semaphore);
-    });
+    NSTask *task = webWindowController.tasks[0];
     
-    NSUInteger timeoutInSeconds = 1;
-    dispatch_time_t timeoutTime = dispatch_time(DISPATCH_TIME_NOW, timeoutInSeconds * NSEC_PER_SEC);
+    __block id observer;
+    __block BOOL taskDidFinish = NO;
+    observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSTaskDidTerminateNotification
+                                                                 object:task
+                                                                  queue:nil
+                                                             usingBlock:^(NSNotification *notification) {
+                                                                 [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                                                                 taskDidFinish = YES;
+                                                             }];
     
-    dispatch_semaphore_wait(semaphore, timeoutTime);
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while (!taskDidFinish && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+
+    XCTAssertTrue(taskDidFinish, @"The task should have finished");
+
+#warning Close window here
 }
 
 - (void)testCloseWindowWithRunningTask

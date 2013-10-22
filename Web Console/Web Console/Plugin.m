@@ -101,6 +101,8 @@
       withResourcePath:(NSString *)resourcePath
        inDirectoryPath:(NSString *)directoryPath
 {
+    DLog(@"commandPath = %@", commandPath);
+    
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
     
@@ -110,7 +112,7 @@
     
     if (arguments) {
         [task setArguments:arguments];
-    }
+    }   
     
     // Environment Dictionary
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
@@ -150,12 +152,6 @@
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
         [[task.standardError fileHandleForReading] setReadabilityHandler:nil];
         
-        // Web Window Controller
-        if (![webWindowController.window isVisible]) {
-            // Remove the WebWindowController if the window was never shown
-            NSLog(@"Removing a window");
-            [[WebWindowsController sharedWebWindowsController] removeWebWindowController:webWindowController];
-        }
         [webWindowController.tasks removeObject:task];
         
         // As per NSTask.h, NSTaskDidTerminateNotification is not posted if a termination handler is set, so post it here.
@@ -163,6 +159,12 @@
     }];
     
     NSLog(@"Starting task webWindowController %@, window %@, windowNumber %ld", webWindowController, webWindowController.window, (long)webWindowController.window.windowNumber);
+
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [webWindowController showWindow:self];
+    });
+
     [task launch];
 }
 

@@ -42,6 +42,7 @@
 		45B375C6179B7517002BCEF6 /* UserInterfaceTextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C5179B7517002BCEF6 /* UserInterfaceTextHelper.m */; };
 		45B375C9179B8347002BCEF6 /* TaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C8179B8347002BCEF6 /* TaskHelper.m */; };
 		45B81480181483400006AA05 /* PluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8147F181483400006AA05 /* PluginTests.m */; };
+		45B8148318161A360006AA05 /* WebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WebWindowControllerTestsHelper.m */; };
 		45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F826421780F99100DD7DF6 /* WebView+Source.m */; };
 /* End PBXBuildFile section */
 
@@ -137,6 +138,8 @@
 		45B375C7179B8347002BCEF6 /* TaskHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskHelper.h; sourceTree = "<group>"; };
 		45B375C8179B8347002BCEF6 /* TaskHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskHelper.m; sourceTree = "<group>"; };
 		45B8147F181483400006AA05 /* PluginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginTests.m; sourceTree = "<group>"; };
+		45B8148118161A360006AA05 /* WebWindowControllerTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowControllerTestsHelper.h; sourceTree = "<group>"; };
+		45B8148218161A360006AA05 /* WebWindowControllerTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowControllerTestsHelper.m; sourceTree = "<group>"; };
 		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
 		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,6 +293,8 @@
 				4530B0F91736E2A6000A52E2 /* WebWindowControllerTests.m */,
 				45B8147F181483400006AA05 /* PluginTests.m */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
+				45B8148118161A360006AA05 /* WebWindowControllerTestsHelper.h */,
+				45B8148218161A360006AA05 /* WebWindowControllerTestsHelper.m */,
 			);
 			path = "Web ConsoleTests";
 			sourceTree = "<group>";
@@ -530,6 +535,7 @@
 			files = (
 				4530B0FA1736E2A6000A52E2 /* WebWindowControllerTests.m in Sources */,
 				451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */,
+				45B8148318161A360006AA05 /* WebWindowControllerTestsHelper.m in Sources */,
 				45B81480181483400006AA05 /* PluginTests.m in Sources */,
 				45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */,
 			);

@@ -31,8 +31,9 @@
 
     NSMutableArray *webWindowControllersWaitingToClose = [webWindowControllersWithTasks mutableCopy];
     NSMutableArray *activeObservers = [NSMutableArray array];
-    __block BOOL didReply = NO;
+    __block BOOL windowsDidFinishClosing = NO;
     for (WebWindowController *webWindowController in webWindowControllersWithTasks) {
+#warning After tests are setup, move perform close after adding observer
         [webWindowController.window performClose:self];
         __block id observer;
         observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
@@ -41,11 +42,12 @@
                                                                  usingBlock:^(NSNotification *notification) {
                                                                      [[NSNotificationCenter defaultCenter] removeObserver:observer];
                                                                      [activeObservers removeObject:observer];
+#warning After tests are setup, remove webWindowControllersWaitingToClose, I should be able to do this just by counting the activeObservers
                                                                      [webWindowControllersWaitingToClose removeObject:webWindowController];
                                                                      if (![webWindowControllersWaitingToClose count] &&
                                                                          ![[ApplicationTerminationHelper webWindowControllersWithTasks] count]) {
                                                                          [NSApp replyToApplicationShouldTerminate:YES];
-                                                                         didReply = YES;
+                                                                         windowsDidFinishClosing = YES;
                                                                      }
                                                                  }];
         [activeObservers addObject:observer];
@@ -54,7 +56,7 @@
     double delayInSeconds = kApplicationTerminationTimeout;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        if (!didReply) {
+        if (!windowsDidFinishClosing) {
             [NSApp replyToApplicationShouldTerminate:NO];
             for (id observer in activeObservers) {
                 [[NSNotificationCenter defaultCenter] removeObserver:observer];
