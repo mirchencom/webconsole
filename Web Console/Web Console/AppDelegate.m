@@ -29,7 +29,6 @@
     if ([ApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks]) return NSTerminateNow;
     
     return NSTerminateLater;
-
 }
 
 @end

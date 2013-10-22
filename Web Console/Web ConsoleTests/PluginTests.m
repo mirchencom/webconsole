@@ -38,7 +38,6 @@
 
 - (void)tearDown
 {
-    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     [super tearDown];
 }
 
@@ -72,7 +71,6 @@
                                                                  [[NSNotificationCenter defaultCenter] removeObserver:observer];
                                                                  taskDidFinish = YES;
                                                              }];
-    
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
     while (!taskDidFinish && [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
@@ -80,7 +78,8 @@
 
     XCTAssertTrue(taskDidFinish, @"The task should have finished");
 
-#warning Close window here
+    // after the task finished the test should be able to close
+    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
 }
 
 - (void)testCloseWindowWithRunningTask

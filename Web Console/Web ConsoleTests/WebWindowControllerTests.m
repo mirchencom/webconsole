@@ -11,6 +11,7 @@
 #import "XCTest+BundleResources.h"
 #import "Web_ConsoleTestsConstants.h"
 #import "WebView+Source.h"
+#import "WebWindowControllerTestsHelper.h"
 
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
@@ -33,38 +34,7 @@
 
 - (void)tearDown
 {
-    NSMutableArray *activeObservers = [NSMutableArray array];
-    __block BOOL windowsDidFinishClosing = NO;
-    for (WebWindowController *webWindowController in [[WebWindowsController sharedWebWindowsController] webWindowControllers]) {
-        __block id observer;
-        observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
-                                                                     object:webWindowController.window
-                                                                      queue:nil
-                                                                 usingBlock:^(NSNotification *notification) {
-                                                                     [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                                     [activeObservers removeObject:observer];
-                                                                     if (![activeObservers count]) {
-                                                                         windowsDidFinishClosing = YES;
-                                                                     }
-                                                                 }];
-        [activeObservers addObject:observer];
-        
-        [webWindowController.window performClose:self];
-    }
-
-    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
-    while (!windowsDidFinishClosing && [loopUntil timeIntervalSinceNow] > 0) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
-    }
-
-    XCTAssertTrue(windowsDidFinishClosing, @"Windows should have finished closing");
-
-    XCTAssertFalse([activeObservers count], @"There should not be any active observers");
-    
-    NSUInteger webWindowControllersCount = [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    XCTAssertFalse(webWindowControllersCount, @"There should not be any webWindowControllers");
-    NSUInteger windowsCount = [[[NSApplication sharedApplication] windows] count];
-    XCTAssertTrue(windowsCount, @"There should not be any windows");
+    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
 
     [super tearDown];
 }
@@ -164,9 +134,7 @@
     XCTAssertTrue(completionHandlerRan2, @"completionHandler2 should run.");
     
     NSUInteger webWindowControllersCount = [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two webWindowControllers %lu", (unsigned long)webWindowControllersCount);
-    NSUInteger windowsCount = [[[NSApplication sharedApplication] windows] count];
-    XCTAssertTrue(windowsCount == 2, @"There should be two windows %lu", (unsigned long)windowsCount);
+    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two webWindowControllers %lu", webWindowControllersCount);
 }
 
 #pragma mark - Helpers
