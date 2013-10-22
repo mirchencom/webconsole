@@ -105,9 +105,7 @@
 }
 
 - (void)testLoadHTMLInSeparateWindows
-{
-//    XCTAssertFalse([[[WebWindowsController sharedWebWindowsController] webWindowControllers] count], @"no webwindowcontrollers");
-    
+{    
     NSString *HTML = [self stringWithContentsOfTestDataFilename:kTestDataHTMLFilename extension:kTestDataHTMLExtension];
     
     WebWindowController *webWindowController1 = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];

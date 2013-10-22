@@ -62,6 +62,8 @@
     
     NSTask *task = webWindowController.tasks[0];
     
+#warning add an attempt to close the window here?
+    
     __block id observer;
     __block BOOL taskDidFinish = NO;
     observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSTaskDidTerminateNotification
