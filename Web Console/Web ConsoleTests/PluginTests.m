@@ -142,13 +142,11 @@
     XCTAssertEqualObjects(firstWebWindowController, webWindowControllers[0], @"The first WebWindowController should still be at the first index.");
     XCTAssertNotEqualObjects(firstWebWindowController, secondWebWindowController, @"The WebWindowControllers should not be equal.");
 
+    // TODO: Get orderedWindows property
     // TODO: assert that the first web window controller is behind the second
-    
-    // TODO: assert web window controllers aren't equal
-
-    XCTAssertEqual([webWindowControllers count], (NSUInteger)2, @"The plugin should have two WebWindowControllers.");
-
-    // Get orderedWindows property
+    NSArray *orderedWindows = [plugin orderedWindows];
+    XCTAssertTrue([orderedWindows containsObject:firstWebWindowController.window], @"The ordered NSWindows should contain the first WebWindowControllers NSWindow.");
+    XCTAssertTrue([orderedWindows containsObject:secondWebWindowController.window], @"The ordered NSWindows should contain the second WebWindowControllers NSWindow.");
     
     NSArray *tasks = [[WebWindowsController sharedWebWindowsController] tasks];
     XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two NSTasks.");
@@ -204,7 +202,7 @@
     NSTask *task = webWindowController.tasks[0];
     
     BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
-    XCTAssertFalse(windowWillClose, @"The Window should not close while the task is running.");
+    XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
     [PluginTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
  
@@ -214,7 +212,7 @@
     [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertFalse([webWindowControllers count], @"The plugin should not have a WebWindowController.");
+    XCTAssertFalse([webWindowControllers count], @"The Plugin should not have a WebWindowController.");
 }
 
 - (void)testTerminateTasksAndCloseWindow
@@ -226,7 +224,7 @@
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The plugin should have a WebWindowController.");
+    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
     
     XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
@@ -237,7 +235,7 @@
     
     BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
 
-    XCTAssert(windowWillClose, @"The Window should have closed.");
+    XCTAssert(windowWillClose, @"The NSWindow should have closed.");
 }
 
 @end

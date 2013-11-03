@@ -63,7 +63,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
     
-    NSAssert(windowsDidFinishClosing, @"The windows should have finished closing.");
+    NSAssert(windowsDidFinishClosing, @"The NSWindows should have finished closing.");
     
     NSUInteger webWindowControllersCount = [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count];
     NSAssert(!webWindowControllersCount, @"There should not be any WebWindowControllers.");
