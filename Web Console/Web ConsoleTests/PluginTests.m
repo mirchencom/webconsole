@@ -65,15 +65,15 @@
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
+    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
     
-    XCTAssertTrue([webWindowController.tasks count], @"The webWindowController should have a task");
+    XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
     NSTask *task = webWindowController.tasks[0];
 
     __block BOOL completionHandlerRan = NO;
     [task interruptWithCompletionHandler:^(BOOL success) {
-        XCTAssertTrue(success, @"The interrupted should have succeeded");
+        XCTAssertTrue(success, @"The interrupted should have succeeded.");
         completionHandlerRan = YES;
     }];
     
@@ -81,10 +81,10 @@
     while (!completionHandlerRan && [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
-    XCTAssertTrue(completionHandlerRan, @"The completion handler should have run");
+    XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
 
-    XCTAssertFalse([task isRunning], @"The task should not be running");
-    XCTAssertFalse([webWindowController.tasks count], @"The webWindowController should not have any tasks");
+    XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
+    XCTAssertFalse([webWindowController.tasks count], @"The WebWindowController should not have any NSTasks.");
 }
 
 - (void)testInterruptAndTerminate
@@ -96,16 +96,16 @@
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
+    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
     
-    XCTAssertTrue([webWindowController.tasks count], @"The webWindowController should have a task");
+    XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
     NSTask *task = webWindowController.tasks[0];
     
     __block BOOL completionHandlerRan = NO;
     [task interruptWithCompletionHandler:^(BOOL success) {
         // TODO: For some reason terminating the task is actually succeeding here even though it should fail. If I can get this to fail, write the rest of the test to do a terminate after failing an interrupt.
-//        XCTAssertFalse(success, @"The interrupted should have failed");
+//        XCTAssertFalse(success, @"The interrupted should have failed.");
         completionHandlerRan = YES;
     }];
     
@@ -113,47 +113,46 @@
     while (!completionHandlerRan && [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
-    XCTAssertTrue(completionHandlerRan, @"The completion handler should have run");
+    XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
 
     // TODO: If I can figure out a way to run a script that doesn't interrupt, then put the terminate here
     
-    XCTAssertFalse([task isRunning], @"The task should not be running");
-    XCTAssertFalse([webWindowController.tasks count], @"The webWindowController should not have any tasks");
+    XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
+    XCTAssertFalse([webWindowController.tasks count], @"The WebWindowController should not have any NSTasks.");
 }
 
 #pragma mark - Ordered Windows
 
 - (void)testOrderedWindows
 {
-    // Can I run two instances of WcAck? Yes
-    
-    // Run two commands for the same plugin this should create two webWindowControllers
-    
-    // Test that the two webWindowControllers are returned in the right order by orderedWindows
-    
     Plugin *plugin = [[Plugin alloc] init];
     NSString *commandPath = [self pathForResource:kTestDataRubyHelloWorld
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count] == 2, @"The plugin should have two webWindowControllers");
-    XCTAssertEqual([webWindowControllers count], (NSUInteger)2, @"The plugin should have two webWindowControllers");
+    XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The plugin should have one WebWindowController.");
+    WebWindowController *firstWebWindowController = webWindowControllers[0];
 
+    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    XCTAssertEqual([webWindowControllers count], (NSUInteger)2, @"The plugin should have two WebWindowControllers.");
+    WebWindowController *secondWebWindowController = webWindowControllers[1];
+
+    XCTAssertEqualObjects(firstWebWindowController, webWindowControllers[0], @"The first WebWindowController should still be at the first index.");
+    XCTAssertNotEqualObjects(firstWebWindowController, secondWebWindowController, @"The WebWindowControllers should not be equal.");
+
+    // TODO: assert that the first web window controller is behind the second
+    
+    // TODO: assert web window controllers aren't equal
+
+    XCTAssertEqual([webWindowControllers count], (NSUInteger)2, @"The plugin should have two WebWindowControllers.");
+
+    // Get orderedWindows property
+    
     NSArray *tasks = [[WebWindowsController sharedWebWindowsController] tasks];
-    XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two tasks");
+    XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two NSTasks.");
     [PluginTestsHelper blockUntilTasksFinish:tasks];
-    
-    
-//    // Clean up
-//    for (WebWindowController *webWindowController in webWindowControllers) {
-//        if ([webWindowController.tasks count]) {
-//            NSTask *task = webWindowController.tasks[0];
-//            [PluginTestsHelper blockUntilTaskFinishes:task];
-//        }
-//    }
 }
 
 #pragma mark - Window Management
@@ -167,21 +166,21 @@
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
 
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
+    XCTAssertTrue([webWindowControllers count], @"The plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
 
-    XCTAssertTrue([webWindowController.tasks count], @"The webWindowController should have a task");
+    XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
     NSTask *task = webWindowController.tasks[0];
 
     [PluginTestsHelper blockUntilTaskFinishes:task];
 
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
+    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     
     [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue(![webWindowControllers count], @"The plugin should not have a webWindowController");
+    XCTAssertTrue(![webWindowControllers count], @"The Plugin should not have a WebWindowController.");
 }
 
 
@@ -196,26 +195,26 @@
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
+    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
     
     [webWindowController.window performClose:self];
 
-    XCTAssertTrue([webWindowController.tasks count], @"The webWindowController should have a task");
+    XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
     NSTask *task = webWindowController.tasks[0];
     
     BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
-    XCTAssertFalse(windowWillClose, @"The window should not close while the task is running");
+    XCTAssertFalse(windowWillClose, @"The Window should not close while the task is running.");
     
     [PluginTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
  
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
+    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     
     [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertFalse([webWindowControllers count], @"The plugin should not have a webWindowController");
+    XCTAssertFalse([webWindowControllers count], @"The plugin should not have a WebWindowController.");
 }
 
 - (void)testTerminateTasksAndCloseWindow
@@ -227,10 +226,10 @@
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
+    XCTAssertTrue([webWindowControllers count], @"The plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
     
-    XCTAssertTrue([webWindowController.tasks count], @"The webWindowController should have a task");
+    XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
 
     [webWindowController terminateTasksAndCloseWindow];
 
@@ -238,7 +237,7 @@
     
     BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
 
-    XCTAssert(windowWillClose, @"Window should close");
+    XCTAssert(windowWillClose, @"The Window should have closed.");
 }
 
 @end

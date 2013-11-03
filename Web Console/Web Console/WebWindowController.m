@@ -90,7 +90,7 @@
 - (void)terminateTasksAndCloseWindow
 {
     [TaskHelper terminateTasks:self.tasks completionHandler:^(BOOL success) {
-        NSAssert(success, @"Terminating tasks should always succeed");
+        NSAssert(success, @"Terminating NSTasks should always succeed.");
         if (![self hasTasks]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.window close];

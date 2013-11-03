@@ -37,8 +37,7 @@
 {
     if (![[[WebWindowsController sharedWebWindowsController] webWindowControllers] count]) return;
     
-    NSMutableArray *activeObservers = [NSMutableArray array];
-    __block BOOL windowsDidFinishClosing = NO;
+    NSMutableArray *observers = [NSMutableArray array];
     for (WebWindowController *webWindowController in [[WebWindowsController sharedWebWindowsController] webWindowControllers]) {
         __block id observer;
         observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
@@ -46,34 +45,34 @@
                                                                       queue:nil
                                                                  usingBlock:^(NSNotification *notification) {
                                                                      [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                                     [activeObservers removeObject:observer];
-                                                                     if (![activeObservers count]) {
-                                                                         windowsDidFinishClosing = YES;
-                                                                     }
+                                                                     [observers removeObject:observer];
                                                                  }];
-        [activeObservers addObject:observer];
+        [observers addObject:observer];
         
         [webWindowController.window performClose:self];
     }
     
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
-    while (!windowsDidFinishClosing && [loopUntil timeIntervalSinceNow] > 0) {
+    while ([observers count] && [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
     
-    NSAssert(windowsDidFinishClosing, @"Windows should have finished closing");
+    BOOL windowsDidFinishClosing = ![observers count] ? YES : NO;
     
-    NSAssert(![activeObservers count], @"There should not be any active observers");
+    for (id observer in observers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    }
+    
+    NSAssert(windowsDidFinishClosing, @"The windows should have finished closing.");
     
     NSUInteger webWindowControllersCount = [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    NSAssert(!webWindowControllersCount, @"There should not be any webWindowControllers");
+    NSAssert(!webWindowControllersCount, @"There should not be any WebWindowControllers.");
 
 // There is not way to pause a test until [[[NSApplication sharedApplication] windows] count] goes to zero
 // The best we can do is test [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count] which should be
 // up to date in tracking windows that are slated to be closed.
 //    NSUInteger windowsCount = [[[NSApplication sharedApplication] windows] count];
-//    NSAssert(!windowsCount, @"There should not be any windows");
+//    NSAssert(!windowsCount, @"There should not be any Windows.");
 }
-
 
 @end

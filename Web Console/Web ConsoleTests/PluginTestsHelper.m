@@ -19,23 +19,7 @@
 
 + (void)blockUntilTaskFinishes:(NSTask *)task timeoutInterval:(NSTimeInterval)timeoutInterval
 {
-    if (![task isRunning]) return;
-    
-    __block id observer;
-    __block BOOL taskDidFinish = NO;
-    observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSTaskDidTerminateNotification
-                                                                 object:task
-                                                                  queue:nil
-                                                             usingBlock:^(NSNotification *notification) {
-                                                                 [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                                 taskDidFinish = YES;
-                                                             }];
-    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:timeoutInterval];
-    while (!taskDidFinish && [loopUntil timeIntervalSinceNow] > 0) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
-    }
-    
-    NSAssert(taskDidFinish, @"The task should have finished");
+    [self blockUntilTasksFinish:@[task] timeoutInterval:timeoutInterval];
 }
 
 + (void)blockUntilTasksFinish:(NSArray *)tasks
@@ -56,7 +40,6 @@
                                                                  usingBlock:^(NSNotification *notification) {
                                                                      [[NSNotificationCenter defaultCenter] removeObserver:observer];
                                                                      [observers removeObject:observer];
-                                                                     NSLog(@"a task finished");
                                                                  }];
         [observers addObject:observer];
     }
@@ -72,7 +55,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
 
-    NSAssert(tasksFinished, @"Tasks should have finished");
+    NSAssert(tasksFinished, @"The NSTasks should have finished.");
 }
 
 @end

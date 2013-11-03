@@ -52,7 +52,7 @@
     WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
     [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
         completionHandlerRan = YES;
-        XCTAssertTrue(success, @"The load should succeed.");
+        XCTAssertTrue(success, @"The load should have succeeded.");
     }];
 
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
@@ -61,7 +61,7 @@
         if (completionHandlerRan) break;
     }
 	
-    XCTAssertTrue(completionHandlerRan, @"completionHandler should run.");
+    XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
 
     NSString *javaScript = [self stringWithContentsOfTestDataFilename:kTestJavaScriptTextJQueryFilename
                                                             extension:kTestDataJavaScriptExtension];
@@ -84,26 +84,26 @@
     
     WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
 
-    __block BOOL completionHandlerRan1 = NO;
+    __block BOOL firstCompletionHandlerRan = NO;
     [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
-        completionHandlerRan1 = YES;
-        XCTAssertFalse(success, @"The first load should fail.");
+        firstCompletionHandlerRan = YES;
+        XCTAssertFalse(success, @"The first load should have failed.");
     }];
 
-    __block BOOL completionHandlerRan2 = NO;
+    __block BOOL secondCompletionHandlerRan = NO;
     [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
-        completionHandlerRan2 = YES;
-        XCTAssertTrue(success, @"The second load should succeed.");
+        secondCompletionHandlerRan = YES;
+        XCTAssertTrue(success, @"The second load should have succeeded.");
     }];
 		
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
     while ([loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
-        if (completionHandlerRan1 && completionHandlerRan2) break;
+        if (firstCompletionHandlerRan && secondCompletionHandlerRan) break;
     }
 	
-    XCTAssertTrue(completionHandlerRan1, @"completionHandler1 should run.");
-    XCTAssertTrue(completionHandlerRan2, @"completionHandler2 should run.");
+    XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
+    XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
 }
 
 - (void)testLoadHTMLInSeparateWindows
@@ -111,30 +111,30 @@
     NSString *HTML = [self stringWithContentsOfTestDataFilename:kTestDataHTMLFilename extension:kTestDataHTMLExtension];
     
     WebWindowController *webWindowController1 = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
-    __block BOOL completionHandlerRan1 = NO;
+    __block BOOL firstCompletionHandlerRan = NO;
     [webWindowController1 loadHTML:HTML completionHandler:^(BOOL success) {
-        completionHandlerRan1 = YES;
-        XCTAssertTrue(success, @"The first load should succeed.");
+        firstCompletionHandlerRan = YES;
+        XCTAssertTrue(success, @"The first load should have succeeded.");
     }];
     
     WebWindowController *webWindowController2 = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
-    __block BOOL completionHandlerRan2 = NO;
+    __block BOOL secondCompletionHandlerRan = NO;
     [webWindowController2 loadHTML:HTML completionHandler:^(BOOL success) {
-        completionHandlerRan2 = YES;
-        XCTAssertTrue(success, @"The second load should succeed.");
+        secondCompletionHandlerRan = YES;
+        XCTAssertTrue(success, @"The second load should have succeeded.");
     }];
     
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
     while ([loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
-        if (completionHandlerRan1 && completionHandlerRan2) break;
+        if (firstCompletionHandlerRan && secondCompletionHandlerRan) break;
     }
 	
-    XCTAssertTrue(completionHandlerRan1, @"completionHandler1 should run.");
-    XCTAssertTrue(completionHandlerRan2, @"completionHandler2 should run.");
+    XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
+    XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
     
     NSUInteger webWindowControllersCount = [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two webWindowControllers %lu", webWindowControllersCount);
+    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two WebWindowControllers. %lu", webWindowControllersCount);
 }
 
 #pragma mark - Helpers

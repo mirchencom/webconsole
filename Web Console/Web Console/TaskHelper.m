@@ -29,7 +29,7 @@
             if (!success) {
                 DLog(@"Failed to interrupt a task, trying terminate");
                 [task terminateWithCompletionHandler:^(BOOL success) {
-                    NSAssert(success, @"Terminating should always succeed");
+                    NSAssert(success, @"Terminating NSTasks should always succeed.");
                     [mutableTasks removeObject:task];
                     completionHandlerBlock();
                 }];

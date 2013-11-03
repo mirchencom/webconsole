@@ -15,7 +15,7 @@
     NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:name
                                                                       ofType:extension
                                                                  inDirectory:subdirectory];
-    NSAssert(path, @"path should not be nil.");
+    NSAssert(path, @"The path should not be nil.");
     return path;
 }
 
@@ -24,14 +24,14 @@
     NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:name
                                                               withExtension:ext
                                                                subdirectory:subdirectory];
-    NSAssert(fileURL, @"fileURL should not be nil.");
+    NSAssert(fileURL, @"The file URL should not be nil.");
     return fileURL;
 }
 
 - (NSString *)stringWithContentsOfFileURL:(NSURL *)fileURL {
     NSError *error;
     NSString *contents = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
-    NSString *errorMessage = [NSString stringWithFormat:@"Error loading string %@", error];
+    NSString *errorMessage = [NSString stringWithFormat:@"There should not be an NSError. %@", error];
     NSAssert(!error, errorMessage);
     return contents;
 }
