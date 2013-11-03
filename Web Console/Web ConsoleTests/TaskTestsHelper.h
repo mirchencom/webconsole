@@ -1,5 +1,5 @@
 //
-//  PluginTestsHelper.h
+//  TaskTestsHelper.h
 //  Web Console
 //
 //  Created by Roben Kleene on 10/21/13.
@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PluginTestsHelper : NSObject
-
+@interface TaskTestsHelper : NSObject
 + (void)blockUntilTaskFinishes:(NSTask *)task;
 + (void)blockUntilTaskFinishes:(NSTask *)task timeoutInterval:(NSTimeInterval)timeoutInterval;
 + (void)blockUntilTasksFinish:(NSArray *)tasks;

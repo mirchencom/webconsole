@@ -1,16 +1,16 @@
 //
-//  PluginTestsHelper.m
+//  TaskTestsHelper.m
 //  Web Console
 //
 //  Created by Roben Kleene on 10/21/13.
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "PluginTestsHelper.h"
+#import "TaskTestsHelper.h"
 
 #import "Web_ConsoleTestsConstants.h"
 
-@implementation PluginTestsHelper
+@implementation TaskTestsHelper
 
 + (void)blockUntilTaskFinishes:(NSTask *)task
 {

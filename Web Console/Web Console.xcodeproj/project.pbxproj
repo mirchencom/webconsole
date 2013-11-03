@@ -43,7 +43,7 @@
 		45B375C9179B8347002BCEF6 /* TaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C8179B8347002BCEF6 /* TaskHelper.m */; };
 		45B81480181483400006AA05 /* PluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8147F181483400006AA05 /* PluginTests.m */; };
 		45B8148318161A360006AA05 /* WebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WebWindowControllerTestsHelper.m */; };
-		45B814861816297C0006AA05 /* PluginTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* PluginTestsHelper.m */; };
+		45B814861816297C0006AA05 /* TaskTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* TaskTestsHelper.m */; };
 		45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F826421780F99100DD7DF6 /* WebView+Source.m */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +107,7 @@
 		455B0C081771627A007B75DD /* DoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoJavaScriptCommand.h; sourceTree = "<group>"; };
 		455B0C091771627A007B75DD /* DoJavaScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoJavaScriptCommand.m; sourceTree = "<group>"; };
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
+		45709B1A18271237005F03E9 /* Plugin+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Plugin+Tests.h"; sourceTree = "<group>"; };
 		4574725617DCCD8500AFD1D9 /* ApplicationTerminationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationTerminationHelper.h; sourceTree = "<group>"; };
 		4574725717DCCD8500AFD1D9 /* ApplicationTerminationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationTerminationHelper.m; sourceTree = "<group>"; };
 		45898B9C1785302C00AE365A /* Ack.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ack.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,8 +142,8 @@
 		45B8147F181483400006AA05 /* PluginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginTests.m; sourceTree = "<group>"; };
 		45B8148118161A360006AA05 /* WebWindowControllerTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebWindowControllerTestsHelper.h; sourceTree = "<group>"; };
 		45B8148218161A360006AA05 /* WebWindowControllerTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebWindowControllerTestsHelper.m; sourceTree = "<group>"; };
-		45B814841816297C0006AA05 /* PluginTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginTestsHelper.h; sourceTree = "<group>"; };
-		45B814851816297C0006AA05 /* PluginTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginTestsHelper.m; sourceTree = "<group>"; };
+		45B814841816297C0006AA05 /* TaskTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTestsHelper.h; sourceTree = "<group>"; };
+		45B814851816297C0006AA05 /* TaskTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTestsHelper.m; sourceTree = "<group>"; };
 		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
 		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -298,8 +299,9 @@
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
 				45B8148118161A360006AA05 /* WebWindowControllerTestsHelper.h */,
 				45B8148218161A360006AA05 /* WebWindowControllerTestsHelper.m */,
-				45B814841816297C0006AA05 /* PluginTestsHelper.h */,
-				45B814851816297C0006AA05 /* PluginTestsHelper.m */,
+				45B814841816297C0006AA05 /* TaskTestsHelper.h */,
+				45B814851816297C0006AA05 /* TaskTestsHelper.m */,
+				45709B1A18271237005F03E9 /* Plugin+Tests.h */,
 			);
 			path = "Web ConsoleTests";
 			sourceTree = "<group>";
@@ -542,7 +544,7 @@
 				451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */,
 				45B8148318161A360006AA05 /* WebWindowControllerTestsHelper.m in Sources */,
 				45B81480181483400006AA05 /* PluginTests.m in Sources */,
-				45B814861816297C0006AA05 /* PluginTestsHelper.m in Sources */,
+				45B814861816297C0006AA05 /* TaskTestsHelper.m in Sources */,
 				45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
