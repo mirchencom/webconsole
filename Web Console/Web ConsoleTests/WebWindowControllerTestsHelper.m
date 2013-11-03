@@ -15,6 +15,24 @@
 
 @implementation WebWindowControllerTestsHelper
 
++ (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window
+{
+    __block id observer;
+    __block BOOL windowWillClose = NO;
+    observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
+                                                                 object:window
+                                                                  queue:nil
+                                                             usingBlock:^(NSNotification *notification) {
+                                                                 [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                                                                 windowWillClose = YES;
+                                                             }];
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while (!windowWillClose && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+    return windowWillClose;
+}
+
 + (void)closeWindowsAndBlockUntilFinished
 {
     if (![[[WebWindowsController sharedWebWindowsController] webWindowControllers] count]) return;

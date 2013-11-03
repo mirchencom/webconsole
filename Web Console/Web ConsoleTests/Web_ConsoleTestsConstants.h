@@ -8,7 +8,7 @@
 
 #pragma mark - General
 
-#define kRunLongTests 0
+#define kRunLongTests NO
 #define kTestTimeoutInterval 1
 #define kTestLongTimeoutInterval 3
 
@@ -38,3 +38,8 @@
 #pragma mark Ruby Resources
 #define kTestDataRubyHelloWorld @"hello_world"
 #define kTestDataSleepTwoSeconds @"sleep_two_seconds"
+
+
+#pragma mark - Shell Scripts
+#define kTestDataShellScriptExtension @"sh"
+#define kTestDataInterruptFails @"interrupt_fails"

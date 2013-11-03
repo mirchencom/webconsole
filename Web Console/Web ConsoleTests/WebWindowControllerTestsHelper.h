@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface WebWindowControllerTestsHelper : NSObject
-
++ (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window;
 + (void)closeWindowsAndBlockUntilFinished;
-
 @end

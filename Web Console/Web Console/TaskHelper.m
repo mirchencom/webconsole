@@ -27,6 +27,7 @@
     for (NSTask *task in mutableTasks) {
         [task interruptWithCompletionHandler:^(BOOL success) {
             if (!success) {
+                DLog(@"Failed to interrupt a task, trying terminate");
                 [task terminateWithCompletionHandler:^(BOOL success) {
                     NSAssert(success, @"Terminating should always succeed");
                     [mutableTasks removeObject:task];

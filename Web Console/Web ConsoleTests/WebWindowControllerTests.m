@@ -19,7 +19,7 @@
 @interface WebWindowControllerTests : XCTestCase
 @end
 
-@interface WebWindowController (TestingAdditions)
+@interface WebWindowController (WebWindowControllerTests)
 @property (nonatomic, readonly) WebView *webView;
 @end
 
