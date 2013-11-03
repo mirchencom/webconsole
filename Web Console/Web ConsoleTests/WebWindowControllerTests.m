@@ -39,6 +39,8 @@
     [super tearDown];
 }
 
+#pragma mark - HTML & JavaScript
+
 - (void)testLoadHTMLWithBaseURL {
     NSURL *fileURL = [self URLForResource:kTestDataHTMLJQUERYFilename
                             withExtension:kTestDataHTMLExtension

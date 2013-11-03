@@ -12,5 +12,6 @@
 
 + (void)blockUntilTaskFinishes:(NSTask *)task;
 + (void)blockUntilTaskFinishes:(NSTask *)task timeoutInterval:(NSTimeInterval)timeoutInterval;
-
++ (void)blockUntilTasksFinish:(NSArray *)tasks;
++ (void)blockUntilTasksFinish:(NSArray *)tasks timeoutInterval:(NSTimeInterval)timeoutInterval;
 @end
