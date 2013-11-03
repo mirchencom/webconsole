@@ -11,6 +11,7 @@
 #import "Web_ConsoleTestsConstants.h"
 #import "XCTest+BundleResources.h"
 #import "WebWindowControllerTestsHelper.h"
+#import "PluginTestsHelper.h"
 
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
@@ -39,54 +40,64 @@
 - (void)tearDown
 {
     [super tearDown];
+
+    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
 }
 
 - (void)testCloseWindowWithFinishedTask
 {
     Plugin *plugin = [[Plugin alloc] init];
-    
     NSString *commandPath = [self pathForResource:kTestDataRubyHelloWorld
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
-    
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
 
-
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-
     XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
-    
     WebWindowController *webWindowController = webWindowControllers[0];
 
     XCTAssertTrue([webWindowController.tasks count], @"The webWindowController should have a task");
-    
     NSTask *task = webWindowController.tasks[0];
-    
-#warning add an attempt to close the window here?
-    
-    __block id observer;
-    __block BOOL taskDidFinish = NO;
-    observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSTaskDidTerminateNotification
-                                                                 object:task
-                                                                  queue:nil
-                                                             usingBlock:^(NSNotification *notification) {
-                                                                 [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                                 taskDidFinish = YES;
-                                                             }];
-    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
-    while (!taskDidFinish && [loopUntil timeIntervalSinceNow] > 0) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
-    }
 
-    XCTAssertTrue(taskDidFinish, @"The task should have finished");
+    [PluginTestsHelper blockUntilTaskFinishes:task];
 
-    // after the task finished the test should be able to close
     [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    
+    webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    XCTAssertTrue(![webWindowControllers count], @"The plugin should not have a webWindowController");
 }
 
+
+#ifdef kRunLongTests
 - (void)testCloseWindowWithRunningTask
 {
+    Plugin *plugin = [[Plugin alloc] init];
+    NSString *commandPath = [self pathForResource:kTestDataSleepTwoSeconds
+                                           ofType:kTestDataRubyExtension
+                                     subdirectory:kTestDataSubdirectory];
+    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
+    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    XCTAssertTrue([webWindowControllers count], @"The plugin should have a webWindowController");
+    WebWindowController *webWindowController = webWindowControllers[0];
+    
+    [webWindowController.window performClose:self];
+
+    XCTAssertTrue([webWindowController.tasks count], @"The webWindowController should have a task");
+    NSTask *task = webWindowController.tasks[0];
+    
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while (![webWindowController.window attachedSheet] && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+    
+    [PluginTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
+    
+    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    
+    webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    XCTAssertTrue(![webWindowControllers count], @"The plugin should not have a webWindowController");
 }
+#endif
 
 @end

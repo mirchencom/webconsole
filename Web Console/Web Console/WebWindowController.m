@@ -66,7 +66,18 @@
                           modalDelegate:self
                          didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                             contextInfo:NULL];
+
+        
+        double delayInSeconds = .5;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            NSLog(@"self.window = %@", [self.window attachedSheet]);
+        });
+
+        
         return NO;
+
+    
     }
     
     return YES;

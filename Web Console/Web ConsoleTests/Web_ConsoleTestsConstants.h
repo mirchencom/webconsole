@@ -8,12 +8,13 @@
 
 #pragma mark - General
 
+#define kRunLongTests 0
 #define kTestTimeoutInterval 1
+#define kTestLongTimeoutInterval 3
 
 #pragma mark - Test Data
 
 #define kTestDataSubdirectory @"Data"
-
 
 #pragma mark - HTML
 #define kTestDataHTMLExtension @"html"
@@ -36,3 +37,4 @@
 #define kTestDataRubyExtension @"rb"
 #pragma mark Ruby Resources
 #define kTestDataRubyHelloWorld @"hello_world"
+#define kTestDataSleepTwoSeconds @"sleep_two_seconds"
