@@ -142,12 +142,22 @@
     XCTAssertEqualObjects(firstWebWindowController, webWindowControllers[0], @"The first WebWindowController should still be at the first index.");
     XCTAssertNotEqualObjects(firstWebWindowController, secondWebWindowController, @"The WebWindowControllers should not be equal.");
 
-    // TODO: Get orderedWindows property
-    // TODO: assert that the first web window controller is behind the second
-    NSArray *orderedWindows = [plugin orderedWindows];
-    XCTAssertTrue([orderedWindows containsObject:firstWebWindowController.window], @"The ordered NSWindows should contain the first WebWindowControllers NSWindow.");
-    XCTAssertTrue([orderedWindows containsObject:secondWebWindowController.window], @"The ordered NSWindows should contain the second WebWindowControllers NSWindow.");
+    NSArray *pluginOrderedWindows = [plugin orderedWindows];
+    XCTAssertTrue([pluginOrderedWindows containsObject:firstWebWindowController.window], @"The plugin ordered NSWindows should contain the first WebWindowControllers NSWindow.");
+    XCTAssertTrue([pluginOrderedWindows containsObject:secondWebWindowController.window], @"The plugin ordered NSWindows should contain the second WebWindowControllers NSWindow.");
+    NSUInteger pluginIndexOfFirst = [pluginOrderedWindows indexOfObject:firstWebWindowController.window];
+    NSUInteger pluginIndexOfsecond = [pluginOrderedWindows indexOfObject:secondWebWindowController.window];
+
+    NSArray *applicationOrderedWindows = [[NSApplication sharedApplication] orderedWindows];
+    XCTAssertTrue([applicationOrderedWindows containsObject:firstWebWindowController.window], @"The application ordered NSWindows should contain the first WebWindowControllers NSWindow.");
+    XCTAssertTrue([applicationOrderedWindows containsObject:secondWebWindowController.window], @"The application ordered NSWindows should contain the second WebWindowControllers NSWindow.");
+    NSUInteger applicationIndexOfFirst = [applicationOrderedWindows indexOfObject:firstWebWindowController.window];
+    NSUInteger applicationIndexOfsecond = [applicationOrderedWindows indexOfObject:secondWebWindowController.window];
     
+    BOOL orderMatches = (pluginIndexOfFirst > pluginIndexOfsecond) == (applicationIndexOfFirst > applicationIndexOfsecond);
+    XCTAssert(orderMatches, @"The order of the NSWindows returned by the Plugin should match the order returned by the NSApplication.");
+    
+    // Clean up
     NSArray *tasks = [[WebWindowsController sharedWebWindowsController] tasks];
     XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two NSTasks.");
     [PluginTestsHelper blockUntilTasksFinish:tasks];
