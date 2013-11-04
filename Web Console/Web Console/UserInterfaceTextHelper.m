@@ -10,7 +10,7 @@
 
 @implementation UserInterfaceTextHelper
 
-+ (NSString *)closeWindowWithTasksInformativeTextForTasks:(NSArray *)tasks
++ (NSString *)informativeTextForCloseWindowWithTasks:(NSArray *)tasks
 {
     NSMutableString *commands = [NSMutableString stringWithString:@""];
     NSArray *launchPathStrings = [tasks valueForKey:@"launchPath"];

@@ -11,4 +11,5 @@
 @interface NSTask (Termination)
 - (void)interruptWithCompletionHandler:(void (^)(BOOL success))completionHandler;
 - (void)terminateWithCompletionHandler:(void (^)(BOOL success))completionHandler;
+- (void)terminateUseInterrupt:(BOOL)useInterrupt completionHandler:(void (^)(BOOL success))completionHandler;
 @end

@@ -9,7 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface UserInterfaceTextHelper : NSObject
-
-+ (NSString *)closeWindowWithTasksInformativeTextForTasks:(NSArray *)tasks;
-
++ (NSString *)informativeTextForCloseWindowWithTasks:(NSArray *)tasks;
 @end

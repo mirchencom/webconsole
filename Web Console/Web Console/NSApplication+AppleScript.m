@@ -13,9 +13,7 @@
 @implementation NSApplication (AppleScript)
 
 - (NSArray *)plugins
-{
-//    NSLog()
-    
+{    
     return [[PluginManager sharedPluginManager] plugins];
 }
 

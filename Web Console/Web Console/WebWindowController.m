@@ -60,7 +60,7 @@
         [alert addButtonWithTitle:@"Cancel"];
         [alert setMessageText:@"Do you want to close this window?"];
         
-        NSString *informativeText = [UserInterfaceTextHelper closeWindowWithTasksInformativeTextForTasks:self.tasks];
+        NSString *informativeText = [UserInterfaceTextHelper informativeTextForCloseWindowWithTasks:self.tasks];
         [alert setInformativeText:informativeText];
         [alert beginSheetModalForWindow:self.window
                           modalDelegate:self
