@@ -26,7 +26,7 @@
     while (![window isVisible] && [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
-    NSAssert([window isVisible], @"The NSWindow should be visible");
+    NSAssert([window isVisible], @"The NSWindow should be visible.");
 }
 
 

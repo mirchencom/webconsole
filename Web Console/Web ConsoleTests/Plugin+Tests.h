@@ -13,4 +13,7 @@
          withArguments:(NSArray *)arguments
       withResourcePath:(NSString *)resourcePath
        inDirectoryPath:(NSString *)directoryPath;
+- (NSString *)commandPath;
+- (NSString *)command;
+- (NSString *)resourcePath;
 @end

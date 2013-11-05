@@ -12,6 +12,14 @@
 #define kTestTimeoutInterval 1
 #define kTestLongTimeoutInterval 3
 
+#pragma mark - Plugin
+
+#define kTestPluginName @"Ack"
+#define kTestPluginCommand @"wcack/wcack.rb"
+
+
+
+
 #pragma mark - Test Data
 
 #define kTestDataSubdirectory @"Data"

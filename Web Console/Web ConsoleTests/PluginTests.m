@@ -19,6 +19,7 @@
 #import "TaskTestsHelper.h"
 
 #import "Plugin.h"
+#import "PluginManager.h"
 #import "Plugin+Tests.h"
 
 @interface PluginTests : XCTestCase
@@ -40,6 +41,20 @@
     [super tearDown];
 }
 
+#pragma mark - Plugin Bundle
+
+- (void)testPlugin
+{
+    Plugin *plugin = [[PluginManager sharedPluginManager] pluginWithName:kTestPluginName];
+    XCTAssertEqualObjects([plugin command], kTestPluginCommand, @"The Plugin's command should match the test plugin command.");
+    XCTAssertTrue([[plugin commandPath] hasPrefix:[plugin resourcePath]], @"The Plugin's command path should begin with it's resource path.");
+    XCTAssertTrue([[plugin commandPath] hasSuffix:[plugin command]], @"The Plugin's command path should end with it's command.");
+
+    BOOL isDir;
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[plugin commandPath] isDirectory:&isDir];
+    XCTAssertTrue(fileExists, @"A file should exist at the Plugin's command path.");
+    XCTAssertFalse(isDir, @"The Plugin's command path should not be a directory.");
+}
 
 #pragma mark - Interrupt & Termination
 
