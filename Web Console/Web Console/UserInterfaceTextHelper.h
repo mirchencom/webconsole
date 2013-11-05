@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kCommandsKey @"launchPath"
+#define kLaunchPathKey @"launchPath"
 
 @interface UserInterfaceTextHelper : NSObject
 + (NSString *)informativeTextForCloseWindowForCommands:(NSArray *)commandPaths;

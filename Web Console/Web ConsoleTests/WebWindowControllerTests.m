@@ -23,8 +23,13 @@
 
 #import "Plugin+Tests.h"
 
+#import "PluginManager.h"
+
+#import "UserInterfaceTextHelper.h"
+
 
 @interface WebWindowControllerTests : XCTestCase
++ (void)testInformativeText:(NSString *)informativeText forCommandPaths:(NSArray *)commandPaths;
 @end
 
 @interface WebWindowController (Tests)
@@ -147,6 +152,36 @@
     XCTAssertTrue(webWindowControllersCount == 2, @"There should be two WebWindowControllers. %lu", webWindowControllersCount);
 }
 
+
+#pragma mark - UserInterfaceTextHelper
+
+- (void)testInformativeTextForCloseWindowForCommands
+{
+    NSString *informativeText = [UserInterfaceTextHelper informativeTextForCloseWindowForCommands:@[]];
+    XCTAssertNil(informativeText, @"The informative text should be nil for an empty NSArray.");
+    
+    Plugin *plugin = [[PluginManager sharedPluginManager] pluginWithName:kTestPluginName];
+    NSArray *commandPaths = @[[plugin commandPath]];
+    informativeText = [UserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
+    [WebWindowControllerTests testInformativeText:informativeText forCommandPaths:commandPaths];
+
+    PluginManager *pluginManager = [PluginManager sharedPluginManager];
+    NSArray *plugins = [pluginManager plugins];
+    commandPaths = [plugins valueForKey:kPluginCommandPathKey];
+    informativeText = [UserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
+    [WebWindowControllerTests testInformativeText:informativeText forCommandPaths:commandPaths];
+}
+
++ (void)testInformativeText:(NSString *)informativeText forCommandPaths:(NSArray *)commandPaths
+{
+    NSRange doubleSpaceRange = [informativeText rangeOfString:@"  "];
+    NSAssert(doubleSpaceRange.location == NSNotFound, @"The informative text should not contain two spaces in a row.");
+    for (NSString *commandPath in commandPaths) {
+        NSString *command = [commandPath lastPathComponent];
+        NSRange commandRange = [informativeText rangeOfString:command];
+        NSAssert(commandRange.location != NSNotFound, @"The informative text should contain the command.");
+    }
+}
 
 #pragma mark - Closing Windows
 

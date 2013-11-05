@@ -57,7 +57,7 @@
 {
     if ([self hasTasks]) {
         
-        NSArray *commands = [self.tasks valueForKey:kCommandsKey];
+        NSArray *commands = [self.tasks valueForKey:kLaunchPathKey];
 
         if (![commands count] && [self.tasks count]) return YES; // Thread protection for if the last task ended after the hasTasks if statement
         

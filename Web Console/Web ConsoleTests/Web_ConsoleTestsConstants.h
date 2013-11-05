@@ -17,7 +17,7 @@
 
 #define kTestPluginName @"Ack"
 #define kTestPluginCommand @"wcack/wcack.rb"
-
+#define kPluginCommandPathKey @"commandPath"
 
 #pragma mark - Test Data
 
