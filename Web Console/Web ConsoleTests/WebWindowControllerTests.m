@@ -189,23 +189,30 @@
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
-    
+    [WebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
+
     [webWindowController.window performClose:self];
-    
     XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
     NSTask *task = webWindowController.tasks[0];
     
     // TODO: I couldn't figure out a way to test if a sheet has appeared here, testing for [webWindowController attachedSheet] wouldn't work because my thread blocking methods prevent the sheet from being returned by that call.
-    
+
     BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
+    [WebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
+#warning Update to [webWindowController.window endSheet:[webWindowController.window attachedSheet]]; in Mavericks
+    [NSApp endSheet:[webWindowController.window attachedSheet]];
+
     [TaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
+    XCTAssertFalse([webWindowController.tasks count], @"The WebWindowController should not have an NSTask.");
     
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     
-    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    [webWindowController.window performClose:self];
+    windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    XCTAssert(windowWillClose, @"The NSWindow should have closed.");
     
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertFalse([webWindowControllers count], @"The Plugin should not have a WebWindowController.");
@@ -230,7 +237,6 @@
     // TODO: When it is possible for a webWindowController to have multiple tasks, a second task should be started on this webWindowController to ensure that recursive calls to terminateTasksAndCloseWindow work.
     
     BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
-    
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
 }
 
@@ -246,10 +252,11 @@
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    
+
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
+    [WebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
     
     shouldTerminate = [ApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
     XCTAssertFalse(shouldTerminate, @"The NSApplication should not terminate with a running task.");
@@ -260,16 +267,22 @@
     BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
+    [WebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
+#warning Update to [webWindowController.window endSheet:[webWindowController.window attachedSheet]]; in Mavericks
+    [NSApp endSheet:[webWindowController.window attachedSheet]];
+    
     [TaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
     
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     
     shouldTerminate = [ApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
+    XCTAssert(shouldTerminate, @"The NSApplication should terminate after the NSTask finishes running.");
 
+    // Clean up
+    [webWindowController.window performClose:self];
     windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
-
     webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertFalse([webWindowControllers count], @"The Plugin should not have a WebWindowController.");
 }

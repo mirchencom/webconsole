@@ -10,17 +10,15 @@
 
 @implementation UserInterfaceTextHelper
 
-+ (NSString *)informativeTextForCloseWindowWithTasks:(NSArray *)tasks
++ (NSString *)informativeTextForCloseWindowForCommands:(NSArray *)commandPaths
 {
-    NSMutableString *commands = [NSMutableString stringWithString:@""];
-    NSArray *launchPathStrings = [tasks valueForKey:@"launchPath"];
-    for (NSString *launchPathString in launchPathStrings) {
-        NSString *command = [NSString stringWithFormat:@"%@,", [launchPathString lastPathComponent]];
-        commands = [NSMutableString stringWithFormat:@"%@ %@", commands, command];
+    NSMutableString *commandsText = [NSMutableString stringWithString:@""];
+    for (NSString *commandPath in commandPaths) {
+        NSString *commandText = [NSString stringWithFormat:@"%@,", [commandPath lastPathComponent]];
+        commandsText = [NSMutableString stringWithFormat:@"%@ %@", commandsText, commandText];
     }
-    [commands deleteCharactersInRange:NSMakeRange([commands length] - 1, 1)];
-    return [NSString stringWithFormat:@"Closing this window will terminate the following running commands: %@.",  commands];
-    
+    [commandsText deleteCharactersInRange:NSMakeRange([commandsText length] - 1, 1)];
+    return [NSString stringWithFormat:@"Closing this window will terminate the following running commands: %@.", commandsText];
 }
 
 @end

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface WebWindowControllerTestsHelper : NSObject
++ (void)blockUntilWindowHasAttachedSheet:(NSWindow *)window;
++ (void)blockUntilWindowIsVisible:(NSWindow *)window;
 + (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window;
 + (void)closeWindowsAndBlockUntilFinished;
 @end

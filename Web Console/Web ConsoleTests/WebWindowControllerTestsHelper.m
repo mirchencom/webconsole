@@ -15,8 +15,40 @@
 
 @implementation WebWindowControllerTestsHelper
 
+
+#pragma mark - Window Visible
+
++ (void)blockUntilWindowIsVisible:(NSWindow *)window
+{
+    if ([window isVisible]) return;
+    
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while (![window isVisible] && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+    NSAssert([window isVisible], @"The NSWindow should be visible");
+}
+
+
+#pragma mark - Attached Sheet
+
++ (void)blockUntilWindowHasAttachedSheet:(NSWindow *)window
+{
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while (![window attachedSheet] && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+
+    NSAssert([window attachedSheet], @"The NSWindow should have an attached sheet.");
+}
+
+
+#pragma mark - Window Closes
+
 + (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window
 {
+    if (![window isVisible]) return YES;
+    
     __block id observer;
     __block BOOL windowWillClose = NO;
     observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
@@ -30,11 +62,13 @@
     while (!windowWillClose && [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
+    if (!windowWillClose) [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    
     return windowWillClose;
 }
 
 + (void)closeWindowsAndBlockUntilFinished
-{
+{    
     if (![[[WebWindowsController sharedWebWindowsController] webWindowControllers] count]) return;
     
     NSMutableArray *observers = [NSMutableArray array];

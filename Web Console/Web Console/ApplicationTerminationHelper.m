@@ -11,16 +11,16 @@
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
 
+@interface ApplicationTerminationHelper ()
++ (NSMutableArray *)webWindowControllersWithTasks;
+@end
+
 @implementation ApplicationTerminationHelper
 
-+ (NSMutableArray *)webWindowControllersWithTasks
++ (NSArray *)webWindowControllersWithTasks
 {
-    NSMutableArray *webWindowControllersWithTasks = [[[WebWindowsController sharedWebWindowsController] webWindowControllers] mutableCopy];
-    
-    NSPredicate *tasksPredicate = [NSPredicate predicateWithFormat:@"hasTasks == YES"];
-    [webWindowControllersWithTasks filteredArrayUsingPredicate:tasksPredicate];
-    
-    return webWindowControllersWithTasks;
+    NSPredicate *tasksPredicate = [NSPredicate predicateWithFormat:@"hasTasks == %@", [NSNumber numberWithBool:YES]];
+    return [[[WebWindowsController sharedWebWindowsController] webWindowControllers] filteredArrayUsingPredicate:tasksPredicate];
 }
 
 + (BOOL)applicationShouldTerminateAndManageWebWindowControllersWithTasks
