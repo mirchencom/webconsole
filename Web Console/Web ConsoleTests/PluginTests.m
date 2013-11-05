@@ -17,6 +17,7 @@
 
 #import "NSTask+Termination.h"
 #import "TaskTestsHelper.h"
+#import "TaskHelper.h"
 
 #import "Plugin.h"
 #import "PluginManager.h"
@@ -41,6 +42,7 @@
     [super tearDown];
 }
 
+
 #pragma mark - Plugin Bundle
 
 - (void)testPlugin
@@ -55,6 +57,7 @@
     XCTAssertTrue(fileExists, @"A file should exist at the Plugin's command path.");
     XCTAssertFalse(isDir, @"The Plugin's command path should not be a directory.");
 }
+
 
 #pragma mark - Interrupt & Termination
 
@@ -71,7 +74,6 @@
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
-    
     XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
     NSTask *task = webWindowController.tasks[0];
 
@@ -102,7 +104,6 @@
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
-    
     XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
     NSTask *task = webWindowController.tasks[0];
     
@@ -123,6 +124,45 @@
     
     XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
     XCTAssertFalse([webWindowController.tasks count], @"The WebWindowController should not have any NSTasks.");
+}
+
+- (void)testTerminateTasks
+{
+    Plugin *firstPlugin = [[Plugin alloc] init];
+    NSString *firstCommandPath = [self pathForResource:kTestDataSleepTwoSeconds
+                                           ofType:kTestDataRubyExtension
+                                     subdirectory:kTestDataSubdirectory];
+    [firstPlugin runCommandPath:firstCommandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    NSArray *firstWebWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:firstPlugin];
+    XCTAssertTrue([firstWebWindowControllers count], @"The Plugin should have a WebWindowController.");
+    WebWindowController *firstWebWindowController = firstWebWindowControllers[0];
+    XCTAssertTrue([firstWebWindowController.tasks count], @"The WebWindowController should have an NSTask.");
+    NSTask *firstTask = firstWebWindowController.tasks[0];
+    
+    Plugin *secondPlugin = [[Plugin alloc] init];
+    NSString *secondCommandPath = [self pathForResource:kTestDataInterruptFails
+                                           ofType:kTestDataShellScriptExtension
+                                     subdirectory:kTestDataSubdirectory];
+    [secondPlugin runCommandPath:secondCommandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    NSArray *secondWebWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:secondPlugin];
+    XCTAssertTrue([secondWebWindowControllers count], @"The Plugin should have a WebWindowController.");
+    WebWindowController *secondWebWindowController = secondWebWindowControllers[0];
+    XCTAssertTrue([secondWebWindowController.tasks count], @"The WebWindowController should have an NSTask.");
+    NSTask *secondTask = secondWebWindowController.tasks[0];
+    
+    XCTAssertTrue([firstTask isRunning], @"The first NSTask should be running.");
+    XCTAssertTrue([secondTask isRunning], @"The second NSTask should be running.");
+    
+    __block BOOL completionHandlerRan = NO;
+    [TaskHelper terminateTasks:@[firstTask, secondTask] completionHandler:^(BOOL success) {
+        XCTAssert(success, @"Terminating the NSTasks should have suceeded.");
+        completionHandlerRan = YES;
+    }];
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while (!completionHandlerRan && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+    XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
 }
 
 
