@@ -8,7 +8,7 @@
 
 #pragma mark - General
 
-#define kRunLongTests YES
+#define kRunLongTests NO
 #define kTestTimeoutInterval 1
 #define kTestLongTimeoutInterval 3
 
