@@ -153,6 +153,26 @@
 }
 
 
+#pragma mark - Run Plugin
+
+- (void)testPlugin
+{
+    NSString *commandPath = [self pathForResource:kTestDataRubyHelloWorld
+                                           ofType:kTestDataRubyExtension
+                                     subdirectory:kTestDataSubdirectory];
+    Plugin *plugin = [[Plugin alloc] init];
+    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The plugin should have one WebWindowController.");
+    WebWindowController *webWindowController = webWindowControllers[0];
+    
+    XCTAssertEqual(webWindowController.plugin, plugin, @"The WebWindowController's Plugin should equal the Plugin.");
+
+    // Clean up
+    [TaskTestsHelper blockUntilTasksFinish:webWindowController.tasks];
+}
+
+
 #pragma mark - UserInterfaceTextHelper
 
 - (void)testInformativeTextForCloseWindowForCommands

@@ -24,7 +24,7 @@
 + (NSTask *)taskRunningCommandPath:(NSString *)commandPath
 {
     NSTask *task;
-    [self webWindowControllerRunningCommandPath:commandPath task:&task];
+    (void)[self webWindowControllerRunningCommandPath:commandPath task:&task];
     return task;
 }
 
