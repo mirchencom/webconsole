@@ -59,23 +59,26 @@
 }
 
 
+#pragma mark - AppleScript
+
+- (void)testReadFromStandardInput
+{
+    // TODO: Write this
+}
+
+
 #pragma mark - Interrupt & Termination
 
 - (void)testInterrupt
 {
     // TODO: Right now there it isn't possible for a WebWindowController to run multiple tasks, when this is possible, this test should be updated to use mutliple tasks.
-    
-    Plugin *plugin = [[Plugin alloc] init];
+
     NSString *commandPath = [self pathForResource:kTestDataSleepTwoSeconds
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
-    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
-    WebWindowController *webWindowController = webWindowControllers[0];
-    XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
-    NSTask *task = webWindowController.tasks[0];
+    NSTask *task;
+    WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+                                                                                                                task:&task];
 
     __block BOOL completionHandlerRan = NO;
     [task interruptWithCompletionHandler:^(BOOL success) {
@@ -95,18 +98,14 @@
 
 - (void)testInterruptAndTerminate
 {
-    Plugin *plugin = [[Plugin alloc] init];
+
     NSString *commandPath = [self pathForResource:kTestDataInterruptFails
                                            ofType:kTestDataShellScriptExtension
                                      subdirectory:kTestDataSubdirectory];
-    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
-    WebWindowController *webWindowController = webWindowControllers[0];
-    XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
-    NSTask *task = webWindowController.tasks[0];
-    
+    NSTask *task;
+    WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+                                                                                                                task:&task];
+
     __block BOOL completionHandlerRan = NO;
     [task interruptWithCompletionHandler:^(BOOL success) {
         // TODO: For some reason terminating the task is actually succeeding here even though it should fail. If I can get this to fail, write the rest of the test to do a terminate after failing an interrupt.
@@ -128,27 +127,15 @@
 
 - (void)testTerminateTasks
 {
-    Plugin *firstPlugin = [[Plugin alloc] init];
     NSString *firstCommandPath = [self pathForResource:kTestDataSleepTwoSeconds
-                                           ofType:kTestDataRubyExtension
-                                     subdirectory:kTestDataSubdirectory];
-    [firstPlugin runCommandPath:firstCommandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    NSArray *firstWebWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:firstPlugin];
-    XCTAssertTrue([firstWebWindowControllers count], @"The Plugin should have a WebWindowController.");
-    WebWindowController *firstWebWindowController = firstWebWindowControllers[0];
-    XCTAssertTrue([firstWebWindowController.tasks count], @"The WebWindowController should have an NSTask.");
-    NSTask *firstTask = firstWebWindowController.tasks[0];
-    
-    Plugin *secondPlugin = [[Plugin alloc] init];
+                                                ofType:kTestDataRubyExtension
+                                          subdirectory:kTestDataSubdirectory];
+    NSTask *firstTask = [WebWindowControllerTestsHelper taskRunningCommandPath:firstCommandPath];
+
     NSString *secondCommandPath = [self pathForResource:kTestDataInterruptFails
-                                           ofType:kTestDataShellScriptExtension
-                                     subdirectory:kTestDataSubdirectory];
-    [secondPlugin runCommandPath:secondCommandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    NSArray *secondWebWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:secondPlugin];
-    XCTAssertTrue([secondWebWindowControllers count], @"The Plugin should have a WebWindowController.");
-    WebWindowController *secondWebWindowController = secondWebWindowControllers[0];
-    XCTAssertTrue([secondWebWindowController.tasks count], @"The WebWindowController should have an NSTask.");
-    NSTask *secondTask = secondWebWindowController.tasks[0];
+                                                 ofType:kTestDataShellScriptExtension
+                                           subdirectory:kTestDataSubdirectory];
+    NSTask *secondTask = [WebWindowControllerTestsHelper taskRunningCommandPath:secondCommandPath];
     
     XCTAssertTrue([firstTask isRunning], @"The first NSTask should be running.");
     XCTAssertTrue([secondTask isRunning], @"The second NSTask should be running.");
@@ -170,10 +157,11 @@
 
 - (void)testOrderedWindows
 {
-    Plugin *plugin = [[Plugin alloc] init];
+
     NSString *commandPath = [self pathForResource:kTestDataRubyHelloWorld
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
+    Plugin *plugin = [[Plugin alloc] init];
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The plugin should have one WebWindowController.");

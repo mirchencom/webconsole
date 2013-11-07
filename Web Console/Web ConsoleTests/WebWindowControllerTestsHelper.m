@@ -13,7 +13,40 @@
 #import "WebWindowsController.h"
 #import "WebWindowController.h"
 
+#import "Plugin.h"
+#import "Plugin+Tests.h"
+
 @implementation WebWindowControllerTestsHelper
+
+
+#pragma mark - Running Tasks
+
++ (NSTask *)taskRunningCommandPath:(NSString *)commandPath
+{
+    NSTask *task;
+    [self webWindowControllerRunningCommandPath:commandPath task:&task];
+    return task;
+}
+
++ (WebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath
+{
+    return [self webWindowControllerRunningCommandPath:commandPath task:nil];
+}
+
++ (WebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
+{
+    Plugin *plugin = [[Plugin alloc] init];
+    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    
+    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    NSAssert([webWindowControllers count], @"The Plugin should have a WebWindowController.");
+    WebWindowController *webWindowController = webWindowControllers[0];
+    NSAssert([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
+    
+    if (task) *task = webWindowController.tasks[0];
+    
+    return webWindowController;
+}
 
 
 #pragma mark - Window Visible

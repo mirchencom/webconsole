@@ -19,6 +19,7 @@
 #define kTestPluginCommand @"wcack/wcack.rb"
 #define kPluginCommandPathKey @"commandPath"
 
+
 #pragma mark - Test Data
 
 #define kTestDataSubdirectory @"Data"
@@ -50,3 +51,4 @@
 #pragma mark - Shell Scripts
 #define kTestDataShellScriptExtension @"sh"
 #define kTestDataInterruptFails @"interrupt_fails"
+#define kTestDataCat @"cat"
