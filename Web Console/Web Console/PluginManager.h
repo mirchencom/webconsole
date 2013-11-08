@@ -11,9 +11,24 @@
 @class Plugin;
 
 @interface PluginManager : NSObject
+
+/*! Returns a shared singleton PluginManager object.
+ */
 + (id)sharedPluginManager;
+
+/*! Loads built-in Plugins.
+ */
 - (void)loadPlugins;
-- (Plugin *)addedPluginWithPath:(NSString *)path;
+
+/*! Returns the Plugin with name, or nil if no Plugin with that name exists.
+ * \param name The name of the Plugin to return.
+ * \returns The Plugin with name.
+ */
 - (Plugin *)pluginWithName:(NSString *)name;
+
+/*! Returns an array of Plugin objects.
+ * \returns An array of Plugin objects.
+ */
 - (NSArray *)plugins;
+
 @end

@@ -18,6 +18,8 @@
 @property (weak) IBOutlet WebView *webView;
 @property (nonatomic, strong) void (^completionHandler)(BOOL success);
 - (void)terminateTasksAndCloseWindow;
+@property (nonatomic, strong) NSMutableArray *mutableTasks;
+@property (nonatomic, strong) Plugin *plugin;
 @end
 
 @implementation WebWindowController
@@ -57,9 +59,9 @@
 {
     if ([self hasTasks]) {
         
-        NSArray *commands = [self.tasks valueForKey:kLaunchPathKey];
+        NSArray *commands = [self.mutableTasks valueForKey:kLaunchPathKey];
 
-        if (![commands count] && [self.tasks count]) return YES; // Thread protection for if the last task ended after the hasTasks if statement
+        if (![commands count] && [self.mutableTasks count]) return YES; // Thread protection for if the last task ended after the hasTasks if statement
         
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"Close"];
@@ -85,7 +87,7 @@
     [[WebWindowsController sharedWebWindowsController] removeWebWindowController:self];
 }
 
-#pragma mark - modalDelegate
+#pragma mark - Modal Delegate
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
@@ -96,7 +98,7 @@
 
 - (void)terminateTasksAndCloseWindow
 {
-    [TaskHelper terminateTasks:self.tasks completionHandler:^(BOOL success) {
+    [TaskHelper terminateTasks:self.mutableTasks completionHandler:^(BOOL success) {
         NSAssert(success, @"Terminating NSTasks should always succeed.");
         if (![self hasTasks]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -155,9 +157,14 @@
 
 - (NSArray *)tasks
 {
-    if (_tasks) return _tasks;    
-    _tasks = [NSMutableArray array];
-    return _tasks;
+    return [NSArray arrayWithArray:self.mutableTasks];
+}
+
+- (NSMutableArray *)mutableTasks
+{
+    if (_mutableTasks) return _mutableTasks;    
+    _mutableTasks = [NSMutableArray array];
+    return _mutableTasks;
 }
 
 - (BOOL)hasTasks

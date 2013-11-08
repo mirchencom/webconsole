@@ -11,5 +11,11 @@
 #define kLaunchPathKey @"launchPath"
 
 @interface UserInterfaceTextHelper : NSObject
+
+/*! Returns informative text for closing windows running commands.
+ * \param commandPaths An array of command paths.
+ * \returns The informative text.
+ */
 + (NSString *)informativeTextForCloseWindowForCommands:(NSArray *)commandPaths;
+
 @end

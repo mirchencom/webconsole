@@ -18,6 +18,8 @@
     [self terminateUseInterrupt:YES completionHandler:completionHandler];
 }
 
+#pragma mark - Private
+
 - (void)terminateUseInterrupt:(BOOL)useInterrupt completionHandler:(void (^)(BOOL success))completionHandler {
 
     __block BOOL didTerminate = NO;
@@ -26,11 +28,9 @@
                                                                  object:self
                                                                   queue:nil
                                                              usingBlock:^(NSNotification *notification) {
-                                                                 NSLog(@"NSTaskDidTerminateNotification");
                                                                  NSAssert(![self isRunning], @"The NSTask should not be running.");
                                                                  didTerminate = YES;
                                                                  completionHandler(YES);
-                                                                 
                                                                  [[NSNotificationCenter defaultCenter] removeObserver:observer];
                                                              }];
     

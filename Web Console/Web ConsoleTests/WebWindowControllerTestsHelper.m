@@ -41,7 +41,7 @@
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     NSAssert([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     WebWindowController *webWindowController = webWindowControllers[0];
-    NSAssert([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
+    NSAssert([webWindowController hasTasks], @"The WebWindowController should have an NSTask.");
     
     if (task) *task = webWindowController.tasks[0];
     

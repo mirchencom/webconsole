@@ -14,6 +14,7 @@
 @interface PluginManager ()
 @property (nonatomic, strong) NSMutableDictionary *nameToPluginDictionary;
 - (void)loadPluginsInDirectory:(NSString *)plugInsPath;
+- (Plugin *)addedPluginWithPath:(NSString *)path;
 @end
 
 @implementation PluginManager

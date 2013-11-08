@@ -10,6 +10,9 @@
 
 @interface ApplicationTerminationHelper : NSObject
 
+/*! Returns whether the application should terminate, and manages replyToApplicationShouldTerminate:.
+ * \return YES if the application should terminate, otherwise NO.
+ */
 + (BOOL)applicationShouldTerminateAndManageWebWindowControllersWithTasks;
 
 @end

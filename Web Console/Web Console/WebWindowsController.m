@@ -17,6 +17,10 @@
 @property (nonatomic, strong) NSMutableArray *mutableWebWindowControllers;
 @end
 
+@interface WebWindowController (WebWindowsController)
+@property (nonatomic, strong) Plugin *plugin;
+@end
+
 @implementation WebWindowsController
 
 + (id)sharedWebWindowsController

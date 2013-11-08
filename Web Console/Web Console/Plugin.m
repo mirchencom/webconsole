@@ -27,6 +27,10 @@
        inDirectoryPath:(NSString *)directoryPath;
 @end
 
+@interface WebWindowController (Plugin)
+@property (nonatomic, strong) NSMutableArray *mutableTasks;
+@end
+
 @implementation Plugin
 
 - (id)initWithPath:(NSString *)path
@@ -86,6 +90,7 @@
     return [[WebWindowsController sharedWebWindowsController] windowsForPlugin:self];
 }
 
+
 #pragma mark - Task
 
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath
@@ -124,7 +129,7 @@
     // Web Window Controller
     WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
     environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
-    [webWindowController.tasks addObject:task];
+    [webWindowController.mutableTasks addObject:task];
     [task setEnvironment:environmentDictionary];
     
     // Standard Output
@@ -152,7 +157,7 @@
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
         [[task.standardError fileHandleForReading] setReadabilityHandler:nil];
         
-        [webWindowController.tasks removeObject:task];
+        [webWindowController.mutableTasks removeObject:task];
         
         // As per NSTask.h, NSTaskDidTerminateNotification is not posted if a termination handler is set, so post it here.
         [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
@@ -195,7 +200,7 @@
     
     WebWindowController *webWindowController = webWindowControllers[0];
 
-    if (![webWindowController.tasks count]) return;
+    if (![webWindowController hasTasks]) return;
     
     NSTask *task = webWindowController.tasks[0];
 

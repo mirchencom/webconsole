@@ -247,7 +247,7 @@
     [NSApp endSheet:[webWindowController.window attachedSheet]];
 
     [TaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
-    XCTAssertFalse([webWindowController.tasks count], @"The WebWindowController should not have an NSTask.");
+    XCTAssertFalse([webWindowController hasTasks], @"The WebWindowController should not have an NSTask.");
     
     Plugin *plugin = webWindowController.plugin;
     NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
@@ -268,7 +268,7 @@
                                      subdirectory:kTestDataSubdirectory];
     WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath];
     
-    XCTAssertTrue([webWindowController.tasks count], @"The WebWindowController should have an NSTask.");
+    XCTAssertTrue([webWindowController hasTasks], @"The WebWindowController should have an NSTask.");
     
     [webWindowController terminateTasksAndCloseWindow];
     

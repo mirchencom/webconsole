@@ -64,6 +64,10 @@
 - (void)testReadFromStandardInput
 {
     // TODO: Write this
+
+    Plugin *pluginTest = [[Plugin alloc] initWithPath:@"path"];
+    NSLog(@"pluginTest.name = %@", pluginTest.name);
+
 }
 
 
@@ -72,7 +76,7 @@
 - (void)testInterrupt
 {
     // TODO: Right now there it isn't possible for a WebWindowController to run multiple tasks, when this is possible, this test should be updated to use mutliple tasks.
-
+    
     NSString *commandPath = [self pathForResource:kTestDataSleepTwoSeconds
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
@@ -93,7 +97,7 @@
     XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
 
     XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
-    XCTAssertFalse([webWindowController.tasks count], @"The WebWindowController should not have any NSTasks.");
+    XCTAssertFalse([webWindowController hasTasks], @"The WebWindowController should not have any NSTasks.");
 }
 
 - (void)testInterruptAndTerminate
@@ -122,7 +126,7 @@
     // TODO: If I can figure out a way to run a script that doesn't interrupt, then put the terminate here
     
     XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
-    XCTAssertFalse([webWindowController.tasks count], @"The WebWindowController should not have any NSTasks.");
+    XCTAssertFalse([webWindowController hasTasks], @"The WebWindowController should not have any NSTasks.");
 }
 
 - (void)testTerminateTasks
@@ -157,7 +161,6 @@
 
 - (void)testOrderedWindows
 {
-
     NSString *commandPath = [self pathForResource:kTestDataRubyHelloWorld
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];

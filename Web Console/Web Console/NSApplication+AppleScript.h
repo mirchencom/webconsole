@@ -9,5 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSApplication (AppleScript)
+
+#pragma mark - AppleScript
 - (NSArray *)plugins;
+
 @end
