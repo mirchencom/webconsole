@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WebWindowControllerTestsHelper.h"
+#import "WCLWebWindowControllerTestsHelper.h"
 
 #import "Web_ConsoleTestsConstants.h"
 
-#import "WebWindowsController.h"
-#import "WebWindowController.h"
+#import "WCLWebWindowsController.h"
+#import "WCLWebWindowController.h"
 
-#import "Plugin.h"
-#import "Plugin+Tests.h"
+#import "WCLPlugin.h"
+#import "WCLPlugin+Tests.h"
 
-@implementation WebWindowControllerTestsHelper
+@implementation WCLWebWindowControllerTestsHelper
 
 
 #pragma mark - Running Tasks
@@ -28,19 +28,19 @@
     return task;
 }
 
-+ (WebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath
++ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath
 {
     return [self webWindowControllerRunningCommandPath:commandPath task:nil];
 }
 
-+ (WebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
++ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
 {
-    Plugin *plugin = [[Plugin alloc] init];
+    WCLPlugin *plugin = [[WCLPlugin alloc] init];
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     NSAssert([webWindowControllers count], @"The Plugin should have a WebWindowController.");
-    WebWindowController *webWindowController = webWindowControllers[0];
+    WCLWebWindowController *webWindowController = webWindowControllers[0];
     NSAssert([webWindowController hasTasks], @"The WebWindowController should have an NSTask.");
     
     if (task) *task = webWindowController.tasks[0];
@@ -102,10 +102,10 @@
 
 + (void)closeWindowsAndBlockUntilFinished
 {    
-    if (![[[WebWindowsController sharedWebWindowsController] webWindowControllers] count]) return;
+    if (![[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count]) return;
     
     NSMutableArray *observers = [NSMutableArray array];
-    for (WebWindowController *webWindowController in [[WebWindowsController sharedWebWindowsController] webWindowControllers]) {
+    for (WCLWebWindowController *webWindowController in [[WCLWebWindowsController sharedWebWindowsController] webWindowControllers]) {
         __block id observer;
         observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
                                                                      object:webWindowController.window
@@ -132,7 +132,7 @@
     
     NSAssert(windowsDidFinishClosing, @"The NSWindows should have finished closing.");
     
-    NSUInteger webWindowControllersCount = [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count];
+    NSUInteger webWindowControllersCount = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count];
     NSAssert(!webWindowControllersCount, @"There should not be any WebWindowControllers.");
 
 // There is not way to pause a test until [[[NSApplication sharedApplication] windows] count] goes to zero

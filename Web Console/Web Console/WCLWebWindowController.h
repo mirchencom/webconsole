@@ -10,9 +10,9 @@
 
 #import <WebKit/WebKit.h>
 
-@class Plugin;
+@class WCLPlugin;
 
-@interface WebWindowController : NSWindowController
+@interface WCLWebWindowController : NSWindowController
 
 /*! Load the HTML in the WebViewController's WebView and executes a handler block when the request completes or fails.
  * \param HTML The HTML string to load.
@@ -42,6 +42,6 @@
 @property (nonatomic, strong, readonly) NSArray *tasks;
 
 /// The receiver's Plugin object.
-@property (nonatomic, strong, readonly) Plugin *plugin;
+@property (nonatomic, strong, readonly) WCLPlugin *plugin;
 
 @end

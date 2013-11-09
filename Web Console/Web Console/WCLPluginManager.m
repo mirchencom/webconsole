@@ -6,23 +6,23 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "PluginManager.h"
-#import "Plugin.h"
+#import "WCLPluginManager.h"
+#import "WCLPlugin.h"
 
 #define kPlugInExtension @"bundle"
 
-@interface PluginManager ()
+@interface WCLPluginManager ()
 @property (nonatomic, strong) NSMutableDictionary *nameToPluginDictionary;
 - (void)loadPluginsInDirectory:(NSString *)plugInsPath;
-- (Plugin *)addedPluginWithPath:(NSString *)path;
+- (WCLPlugin *)addedPluginWithPath:(NSString *)path;
 @end
 
-@implementation PluginManager
+@implementation WCLPluginManager
 
 + (id)sharedPluginManager
 {
     static dispatch_once_t pred;
-    static PluginManager *pluginManager = nil;
+    static WCLPluginManager *pluginManager = nil;
     
     dispatch_once(&pred, ^{ pluginManager = [[self alloc] init]; });
     return pluginManager;
@@ -54,13 +54,13 @@
     NSArray *bundlePaths = [NSBundle pathsForResourcesOfType:kPlugInExtension inDirectory:plugInsPath];
     
     for (NSString *path in bundlePaths) {
-        (void)[[PluginManager sharedPluginManager] addedPluginWithPath:path];
+        (void)[[WCLPluginManager sharedPluginManager] addedPluginWithPath:path];
     }
 }
 
-- (Plugin *)addedPluginWithPath:(NSString *)path
+- (WCLPlugin *)addedPluginWithPath:(NSString *)path
 {
-    Plugin *plugin = [[Plugin alloc] initWithPath:path];
+    WCLPlugin *plugin = [[WCLPlugin alloc] initWithPath:path];
 
     if (!plugin) return nil;
     
@@ -72,7 +72,7 @@
     return plugin;
 }
 
-- (Plugin *)pluginWithName:(NSString *)name
+- (WCLPlugin *)pluginWithName:(NSString *)name
 {
     return self.nameToPluginDictionary[name];
 }

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "UserInterfaceTextHelper.h"
+#import "WCLUserInterfaceTextHelper.h"
 
-@implementation UserInterfaceTextHelper
+@implementation WCLUserInterfaceTextHelper
 
 + (NSString *)informativeTextForCloseWindowForCommands:(NSArray *)commandPaths
 {

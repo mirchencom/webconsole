@@ -6,33 +6,33 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "ApplicationTerminationHelper.h"
+#import "WCLApplicationTerminationHelper.h"
 
-#import "WebWindowsController.h"
-#import "WebWindowController.h"
+#import "WCLWebWindowsController.h"
+#import "WCLWebWindowController.h"
 
-@interface ApplicationTerminationHelper ()
+@interface WCLApplicationTerminationHelper ()
 + (NSMutableArray *)webWindowControllersWithTasks;
 @end
 
-@implementation ApplicationTerminationHelper
+@implementation WCLApplicationTerminationHelper
 
 + (NSArray *)webWindowControllersWithTasks
 {
     NSPredicate *tasksPredicate = [NSPredicate predicateWithFormat:@"hasTasks == %@", [NSNumber numberWithBool:YES]];
-    return [[[WebWindowsController sharedWebWindowsController] webWindowControllers] filteredArrayUsingPredicate:tasksPredicate];
+    return [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] filteredArrayUsingPredicate:tasksPredicate];
 }
 
 + (BOOL)applicationShouldTerminateAndManageWebWindowControllersWithTasks
 {
-    NSMutableArray *webWindowControllersWithTasks = [ApplicationTerminationHelper webWindowControllersWithTasks];
+    NSMutableArray *webWindowControllersWithTasks = [WCLApplicationTerminationHelper webWindowControllersWithTasks];
     
     if (![webWindowControllersWithTasks count]) return YES;
 
     NSMutableArray *webWindowControllersWaitingToClose = [webWindowControllersWithTasks mutableCopy];
     NSMutableArray *observers = [NSMutableArray array];
     __block BOOL windowsDidFinishClosing = NO;
-    for (WebWindowController *webWindowController in webWindowControllersWithTasks) {
+    for (WCLWebWindowController *webWindowController in webWindowControllersWithTasks) {
 #warning After tests are setup, move perform close after adding observer
         [webWindowController.window performClose:self];
         __block id observer;
@@ -45,7 +45,7 @@
 #warning After tests are setup, refactor to just use observers count
                                                                      [webWindowControllersWaitingToClose removeObject:webWindowController];
                                                                      if (![webWindowControllersWaitingToClose count] &&
-                                                                         ![[ApplicationTerminationHelper webWindowControllersWithTasks] count]) {
+                                                                         ![[WCLApplicationTerminationHelper webWindowControllersWithTasks] count]) {
                                                                          [NSApp replyToApplicationShouldTerminate:YES];
                                                                          windowsDidFinishClosing = YES;
                                                                      }

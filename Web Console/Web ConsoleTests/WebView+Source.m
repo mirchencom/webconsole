@@ -10,7 +10,7 @@
 
 @implementation WebView (Source)
 
-- (NSString *)source {
+- (NSString *)wcl_source {
     return [(DOMHTMLElement *)[[[self mainFrame] DOMDocument] documentElement] outerHTML];
 }
 @end

@@ -6,23 +6,23 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WebWindowController.h"
+#import "WCLWebWindowController.h"
 
-#import "WebWindowsController.h"
+#import "WCLWebWindowsController.h"
 
-#import "UserInterfaceTextHelper.h"
+#import "WCLUserInterfaceTextHelper.h"
 
-#import "TaskHelper.h"
+#import "WCLTaskHelper.h"
 
-@interface WebWindowController () <NSWindowDelegate>
+@interface WCLWebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
 @property (nonatomic, strong) void (^completionHandler)(BOOL success);
 - (void)terminateTasksAndCloseWindow;
 @property (nonatomic, strong) NSMutableArray *mutableTasks;
-@property (nonatomic, strong) Plugin *plugin;
+@property (nonatomic, strong) WCLPlugin *plugin;
 @end
 
-@implementation WebWindowController
+@implementation WCLWebWindowController
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -69,7 +69,7 @@
         [alert setMessageText:@"Do you want to close this window?"];
         
         
-        NSString *informativeText = [UserInterfaceTextHelper informativeTextForCloseWindowForCommands:commands];
+        NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commands];
         [alert setInformativeText:informativeText];
         [alert beginSheetModalForWindow:self.window
                           modalDelegate:self
@@ -84,7 +84,7 @@
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-    [[WebWindowsController sharedWebWindowsController] removeWebWindowController:self];
+    [[WCLWebWindowsController sharedWebWindowsController] removeWebWindowController:self];
 }
 
 #pragma mark - Modal Delegate
@@ -98,7 +98,7 @@
 
 - (void)terminateTasksAndCloseWindow
 {
-    [TaskHelper terminateTasks:self.mutableTasks completionHandler:^(BOOL success) {
+    [WCLTaskHelper terminateTasks:self.mutableTasks completionHandler:^(BOOL success) {
         NSAssert(success, @"Terminating NSTasks should always succeed.");
         if (![self hasTasks]) {
             dispatch_async(dispatch_get_main_queue(), ^{

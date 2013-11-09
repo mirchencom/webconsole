@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ApplicationTerminationHelper : NSObject
+@interface WCLApplicationTerminationHelper : NSObject
 
 /*! Returns whether the application should terminate, and manages replyToApplicationShouldTerminate:.
  * \return YES if the application should terminate, otherwise NO.

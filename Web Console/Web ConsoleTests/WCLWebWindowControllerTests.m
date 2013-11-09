@@ -13,32 +13,32 @@
 
 #import "WebView+Source.h"
 
-#import "WebWindowsController.h"
-#import "WebWindowController.h"
-#import "WebWindowControllerTestsHelper.h"
+#import "WCLWebWindowsController.h"
+#import "WCLWebWindowController.h"
+#import "WCLWebWindowControllerTestsHelper.h"
 
-#import "TaskTestsHelper.h"
+#import "WCLTaskTestsHelper.h"
 
-#import "ApplicationTerminationHelper.h"
+#import "WCLApplicationTerminationHelper.h"
 
-#import "Plugin+Tests.h"
+#import "WCLPlugin+Tests.h"
 
-#import "PluginManager.h"
+#import "WCLPluginManager.h"
 
-#import "UserInterfaceTextHelper.h"
+#import "WCLUserInterfaceTextHelper.h"
 
 
-@interface WebWindowControllerTests : XCTestCase
+@interface WCLWebWindowControllerTests : XCTestCase
 + (void)testInformativeText:(NSString *)informativeText forCommandPaths:(NSArray *)commandPaths;
 @end
 
-@interface WebWindowController (Tests)
+@interface WCLWebWindowController (Tests)
 @property (nonatomic, readonly) WebView *webView;
 - (void)terminateTasksAndCloseWindow;
 @end
 
 
-@implementation WebWindowControllerTests
+@implementation WCLWebWindowControllerTests
 
 - (void)setUp
 {
@@ -49,7 +49,7 @@
 
 - (void)tearDown
 {
-    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
 
     [super tearDown];
 }
@@ -57,14 +57,14 @@
 #pragma mark - HTML & JavaScript
 
 - (void)testLoadHTMLWithBaseURL {
-    NSURL *fileURL = [self URLForResource:kTestDataHTMLJQUERYFilename
+    NSURL *fileURL = [self wcl_URLForResource:kTestDataHTMLJQUERYFilename
                             withExtension:kTestDataHTMLExtension
                              subdirectory:kTestDataSubdirectory];
-    NSString *HTML = [self stringWithContentsOfFileURL:fileURL];
+    NSString *HTML = [self wcl_stringWithContentsOfFileURL:fileURL];
     NSURL *baseURL = [fileURL URLByDeletingLastPathComponent];
 
     __block BOOL completionHandlerRan = NO;
-    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
     [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
         completionHandlerRan = YES;
         XCTAssertTrue(success, @"The load should have succeeded.");
@@ -97,7 +97,7 @@
 {
     NSString *HTML = [self stringWithContentsOfTestDataFilename:kTestDataHTMLFilename extension:kTestDataHTMLExtension];
     
-    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
 
     __block BOOL firstCompletionHandlerRan = NO;
     [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
@@ -125,14 +125,14 @@
 {    
     NSString *HTML = [self stringWithContentsOfTestDataFilename:kTestDataHTMLFilename extension:kTestDataHTMLExtension];
     
-    WebWindowController *webWindowController1 = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLWebWindowController *webWindowController1 = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
     __block BOOL firstCompletionHandlerRan = NO;
     [webWindowController1 loadHTML:HTML completionHandler:^(BOOL success) {
         firstCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The first load should have succeeded.");
     }];
     
-    WebWindowController *webWindowController2 = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLWebWindowController *webWindowController2 = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
     __block BOOL secondCompletionHandlerRan = NO;
     [webWindowController2 loadHTML:HTML completionHandler:^(BOOL success) {
         secondCompletionHandlerRan = YES;
@@ -148,7 +148,7 @@
     XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
     XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
     
-    NSUInteger webWindowControllersCount = [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count];
+    NSUInteger webWindowControllersCount = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count];
     XCTAssertTrue(webWindowControllersCount == 2, @"There should be two WebWindowControllers. %lu", webWindowControllersCount);
 }
 
@@ -157,19 +157,19 @@
 
 - (void)testPlugin
 {
-    NSString *commandPath = [self pathForResource:kTestDataRubyHelloWorld
+    NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
-    Plugin *plugin = [[Plugin alloc] init];
+    WCLPlugin *plugin = [[WCLPlugin alloc] init];
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The plugin should have one WebWindowController.");
-    WebWindowController *webWindowController = webWindowControllers[0];
+    WCLWebWindowController *webWindowController = webWindowControllers[0];
     
     XCTAssertEqual(webWindowController.plugin, plugin, @"The WebWindowController's Plugin should equal the Plugin.");
 
     // Clean up
-    [TaskTestsHelper blockUntilTasksFinish:webWindowController.tasks];
+    [WCLTaskTestsHelper blockUntilTasksFinish:webWindowController.tasks];
 }
 
 
@@ -177,19 +177,19 @@
 
 - (void)testInformativeTextForCloseWindowForCommands
 {
-    NSString *informativeText = [UserInterfaceTextHelper informativeTextForCloseWindowForCommands:@[]];
+    NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:@[]];
     XCTAssertNil(informativeText, @"The informative text should be nil for an empty NSArray.");
     
-    Plugin *plugin = [[PluginManager sharedPluginManager] pluginWithName:kTestPluginName];
+    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kTestPluginName];
     NSArray *commandPaths = @[[plugin commandPath]];
-    informativeText = [UserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
-    [WebWindowControllerTests testInformativeText:informativeText forCommandPaths:commandPaths];
+    informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
+    [WCLWebWindowControllerTests testInformativeText:informativeText forCommandPaths:commandPaths];
 
-    PluginManager *pluginManager = [PluginManager sharedPluginManager];
+    WCLPluginManager *pluginManager = [WCLPluginManager sharedPluginManager];
     NSArray *plugins = [pluginManager plugins];
     commandPaths = [plugins valueForKey:kPluginCommandPathKey];
-    informativeText = [UserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
-    [WebWindowControllerTests testInformativeText:informativeText forCommandPaths:commandPaths];
+    informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
+    [WCLWebWindowControllerTests testInformativeText:informativeText forCommandPaths:commandPaths];
 }
 
 + (void)testInformativeText:(NSString *)informativeText forCommandPaths:(NSArray *)commandPaths
@@ -207,21 +207,21 @@
 
 - (void)testCloseWindowWithFinishedTask
 {
-    NSString *commandPath = [self pathForResource:kTestDataRubyHelloWorld
+    NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
                                                                                                                 task:&task];
-    [TaskTestsHelper blockUntilTaskFinishes:task];
+    [WCLTaskTestsHelper blockUntilTaskFinishes:task];
 
-    Plugin *plugin = webWindowController.plugin;
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    WCLPlugin *plugin = webWindowController.plugin;
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     
-    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
-    webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue(![webWindowControllers count], @"The Plugin should not have a WebWindowController.");
 }
 
@@ -230,43 +230,43 @@
     if (!kRunLongTests) return;
     
 
-    NSString *commandPath = [self pathForResource:kTestDataSleepTwoSeconds
+    NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
                                                                                                                 task:&task];
-    [WebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
+    [WCLWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
     
     [webWindowController.window performClose:self];
-    BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    BOOL windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
-    [WebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
+    [WCLWebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
 #warning Update to [webWindowController.window endSheet:[webWindowController.window attachedSheet]]; in Mavericks
     [NSApp endSheet:[webWindowController.window attachedSheet]];
 
-    [TaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
+    [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
     XCTAssertFalse([webWindowController hasTasks], @"The WebWindowController should not have an NSTask.");
     
-    Plugin *plugin = webWindowController.plugin;
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    WCLPlugin *plugin = webWindowController.plugin;
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     
     [webWindowController.window performClose:self];
-    windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
     
-    webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertFalse([webWindowControllers count], @"The Plugin should not have a WebWindowController.");
 }
 
 - (void)testTerminateTasksAndCloseWindow
 {
-    NSString *commandPath = [self pathForResource:kTestDataSleepTwoSeconds
+    NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
-    WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath];
+    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath];
     
     XCTAssertTrue([webWindowController hasTasks], @"The WebWindowController should have an NSTask.");
     
@@ -274,62 +274,62 @@
     
     // TODO: When it is possible for a webWindowController to have multiple tasks, a second task should be started on this webWindowController to ensure that recursive calls to terminateTasksAndCloseWindow work.
     
-    BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    BOOL windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
 }
 
 - (void)testApplicationShouldTerminateAndManageWebWindowControllersWithTasks
 {
-    BOOL shouldTerminate = [ApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
+    BOOL shouldTerminate = [WCLApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
     XCTAssertTrue(shouldTerminate, @"The NSApplication should terminate if there are no running NSTasks.");
     
     if (!kRunLongTests) return;
     
 
-    NSString *commandPath = [self pathForResource:kTestDataSleepTwoSeconds
+    NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
 
     NSTask *task;
-    WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
                                                                                                                 task:&task];
-    [WebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
+    [WCLWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
 
     XCTAssert([task isRunning], @"The NSTask should be running.");
-    shouldTerminate = [ApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
+    shouldTerminate = [WCLApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
     XCTAssertFalse(shouldTerminate, @"The NSApplication should not terminate with a running task.");
     
-    BOOL windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    BOOL windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
-    [WebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
+    [WCLWebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
 #warning Update to [webWindowController.window endSheet:[webWindowController.window attachedSheet]]; in Mavericks
     [NSApp endSheet:[webWindowController.window attachedSheet]];
     
-    [TaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
+    [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
     
-    Plugin *plugin = webWindowController.plugin;
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    WCLPlugin *plugin = webWindowController.plugin;
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
     
-    shouldTerminate = [ApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
+    shouldTerminate = [WCLApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
     XCTAssert(shouldTerminate, @"The NSApplication should terminate after the NSTask finishes running.");
 
     // Clean up
     [webWindowController.window performClose:self];
-    windowWillClose = [WebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
-    webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertFalse([webWindowControllers count], @"The Plugin should not have a WebWindowController.");
 }
 
 #pragma mark - Helpers
 
 - (NSString *)stringWithContentsOfTestDataFilename:(NSString *)filename extension:(NSString *)extension {
-    NSURL *fileURL = [self URLForResource:filename
+    NSURL *fileURL = [self wcl_URLForResource:filename
                             withExtension:extension
                              subdirectory:kTestDataSubdirectory];
-    return [self stringWithContentsOfFileURL:fileURL];
+    return [self wcl_stringWithContentsOfFileURL:fileURL];
 }
 
 @end

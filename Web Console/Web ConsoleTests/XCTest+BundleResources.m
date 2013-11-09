@@ -10,7 +10,7 @@
 
 @implementation XCTestCase (BundleResources)
 
-- (NSString *)pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory
+- (NSString *)wcl_pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory
 {
     NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:name
                                                                       ofType:extension
@@ -19,7 +19,7 @@
     return path;
 }
 
-- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory
+- (NSURL *)wcl_URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory
 {
     NSURL *fileURL = [[NSBundle bundleForClass:[self class]] URLForResource:name
                                                               withExtension:ext
@@ -28,7 +28,7 @@
     return fileURL;
 }
 
-- (NSString *)stringWithContentsOfFileURL:(NSURL *)fileURL {
+- (NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL {
     NSError *error;
     NSString *contents = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
     NSString *errorMessage = [NSString stringWithFormat:@"There should not be an NSError. %@", error];

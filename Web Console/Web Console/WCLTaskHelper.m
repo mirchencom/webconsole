@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "TaskHelper.h"
+#import "WCLTaskHelper.h"
 #import "NSTask+Termination.h"
 
-@implementation TaskHelper
+@implementation WCLTaskHelper
 
 + (void)terminateTasks:(NSArray *)tasks completionHandler:(void (^)(BOOL success))completionHandler
 {
@@ -25,10 +25,10 @@
     
 #warning Change to mutable tasks to tasks after unit tests are written
     for (NSTask *task in mutableTasks) {
-        [task interruptWithCompletionHandler:^(BOOL success) {
+        [task wcl_interruptWithCompletionHandler:^(BOOL success) {
             if (!success) {
                 DLog(@"Failed to interrupt a task, trying terminate");
-                [task terminateWithCompletionHandler:^(BOOL success) {
+                [task wcl_terminateWithCompletionHandler:^(BOOL success) {
                     NSAssert(success, @"Terminating NSTasks should always succeed.");
                     [mutableTasks removeObject:task];
                     completionHandlerBlock();

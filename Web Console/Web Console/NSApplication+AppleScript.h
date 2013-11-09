@@ -11,6 +11,6 @@
 @interface NSApplication (AppleScript)
 
 #pragma mark - AppleScript
-- (NSArray *)plugins;
+- (NSArray *)wcl_plugins;
 
 @end

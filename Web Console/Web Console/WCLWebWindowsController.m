@@ -6,27 +6,27 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WebWindowsController.h"
+#import "WCLWebWindowsController.h"
 
-#import "WebWindowController.h"
-#import "Plugin.h"
+#import "WCLWebWindowController.h"
+#import "WCLPlugin.h"
 
 #define kWebWindowNibName @"WebWindow"
 
-@interface WebWindowsController ()
+@interface WCLWebWindowsController ()
 @property (nonatomic, strong) NSMutableArray *mutableWebWindowControllers;
 @end
 
-@interface WebWindowController (WebWindowsController)
-@property (nonatomic, strong) Plugin *plugin;
+@interface WCLWebWindowController (WebWindowsController)
+@property (nonatomic, strong) WCLPlugin *plugin;
 @end
 
-@implementation WebWindowsController
+@implementation WCLWebWindowsController
 
 + (id)sharedWebWindowsController
 {
     static dispatch_once_t pred;
-    static WebWindowsController *webWindowsController = nil;
+    static WCLWebWindowsController *webWindowsController = nil;
     
     dispatch_once(&pred, ^{ webWindowsController = [[self alloc] init]; });
     return webWindowsController;
@@ -47,16 +47,16 @@
     return [self.mutableWebWindowControllers copy];
 }
 
-- (WebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin
+- (WCLWebWindowController *)addedWebWindowControllerForPlugin:(WCLPlugin *)plugin
 {
-    WebWindowController *webWindowController = [self addedWebWindowController];
+    WCLWebWindowController *webWindowController = [self addedWebWindowController];
     webWindowController.plugin = plugin;
     return webWindowController;
 }
 
-- (WebWindowController *)addedWebWindowController
+- (WCLWebWindowController *)addedWebWindowController
 {
-    WebWindowController *webWindowController = [[WebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
+    WCLWebWindowController *webWindowController = [[WCLWebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
     [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
     
@@ -65,18 +65,18 @@
     return webWindowController;
 }
 
-- (void)removeWebWindowController:(WebWindowController *)webWindowController
+- (void)removeWebWindowController:(WCLWebWindowController *)webWindowController
 {
     [self.mutableWebWindowControllers removeObject:webWindowController];
 }
 
-- (NSArray *)webWindowControllersForPlugin:(Plugin *)plugin
+- (NSArray *)webWindowControllersForPlugin:(WCLPlugin *)plugin
 {
     NSPredicate *pluginPredicate = [NSPredicate predicateWithFormat:@"(plugin = %@)", plugin];
     return [self.mutableWebWindowControllers filteredArrayUsingPredicate:pluginPredicate];
 }
 
-- (NSArray *)windowsForPlugin:(Plugin *)plugin
+- (NSArray *)windowsForPlugin:(WCLPlugin *)plugin
 {
     NSArray *pluginWebWindowControllers = [self webWindowControllersForPlugin:plugin];
     
@@ -96,7 +96,7 @@
 - (NSArray *)tasks
 {
     NSMutableArray *tasks = [NSMutableArray array];
-    for (WebWindowController *webWindowController in self.mutableWebWindowControllers) {
+    for (WCLWebWindowController *webWindowController in self.mutableWebWindowControllers) {
         [tasks addObjectsFromArray:webWindowController.tasks];
     }
     return tasks;

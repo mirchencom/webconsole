@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class Plugin;
+@class WCLPlugin;
 
-@interface PluginManager : NSObject
+@interface WCLPluginManager : NSObject
 
 /*! Returns a shared singleton PluginManager object.
  */
@@ -24,7 +24,7 @@
  * \param name The name of the Plugin to return.
  * \returns The Plugin with name.
  */
-- (Plugin *)pluginWithName:(NSString *)name;
+- (WCLPlugin *)pluginWithName:(NSString *)name;
 
 /*! Returns an array of Plugin objects.
  * \returns An array of Plugin objects.

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "Plugin.h"
+#import "WCLPlugin.h"
 
-@interface Plugin (Tests)
+@interface WCLPlugin (Tests)
 - (void)runCommandPath:(NSString *)commandPath
          withArguments:(NSArray *)arguments
       withResourcePath:(NSString *)resourcePath

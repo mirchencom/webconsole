@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "TaskTestsHelper.h"
+#import "WCLTaskTestsHelper.h"
 
 #import "Web_ConsoleTestsConstants.h"
 
-@implementation TaskTestsHelper
+@implementation WCLTaskTestsHelper
 
 + (void)blockUntilTaskFinishes:(NSTask *)task
 {

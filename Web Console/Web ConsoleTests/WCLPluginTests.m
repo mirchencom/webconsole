@@ -11,23 +11,23 @@
 #import "Web_ConsoleTestsConstants.h"
 #import "XCTest+BundleResources.h"
 
-#import "WebWindowsController.h"
-#import "WebWindowController.h"
-#import "WebWindowControllerTestsHelper.h"
+#import "WCLWebWindowsController.h"
+#import "WCLWebWindowController.h"
+#import "WCLWebWindowControllerTestsHelper.h"
 
 #import "NSTask+Termination.h"
-#import "TaskTestsHelper.h"
-#import "TaskHelper.h"
+#import "WCLTaskTestsHelper.h"
+#import "WCLTaskHelper.h"
 
-#import "Plugin.h"
-#import "PluginManager.h"
-#import "Plugin+Tests.h"
+#import "WCLPlugin.h"
+#import "WCLPluginManager.h"
+#import "WCLPlugin+Tests.h"
 
-@interface PluginTests : XCTestCase
+@interface WCLPluginTests : XCTestCase
 @end
 
 
-@implementation PluginTests
+@implementation WCLPluginTests
 
 - (void)setUp
 {
@@ -37,7 +37,7 @@
 
 - (void)tearDown
 {
-    [WebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
     [super tearDown];
 }
@@ -47,7 +47,7 @@
 
 - (void)testPlugin
 {
-    Plugin *plugin = [[PluginManager sharedPluginManager] pluginWithName:kTestPluginName];
+    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kTestPluginName];
     XCTAssertEqualObjects([plugin command], kTestPluginCommand, @"The Plugin's command should match the test plugin command.");
     XCTAssertTrue([[plugin commandPath] hasPrefix:[plugin resourcePath]], @"The Plugin's command path should begin with it's resource path.");
     XCTAssertTrue([[plugin commandPath] hasSuffix:[plugin command]], @"The Plugin's command path should end with it's command.");
@@ -65,7 +65,7 @@
 {
     // TODO: Write this
 
-    Plugin *pluginTest = [[Plugin alloc] initWithPath:@"path"];
+    WCLPlugin *pluginTest = [[WCLPlugin alloc] initWithPath:@"path"];
     NSLog(@"pluginTest.name = %@", pluginTest.name);
 
 }
@@ -77,15 +77,15 @@
 {
     // TODO: Right now there it isn't possible for a WebWindowController to run multiple tasks, when this is possible, this test should be updated to use mutliple tasks.
     
-    NSString *commandPath = [self pathForResource:kTestDataSleepTwoSeconds
+    NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
                                                                                                                 task:&task];
 
     __block BOOL completionHandlerRan = NO;
-    [task interruptWithCompletionHandler:^(BOOL success) {
+    [task wcl_interruptWithCompletionHandler:^(BOOL success) {
         XCTAssertTrue(success, @"The interrupted should have succeeded.");
         completionHandlerRan = YES;
     }];
@@ -103,15 +103,15 @@
 - (void)testInterruptAndTerminate
 {
 
-    NSString *commandPath = [self pathForResource:kTestDataInterruptFails
+    NSString *commandPath = [self wcl_pathForResource:kTestDataInterruptFails
                                            ofType:kTestDataShellScriptExtension
                                      subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WebWindowController *webWindowController = [WebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
                                                                                                                 task:&task];
 
     __block BOOL completionHandlerRan = NO;
-    [task interruptWithCompletionHandler:^(BOOL success) {
+    [task wcl_interruptWithCompletionHandler:^(BOOL success) {
         // TODO: For some reason terminating the task is actually succeeding here even though it should fail. If I can get this to fail, write the rest of the test to do a terminate after failing an interrupt.
 //        XCTAssertFalse(success, @"The interrupted should have failed.");
         completionHandlerRan = YES;
@@ -131,21 +131,21 @@
 
 - (void)testTerminateTasks
 {
-    NSString *firstCommandPath = [self pathForResource:kTestDataSleepTwoSeconds
+    NSString *firstCommandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                                 ofType:kTestDataRubyExtension
                                           subdirectory:kTestDataSubdirectory];
-    NSTask *firstTask = [WebWindowControllerTestsHelper taskRunningCommandPath:firstCommandPath];
+    NSTask *firstTask = [WCLWebWindowControllerTestsHelper taskRunningCommandPath:firstCommandPath];
 
-    NSString *secondCommandPath = [self pathForResource:kTestDataInterruptFails
+    NSString *secondCommandPath = [self wcl_pathForResource:kTestDataInterruptFails
                                                  ofType:kTestDataShellScriptExtension
                                            subdirectory:kTestDataSubdirectory];
-    NSTask *secondTask = [WebWindowControllerTestsHelper taskRunningCommandPath:secondCommandPath];
+    NSTask *secondTask = [WCLWebWindowControllerTestsHelper taskRunningCommandPath:secondCommandPath];
     
     XCTAssertTrue([firstTask isRunning], @"The first NSTask should be running.");
     XCTAssertTrue([secondTask isRunning], @"The second NSTask should be running.");
     
     __block BOOL completionHandlerRan = NO;
-    [TaskHelper terminateTasks:@[firstTask, secondTask] completionHandler:^(BOOL success) {
+    [WCLTaskHelper terminateTasks:@[firstTask, secondTask] completionHandler:^(BOOL success) {
         XCTAssert(success, @"Terminating the NSTasks should have suceeded.");
         completionHandlerRan = YES;
     }];
@@ -161,19 +161,19 @@
 
 - (void)testOrderedWindows
 {
-    NSString *commandPath = [self pathForResource:kTestDataRubyHelloWorld
+    NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
-    Plugin *plugin = [[Plugin alloc] init];
+    WCLPlugin *plugin = [[WCLPlugin alloc] init];
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The plugin should have one WebWindowController.");
-    WebWindowController *firstWebWindowController = webWindowControllers[0];
+    WCLWebWindowController *firstWebWindowController = webWindowControllers[0];
 
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
-    webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertEqual([webWindowControllers count], (NSUInteger)2, @"The plugin should have two WebWindowControllers.");
-    WebWindowController *secondWebWindowController = webWindowControllers[1];
+    WCLWebWindowController *secondWebWindowController = webWindowControllers[1];
 
     XCTAssertEqualObjects(firstWebWindowController, webWindowControllers[0], @"The first WebWindowController should still be at the first index.");
     XCTAssertNotEqualObjects(firstWebWindowController, secondWebWindowController, @"The WebWindowControllers should not be equal.");
@@ -194,9 +194,9 @@
     XCTAssert(orderMatches, @"The order of the NSWindows returned by the Plugin should match the order returned by the NSApplication.");
     
     // Clean up
-    NSArray *tasks = [[WebWindowsController sharedWebWindowsController] tasks];
+    NSArray *tasks = [[WCLWebWindowsController sharedWebWindowsController] tasks];
     XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two NSTasks.");
-    [TaskTestsHelper blockUntilTasksFinish:tasks];
+    [WCLTaskTestsHelper blockUntilTasksFinish:tasks];
 }
 
 @end

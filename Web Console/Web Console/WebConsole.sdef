@@ -240,12 +240,12 @@
 		<class name="application" code="capp" description="The application&apos;s top-level scripting object." inherits="application">
 			<cocoa class="NSApplication"/>
 			<element type="plugin" access="r">
-				<cocoa key="plugins"/>
+				<cocoa key="wcl_plugins"/>
 			</element>
 		</class>
 
         <class name="plugin" code="plgn" description="A Web Console plugin.">
-			<cocoa class="Plugin"/>
+			<cocoa class="WCLPlugin"/>
 			<property name="name" code="pnam" type="text" access="r">
 				<cocoa key="name"/>
 			</property>
@@ -261,7 +261,7 @@
 		</class>
         
         <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML.">
-            <cocoa class="LoadHTMLCommand"/>
+            <cocoa class="WCLLoadHTMLCommand"/>
             <direct-parameter type="text" description="The HTML to load." />
 			<parameter name="in" description="The window to load the HTML in." code="kfil" optional="yes">
 				<cocoa key="Target" />
@@ -275,7 +275,7 @@
 		</command>
 
         <command name="do JavaScript" code="WCSCJVSC" description="Runs JavaScript in a window.">
-            <cocoa class="DoJavaScriptCommand"/>
+            <cocoa class="WCLDoJavaScriptCommand"/>
             <direct-parameter type="text" description="The JavaScript to run." />
 			<parameter name="in" description="The window to run the JavaScript in." code="kfil">
 				<cocoa key="Target" />

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TaskTestsHelper : NSObject
+@interface WCLTaskTestsHelper : NSObject
 + (void)blockUntilTaskFinishes:(NSTask *)task;
 + (void)blockUntilTaskFinishes:(NSTask *)task timeoutInterval:(NSTimeInterval)timeoutInterval;
 + (void)blockUntilTasksFinish:(NSArray *)tasks;

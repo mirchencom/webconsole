@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LoadHTMLCommand : NSScriptCommand
+@interface WCLLoadHTMLCommand : NSScriptCommand
 
 @end

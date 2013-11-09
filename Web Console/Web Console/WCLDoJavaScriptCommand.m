@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "DoJavaScriptCommand.h"
+#import "WCLDoJavaScriptCommand.h"
 
-#import "WebWindowsController.h"
-#import "WebWindowController.h"
+#import "WCLWebWindowsController.h"
+#import "WCLWebWindowController.h"
 
-@implementation DoJavaScriptCommand
+@implementation WCLDoJavaScriptCommand
 
 - (id)performDefaultImplementation {
 
@@ -20,7 +20,7 @@
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     
-    WebWindowController *webWindowController = (WebWindowController *)window.windowController;
+    WCLWebWindowController *webWindowController = (WCLWebWindowController *)window.windowController;
 
     return [webWindowController doJavaScript:javaScript];
 }

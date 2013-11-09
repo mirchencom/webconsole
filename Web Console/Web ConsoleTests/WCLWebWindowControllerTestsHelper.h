@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class WebWindowController;
+@class WCLWebWindowController;
 
-@interface WebWindowControllerTestsHelper : NSObject
+@interface WCLWebWindowControllerTestsHelper : NSObject
 + (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
-+ (WebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath;
-+ (WebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
++ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath;
++ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
 + (void)blockUntilWindowHasAttachedSheet:(NSWindow *)window;
 + (void)blockUntilWindowIsVisible:(NSWindow *)window;
 + (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window;

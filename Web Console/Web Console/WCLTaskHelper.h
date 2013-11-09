@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TaskHelper : NSObject
+@interface WCLTaskHelper : NSObject
 
 /*! First interrupts an array of NSTasks, then terminates any NSTasks that did not terminate before timing out. Executes a handler block when all the NSTasks are terminated.
  * \param tasks An array of NSTasks to terminate.

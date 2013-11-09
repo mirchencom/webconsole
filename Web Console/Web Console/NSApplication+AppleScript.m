@@ -8,13 +8,13 @@
 
 #import "NSApplication+AppleScript.h"
 
-#import "PluginManager.h"
+#import "WCLPluginManager.h"
 
 @implementation NSApplication (AppleScript)
 
-- (NSArray *)plugins
+- (NSArray *)wcl_plugins
 {    
-    return [[PluginManager sharedPluginManager] plugins];
+    return [[WCLPluginManager sharedPluginManager] plugins];
 }
 
 @end

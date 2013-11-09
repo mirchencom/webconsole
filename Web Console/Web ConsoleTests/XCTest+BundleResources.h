@@ -10,8 +10,8 @@
 
 @interface XCTestCase (BundleResources)
 
-- (NSString *)pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory;
-- (NSURL *)URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory;
-- (NSString *)stringWithContentsOfFileURL:(NSURL *)fileURL;
+- (NSString *)wcl_pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory;
+- (NSURL *)wcl_URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory;
+- (NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL;
 
 @end

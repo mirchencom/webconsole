@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "Plugin.h"
+#import "WCLPlugin.h"
 
-#import "WebWindowsController.h"
-#import "WebWindowController.h"
+#import "WCLWebWindowsController.h"
+#import "WCLWebWindowController.h"
 
 #import "NSApplication+AppleScript.h"
 
 #define kPluginNameKey @"Name"
 #define kPluginCommandKey @"Command"
 
-@interface Plugin ()
+@interface WCLPlugin ()
 @property (nonatomic, strong) NSBundle *bundle;
 - (NSString *)commandPath;
 - (NSString *)command;
@@ -27,11 +27,11 @@
        inDirectoryPath:(NSString *)directoryPath;
 @end
 
-@interface WebWindowController (Plugin)
+@interface WCLWebWindowController (Plugin)
 @property (nonatomic, strong) NSMutableArray *mutableTasks;
 @end
 
-@implementation Plugin
+@implementation WCLPlugin
 
 - (id)initWithPath:(NSString *)path
 {
@@ -87,7 +87,7 @@
 }
 
 - (NSArray *)orderedWindows {
-    return [[WebWindowsController sharedWebWindowsController] windowsForPlugin:self];
+    return [[WCLWebWindowsController sharedWebWindowsController] windowsForPlugin:self];
 }
 
 
@@ -127,7 +127,7 @@
     }
     
     // Web Window Controller
-    WebWindowController *webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
+    WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
     environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
     [webWindowController.mutableTasks addObject:task];
     [task setEnvironment:environmentDictionary];
@@ -194,11 +194,11 @@
 	NSDictionary *argumentsDictionary = [command evaluatedArguments];
     NSString *text = [argumentsDictionary objectForKey:kTextKey];
 
-    NSArray *webWindowControllers = [[WebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
     
     if (![webWindowControllers count]) return;
     
-    WebWindowController *webWindowController = webWindowControllers[0];
+    WCLWebWindowController *webWindowController = webWindowControllers[0];
 
     if (![webWindowController hasTasks]) return;
     

@@ -9,5 +9,5 @@
 #import <WebKit/WebKit.h>
 
 @interface WebView (Source)
-- (NSString *)source;
+- (NSString *)wcl_source;
 @end

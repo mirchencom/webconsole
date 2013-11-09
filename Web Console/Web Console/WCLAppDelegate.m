@@ -6,27 +6,27 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "WCLAppDelegate.h"
 
-#import "PluginManager.h"
+#import "WCLPluginManager.h"
 
-#import "WebWindowsController.h"
+#import "WCLWebWindowsController.h"
 
-#import "TaskHelper.h"
+#import "WCLTaskHelper.h"
 
-#import "ApplicationTerminationHelper.h"
+#import "WCLApplicationTerminationHelper.h"
 
-@implementation AppDelegate
+@implementation WCLAppDelegate
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-    [[PluginManager sharedPluginManager] loadPlugins];
+    [[WCLPluginManager sharedPluginManager] loadPlugins];
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"WebKitDeveloperExtras"];
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 
-    if ([ApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks]) return NSTerminateNow;
+    if ([WCLApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks]) return NSTerminateNow;
     
     return NSTerminateLater;
 }

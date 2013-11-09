@@ -10,11 +10,11 @@
 
 @implementation NSTask (Termination)
 
-- (void)terminateWithCompletionHandler:(void (^)(BOOL success))completionHandler {
+- (void)wcl_terminateWithCompletionHandler:(void (^)(BOOL success))completionHandler {
     [self terminateUseInterrupt:NO completionHandler:completionHandler];
 }
 
-- (void)interruptWithCompletionHandler:(void (^)(BOOL success))completionHandler {
+- (void)wcl_interruptWithCompletionHandler:(void (^)(BOOL success))completionHandler {
     [self terminateUseInterrupt:YES completionHandler:completionHandler];
 }
 

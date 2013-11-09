@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "LoadHTMLCommand.h"
+#import "WCLLoadHTMLCommand.h"
 
-#import "WebWindowsController.h"
-#import "WebWindowController.h"
+#import "WCLWebWindowsController.h"
+#import "WCLWebWindowController.h"
 
 #define kFileURLPrefix @"file://"
 
-@implementation LoadHTMLCommand
+@implementation WCLLoadHTMLCommand
 
 - (id)performDefaultImplementation {
 
@@ -30,11 +30,11 @@
         baseURL = [NSURL URLWithString:baseURLString];
     }
 
-    WebWindowController *webWindowController;
+    WCLWebWindowController *webWindowController;
     if (window) {
-        webWindowController = (WebWindowController *)window.windowController;
+        webWindowController = (WCLWebWindowController *)window.windowController;
     } else {
-        webWindowController = [[WebWindowsController sharedWebWindowsController] addedWebWindowController];
+        webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
         window = webWindowController.window;
     }
 

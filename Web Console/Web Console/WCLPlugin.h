@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Plugin : NSObject
+@interface WCLPlugin : NSObject
 
 /*! Returns a Plugin object initialized to correspond to the specified directory.
  * \param path The path to a directory. This must be a full pathname for a directory; if it contains any symbolic links, they must be resolvable.
