@@ -63,12 +63,6 @@
 
 - (void)testReadFromStandardInput
 {
-    // TODO: Write this
-
-    // 1. Start a long running plugin that accepts input from STDIN
-    // 2. I think I could just grab the pipe and run it here
-    // First just try running it
-
     NSString *commandPath = [self wcl_pathForResource:kTestDataCat
                                                      ofType:kTestDataShellScriptExtension
                                                subdirectory:kTestDataSubdirectory];
@@ -77,24 +71,24 @@
                                                                                                                       task:&task];
     WCLPlugin *plugin = webWindowController.plugin;
 
-    [plugin readFromStandardInput:@"test"];
+    static NSString *StandardInputText = @"Test String";
 
-    // Wait for the readFromStanrdInput to appear
-    
-    // Clean up
-
-    // Refactor the below
     __block BOOL completionHandlerRan = NO;
-    [task wcl_interruptWithCompletionHandler:^(BOOL success) {
-        XCTAssertTrue(success, @"The interrupted should have succeeded.");
+    [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
+        NSData *data = [file availableData];
+        NSString *standardOutputText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        XCTAssert([standardOutputText isEqualToString:StandardInputText], @"The standard input text should match the standard output text.");
         completionHandlerRan = YES;
     }];
+    [plugin readFromStandardInput:StandardInputText];
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
     while (!completionHandlerRan && [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
-    XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
-    XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
+    NSAssert(completionHandlerRan, @"The completion handler should have run.");
+    
+    // Clean up
+    [WCLTaskTestsHelper interruptTaskAndblockUntilTaskFinishes:task];
     XCTAssertFalse([webWindowController hasTasks], @"The WCLWebWindowController should not have any NSTasks.");
 }
 

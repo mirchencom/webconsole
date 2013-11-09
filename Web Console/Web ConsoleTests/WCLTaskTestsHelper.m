@@ -10,7 +10,24 @@
 
 #import "Web_ConsoleTestsConstants.h"
 
+#import "NSTask+Termination.h"
+
 @implementation WCLTaskTestsHelper
+
++ (void)interruptTaskAndblockUntilTaskFinishes:(NSTask *)task
+{
+    __block BOOL completionHandlerRan = NO;
+    [task wcl_interruptWithCompletionHandler:^(BOOL success) {
+        NSAssert(success, @"The interrupted should have succeeded.");
+        completionHandlerRan = YES;
+    }];
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while (!completionHandlerRan && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+    NSAssert(completionHandlerRan, @"The completion handler should have run.");
+    NSAssert(![task isRunning], @"The NSTask should not be running.");
+}
 
 + (void)blockUntilTaskFinishes:(NSTask *)task
 {
