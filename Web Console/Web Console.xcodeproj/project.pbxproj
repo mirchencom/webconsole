@@ -240,10 +240,6 @@
 		4530B0D51736E2A6000A52E2 /* Web Console */ = {
 			isa = PBXGroup;
 			children = (
-				45B375C1179B3CA7002BCEF6 /* NSTask+Termination.h */,
-				45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */,
-				4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */,
-				4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */,
 				45898BB3178532EC00AE365A /* WCLPlugin.h */,
 				45898BB4178532EC00AE365A /* WCLPlugin.m */,
 				45898BB5178532EC00AE365A /* WCLPluginManager.h */,
@@ -254,7 +250,6 @@
 				455B0BFD176FF592007B75DD /* WCLLoadHTMLCommand.m */,
 				4530B0E11736E2A6000A52E2 /* WCLAppDelegate.h */,
 				4530B0E21736E2A6000A52E2 /* WCLAppDelegate.m */,
-				4530B0D61736E2A6000A52E2 /* Supporting Files */,
 				45ADD90A1739E883008A6AE7 /* WCLWebWindowController.h */,
 				45ADD90B1739E883008A6AE7 /* WCLWebWindowController.m */,
 				45ADD90F1739F257008A6AE7 /* WCLWebWindowsController.h */,
@@ -265,9 +260,14 @@
 				45B375C8179B8347002BCEF6 /* WCLTaskHelper.m */,
 				4574725617DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.h */,
 				4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */,
+				45B375C1179B3CA7002BCEF6 /* NSTask+Termination.h */,
+				45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */,
+				4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */,
+				4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */,
 				4530B0E41736E2A6000A52E2 /* MainMenu.xib */,
 				45ADD90D1739EA58008A6AE7 /* WebWindow.xib */,
 				455B0C0B177162F0007B75DD /* WebConsoleConstants.h */,
+				4530B0D61736E2A6000A52E2 /* Supporting Files */,
 			);
 			path = "Web Console";
 			sourceTree = "<group>";
@@ -288,20 +288,20 @@
 		4530B0F21736E2A6000A52E2 /* Web ConsoleTests */ = {
 			isa = PBXGroup;
 			children = (
-				45898BB11785325B00AE365A /* Data */,
-				451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */,
-				451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */,
-				451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */,
-				45F826411780F99000DD7DF6 /* WebView+Source.h */,
-				45F826421780F99100DD7DF6 /* WebView+Source.m */,
 				4530B0F91736E2A6000A52E2 /* WCLWebWindowControllerTests.m */,
 				45B8147F181483400006AA05 /* WCLPluginTests.m */,
-				4530B0F31736E2A6000A52E2 /* Supporting Files */,
 				45B8148118161A360006AA05 /* WCLWebWindowControllerTestsHelper.h */,
 				45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */,
 				45B814841816297C0006AA05 /* WCLTaskTestsHelper.h */,
 				45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */,
 				45709B1A18271237005F03E9 /* WCLPlugin+Tests.h */,
+				45F826411780F99000DD7DF6 /* WebView+Source.h */,
+				45F826421780F99100DD7DF6 /* WebView+Source.m */,
+				451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */,
+				451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */,
+				451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */,
+				45898BB11785325B00AE365A /* Data */,
+				4530B0F31736E2A6000A52E2 /* Supporting Files */,
 			);
 			path = "Web ConsoleTests";
 			sourceTree = "<group>";
