@@ -13,37 +13,37 @@
 
 @interface WCLWebWindowsController : NSObject
 
-/*! Returns a shared singleton WebWindowsController object.
+/*! Returns a shared singleton WCLWebWindowsController object.
  */
 + (id)sharedWebWindowsController;
 
-/*! Returns an added WebWindowController.
- * \return An added WebWindowController.
+/*! Returns an added WCLWebWindowController.
+ * \return An added WCLWebWindowController.
  */
 - (WCLWebWindowController *)addedWebWindowController;
 
 /*! Returns an added WebWindowController for a Plugin.
- * \param plugin The Plugin to set as the returned WebWindowController's plugin.
+ * \param plugin The WCLPlugin to set as the returned WebWindowController's plugin.
  * \return A WebWindowController for a Plugin.
  */
 - (WCLWebWindowController *)addedWebWindowControllerForPlugin:(WCLPlugin *)plugin;
 
-/*! Removes a WebWindowController.
+/*! Removes a WCLWebWindowController.
  */
 - (void)removeWebWindowController:(WCLWebWindowController *)webWindowController;
 
-/*! Returns an array of WebWindowController objects.
- * \returns An array of WebWindowController objects.
+/*! Returns an array of WCLWebWindowController objects.
+ * \returns An array of WCLWebWindowController objects.
  */
 - (NSArray *)webWindowControllers;
 
-/*! Returns an array of WebWindowController objects for a Plugin.
- * \returns An array of WebWindowController objects for a Plugin.
+/*! Returns an array of WCLWebWindowController objects for a WCLPlugin.
+ * \returns An array of WCLWebWindowController objects for a WCLPlugin.
  */
 - (NSArray *)webWindowControllersForPlugin:(WCLPlugin *)plugin;
 
-/*! Returns an array of NSWindow objects for a Plugin.
- * \returns An array of NSWindow objects for a Plugin.
+/*! Returns an array of NSWindow objects for a WCLPlugin.
+ * \returns An array of NSWindow objects for a WCLPlugin.
  */
 - (NSArray *)windowsForPlugin:(WCLPlugin *)plugin;
 

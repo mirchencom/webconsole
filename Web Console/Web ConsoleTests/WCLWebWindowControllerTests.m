@@ -149,7 +149,7 @@
     XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
     
     NSUInteger webWindowControllersCount = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two WebWindowControllers. %lu", webWindowControllersCount);
+    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two WCLWebWindowControllers. %lu", webWindowControllersCount);
 }
 
 
@@ -163,10 +163,10 @@
     WCLPlugin *plugin = [[WCLPlugin alloc] init];
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The plugin should have one WebWindowController.");
+    XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
     WCLWebWindowController *webWindowController = webWindowControllers[0];
     
-    XCTAssertEqual(webWindowController.plugin, plugin, @"The WebWindowController's Plugin should equal the Plugin.");
+    XCTAssertEqual(webWindowController.plugin, plugin, @"The WCLWebWindowController's WCLPlugin should equal the WCLPlugin.");
 
     // Clean up
     [WCLTaskTestsHelper blockUntilTasksFinish:webWindowController.tasks];
@@ -217,12 +217,12 @@
 
     WCLPlugin *plugin = webWindowController.plugin;
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
+    XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     
     [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
     webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue(![webWindowControllers count], @"The Plugin should not have a WebWindowController.");
+    XCTAssertTrue(![webWindowControllers count], @"The WCLPlugin should not have a WCLWebWindowController.");
 }
 
 - (void)testCloseWindowWithRunningTask
@@ -247,18 +247,18 @@
     [NSApp endSheet:[webWindowController.window attachedSheet]];
 
     [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
-    XCTAssertFalse([webWindowController hasTasks], @"The WebWindowController should not have an NSTask.");
+    XCTAssertFalse([webWindowController hasTasks], @"The WCLWebWindowController should not have an NSTask.");
     
     WCLPlugin *plugin = webWindowController.plugin;
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
+    XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     
     [webWindowController.window performClose:self];
     windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
     
     webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertFalse([webWindowControllers count], @"The Plugin should not have a WebWindowController.");
+    XCTAssertFalse([webWindowControllers count], @"The WCLPlugin should not have a WCLWebWindowController.");
 }
 
 - (void)testTerminateTasksAndCloseWindow
@@ -310,7 +310,7 @@
     
     WCLPlugin *plugin = webWindowController.plugin;
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The Plugin should have a WebWindowController.");
+    XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     
     shouldTerminate = [WCLApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
     XCTAssert(shouldTerminate, @"The NSApplication should terminate after the NSTask finishes running.");
@@ -320,7 +320,7 @@
     windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
     webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertFalse([webWindowControllers count], @"The Plugin should not have a WebWindowController.");
+    XCTAssertFalse([webWindowControllers count], @"The WCLPlugin should not have a WCLWebWindowController.");
 }
 
 #pragma mark - Helpers

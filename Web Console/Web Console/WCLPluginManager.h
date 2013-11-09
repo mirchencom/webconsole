@@ -12,22 +12,22 @@
 
 @interface WCLPluginManager : NSObject
 
-/*! Returns a shared singleton PluginManager object.
+/*! Returns a shared singleton WCLPluginManager object.
  */
 + (id)sharedPluginManager;
 
-/*! Loads built-in Plugins.
+/*! Loads built-in WCLPlugins.
  */
 - (void)loadPlugins;
 
-/*! Returns the Plugin with name, or nil if no Plugin with that name exists.
+/*! Returns the WCLPlugin with name, or nil if no Plugin with that name exists.
  * \param name The name of the Plugin to return.
- * \returns The Plugin with name.
+ * \returns The WCLPlugin with name.
  */
 - (WCLPlugin *)pluginWithName:(NSString *)name;
 
-/*! Returns an array of Plugin objects.
- * \returns An array of Plugin objects.
+/*! Returns an array of WCLPlugin objects.
+ * \returns An array of WCLPlugin objects.
  */
 - (NSArray *)plugins;
 

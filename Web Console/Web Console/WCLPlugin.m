@@ -25,6 +25,7 @@
          withArguments:(NSArray *)arguments
       withResourcePath:(NSString *)resourcePath
        inDirectoryPath:(NSString *)directoryPath;
+- (void)readFromStandardInput:(NSString *)text;
 @end
 
 @interface WCLWebWindowController (Plugin)
@@ -176,7 +177,7 @@
 
 #pragma mark - AppleScript
 
-- (void)run:(NSScriptCommand *)command
+- (void)runCommand:(NSScriptCommand *)command
 {
 	NSDictionary *argumentsDictionary = [command evaluatedArguments];
     NSArray *arguments = [argumentsDictionary objectForKey:kArgumentsKey];
@@ -189,23 +190,27 @@
     [self runWithArguments:arguments inDirectoryPath:[directoryURL path]];
 }
 
-- (void)readFromStandardInput:(NSScriptCommand *)command
+- (void)readFromStandardInputCommand:(NSScriptCommand *)command
 {
 	NSDictionary *argumentsDictionary = [command evaluatedArguments];
     NSString *text = [argumentsDictionary objectForKey:kTextKey];
+    [self readFromStandardInput:text];
+}
 
+- (void)readFromStandardInput:(NSString *)text
+{
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
     
     if (![webWindowControllers count]) return;
     
     WCLWebWindowController *webWindowController = webWindowControllers[0];
-
+    
     if (![webWindowController hasTasks]) return;
     
     NSTask *task = webWindowController.tasks[0];
-
+    
     NSPipe *pipe = (NSPipe *)task.standardInput;
-
+    
     [pipe.fileHandleForWriting writeData:[text dataUsingEncoding:NSUTF8StringEncoding]];
 }
 

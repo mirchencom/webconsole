@@ -16,4 +16,5 @@
 - (NSString *)commandPath;
 - (NSString *)command;
 - (NSString *)resourcePath;
+- (void)readFromStandardInput:(NSString *)text;
 @end

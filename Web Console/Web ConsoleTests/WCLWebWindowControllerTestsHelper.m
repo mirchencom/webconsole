@@ -39,9 +39,9 @@
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    NSAssert([webWindowControllers count], @"The Plugin should have a WebWindowController.");
+    NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     WCLWebWindowController *webWindowController = webWindowControllers[0];
-    NSAssert([webWindowController hasTasks], @"The WebWindowController should have an NSTask.");
+    NSAssert([webWindowController hasTasks], @"The WCLWebWindowController should have an NSTask.");
     
     if (task) *task = webWindowController.tasks[0];
     
@@ -133,7 +133,7 @@
     NSAssert(windowsDidFinishClosing, @"The NSWindows should have finished closing.");
     
     NSUInteger webWindowControllersCount = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    NSAssert(!webWindowControllersCount, @"There should not be any WebWindowControllers.");
+    NSAssert(!webWindowControllersCount, @"There should not be any WCLWebWindowControllers.");
 
 // There is not way to pause a test until [[[NSApplication sharedApplication] windows] count] goes to zero
 // The best we can do is test [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count] which should be

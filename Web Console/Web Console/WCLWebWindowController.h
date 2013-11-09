@@ -41,7 +41,7 @@
 /// An array of NSTasks the receiver is running.
 @property (nonatomic, strong, readonly) NSArray *tasks;
 
-/// The receiver's Plugin object.
+/// The receiver's WCLPlugin object.
 @property (nonatomic, strong, readonly) WCLPlugin *plugin;
 
 @end

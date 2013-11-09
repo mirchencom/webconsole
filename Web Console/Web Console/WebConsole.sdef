@@ -253,10 +253,10 @@
 				<cocoa key="orderedWindows"/>
 			</element>
             <responds-to command="read from standard input">
-                <cocoa method="readFromStandardInput:"/>
+                <cocoa method="readFromStandardInputCommand:"/>
             </responds-to>
             <responds-to command="run">
-                <cocoa method="run:"/>
+                <cocoa method="runCommand:"/>
             </responds-to>
 		</class>
         

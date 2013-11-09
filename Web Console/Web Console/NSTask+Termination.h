@@ -10,12 +10,12 @@
 
 @interface NSTask (Termination)
 
-/*! Sends an interrupt signal to the receiver and all of its subtasks and executes a handler block when the task terminates or after a timeout.
+/*! Sends an interrupt signal to the receiver and all of its subtasks and executes a handler block when it terminates or after a timeout.
  * \param completionHandler A handler block execute.
  */
 - (void)wcl_interruptWithCompletionHandler:(void (^)(BOOL success))completionHandler;
 
-/*! Sends an terminate signal to the receiver and all of its subtasks and executes a handler block when the task terminates or after a timeout.
+/*! Sends an terminate signal to the receiver and all of its subtasks and executes a handler block when it terminates or after a timeout.
  * \param completionHandler A handler block execute.
  */
 - (void)wcl_terminateWithCompletionHandler:(void (^)(BOOL success))completionHandler;
