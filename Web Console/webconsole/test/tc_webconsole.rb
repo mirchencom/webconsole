@@ -8,7 +8,13 @@ WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "..", "lib", "webconsole")
 require WEBCONSOLE_FILE
 DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
 
-class TestWebConsole < Test::Unit::TestCase
+module JavaScriptHelper
+  def self.run_javascript(javascript)
+    return `node -e #{Shellwords.escape(javascript)}`
+  end
+end
+
+class TestDoJavaScript < Test::Unit::TestCase
 
   TESTHTML_FILE = File.join(DATA_DIRECTORY, "index.html")
   def setup
@@ -25,7 +31,7 @@ class TestWebConsole < Test::Unit::TestCase
   def test_do_javascript
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
-    expected = `node #{Shellwords.escape(SIMPLEJAVASCRIPT_FILE)}`
+    expected = JavaScriptHelper::run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
   end
 end
@@ -39,12 +45,16 @@ class TestLoadHTML < Test::Unit::TestCase
     @window_manager.close
   end
 
+
+  TESTJAVASCRIPTBODY_FILE = File.join(DATA_DIRECTORY, "body.js")
   def test_load_html
     testString = "This is a test string"
     html = "<html><body>" + testString + "</body></html>"
-    javascript = "document.getElementsByTagName('body')[0].innerHTML;"
     @window_manager.load_html(html)
+
+    javascript = File.read(TESTJAVASCRIPTBODY_FILE)
     result = @window_manager.do_javascript(javascript)
+
     result.strip! # Remove line break
     assert_equal(testString, result, "The result should match the test string.")
   end
