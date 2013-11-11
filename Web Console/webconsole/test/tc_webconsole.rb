@@ -14,6 +14,23 @@ module JavaScriptHelper
   end
 end
 
+# WebConsole
+
+
+class TestRunPlugin < Test::Unit::TestCase
+  TESTPLUGIN_NAME = "IRB"
+
+  # def test_run_plugin
+  #   WebConsole::run_plugin(TESTPLUGIN_NAME)
+  #   window_id = WebConsole::window_id_for_plugin(TESTPLUGIN_NAME)
+  #   @window_manager = WebConsole::WindowManager.new(window_id)
+  #   @window_manager.close
+  #   # Crap closing a running process...
+  # end
+end
+
+# WindowManager
+
 class TestDoJavaScript < Test::Unit::TestCase
 
   TESTHTML_FILE = File.join(DATA_DIRECTORY, "index.html")
@@ -44,7 +61,6 @@ class TestLoadHTML < Test::Unit::TestCase
   def teardown
     @window_manager.close
   end
-
 
   TESTJAVASCRIPTBODY_FILE = File.join(DATA_DIRECTORY, "body.js")
   def test_load_html

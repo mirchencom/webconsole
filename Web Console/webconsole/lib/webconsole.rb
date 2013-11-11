@@ -27,6 +27,13 @@ module WebConsole
     end
   end
 
+  WINDOW_ID_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "window_id_for_plugin.scpt")
+  def self.window_id_for_plugin(name)
+    result = self.run_applescript(WINDOW_ID_FOR_PLUGIN_SCRIPT, [name])
+    result.chomp!
+    return result
+  end
+
   PLUGIN_READ_FROM_STANDARD_INPUT = File.join(APPLESCRIPT_DIRECTORY, "plugin_read_from_standard_input.scpt")
   def self.plugin_read_from_standard_input(name, text)
     self.run_applescript(PLUGIN_READ_FROM_STANDARD_INPUT, [name, text])

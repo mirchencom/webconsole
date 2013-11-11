@@ -13,5 +13,6 @@ Gem::Specification.new do |s|
     lib/applescript/run.scpt
     lib/applescript/plugin_has_windows.scpt
     lib/applescript/plugin_read_from_standard_input.scpt
+    lib/applescript/window_id_for_plugin.scpt
   ]
 end
