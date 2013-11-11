@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
     lib/applescript/do_javascript_in.scpt
     lib/applescript/load_html.scpt
     lib/applescript/run.scpt
-    lib/applescript/plugin_is_running.scpt
+    lib/applescript/plugin_has_windows.scpt
     lib/applescript/plugin_read_from_standard_input.scpt
   ]
 end

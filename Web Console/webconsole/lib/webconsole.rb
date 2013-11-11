@@ -16,9 +16,9 @@ module WebConsole
     self.run_applescript(RUN_SCRIPT, parameters)
   end
 
-  PLUGIN_IS_RUNNING_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_is_running.scpt")
-  def self.plugin_is_running(name)
-    result = self.run_applescript(PLUGIN_IS_RUNNING_SCRIPT, [name])
+  PLUGIN_HAS_WINDOWS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_has_windows.scpt")
+  def self.plugin_has_windows(name)
+    result = self.run_applescript(PLUGIN_HAS_WINDOWS_SCRIPT, [name])
     result.chomp!
     if result == "true"
       return true
