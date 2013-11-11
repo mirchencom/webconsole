@@ -239,9 +239,7 @@
         
 		<class name="application" code="capp" description="The application&apos;s top-level scripting object." inherits="application">
 			<cocoa class="NSApplication"/>
-			<element type="plugin" access="r">
-				<cocoa key="wcl_plugins"/>
-			</element>
+			<element type="plugin" access="r"/>
 		</class>
 
         <class name="plugin" code="plgn" description="A Web Console plugin.">

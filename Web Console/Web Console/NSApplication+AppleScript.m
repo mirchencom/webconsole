@@ -12,7 +12,7 @@
 
 @implementation NSApplication (AppleScript)
 
-- (NSArray *)wcl_plugins
+- (NSArray *)plugins
 {    
     return [[WCLPluginManager sharedPluginManager] plugins];
 }

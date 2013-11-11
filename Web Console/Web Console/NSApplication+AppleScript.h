@@ -11,6 +11,13 @@
 @interface NSApplication (AppleScript)
 
 #pragma mark - AppleScript
-- (NSArray *)wcl_plugins;
+
+// This property should be called wcl_plugins, based on Apple's recommendation
+// that methods in categories on framework classes should use a prefix, but the
+// script dictionary "plugins" element on the application broke when it was
+// renamed. This did not work, the plugins were being returned but without there
+// class being defined.
+// <element type="plugin" access="r"><cocoa key="wcl_plugins"/></element>
+- (NSArray *)plugins;
 
 @end
