@@ -19,7 +19,7 @@
 		4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0F51736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B0FA1736E2A6000A52E2 /* WCLWebWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0F91736E2A6000A52E2 /* WCLWebWindowControllerTests.m */; };
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
-		455B0BFE176FF592007B75DD /* WCLLoadHTMLCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLCommand.m */; };
+		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
 		45898B9D1785302D00AE365A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
@@ -102,8 +102,8 @@
 		4530B0F61736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4530B0F91736E2A6000A52E2 /* WCLWebWindowControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTests.m; sourceTree = "<group>"; };
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		455B0BFC176FF592007B75DD /* WCLLoadHTMLCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLLoadHTMLCommand.h; sourceTree = "<group>"; };
-		455B0BFD176FF592007B75DD /* WCLLoadHTMLCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLLoadHTMLCommand.m; sourceTree = "<group>"; };
+		455B0BFC176FF592007B75DD /* WCLLoadHTMLScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLLoadHTMLScriptCommand.h; sourceTree = "<group>"; };
+		455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLLoadHTMLScriptCommand.m; sourceTree = "<group>"; };
 		455B0C081771627A007B75DD /* WCLDoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLDoJavaScriptCommand.h; sourceTree = "<group>"; };
 		455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLDoJavaScriptCommand.m; sourceTree = "<group>"; };
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
@@ -246,8 +246,8 @@
 				45898BB6178532EC00AE365A /* WCLPluginManager.m */,
 				455B0C081771627A007B75DD /* WCLDoJavaScriptCommand.h */,
 				455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */,
-				455B0BFC176FF592007B75DD /* WCLLoadHTMLCommand.h */,
-				455B0BFD176FF592007B75DD /* WCLLoadHTMLCommand.m */,
+				455B0BFC176FF592007B75DD /* WCLLoadHTMLScriptCommand.h */,
+				455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */,
 				4530B0E11736E2A6000A52E2 /* WCLAppDelegate.h */,
 				4530B0E21736E2A6000A52E2 /* WCLAppDelegate.m */,
 				45ADD90A1739E883008A6AE7 /* WCLWebWindowController.h */,
@@ -525,7 +525,7 @@
 				4530B0E31736E2A6000A52E2 /* WCLAppDelegate.m in Sources */,
 				45ADD90C1739E883008A6AE7 /* WCLWebWindowController.m in Sources */,
 				45ADD9111739F257008A6AE7 /* WCLWebWindowsController.m in Sources */,
-				455B0BFE176FF592007B75DD /* WCLLoadHTMLCommand.m in Sources */,
+				455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */,
 				455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */,
 				45898BB7178532EC00AE365A /* WCLPlugin.m in Sources */,
 				45898BB8178532EC00AE365A /* WCLPluginManager.m in Sources */,

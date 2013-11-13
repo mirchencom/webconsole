@@ -28,8 +28,8 @@
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath;
 
 #pragma mark - AppleScript
-- (void)runCommand:(NSScriptCommand *)command;
-- (void)readFromStandardInputCommand:(NSScriptCommand *)command;
+- (void)handleRunScriptCommand:(NSScriptCommand *)command;
+- (void)handleReadFromStandardInputScriptCommand:(NSScriptCommand *)command;
 - (NSArray *)orderedWindows;
 
 @end

@@ -254,15 +254,15 @@
 				<cocoa key="orderedWindows"/>
 			</element>
             <responds-to command="read from standard input">
-                <cocoa method="readFromStandardInputCommand:"/>
+                <cocoa method="handleReadFromStandardInputScriptCommand:"/>
             </responds-to>
             <responds-to command="run">
-                <cocoa method="runCommand:"/>
+                <cocoa method="handleRunScriptCommand:"/>
             </responds-to>
 		</class>
         
         <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML.">
-            <cocoa class="WCLLoadHTMLCommand"/>
+            <cocoa class="WCLLoadHTMLScriptCommand"/>
             <direct-parameter type="text" description="The HTML to load." />
 			<parameter name="in" description="The window to load the HTML in." code="kfil" optional="yes">
 				<cocoa key="Target" />

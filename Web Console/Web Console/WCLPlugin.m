@@ -177,7 +177,7 @@
 
 #pragma mark - AppleScript
 
-- (void)runCommand:(NSScriptCommand *)command
+- (void)handleRunScriptCommand:(NSScriptCommand *)command
 {
 	NSDictionary *argumentsDictionary = [command evaluatedArguments];
     NSArray *arguments = [argumentsDictionary objectForKey:kArgumentsKey];
@@ -190,7 +190,7 @@
     [self runWithArguments:arguments inDirectoryPath:[directoryURL path]];
 }
 
-- (void)readFromStandardInputCommand:(NSScriptCommand *)command
+- (void)handleReadFromStandardInputScriptCommand:(NSScriptCommand *)command
 {
 	NSDictionary *argumentsDictionary = [command evaluatedArguments];
     NSString *text = [argumentsDictionary objectForKey:kTextKey];

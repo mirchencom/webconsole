@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WCLLoadHTMLCommand.h"
+#import "WCLLoadHTMLScriptCommand.h"
 
 #import "WCLWebWindowsController.h"
 #import "WCLWebWindowController.h"
 
 #define kFileURLPrefix @"file://"
 
-@implementation WCLLoadHTMLCommand
+@implementation WCLLoadHTMLScriptCommand
 
 - (id)performDefaultImplementation {
 
