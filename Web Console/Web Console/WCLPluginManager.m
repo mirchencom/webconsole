@@ -58,17 +58,20 @@
     }
 }
 
+- (WCLPlugin *)addedPluginAtURL:(NSURL *)URL
+{
+    return [self addedPluginWithPath:[URL path]];
+}
+
 - (WCLPlugin *)addedPluginWithPath:(NSString *)path
 {
     WCLPlugin *plugin = [[WCLPlugin alloc] initWithPath:path];
 
     if (!plugin) return nil;
     
-    // Allow only one plugin with a name
-    if (self.nameToPluginDictionary[plugin.name]) return nil;
-    
+    // TODO: This allows a new plugin with the same name to replace the old plugin. Is this what I want?
     self.nameToPluginDictionary[plugin.name] = plugin;
-    
+
     return plugin;
 }
 

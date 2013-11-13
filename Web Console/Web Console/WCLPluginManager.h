@@ -31,4 +31,10 @@
  */
 - (NSArray *)plugins;
 
+/*! Returns the WCLPlugin at the specified URL, or nil if no valid Plugin exists at that URL.
+ * \param URL The URL of the Plugin to add.
+ * \returns The WCLPlugin at the specified URL.
+ */
+- (WCLPlugin *)addedPluginAtURL:(NSURL *)URL;
+
 @end

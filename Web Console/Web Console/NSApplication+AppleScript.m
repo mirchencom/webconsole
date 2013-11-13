@@ -19,10 +19,9 @@
 
 - (id)handleLoadPluginScriptCommand:(NSScriptCommand *)command
 {
-    id directParameter = [command directParameter];
-    NSLog(@"directParameter = %@", directParameter);
-    
-    return nil;
+    NSURL *pluginFileURL = [command directParameter];
+
+    return [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginFileURL];
 }
 
 
