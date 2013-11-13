@@ -17,4 +17,13 @@
     return [[WCLPluginManager sharedPluginManager] plugins];
 }
 
+- (id)handleLoadPluginScriptCommand:(NSScriptCommand *)command
+{
+    id directParameter = [command directParameter];
+    NSLog(@"directParameter = %@", directParameter);
+    
+    return nil;
+}
+
+
 @end

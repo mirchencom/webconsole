@@ -19,5 +19,5 @@
 // class being defined.
 // <element type="plugin" access="r"><cocoa key="wcl_plugins"/></element>
 - (NSArray *)plugins;
-
+- (id)handleLoadPluginScriptCommand:(NSScriptCommand *)command;
 @end

@@ -240,6 +240,9 @@
 		<class name="application" code="capp" description="The application&apos;s top-level scripting object." inherits="application">
 			<cocoa class="NSApplication"/>
 			<element type="plugin" access="r"/>
+            <responds-to command="load plugin">
+                <cocoa method="handleLoadPluginScriptCommand:"/>
+            </responds-to>
 		</class>
 
         <class name="plugin" code="plgn" description="A Web Console plugin.">
@@ -317,6 +320,11 @@
 			</parameter>
 
         </command>
+        
+        <command name="load plugin" code="loadplgn" description="Load a plugin from a file.">
+            <direct-parameter type="file" description="The plugin file to load." />
+            <result type="plugin" description="The loaded plugin." />
+		</command>
         
     </suite>
 </dictionary>

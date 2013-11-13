@@ -13,7 +13,8 @@
 
 @implementation WCLDoJavaScriptCommand
 
-- (id)performDefaultImplementation {
+- (id)performDefaultImplementation
+{
 
     NSString *javaScript = [self directParameter];
         
