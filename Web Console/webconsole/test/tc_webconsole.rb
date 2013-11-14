@@ -18,15 +18,16 @@ end
 
 
 class TestRunPlugin < Test::Unit::TestCase
-  TESTPLUGIN_NAME = "IRB"
-
-  # def test_run_plugin
-  #   WebConsole::run_plugin(TESTPLUGIN_NAME)
-  #   window_id = WebConsole::window_id_for_plugin(TESTPLUGIN_NAME)
-  #   @window_manager = WebConsole::WindowManager.new(window_id)
-  #   @window_manager.close
-  #   # Crap closing a running process...
-  # end
+  TESTPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
+  TESTPLUGIN_NAME = "HelloWorld"
+  def test_run_plugin
+    WebConsole::load_plugin(TESTPLUGIN_PATH)
+    WebConsole::run_plugin(TESTPLUGIN_NAME)
+    window_id = WebConsole::window_id_for_plugin(TESTPLUGIN_NAME)
+    @window_manager = WebConsole::WindowManager.new(window_id)
+    # May need delay here for script to finish running in some circumstances?
+    @window_manager.close
+  end
 end
 
 # WindowManager

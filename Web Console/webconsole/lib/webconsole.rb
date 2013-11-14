@@ -4,7 +4,12 @@ module WebConsole
   SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
   APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "applescript")
 
-  RUN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run.scpt")
+  LOAD_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_plugin.scpt")
+  def self.load_plugin(path)
+    self.run_applescript(LOAD_PLUGIN_SCRIPT, [path])
+  end
+
+  RUN_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run_plugin.scpt")
   def self.run_plugin(name, directory = nil, arguments = nil)
     parameters = [name]
     if directory
@@ -13,7 +18,7 @@ module WebConsole
     if arguments
       parameters = parameters + arguments
     end
-    self.run_applescript(RUN_SCRIPT, parameters)
+    self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
   end
 
   PLUGIN_HAS_WINDOWS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_has_windows.scpt")
