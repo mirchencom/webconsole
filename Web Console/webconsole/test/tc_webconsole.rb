@@ -23,6 +23,7 @@ class TestRunPlugin < Test::Unit::TestCase
   def test_run_plugin
     WebConsole::load_plugin(TESTPLUGIN_PATH)
     WebConsole::run_plugin(TESTPLUGIN_NAME)
+    assert(WebConsole::plugin_has_windows(TESTPLUGIN_NAME), "The plugin should have a window.")
     window_id = WebConsole::window_id_for_plugin(TESTPLUGIN_NAME)
     @window_manager = WebConsole::WindowManager.new(window_id)
     # May need delay here for script to finish running in some circumstances?
