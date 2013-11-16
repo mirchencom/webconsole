@@ -8,28 +8,60 @@ WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "..", "lib", "webconsole")
 require WEBCONSOLE_FILE
 DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
 
-module JavaScriptHelper
+module WebConsoleTestsHelper
   def self.run_javascript(javascript)
     return `node -e #{Shellwords.escape(javascript)}`
+  end
+
+  RESPONDTODIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "respond_to_dialog.scpt")
+  def self.respond_to_dialog
+    `osascript #{Shellwords.escape(RESPONDTODIALOGAPPLESCRIPT_FILE)}`
   end
 end
 
 # WebConsole
 
-
 class TestRunPlugin < Test::Unit::TestCase
-  TESTPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
-  TESTPLUGIN_NAME = "HelloWorld"
+  HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
+  HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_run_plugin
-    WebConsole::load_plugin(TESTPLUGIN_PATH)
-    WebConsole::run_plugin(TESTPLUGIN_NAME)
-    assert(WebConsole::plugin_has_windows(TESTPLUGIN_NAME), "The plugin should have a window.")
-    window_id = WebConsole::window_id_for_plugin(TESTPLUGIN_NAME)
-    @window_manager = WebConsole::WindowManager.new(window_id)
-    # May need delay here for script to finish running in some circumstances?
-    @window_manager.close
+    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
+    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    assert(WebConsole::plugin_has_windows(HELLOWORLDPLUGIN_NAME), "The plugin should have a window.")
+
+    # Clean up
+    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    window_manager = WebConsole::WindowManager.new(window_id)
+    window_manager.close
+  end
+
+  PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
+  PRINTPLUGIN_NAME = "Print"
+  LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
+  def test_read_from_standard_input_plugin
+    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    assert(WebConsole::plugin_has_windows(PRINTPLUGIN_NAME), "The plugin should have a window.")
+
+    test_text = "This is a test string"
+    WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text + "\n")
+    sleep 0.5 # Give read from standard input time to run
+
+    window_id = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
+    window_manager = WebConsole::WindowManager.new(window_id)
+
+    javascript = File.read(LASTCODEJAVASCRIPT_FILE)
+    result = window_manager.do_javascript(javascript)
+    result.strip!
+
+    assert_equal(test_text, result, "The test text should equal the result.")
+
+    # Clean up
+    window_manager.close
+    WebConsoleTestsHelper::respond_to_dialog
   end
 end
+
 
 # WindowManager
 
@@ -50,7 +82,7 @@ class TestDoJavaScript < Test::Unit::TestCase
   def test_do_javascript
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
-    expected = JavaScriptHelper::run_javascript(javascript)
+    expected = WebConsoleTestsHelper::run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
   end
 end
@@ -66,15 +98,15 @@ class TestLoadHTML < Test::Unit::TestCase
 
   TESTJAVASCRIPTBODY_FILE = File.join(DATA_DIRECTORY, "body.js")
   def test_load_html
-    testString = "This is a test string"
-    html = "<html><body>" + testString + "</body></html>"
+    test_text = "This is a test string"
+    html = "<html><body>" + test_text + "</body></html>"
     @window_manager.load_html(html)
 
     javascript = File.read(TESTJAVASCRIPTBODY_FILE)
     result = @window_manager.do_javascript(javascript)
 
     result.strip! # Remove line break
-    assert_equal(testString, result, "The result should match the test string.")
+    assert_equal(test_text, result, "The result should match the test string.")
   end
 end
 

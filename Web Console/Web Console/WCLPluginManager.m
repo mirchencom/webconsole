@@ -70,6 +70,7 @@
     if (!plugin) return nil;
     
     // TODO: This allows a new plugin with the same name to replace the old plugin. Is this what I want?
+    // Probably yes, this allows the plugin to by modified
     self.nameToPluginDictionary[plugin.name] = plugin;
 
     return plugin;

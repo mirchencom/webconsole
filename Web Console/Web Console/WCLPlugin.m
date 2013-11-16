@@ -107,15 +107,11 @@
       withResourcePath:(NSString *)resourcePath
        inDirectoryPath:(NSString *)directoryPath
 {
-    DLog(@"commandPath = %@", commandPath);
-    
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
-    
     if (directoryPath) {
         [task setCurrentDirectoryPath:directoryPath];
     }
-    
     if (arguments) {
         [task setArguments:arguments];
     }   
@@ -129,22 +125,20 @@
     
     // Web Window Controller
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
-    environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
     [webWindowController.mutableTasks addObject:task];
-    [task setEnvironment:environmentDictionary];
-    
+
     // Standard Output
     task.standardOutput = [NSPipe pipe];
     [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
-        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        DLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }];
     
     // Standard Error
     task.standardError = [NSPipe pipe];
     [[task.standardError fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
-        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        DLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }];
     
     // Standard Input
@@ -152,7 +146,7 @@
     
     // Termination handler
     [task setTerminationHandler:^(NSTask *task) {
-        NSLog(@"Ending task webWindowController %@, window %@, windowNumber %ld", webWindowController, webWindowController.window, (long)webWindowController.window.windowNumber);
+        DLog(@"Terminate %@", commandPath);
         
         // Standard Input, Output & Error
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
@@ -164,14 +158,15 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
     }];
     
-    NSLog(@"Starting task webWindowController %@, window %@, windowNumber %ld", webWindowController, webWindowController.window, (long)webWindowController.window.windowNumber);
-
-
     dispatch_async(dispatch_get_main_queue(), ^{
         [webWindowController showWindow:self];
-    });
 
-    [task launch];
+        // Setting the windowNumber in the enviornmentDictionary must happen after showing the window
+        environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
+        [task setEnvironment:environmentDictionary];
+        DLog(@"Launch runCommandPath: %@", commandPath);
+        [task launch];
+    });
 }
 
 
@@ -199,6 +194,8 @@
 
 - (void)readFromStandardInput:(NSString *)text
 {
+    DLog(@"%@ readFromStandardInput: %@", self.name, text);
+    
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
     
     if (![webWindowControllers count]) return;

@@ -41,6 +41,9 @@
 - (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {
 
     if (![self.window isVisible]) {
+        // Showing the window here allows connecting manipulating a window just by loading HTML. I.e., running an script without
+        // using the plugin interface. Note that when running a script and using the app this way that some functionality
+        // will not work, such as terminating the running process when the window closes.
         [self showWindow:self]; // If showWindow is not before loadHTMLString, then failure completion handler will not fire.
     }
 
