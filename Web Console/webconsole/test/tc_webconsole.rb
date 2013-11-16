@@ -21,7 +21,12 @@ end
 
 # WebConsole
 
-class TestRunPlugin < Test::Unit::TestCase
+class TestWebConsoleRunPlugin < Test::Unit::TestCase
+
+  def teardown
+    @window_manager.close
+  end
+
   HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
   HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_run_plugin
@@ -31,41 +36,45 @@ class TestRunPlugin < Test::Unit::TestCase
 
     # Clean up
     window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
-    window_manager = WebConsole::WindowManager.new(window_id)
-    window_manager.close
+    @window_manager = WebConsole::WindowManager.new(window_id)
   end
+end
+
+class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
 
   PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
   PRINTPLUGIN_NAME = "Print"
-  LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
-  def test_read_from_standard_input_plugin
+  def setup
     WebConsole::load_plugin(PRINTPLUGIN_PATH)
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
     assert(WebConsole::plugin_has_windows(PRINTPLUGIN_NAME), "The plugin should have a window.")
+    window_id = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
+    @window_manager = WebConsole::WindowManager.new(window_id)
+  end
+  
+  def teardown
+    @window_manager.close
+    WebConsoleTestsHelper::respond_to_dialog
+  end
 
+  LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
+  def test_plugin_read_from_standard_input
     test_text = "This is a test string"
     WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text + "\n")
     sleep 0.5 # Give read from standard input time to run
 
-    window_id = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
-    window_manager = WebConsole::WindowManager.new(window_id)
-
     javascript = File.read(LASTCODEJAVASCRIPT_FILE)
-    result = window_manager.do_javascript(javascript)
+    result = @window_manager.do_javascript(javascript)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")
-
-    # Clean up
-    window_manager.close
-    WebConsoleTestsHelper::respond_to_dialog
   end
 end
 
 
 # WindowManager
 
-class TestDoJavaScript < Test::Unit::TestCase
+class TestWindowManagerDoJavaScript < Test::Unit::TestCase
 
   TESTHTML_FILE = File.join(DATA_DIRECTORY, "index.html")
   def setup
@@ -87,7 +96,7 @@ class TestDoJavaScript < Test::Unit::TestCase
   end
 end
 
-class TestLoadHTML < Test::Unit::TestCase
+class TestWindowManagerLoadHTML < Test::Unit::TestCase
   def setup
     @window_manager = WebConsole::WindowManager.new
   end
@@ -110,7 +119,7 @@ class TestLoadHTML < Test::Unit::TestCase
   end
 end
 
-class TestLoadHTMLWithBaseURL < Test::Unit::TestCase
+class TestWindowManagerLoadHTMLWithBaseURL < Test::Unit::TestCase
   TESTHTMLJQUERY_FILE = File.join(DATA_DIRECTORY, "indexjquery.html")
   def setup
     html = File.read(TESTHTMLJQUERY_FILE)
@@ -125,7 +134,7 @@ class TestLoadHTMLWithBaseURL < Test::Unit::TestCase
 
   TESTJAVASCRIPTTEXTJQUERY_FILE = File.join(DATA_DIRECTORY, "textjquery.js")
   TESTJAVASCRIPTTEXT_FILE = File.join(DATA_DIRECTORY, "text.js")
-  def test_load_from_base_url
+  def test_load_with_base_url
     javascript = File.read(TESTJAVASCRIPTTEXTJQUERY_FILE)
     result = @window_manager.do_javascript(javascript)
 

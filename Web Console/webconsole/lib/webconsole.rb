@@ -82,7 +82,7 @@ module WebConsole
       @window_id = self.class.window_id_from_result(result)
     end
 
-    DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "do_javascript_in.scpt")
+    DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "do_javascript.scpt")
     def do_javascript(javascript)
       WebConsole::run_applescript(DOJAVASCRIPT_SCRIPT, [javascript, @window_id])
     end
