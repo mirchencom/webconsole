@@ -79,7 +79,9 @@ module WebConsole
       end
 
       result = WebConsole::run_applescript(LOADHTML_SCRIPT, arguments)
-      @window_id = self.class.window_id_from_result(result)
+      if !@window_id
+        @window_id = self.class.window_id_from_result(result)        
+      end
     end
 
     DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "do_javascript.scpt")

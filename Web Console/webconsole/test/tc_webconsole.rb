@@ -19,6 +19,7 @@ module WebConsoleTestsHelper
   end
 end
 
+
 # WebConsole
 
 class TestWebConsoleRunPlugin < Test::Unit::TestCase
@@ -38,6 +39,9 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
     @window_manager = WebConsole::WindowManager.new(window_id)
   end
+
+  # TODO Test directory and arguments from `def self.run_plugin(name, directory = nil, arguments = nil)`
+
 end
 
 class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
@@ -73,6 +77,22 @@ end
 
 
 # WindowManager
+
+class TestWindowManagerClose < Test::Unit::TestCase
+
+  HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
+  HELLOWORLDPLUGIN_NAME = "HelloWorld"
+  def test_close
+    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
+    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    assert(WebConsole::plugin_has_windows(HELLOWORLDPLUGIN_NAME), "The plugin should have a window.")
+    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    @window_manager = WebConsole::WindowManager.new(window_id)
+    @window_manager.close
+    assert(!WebConsole::plugin_has_windows(HELLOWORLDPLUGIN_NAME), "The plugin should not have a window.")
+  end
+
+end
 
 class TestWindowManagerDoJavaScript < Test::Unit::TestCase
 
@@ -143,4 +163,6 @@ class TestWindowManagerLoadHTMLWithBaseURL < Test::Unit::TestCase
 
     assert_equal(expected, result, "The result should equal expected result.")
   end
+
+  # TODO Test directory and arguments from `def self.run_plugin(name, directory = nil, arguments = nil)`
 end
