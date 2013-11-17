@@ -10,6 +10,7 @@ DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
 PAUSE_TIME = 0.5
 
 module WebConsoleTestsHelper
+
   def self.run_javascript(javascript)
     return `node -e #{Shellwords.escape(javascript)}`
   end
@@ -45,9 +46,12 @@ module WebConsoleTestsHelper
   def self.run_applescript(applescript)
     `osascript #{Shellwords.escape(applescript)}`
   end
+
 end
 
+
 class TestQuit < Test::Unit::TestCase
+
   HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
   HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_quit_after_task_finishes
@@ -70,7 +74,6 @@ class TestQuit < Test::Unit::TestCase
     assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end
-
   def test_cancel_quit_with_running_task
     WebConsole::load_plugin(PRINTPLUGIN_PATH)
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
@@ -87,3 +90,20 @@ class TestQuit < Test::Unit::TestCase
   end
 
 end
+
+# TODO Test closing a window with a running task terminates the task
+# 1. Run a plugin that runs a task that needs to be interrupted
+# 2. Assert that the task is running
+# 3. Tell the window to close
+# 4. Confirm the close window dialog
+# 5. Assert that the task is terminated
+# 6. Assert that the plugin does not have windows
+
+# TODO Test closing a window with a running task and canceling the close does not terminate the task
+# 1. Run a plugin that runs a task that needs to be interrupted
+# 2. Assert that the task is running
+# 3. Tell the window to close
+# 4. Cancel the close window dialog
+# 5. Assert that the task is running
+# 6. Assert that the plugin still has windows
+
