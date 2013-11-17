@@ -29,39 +29,52 @@
     
     if (![webWindowControllersWithTasks count]) return YES;
 
-    NSMutableArray *webWindowControllersWaitingToClose = [webWindowControllersWithTasks mutableCopy];
-    NSMutableArray *observers = [NSMutableArray array];
-    __block BOOL windowsDidFinishClosing = NO;
+    NSMutableArray *windowWillCloseObservers = [NSMutableArray array];
+
+    void (^replyToApplicationShouldTerminate)(BOOL shouldCancel) = ^(BOOL shouldCancel) {
+        if (shouldCancel) {
+            [NSApp replyToApplicationShouldTerminate:NO];
+            for (id windowWillCloseObserver in windowWillCloseObservers) {
+                [[NSNotificationCenter defaultCenter] removeObserver:windowWillCloseObserver];
+            }
+        } else {
+            if (![windowWillCloseObservers count] &&
+                ![[WCLApplicationTerminationHelper webWindowControllersWithTasks] count]) {
+                [NSApp replyToApplicationShouldTerminate:YES];
+            }
+        }
+    };
+
+    // Quit if the user closes all the windows with running tasks
     for (WCLWebWindowController *webWindowController in webWindowControllersWithTasks) {
-#warning After tests are setup, move perform close after adding observer
-        [webWindowController.window performClose:self];
-        __block id observer;
-        observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
+        __block id windowWillCloseObserver;
+        windowWillCloseObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
                                                                      object:webWindowController.window
                                                                       queue:nil
                                                                  usingBlock:^(NSNotification *notification) {
-                                                                     [[NSNotificationCenter defaultCenter] removeObserver:observer];
-                                                                     [observers removeObject:observer];
-#warning After tests are setup, refactor to just use observers count
-                                                                     [webWindowControllersWaitingToClose removeObject:webWindowController];
-                                                                     if (![webWindowControllersWaitingToClose count] &&
-                                                                         ![[WCLApplicationTerminationHelper webWindowControllersWithTasks] count]) {
-                                                                         [NSApp replyToApplicationShouldTerminate:YES];
-                                                                         windowsDidFinishClosing = YES;
-                                                                     }
+                                                                     [[NSNotificationCenter defaultCenter] removeObserver:windowWillCloseObserver];
+                                                                     [windowWillCloseObservers removeObject:windowWillCloseObserver];
+                                                                     replyToApplicationShouldTerminate(NO);
                                                                  }];
-        [observers addObject:observer];
+        [windowWillCloseObservers addObject:windowWillCloseObserver];
+        [webWindowController.window performClose:self];
     }
-    
+
+    // Cancel the quit if the user does not confirm closing a window with a running task
+    __block id cancelWindowCloseObserver;
+    cancelWindowCloseObserver= [[NSNotificationCenter defaultCenter] addObserverForName:WCLWebWindowControllerDidCancelCloseWindowNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification) {
+                                                      [[NSNotificationCenter defaultCenter] removeObserver:cancelWindowCloseObserver];
+                                                      replyToApplicationShouldTerminate(YES);
+                                                  }];
+ 
+    // Cancel the quit after a timeout
     double delayInSeconds = kApplicationTerminationTimeout;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        if (!windowsDidFinishClosing) {
-            [NSApp replyToApplicationShouldTerminate:NO];
-            for (id observer in observers) {
-                [[NSNotificationCenter defaultCenter] removeObserver:observer];
-            }
-        }
+        replyToApplicationShouldTerminate(YES);
     });
     
     return NO;

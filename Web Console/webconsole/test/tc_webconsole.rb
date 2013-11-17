@@ -8,6 +8,8 @@ WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "..", "lib", "webconsole")
 require WEBCONSOLE_FILE
 DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
 
+PAUSE_TIME = 0.5
+
 module WebConsoleTestsHelper
   def self.run_javascript(javascript)
     return `node -e #{Shellwords.escape(javascript)}`
@@ -53,7 +55,7 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     window_id = WebConsole::window_id_for_plugin(DATAPLUGIN_NAME)
     @window_manager = WebConsole::WindowManager.new(window_id)
 
-    sleep 0.5 # Give time for script to run
+    sleep PAUSE_TIME # Give time for script to run
 
     path_result = @window_manager.do_javascript(%Q[valueForKey('#{PATH_KEY}');])
     arguments_result = @window_manager.do_javascript(%Q[valueForKey('#{ARGUMENTS_KEY}');])
@@ -86,7 +88,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
   def test_plugin_read_from_standard_input
     test_text = "This is a test string"
     WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text + "\n")
-    sleep 0.5 # Give read from standard input time to run
+    sleep PAUSE_TIME # Give read from standard input time to run
 
     javascript = File.read(LASTCODEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
@@ -214,14 +216,14 @@ class TestTwoWindowManagers < Test::Unit::TestCase
     window_id_one = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
     @window_manager_one = WebConsole::WindowManager.new(window_id_one)
     # WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text_one + "\n")
-    # sleep 0.5 # Give read from standard input time to run
+    # sleep PAUSE_TIME # Give read from standard input time to run
 
     # Window Manager Two
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
     window_id_two = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
     @window_manager_two = WebConsole::WindowManager.new(window_id_two)
     # WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text_two + "\n")
-    # sleep 0.5 # Give read from standard input time to run
+    # sleep PAUSE_TIME # Give read from standard input time to run
 
     # TODO This test doesn't really work because plugin_read_from_standard_input can't target a unique window_manager, finish this test when that functionality exists. For now the only thing valid to test is that the window ids are different.
 

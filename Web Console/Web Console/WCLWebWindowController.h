@@ -12,6 +12,8 @@
 
 @class WCLPlugin;
 
+extern NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification;
+
 @interface WCLWebWindowController : NSWindowController
 
 /*! Load the HTML in the WebViewController's WebView and executes a handler block when the request completes or fails.

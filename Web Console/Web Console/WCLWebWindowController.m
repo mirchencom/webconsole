@@ -14,6 +14,8 @@
 
 #import "WCLTaskHelper.h"
 
+NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLWebWindowControllerDidCancelCloseWindowNotification";
+
 @interface WCLWebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
 @property (nonatomic, strong) void (^completionHandler)(BOOL success);
@@ -94,7 +96,10 @@
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
-    if (returnCode != NSAlertFirstButtonReturn) return;
+    if (returnCode != NSAlertFirstButtonReturn) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:WCLWebWindowControllerDidCancelCloseWindowNotification object:self];
+        return;
+    }
 
     [self terminateTasksAndCloseWindow];
 }
