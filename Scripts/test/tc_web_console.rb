@@ -63,24 +63,27 @@ class TestQuit < Test::Unit::TestCase
   def test_quit_with_running_task
     WebConsole::load_plugin(PRINTPLUGIN_PATH)
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    # TODO Assert that the process is running
     WebConsoleTestsHelper::quit
     WebConsoleTestsHelper::confirm_dialog
     sleep PAUSE_TIME # Give the application time to quit
     assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
+    # TODO Assert that the process is not running
   end
 
   def test_cancel_quit_with_running_task
     WebConsole::load_plugin(PRINTPLUGIN_PATH)
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    # TODO Assert that the process is running
     WebConsoleTestsHelper::quit
     WebConsoleTestsHelper::cancel_dialog
     assert(WebConsoleTestsHelper::is_running, "The application should be running.")
-
-    # TODO Assert that the process is still running here
-
+    # TODO Assert that the process is running
     WebConsoleTestsHelper::quit
     WebConsoleTestsHelper::confirm_dialog
     sleep PAUSE_TIME # Give the application time to quit
     assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
+    # TODO Assert that the process is not running
   end
+
 end
