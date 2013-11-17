@@ -15,9 +15,9 @@ module WebConsoleTestsHelper
     return `node -e #{Shellwords.escape(javascript)}`
   end
 
-  RESPONDTODIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "respond_to_dialog.scpt")
-  def self.respond_to_dialog
-    `osascript #{Shellwords.escape(RESPONDTODIALOGAPPLESCRIPT_FILE)}`
+  CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "confirm_dialog.applescript")
+  def self.confirm_dialog
+    `osascript #{Shellwords.escape(CONFIRMDIALOGAPPLESCRIPT_FILE)}`
   end
 end
 
@@ -81,7 +81,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
   
   def teardown
     @window_manager.close
-    WebConsoleTestsHelper::respond_to_dialog
+    WebConsoleTestsHelper::confirm_dialog
   end
 
   LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
@@ -200,10 +200,10 @@ class TestTwoWindowManagers < Test::Unit::TestCase
   
   def teardown
     @window_manager_one.close
-    WebConsoleTestsHelper::respond_to_dialog
+    WebConsoleTestsHelper::confirm_dialog
   
     @window_manager_two.close
-    WebConsoleTestsHelper::respond_to_dialog
+    WebConsoleTestsHelper::confirm_dialog
   end
 
   LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")

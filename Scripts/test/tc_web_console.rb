@@ -14,22 +14,22 @@ module WebConsoleTestsHelper
     return `node -e #{Shellwords.escape(javascript)}`
   end
 
-  CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "confirm_dialog.scpt")
+  CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "confirm_dialog.applescript")
   def self.confirm_dialog
     self.run_applescript(CONFIRMDIALOGAPPLESCRIPT_FILE)
   end
 
-  CANCELDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "cancel_dialog.scpt")
+  CANCELDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "cancel_dialog.applescript")
   def self.cancel_dialog
     self.run_applescript(CANCELDIALOGAPPLESCRIPT_FILE)
   end
 
-  QUITAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.scpt")
+  QUITAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.applescript")
   def self.quit
     self.run_applescript(QUITAPPLESCRIPT_FILE)
   end
 
-  ISRUNNINGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "is_running.scpt")
+  ISRUNNINGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "is_running.applescript")
   def self.is_running
     result = self.run_applescript(ISRUNNINGAPPLESCRIPT_FILE)
     result.chomp!
@@ -75,6 +75,7 @@ class TestQuit < Test::Unit::TestCase
     WebConsoleTestsHelper::quit
     WebConsoleTestsHelper::cancel_dialog
     assert(WebConsoleTestsHelper::is_running, "The application should be running.")
+
     # TODO Assert that the process is still running here
 
     WebConsoleTestsHelper::quit
