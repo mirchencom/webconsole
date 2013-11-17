@@ -12,12 +12,16 @@ module WcIrb
 
       view_erb = ERB.new(File.new(VIEW_TEMPLATE).read, nil, '-')
       html = view_erb.result
-      @delegate.load_html(html)
+      if @delegate
+        @delegate.load_html(html)
+      end
     end  
     def parse_line(line)
       line.chomp!
       javascript = %Q[addOutput('#{line.gsub("'", "\\\\'")}');]
-      @delegate.do_javascript(javascript)
+      if @delegate
+        @delegate.do_javascript(javascript)
+      end
     end
   end
 end

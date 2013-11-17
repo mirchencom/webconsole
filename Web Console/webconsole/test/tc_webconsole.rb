@@ -40,7 +40,29 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     @window_manager = WebConsole::WindowManager.new(window_id)
   end
 
-  # TODO Test directory and arguments from `def self.run_plugin(name, directory = nil, arguments = nil)`
+  DATAPLUGIN_PATH = File.join(DATA_DIRECTORY, "Data.bundle")
+  DATAPLUGIN_NAME = "Data"
+  PATH_KEY = "Path"
+  ARGUMENTS_KEY = "Arguments"
+  def test_run_plugin_in_directory_with_arguments
+    arguments = "1 2 3"    
+    path = DATA_DIRECTORY
+
+    WebConsole::load_plugin(DATAPLUGIN_PATH)
+    WebConsole::run_plugin(DATAPLUGIN_NAME, path, arguments.split(" "))    
+    window_id = WebConsole::window_id_for_plugin(DATAPLUGIN_NAME)
+    @window_manager = WebConsole::WindowManager.new(window_id)
+
+    sleep 0.5 # Give time for script to run
+
+    path_result = @window_manager.do_javascript(%Q[valueForKey('#{PATH_KEY}');])
+    arguments_result = @window_manager.do_javascript(%Q[valueForKey('#{ARGUMENTS_KEY}');])
+    path_result.chomp!
+    arguments_result.chomp!
+
+    assert_equal(path_result, path, "The path result should match the path.")
+    assert_equal(arguments_result, arguments, "The arguments result should match the arguments.")
+  end
 
 end
 
@@ -164,5 +186,7 @@ class TestWindowManagerLoadHTMLWithBaseURL < Test::Unit::TestCase
     assert_equal(expected, result, "The result should equal expected result.")
   end
 
-  # TODO Test directory and arguments from `def self.run_plugin(name, directory = nil, arguments = nil)`
+  # TODO Test two window managers
+  # Create two different window managers for the pring plugin
+  # Change their order and test that the last code element is correct before after various order switches
 end
