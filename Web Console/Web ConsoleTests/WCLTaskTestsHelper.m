@@ -14,6 +14,35 @@
 
 @implementation WCLTaskTestsHelper
 
+#pragma mark - Running
+
++ (void)blockUntilTaskIsRunning:(NSTask *)task
+{
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while (![task isRunning] && [loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+    NSAssert([task isRunning], @"The NSTask should be running.");
+}
+
++ (void)blockUntilTasksAreRunning:(NSArray *)tasks
+{
+    NSMutableArray *tasksWaitingToRun = [tasks mutableCopy];
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while ([tasksWaitingToRun count] && [loopUntil timeIntervalSinceNow] > 0) {
+        NSMutableArray *tasksNowRunning = [NSMutableArray array];
+        for (NSTask *task in tasksWaitingToRun) {
+            if ([task isRunning]) [tasksNowRunning addObject:task];
+
+        }
+        [tasksWaitingToRun removeObjectsInArray:tasksNowRunning];
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+    }
+    NSAssert(![tasksWaitingToRun count], @"All of the NSTasks should have started runnign.");
+}
+
+#pragma mark - Finishing
+
 + (void)interruptTaskAndblockUntilTaskFinishes:(NSTask *)task
 {
     __block BOOL completionHandlerRan = NO;

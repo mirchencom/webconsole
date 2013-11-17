@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface WCLTaskTestsHelper : NSObject
+#pragma mark - Running
++ (void)blockUntilTasksAreRunning:(NSArray *)tasks;
++ (void)blockUntilTaskIsRunning:(NSTask *)task;
+#pragma mark - Finishing
 + (void)interruptTaskAndblockUntilTaskFinishes:(NSTask *)task;
 + (void)blockUntilTaskFinishes:(NSTask *)task;
 + (void)blockUntilTaskFinishes:(NSTask *)task timeoutInterval:(NSTimeInterval)timeoutInterval;

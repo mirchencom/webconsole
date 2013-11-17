@@ -13,6 +13,8 @@
 #import "WCLWebWindowsController.h"
 #import "WCLWebWindowController.h"
 
+#import "WCLTaskTestsHelper.h"
+
 #import "WCLPlugin.h"
 #import "WCLPlugin+Tests.h"
 
@@ -44,6 +46,8 @@
     NSAssert([webWindowController hasTasks], @"The WCLWebWindowController should have an NSTask.");
     
     if (task) *task = webWindowController.tasks[0];
+
+    [WCLTaskTestsHelper blockUntilTaskIsRunning:webWindowController.tasks[0]];
     
     return webWindowController;
 }
@@ -129,7 +133,7 @@
     for (id observer in observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
-    
+
     NSAssert(windowsDidFinishClosing, @"The NSWindows should have finished closing.");
     
     NSUInteger webWindowControllersCount = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count];

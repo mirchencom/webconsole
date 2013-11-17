@@ -105,7 +105,6 @@
     NSTask *task;
     WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
-
     __block BOOL completionHandlerRan = NO;
     [task wcl_interruptWithCompletionHandler:^(BOOL success) {
         XCTAssertTrue(success, @"The interrupted should have succeeded.");
@@ -176,6 +175,9 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
     XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
+
+    XCTAssertFalse([firstTask isRunning], @"The first NSTask should not be running.");
+    XCTAssertFalse([secondTask isRunning], @"The second NSTask should not be running.");
 }
 
 
@@ -218,6 +220,8 @@
     // Clean up
     NSArray *tasks = [[WCLWebWindowsController sharedWebWindowsController] tasks];
     XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two NSTasks.");
+
+    [WCLTaskTestsHelper blockUntilTasksAreRunning:tasks];
     [WCLTaskTestsHelper blockUntilTasksFinish:tasks];
 }
 

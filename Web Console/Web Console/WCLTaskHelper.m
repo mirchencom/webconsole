@@ -23,7 +23,7 @@
         }
     };
     
-#warning Change to mutable tasks to tasks after unit tests are written
+#warning Change mutable tasks to tasks after unit tests are written, this is a potential modify array while being enumerated crash
     for (NSTask *task in mutableTasks) {
         [task wcl_interruptWithCompletionHandler:^(BOOL success) {
             if (!success) {

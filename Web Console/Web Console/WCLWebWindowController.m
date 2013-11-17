@@ -101,18 +101,23 @@
 
 - (void)terminateTasksAndCloseWindow
 {
+    // TODO: When the API allows a WCLWebWindowController to have multiple tasks, this will need additional testing.
+    // A test where a new task is created on the WCLWebWindowController after terminateTasks:completionHandler: is called
+    // so that the ![self hasTasks] check fails and this method is called recurssively.
     [WCLTaskHelper terminateTasks:self.mutableTasks completionHandler:^(BOOL success) {
         NSAssert(success, @"Terminating NSTasks should always succeed.");
-        if (![self hasTasks]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (![self hasTasks]) {
                 [self.window close];
-            });
-        } else {
-            // Another task could have started while terminating the initial set of tasks
-            // so call again recursively
-            DLog(@"Calling terminateTasksAndCloseWindow recursively because there are still running tasks");
-            [self terminateTasksAndCloseWindow];
-        }
+            } else {
+#warning If performance becomes a concern, this should be dispatched to another queue
+                // Another task could have started while terminating the initial set of tasks
+                // so call again recursively
+                DLog(@"Calling terminateTasksAndCloseWindow recursively because there are still running tasks");
+                [self terminateTasksAndCloseWindow];
+            }
+        });
     }];
 }
 
