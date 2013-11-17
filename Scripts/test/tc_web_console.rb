@@ -8,6 +8,9 @@ SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
 DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
 
 PAUSE_TIME = 0.5
+QUIT_TIMEOUT = 60.0
+
+RUN_LONG_TESTS = false
 
 module WebConsoleTestsHelper
 
@@ -18,11 +21,13 @@ module WebConsoleTestsHelper
   CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "confirm_dialog.applescript")
   def self.confirm_dialog
     self.run_applescript(CONFIRMDIALOGAPPLESCRIPT_FILE)
+    sleep PAUSE_TIME # Give dialog time
   end
 
   CANCELDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "cancel_dialog.applescript")
   def self.cancel_dialog
     self.run_applescript(CANCELDIALOGAPPLESCRIPT_FILE)
+    sleep PAUSE_TIME # Give dialog time
   end
 
   QUITAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.applescript")
@@ -65,30 +70,60 @@ class TestQuit < Test::Unit::TestCase
   PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
   PRINTPLUGIN_NAME = "Print"
   def test_quit_with_running_task
+    # Start a task with a long running process
     WebConsole::load_plugin(PRINTPLUGIN_PATH)
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
     # TODO Assert that the process is running
+
+    # Quit and confirm the dialog
     WebConsoleTestsHelper::quit
     WebConsoleTestsHelper::confirm_dialog
-    sleep PAUSE_TIME # Give the application time to quit
-    assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
-    # TODO Assert that the process is not running
-  end
-  def test_cancel_quit_with_running_task
-    WebConsole::load_plugin(PRINTPLUGIN_PATH)
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
-    # TODO Assert that the process is running
-    WebConsoleTestsHelper::quit
-    WebConsoleTestsHelper::cancel_dialog
-    assert(WebConsoleTestsHelper::is_running, "The application should be running.")
-    # TODO Assert that the process is running
-    WebConsoleTestsHelper::quit
-    WebConsoleTestsHelper::confirm_dialog
-    sleep PAUSE_TIME # Give the application time to quit
     assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end
 
+  def test_cancel_quit_with_running_task
+    # Start a task with a long running process
+    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    # TODO Assert that the process is running
+
+    # Quit and cancel the dialog
+    WebConsoleTestsHelper::quit
+    WebConsoleTestsHelper::cancel_dialog
+    assert(WebConsoleTestsHelper::is_running, "The application should be running.")
+    # TODO Assert that the process is running
+
+    # Quit and confirm the dialog
+    WebConsoleTestsHelper::quit
+    WebConsoleTestsHelper::confirm_dialog
+    assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
+    # TODO Assert that the process is not running
+  end
+
+  def test_quit_timeout
+    if !RUN_LONG_TESTS
+      return
+    end
+
+    # Start a task with a long running process    
+    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    # TODO Assert that the process is running
+
+    # Quit and wait for the quit timout before confirming the dialog
+    WebConsoleTestsHelper::quit
+    sleep QUIT_TIMEOUT
+    WebConsoleTestsHelper::confirm_dialog
+    assert(WebConsoleTestsHelper::is_running, "The application should be running.")
+    # TODO Assert that the process is running
+
+    # Quit and confirm the dialog
+    WebConsoleTestsHelper::quit
+    # Don't need to confirm the dialog because the window is closed
+    assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
+    # TODO Assert that the process is not running
+  end
 end
 
 # TODO Test closing a window with a running task terminates the task
