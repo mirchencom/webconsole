@@ -189,57 +189,57 @@ end
 
 # TODO The Web Console functionality for the below test doesn't exist yet. The Web Console API first needs to be able to target reading from standard input for a specific window manager before this test will be possible.
 
-# class TestTwoWindowManagers < Test::Unit::TestCase
-#   PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
-#   PRINTPLUGIN_NAME = "Print"
-#   def setup
-#     WebConsole::load_plugin(PRINTPLUGIN_PATH)
-#   end
-#   
-#   def teardown
-#     @window_manager_one.close
-#     WebConsoleTestsHelper::respond_to_dialog
-#   
-#     @window_manager_two.close
-#     WebConsoleTestsHelper::respond_to_dialog
-#   end
-# 
-#   LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
-#   def test_two_window_managers
-#     test_text_one = "The first test string"
-#     test_text_two = "The second test string"
-# 
-#     # Window Manager One
-#     WebConsole::run_plugin(PRINTPLUGIN_NAME)
-#     window_id_one = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
-#     @window_manager_one = WebConsole::WindowManager.new(window_id_one)
-#     WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text_one + "\n")
-#     sleep 0.5 # Give read from standard input time to run
-# 
-#     # Window Manager Two
-#     WebConsole::run_plugin(PRINTPLUGIN_NAME)
-#     window_id_two = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
-#     @window_manager_two = WebConsole::WindowManager.new(window_id_two)
-#     WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text_two + "\n")
-#     sleep 0.5 # Give read from standard input time to run
-# 
-#     # TODO This test doesn't really work because plugin_read_from_standard_input can't target a unique window_manager, finish this test when that functionality exists
-# 
-#     assert_not_equal(window_id_one, window_id_two, "Window managers one and two should have different window ids.")
-# 
-#     # TODO Switch the window order of window manager's one and two
-# 
-#     javascript = File.read(LASTCODEJAVASCRIPT_FILE)
-# 
-#     # Window Manager One
-#     result_one = @window_manager_one.do_javascript(javascript)
-#     result_one.strip!
-# 
-#     # Window Manager Two
-#     result_two = @window_manager_two.do_javascript(javascript)
-#     result_two.strip!
-# 
-#     assert_equal(test_text_one, result_one, "The first test text should equal the first result.")
-#     assert_equal(test_text_two, result_two, "The second test text should equal the second result.")
-#   end
-# end
+class TestTwoWindowManagers < Test::Unit::TestCase
+  PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
+  PRINTPLUGIN_NAME = "Print"
+  def setup
+    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+  end
+  
+  def teardown
+    @window_manager_one.close
+    WebConsoleTestsHelper::respond_to_dialog
+  
+    @window_manager_two.close
+    WebConsoleTestsHelper::respond_to_dialog
+  end
+
+  LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
+  def test_two_window_managers
+    # test_text_one = "The first test string"
+    # test_text_two = "The second test string"
+
+    # Window Manager One
+    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    window_id_one = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
+    @window_manager_one = WebConsole::WindowManager.new(window_id_one)
+    # WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text_one + "\n")
+    # sleep 0.5 # Give read from standard input time to run
+
+    # Window Manager Two
+    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    window_id_two = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
+    @window_manager_two = WebConsole::WindowManager.new(window_id_two)
+    # WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text_two + "\n")
+    # sleep 0.5 # Give read from standard input time to run
+
+    # TODO This test doesn't really work because plugin_read_from_standard_input can't target a unique window_manager, finish this test when that functionality exists. For now the only thing valid to test is that the window ids are different.
+
+    assert_not_equal(window_id_one, window_id_two, "Window managers one and two should have different window ids.")
+
+    # TODO Switch the window order of window manager's one and two
+
+    # javascript = File.read(LASTCODEJAVASCRIPT_FILE)
+    # 
+    # # Window Manager One
+    # result_one = @window_manager_one.do_javascript(javascript)
+    # result_one.strip!
+    # 
+    # # Window Manager Two
+    # result_two = @window_manager_two.do_javascript(javascript)
+    # result_two.strip!
+    # 
+    # assert_equal(test_text_one, result_one, "The first test text should equal the first result.")
+    # assert_equal(test_text_two, result_two, "The second test text should equal the second result.")
+  end
+end
