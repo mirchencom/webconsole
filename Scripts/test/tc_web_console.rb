@@ -163,6 +163,27 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end
+
+  HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
+  HELLOWORLDPLUGIN_NAME = "HelloWorld"
+  def test_quit_confirming_after_starting_short_second_task
+    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
+
+    # Start a task with a long running process
+    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    # TODO Assert that the process is running
+
+    # Quit and start another process
+    WebConsoleTestsHelper::quit
+    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    sleep PAUSE_TIME # Give the plugin time to finish running    
+
+    # Switch windows and confirm close
+    WebConsoleTestsHelper::switch_windows
+    WebConsoleTestsHelper::confirm_dialog
+    assert(!WebConsoleTestsHelper::is_running, "The application should be running.")
+    # TODO Assert that the process is not running  
+  end
 end
 
 # TODO Test closing a window with a running task terminates the task
