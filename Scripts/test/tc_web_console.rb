@@ -48,12 +48,18 @@ module WebConsoleTestsHelper
 
   private
   
-  def self.run_applescript(applescript)
-    `osascript #{Shellwords.escape(applescript)}`
+  def self.run_applescript(script, arguments = nil)
+    command = "osascript #{Shellwords.escape(script)}"
+    if arguments
+      arguments.each { |argument|
+        argument = argument.to_s
+        command = command + " " + Shellwords.escape(argument)
+      }
+    end
+    return `#{command}`
   end
 
 end
-
 
 class TestQuit < Test::Unit::TestCase
 
@@ -67,11 +73,19 @@ class TestQuit < Test::Unit::TestCase
     assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
   end
 
+end
+
+class TestQuitWithRunningTask < Test::Unit::TestCase
+
+
   PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
   PRINTPLUGIN_NAME = "Print"
+  def setup
+    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+  end
+
   def test_quit_with_running_task
     # Start a task with a long running process
-    WebConsole::load_plugin(PRINTPLUGIN_PATH)
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
     # TODO Assert that the process is running
 
@@ -84,7 +98,6 @@ class TestQuit < Test::Unit::TestCase
 
   def test_cancel_quit_with_running_task
     # Start a task with a long running process
-    WebConsole::load_plugin(PRINTPLUGIN_PATH)
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
     # TODO Assert that the process is running
 
@@ -106,8 +119,7 @@ class TestQuit < Test::Unit::TestCase
       return
     end
 
-    # Start a task with a long running process    
-    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+    # Start a task with a long running process
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
     # TODO Assert that the process is running
 
@@ -121,6 +133,36 @@ class TestQuit < Test::Unit::TestCase
     # Quit and confirm the dialog
     WebConsoleTestsHelper::quit
     # Don't need to confirm the dialog because the window is closed
+    assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
+    # TODO Assert that the process is not running
+  end
+
+  def test_quit_confirming_after_starting_second_task
+    return
+
+    # Start a task with a long running process
+    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    window_id_one = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
+
+puts "window_id_one = " + window_id_one.to_s
+
+    # TODO Assert that the process is running
+  
+    # Quit and start another process
+    WebConsoleTestsHelper::quit
+    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+
+    # TODO Probably have to deal with window order here
+    # E.g., bring_window_id to front
+
+    # Confirm the close after the second process is started
+    WebConsoleTestsHelper::confirm_dialog
+    assert(WebConsoleTestsHelper::is_running, "The application should be running.")
+    # TODO Assert that the process is running
+  
+    # Quit and confirm the dialog
+    WebConsoleTestsHelper::quit
+    WebConsoleTestsHelper::confirm_dialog
     assert(!WebConsoleTestsHelper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end

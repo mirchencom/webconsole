@@ -46,12 +46,14 @@ module WebConsole
 
   private
 
-  def self.run_applescript(script, arguments)
+  def self.run_applescript(script, arguments = nil)
     command = "osascript #{Shellwords.escape(script)}"
-    arguments.each { |argument|
-      argument = argument.to_s
-      command = command + " " + Shellwords.escape(argument)
-    }
+    if arguments
+      arguments.each { |argument|
+        argument = argument.to_s
+        command = command + " " + Shellwords.escape(argument)
+      }
+    end
     return `#{command}`
   end
 
