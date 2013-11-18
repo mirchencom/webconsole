@@ -38,9 +38,11 @@
                 [[NSNotificationCenter defaultCenter] removeObserver:windowWillCloseObserver];
             }
         } else {
-            if (![windowWillCloseObservers count] &&
-                ![[WCLApplicationTerminationHelper webWindowControllersWithTasks] count]) {
-                [NSApp replyToApplicationShouldTerminate:YES];
+            if (![windowWillCloseObservers count]) {
+                // The application should only terminate if there are no NSTasks. This condition can be false if a new NSTask
+                // started after user initialized the quit.
+                BOOL shouldTerminate = [[WCLApplicationTerminationHelper webWindowControllersWithTasks] count] ? NO : YES;
+                [NSApp replyToApplicationShouldTerminate:shouldTerminate];
             }
         }
     };

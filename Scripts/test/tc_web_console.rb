@@ -10,7 +10,7 @@ DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
 PAUSE_TIME = 0.5
 QUIT_TIMEOUT = 60.0
 
-RUN_LONG_TESTS = false
+RUN_LONG_TESTS = true
 
 module WebConsoleTestsHelper
 
@@ -44,6 +44,11 @@ module WebConsoleTestsHelper
     else
       return false
     end
+  end
+
+  SWITCHWINDOWSAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "switch_windows.applescript")
+  def self.switch_windows
+    self.run_applescript(SWITCHWINDOWSAPPLESCRIPT_FILE)
   end
 
   private
@@ -138,24 +143,17 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
   end
 
   def test_quit_confirming_after_starting_second_task
-    return
-
     # Start a task with a long running process
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
     window_id_one = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
-
-puts "window_id_one = " + window_id_one.to_s
-
     # TODO Assert that the process is running
-  
+
     # Quit and start another process
     WebConsoleTestsHelper::quit
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
 
-    # TODO Probably have to deal with window order here
-    # E.g., bring_window_id to front
-
-    # Confirm the close after the second process is started
+    # Switch windows and confirm close
+    WebConsoleTestsHelper::switch_windows
     WebConsoleTestsHelper::confirm_dialog
     assert(WebConsoleTestsHelper::is_running, "The application should be running.")
     # TODO Assert that the process is running
