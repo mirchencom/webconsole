@@ -10,7 +10,7 @@ DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
 PAUSE_TIME = 0.5
 QUIT_TIMEOUT = 60.0
 
-RUN_LONG_TESTS = true
+RUN_LONG_TESTS = false
 
 module WebConsoleTestsHelper
 
@@ -145,7 +145,6 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
   def test_quit_confirming_after_starting_second_task
     # Start a task with a long running process
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
-    window_id_one = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
     # TODO Assert that the process is running
 
     # Quit and start another process
