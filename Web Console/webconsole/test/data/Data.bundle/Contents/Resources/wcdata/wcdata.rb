@@ -2,7 +2,7 @@
 
 require 'webconsole'
 
-BASE_DIRECTORY = File.join(File.dirname(__FILE__))
+BASE_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 LIB_DIRECTORY = File.join(BASE_DIRECTORY, "lib")
 CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
 require CONTROLLER_FILE

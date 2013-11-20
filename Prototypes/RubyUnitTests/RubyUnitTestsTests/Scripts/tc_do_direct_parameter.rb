@@ -3,7 +3,7 @@
 require "test/unit"
 require 'Shellwords'
 
-SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
+SCRIPT_DIRECTORY = File.dirname(__FILE__)
 
 class TestDoDirectParameter < Test::Unit::TestCase
   DODIRECTPARAMETER_APPLESCRIPT_FILENAME = "DoDirectParameter.scpt"

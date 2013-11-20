@@ -107,6 +107,8 @@
       withResourcePath:(NSString *)resourcePath
        inDirectoryPath:(NSString *)directoryPath
 {
+    DLog(@"runCommandPath:%@ withArguments:%@ withResourcePath:%@ inDirectoryPath:%@", commandPath, arguments, resourcePath, directoryPath);
+    
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
     if (directoryPath) {
@@ -164,7 +166,6 @@
         // Setting the windowNumber in the enviornmentDictionary must happen after showing the window
         environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
         [task setEnvironment:environmentDictionary];
-        DLog(@"Launch runCommandPath: %@", commandPath);
         [task launch];
     });
 }

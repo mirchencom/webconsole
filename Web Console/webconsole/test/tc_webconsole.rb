@@ -3,7 +3,7 @@
 require "test/unit"
 require 'Shellwords'
 
-SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
+SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "..", "lib", "webconsole")
 require WEBCONSOLE_FILE
 DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")

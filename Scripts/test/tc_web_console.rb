@@ -4,7 +4,7 @@ require "test/unit"
 require 'Shellwords'
 require 'webconsole'
 
-SCRIPT_DIRECTORY = File.join(File.dirname(__FILE__))
+SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
 
 PAUSE_TIME = 0.5
