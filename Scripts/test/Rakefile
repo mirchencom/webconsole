@@ -1,6 +1,8 @@
+require 'shellwords'
+
 task :default => [:test]
 
 task :test do
   ruby "tc_web_console.rb"
-  ruby "../../Web Console/webconsole/test/tc_webconsole.rb"
+  ruby File.expand_path("../../Web Console/webconsole/test/tc_webconsole.rb").shellescape
 end
