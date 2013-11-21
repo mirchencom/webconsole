@@ -1,26 +1,9 @@
 #!/usr/bin/env ruby
 
 require "test/unit"
-require 'Shellwords'
-
-SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-WEBCONSOLE_FILE = File.join(SCRIPT_DIRECTORY, "..", "lib", "webconsole")
-require WEBCONSOLE_FILE
-DATA_DIRECTORY = File.join(SCRIPT_DIRECTORY, "data")
-
-PAUSE_TIME = 0.5
-
-module WebConsoleTestsHelper
-  def self.run_javascript(javascript)
-    return `node -e #{Shellwords.escape(javascript)}`
-  end
-
-  CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "confirm_dialog.applescript")
-  def self.confirm_dialog
-    `osascript #{Shellwords.escape(CONFIRMDIALOGAPPLESCRIPT_FILE)}`
-  end
-end
-
+TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "test_helper")
+require TEST_HELPER_FILE
 
 # WebConsole
 
@@ -81,7 +64,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
   
   def teardown
     @window_manager.close
-    WebConsoleTestsHelper::confirm_dialog
+    TestsHelper::confirm_dialog
   end
 
   LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
@@ -134,7 +117,7 @@ class TestWindowManagerDoJavaScript < Test::Unit::TestCase
   def test_do_javascript
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
-    expected = WebConsoleTestsHelper::run_javascript(javascript)
+    expected = TestsHelper::run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
   end
 end
@@ -200,10 +183,10 @@ class TestTwoWindowManagers < Test::Unit::TestCase
   
   def teardown
     @window_manager_one.close
-    WebConsoleTestsHelper::confirm_dialog
+    TestsHelper::confirm_dialog
   
     @window_manager_two.close
-    WebConsoleTestsHelper::confirm_dialog
+    TestsHelper::confirm_dialog
   end
 
   LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
