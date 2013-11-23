@@ -22,9 +22,8 @@
             completionHandler(YES);
         }
     };
-    
-#warning Change mutable tasks to tasks after unit tests are written, this is a potential modify array while being enumerated crash
-    for (NSTask *task in mutableTasks) {
+
+    for (NSTask *task in tasks) {
         [task wcl_interruptWithCompletionHandler:^(BOOL success) {
             if (!success) {
                 DLog(@"Failed to interrupt a task, trying terminate");
