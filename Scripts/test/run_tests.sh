@@ -4,14 +4,18 @@ usage () {
 	echo "Usage: run_tests.sh [-l]"
 	echo
 	echo "-l : Run long tests"
+	echo "-c : Run only XCUnit tests"
 }
 
 LONG=false
-while getopts lh option
+XCUNIT=false
+while getopts lch option
 do
 	case "$option"
 	in
 	    l)  LONG=true
+			;;
+	    c)  XCUNIT=true
 			;;
 	    h)  usage
 	        exit 0
@@ -23,8 +27,14 @@ do
 	esac
 done
 
+if $XCUNIT ; then
+	rake xcunit
+	exit 0
+fi
+
 if $LONG ; then
 	rake long
-else
-	rake
+	exit 0
 fi
+
+rake
