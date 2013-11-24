@@ -7,6 +7,7 @@ TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, 'test_constants')
 require TEST_CONSTANTS_FILE
 
 require TEST_DATA_HELPER_FILE
+require TEST_JAVASCRIPT_HELPER_FILE
 require TEST_PARSER_ADDITIONS_FILE
 require PARSER_FILE
 require CONTROLLER_FILE
@@ -22,6 +23,11 @@ class TestController < Test::Unit::TestCase
     parser = WcAck::Parser.new(WcAck::Controller.new(window_manager))
     parser.parse(test_data)
 
-    # test_files_hash = test_data_helper.test_files_hash
+
+
+    TestJavaScriptHelper::files_hash_for_window_manager(window_manager)
+
+# test_files_hash = test_data_helper.test_files_hash
+# puts "test_files_hash = " + test_files_hash.to_s
   end
 end

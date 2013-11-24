@@ -3,8 +3,8 @@
 require 'Shellwords'
 require 'webconsole'
 
-BASE_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-LIB_DIRECTORY = File.join(BASE_DIRECTORY, "lib")
+SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+LIB_DIRECTORY = File.join(SCRIPT_DIRECTORY, "lib")
 
 PARSER_FILE = File.join(LIB_DIRECTORY, "parser")
 require PARSER_FILE
@@ -12,11 +12,13 @@ require PARSER_FILE
 CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
 require CONTROLLER_FILE
 
+WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, "window_manager")
+require WINDOW_MANAGER_FILE
+
+
 # Window Manager
 window_id = ENV['WINDOWID']
-window_manager = WebConsole::WindowManager.new(window_id)
-BASE_PATH = File.expand_path(BASE_DIRECTORY)
-window_manager.base_url_path = BASE_PATH
+window_manager = WcAck::WindowManager.new(window_id)
 
 # Parser
 parser = WcAck::Parser.new(WcAck::Controller.new(window_manager))

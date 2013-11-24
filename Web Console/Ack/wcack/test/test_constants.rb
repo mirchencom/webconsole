@@ -1,6 +1,7 @@
 # Test
 TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 TEST_DATA_HELPER_FILE = File.join(TEST_DIRECTORY, "test_data_helper")
+TEST_JAVASCRIPT_HELPER_FILE = File.join(TEST_DIRECTORY, "test_javascript_helper")
 TEST_PARSER_ADDITIONS_FILE = File.join(TEST_DIRECTORY, "test_parser_additions")
 
 # Lib
