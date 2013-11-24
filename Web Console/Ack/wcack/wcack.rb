@@ -19,8 +19,7 @@ BASE_PATH = File.expand_path(BASE_DIRECTORY)
 window_manager.base_url_path = BASE_PATH
 
 # Parser
-parser = WcAck::Parser.new
-parser.delegate = WcAck::Controller.new(window_manager)
+parser = WcAck::Parser.new(WcAck::Controller.new(window_manager))
 
 # Parse
 term = ARGV[0]

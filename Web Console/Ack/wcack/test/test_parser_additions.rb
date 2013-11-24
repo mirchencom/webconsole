@@ -4,18 +4,11 @@ require PARSER_FILE
 
 module WcAck
   class Parser
-
-    def self.load(data) 
-      parser = Parser.new
-      parser.parse(data)
-    end
-
+    attr_reader :files_hash
     def parse(data)
       data.each_line { |line|
           parse_line(line)
       }
-      return @files_hash
     end
-
   end
 end

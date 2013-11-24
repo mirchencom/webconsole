@@ -16,7 +16,10 @@ class TestParser < Test::Unit::TestCase
     test_data_helper = TestDataHelper.new
     test_data = test_data_helper.test_data
 
-    files_hash = WcAck::Parser::load(test_data)
+    parser = WcAck::Parser.new
+    parser.parse(test_data)
+
+    files_hash = parser.files_hash
     test_files_hash = test_data_helper.test_files_hash
 
     test_files_hash.keys.each do |file_path|
