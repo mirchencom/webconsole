@@ -9,18 +9,22 @@ module WcAck
     VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
 
     attr_writer :delegate
-    def initialize(delegate)
+    def initialize(delegate = nil)
       @delegate = delegate
 
       view_erb = ERB.new(File.new(VIEW_TEMPLATE).read, nil, '-')
       html = view_erb.result
-      @delegate.load_html(html)
+      if @delegate
+        @delegate.load_html(html)
+      end
     end
 
     def added_file(file)
       # Escape '
       javascript = "addFile('#{file.file_path.gsub("'", "\\\\'")}');"
-      @delegate.do_javascript(javascript)
+      if @delegate
+        @delegate.do_javascript(javascript)
+      end
     end
 
     def added_line_to_file(line, file)
@@ -40,7 +44,9 @@ var matches = [#{matches_javascript}
 ];
 addLine(#{line.number}, '#{text}', matches);
 ]
-      @delegate.do_javascript(javascript)
+      if @delegate
+        @delegate.do_javascript(javascript)
+      end
     end
   end    
 end
