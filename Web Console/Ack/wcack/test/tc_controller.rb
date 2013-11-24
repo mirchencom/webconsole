@@ -2,34 +2,26 @@
 
 require "test/unit"
 
-TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "test_helper")
-require TEST_HELPER_FILE
+SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_CONSTANTS_FILE = file.join(SCRIPT_DIRECTORY, 'test_constants')
+require TEST_CONSTANTS_FILE
 
-LIB_DIRECTORY = File.join(File.dirname(__FILE__), '..', 'lib')
-
-PARSER_FILE = File.join(LIB_DIRECTORY, 'parser')
+require TEST_DATA_HELPER_FILE
 require PARSER_FILE
-
-CONTROLLER_FILE = File.join(LIB_DIRECTORY, 'controller')
 require CONTROLLER_FILE
-
-WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, 'window_manager')
 require WINDOW_MANAGER_FILE
-
 
 class TestController < Test::Unit::TestCase
 
   def test_controller
       window_manager = WcAck::WindowManager.new
-      parser = WcAck::Parser.new
-      parser.delegate = WcAck::Controller.new(window_manager)
+      parser = WcAck::Parser.new(WcAck::Controller.new(window_manager))
 
-      test_helper = TestHelper.new
-      test_data = test_helper.test_data
+      test_data_helper = TestDataHelper.new
+      test_data = test_data_helper.test_data
 
-      test_files_hash = test_helper.test_files_hash
+      test_files_hash = test_data_helper.test_files_hash
 
-      files_hash = WcAck.load(test_data)    
+      files_hash = WcAck::load(test_data)    
   end
 end

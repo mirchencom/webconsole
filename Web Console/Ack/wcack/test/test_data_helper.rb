@@ -1,8 +1,8 @@
 require "yaml"
-TEST_HELPER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-DATA_DIRECTORY = File.join(TEST_HELPER_DIRECTORY, "data")
+TEST_DATA_HELPER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+DATA_DIRECTORY = File.join(TEST_DATA_HELPER_DIRECTORY, "data")
 
-class TestHelper
+class TestDataHelper
 
   TEST_DATA_GENERATED = File.join(DATA_DIRECTORY, 'test_data_generated.yml')
   def initialize

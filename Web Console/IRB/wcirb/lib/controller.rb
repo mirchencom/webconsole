@@ -7,7 +7,7 @@ module WcIrb
     VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
 
     attr_writer :delegate
-    def initialize(delegate)
+    def initialize(delegate = nil)
       @delegate = delegate
 
       view_erb = ERB.new(File.new(VIEW_TEMPLATE).read, nil, '-')

@@ -2,23 +2,22 @@
 
 require "test/unit"
 
-TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "test_helper")
-require TEST_HELPER_FILE
+SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, 'test_constants')
+require TEST_CONSTANTS_FILE
 
-LIB_DIRECTORY = File.join(File.dirname(__FILE__), '..', 'lib')
-
-PARSER_FILE = File.join(LIB_DIRECTORY, 'parser')
+require TEST_DATA_HELPER_FILE
+require TEST_PARSER_ADDITIONS_FILE
 require PARSER_FILE
 
 class TestParser < Test::Unit::TestCase
 
   def test_parser
-    test_helper = TestHelper.new
-    test_data = test_helper.test_data
+    test_data_helper = TestDataHelper.new
+    test_data = test_data_helper.test_data
 
-    files_hash = WcAck.load(test_data)
-    test_files_hash = test_helper.test_files_hash
+    files_hash = WcAck::Parser::load(test_data)
+    test_files_hash = test_data_helper.test_files_hash
 
     test_files_hash.keys.each do |file_path|
       test_file = test_files_hash[file_path]

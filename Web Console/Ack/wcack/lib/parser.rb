@@ -1,11 +1,8 @@
-MODEL_FILE = File.join(File.dirname(__FILE__), 'model')
+PARSER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+MODEL_FILE = File.join(PARSER_DIRECTORY, 'model')
 require MODEL_FILE
 
 module WcAck
-  def self.load(data) 
-    parser = Parser.new
-    parser.parse(data)
-  end
 
   class Parser
     ANSI_ESCAPE = '\x1b[^m]*m'
@@ -15,17 +12,11 @@ module WcAck
     LINE_ENDING_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '\x1b\[K')
 
     attr_writer :delegate
-    def initialize
+    def initialize(delegate = nil)
+      @delegate = delegate
       @files_hash = Hash.new
     end
     
-    def parse(data)
-      data.each_line { |line|
-          parse_line(line)
-      }
-      return @files_hash
-    end
-
     def parse_line(raw_line)
       ansi_wrapped = raw_line.scan(ANSI_WRAPPER_REGEXP)
 
