@@ -18,7 +18,8 @@ class TestController < Test::Unit::TestCase
     test_data_helper = TestDataHelper.new
     test_data = test_data_helper.test_data
 
-    parser = WcAck::Parser.new(WcAck::Controller.new(WcAck::WindowManager.new))
+    window_manager = WcAck::WindowManager.new
+    parser = WcAck::Parser.new(WcAck::Controller.new(window_manager))
     parser.parse(test_data)
 
     # test_files_hash = test_data_helper.test_files_hash

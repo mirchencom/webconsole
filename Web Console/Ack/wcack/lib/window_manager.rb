@@ -7,7 +7,7 @@ module WcAck
   class WindowManager < WebConsole::WindowManager
     def initialize(window_id = nil)
       super(window_id)
-      base_url_path = File.expand_path(BASE_DIRECTORY)
-    end    
+      self.base_url_path = File.expand_path(BASE_DIRECTORY)
+    end
   end
 end
