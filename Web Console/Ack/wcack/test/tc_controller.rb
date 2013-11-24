@@ -1,19 +1,35 @@
 #!/usr/bin/env ruby
 
 require "test/unit"
-require 'webconsole'
-CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'test_constants')
-require CONSTANTS_FILE
+
+TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "test_helper")
+require TEST_HELPER_FILE
+
+LIB_DIRECTORY = File.join(File.dirname(__FILE__), '..', 'lib')
+
+PARSER_FILE = File.join(LIB_DIRECTORY, 'parser')
 require PARSER_FILE
+
+CONTROLLER_FILE = File.join(LIB_DIRECTORY, 'controller')
+require CONTROLLER_FILE
+
+WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, 'window_manager')
+require WINDOW_MANAGER_FILE
 
 
 class TestController < Test::Unit::TestCase
-  SEARCH_DIRECTORY = File.join(File.dirname(__FILE__), '../../../../')
-  SEARCH_TERM = "test"
-  def test_matches_count
-    match_count = `ack --no-filename --count #{SEARCH_TERM} #{SEARCH_DIRECTORY}`
-    puts match_count
 
-    puts SEARCH_DIRECTORY
+  def test_controller
+      window_manager = WcAck::WindowManager.new
+      parser = WcAck::Parser.new
+      parser.delegate = WcAck::Controller.new(window_manager)
+
+      test_helper = TestHelper.new
+      test_data = test_helper.test_data
+
+      test_files_hash = test_helper.test_files_hash
+
+      files_hash = WcAck.load(test_data)    
   end
 end
