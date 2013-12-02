@@ -24,5 +24,9 @@ class TestController < Test::Unit::TestCase
     controller = WcAck::Controller.new(window_manager)
     parser = WcAck::Parser.new(controller, test_data_directory)
     parser.parse(test_ack_output)
+
+    files_hash = TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)
+puts "files_hash = " + files_hash.to_s
+
   end
 end

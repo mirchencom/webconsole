@@ -1,13 +1,30 @@
-function DOMToJSON(root) {
-  // var result = {};
-// $('section').first().('a')
+function DOMToJSON() {
+	var matches = [];
 
-  $('section').each(function () {
-	  text = $('a' , this).first().text();
+	$('section').each(function () {
+		a = $('a' , this).first()
+		var displayFilePath = a.text();
+		var filePath = a.attr("href").replace('file://','');
 
-	  return text
-	  // console.log(text);
-  });
+		$('li', this).each(function () {
+			var strongElements = $('strong', this).toArray();
+			var numberElement = strongElements.shift();
+			var lineNumber = $(numberElement).text().replace(':','');
 
-  // return result;
+			$(strongElements).each(function () {
+				matchedText = $(this).text();
+
+				var match = new Object();
+				match.display_file_path = displayFilePath;
+				match.file_path = filePath;
+				match.line_number = lineNumber;
+				match.matched_text = matchedText;
+
+				matches.push(match);
+			});
+		});
+	});
+
+	return JSON.stringify(matches);
 }
+DOMToJSON();
