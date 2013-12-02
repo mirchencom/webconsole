@@ -17,18 +17,14 @@ require WINDOW_MANAGER_FILE
 class TestController < Test::Unit::TestCase
 
   def test_controller
-    test_data_helper = TestDataHelper.new
-    test_data = test_data_helper.test_data
+    test_ack_output = TestHelper::TestData::test_ack_output
 
     window_manager = WcAck::WindowManager.new
     parser = WcAck::Parser.new(WcAck::Controller.new(window_manager))
-    parser.parse(test_data)
+    parser.parse(test_ack_output)
 
 
 
-    TestJavaScriptHelper::files_hash_for_window_manager(window_manager)
-
-test_files_hash = test_data_helper.test_files_hash
-puts "test_files_hash = " + test_files_hash.to_s
+    # TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)
   end
 end

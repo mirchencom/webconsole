@@ -21,6 +21,7 @@ module WcAck
       ansi_wrapped = raw_line.scan(ANSI_WRAPPER_REGEXP)
 
       file_path = ansi_wrapped[0][0]
+      file_path = File.expand_path(file_path) # Convert paths with .. to full paths
       file = @files_hash[file_path]
       if !file
         file = Match::File.new(file_path)

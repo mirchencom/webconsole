@@ -44,6 +44,7 @@ module TestHelper
       hashes.each { |hash|
         filename = hash[FILENAME_KEY]
         file_path = hash[FILE_PATH_KEY]
+        file_path = File.expand_path(file_path) # Convert paths with .. to full paths
         line_number = hash[LINE_NUMBER_KEY].to_i
         matched_text = hash[MATCHED_TEXT_KEY]
 
