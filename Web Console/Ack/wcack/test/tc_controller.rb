@@ -10,6 +10,7 @@ require TEST_DATA_HELPER_FILE
 require TEST_DATA_PARSER_FILE
 require TEST_JAVASCRIPT_HELPER_FILE
 require TEST_PARSER_ADDITIONS_FILE
+require TEST_DATA_TESTER_FILE
 require PARSER_FILE
 require CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
@@ -25,8 +26,15 @@ class TestController < Test::Unit::TestCase
     parser = WcAck::Parser.new(controller, test_data_directory)
     parser.parse(test_ack_output)
 
-    files_hash = TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)
-puts "files_hash = " + files_hash.to_s
+    files_json = TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)
+    files_hash = TestHelper::Parser::parse(files_json)
 
+    test_data_json = TestHelper::TestData::test_data_json
+    test_files_hash = TestHelper::Parser::parse(test_data_json)
+
+    file_hashes_match = TestHelper::TestDataTester::test_file_hashes(files_hash, test_files_hash)
+    assert(file_hashes_match, "The file hashes should match.")
+
+    window_manager.close
   end
 end
