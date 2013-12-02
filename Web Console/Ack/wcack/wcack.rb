@@ -21,11 +21,12 @@ window_id = ENV['WINDOWID']
 window_manager = WcAck::WindowManager.new(window_id)
 
 # Parser
-parser = WcAck::Parser.new(WcAck::Controller.new(window_manager))
+controller = WcAck::Controller.new(window_manager)
+directory = `pwd`
+parser = WcAck::Parser.new(controller, directory)
 
 # Parse
 term = ARGV[0]
-directory = `pwd`
 directory.chomp!
 pipe = IO.popen("ack --color #{Shellwords.escape(term)} #{Shellwords.escape(directory)}")
 while (line = pipe.gets)

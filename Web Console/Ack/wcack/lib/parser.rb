@@ -2,6 +2,8 @@ PARSER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 MODEL_FILE = File.join(PARSER_DIRECTORY, 'model')
 require MODEL_FILE
 
+require 'pathname'
+
 module WcAck
 
   class Parser
@@ -12,8 +14,9 @@ module WcAck
     LINE_ENDING_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '\x1b\[K')
 
     attr_writer :delegate
-    def initialize(delegate = nil)
+    def initialize(delegate = nil, directory = nil)
       @delegate = delegate
+      @directory = directory
       @files_hash = Hash.new
     end
     
@@ -22,9 +25,13 @@ module WcAck
 
       file_path = ansi_wrapped[0][0]
       file_path = File.expand_path(file_path) # Convert paths with .. to full paths
+      if @directory
+        display_file_path = Pathname.new(file_path).relative_path_from(Pathname.new(@directory)).to_s
+      end
+
       file = @files_hash[file_path]
       if !file
-        file = Match::File.new(file_path)
+        file = Match::File.new(file_path, display_file_path)
         @files_hash[file_path] = file
 
         if @delegate 

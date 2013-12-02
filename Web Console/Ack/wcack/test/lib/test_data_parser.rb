@@ -15,9 +15,14 @@ module TestHelper
 
     # Model
     class TestFile
-      attr_reader :file_path, :lines
-      def initialize(file_path)
+      attr_reader :file_path, :display_file_path, :lines
+      def initialize(file_path, display_file_path = nil)
         @file_path = file_path
+        if display_file_path
+          @display_file_path = display_file_path
+        else
+          @display_file_path = file_path
+        end
         @lines = Array.new
       end
       class TestLine
@@ -44,13 +49,13 @@ module TestHelper
       hashes.each { |hash|
         filename = hash[FILENAME_KEY]
         file_path = hash[FILE_PATH_KEY]
-        file_path = File.expand_path(file_path) # Convert paths with .. to full paths
+        display_file_path = hash[DISPLAY_FILE_PATH_KEY]
         line_number = hash[LINE_NUMBER_KEY].to_i
         matched_text = hash[MATCHED_TEXT_KEY]
 
         test_file = test_files_hash[file_path]
         if !test_file
-          test_file = TestFile.new(file_path)
+          test_file = TestFile.new(file_path, display_file_path)
           test_files_hash[file_path] = test_file
           # Create a new test_lines_hash, this will break if our test data isn't ordered
           test_lines_hash = Hash.new

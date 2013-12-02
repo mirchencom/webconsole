@@ -3,6 +3,9 @@ require 'Shellwords'
 TEST_DATA_HELPER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 TEST_SCRIPTS_DIRECTORY = File.join(TEST_DATA_HELPER_DIRECTORY, "..", "scripts")
 
+TEST_SCRIPT_CONSTANTS_FILE = File.join(TEST_DATA_HELPER_DIRECTORY, 'test_script_constants')
+require TEST_SCRIPT_CONSTANTS_FILE # Get the TEST_DATA_DIRECTORY
+
 module TestHelper
 
   module TestData
@@ -20,6 +23,10 @@ module TestHelper
       result = `#{command}`
       return result
     end
+    def self.test_data_directory
+      return TEST_DATA_DIRECTORY
+    end
+
 
 
     # TODO Above is a quick hack replace of below because below wouldn't run in TextMate's run command window

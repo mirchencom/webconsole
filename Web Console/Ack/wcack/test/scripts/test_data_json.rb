@@ -2,6 +2,7 @@
 
 require 'json'
 require 'Shellwords'
+require 'pathname'
 
 SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 TEST_LIB_DIRECTORY = File.join(SCRIPT_DIRECTORY, "..", 'lib')
@@ -24,7 +25,8 @@ Dir.foreach(TEST_DATA_DIRECTORY) do |filename|
     line_number = /.*:(.*):.*/.match(line_match).captures[0]
     matched_text = /.*:.*:(.*)/.match(line_match).captures[0]
 
-    match_hash[FILE_PATH_KEY] = file_path
+    match_hash[FILE_PATH_KEY] = File.expand_path(file_path)
+    match_hash[DISPLAY_FILE_PATH_KEY] = Pathname.new(file_path).relative_path_from(Pathname.new(TEST_DATA_DIRECTORY)).to_s
     match_hash[FILENAME_KEY] = filename
     match_hash[LINE_NUMBER_KEY] = line_number
     match_hash[MATCHED_TEXT_KEY] = matched_text

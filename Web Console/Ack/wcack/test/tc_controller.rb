@@ -18,13 +18,11 @@ class TestController < Test::Unit::TestCase
 
   def test_controller
     test_ack_output = TestHelper::TestData::test_ack_output
+    test_data_directory = TestHelper::TestData::test_data_directory
 
     window_manager = WcAck::WindowManager.new
-    parser = WcAck::Parser.new(WcAck::Controller.new(window_manager))
+    controller = WcAck::Controller.new(window_manager)
+    parser = WcAck::Parser.new(controller, test_data_directory)
     parser.parse(test_ack_output)
-
-
-
-    # TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)
   end
 end

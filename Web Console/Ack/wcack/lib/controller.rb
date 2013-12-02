@@ -21,7 +21,9 @@ module WcAck
 
     def added_file(file)
       # Escape '
-      javascript = "addFile('#{file.file_path.gsub("'", "\\\\'")}');"
+      file_path = file.file_path.gsub("'", "\\\\'")
+      display_file_path = file.display_file_path.gsub("'", "\\\\'")
+      javascript = "addFile('#{file_path}', '#{display_file_path}');"
       if @delegate
         @delegate.do_javascript(javascript)
       end
