@@ -47,7 +47,6 @@ module TestHelper
       test_lines_hash = Hash.new
 
       hashes.each { |hash|
-        filename = hash[FILENAME_KEY]
         file_path = hash[FILE_PATH_KEY]
         display_file_path = hash[DISPLAY_FILE_PATH_KEY]
         line_number = hash[LINE_NUMBER_KEY].to_i

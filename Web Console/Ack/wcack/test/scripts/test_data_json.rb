@@ -27,7 +27,6 @@ Dir.foreach(TEST_DATA_DIRECTORY) do |filename|
 
     match_hash[FILE_PATH_KEY] = File.expand_path(file_path)
     match_hash[DISPLAY_FILE_PATH_KEY] = Pathname.new(file_path).relative_path_from(Pathname.new(TEST_DATA_DIRECTORY)).to_s
-    match_hash[FILENAME_KEY] = filename
     match_hash[LINE_NUMBER_KEY] = line_number
     match_hash[MATCHED_TEXT_KEY] = matched_text
     matches << match_hash

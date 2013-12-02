@@ -35,6 +35,7 @@ class TestParser < Test::Unit::TestCase
       test_file.lines.zip(file.lines).each do |test_line, line|
         assert_equal(test_line.number, line.number, "The test line number should equal the line number.")
         assert_equal(test_line.matches.count, line.matches.count, "The test line match count should equal the line match count.")
+
         test_line.matches.zip(line.matches).each do |test_match, match|
           assert_equal(test_match.text, match.text, "The test match text should equal the match text.")
         end
