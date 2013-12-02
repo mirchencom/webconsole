@@ -1,11 +1,11 @@
 // DOM Manipulation
 
-function addFile(file_path, display_file_path) {
+function addFile(filePath, displayFilePath) {
 	var source   = $("#file-template").html();
 	var template = Handlebars.compile(source);
 	var data = { 
-		file_path: file_path,
-		display_file_path: display_file_path
+		filePath: filePath,
+		displayFilePath: displayFilePath
 	};
 	$(template(data)).appendTo("body");
 }
