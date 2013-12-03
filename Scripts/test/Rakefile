@@ -1,43 +1,45 @@
 require 'shellwords'
 
-TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-DATA_DIRECTORY = File.join(TESTS_DIRECTORY, "data")
-QUIT_APPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.applescript")
+task :default => ['webconsole:clean_up']
 
-# XCUnit
-XCODEBUILD_SCHEME = "Web Console"
-XCODEBUILD_PROJECT_FILE = File.expand_path(File.join(TESTS_DIRECTORY, "../../Web Console/Web Console.xcodeproj"))
+task :long => ['webconsole:test_web_console_long', 'webconsole:clean_up']
+task :xcunit => ['webconsole:test_xcunit']
 
-# Web Console
-WEBCONSOLE_TESTS_FILE = File.join(TESTS_DIRECTORY, "tc_web_console.rb")
-WEBCONSOLE_TESTS_LONG_FILE = File.join(TESTS_DIRECTORY, "tc_web_console_long.rb")
+namespace :webconsole do
+  TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+  DATA_DIRECTORY = File.join(TESTS_DIRECTORY, "data")
+  QUIT_APPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.applescript")
 
-# Web Console Gem
-WEBCONSOLE_GEM_TESTS_FILE = File.join(TESTS_DIRECTORY, "../../Web Console/webconsole/test/tc_webconsole.rb")
+  # XCUnit
+  XCODEBUILD_SCHEME = "Web Console"
+  XCODEBUILD_PROJECT_FILE = File.expand_path(File.join(TESTS_DIRECTORY, "../../Web Console/Web Console.xcodeproj"))
 
-task :default => [:clean_up]
+  # Web Console
+  WEBCONSOLE_TESTS_FILE = File.join(TESTS_DIRECTORY, "tc_web_console.rb")
+  WEBCONSOLE_TESTS_LONG_FILE = File.join(TESTS_DIRECTORY, "tc_web_console_long.rb")
 
-task :long => [:test_web_console_long, :clean_up]
-task :xcunit => [:test_xcunit]
+  # Web Console Gem
+  WEBCONSOLE_GEM_TESTS_FILE = File.join(TESTS_DIRECTORY, "../../Web Console/webconsole/test/tc_webconsole.rb")
 
-task :test_xcunit do
-  sh "xcodebuild test -scheme #{Shellwords.escape(XCODEBUILD_SCHEME)} -project #{Shellwords.escape(XCODEBUILD_PROJECT_FILE)}"
-end
+  task :test_xcunit do
+    sh "xcodebuild test -scheme #{Shellwords.escape(XCODEBUILD_SCHEME)} -project #{Shellwords.escape(XCODEBUILD_PROJECT_FILE)}"
+  end
 
-task :test_webconsole_gem => [:test_xcunit] do
-  ruby Shellwords.escape(WEBCONSOLE_GEM_TESTS_FILE)
-end
+  task :test_webconsole_gem => [:test_xcunit] do
+    ruby Shellwords.escape(WEBCONSOLE_GEM_TESTS_FILE)
+  end
 
-task :test_web_console => [:test_webconsole_gem] do
-  ruby Shellwords.escape(WEBCONSOLE_TESTS_FILE)
-end
+  task :test_web_console => [:test_webconsole_gem] do
+    ruby Shellwords.escape(WEBCONSOLE_TESTS_FILE)
+  end
 
-task :clean_up => [:test_web_console] do
-  sh "osascript #{Shellwords.escape(QUIT_APPLESCRIPT_FILE)}"
-end
+  task :clean_up => [:test_web_console] do
+    sh "osascript #{Shellwords.escape(QUIT_APPLESCRIPT_FILE)}"
+  end
 
-# Long
+  # Long
 
-task :test_web_console_long => [:test_web_console] do
-  ruby Shellwords.escape(WEBCONSOLE_TESTS_LONG_FILE)
+  task :test_web_console_long => [:test_web_console] do
+    ruby Shellwords.escape(WEBCONSOLE_TESTS_LONG_FILE)
+  end
 end
