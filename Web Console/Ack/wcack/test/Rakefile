@@ -1,27 +1,29 @@
 require 'shellwords'
 
-TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+task :default => ['wcack:clean_up']
 
-PARSER_TESTS_FILE = File.join(TESTS_DIRECTORY, "tc_parser.rb")
-CONTROLLER_TESTS_FILE = File.join(TESTS_DIRECTORY, "tc_controller.rb")
-WCACK_TESTS_FILE = File.join(TESTS_DIRECTORY, "tc_wcack.rb")
+namespace :wcack do
+  TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 
-QUIT_APPLESCRIPT_FILE = File.join(TESTS_DIRECTORY, "applescript", "quit.applescript")
+  PARSER_TESTS_FILE = File.join(TESTS_DIRECTORY, "tc_parser.rb")
+  CONTROLLER_TESTS_FILE = File.join(TESTS_DIRECTORY, "tc_controller.rb")
+  WCACK_TESTS_FILE = File.join(TESTS_DIRECTORY, "tc_wcack.rb")
 
-task :default => [:clean_up]
+  QUIT_APPLESCRIPT_FILE = File.join(TESTS_DIRECTORY, "applescript", "quit.applescript")
 
-task :test_parser do
-  ruby Shellwords.escape(PARSER_TESTS_FILE)
-end
+  task :test_parser do
+    ruby Shellwords.escape(PARSER_TESTS_FILE)
+  end
 
-task :test_controller => [:test_parser] do
-  ruby Shellwords.escape(CONTROLLER_TESTS_FILE)
-end
+  task :test_controller => [:test_parser] do
+    ruby Shellwords.escape(CONTROLLER_TESTS_FILE)
+  end
 
-task :test_wcack => [:test_controller] do
-  ruby Shellwords.escape(WCACK_TESTS_FILE)
-end
+  task :test_wcack => [:test_controller] do
+    ruby Shellwords.escape(WCACK_TESTS_FILE)
+  end
 
-task :clean_up => [:test_wcack] do
-  sh "osascript #{Shellwords.escape(QUIT_APPLESCRIPT_FILE)}"
+  task :clean_up => [:test_wcack] do
+    sh "osascript #{Shellwords.escape(QUIT_APPLESCRIPT_FILE)}"
+  end
 end
