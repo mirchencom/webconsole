@@ -1,9 +1,15 @@
 require 'shellwords'
 
+WEBCONSOLE_TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+WCACK_TEST_RAKEFILE = File.expand_path(File.join(WEBCONSOLE_TESTS_DIRECTORY, "../..", "Web Console", "Ack", "wcack", "test", "Rakefile"))
+import WCACK_TEST_RAKEFILE
+
 task :default => ['webconsole:clean_up']
 
 task :long => ['webconsole:test_web_console_long', 'webconsole:clean_up']
 task :xcunit => ['webconsole:test_xcunit']
+
+task :wcack => ['wcack:clean_up']
 
 namespace :webconsole do
   TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
