@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "test/unit"
+require 'Shellwords'
 
 SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
 TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, 'lib', 'test_constants')
@@ -8,23 +9,23 @@ require TEST_CONSTANTS_FILE
 
 require TEST_DATA_HELPER_FILE
 require TEST_DATA_PARSER_FILE
+require TEST_APPLESCRIPT_HELPER_FILE
 require TEST_JAVASCRIPT_HELPER_FILE
-require TEST_PARSER_ADDITIONS_FILE
 require TEST_DATA_TESTER_FILE
-require PARSER_FILE
-require CONTROLLER_FILE
-require WINDOW_MANAGER_FILE
 
-class TestController < Test::Unit::TestCase
+class TestWcAck < Test::Unit::TestCase
 
+  WCACK_FILE = File.join(SCRIPT_DIRECTORY, "..", 'wcack.rb')
+  WCACK_PLUGIN_NAME = 
   def test_controller
-    test_ack_output = TestHelper::TestData::test_ack_output
+    # This test won't run from TextMate because the TextMate shell results window can't spawn a working `ack` process
     test_data_directory = TestHelper::TestData::test_data_directory
+    test_search_term = TestHelper::TestData::test_search_term
+    command = "#{Shellwords.escape(WCACK_FILE)} \"#{test_search_term}\" #{Shellwords.escape(test_data_directory)}"
+    `#{command}`
 
-    window_manager = WcAck::WindowManager.new
-    controller = WcAck::Controller.new(window_manager)
-    parser = WcAck::Parser.new(controller, test_data_directory)
-    parser.parse(test_ack_output)
+    window_id = TestHelper::AppleScriptHelper::window_id
+    window_manager = WebConsole::WindowManager.new(window_id)
 
     files_json = TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)
     files_hash = TestHelper::Parser::parse(files_json)

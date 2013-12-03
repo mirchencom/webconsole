@@ -22,7 +22,10 @@ window_manager = WcAck::WindowManager.new(window_id)
 
 # Parser
 controller = WcAck::Controller.new(window_manager)
-directory = `pwd`
+directory = ARGV[1].dup
+if !directory
+  directory = `pwd`
+end
 parser = WcAck::Parser.new(controller, directory)
 
 # Parse

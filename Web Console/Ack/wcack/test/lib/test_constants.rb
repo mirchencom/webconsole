@@ -5,6 +5,8 @@ TEST_DATA_PARSER_FILE = File.join(TEST_LIB_DIRECTORY, "test_data_parser")
 TEST_DATA_TESTER_FILE = File.join(TEST_LIB_DIRECTORY, "test_data_tester")
 TEST_JAVASCRIPT_HELPER_FILE = File.join(TEST_LIB_DIRECTORY, "test_javascript_helper")
 TEST_PARSER_ADDITIONS_FILE = File.join(TEST_LIB_DIRECTORY, "test_parser_additions")
+TEST_APPLESCRIPT_HELPER_FILE = File.join(TEST_LIB_DIRECTORY, "test_applescript_helper")
+
 
 # Lib
 LIB_DIRECTORY = File.join(File.dirname(__FILE__), '../..', 'lib')
