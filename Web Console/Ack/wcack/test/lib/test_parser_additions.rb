@@ -1,4 +1,4 @@
-TEST_PARSER_ADDITIONS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_PARSER_ADDITIONS_DIRECTORY = File.dirname(__FILE__)
 require File.join(TEST_PARSER_ADDITIONS_DIRECTORY, 'test_constants')
 require PARSER_FILE
 

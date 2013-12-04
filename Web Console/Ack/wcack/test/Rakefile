@@ -3,7 +3,7 @@ require 'shellwords'
 task :default => ['wcack:tests']
 
 namespace :wcack do
-  wcack_tests_directory = File.expand_path(File.dirname(__FILE__))
+  wcack_tests_directory = File.dirname(__FILE__)
   
   task :tests => [:clean_up]
 

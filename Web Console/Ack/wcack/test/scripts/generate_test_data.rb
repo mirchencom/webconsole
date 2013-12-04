@@ -4,7 +4,7 @@ require 'Shellwords'
 
 # Temporary hack because for some reason these scripts won't run within Textmate
 
-SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+SCRIPT_DIRECTORY = File.dirname(__FILE__)
 TEST_ACK_OUTPUT_FILE = File.join(SCRIPT_DIRECTORY, "test_ack_output.rb")
 TEST_DATA_JSON_FILE = File.join(SCRIPT_DIRECTORY, "test_data_json.rb")
 

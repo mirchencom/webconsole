@@ -1,5 +1,5 @@
 # Test
-TEST_LIB_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_LIB_DIRECTORY = File.dirname(__FILE__)
 TEST_DATA_HELPER_FILE = File.join(TEST_LIB_DIRECTORY, "test_data_helper")
 TEST_DATA_PARSER_FILE = File.join(TEST_LIB_DIRECTORY, "test_data_parser")
 TEST_DATA_TESTER_FILE = File.join(TEST_LIB_DIRECTORY, "test_data_tester")

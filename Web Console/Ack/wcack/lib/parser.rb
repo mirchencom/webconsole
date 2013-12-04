@@ -1,4 +1,4 @@
-PARSER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+PARSER_DIRECTORY = File.dirname(__FILE__)
 MODEL_FILE = File.join(PARSER_DIRECTORY, 'model')
 require MODEL_FILE
 

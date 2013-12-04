@@ -3,7 +3,7 @@
 require "test/unit"
 require 'Shellwords'
 
-SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+SCRIPT_DIRECTORY = File.dirname(__FILE__)
 TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
 
