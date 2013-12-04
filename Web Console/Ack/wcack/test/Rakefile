@@ -1,9 +1,11 @@
 require 'shellwords'
 
-task :default => ['wcack:clean_up']
+task :default => ['wcack:tests']
 
 namespace :wcack do
   WCACK_TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+  
+  task :tests => [:clean_up]
 
   task :test_parser do
     PARSER_TESTS_FILE = File.join(WCACK_TESTS_DIRECTORY, "tc_parser.rb")

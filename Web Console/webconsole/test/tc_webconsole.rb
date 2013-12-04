@@ -2,7 +2,7 @@
 
 require "test/unit"
 TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "test_helper")
+TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "lib", "test_helper")
 require TEST_HELPER_FILE
 
 # WebConsole

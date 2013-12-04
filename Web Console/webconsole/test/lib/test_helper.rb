@@ -1,9 +1,9 @@
 require 'Shellwords'
 
 TEST_HELPER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-WEBCONSOLE_FILE = File.join(TEST_HELPER_DIRECTORY, "..", "lib", "webconsole")
+WEBCONSOLE_FILE = File.join(TEST_HELPER_DIRECTORY, "..", "..", "lib", "webconsole")
 require WEBCONSOLE_FILE
-DATA_DIRECTORY = File.join(TEST_HELPER_DIRECTORY, "data")
+DATA_DIRECTORY = File.expand_path(File.join(TEST_HELPER_DIRECTORY, "..", "data"))
 
 PAUSE_TIME = 0.5
 
