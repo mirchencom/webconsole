@@ -2,7 +2,7 @@
 
 require "test/unit"
 
-SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+SCRIPT_DIRECTORY = File.dirname(__FILE__)
 TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, "lib", "test_constants")
 require TEST_CONSTANTS_FILE
 
@@ -35,7 +35,7 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
   ARGUMENTS_KEY = "Arguments"
   def test_run_plugin_in_directory_with_arguments
     arguments = "1 2 3"    
-    path = TEST_DATA_DIRECTORY
+    path = File.expand_path(TEST_DATA_DIRECTORY)
 
     WebConsole::load_plugin(DATAPLUGIN_PATH)
     WebConsole::run_plugin(DATAPLUGIN_NAME, path, arguments.split(" "))    

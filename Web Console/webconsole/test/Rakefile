@@ -3,7 +3,7 @@ require 'shellwords'
 task :default => ['webconsole:tests']
 
 namespace :webconsole do
-  webconsole_gem_tests_directory = File.expand_path(File.dirname(__FILE__))
+  webconsole_gem_tests_directory = File.dirname(__FILE__)
   
   task :tests => [:clean_up]
 

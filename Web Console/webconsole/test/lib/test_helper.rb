@@ -1,6 +1,6 @@
 require 'Shellwords'
 
-require File.join(File.expand_path(File.dirname(__FILE__)), "test_constants") 
+require File.join(File.dirname(__FILE__), "test_constants") 
 
 module TestsHelper
   def self.run_javascript(javascript)
