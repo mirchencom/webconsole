@@ -1,7 +1,5 @@
 require "test/unit"
 
-
-
 module TestHelper
   module TestDataTester
     def self.test_file_hashes(files_hash, test_files_hash)

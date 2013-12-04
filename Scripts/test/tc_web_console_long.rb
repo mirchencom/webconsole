@@ -2,15 +2,17 @@
 
 require "test/unit"
 require 'webconsole'
-TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "test_helper")
-require TEST_HELPER_FILE
 
-QUIT_TIMEOUT = 60.0
+SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, "lib", "test_constants")
+require TEST_CONSTANTS_FILE
+require TEST_HELPER_FILE
 
 class TestQuitTimeout < Test::Unit::TestCase
 
-  PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
+  QUIT_TIMEOUT = 60.0
+
+  PRINTPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Print.bundle")
   PRINTPLUGIN_NAME = "Print"
   def setup
     WebConsole::load_plugin(PRINTPLUGIN_PATH)

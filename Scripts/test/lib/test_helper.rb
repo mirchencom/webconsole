@@ -1,9 +1,6 @@
 require 'Shellwords'
 
-TEST_HELPER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-DATA_DIRECTORY = File.join(TEST_HELPER_DIRECTORY, "data")
-
-PAUSE_TIME = 0.5
+require File.join(File.expand_path(File.dirname(__FILE__)), "test_constants")
 
 module TestsHelper
 
@@ -11,24 +8,24 @@ module TestsHelper
     return `node -e #{Shellwords.escape(javascript)}`
   end
 
-  CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "confirm_dialog.applescript")
+  CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "confirm_dialog.applescript")
   def self.confirm_dialog
     self.run_applescript(CONFIRMDIALOGAPPLESCRIPT_FILE)
     sleep PAUSE_TIME # Give dialog time
   end
 
-  CANCELDIALOGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "cancel_dialog.applescript")
+  CANCELDIALOGAPPLESCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "cancel_dialog.applescript")
   def self.cancel_dialog
     self.run_applescript(CANCELDIALOGAPPLESCRIPT_FILE)
     sleep PAUSE_TIME # Give dialog time
   end
 
-  QUITAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.applescript")
+  QUITAPPLESCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "quit.applescript")
   def self.quit
     self.run_applescript(QUITAPPLESCRIPT_FILE)
   end
 
-  ISRUNNINGAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "is_running.applescript")
+  ISRUNNINGAPPLESCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "is_running.applescript")
   def self.is_running
     result = self.run_applescript(ISRUNNINGAPPLESCRIPT_FILE)
     result.chomp!
@@ -39,7 +36,7 @@ module TestsHelper
     end
   end
 
-  SWITCHWINDOWSAPPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "switch_windows.applescript")
+  SWITCHWINDOWSAPPLESCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "switch_windows.applescript")
   def self.switch_windows
     self.run_applescript(SWITCHWINDOWSAPPLESCRIPT_FILE)
   end

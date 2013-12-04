@@ -1,10 +1,9 @@
 require 'Shellwords'
 
-TEST_APPLESCRIPT_HELPER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-APPLESCRIPT_DIRECTORY = File.join(TEST_APPLESCRIPT_HELPER_DIRECTORY, "..", "applescript")
-
 module TestHelper
   module AppleScriptHelper
+    TEST_APPLESCRIPT_HELPER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+    APPLESCRIPT_DIRECTORY = File.join(TEST_APPLESCRIPT_HELPER_DIRECTORY, "..", "applescript")
 
     WINDOW_ID_APPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY, "window_id.applescript")
     def self.window_id

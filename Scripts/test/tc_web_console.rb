@@ -2,13 +2,15 @@
 
 require "test/unit"
 require 'webconsole'
-TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "test_helper")
+
+SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, "lib", "test_constants")
+require TEST_CONSTANTS_FILE
 require TEST_HELPER_FILE
 
 class TestQuit < Test::Unit::TestCase
 
-  HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
+  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
   HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_quit_after_task_finishes
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
@@ -22,7 +24,7 @@ end
 
 class TestQuitWithRunningTask < Test::Unit::TestCase
 
-  PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
+  PRINTPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Print.bundle")
   PRINTPLUGIN_NAME = "Print"
   def setup
     WebConsole::load_plugin(PRINTPLUGIN_PATH)
@@ -80,7 +82,7 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # TODO Assert that the process is not running
   end
 
-  HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
+  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
   HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_quit_confirming_after_starting_short_second_task
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)

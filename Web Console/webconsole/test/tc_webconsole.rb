@@ -1,9 +1,13 @@
 #!/usr/bin/env ruby
 
 require "test/unit"
-TEST_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-TEST_HELPER_FILE = File.join(TEST_DIRECTORY, "lib", "test_helper")
+
+SCRIPT_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, "lib", "test_constants")
+require TEST_CONSTANTS_FILE
+
 require TEST_HELPER_FILE
+require WEBCONSOLE_FILE
 
 # WebConsole
 
@@ -13,7 +17,7 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     @window_manager.close
   end
 
-  HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
+  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
   HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_run_plugin
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
@@ -25,13 +29,13 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     @window_manager = WebConsole::WindowManager.new(window_id)
   end
 
-  DATAPLUGIN_PATH = File.join(DATA_DIRECTORY, "Data.bundle")
+  DATAPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Data.bundle")
   DATAPLUGIN_NAME = "Data"
   PATH_KEY = "Path"
   ARGUMENTS_KEY = "Arguments"
   def test_run_plugin_in_directory_with_arguments
     arguments = "1 2 3"    
-    path = DATA_DIRECTORY
+    path = TEST_DATA_DIRECTORY
 
     WebConsole::load_plugin(DATAPLUGIN_PATH)
     WebConsole::run_plugin(DATAPLUGIN_NAME, path, arguments.split(" "))    
@@ -53,7 +57,7 @@ end
 
 class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
 
-  PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
+  PRINTPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Print.bundle")
   PRINTPLUGIN_NAME = "Print"
   def setup
     WebConsole::load_plugin(PRINTPLUGIN_PATH)
@@ -67,7 +71,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
     TestsHelper::confirm_dialog
   end
 
-  LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
+  LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")
   def test_plugin_read_from_standard_input
     test_text = "This is a test string"
     WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text + "\n")
@@ -86,7 +90,7 @@ end
 
 class TestWindowManagerClose < Test::Unit::TestCase
 
-  HELLOWORLDPLUGIN_PATH = File.join(DATA_DIRECTORY, "HelloWorld.bundle")
+  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
   HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_close
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
@@ -102,7 +106,7 @@ end
 
 class TestWindowManagerDoJavaScript < Test::Unit::TestCase
 
-  TESTHTML_FILE = File.join(DATA_DIRECTORY, "index.html")
+  TESTHTML_FILE = File.join(TEST_DATA_DIRECTORY, "index.html")
   def setup
     html = File.read(TESTHTML_FILE)
     @window_manager = WebConsole::WindowManager.new
@@ -113,7 +117,7 @@ class TestWindowManagerDoJavaScript < Test::Unit::TestCase
     @window_manager.close
   end
 
-  SIMPLEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "nodom.js")
+  SIMPLEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "nodom.js")
   def test_do_javascript
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
@@ -131,7 +135,7 @@ class TestWindowManagerLoadHTML < Test::Unit::TestCase
     @window_manager.close
   end
 
-  TESTJAVASCRIPTBODY_FILE = File.join(DATA_DIRECTORY, "body.js")
+  TESTJAVASCRIPTBODY_FILE = File.join(TEST_DATA_DIRECTORY, "body.js")
   def test_load_html
     test_text = "This is a test string"
     html = "<html><body>" + test_text + "</body></html>"
@@ -146,7 +150,7 @@ class TestWindowManagerLoadHTML < Test::Unit::TestCase
 end
 
 class TestWindowManagerLoadHTMLWithBaseURL < Test::Unit::TestCase
-  TESTHTMLJQUERY_FILE = File.join(DATA_DIRECTORY, "indexjquery.html")
+  TESTHTMLJQUERY_FILE = File.join(TEST_DATA_DIRECTORY, "indexjquery.html")
   def setup
     html = File.read(TESTHTMLJQUERY_FILE)
     @window_manager = WebConsole::WindowManager.new
@@ -158,8 +162,8 @@ class TestWindowManagerLoadHTMLWithBaseURL < Test::Unit::TestCase
     @window_manager.close
   end
 
-  TESTJAVASCRIPTTEXTJQUERY_FILE = File.join(DATA_DIRECTORY, "textjquery.js")
-  TESTJAVASCRIPTTEXT_FILE = File.join(DATA_DIRECTORY, "text.js")
+  TESTJAVASCRIPTTEXTJQUERY_FILE = File.join(TEST_DATA_DIRECTORY, "textjquery.js")
+  TESTJAVASCRIPTTEXT_FILE = File.join(TEST_DATA_DIRECTORY, "text.js")
   def test_load_with_base_url
     javascript = File.read(TESTJAVASCRIPTTEXTJQUERY_FILE)
     result = @window_manager.do_javascript(javascript)
@@ -175,7 +179,7 @@ end
 # TODO The Web Console functionality for the below test doesn't exist yet. The Web Console API first needs to be able to target reading from standard input for a specific window manager before this test will be possible.
 
 class TestTwoWindowManagers < Test::Unit::TestCase
-  PRINTPLUGIN_PATH = File.join(DATA_DIRECTORY, "Print.bundle")
+  PRINTPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Print.bundle")
   PRINTPLUGIN_NAME = "Print"
   def setup
     WebConsole::load_plugin(PRINTPLUGIN_PATH)
@@ -189,7 +193,7 @@ class TestTwoWindowManagers < Test::Unit::TestCase
     TestsHelper::confirm_dialog
   end
 
-  LASTCODEJAVASCRIPT_FILE = File.join(DATA_DIRECTORY, "lastcode.js")
+  LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")
   def test_two_window_managers
     # test_text_one = "The first test string"
     # test_text_two = "The second test string"
