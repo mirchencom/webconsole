@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# To use, put into wcirb tests directory and run
+
 require 'erb'
 require 'Shellwords'
 require 'open-uri'

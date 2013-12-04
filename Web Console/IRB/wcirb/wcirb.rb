@@ -14,7 +14,7 @@ BASE_PATH = File.expand_path(BASE_DIRECTORY)
 window_manager.base_url_path = BASE_PATH
 
 # Controller
-controller = WcIrb::Controller.new(window_manager)
+controller = WcIRB::Controller.new(window_manager)
 
 ARGF.each do |line|
   controller.parse_line(line)

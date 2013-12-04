@@ -1,6 +1,6 @@
 require 'erb'
 
-module WcIrb
+module WcIRB
   class Controller
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
