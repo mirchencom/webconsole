@@ -1,6 +1,6 @@
 require 'shellwords'
 
-WEB_CONSOLE_TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+WEB_CONSOLE_TESTS_DIRECTORY = File.dirname(__FILE__)
 
 task :default => [:xcunit, :web_console, :gems, :plugins]
 
@@ -27,7 +27,7 @@ end
 
 namespace :plugins do
 
-  wcack_test_rakefile = File.expand_path(File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../..", "Web Console", "Ack", "wcack", "test", "Rakefile"))
+  wcack_test_rakefile = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../..", "Web Console", "Ack", "wcack", "test", "Rakefile")
   load wcack_test_rakefile
 
   task :tests => [:test_wcack]
@@ -43,7 +43,7 @@ namespace :xcunit do
 
   task :test_xcunit do
     xcodebuild_scheme = "Web Console"
-    xcodebuild_project_file = File.expand_path(File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../../Web Console/Web Console.xcodeproj"))
+    xcodebuild_project_file = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../../Web Console/Web Console.xcodeproj")
     sh "xcodebuild test -scheme #{Shellwords.escape(xcodebuild_scheme)} -project #{Shellwords.escape(xcodebuild_project_file)}"
   end
 
