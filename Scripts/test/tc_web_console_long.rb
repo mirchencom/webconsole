@@ -3,8 +3,7 @@
 require "test/unit"
 require 'webconsole'
 
-SCRIPT_DIRECTORY = File.dirname(__FILE__)
-TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, "lib", "test_constants")
+TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
 require TEST_HELPER_FILE
 
