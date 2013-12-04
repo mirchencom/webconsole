@@ -1,7 +1,6 @@
 require 'Shellwords'
 
 module WebConsole
-  SCRIPT_DIRECTORY = File.dirname(__FILE__)
   APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "applescript")
 
   LOAD_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_plugin.scpt")
