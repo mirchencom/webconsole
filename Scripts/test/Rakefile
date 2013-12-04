@@ -78,7 +78,7 @@ namespace :web_console_long do
   end
 
   task :clean_up => [:test_web_console_long] do
-    data_directory = File.join(WEBCONSOLE_TESTS_DIRECTORY, "data")
+    data_directory = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "data")
     quit_applescript_file = File.join(data_directory, "quit.applescript")
     sh "osascript #{Shellwords.escape(quit_applescript_file)}"
   end
