@@ -3,8 +3,7 @@
 require "test/unit"
 require 'Shellwords'
 
-SCRIPT_DIRECTORY = File.dirname(__FILE__)
-TEST_CONSTANTS_FILE = File.join(SCRIPT_DIRECTORY, 'lib', 'test_constants')
+TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
 
 require TEST_DATA_HELPER_FILE
@@ -15,7 +14,7 @@ require TEST_DATA_TESTER_FILE
 
 class TestWcAck < Test::Unit::TestCase
 
-  WCACK_FILE = File.join(SCRIPT_DIRECTORY, "..", 'wcack.rb')
+  WCACK_FILE = File.join(File.dirname(__FILE__), "..", 'wcack.rb')
   WCACK_PLUGIN_NAME = 
   def test_controller
     # This test won't run from TextMate because the TextMate shell results window can't spawn a working `ack` process

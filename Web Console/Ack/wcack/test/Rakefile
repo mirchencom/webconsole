@@ -3,27 +3,26 @@ require 'shellwords'
 task :default => ['wcack:tests']
 
 namespace :wcack do
-  wcack_tests_directory = File.dirname(__FILE__)
   
   task :tests => [:clean_up]
 
   task :test_parser do
-    parser_tests_file = File.join(wcack_tests_directory, "tc_parser.rb")
+    parser_tests_file = File.join(File.dirname(__FILE__), "tc_parser.rb")
     ruby Shellwords.escape(parser_tests_file)
   end
 
   task :test_controller => [:test_parser] do
-    controller_tests_file = File.join(wcack_tests_directory, "tc_controller.rb")
+    controller_tests_file = File.join(File.dirname(__FILE__), "tc_controller.rb")
     ruby Shellwords.escape(controller_tests_file)
   end
 
   task :test_wcack => [:test_controller] do
-    wcack_tests_file = File.join(wcack_tests_directory, "tc_wcack.rb")
+    wcack_tests_file = File.join(File.dirname(__FILE__), "tc_wcack.rb")
     ruby Shellwords.escape(wcack_tests_file)
   end
 
   task :clean_up => [:test_wcack] do
-    quit_applescript_file = File.join(wcack_tests_directory, "applescript", "quit.applescript")
+    quit_applescript_file = File.join(File.dirname(__FILE__), "applescript", "quit.applescript")
     sh "osascript #{Shellwords.escape(quit_applescript_file)}"
   end
 end

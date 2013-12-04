@@ -3,8 +3,7 @@
 require 'Shellwords'
 require 'webconsole'
 
-SCRIPT_DIRECTORY = File.dirname(__FILE__)
-LIB_DIRECTORY = File.join(SCRIPT_DIRECTORY, "lib")
+LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
 
 PARSER_FILE = File.join(LIB_DIRECTORY, "parser")
 require PARSER_FILE

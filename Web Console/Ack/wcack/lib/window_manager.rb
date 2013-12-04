@@ -2,8 +2,7 @@ require 'webconsole'
 
 module WcAck
   class WindowManager < WebConsole::WindowManager
-    WINDOW_MANAGER_DIRECTORY = File.dirname(__FILE__)
-    BASE_DIRECTORY = File.join(WINDOW_MANAGER_DIRECTORY, '..')
+    BASE_DIRECTORY = File.join(File.dirname(__FILE__), '..')
 
     def initialize(window_id = nil)
       super(window_id)

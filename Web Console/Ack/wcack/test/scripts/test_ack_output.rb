@@ -2,8 +2,7 @@
 
 require 'Shellwords'
 
-SCRIPT_DIRECTORY = File.dirname(__FILE__)
-TEST_LIB_DIRECTORY = File.join(SCRIPT_DIRECTORY, "..", 'lib')
+TEST_LIB_DIRECTORY = File.join(File.dirname(__FILE__), "..", 'lib')
 TEST_SCRIPT_CONSTANTS_FILE = File.join(TEST_LIB_DIRECTORY, 'test_script_constants')
 require TEST_SCRIPT_CONSTANTS_FILE
 

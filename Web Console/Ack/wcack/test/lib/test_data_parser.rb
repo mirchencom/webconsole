@@ -1,7 +1,6 @@
 require 'json'
 
-TEST_DATA_PARSER_DIRECTORY = File.dirname(__FILE__)
-TEST_DATA_CONSTANTS_FILE = File.join(TEST_DATA_PARSER_DIRECTORY, 'test_data_constants')
+TEST_DATA_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'test_data_constants')
 require TEST_DATA_CONSTANTS_FILE
 
 module TestHelper

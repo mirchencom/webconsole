@@ -1,3 +1,2 @@
 SEARCH_TERM = "ei.*?od"
-TEST_DATA_CONSTANTS_DIRECTORY = File.dirname(__FILE__)
-TEST_DATA_DIRECTORY = File.join(TEST_DATA_CONSTANTS_DIRECTORY, "..", "data")
+TEST_DATA_DIRECTORY = File.join(File.dirname(__FILE__), "..", "data")
