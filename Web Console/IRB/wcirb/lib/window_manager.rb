@@ -2,7 +2,7 @@ require 'webconsole'
 
 module WcIRB
   class WindowManager < WebConsole::WindowManager
-    WINDOW_MANAGER_DIRECTORY = File.expand_path(File.dirname(__FILE__))
+    WINDOW_MANAGER_DIRECTORY = File.dirname(__FILE__)
     BASE_DIRECTORY = File.join(WINDOW_MANAGER_DIRECTORY, '..')
 
     def initialize(window_id = nil)
