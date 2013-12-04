@@ -1,22 +1,21 @@
 require 'shellwords'
 
-WEBCONSOLE_GEM_TESTS_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-
 task :default => ['webconsole:tests']
 
 namespace :webconsole do
+  webconsole_gem_tests_directory = File.expand_path(File.dirname(__FILE__))
   
   task :tests => [:clean_up]
 
   task :test_webconsole do
-    WEBCONSOLE_GEM_TESTS_FILE = File.join(WEBCONSOLE_GEM_TESTS_DIRECTORY, "tc_webconsole.rb")
-    ruby Shellwords.escape(WEBCONSOLE_GEM_TESTS_FILE)
+    webconsole_gem_tests_file = File.join(webconsole_gem_tests_directory, "tc_webconsole.rb")
+    ruby Shellwords.escape(webconsole_gem_tests_file)
   end
 
   task :clean_up => [:test_webconsole] do
-    DATA_DIRECTORY = File.join(WEBCONSOLE_GEM_TESTS_DIRECTORY, "data")
-    QUIT_APPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.applescript")
-    sh "osascript #{Shellwords.escape(QUIT_APPLESCRIPT_FILE)}"
+    data_directory = File.join(webconsole_gem_tests_directory, "data")
+    quit_applescript_file = File.join(data_directory, "quit.applescript")
+    sh "osascript #{Shellwords.escape(quit_applescript_file)}"
   end
 
 end

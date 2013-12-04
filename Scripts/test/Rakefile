@@ -15,8 +15,8 @@ task :plugins => ['plugins:tests']
 
 namespace :gems do
 
-  WEBCONSOLE_GEM_TESTS_RAKEFILE = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../../Web Console/webconsole/test/Rakefile")
-  load WEBCONSOLE_GEM_TESTS_RAKEFILE
+  webconsole_gem_tests_rakefile = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../../Web Console/webconsole/test/Rakefile")
+  load webconsole_gem_tests_rakefile
 
   task :tests => [:test_webconsole]
 
@@ -27,8 +27,8 @@ end
 
 namespace :plugins do
 
-  WCACK_TEST_RAKEFILE = File.expand_path(File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../..", "Web Console", "Ack", "wcack", "test", "Rakefile"))
-  load WCACK_TEST_RAKEFILE
+  wcack_test_rakefile = File.expand_path(File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../..", "Web Console", "Ack", "wcack", "test", "Rakefile"))
+  load wcack_test_rakefile
 
   task :tests => [:test_wcack]
 
@@ -42,9 +42,9 @@ namespace :xcunit do
   task :tests => ['test_xcunit']
 
   task :test_xcunit do
-    XCODEBUILD_SCHEME = "Web Console"
-    XCODEBUILD_PROJECT_FILE = File.expand_path(File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../../Web Console/Web Console.xcodeproj"))
-    sh "xcodebuild test -scheme #{Shellwords.escape(XCODEBUILD_SCHEME)} -project #{Shellwords.escape(XCODEBUILD_PROJECT_FILE)}"
+    xcodebuild_scheme = "Web Console"
+    xcodebuild_project_file = File.expand_path(File.join(WEB_CONSOLE_TESTS_DIRECTORY, "../../Web Console/Web Console.xcodeproj"))
+    sh "xcodebuild test -scheme #{Shellwords.escape(xcodebuild_scheme)} -project #{Shellwords.escape(xcodebuild_project_file)}"
   end
 
 end
@@ -55,14 +55,14 @@ namespace :web_console do
   task :tests => [:clean_up]
 
   task :test_web_console do
-    WEB_CONSOLE_TESTS_FILE = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "tc_web_console.rb")
-    ruby Shellwords.escape(WEB_CONSOLE_TESTS_FILE)
+    web_console_tests_file = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "tc_web_console.rb")
+    ruby Shellwords.escape(web_console_tests_file)
   end
 
   task :clean_up => [:test_web_console] do
-    DATA_DIRECTORY = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "data")
-    QUIT_APPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.applescript")
-    sh "osascript #{Shellwords.escape(QUIT_APPLESCRIPT_FILE)}"
+    data_directory = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "data")
+    quit_applescript_file = File.join(data_directory, "quit.applescript")
+    sh "osascript #{Shellwords.escape(quit_applescript_file)}"
   end
 
 end
@@ -73,14 +73,14 @@ namespace :web_console_long do
   task :tests => [:clean_up]
 
   task :test_web_console_long do
-    WEB_CONSOLE_TESTS_LONG_FILE = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "tc_web_console_long.rb")
-    ruby Shellwords.escape(WEB_CONSOLE_TESTS_LONG_FILE)
+    web_console_tests_long_file = File.join(WEB_CONSOLE_TESTS_DIRECTORY, "tc_web_console_long.rb")
+    ruby Shellwords.escape(web_console_tests_long_file)
   end
 
   task :clean_up => [:test_web_console_long] do
-    DATA_DIRECTORY = File.join(WEBCONSOLE_TESTS_DIRECTORY, "data")
-    QUIT_APPLESCRIPT_FILE = File.join(DATA_DIRECTORY, "quit.applescript")
-    sh "osascript #{Shellwords.escape(QUIT_APPLESCRIPT_FILE)}"
+    data_directory = File.join(WEBCONSOLE_TESTS_DIRECTORY, "data")
+    quit_applescript_file = File.join(data_directory, "quit.applescript")
+    sh "osascript #{Shellwords.escape(quit_applescript_file)}"
   end
 
 end
