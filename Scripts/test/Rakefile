@@ -1,12 +1,14 @@
 require 'shellwords'
 
-task :default => [:xcunit, :web_console, :gems, :plugins]
+task :default => [:xcunit, :ruby]
 
-task :long => [:default, :web_console_long]
-
-task :web_console => ['web_console:tests']
-task :web_console_long => ['web_console_long:tests']
+task :long => [:xcunit, :ruby_long]
 task :xcunit => ['xcunit:tests']
+task :ruby => [:web_console, :gems, :plugins]
+
+task :ruby_long => [:web_console_long, :gems, :plugins]
+task :web_console => ['web_console:tests']
+task :web_console_long => ['web_console:tests_long']
 task :gems => ['gems:tests']
 task :plugins => ['plugins:tests']
 
@@ -51,11 +53,7 @@ end
 namespace :web_console do
 
   task :tests => [:clean_up]
-
-  task :test_web_console do
-    web_console_tests_file = File.join(File.dirname(__FILE__), "tc_web_console.rb")
-    ruby Shellwords.escape(web_console_tests_file)
-  end
+  task :tests_long => [:test_web_console_long, :tests]
 
   task :clean_up => [:test_web_console] do
     data_directory = File.join(File.dirname(__FILE__), "data")
@@ -63,22 +61,19 @@ namespace :web_console do
     sh "osascript #{Shellwords.escape(quit_applescript_file)}"
   end
 
-end
-
-
-namespace :web_console_long do
-
-  task :tests => [:clean_up]
+  task :test_web_console do
+    web_console_tests_file = File.join(File.dirname(__FILE__), "tc_web_console.rb")
+    ruby Shellwords.escape(web_console_tests_file)
+  end
 
   task :test_web_console_long do
     web_console_tests_long_file = File.join(File.dirname(__FILE__), "tc_web_console_long.rb")
     ruby Shellwords.escape(web_console_tests_long_file)
   end
 
-  task :clean_up => [:test_web_console_long] do
-    data_directory = File.join(File.dirname(__FILE__), "data")
-    quit_applescript_file = File.join(data_directory, "quit.applescript")
-    sh "osascript #{Shellwords.escape(quit_applescript_file)}"
-  end
-
 end
+
+
+
+
+

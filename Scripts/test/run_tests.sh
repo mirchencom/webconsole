@@ -1,21 +1,25 @@
 #!/bin/sh
 
 usage () {
-	echo "Usage: run_tests.sh [-l]"
+	echo "Usage: run_tests.sh [-lrc]"
 	echo
 	echo "-l : Run long tests"
-	echo "-c : Run only XCUnit tests"
+	echo "-r : Run ruby tests"
+	echo "-x : Run only XCUnit tests"
 }
 
 LONG=false
 XCUNIT=false
-while getopts lch option
+RUBY=false
+while getopts lxrh option
 do
 	case "$option"
 	in
 	    l)  LONG=true
 			;;
-	    c)  XCUNIT=true
+	    x)  XCUNIT=true
+			;;
+	    r)  RUBY=true
 			;;
 	    h)  usage
 	        exit 0
@@ -34,6 +38,11 @@ fi
 
 if $LONG ; then
 	rake long
+	exit 0
+fi
+
+if $RUBY ; then
+	rake ruby
 	exit 0
 fi
 
