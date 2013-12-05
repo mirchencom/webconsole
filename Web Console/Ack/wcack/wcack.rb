@@ -21,15 +21,21 @@ window_manager = WcAck::WindowManager.new(window_id)
 
 # Parser
 controller = WcAck::Controller.new(window_manager)
-directory = ARGV[1].dup
+
+if ARGV[1]
+  directory = ARGV[1].dup
+end
 if !directory
   directory = `pwd`
 end
+
 parser = WcAck::Parser.new(controller, directory)
 
 # Parse
 term = ARGV[0]
 directory.chomp!
+
+# TODO Getting stuck here when run as a plugin, why? If I can fix ack in TextMate it should work here
 pipe = IO.popen("ack --color #{Shellwords.escape(term)} #{Shellwords.escape(directory)}")
 while (line = pipe.gets)
   parser.parse_line(line)

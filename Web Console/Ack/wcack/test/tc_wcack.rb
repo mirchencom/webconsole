@@ -15,7 +15,6 @@ require TEST_DATA_TESTER_FILE
 class TestWcAck < Test::Unit::TestCase
 
   WCACK_FILE = File.join(File.dirname(__FILE__), "..", 'wcack.rb')
-  WCACK_PLUGIN_NAME = 
   def test_controller
     # This test won't run from TextMate because the TextMate shell results window can't spawn a working `ack` process
     test_data_directory = TestHelper::TestData::test_data_directory
