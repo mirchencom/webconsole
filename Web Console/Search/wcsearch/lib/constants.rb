@@ -1,0 +1,1 @@
+SEARCH_COMMAND = "ack --color --with-filename"

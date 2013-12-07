@@ -19,6 +19,9 @@
 		4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0F51736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B0FA1736E2A6000A52E2 /* WCLWebWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0F91736E2A6000A52E2 /* WCLWebWindowControllerTests.m */; };
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
+		4546484D1853C6C700147962 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
+		454648531853C6C700147962 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 454648511853C6C700147962 /* InfoPlist.strings */; };
+		454648591853C78700147962 /* search in Resources */ = {isa = PBXBuildFile; fileRef = 454648581853C78700147962 /* search */; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
@@ -102,6 +105,11 @@
 		4530B0F61736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4530B0F91736E2A6000A52E2 /* WCLWebWindowControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTests.m; sourceTree = "<group>"; };
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		4546484C1853C6C700147962 /* Search.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Search.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		454648501853C6C700147962 /* Search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Search-Info.plist"; sourceTree = "<group>"; };
+		454648521853C6C700147962 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		454648541853C6C700147962 /* Search-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Search-Prefix.pch"; sourceTree = "<group>"; };
+		454648581853C78700147962 /* search */ = {isa = PBXFileReference; lastKnownFileType = folder; path = search; sourceTree = "<group>"; };
 		455B0BFC176FF592007B75DD /* WCLLoadHTMLScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLLoadHTMLScriptCommand.h; sourceTree = "<group>"; };
 		455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLLoadHTMLScriptCommand.m; sourceTree = "<group>"; };
 		455B0C081771627A007B75DD /* WCLDoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLDoJavaScriptCommand.h; sourceTree = "<group>"; };
@@ -167,6 +175,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		454648491853C6C700147962 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4546484D1853C6C700147962 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45898B991785302C00AE365A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,6 +205,7 @@
 		452E2F891789C79300EAD55B /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				4546484E1853C6C700147962 /* Search */,
 				4596C05D1792316B005FC51A /* IRB */,
 				45898B9E1785302D00AE365A /* Ack */,
 			);
@@ -213,6 +230,7 @@
 				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */,
 				45898B9C1785302C00AE365A /* Ack.bundle */,
 				4596C05B1792316B005FC51A /* IRB.bundle */,
+				4546484C1853C6C700147962 /* Search.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -315,6 +333,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4546484E1853C6C700147962 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				454648581853C78700147962 /* search */,
+				4546484F1853C6C700147962 /* Supporting Files */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		4546484F1853C6C700147962 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				454648501853C6C700147962 /* Search-Info.plist */,
+				454648511853C6C700147962 /* InfoPlist.strings */,
+				454648541853C6C700147962 /* Search-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		45898B9E1785302D00AE365A /* Ack */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +431,23 @@
 			productReference = 4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		4546484B1853C6C700147962 /* Search */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 454648571853C6C700147962 /* Build configuration list for PBXNativeTarget "Search" */;
+			buildPhases = (
+				454648481853C6C700147962 /* Sources */,
+				454648491853C6C700147962 /* Frameworks */,
+				4546484A1853C6C700147962 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Search;
+			productName = Search;
+			productReference = 4546484C1853C6C700147962 /* Search.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		45898B9B1785302C00AE365A /* Ack */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45898BA51785302D00AE365A /* Build configuration list for PBXNativeTarget "Ack" */;
@@ -437,6 +491,11 @@
 				CLASSPREFIX = WCL;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Roben Kleene";
+				TargetAttributes = {
+					4530B0EB1736E2A6000A52E2 = {
+						TestTargetID = 4530B0CB1736E2A6000A52E2;
+					};
+				};
 			};
 			buildConfigurationList = 4530B0C71736E2A6000A52E2 /* Build configuration list for PBXProject "Web Console" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -454,6 +513,7 @@
 				4530B0EB1736E2A6000A52E2 /* Web ConsoleTests */,
 				45898B9B1785302C00AE365A /* Ack */,
 				4596C05A1792316B005FC51A /* IRB */,
+				4546484B1853C6C700147962 /* Search */,
 			);
 		};
 /* End PBXProject section */
@@ -477,6 +537,15 @@
 			files = (
 				4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */,
 				45898BB21785325B00AE365A /* Data in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4546484A1853C6C700147962 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				454648591853C78700147962 /* search in Resources */,
+				454648531853C6C700147962 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +619,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		454648481853C6C700147962 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45898B981785302C00AE365A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -603,6 +679,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				4530B0F61736E2A6000A52E2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		454648511853C6C700147962 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				454648521853C6C700147962 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -735,6 +819,49 @@
 			};
 			name = Release;
 		};
+		454648551853C6C700147962 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Search/Search-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Search/Search-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		454648561853C6C700147962 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Search/Search-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Search/Search-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		45898BA61785302D00AE365A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -816,6 +943,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		454648571853C6C700147962 /* Build configuration list for PBXNativeTarget "Search" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				454648551853C6C700147962 /* Debug */,
+				454648561853C6C700147962 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		45898BA51785302D00AE365A /* Build configuration list for PBXNativeTarget "Ack" */ = {
 			isa = XCConfigurationList;
