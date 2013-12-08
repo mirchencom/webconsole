@@ -2,14 +2,17 @@
 
 require 'webconsole'
 
-BASE_DIRECTORY = File.expand_path(File.dirname(__FILE__))
-LIB_DIRECTORY = File.join(BASE_DIRECTORY, "lib")
+LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
+
 CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
 require CONTROLLER_FILE
 
+WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, "window_manager")
+require WINDOW_MANAGER_FILE
+
 # Window Manager
 window_id = ENV['WINDOWID']
-window_manager = WebConsole::WindowManager.new(window_id)
+window_manager = WcIRB::WindowManager.new(window_id)
 BASE_PATH = File.expand_path(BASE_DIRECTORY)
 window_manager.base_url_path = BASE_PATH
 
