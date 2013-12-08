@@ -15,8 +15,8 @@
 
 #pragma mark - Plugin
 
-#define kTestPluginName @"Ack"
-#define kTestPluginCommand @"wcack/wcack.rb"
+#define kTestPluginName @"Search"
+#define kTestPluginCommand @"wcsearch/wcsearch.rb"
 #define kPluginCommandPathKey @"commandPath"
 
 

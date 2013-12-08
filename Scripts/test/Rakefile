@@ -27,12 +27,12 @@ end
 
 namespace :plugins do
 
-  wcack_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Ack", "wcack", "test", "Rakefile")
-  load wcack_test_rakefile
+  wcsearch_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Search", "wcsearch", "test", "Rakefile")
+  load wcsearch_test_rakefile
 
-  task :tests => [:test_wcack]
+  task :tests => [:test_wcsearch]
 
-  task :test_wcack => ['wcack:tests']
+  task :test_wcsearch => ['wcsearch:tests']
 
 end
 

@@ -26,10 +26,6 @@
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
-		45898B9D1785302D00AE365A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
-		45898BA31785302D00AE365A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45898BA11785302D00AE365A /* InfoPlist.strings */; };
-		45898BA91785306100AE365A /* Ack.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45898B9C1785302C00AE365A /* Ack.bundle */; };
-		45898BAC1785319600AE365A /* wcack in Resources */ = {isa = PBXBuildFile; fileRef = 45898BAA1785319600AE365A /* wcack */; };
 		45898BB21785325B00AE365A /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 45898BB11785325B00AE365A /* Data */; };
 		45898BB7178532EC00AE365A /* WCLPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB4178532EC00AE365A /* WCLPlugin.m */; };
 		45898BB8178532EC00AE365A /* WCLPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB6178532EC00AE365A /* WCLPluginManager.m */; };
@@ -79,7 +75,6 @@
 			files = (
 				45302A5B185430AF00AE50C6 /* Search.bundle in CopyFiles */,
 				4596C06717923187005FC51A /* IRB.bundle in CopyFiles */,
-				45898BA91785306100AE365A /* Ack.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,11 +115,6 @@
 		45709B1A18271237005F03E9 /* WCLPlugin+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WCLPlugin+Tests.h"; sourceTree = "<group>"; };
 		4574725617DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLApplicationTerminationHelper.h; sourceTree = "<group>"; };
 		4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLApplicationTerminationHelper.m; sourceTree = "<group>"; };
-		45898B9C1785302C00AE365A /* Ack.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Ack.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		45898BA01785302D00AE365A /* Ack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ack-Info.plist"; sourceTree = "<group>"; };
-		45898BA21785302D00AE365A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		45898BA41785302D00AE365A /* Ack-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ack-Prefix.pch"; sourceTree = "<group>"; };
-		45898BAA1785319600AE365A /* wcack */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcack; sourceTree = "<group>"; };
 		45898BB11785325B00AE365A /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		45898BB3178532EC00AE365A /* WCLPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPlugin.h; sourceTree = "<group>"; };
 		45898BB4178532EC00AE365A /* WCLPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPlugin.m; sourceTree = "<group>"; };
@@ -185,14 +175,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45898B991785302C00AE365A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45898B9D1785302D00AE365A /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4596C0581792316B005FC51A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,7 +191,6 @@
 			children = (
 				4546484E1853C6C700147962 /* Search */,
 				4596C05D1792316B005FC51A /* IRB */,
-				45898B9E1785302D00AE365A /* Ack */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -230,7 +211,6 @@
 			children = (
 				4530B0CC1736E2A6000A52E2 /* Web Console.app */,
 				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */,
-				45898B9C1785302C00AE365A /* Ack.bundle */,
 				4596C05B1792316B005FC51A /* IRB.bundle */,
 				4546484C1853C6C700147962 /* Search.bundle */,
 			);
@@ -354,25 +334,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		45898B9E1785302D00AE365A /* Ack */ = {
-			isa = PBXGroup;
-			children = (
-				45898BAA1785319600AE365A /* wcack */,
-				45898B9F1785302D00AE365A /* Supporting Files */,
-			);
-			path = Ack;
-			sourceTree = "<group>";
-		};
-		45898B9F1785302D00AE365A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				45898BA01785302D00AE365A /* Ack-Info.plist */,
-				45898BA11785302D00AE365A /* InfoPlist.strings */,
-				45898BA41785302D00AE365A /* Ack-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		4596C05D1792316B005FC51A /* IRB */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,23 +411,6 @@
 			productReference = 4546484C1853C6C700147962 /* Search.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		45898B9B1785302C00AE365A /* Ack */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 45898BA51785302D00AE365A /* Build configuration list for PBXNativeTarget "Ack" */;
-			buildPhases = (
-				45898B981785302C00AE365A /* Sources */,
-				45898B991785302C00AE365A /* Frameworks */,
-				45898B9A1785302C00AE365A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Ack;
-			productName = Ack;
-			productReference = 45898B9C1785302C00AE365A /* Ack.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 		4596C05A1792316B005FC51A /* IRB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */;
@@ -513,7 +457,6 @@
 			targets = (
 				4530B0CB1736E2A6000A52E2 /* Web Console */,
 				4530B0EB1736E2A6000A52E2 /* Web ConsoleTests */,
-				45898B9B1785302C00AE365A /* Ack */,
 				4596C05A1792316B005FC51A /* IRB */,
 				4546484B1853C6C700147962 /* Search */,
 			);
@@ -548,15 +491,6 @@
 			files = (
 				45302A5E1854317A00AE50C6 /* wcsearch in Resources */,
 				454648531853C6C700147962 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		45898B9A1785302C00AE365A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45898BA31785302D00AE365A /* InfoPlist.strings in Resources */,
-				45898BAC1785319600AE365A /* wcack in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,13 +562,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45898B981785302C00AE365A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4596C0571792316B005FC51A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -689,14 +616,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				454648521853C6C700147962 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		45898BA11785302D00AE365A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				45898BA21785302D00AE365A /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -864,32 +783,6 @@
 			};
 			name = Release;
 		};
-		45898BA61785302D00AE365A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ack/Ack-Prefix.pch";
-				INFOPLIST_FILE = "Ack/Ack-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		45898BA71785302D00AE365A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ack/Ack-Prefix.pch";
-				INFOPLIST_FILE = "Ack/Ack-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		4596C0641792316B005FC51A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -951,15 +844,6 @@
 			buildConfigurations = (
 				454648551853C6C700147962 /* Debug */,
 				454648561853C6C700147962 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		45898BA51785302D00AE365A /* Build configuration list for PBXNativeTarget "Ack" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				45898BA61785302D00AE365A /* Debug */,
-				45898BA71785302D00AE365A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
