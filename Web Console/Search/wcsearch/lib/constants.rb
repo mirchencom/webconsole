@@ -1,1 +1,1 @@
-SEARCH_COMMAND = "ack --color --nogroup"
+require File.join(File.dirname(__FILE__), "ack_constants")

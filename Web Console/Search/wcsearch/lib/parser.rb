@@ -1,16 +1,11 @@
-MODEL_FILE = File.join(File.dirname(__FILE__), 'model')
-require MODEL_FILE
-
 require 'pathname'
+
+require File.join(File.dirname(__FILE__), 'model')
+require File.join(File.dirname(__FILE__), 'constants')
 
 module WcSearch
 
   class Parser
-    ANSI_ESCAPE = '\x1b[^m]*m'
-    MATCH_REGEXP = Regexp.new("#{ANSI_ESCAPE}(.+?)#{ANSI_ESCAPE}")
-    METADATA_REGEXP = Regexp.new((MATCH_REGEXP.source) + ":#{ANSI_ESCAPE}([0-9]+)#{ANSI_ESCAPE}:")
-    LINE_ENDING = "#{ANSI_ESCAPE}" + '\x1b\[K'
-    TEXT_REGEXP = Regexp.new("#{ANSI_ESCAPE}.+?#{ANSI_ESCAPE}:#{ANSI_ESCAPE}[0-9]+#{ANSI_ESCAPE}:(.*?)#{LINE_ENDING}")
 
     attr_writer :delegate
     def initialize(delegate = nil, directory = nil)
