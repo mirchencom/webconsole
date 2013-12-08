@@ -42,7 +42,7 @@ module WcSearch
       while index && index < text.length
         index = text.index(MATCH_REGEXP)
         if index
-          matched_text = text.match(MATCH_REGEXP)[1]
+          matched_text = text.match(MATCH_REGEXP).captures[0]
           text.sub!(MATCH_REGEXP, matched_text)
           length = matched_text.length
 

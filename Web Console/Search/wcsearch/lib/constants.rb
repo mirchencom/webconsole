@@ -1,1 +1,1 @@
-require File.join(File.dirname(__FILE__), "ack_constants")
+require File.join(File.dirname(__FILE__), "grep_constants")
