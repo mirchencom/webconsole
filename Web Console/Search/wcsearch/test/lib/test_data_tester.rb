@@ -12,25 +12,30 @@ module TestHelper
         file = files_hash[file_path]
       
         if test_file.file_path != file.file_path
+          puts "File path #{test_file.file_path} should match #{file.file_path}."
           return false
         end
           
         if test_file.display_file_path != file.display_file_path
+          puts "Display file path #{test_file.display_file_path} should match #{file.display_file_path}."
           return false
         end
 
         test_file.lines.zip(file.lines).each do |test_line, line|
 
           if test_line.number != line.number
+            puts "Line number #{test_line.number} should match #{line.number}."
             return false
           end
 
           if test_line.matches.count != line.matches.count
+            puts "Match count #{test_line.matches.count} should match #{line.matches.count}."
             return false
           end
 
           test_line.matches.zip(line.matches).each do |test_match, match|
             if test_match.text != match.text
+              puts "Match text #{test_match.text} should match #{match.text}."
               return false
             end
           end

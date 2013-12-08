@@ -7,10 +7,10 @@ module WcSearch
 
   class Parser
     ANSI_ESCAPE = '\x1b[^m]*m'
-    ANSI_ESCAPE_REGEXP = Regexp.new("#{ANSI_ESCAPE}")
-    ANSI_WRAPPER_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '(.+?)' + "#{ANSI_ESCAPE}")
-    METADATA_REGEXP = Regexp.new(ANSI_WRAPPER_REGEXP.source + ":#{ANSI_ESCAPE}[0-9]+#{ANSI_ESCAPE}:")
-    LINE_ENDING_REGEXP = Regexp.new("#{ANSI_ESCAPE}" + '\x1b\[K')
+    MATCH_REGEXP = Regexp.new("#{ANSI_ESCAPE}(.+?)#{ANSI_ESCAPE}")
+    METADATA_REGEXP = Regexp.new((MATCH_REGEXP.source) + ":#{ANSI_ESCAPE}([0-9]+)#{ANSI_ESCAPE}:")
+    LINE_ENDING = "#{ANSI_ESCAPE}" + '\x1b\[K'
+    TEXT_REGEXP = Regexp.new("#{ANSI_ESCAPE}.+?#{ANSI_ESCAPE}:#{ANSI_ESCAPE}[0-9]+#{ANSI_ESCAPE}:(.*?)#{LINE_ENDING}")
 
     attr_writer :delegate
     def initialize(delegate = nil, directory = nil)
@@ -18,11 +18,11 @@ module WcSearch
       @directory = directory
       @files_hash = Hash.new
     end
-    
-    def parse_line(raw_line)
-      ansi_wrapped = raw_line.scan(ANSI_WRAPPER_REGEXP)
+   
+    def parse_line(output_line)
 
-      file_path = ansi_wrapped[0][0]
+      metadata_captures = output_line.match(METADATA_REGEXP).captures
+      file_path = metadata_captures[0]
       file_path = File.expand_path(file_path) # Convert paths with .. to full paths
       if @directory
         display_file_path = Pathname.new(file_path).relative_path_from(Pathname.new(@directory)).to_s
@@ -38,17 +38,17 @@ module WcSearch
         end
       end
 
-      number = ansi_wrapped[1][0].to_i
-      line = Match::File::Line.new(number)
+      line_number = metadata_captures[1].to_i
+      line = Match::File::Line.new(line_number)
       file.lines.push(line)
 
-      text = raw_line.sub(METADATA_REGEXP, '')
+      text = output_line.match(TEXT_REGEXP).captures[0]
       index = 0
       while index && index < text.length
-        index = text.index(ANSI_WRAPPER_REGEXP)
+        index = text.index(MATCH_REGEXP)
         if index
-          matched_text = text.match(ANSI_WRAPPER_REGEXP)[1]
-          text.sub!(ANSI_WRAPPER_REGEXP, matched_text)
+          matched_text = text.match(MATCH_REGEXP)[1]
+          text.sub!(MATCH_REGEXP, matched_text)
           length = matched_text.length
 
           match = Match::File::Line::Match.new(index, length, line)
@@ -56,7 +56,6 @@ module WcSearch
           line.matches.push(match)
         end                 
       end
-      text.sub!(LINE_ENDING_REGEXP, '') 
       text.rstrip!
 
       line.text = text

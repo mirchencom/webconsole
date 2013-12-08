@@ -1,1 +1,1 @@
-SEARCH_COMMAND = "ack --color --with-filename"
+SEARCH_COMMAND = "ack --color --nogroup"
