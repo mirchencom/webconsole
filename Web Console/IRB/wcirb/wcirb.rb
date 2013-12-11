@@ -1,22 +1,11 @@
 #!/usr/bin/env ruby
 
-require 'webconsole'
+require 'Shellwords'
 
-LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
+BRIDGE_FILE = File.join(File.dirname(__FILE__), "lib", "bridge.rb")
+command = "irb | #{Shellwords.escape(BRIDGE_FILE)}"
 
-CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
-require CONTROLLER_FILE
-
-WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, "window_manager")
-require WINDOW_MANAGER_FILE
-
-# Window Manager
-window_id = ENV['WINDOWID']
-window_manager = WcIRB::WindowManager.new(window_id)
-
-# Controller
-controller = WcIRB::Controller.new(window_manager)
-
+pipe = IO.popen(command, "w")
 ARGF.each do |line|
-  controller.parse_line(line)
+  pipe.write(line)
 end

@@ -27,7 +27,7 @@
 	<key>NSPrincipalClass</key>
 	<string>Plugin</string>
 	<key>Command</key>
-	<string>wcirb/wcirb.sh</string>
+	<string>wcirb/wcirb.rb</string>
 	<key>Name</key>
 	<string>IRB</string>
 </dict>
