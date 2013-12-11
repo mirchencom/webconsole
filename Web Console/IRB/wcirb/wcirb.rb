@@ -13,8 +13,6 @@ require WINDOW_MANAGER_FILE
 # Window Manager
 window_id = ENV['WINDOWID']
 window_manager = WcIRB::WindowManager.new(window_id)
-BASE_PATH = File.expand_path(BASE_DIRECTORY)
-window_manager.base_url_path = BASE_PATH
 
 # Controller
 controller = WcIRB::Controller.new(window_manager)
