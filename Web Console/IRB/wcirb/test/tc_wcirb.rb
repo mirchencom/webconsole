@@ -27,6 +27,8 @@ class TestWcIRB < Test::Unit::TestCase
     result.strip!
     
     assert_equal(result, test_result, "The test result should equal the result.")
+
+    window_manager.close
   end
 
 end

@@ -26,6 +26,8 @@ class TestBridge < Test::Unit::TestCase
     result.strip!
     
     assert_equal(test_text, result, "The test text should equal the result.")
+
+    window_manager.close
   end
 
 end
