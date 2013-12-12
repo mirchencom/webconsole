@@ -18,9 +18,11 @@ module WcIRB
     end  
     def parse_line(line)
       line.chomp!
-      javascript = %Q[addOutput('#{line.gsub("'", "\\\\'")}');]
-      if @delegate
-        @delegate.do_javascript(javascript)
+      if !line.strip.empty? # Ignore empty lines
+        javascript = %Q[addOutput('#{line.gsub("'", "\\\\'")}');]
+        if @delegate
+          @delegate.do_javascript(javascript)
+        end
       end
     end
   end

@@ -12,6 +12,8 @@ module TestHelper
     end
 
     def close
+      @pipe.close_write
+      puts @pipe.read
       @pipe.close
     end
   end
