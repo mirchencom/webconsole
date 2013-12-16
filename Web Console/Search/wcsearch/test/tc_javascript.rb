@@ -8,6 +8,9 @@ require CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
 
 
+# Test cases for some situations where `textWithMatchesProcessed` was failing.
+# To debug these situations: Run a test case and then use Web Console's Web Inspector to log console messages from the `textWithMatchesProcessed` JavaScript.
+
 class TestJavaScript < Test::Unit::TestCase
 
   def setup
