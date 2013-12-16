@@ -39,7 +39,8 @@ function textWithMatchesProcessed(text, startIndex, matches) {
 		var data = {
 			text: matchedText
 		};
-		var templatedText = template(data).stripWhitespace();
+
+		var templatedText = template(data).stripWhitespace(); // Handlebars does internal escaping
 
 		textWithMatchSubstring = beforeMatch + templatedText;
 

@@ -44,7 +44,7 @@ textWithMatchesProcessed(text, 0, matches);]
 
 
 
-  def test_javascript_quote
+  def test_contains_quote
     test_result = 'WCSEARCH_FILE = File.join(File.dirname(__FILE__), &quot;..&quot;, &#39;<strong>eiusmod</strong>.rb&#39;)'
     javascript = %Q[
 var matches = [ 
@@ -62,7 +62,7 @@ textWithMatchesProcessed(text, 0, matches);]
 
 
 
-  def test_javascript_first
+  def test_matching_first
     test_result = '    <strong>eiusmod</strong>_tests_file = File.join(File.dirname(__FILE__), &quot;tc_<strong>eiusmod</strong>.rb&quot;)'
     javascript = %Q[
 var matches = [ 
@@ -76,6 +76,37 @@ var matches = [
   }  
 ];
 var text = '    eiusmod_tests_file = File.join(File.dirname(__FILE__), "tc_eiusmod.rb")';
+textWithMatchesProcessed(text, 0, matches);]
+    result = @window_manager.do_javascript(javascript)
+    result.chomp!
+    assert(result == test_result, "The result should match the test result.")
+  end
+
+
+
+
+  def test_matching_html
+    test_result = '<strong>&lt;eiusmod&gt;</strong><strong>eiusmod</strong>&#x2F;<strong>eiusmod</strong>.rb<strong>&lt;/eiusmod&gt;</strong>'
+    javascript = %Q[
+var matches = [ 
+  {
+    index: 0,
+    length: 9
+  }, 
+  {
+    index: 9,
+    length: 7
+  }, 
+  {
+    index: 17,
+    length: 7
+  }, 
+  {
+    index: 27,
+    length: 10
+  }  
+];
+var text = '<eiusmod>eiusmod/eiusmod.rb</eiusmod>';
 textWithMatchesProcessed(text, 0, matches);]
     result = @window_manager.do_javascript(javascript)
     result.chomp!
