@@ -1,5 +1,4 @@
 require 'erb'
-require 'cgi'
 
 # Controller has a delegate, either domrunner or WebConsole
 module WcSearch
@@ -40,7 +39,7 @@ module WcSearch
         matches_javascript << match_javascript
       }
       matches_javascript.chomp!(",");
-      text = CGI.escapeHTML(line.text)
+      text = line.text.gsub("'", "\\\\'")
       javascript = %Q[
 var matches = [#{matches_javascript}  
 ];

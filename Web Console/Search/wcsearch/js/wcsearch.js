@@ -33,28 +33,40 @@ function textWithMatchesProcessed(text, startIndex, matches) {
 
 		var source = $("#match-template").html();
 		var template = Handlebars.compile(source);
+		var beforeMatchLength = match.index - startIndex;
+		var beforeMatch = escapeHTML(text.substr(startIndex, beforeMatchLength));
 		var matchedText = text.substr(match.index, match.length);
-		var data = { 
+		var data = {
 			text: matchedText
 		};
 		var templatedText = template(data).stripWhitespace();
 
-		var textWithMatchReplaced = text.replaceSubstr(match.index, match.length, templatedText);
-		textWithMatchSubstring = textWithMatchReplaced.substring(startIndex, match.index + templatedText.length);
+		textWithMatchSubstring = beforeMatch + templatedText;
 
 		var nextStartIndex = match.index + match.length;
+
 		return textWithMatchSubstring + textWithMatchesProcessed(text, nextStartIndex, matches)
 	}
 
-	return text.substr(startIndex);
+	return escapeHTML(text.substr(startIndex));
 }
 
 // Helpers
 
-String.prototype.replaceSubstr=function(start, length, newSubstring) {
-     return this.substr(0, start) + newSubstring + this.substr(start + length);
-}
-
 String.prototype.stripWhitespace=function() {
 	return this.replace(/(^\s+|\s+$)/g, '');
+}
+
+var entityMap = {
+   "&": "&amp;",
+   "<": "&lt;",
+   ">": "&gt;",
+   '"': '&quot;',
+   "'": '&#39;',
+   "/": '&#x2F;'
+};
+function escapeHTML(string) {
+	return String(string).replace(/[&<>"'\/]/g, function (s) {
+		return entityMap[s];
+	});
 }
