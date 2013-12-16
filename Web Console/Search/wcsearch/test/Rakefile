@@ -16,7 +16,12 @@ namespace :wcsearch do
     ruby Shellwords.escape(controller_tests_file)
   end
 
-  task :test_wcsearch => [:test_controller] do
+  task :test_javascript => [:test_controller] do
+    javascript_tests_file = File.join(File.dirname(__FILE__), "tc_javascript.rb")
+    ruby Shellwords.escape(javascript_tests_file)
+  end
+
+  task :test_wcsearch => [:test_javascript] do
     wcsearch_tests_file = File.join(File.dirname(__FILE__), "tc_wcsearch.rb")
     ruby Shellwords.escape(wcsearch_tests_file)
   end
