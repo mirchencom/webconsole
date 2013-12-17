@@ -1,5 +1,15 @@
 require 'erb'
 
+class String
+  def escape_single_quote
+    self.gsub("'", "\\\\'")
+  end
+
+  def escape_single_quote!
+    replace(self.escape_single_quote)
+  end
+end
+
 # Controller has a delegate, either domrunner or WebConsole
 module WcSearch
   class Controller
@@ -20,8 +30,10 @@ module WcSearch
 
     def added_file(file)
       # Escape '
-      file_path = file.file_path.gsub("'", "\\\\'")
-      display_file_path = file.display_file_path.gsub("'", "\\\\'")
+      file_path = file.file_path
+      display_file_path = file.display_file_path
+      file_path.escape_single_quote!
+      display_file_path.escape_single_quote!
       javascript = "addFile('#{file_path}', '#{display_file_path}');"
       if @delegate
         @delegate.do_javascript(javascript)
@@ -39,7 +51,8 @@ module WcSearch
         matches_javascript << match_javascript
       }
       matches_javascript.chomp!(",");
-      text = line.text.gsub("'", "\\\\'")
+      text = line.text
+      text.escape_single_quote!
       javascript = %Q[
 var matches = [#{matches_javascript}  
 ];

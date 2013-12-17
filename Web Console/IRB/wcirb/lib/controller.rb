@@ -1,5 +1,15 @@
 require 'erb'
 
+class String
+  def escape_single_quote
+    self.gsub("'", "\\\\'")
+  end
+
+  def escape_single_quote!
+    replace(self.escape_single_quote)
+  end
+end
+
 module WcIRB
   class Controller
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
@@ -18,8 +28,9 @@ module WcIRB
     end  
     def parse_line(line)
       line.chomp!
+      line.escape_single_quote!
       if !line.strip.empty? # Ignore empty lines
-        javascript = %Q[addOutput('#{line.gsub("'", "\\\\'")}');]
+        javascript = %Q[addOutput('#{line}');]
         if @delegate
           @delegate.do_javascript(javascript)
         end
