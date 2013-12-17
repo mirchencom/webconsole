@@ -1,6 +1,9 @@
 body {
 	font-family: "Menlo", monospace;
 }
+h5 {
+	white-space: nowrap;
+}
 li {
 	list-style: none;
 	white-space: pre;
