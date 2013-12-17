@@ -38,12 +38,12 @@ module WcData
     private
     
     class ::String
-      def javascript_escape!
-        replace(self.javascript_escape)
+      def javascript_escape
+        self.gsub('\\', "\\\\\\\\").gsub("'", "\\\\'")
       end
 
-      def javascript_escape
-        self.gsub("'", "\\\\'")
+      def javascript_escape!
+        replace(self.javascript_escape)
       end
     end
     

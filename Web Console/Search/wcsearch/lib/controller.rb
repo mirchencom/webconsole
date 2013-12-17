@@ -1,16 +1,5 @@
 require 'erb'
 
-class String
-  def escape_single_quote
-    self.gsub("'", "\\\\'")
-  end
-
-  def escape_single_quote!
-    replace(self.escape_single_quote)
-  end
-end
-
-# Controller has a delegate, either domrunner or WebConsole
 module WcSearch
   class Controller
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
@@ -32,8 +21,8 @@ module WcSearch
       # Escape '
       file_path = file.file_path
       display_file_path = file.display_file_path
-      file_path.escape_single_quote!
-      display_file_path.escape_single_quote!
+      file_path.javascript_escape!
+      display_file_path.javascript_escape!
       javascript = "addFile('#{file_path}', '#{display_file_path}');"
       if @delegate
         @delegate.do_javascript(javascript)
@@ -52,7 +41,7 @@ module WcSearch
       }
       matches_javascript.chomp!(",");
       text = line.text
-      text.escape_single_quote!
+      text.javascript_escape!
       javascript = %Q[
 var matches = [#{matches_javascript}  
 ];
@@ -62,5 +51,18 @@ addLine(#{line.number}, '#{text}', matches);
         @delegate.do_javascript(javascript)
       end
     end
-  end    
+
+    private
+
+    class ::String
+      def javascript_escape
+        self.gsub('\\', "\\\\\\\\").gsub("'", "\\\\'")
+      end
+
+      def javascript_escape!
+        replace(self.javascript_escape)
+      end
+    end
+    
+  end
 end

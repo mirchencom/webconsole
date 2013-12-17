@@ -1,15 +1,5 @@
 require 'erb'
 
-class String
-  def escape_single_quote
-    self.gsub("'", "\\\\'")
-  end
-
-  def escape_single_quote!
-    replace(self.escape_single_quote)
-  end
-end
-
 module WcPrint
   class Controller
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
@@ -26,9 +16,22 @@ module WcPrint
     end  
     def parse_line(line)
       line.chomp!
-      line.escape_single_quote!
+      line.javascript_escape!
       javascript = %Q[addOutput('#{line}');]
       @delegate.do_javascript(javascript)
     end
+  
+    private
+    
+    class ::String
+      def javascript_escape
+        self.gsub('\\', "\\\\\\\\").gsub("'", "\\\\'")
+      end
+
+      def javascript_escape!
+        replace(self.javascript_escape)
+      end
+    end
+  
   end
 end
