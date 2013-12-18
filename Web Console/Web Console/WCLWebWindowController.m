@@ -130,18 +130,32 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
     NSURL *URL = [request URL];
+
+    if (![webView mainFrameURL]) {
+        // Always allow the first URL to load
+        [listener use];
+        return;
+    }
+
     if ([[URL scheme] isEqualToString:@"file"]) {
+        // Handle FILE URLs
         switch ([actionInformation[@"WebActionNavigationTypeKey"] intValue]) {
             case WebNavigationTypeLinkClicked:
+                // Links clicked
+                [[NSWorkspace sharedWorkspace] openURL:[request URL]];
+                break;
+            case WebNavigationTypeOther:
+                // JavaScript setting "window.location"
                 [[NSWorkspace sharedWorkspace] openURL:[request URL]];
                 break;
             default:
                 [listener use];
                 break;
         }
-    } else {
-        [listener use];
+        return;
     }
+
+    [listener use];
 }
 
 - (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
