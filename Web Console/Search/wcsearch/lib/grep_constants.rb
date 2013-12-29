@@ -1,4 +1,4 @@
-SEARCH_COMMAND = "grep --exclude-dir=\".git\" --color=always --recursive --line-number --extended-regexp"
+SEARCH_COMMAND = "grep --exclude-dir=\".git\" -I --color=always --recursive --line-number --extended-regexp"
 
 module WcSearch
   class Parser
