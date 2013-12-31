@@ -19,7 +19,6 @@
 		4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0E41736E2A6000A52E2 /* MainMenu.xib */; };
 		4530B0EF1736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0F51736E2A6000A52E2 /* InfoPlist.strings */; };
-		4530B0FA1736E2A6000A52E2 /* WCLWebWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0F91736E2A6000A52E2 /* WCLWebWindowControllerTests.m */; };
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		4546484D1853C6C700147962 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		454648531853C6C700147962 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 454648511853C6C700147962 /* InfoPlist.strings */; };
@@ -34,6 +33,9 @@
 		4596C06717923187005FC51A /* IRB.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4596C05B1792316B005FC51A /* IRB.bundle */; };
 		4596C06A179246CF005FC51A /* wcirb in Resources */ = {isa = PBXBuildFile; fileRef = 4596C068179231C3005FC51A /* wcirb */; };
 		4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */; };
+		45A34E22187263A4005BF628 /* WCLWebWindowControllerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */; };
+		45A34E2418726470005BF628 /* WCLWebWindowControllerHTMLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A34E2318726470005BF628 /* WCLWebWindowControllerHTMLTests.m */; };
+		45A34E2618726492005BF628 /* WCLWebWindowControllerTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A34E2518726492005BF628 /* WCLWebWindowControllerTaskTests.m */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WCLWebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WCLWebWindowController.m */; };
 		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
@@ -44,7 +46,6 @@
 		45B81480181483400006AA05 /* WCLPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8147F181483400006AA05 /* WCLPluginTests.m */; };
 		45B8148318161A360006AA05 /* WCLWebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */; };
 		45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */; };
-		45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F826421780F99100DD7DF6 /* WebView+Source.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,7 +102,6 @@
 		4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Web ConsoleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0F41736E2A6000A52E2 /* Web ConsoleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Web ConsoleTests-Info.plist"; sourceTree = "<group>"; };
 		4530B0F61736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4530B0F91736E2A6000A52E2 /* WCLWebWindowControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTests.m; sourceTree = "<group>"; };
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		4546484C1853C6C700147962 /* Search.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Search.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		454648501853C6C700147962 /* Search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Search-Info.plist"; sourceTree = "<group>"; };
@@ -127,6 +127,10 @@
 		4596C068179231C3005FC51A /* wcirb */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcirb; sourceTree = "<group>"; };
 		4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+AppleScript.h"; sourceTree = "<group>"; };
 		4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+AppleScript.m"; sourceTree = "<group>"; };
+		45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTestCase.m; sourceTree = "<group>"; };
+		45A34E2318726470005BF628 /* WCLWebWindowControllerHTMLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerHTMLTests.m; sourceTree = "<group>"; };
+		45A34E2518726492005BF628 /* WCLWebWindowControllerTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTaskTests.m; sourceTree = "<group>"; };
+		45A34E2718726711005BF628 /* WCLWebWindowControllerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLWebWindowControllerTestCase.h; sourceTree = "<group>"; };
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WCLWebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLWebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WCLWebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowController.m; sourceTree = "<group>"; };
@@ -144,8 +148,6 @@
 		45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTestsHelper.m; sourceTree = "<group>"; };
 		45B814841816297C0006AA05 /* WCLTaskTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLTaskTestsHelper.h; sourceTree = "<group>"; };
 		45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTaskTestsHelper.m; sourceTree = "<group>"; };
-		45F826411780F99000DD7DF6 /* WebView+Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WebView+Source.h"; sourceTree = "<group>"; };
-		45F826421780F99100DD7DF6 /* WebView+Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WebView+Source.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,15 +290,16 @@
 		4530B0F21736E2A6000A52E2 /* Web ConsoleTests */ = {
 			isa = PBXGroup;
 			children = (
-				4530B0F91736E2A6000A52E2 /* WCLWebWindowControllerTests.m */,
+				45A34E2718726711005BF628 /* WCLWebWindowControllerTestCase.h */,
+				45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */,
+				45A34E2318726470005BF628 /* WCLWebWindowControllerHTMLTests.m */,
+				45A34E2518726492005BF628 /* WCLWebWindowControllerTaskTests.m */,
 				45B8147F181483400006AA05 /* WCLPluginTests.m */,
 				45B8148118161A360006AA05 /* WCLWebWindowControllerTestsHelper.h */,
 				45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */,
 				45B814841816297C0006AA05 /* WCLTaskTestsHelper.h */,
 				45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */,
 				45709B1A18271237005F03E9 /* WCLPlugin+Tests.h */,
-				45F826411780F99000DD7DF6 /* WebView+Source.h */,
-				45F826421780F99100DD7DF6 /* WebView+Source.m */,
 				451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */,
 				451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */,
 				451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */,
@@ -546,12 +549,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4530B0FA1736E2A6000A52E2 /* WCLWebWindowControllerTests.m in Sources */,
 				451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */,
 				45B8148318161A360006AA05 /* WCLWebWindowControllerTestsHelper.m in Sources */,
+				45A34E22187263A4005BF628 /* WCLWebWindowControllerTestCase.m in Sources */,
+				45A34E2418726470005BF628 /* WCLWebWindowControllerHTMLTests.m in Sources */,
 				45B81480181483400006AA05 /* WCLPluginTests.m in Sources */,
 				45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */,
-				45F826431780F99100DD7DF6 /* WebView+Source.m in Sources */,
+				45A34E2618726492005BF628 /* WCLWebWindowControllerTaskTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
