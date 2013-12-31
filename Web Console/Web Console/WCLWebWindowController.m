@@ -112,17 +112,19 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (void)windowDidLoad
 {
-    [self.window setFrameUsingName:[self windowFrameName]];
+    NSString *windowFrameName = [self windowFrameName];
+    if (windowFrameName) [self.window setFrameUsingName:windowFrameName];
+}
+
+- (void)saveWindowFrame
+{
+    NSString *windowFrameName = [self windowFrameName];
+    if (windowFrameName) [self.window saveFrameUsingName:windowFrameName];
 }
 
 - (NSString *)windowFrameName
 {
     return self.plugin.name;
-}
-
-- (void)saveWindowFrame
-{
-    [self.window saveFrameUsingName:[self windowFrameName]];
 }
 
 #pragma mark - Modal Delegate
