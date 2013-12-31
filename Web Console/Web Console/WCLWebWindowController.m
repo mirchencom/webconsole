@@ -14,12 +14,16 @@
 
 #import "WCLTaskHelper.h"
 
+#import "WCLPlugin.h"
+
 NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLWebWindowControllerDidCancelCloseWindowNotification";
 
 @interface WCLWebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
 @property (nonatomic, strong) void (^completionHandler)(BOOL success);
 - (void)terminateTasksAndCloseWindow;
+- (void)saveWindowFrame;
+- (NSString *)windowFrameName;
 @property (nonatomic, strong) NSMutableArray *mutableTasks;
 @property (nonatomic, strong) WCLPlugin *plugin;
 @end
@@ -35,6 +39,8 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     
     return self;
 }
+
+#pragma mark - AppleScript
 
 - (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL))completionHandler {
     [self loadHTML:HTML baseURL:nil completionHandler:completionHandler];
@@ -90,6 +96,33 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (void)windowWillClose:(NSNotification *)notification {
     [[WCLWebWindowsController sharedWebWindowsController] removeWebWindowController:self];
+}
+
+- (void)windowDidMove:(NSNotification *)notification
+{
+    [self saveWindowFrame];
+}
+
+- (void)windowDidResize:(NSNotification *)notification
+{
+    [self saveWindowFrame];
+}
+
+#pragma mark - Save & Restore Window Frame
+
+- (void)windowDidLoad
+{
+    [self.window setFrameUsingName:[self windowFrameName]];
+}
+
+- (NSString *)windowFrameName
+{
+    return self.plugin.name;
+}
+
+- (void)saveWindowFrame
+{
+    [self.window saveFrameUsingName:[self windowFrameName]];
 }
 
 #pragma mark - Modal Delegate
