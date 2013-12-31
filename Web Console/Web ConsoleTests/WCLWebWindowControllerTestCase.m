@@ -12,13 +12,6 @@
 
 @implementation WCLWebWindowControllerTestCase
 
-- (void)setUp
-{
-    [super setUp];
-    
-    // Set-up code here.
-}
-
 - (void)tearDown
 {
     [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];

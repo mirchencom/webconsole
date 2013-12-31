@@ -43,6 +43,7 @@
 		45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */; };
 		45B375C6179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C5179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m */; };
 		45B375C9179B8347002BCEF6 /* WCLTaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C8179B8347002BCEF6 /* WCLTaskHelper.m */; };
+		45B3E402187269E300DCDB42 /* WCLWebWindowControllerResizingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B3E401187269E300DCDB42 /* WCLWebWindowControllerResizingTests.m */; };
 		45B81480181483400006AA05 /* WCLPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8147F181483400006AA05 /* WCLPluginTests.m */; };
 		45B8148318161A360006AA05 /* WCLWebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */; };
 		45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */; };
@@ -143,6 +144,7 @@
 		45B375C5179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLUserInterfaceTextHelper.m; sourceTree = "<group>"; };
 		45B375C7179B8347002BCEF6 /* WCLTaskHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLTaskHelper.h; sourceTree = "<group>"; };
 		45B375C8179B8347002BCEF6 /* WCLTaskHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTaskHelper.m; sourceTree = "<group>"; };
+		45B3E401187269E300DCDB42 /* WCLWebWindowControllerResizingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerResizingTests.m; sourceTree = "<group>"; };
 		45B8147F181483400006AA05 /* WCLPluginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginTests.m; sourceTree = "<group>"; };
 		45B8148118161A360006AA05 /* WCLWebWindowControllerTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLWebWindowControllerTestsHelper.h; sourceTree = "<group>"; };
 		45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTestsHelper.m; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */,
 				45A34E2318726470005BF628 /* WCLWebWindowControllerHTMLTests.m */,
 				45A34E2518726492005BF628 /* WCLWebWindowControllerTaskTests.m */,
+				45B3E401187269E300DCDB42 /* WCLWebWindowControllerResizingTests.m */,
 				45B8147F181483400006AA05 /* WCLPluginTests.m */,
 				45B8148118161A360006AA05 /* WCLWebWindowControllerTestsHelper.h */,
 				45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */,
@@ -555,6 +558,7 @@
 				45A34E2418726470005BF628 /* WCLWebWindowControllerHTMLTests.m in Sources */,
 				45B81480181483400006AA05 /* WCLPluginTests.m in Sources */,
 				45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */,
+				45B3E402187269E300DCDB42 /* WCLWebWindowControllerResizingTests.m in Sources */,
 				45A34E2618726492005BF628 /* WCLWebWindowControllerTaskTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
