@@ -76,10 +76,11 @@ class TestResizing < Test::Unit::TestCase
     WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
     bounds = TestsHelper::window_bounds
     assert(bounds.size_matches(destination_bounds_two), "The windows bounds should match the destination bounds.")
-
     
-    # Do any cleanup (do I want to close windows?)
-
+    # Cleanup
+    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    window_manager = WebConsole::WindowManager.new(window_id)
+    window_manager.close
   end
 
   class ::String
