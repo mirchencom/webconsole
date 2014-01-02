@@ -26,111 +26,108 @@
 
 @implementation WCLWebWindowControllerResizingTests
 
-//- (void)setUp
-//{
-//    [super setUp];
-//}
-//
-//- (void)tearDown
-//{
-//    [super tearDown];
-//}
-
 - (void)testResizingWindow
 {
-#warning This implementation will overwrite my real window frame data for the test plugin, so I want to use a different name here, maybe use the load plugin API and the print plugin?
-    
-    // For window resizing to work the plugin must have a name
     NSURL *pluginURL = [self wcl_URLForResource:kTestPluginName
                                   withExtension:kPlugInExtension
                                    subdirectory:kTestDataSubdirectory];
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
 
+    // The plugin needs a name for saved frames to work
     XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");
     XCTAssertTrue([plugin.name isEqualToString:kTestPluginName], @"The WCLPlugin's name should equal the test plugin name.");
     
+    // Open an NSWindow
     WCLWebWindowController *webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
+    XCTAssertEqual([[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLWebWindowControllers for the WCLPlugin.");
 
-    // Test Resizing...
-    
-    // Get the window frame from NSUserDefaults
+    // Test that the NSWindow's frame matches the saved frame
     NSRect savedFrame = [[self class] savedFrameNamed:plugin.name];
-NSLog(@"Original savedFrame = %@", NSStringFromRect(savedFrame));
-
     NSRect windowFrame = [webWindowController.window frame];
-NSLog(@"First windowFrame = %@", NSStringFromRect(windowFrame));
-
-    // Test the window frame equals the frame from NSUserDefaults
     if (!NSRectEqualToRect(savedFrame, NSZeroRect)) {
         // Only test if the first rect is equal if we've already stored a frame for this plugin
         XCTAssertTrue(NSRectEqualToRect(windowFrame, savedFrame), @"The NSWindow's frame should equal the saved frame.");
     }
 
-    // If the window frame equals kTestWindowFrame, set the destination to kTestWindowFrameTwo
-    // Otherwise set the destination to kTestWindowFrame
-    // Test that the window from NSUserDefaults does not equal the destination frame
-
+    // Setup the destination frames
     // After running tests previously, the saved frame probably equals the
     // current frame already, so instead use the alternative rect as the
     // destination.
     NSRect destinationFrame = NSRectEqualToRect(windowFrame, kTestWindowFrame) ? kTestWindowFrameTwo : kTestWindowFrame;
+    NSRect destinationFrameTwo = NSRectEqualToRect(windowFrame, kTestWindowFrame) ? kTestWindowFrame : kTestWindowFrameTwo;
     XCTAssertFalse(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should not equal the destination frame.");
+    XCTAssertFalse(NSRectEqualToRect(destinationFrame, destinationFrameTwo), @"The NSWindow's frame should not equal the destination frame.");
     
-    // Resize the window to the destination frame
+    // Set the NSWindow's frame to the destination frame
     [webWindowController.window setFrame:destinationFrame display:NO];
-    
-    
-    // Test that the window frame frame from NSUserDefaults now equals the destination frame
-    savedFrame = [[self class] savedFrameNamed:plugin.name];
-NSLog(@"After move savedFrame = %@", NSStringFromRect(savedFrame));
 
+    // Test that the saved frame now equals the destination frame
+    savedFrame = [[self class] savedFrameNamed:plugin.name];
     XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrame), @"The saved frame should equal the destination frame.");
 
-    // Close the window
-NSLog(@"before run tasks windowFrame = %@", NSStringFromRect([webWindowController.window frame]));
-    [WCLWebWindowControllerTestsHelper blockUntilWebWindowControllersTasksRunAndFinish:webWindowController];
-NSLog(@"after run tasks windowFrame = %@", NSStringFromRect([webWindowController.window frame]));
-NSLog(@"savedFrame = %@", NSStringFromRect([[self class] savedFrameNamed:plugin.name]));
+    // Close the NSWindow
+    [WCLWebWindowControllerTestsHelper blockUntilWebWindowControllerTasksRunAndFinish:webWindowController];
     [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
-
-    // Open a new window
-NSLog(@"savedFrame before open = %@", NSStringFromRect([[self class] savedFrameNamed:plugin.name]));
-
+    // Open a new NSWindow
     webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
+    XCTAssertEqual([[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLWebWindowControllers for the WCLPlugin.");
     
-    // Test that the window's frame now equals the destination frame
+    // Test that the NSWindow's frame now equals the destination frame
     windowFrame = [webWindowController.window frame];
-NSLog(@"Frame that we moved the window too (which shoudl be the current saved frame) destinationFrame = %@", NSStringFromRect(destinationFrame));
-NSLog(@"The frame the window was opened at windowFrame = %@", NSStringFromRect(windowFrame));
-savedFrame = [[self class] savedFrameNamed:plugin.name];
-NSLog(@"savedFrame after open = %@", NSStringFromRect(savedFrame));
     XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should equal the destination frame.");
     
     // Open a second window
+    webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
+    XCTAssertEqual([[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)2, @"There should be two WCLWebWindowControllers for the WCLPlugin.");
     
+    // Test that the second NSWindow's frame now equals the destination frame
+    windowFrame = [webWindowController.window frame];
+    XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should equal the destination frame.");
+
+    // Set the second NSWindow's frame to the second destination frame
+    [webWindowController.window setFrame:destinationFrameTwo display:NO];
+
+    // Test that the saved frame now equals the second destination frame
+    savedFrame = [[self class] savedFrameNamed:plugin.name];
+    XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrameTwo), @"The saved frame should equal the destination frame.");
     
+    // Open a third NSWindow
+    webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
+    XCTAssertEqual([[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)3, @"There should be three WCLWebWindowControllers for the WCLPlugin.");
     
+    // Test that the third NSWindow matches the second desintation frame
+    windowFrame = [webWindowController.window frame];
+    XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrameTwo), @"The NSWindow's frame should equal the destination frame.");
+
+    // Test that the saved frame matches second destination frame
+    savedFrame = [[self class] savedFrameNamed:plugin.name];
+    XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrameTwo), @"The saved frame should equal the destination frame.");
+
     // Clean up
-    [WCLWebWindowControllerTestsHelper blockUntilWebWindowControllersTasksRunAndFinish:webWindowController];
+    NSArray *tasks = [[WCLWebWindowsController sharedWebWindowsController] tasks];
+    [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
 }
 
 #pragma mark - Helpers
 
 - (WCLWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(WCLPlugin *)plugin
 {
+    NSArray *originalWebWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    
     // Run a simple command to get the window to display
     NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
     
-    // Test the WCLWebWindowController is configured correctly
-    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    NSMutableArray *webWindowControllers = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] mutableCopy];
+    [webWindowControllers removeObjectsInArray:originalWebWindowControllers];
+    
     NSAssert([webWindowControllers count] == (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
     WCLWebWindowController *webWindowController = webWindowControllers[0];
     NSAssert(webWindowController.plugin == plugin, @"The WCLWebWindowController's WCLPlugin should equal the WCLPlugin.");
-
+    
 #warning Turning off cascading windows for tests with the assumption that "in the wild" the actual windows origins will sometimes vary due to cascading.
     [webWindowController setShouldCascadeWindows:NO];
     

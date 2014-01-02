@@ -52,11 +52,10 @@
     return webWindowController;
 }
 
-+ (void)blockUntilWebWindowControllersTasksRunAndFinish:(WCLWebWindowController *)webWindowController
++ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLWebWindowController *)webWindowController
 {
     [WCLTaskTestsHelper blockUntilTasksRunAndFinish:webWindowController.tasks];
 }
-
 
 #pragma mark - Window Visible
 

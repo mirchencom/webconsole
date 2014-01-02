@@ -45,7 +45,7 @@
     XCTAssertEqual(webWindowController.plugin, plugin, @"The WCLWebWindowController's WCLPlugin should equal the WCLPlugin.");
     
     // Clean up
-    [WCLWebWindowControllerTestsHelper blockUntilWebWindowControllersTasksRunAndFinish:webWindowController];
+    [WCLWebWindowControllerTestsHelper blockUntilWebWindowControllerTasksRunAndFinish:webWindowController];
 }
 
 

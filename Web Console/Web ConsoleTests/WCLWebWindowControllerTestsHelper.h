@@ -14,7 +14,7 @@
 + (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
 + (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath;
 + (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
-+ (void)blockUntilWebWindowControllersTasksRunAndFinish:(WCLWebWindowController *)webWindowController;
++ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLWebWindowController *)webWindowController;
 + (void)blockUntilWindowHasAttachedSheet:(NSWindow *)window;
 + (void)blockUntilWindowIsVisible:(NSWindow *)window;
 + (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window;
