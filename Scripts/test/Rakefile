@@ -59,7 +59,7 @@ namespace :web_console do
   task :tests => [:clean_up]
   task :tests_long => [:test_web_console_long, :tests]
 
-  task :clean_up => [:test_web_console_tasks] do
+  task :clean_up => [:test_web_console_tasks, :test_web_console_resizing] do
     data_directory = File.join(File.dirname(__FILE__), "data")
     quit_applescript_file = File.join(data_directory, "quit.applescript")
     sh "osascript #{Shellwords.escape(quit_applescript_file)}"
@@ -67,6 +67,11 @@ namespace :web_console do
 
   task :test_web_console_tasks do
     web_console_tests_file = File.join(File.dirname(__FILE__), "tc_web_console_tasks.rb")
+    ruby Shellwords.escape(web_console_tests_file)
+  end
+
+  task :test_web_console_resizing do
+    web_console_tests_file = File.join(File.dirname(__FILE__), "tc_web_console_resizing.rb")
     ruby Shellwords.escape(web_console_tests_file)
   end
 
