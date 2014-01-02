@@ -18,4 +18,6 @@
 + (void)blockUntilTaskFinishes:(NSTask *)task timeoutInterval:(NSTimeInterval)timeoutInterval;
 + (void)blockUntilTasksFinish:(NSArray *)tasks;
 + (void)blockUntilTasksFinish:(NSArray *)tasks timeoutInterval:(NSTimeInterval)timeoutInterval;
+#pragma mark - Running & Finishing
++ (void)blockUntilTasksRunAndFinish:(NSArray *)tasks;
 @end

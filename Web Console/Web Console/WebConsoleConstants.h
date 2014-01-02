@@ -12,6 +12,7 @@
 #define kDirectoryKey @"Directory"
 #define kPluginKey @"Plugin"
 #define kTextKey @"Text"
+#define kPlugInExtension @"bundle"
 
 #define kEnvironmentVariablePathKey @"PATH"
 #define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";

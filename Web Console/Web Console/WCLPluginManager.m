@@ -9,8 +9,6 @@
 #import "WCLPluginManager.h"
 #import "WCLPlugin.h"
 
-#define kPlugInExtension @"bundle"
-
 @interface WCLPluginManager ()
 @property (nonatomic, strong) NSMutableDictionary *nameToPluginDictionary;
 - (void)loadPluginsInDirectory:(NSString *)plugInsPath;

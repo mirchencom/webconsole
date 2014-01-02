@@ -47,7 +47,11 @@
 
 - (void)testPlugin
 {
-    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kTestPluginName];
+    NSURL *pluginURL = [self wcl_URLForResource:kTestPluginName
+                                  withExtension:kPlugInExtension
+                                   subdirectory:kTestDataSubdirectory];
+    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
+
     XCTAssertEqualObjects([plugin command], kTestPluginCommand, @"The WCLPlugin's command should match the test plugin command.");
     XCTAssertTrue([[plugin commandPath] hasPrefix:[plugin resourcePath]], @"The WCLPlugin's command path should begin with it's resource path.");
     XCTAssertTrue([[plugin commandPath] hasSuffix:[plugin command]], @"The WCLPlugin's command path should end with it's command.");
@@ -64,8 +68,8 @@
 - (void)testReadFromStandardInput
 {
     NSString *commandPath = [self wcl_pathForResource:kTestDataCat
-                                                     ofType:kTestDataShellScriptExtension
-                                               subdirectory:kTestDataSubdirectory];
+                                               ofType:kTestDataShellScriptExtension
+                                         subdirectory:kTestDataSubdirectory];
     NSTask *task;
     WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
@@ -221,8 +225,7 @@
     NSArray *tasks = [[WCLWebWindowsController sharedWebWindowsController] tasks];
     XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two NSTasks.");
 
-    [WCLTaskTestsHelper blockUntilTasksAreRunning:tasks];
-    [WCLTaskTestsHelper blockUntilTasksFinish:tasks];
+    [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
 }
 
 @end

@@ -104,4 +104,12 @@
     NSAssert(tasksFinished, @"The NSTasks should have finished.");
 }
 
+#pragma mark - Running & Finishing
+
++ (void)blockUntilTasksRunAndFinish:(NSArray *)tasks
+{
+    [WCLTaskTestsHelper blockUntilTasksAreRunning:tasks];
+    [WCLTaskTestsHelper blockUntilTasksFinish:tasks];
+}
+
 @end

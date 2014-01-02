@@ -15,9 +15,14 @@
 
 #pragma mark - Plugin
 
-#define kTestPluginName @"Search"
-#define kTestPluginCommand @"wcsearch/wcsearch.rb"
+#define kTestPluginName @"Print"
+#define kTestPluginCommand @"wcprint/wcprint.rb"
 #define kPluginCommandPathKey @"commandPath"
+
+#pragma mark - Window Sizes
+
+#define kTestWindowFrame NSMakeRect(158, 97, 303, 449)
+#define kTestWindowFrameTwo NSMakeRect(200, 200, 343, 409)
 
 
 #pragma mark - Test Data

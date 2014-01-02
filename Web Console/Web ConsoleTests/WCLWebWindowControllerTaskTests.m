@@ -8,6 +8,8 @@
 
 #import "WCLWebWindowControllerTestCase.h"
 
+#import "WCLWebWindowControllerTestsHelper.h"
+
 #import "WCLTaskTestsHelper.h"
 
 #import "WCLUserInterfaceTextHelper.h"
@@ -43,8 +45,7 @@
     XCTAssertEqual(webWindowController.plugin, plugin, @"The WCLWebWindowController's WCLPlugin should equal the WCLPlugin.");
     
     // Clean up
-    [WCLTaskTestsHelper blockUntilTasksAreRunning:webWindowController.tasks];
-    [WCLTaskTestsHelper blockUntilTasksFinish:webWindowController.tasks];
+    [WCLWebWindowControllerTestsHelper blockUntilWebWindowControllersTasksRunAndFinish:webWindowController];
 }
 
 
@@ -55,7 +56,10 @@
     NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:@[]];
     XCTAssertNil(informativeText, @"The informative text should be nil for an empty NSArray.");
     
-    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kTestPluginName];
+    NSURL *pluginURL = [self wcl_URLForResource:kTestPluginName
+                                  withExtension:kPlugInExtension
+                                   subdirectory:kTestDataSubdirectory];
+    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
     NSArray *commandPaths = @[[plugin commandPath]];
     informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
     [[self class] testInformativeText:informativeText forCommandPaths:commandPaths];

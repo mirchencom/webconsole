@@ -113,6 +113,7 @@
 		455B0C081771627A007B75DD /* WCLDoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLDoJavaScriptCommand.h; sourceTree = "<group>"; };
 		455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLDoJavaScriptCommand.m; sourceTree = "<group>"; };
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
+		4561C2271874C01700CF926D /* NSRectHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSRectHelpers.h; sourceTree = "<group>"; };
 		45709B1A18271237005F03E9 /* WCLPlugin+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WCLPlugin+Tests.h"; sourceTree = "<group>"; };
 		4574725617DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLApplicationTerminationHelper.h; sourceTree = "<group>"; };
 		4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLApplicationTerminationHelper.m; sourceTree = "<group>"; };
@@ -306,6 +307,7 @@
 				451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */,
 				451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */,
 				451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */,
+				4561C2271874C01700CF926D /* NSRectHelpers.h */,
 				45898BB11785325B00AE365A /* Data */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
 			);
