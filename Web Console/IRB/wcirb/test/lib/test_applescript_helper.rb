@@ -17,8 +17,10 @@ module TestHelper
       command = "osascript #{Shellwords.escape(script)}"
       if arguments
         arguments.each { |argument|
-          argument = argument.to_s
-          command = command + " " + Shellwords.escape(argument)
+          if argument
+            argument = argument.to_s
+            command = command + " " + Shellwords.escape(argument)
+          end
         }
       end
       return `#{command}`
