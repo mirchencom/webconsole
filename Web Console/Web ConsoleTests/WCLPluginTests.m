@@ -51,13 +51,20 @@
                                   withExtension:kPlugInExtension
                                    subdirectory:kTestDataSubdirectory];
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
-
+    
+    // Test Resource Path & URL
+    BOOL isDir;
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[plugin resourcePath] isDirectory:&isDir];
+    XCTAssertTrue(fileExists, @"A file should exist at the WCLPlugin's resource path.");
+    XCTAssertTrue(isDir, @"The WCLPlugin's resource path should be a directory.");
+    XCTAssertTrue([[plugin resourcePath] isEqualToString:[[plugin resourceURL] path]], @"The WCLPlugin's resource path should equal the path to its resource URL.");
+    
+    // Test Command
     XCTAssertEqualObjects([plugin command], kTestPluginCommand, @"The WCLPlugin's command should match the test plugin command.");
     XCTAssertTrue([[plugin commandPath] hasPrefix:[plugin resourcePath]], @"The WCLPlugin's command path should begin with it's resource path.");
     XCTAssertTrue([[plugin commandPath] hasSuffix:[plugin command]], @"The WCLPlugin's command path should end with it's command.");
 
-    BOOL isDir;
-    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[plugin commandPath] isDirectory:&isDir];
+    fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[plugin commandPath] isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the WCLPlugin's command path.");
     XCTAssertFalse(isDir, @"The WCLPlugin's command path should not be a directory.");
 }

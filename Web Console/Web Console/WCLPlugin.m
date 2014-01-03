@@ -67,6 +67,12 @@
     return [self.bundle resourcePath];
 }
 
+- (NSURL *)resourceURL
+{
+    return [self.bundle resourceURL];
+}
+
+
 - (NSString *)commandPath
 {
     NSString *command = [self command];

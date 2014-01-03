@@ -16,8 +16,8 @@
  */
 - (id)initWithPath:(NSString *)path;
 
-/*! Returns the name of the WCLPlugin.
- * \returns The name of the WCLPlugin.
+/*! Returns the receiver's name.
+ * \returns The receiver's name.
  */
 - (NSString *)name;
 
@@ -26,6 +26,16 @@
  * \param directoryPath The current directory for the receiver's command.
  */
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath;
+
+/*! Returns the full URL of the receiver’s resource directory.
+ * \returns The full URL of the receiver’s resource directory.
+ */
+- (NSURL *)resourceURL;
+
+/*! Returns the full pathname of the receiver’s resource directory.
+ * \returns The full pathname of the receiver’s resource directory.
+ */
+- (NSString *)resourcePath;
 
 #pragma mark - AppleScript
 - (void)handleRunScriptCommand:(NSScriptCommand *)command;
