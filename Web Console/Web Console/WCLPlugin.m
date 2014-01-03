@@ -128,7 +128,7 @@
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
     if (resourcePath) {
-        environmentDictionary[kEnvironmentVariablePluginDirectoryKey] = [self resourcePath];
+        environmentDictionary[kEnvironmentVariablePluginPathKey] = [self resourcePath];
     }
     
     // Web Window Controller
