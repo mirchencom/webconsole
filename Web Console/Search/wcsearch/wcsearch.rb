@@ -3,6 +3,10 @@
 require 'Shellwords'
 require 'webconsole'
 
+SHARED_RESOURCES_PATH = WebConsole::resource_path_for_plugin("Shared Resources")
+WEB_CONSOLE_CONSTANTS_FILE = File.join(SHARED_RESOURCES_PATH, "Shared/ruby/web_console_constants")
+require WEB_CONSOLE_CONSTANTS_FILE
+
 LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
 
 CONSTANTS_FILE = File.join(LIB_DIRECTORY, "constants")
@@ -19,7 +23,7 @@ require WINDOW_MANAGER_FILE
 
 
 # Window Manager
-window_id = ENV['WINDOWID']
+window_id = ENV[WINDOW_ID_KEY]
 window_manager = WcSearch::WindowManager.new(window_id)
 
 # Parser
