@@ -23,7 +23,6 @@
 - (NSString *)resourcePath;
 - (void)runCommandPath:(NSString *)commandPath
          withArguments:(NSArray *)arguments
-      withResourcePath:(NSString *)resourcePath
        inDirectoryPath:(NSString *)directoryPath;
 - (void)readFromStandardInput:(NSString *)text;
 @end
@@ -108,16 +107,14 @@
 {
     [self runCommandPath:[self commandPath]
            withArguments:arguments
-        withResourcePath:[self resourcePath]
          inDirectoryPath:directoryPath];
 }
 
 - (void)runCommandPath:(NSString *)commandPath
          withArguments:(NSArray *)arguments
-      withResourcePath:(NSString *)resourcePath
        inDirectoryPath:(NSString *)directoryPath
 {
-    DLog(@"runCommandPath:%@ withArguments:%@ withResourcePath:%@ inDirectoryPath:%@", commandPath, arguments, resourcePath, directoryPath);
+    DLog(@"runCommandPath:%@ withArguments:%@ inDirectoryPath:%@", commandPath, arguments, directoryPath);
     
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
@@ -131,9 +128,6 @@
     // Environment Dictionary
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
-    if (resourcePath) {
-        environmentDictionary[kEnvironmentVariablePluginPathKey] = [self resourcePath];
-    }
     
     // Web Window Controller
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];

@@ -38,7 +38,7 @@
 + (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
 {
     WCLPlugin *plugin = [[WCLPlugin alloc] init];
-    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");

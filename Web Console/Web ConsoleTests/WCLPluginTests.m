@@ -200,12 +200,12 @@
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
     WCLPlugin *plugin = [[WCLPlugin alloc] init];
-    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WCLWebWindowController.");
     WCLWebWindowController *firstWebWindowController = webWindowControllers[0];
 
-    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertEqual([webWindowControllers count], (NSUInteger)2, @"The WCLPlugin should have two WCLWebWindowControllers.");
     WCLWebWindowController *secondWebWindowController = webWindowControllers[1];

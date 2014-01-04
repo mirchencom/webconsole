@@ -119,7 +119,7 @@
     NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
-    [plugin runCommandPath:commandPath withArguments:nil withResourcePath:nil inDirectoryPath:nil];
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     
     NSMutableArray *webWindowControllers = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] mutableCopy];
     [webWindowControllers removeObjectsInArray:originalWebWindowControllers];
