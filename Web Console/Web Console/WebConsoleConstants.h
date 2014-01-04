@@ -16,7 +16,7 @@
 
 #define kEnvironmentVariablePathKey @"PATH"
 #define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";
-#define kEnvironmentVariableWindowIDKey @"WINDOWID"
+#define kEnvironmentVariableWindowIDKey @"WC_WINDOW_ID"
 #define kEnvironmentVariablePluginPathKey @"WC_PLUGIN_PATH"
 
 #define kTaskInterruptTimeout 1.0
