@@ -72,6 +72,10 @@
     return [self.bundle resourceURL];
 }
 
+- (NSString *)resourceURLString
+{
+    return [[self.bundle resourceURL] absoluteString];
+}
 
 - (NSString *)commandPath
 {

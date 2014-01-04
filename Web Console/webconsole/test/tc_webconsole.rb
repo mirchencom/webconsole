@@ -10,6 +10,43 @@ require WEBCONSOLE_FILE
 
 # WebConsole
 
+class TestWebConsoleProperties < Test::Unit::TestCase
+
+  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
+  HELLOWORLDPLUGIN_NAME = "HelloWorld"
+  def test_window_id
+    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
+    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    assert(WebConsole::plugin_has_windows(HELLOWORLDPLUGIN_NAME), "The plugin should have a window.")
+
+    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    window_manager = WebConsole::WindowManager.new(window_id)
+    window_manager.close
+
+    assert(!WebConsole::plugin_has_windows(HELLOWORLDPLUGIN_NAME), "The plugin should not have a window.")
+  end
+
+  SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
+  WEB_CONSOLE_CONSTANTS_PATH_COMPONENT = "Shared/ruby/web_console_constants.rb"
+  def test_resource_path
+    resource_path = WebConsole::resource_path_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
+    test_file = File.join(resource_path, WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
+    assert(File.file?(test_file), "The test file should exist.")
+  end
+  
+  require 'open-uri'
+  require 'net/http'
+  def test_resource_url
+    resource_url = WebConsole::resource_url_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
+    test_url = URI.join(resource_url, WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
+
+    # Ruby doesn't handle file URLs so convert the file URL to a path
+    # File URLs aren't supported by 'open-uri' but file paths are
+    test_file = URI.unescape(test_url.to_s.sub!(%r{^file://localhost}, ''))
+    assert(File.file?(test_file), "The test file should exist.")
+  end
+end
+
 class TestWebConsoleRunPlugin < Test::Unit::TestCase
 
   def teardown

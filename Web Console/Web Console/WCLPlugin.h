@@ -38,8 +38,8 @@
 - (NSString *)resourcePath;
 
 #pragma mark - AppleScript
+- (NSURL *)resourceURLString;
 - (void)handleRunScriptCommand:(NSScriptCommand *)command;
 - (void)handleReadFromStandardInputScriptCommand:(NSScriptCommand *)command;
 - (NSArray *)orderedWindows;
-
 @end

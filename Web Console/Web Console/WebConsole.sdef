@@ -250,7 +250,13 @@
 			<property name="name" code="pnam" type="text" access="r">
 				<cocoa key="name"/>
 			</property>
-			<element type="window" access="r">
+			<property name="resource path" code="rpth" type="text" access="r">
+				<cocoa key="resourcePath"/>
+			</property>
+			<property name="resource URL" code="rurl" type="text" access="r">
+				<cocoa key="resourceURLString"/>
+			</property>
+            <element type="window" access="r">
 				<cocoa key="orderedWindows"/>
 			</element>
             <responds-to command="read from standard input">
