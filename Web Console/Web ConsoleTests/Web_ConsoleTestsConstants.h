@@ -24,6 +24,9 @@
 #define kTestWindowFrame NSMakeRect(158, 97, 303, 449)
 #define kTestWindowFrameTwo NSMakeRect(200, 200, 343, 409)
 
+#pragma mark - Shared Resources
+
+#define kTestSharedResourcePathComponent @"ruby/web_console_constants.rb"
 
 #pragma mark - Test Data
 

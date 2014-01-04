@@ -11,6 +11,8 @@
 #import "WCLWebWindowsController.h"
 #import "WCLWebWindowController.h"
 
+#import "WCLPluginManager.h"
+
 #import "NSApplication+AppleScript.h"
 
 #define kPluginNameKey @"Name"
@@ -21,6 +23,8 @@
 - (NSString *)commandPath;
 - (NSString *)command;
 - (NSString *)resourcePath;
++ (NSURL *)sharedResourceURL;
++ (NSString *)sharedResourcePath;
 - (void)runCommandPath:(NSString *)commandPath
          withArguments:(NSArray *)arguments
        inDirectoryPath:(NSString *)directoryPath;
@@ -88,7 +92,8 @@
 
 #pragma mark - AppleScript
 
-- (NSScriptObjectSpecifier *)objectSpecifier {    
+- (NSScriptObjectSpecifier *)objectSpecifier
+{
     NSScriptClassDescription *containerClassDescription = (NSScriptClassDescription *)[NSScriptClassDescription classDescriptionForClass:[NSApp class]];
 	return [[NSNameSpecifier alloc] initWithContainerClassDescription:containerClassDescription
                                                    containerSpecifier:nil
@@ -96,8 +101,23 @@
                                                                  name:[self name]];
 }
 
-- (NSArray *)orderedWindows {
+- (NSArray *)orderedWindows
+{
     return [[WCLWebWindowsController sharedWebWindowsController] windowsForPlugin:self];
+}
+
+#pragma mark - Shared Resources
+
++ (NSString *)sharedResourcePath
+{
+    WCLPlugin *sharedResourcePlugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kSharedResourcesPluginName];
+    return [[sharedResourcePlugin resourcePath] stringByAppendingPathComponent:kSharedResourcesPathComponent];
+}
+
++ (NSURL *)sharedResourceURL
+{
+    WCLPlugin *sharedResourcePlugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kSharedResourcesPluginName];
+    return [[sharedResourcePlugin resourceURL] URLByAppendingPathComponent:kSharedResourcesPathComponent];
 }
 
 
@@ -128,6 +148,8 @@
     // Environment Dictionary
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
+    environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [WCLPlugin sharedResourcePath];
+    environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[WCLPlugin sharedResourceURL] absoluteString];
     
     // Web Window Controller
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];

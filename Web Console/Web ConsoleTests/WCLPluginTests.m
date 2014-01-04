@@ -26,6 +26,11 @@
 @interface WCLPluginTests : XCTestCase
 @end
 
+@interface WCLPlugin (WCLPluginTests)
++ (NSURL *)sharedResourceURL;
++ (NSString *)sharedResourcePath;
+@end
+
 
 @implementation WCLPluginTests
 
@@ -69,6 +74,19 @@
     XCTAssertFalse(isDir, @"The WCLPlugin's command path should not be a directory.");
 }
 
+- (void)testSharedResources
+{
+    NSString *testSharedResourcePath = [[WCLPlugin sharedResourcePath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
+    BOOL isDir;
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:testSharedResourcePath isDirectory:&isDir];
+    XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's path.");
+    XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");
+
+    NSURL *testSharedResourceURL = [[WCLPlugin sharedResourceURL] URLByAppendingPathComponent:kTestSharedResourcePathComponent];
+    fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[testSharedResourceURL path] isDirectory:&isDir];
+    XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's URL.");
+    XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");
+}
 
 #pragma mark - AppleScript
 
