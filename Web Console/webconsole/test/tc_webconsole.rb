@@ -33,12 +33,26 @@ class TestWebConsoleProperties < Test::Unit::TestCase
     test_file = File.join(resource_path, WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
     assert(File.file?(test_file), "The test file should exist.")
   end
+  SHARED_WEB_CONSOLE_CONSTANTS_PATH_COMPONENT = "ruby/web_console_constants.rb"
+  def test_shared_resources_path
+    resource_path = WebConsole::shared_resources_path
+    test_file = File.join(resource_path, SHARED_WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
+    assert(File.file?(test_file), "The test file should exist.")
+  end
   
   require 'open-uri'
-  require 'net/http'
   def test_resource_url
     resource_url = WebConsole::resource_url_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
     test_url = URI.join(resource_url, WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
+
+    # Ruby doesn't handle file URLs so convert the file URL to a path
+    # File URLs aren't supported by 'open-uri' but file paths are
+    test_file = URI.unescape(test_url.to_s.sub!(%r{^file://localhost}, ''))
+    assert(File.file?(test_file), "The test file should exist.")
+  end
+  def test_shared_resources_url
+    resource_url = WebConsole::shared_resources_url
+    test_url = URI.join(resource_url, SHARED_WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
 
     # Ruby doesn't handle file URLs so convert the file URL to a path
     # File URLs aren't supported by 'open-uri' but file paths are

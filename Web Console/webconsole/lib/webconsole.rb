@@ -44,12 +44,23 @@ module WebConsole
     result.chomp!
     return result
   end
+  SHARED_RESOURCES_PLUGIN_NAME = "Shared Resources"
+  SHARED_RESOURCES_PATH_COMPONENT = "Shared/"
+  def self.shared_resources_path
+    shared_resources_path = WebConsole::resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
+    return File.join(shared_resources_path, SHARED_RESOURCES_PATH_COMPONENT)
+  end
 
   RESOURCE_URL_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_url_for_plugin.scpt")
   def self.resource_url_for_plugin(name)
     result = self.run_applescript(RESOURCE_URL_FOR_PLUGIN_SCRIPT, [name])
     result.chomp!
     return result
+  end
+  require 'open-uri'
+  def self.shared_resources_url
+    shared_resources_url = WebConsole::resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
+    return URI.join(shared_resources_url, SHARED_RESOURCES_PATH_COMPONENT)
   end
 
 
