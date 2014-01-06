@@ -7,8 +7,7 @@ CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
 require CONTROLLER_FILE
 
 # Window Manager
-window_id = ENV[WC_WINDOW_ID_KEY]
-window_manager = WebConsole::WindowManager.new(window_id)
+window_manager = WebConsole::WindowManager.new
 BASE_PATH = File.expand_path(File.dirname(__FILE__))
 window_manager.base_url_path = BASE_PATH
 

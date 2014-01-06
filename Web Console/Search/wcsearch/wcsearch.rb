@@ -19,8 +19,7 @@ require WINDOW_MANAGER_FILE
 
 
 # Window Manager
-window_id = ENV[WC_WINDOW_ID_KEY]
-window_manager = WcSearch::WindowManager.new(window_id)
+window_manager = WcSearch::WindowManager.new
 
 # Parser
 controller = WcSearch::Controller.new(window_manager)

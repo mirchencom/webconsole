@@ -22,17 +22,17 @@ module WebConsole
     CSS_EXTENSION = ".css"
     CSS_PATH_COMPONENT = "css/"
     def shared_stylesheet_link_tag(resource)
-      uri = URI.join(self.shared_resources_url, CSS_PATH_COMPONENT, resource + CSS_EXTENSION)
+      uri = URI.join(shared_resources_url, CSS_PATH_COMPONENT, resource + CSS_EXTENSION)
       return "<link rel=\"stylesheet\" href=\"#{uri.to_s}\" />"
     end
     JS_EXTENSION = ".js"
     JS_PATH_COMPONENT = "js/"
     def shared_javascript_include_tag(resource)
-      uri = URI.join(self.shared_resources_url, JS_PATH_COMPONENT, resource + JS_EXTENSION)
+      uri = URI.join(shared_resources_url, JS_PATH_COMPONENT, resource + JS_EXTENSION)
       return "<script type=\"text/javascript\" src=\"#{uri.to_s}\"></script>"
     end
-
-    # private
+    
+    private
 
     def shared_resources_url
       if !@shared_resources_url

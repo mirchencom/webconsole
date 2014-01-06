@@ -9,8 +9,7 @@ WINDOW_MANAGER_FILE = File.join(File.dirname(__FILE__), "window_manager")
 require WINDOW_MANAGER_FILE
 
 # Window Manager
-window_id = ENV[WC_WINDOW_ID_KEY]
-window_manager = WcIRB::WindowManager.new(window_id)
+window_manager = WcIRB::WindowManager.new
 
 # Controller
 controller = WcIRB::Controller.new(window_manager)
