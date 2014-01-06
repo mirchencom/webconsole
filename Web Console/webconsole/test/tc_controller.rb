@@ -4,9 +4,13 @@ require "test/unit"
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
+require WEBCONSOLE_FILE
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WC_TEST_HELPER_FILE
 require CONTROLLER_FILE
 
-class TestWebConsoleProperties < Test::Unit::TestCase
+
+class TestWebConsoleController < Test::Unit::TestCase
 
   TESTJAVASCRIPTTEXTJQUERY_FILE = File.join(TEST_DATA_DIRECTORY, "textjquery.js")
   TESTJAVASCRIPTTEXT_FILE = File.join(TEST_DATA_DIRECTORY, "text.js")
@@ -27,12 +31,10 @@ class TestWebConsoleProperties < Test::Unit::TestCase
 
 
   def test_controller_with_environment_variable  
-    # Test that when the WC_SHARED_RESOURCES_URL_KEY environment variable is already set, that web console does not need to be launched in order to 
-    # Also make sure the delegate is nil so delegate methods don't launch 
-    # ENV[WC_SHARED_RESOURCES_URL_KEY] = WebConsole::shared_resources_url.to_s
-    # Quit web console
-    # Make sure delegate is nil
-    # Should not launch web console
+    ENV[WC_SHARED_RESOURCES_URL_KEY] = WebConsole::shared_resources_url.to_s
+    WebConsole::TestHelper::quit
+    controller = WebConsole::Controller.new(nil, TEST_TEMPLATE_FILE)
+    assert(!WebConsole::TestHelper::is_running, "Web Console should not be running.")
   end
 
 end

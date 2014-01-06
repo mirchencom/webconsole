@@ -28,6 +28,10 @@
 		45898BB21785325B00AE365A /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 45898BB11785325B00AE365A /* Data */; };
 		45898BB7178532EC00AE365A /* WCLPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB4178532EC00AE365A /* WCLPlugin.m */; };
 		45898BB8178532EC00AE365A /* WCLPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB6178532EC00AE365A /* WCLPluginManager.m */; };
+		458AD5C7187A36EB003EC5E4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
+		458AD5CD187A36EB003EC5E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 458AD5CB187A36EB003EC5E4 /* InfoPlist.strings */; };
+		458AD5D2187A3701003EC5E4 /* Shared Test Resources.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 458AD5C6187A36EB003EC5E4 /* Shared Test Resources.bundle */; };
+		458AD5D5187A37C1003EC5E4 /* Shared in Resources */ = {isa = PBXBuildFile; fileRef = 458AD5D3187A37BA003EC5E4 /* Shared */; };
 		4596C05C1792316B005FC51A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4596C0621792316B005FC51A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4596C0601792316B005FC51A /* InfoPlist.strings */; };
 		4596C06717923187005FC51A /* IRB.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4596C05B1792316B005FC51A /* IRB.bundle */; };
@@ -79,6 +83,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				458AD5D2187A3701003EC5E4 /* Shared Test Resources.bundle in CopyFiles */,
 				45EB848518764F8200205F73 /* Shared Resources.bundle in CopyFiles */,
 				45302A5B185430AF00AE50C6 /* Search.bundle in CopyFiles */,
 				4596C06717923187005FC51A /* IRB.bundle in CopyFiles */,
@@ -127,6 +132,11 @@
 		45898BB4178532EC00AE365A /* WCLPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPlugin.m; sourceTree = "<group>"; };
 		45898BB5178532EC00AE365A /* WCLPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPluginManager.h; sourceTree = "<group>"; };
 		45898BB6178532EC00AE365A /* WCLPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginManager.m; sourceTree = "<group>"; };
+		458AD5C6187A36EB003EC5E4 /* Shared Test Resources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Shared Test Resources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		458AD5CA187A36EB003EC5E4 /* Shared Test Resources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Shared Test Resources-Info.plist"; sourceTree = "<group>"; };
+		458AD5CC187A36EB003EC5E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		458AD5CE187A36EB003EC5E4 /* Shared Test Resources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shared Test Resources-Prefix.pch"; sourceTree = "<group>"; };
+		458AD5D3187A37BA003EC5E4 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shared; sourceTree = "<group>"; };
 		4596C05B1792316B005FC51A /* IRB.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRB.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		4596C05F1792316B005FC51A /* IRB-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRB-Info.plist"; sourceTree = "<group>"; };
 		4596C0611792316B005FC51A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -190,6 +200,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		458AD5C3187A36EB003EC5E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				458AD5C7187A36EB003EC5E4 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4596C0581792316B005FC51A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				45EB847B18764E1800205F73 /* Shared Resources */,
+				458AD5C8187A36EB003EC5E4 /* Shared Test Resources */,
 				4546484E1853C6C700147962 /* Search */,
 				4596C05D1792316B005FC51A /* IRB */,
 			);
@@ -238,6 +257,7 @@
 				4596C05B1792316B005FC51A /* IRB.bundle */,
 				4546484C1853C6C700147962 /* Search.bundle */,
 				45EB847918764E1700205F73 /* Shared Resources.bundle */,
+				458AD5C6187A36EB003EC5E4 /* Shared Test Resources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -362,6 +382,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		458AD5C8187A36EB003EC5E4 /* Shared Test Resources */ = {
+			isa = PBXGroup;
+			children = (
+				458AD5D3187A37BA003EC5E4 /* Shared */,
+				458AD5C9187A36EB003EC5E4 /* Supporting Files */,
+			);
+			path = "Shared Test Resources";
+			sourceTree = "<group>";
+		};
+		458AD5C9187A36EB003EC5E4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				458AD5CA187A36EB003EC5E4 /* Shared Test Resources-Info.plist */,
+				458AD5CB187A36EB003EC5E4 /* InfoPlist.strings */,
+				458AD5CE187A36EB003EC5E4 /* Shared Test Resources-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		4596C05D1792316B005FC51A /* IRB */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,6 +497,23 @@
 			productReference = 4546484C1853C6C700147962 /* Search.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		458AD5C5187A36EB003EC5E4 /* Shared Test Resources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 458AD5D1187A36EC003EC5E4 /* Build configuration list for PBXNativeTarget "Shared Test Resources" */;
+			buildPhases = (
+				458AD5C2187A36EB003EC5E4 /* Sources */,
+				458AD5C3187A36EB003EC5E4 /* Frameworks */,
+				458AD5C4187A36EB003EC5E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Shared Test Resources";
+			productName = "Shared Test Resources";
+			productReference = 458AD5C6187A36EB003EC5E4 /* Shared Test Resources.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		4596C05A1792316B005FC51A /* IRB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */;
@@ -524,6 +580,7 @@
 				4596C05A1792316B005FC51A /* IRB */,
 				4546484B1853C6C700147962 /* Search */,
 				45EB847818764E1700205F73 /* Shared Resources */,
+				458AD5C5187A36EB003EC5E4 /* Shared Test Resources */,
 			);
 		};
 /* End PBXProject section */
@@ -556,6 +613,15 @@
 			files = (
 				45302A5E1854317A00AE50C6 /* wcsearch in Resources */,
 				454648531853C6C700147962 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		458AD5C4187A36EB003EC5E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				458AD5CD187A36EB003EC5E4 /* InfoPlist.strings in Resources */,
+				458AD5D5187A37C1003EC5E4 /* Shared in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +704,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		458AD5C2187A36EB003EC5E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4596C0571792316B005FC51A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -699,6 +772,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				454648521853C6C700147962 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		458AD5CB187A36EB003EC5E4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				458AD5CC187A36EB003EC5E4 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -874,6 +955,49 @@
 			};
 			name = Release;
 		};
+		458AD5CF187A36EC003EC5E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shared Test Resources/Shared Test Resources-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Shared Test Resources/Shared Test Resources-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		458AD5D0187A36EC003EC5E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shared Test Resources/Shared Test Resources-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Shared Test Resources/Shared Test Resources-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		4596C0641792316B005FC51A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -982,6 +1106,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		458AD5D1187A36EC003EC5E4 /* Build configuration list for PBXNativeTarget "Shared Test Resources" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				458AD5CF187A36EC003EC5E4 /* Debug */,
+				458AD5D0187A36EC003EC5E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -998,6 +1131,7 @@
 				45EB848318764E1800205F73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -3,9 +3,10 @@
 require "test/unit"
 require 'webconsole'
 
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WC_TEST_HELPER_FILE
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
-require TEST_HELPER_FILE
 
 class TestQuit < Test::Unit::TestCase
 
@@ -15,8 +16,8 @@ class TestQuit < Test::Unit::TestCase
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
     WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
     sleep PAUSE_TIME # Give the plugin time to finish running
-    TestsHelper::quit
-    assert(!TestsHelper::is_running, "The application should not be running.")
+    WebConsole::TestHelper::quit
+    assert(!WebConsole::TestHelper::is_running, "The application should not be running.")
   end
 
 end
@@ -35,9 +36,9 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # TODO Assert that the process is running
 
     # Quit and confirm the dialog
-    TestsHelper::quit
-    TestsHelper::confirm_dialog
-    assert(!TestsHelper::is_running, "The application should not be running.")
+    WebConsole::TestHelper::quit
+    WebConsole::TestHelper::confirm_dialog
+    assert(!WebConsole::TestHelper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end
 
@@ -47,15 +48,15 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # TODO Assert that the process is running
 
     # Quit and cancel the dialog
-    TestsHelper::quit
-    TestsHelper::cancel_dialog
-    assert(TestsHelper::is_running, "The application should be running.")
+    WebConsole::TestHelper::quit
+    WebConsole::TestHelper::cancel_dialog
+    assert(WebConsole::TestHelper::is_running, "The application should be running.")
     # TODO Assert that the process is running
 
     # Quit and confirm the dialog
-    TestsHelper::quit
-    TestsHelper::confirm_dialog
-    assert(!TestsHelper::is_running, "The application should not be running.")
+    WebConsole::TestHelper::quit
+    WebConsole::TestHelper::confirm_dialog
+    assert(!WebConsole::TestHelper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end
 
@@ -65,19 +66,19 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # TODO Assert that the process is running
 
     # Quit and start another process
-    TestsHelper::quit
+    WebConsole::TestHelper::quit
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
 
     # Switch windows and confirm close
-    TestsHelper::switch_windows
-    TestsHelper::confirm_dialog
-    assert(TestsHelper::is_running, "The application should be running.")
+    WebConsole::TestHelper::switch_windows
+    WebConsole::TestHelper::confirm_dialog
+    assert(WebConsole::TestHelper::is_running, "The application should be running.")
     # TODO Assert that the process is running
   
     # Quit and confirm the dialog
-    TestsHelper::quit
-    TestsHelper::confirm_dialog
-    assert(!TestsHelper::is_running, "The application should not be running.")
+    WebConsole::TestHelper::quit
+    WebConsole::TestHelper::confirm_dialog
+    assert(!WebConsole::TestHelper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end
 
@@ -91,14 +92,14 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # TODO Assert that the process is running
 
     # Quit and start another process
-    TestsHelper::quit
+    WebConsole::TestHelper::quit
     WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
     sleep PAUSE_TIME # Give the plugin time to finish running    
 
     # Switch windows and confirm close
-    TestsHelper::switch_windows
-    TestsHelper::confirm_dialog
-    assert(!TestsHelper::is_running, "The application should be running.")
+    WebConsole::TestHelper::switch_windows
+    WebConsole::TestHelper::confirm_dialog
+    assert(!WebConsole::TestHelper::is_running, "The application should be running.")
     # TODO Assert that the process is not running  
   end
 

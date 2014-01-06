@@ -3,9 +3,10 @@
 require "test/unit"
 require 'webconsole'
 
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WC_TEST_HELPER_FILE
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
-require TEST_HELPER_FILE
 
 class TestQuitTimeout < Test::Unit::TestCase
 
@@ -23,16 +24,16 @@ class TestQuitTimeout < Test::Unit::TestCase
     # TODO Assert that the process is running
 
     # Quit and wait for the quit timout before confirming the dialog
-    TestsHelper::quit
+    WebConsole::TestHelper::quit
     sleep QUIT_TIMEOUT
-    TestsHelper::confirm_dialog
-    assert(TestsHelper::is_running, "The application should be running.")
+    WebConsole::TestHelper::confirm_dialog
+    assert(WebConsole::TestHelper::is_running, "The application should be running.")
     # TODO Assert that the process is running
 
     # Quit and confirm the dialog
-    TestsHelper::quit
+    WebConsole::TestHelper::quit
     # Don't need to confirm the dialog because the window is closed
-    assert(!TestsHelper::is_running, "The application should not be running.")
+    assert(!WebConsole::TestHelper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end
 

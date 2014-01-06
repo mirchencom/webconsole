@@ -52,6 +52,11 @@ module WebConsole
     shared_resources_path = WebConsole::resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
     return File.join(shared_resources_path, SHARED_RESOURCES_PATH_COMPONENT)
   end
+  SHARED_TEST_RESOURCES_PLUGIN_NAME = "Shared Test Resources"
+  def self.shared_test_resource(resource)
+    shared_test_resources_path = WebConsole::resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
+    return File.join(shared_test_resources_path, SHARED_RESOURCES_PATH_COMPONENT, resource)    
+  end
 
   RESOURCE_URL_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_url_for_plugin.scpt")
   def self.resource_url_for_plugin(name)
