@@ -4,10 +4,11 @@ require "test/unit"
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
-require WEBCONSOLE_FILE
+require CONSTANTS_FILE
+require WebConsole::CONTROLLER_FILE
+require WebConsole::WINDOW_MANAGER_FILE
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WC_TEST_HELPER_FILE
-require CONTROLLER_FILE
 
 
 class TestWebConsoleController < Test::Unit::TestCase

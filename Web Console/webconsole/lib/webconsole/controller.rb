@@ -1,9 +1,12 @@
 require 'erb'
-require 'webconsole'
 require 'open-uri'
 
 module WebConsole
   class Controller
+    WEBCONSOLE_CONSTANTS = File.join(File.dirname(__FILE__), "constants")
+    require WEBCONSOLE_CONSTANTS
+    require MODULE_FILE
+
     attr_reader :name
     def initialize(delegate = nil, erb_template_path = nil)
       @delegate = delegate

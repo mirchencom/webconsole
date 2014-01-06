@@ -9,6 +9,9 @@ Gem::Specification.new do |s|
   s.files = %w[
     lib/webconsole.rb
     lib/webconsole/constants.rb
+    lib/webconsole/controller.rb
+    lib/webconsole/module.rb
+    lib/webconsole/window_manager.rb
     lib/applescript/resource_path_for_plugin.scpt
     lib/applescript/resource_url_for_plugin.scpt
     lib/applescript/close_window.scpt

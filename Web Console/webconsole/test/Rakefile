@@ -1,4 +1,7 @@
 require 'shellwords'
+require 'webconsole'
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WC_TEST_HELPER_FILE
 
 task :default => ['webconsole:tests']
 
@@ -6,15 +9,23 @@ namespace :webconsole do
 
   task :tests => [:clean_up]
 
-  task :test_webconsole do
-    webconsole_gem_tests_file = File.join(File.dirname(__FILE__), "tc_webconsole.rb")
-    ruby Shellwords.escape(webconsole_gem_tests_file)
+  task :test_controller do
+    controller_tests_file = File.join(File.dirname(__FILE__), "tc_controller.rb")
+    ruby Shellwords.escape(controller_tests_file)
   end
 
-  task :clean_up => [:test_webconsole] do
-    data_directory = File.join(File.dirname(__FILE__), "data")
-    quit_applescript_file = File.join(data_directory, "quit.applescript")
-    sh "osascript #{Shellwords.escape(quit_applescript_file)}"
+  task :test_window_manager => [:test_controller] do
+    window_manager_tests_file = File.join(File.dirname(__FILE__), "tc_window_manager.rb")
+    ruby Shellwords.escape(window_manager_tests_file)
+  end
+
+  task :test_module => [:test_window_manager] do
+    module_tests_file = File.join(File.dirname(__FILE__), "tc_module.rb")
+    ruby Shellwords.escape(module_tests_file)
+  end
+
+  task :clean_up => [:test_module] do
+    WebConsole::TestHelper::quit
   end
 
 end
