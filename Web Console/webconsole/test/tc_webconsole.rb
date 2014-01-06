@@ -27,13 +27,13 @@ class TestWebConsoleProperties < Test::Unit::TestCase
   end
 
   SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
-  WEB_CONSOLE_CONSTANTS_PATH_COMPONENT = "Shared/ruby/web_console_constants.rb"
+  WEB_CONSOLE_CONSTANTS_PATH_COMPONENT = "Shared/js/zepto.js"
   def test_resource_path
     resource_path = WebConsole::resource_path_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
     test_file = File.join(resource_path, WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
     assert(File.file?(test_file), "The test file should exist.")
   end
-  SHARED_WEB_CONSOLE_CONSTANTS_PATH_COMPONENT = "ruby/web_console_constants.rb"
+  SHARED_WEB_CONSOLE_CONSTANTS_PATH_COMPONENT = "js/zepto.js"
   def test_shared_resources_path
     resource_path = WebConsole::shared_resources_path
     test_file = File.join(resource_path, SHARED_WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)

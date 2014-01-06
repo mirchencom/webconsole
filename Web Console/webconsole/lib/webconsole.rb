@@ -1,4 +1,6 @@
 require 'Shellwords'
+WC_WEBCONSOLE_CONSTANTS = File.join(File.dirname(__FILE__), "webconsole", "constants")
+require WC_WEBCONSOLE_CONSTANTS
 
 module WebConsole
   APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "applescript")

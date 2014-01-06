@@ -26,7 +26,7 @@
 
 #pragma mark - Shared Resources
 
-#define kTestSharedResourcePathComponent @"ruby/web_console_constants.rb"
+#define kTestSharedResourcePathComponent @"js/zepto.js"
 
 #pragma mark - Test Data
 
