@@ -1,4 +1,7 @@
 require 'shellwords'
+require 'webconsole'
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WC_TEST_HELPER_FILE
 
 task :default => ['wcirb:tests']
 
@@ -22,7 +25,6 @@ namespace :wcirb do
   end
 
   task :clean_up => [:test_wcirb] do
-    quit_applescript_file = File.join(File.dirname(__FILE__), "applescript", "quit.applescript")
-    sh "osascript #{Shellwords.escape(quit_applescript_file)}"
+    WebConsole::TestHelper::quit
   end
 end

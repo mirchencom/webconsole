@@ -5,7 +5,9 @@ require "webconsole"
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
-require TEST_APPLESCRIPT_HELPER_FILE
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WC_TEST_HELPER_FILE
+
 require TEST_PIPE_HELPER_FILE
 
 class TestWcIRB < Test::Unit::TestCase
@@ -20,7 +22,7 @@ class TestWcIRB < Test::Unit::TestCase
     bridge.write(test_text)
     bridge.close
 
-    window_id = TestHelper::AppleScriptHelper::window_id
+    window_id = WebConsole::TestHelper::window_id
     window_manager = WebConsole::WindowManager.new(window_id)
     javascript = File.read(LASTCODEJAVASCRIPT_FILE)
     result = window_manager.do_javascript(javascript)

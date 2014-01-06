@@ -2,13 +2,15 @@
 
 require "test/unit"
 require 'Shellwords'
+require 'webconsole'
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WC_TEST_HELPER_FILE
 
 require TEST_DATA_HELPER_FILE
 require TEST_DATA_PARSER_FILE
-require TEST_APPLESCRIPT_HELPER_FILE
 require TEST_JAVASCRIPT_HELPER_FILE
 require TEST_DATA_TESTER_FILE
 
@@ -21,7 +23,7 @@ class TestWcSearch < Test::Unit::TestCase
     command = "#{Shellwords.escape(WCSEARCH_FILE)} \"#{test_search_term}\" #{Shellwords.escape(test_data_directory)}"
     `#{command}`
 
-    window_id = TestHelper::AppleScriptHelper::window_id
+    window_id = WebConsole::TestHelper::window_id
     window_manager = WebConsole::WindowManager.new(window_id)
 
     files_json = TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)

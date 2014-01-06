@@ -15,6 +15,13 @@ module WebConsole
       sleep WC_TEST_PAUSE_TIME # Give dialog time
     end
 
+    WINDOWIDAPPLESCRIPT_FILE = File.join(WC_TEST_APPLESCRIPT_DIRECTORY, "window_id.applescript")
+    def self.window_id
+      result = self.run_applescript(WINDOWIDAPPLESCRIPT_FILE)
+      result.chomp!
+      return result      
+    end
+
     CANCELDIALOGAPPLESCRIPT_FILE = File.join(WC_TEST_APPLESCRIPT_DIRECTORY, "cancel_dialog.applescript")
     def self.cancel_dialog
       self.run_applescript(CANCELDIALOGAPPLESCRIPT_FILE)
