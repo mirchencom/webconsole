@@ -15,7 +15,7 @@ class TestQuit < Test::Unit::TestCase
   def test_quit_after_task_finishes
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
     WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
-    sleep PAUSE_TIME # Give the plugin time to finish running
+    sleep WC_TEST_PAUSE_TIME # Give the plugin time to finish running
     WebConsole::TestHelper::quit
     assert(!WebConsole::TestHelper::is_running, "The application should not be running.")
   end
@@ -94,7 +94,7 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # Quit and start another process
     WebConsole::TestHelper::quit
     WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
-    sleep PAUSE_TIME # Give the plugin time to finish running    
+    sleep WC_TEST_PAUSE_TIME # Give the plugin time to finish running    
 
     # Switch windows and confirm close
     WebConsole::TestHelper::switch_windows

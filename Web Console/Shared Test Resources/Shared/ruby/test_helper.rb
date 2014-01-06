@@ -12,13 +12,13 @@ module WebConsole
     CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(WC_TEST_APPLESCRIPT_DIRECTORY, "confirm_dialog.applescript")
     def self.confirm_dialog
       self.run_applescript(CONFIRMDIALOGAPPLESCRIPT_FILE)
-      sleep PAUSE_TIME # Give dialog time
+      sleep WC_TEST_PAUSE_TIME # Give dialog time
     end
 
     CANCELDIALOGAPPLESCRIPT_FILE = File.join(WC_TEST_APPLESCRIPT_DIRECTORY, "cancel_dialog.applescript")
     def self.cancel_dialog
       self.run_applescript(CANCELDIALOGAPPLESCRIPT_FILE)
-      sleep PAUSE_TIME # Give dialog time
+      sleep WC_TEST_PAUSE_TIME # Give dialog time
     end
 
     QUITAPPLESCRIPT_FILE = File.join(WC_TEST_APPLESCRIPT_DIRECTORY, "quit.applescript")

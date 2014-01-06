@@ -42,7 +42,7 @@ class TestResizing < Test::Unit::TestCase
 
     # Quit
     WebConsole::TestHelper::quit
-    sleep PAUSE_TIME
+    sleep WC_TEST_PAUSE_TIME
 
     # Open a new window, the new window's size should match the destination bounds
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
@@ -70,7 +70,7 @@ class TestResizing < Test::Unit::TestCase
     
     # Quit
     WebConsole::TestHelper::quit
-    sleep PAUSE_TIME
+    sleep WC_TEST_PAUSE_TIME
     
     # Open a window, the window's size should match destination bounds two
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)

@@ -4,9 +4,9 @@ require "test/unit"
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
-
-require TEST_HELPER_FILE
 require WEBCONSOLE_FILE
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WC_TEST_HELPER_FILE
 
 # WebConsole
 
@@ -97,7 +97,7 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     window_id = WebConsole::window_id_for_plugin(DATAPLUGIN_NAME)
     @window_manager = WebConsole::WindowManager.new(window_id)
 
-    sleep PAUSE_TIME # Give time for script to run
+    sleep WC_TEST_PAUSE_TIME # Give time for script to run
 
     path_result = @window_manager.do_javascript(%Q[valueForKey('#{PATH_KEY}');])
     arguments_result = @window_manager.do_javascript(%Q[valueForKey('#{ARGUMENTS_KEY}');])
@@ -123,14 +123,14 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
   
   def teardown
     @window_manager.close
-    TestsHelper::confirm_dialog
+    WebConsole::TestHelper::confirm_dialog
   end
 
   LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")
   def test_plugin_read_from_standard_input
     test_text = "This is a test string"
     WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text + "\n")
-    sleep PAUSE_TIME # Give read from standard input time to run
+    sleep WC_TEST_PAUSE_TIME # Give read from standard input time to run
 
     javascript = File.read(LASTCODEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
@@ -176,7 +176,7 @@ class TestWindowManagerDoJavaScript < Test::Unit::TestCase
   def test_do_javascript
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
-    expected = TestsHelper::run_javascript(javascript)
+    expected = WebConsole::TestHelper::run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
   end
 end
@@ -242,10 +242,10 @@ class TestTwoWindowManagers < Test::Unit::TestCase
   
   def teardown
     @window_manager_one.close
-    TestsHelper::confirm_dialog
+    WebConsole::TestHelper::confirm_dialog
   
     @window_manager_two.close
-    TestsHelper::confirm_dialog
+    WebConsole::TestHelper::confirm_dialog
   end
 
   LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")

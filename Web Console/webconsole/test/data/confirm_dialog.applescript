@@ -1,1 +1,0 @@
-tell application "Web Console" to activatedelay 0.5tell application "System Events" to keystroke return
