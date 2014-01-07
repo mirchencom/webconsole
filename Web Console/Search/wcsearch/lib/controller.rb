@@ -1,24 +1,18 @@
 require 'erb'
+require 'webconsole'
 
 module WcSearch
-  class Controller
+  class Controller < WebConsole::Controller
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "views")
     VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
 
     attr_writer :delegate
-    def initialize(delegate = nil)
-      @delegate = delegate
-
-      view_erb = ERB.new(File.new(VIEW_TEMPLATE).read, nil, '-')
-      html = view_erb.result
-      if @delegate
-        @delegate.load_html(html)
-      end
+    def initialize(delegate = nil)      
+      super(delegate, VIEW_TEMPLATE)
     end
 
     def added_file(file)
-      # Escape '
       file_path = file.file_path
       display_file_path = file.display_file_path
       file_path.javascript_escape!
