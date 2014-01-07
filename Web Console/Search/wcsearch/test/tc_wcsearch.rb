@@ -23,7 +23,7 @@ class TestWcSearch < Test::Unit::TestCase
     command = "#{Shellwords.escape(WCSEARCH_FILE)} \"#{test_search_term}\" #{Shellwords.escape(test_data_directory)}"
     `#{command}`
 
-    window_id = WebConsole::TestHelper::window_id
+    window_id = WebConsole::Tests::Helper::window_id
     window_manager = WebConsole::WindowManager.new(window_id)
 
     files_json = TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)

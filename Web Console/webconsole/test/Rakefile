@@ -25,7 +25,7 @@ namespace :webconsole do
   end
 
   task :clean_up => [:test_module] do
-    WebConsole::TestHelper::quit
+    WebConsole::Tests::Helper::quit
   end
 
 end

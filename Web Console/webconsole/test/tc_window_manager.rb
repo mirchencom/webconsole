@@ -43,7 +43,7 @@ class TestWindowManagerDoJavaScript < Test::Unit::TestCase
   def test_do_javascript
     javascript = File.read(SIMPLEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
-    expected = WebConsole::TestHelper::run_javascript(javascript)
+    expected = WebConsole::Tests::Helper::run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
   end
 end
@@ -109,10 +109,10 @@ class TestTwoWindowManagers < Test::Unit::TestCase
   
   def teardown
     @window_manager_one.close
-    WebConsole::TestHelper::confirm_dialog
+    WebConsole::Tests::Helper::confirm_dialog
   
     @window_manager_two.close
-    WebConsole::TestHelper::confirm_dialog
+    WebConsole::Tests::Helper::confirm_dialog
   end
 
   LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")

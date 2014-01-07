@@ -24,16 +24,16 @@ class TestQuitTimeout < Test::Unit::TestCase
     # TODO Assert that the process is running
 
     # Quit and wait for the quit timout before confirming the dialog
-    WebConsole::TestHelper::quit
+    WebConsole::Tests::Helper::quit
     sleep QUIT_TIMEOUT
-    WebConsole::TestHelper::confirm_dialog
-    assert(WebConsole::TestHelper::is_running, "The application should be running.")
+    WebConsole::Tests::Helper::confirm_dialog
+    assert(WebConsole::Tests::Helper::is_running, "The application should be running.")
     # TODO Assert that the process is running
 
     # Quit and confirm the dialog
-    WebConsole::TestHelper::quit
+    WebConsole::Tests::Helper::quit
     # Don't need to confirm the dialog because the window is closed
-    assert(!WebConsole::TestHelper::is_running, "The application should not be running.")
+    assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running
   end
 

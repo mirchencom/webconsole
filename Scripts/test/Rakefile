@@ -63,7 +63,7 @@ namespace :web_console do
   task :tests_long => [:test_web_console_long, :tests]
 
   task :clean_up => [:test_web_console_tasks, :test_web_console_resizing] do
-    WebConsole::TestHelper::quit
+    WebConsole::Tests::Helper::quit
   end
 
   task :test_web_console_tasks do

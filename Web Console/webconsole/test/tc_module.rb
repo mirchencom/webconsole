@@ -123,7 +123,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
   
   def teardown
     @window_manager.close
-    WebConsole::TestHelper::confirm_dialog
+    WebConsole::Tests::Helper::confirm_dialog
   end
 
   LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")

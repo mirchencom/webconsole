@@ -25,6 +25,6 @@ namespace :wcirb do
   end
 
   task :clean_up => [:test_wcirb] do
-    WebConsole::TestHelper::quit
+    WebConsole::Tests::Helper::quit
   end
 end

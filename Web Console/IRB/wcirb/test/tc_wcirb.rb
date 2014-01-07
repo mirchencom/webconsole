@@ -22,7 +22,7 @@ class TestWcIRB < Test::Unit::TestCase
     bridge.write(test_text)
     bridge.close
 
-    window_id = WebConsole::TestHelper::window_id
+    window_id = WebConsole::Tests::Helper::window_id
     window_manager = WebConsole::WindowManager.new(window_id)
     javascript = File.read(LASTCODEJAVASCRIPT_FILE)
     result = window_manager.do_javascript(javascript)
