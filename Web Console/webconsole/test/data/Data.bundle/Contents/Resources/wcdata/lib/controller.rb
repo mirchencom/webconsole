@@ -1,21 +1,13 @@
-require 'erb'
+require 'webconsole'
 
 module WcData
-  class Controller
+  class Controller < WebConsole::Controller
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
     VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
 
-    attr_writer :delegate
-    def initialize(delegate)
-      @delegate = delegate
-
-      view_erb = ERB.new(File.new(VIEW_TEMPLATE).read, nil, '-')
-      html = view_erb.result
-
-      if @delegate
-        @delegate.load_html(html)
-      end
+    def initialize(delegate = nil)      
+      super(delegate, VIEW_TEMPLATE)
     end
 
     def add_key_value(key, value)

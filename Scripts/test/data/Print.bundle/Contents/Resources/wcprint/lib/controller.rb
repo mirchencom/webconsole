@@ -1,19 +1,15 @@
-require 'erb'
+require 'webconsole'
 
 module WcPrint
-  class Controller
+  class Controller < WebConsole::Controller
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
     VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
 
-    attr_writer :delegate
-    def initialize(delegate)
-      @delegate = delegate
+    def initialize(delegate = nil)      
+      super(delegate, VIEW_TEMPLATE)
+    end
 
-      view_erb = ERB.new(File.new(VIEW_TEMPLATE).read, nil, '-')
-      html = view_erb.result
-      @delegate.load_html(html)
-    end  
     def parse_line(line)
       line.chomp!
       line.javascript_escape!
