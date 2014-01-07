@@ -1,0 +1,3 @@
+[submodule "Web Console/Shared Resources/Shared/js/bullets"]
+	path = Web Console/Shared Resources/Shared/js/bullets
+	url = git@github.com:robenkleene/bullets.git
