@@ -4,7 +4,7 @@ require "test/unit"
 require 'webconsole'
 
 require WebConsole::shared_test_resource("ruby/test_constants")
-require WC_TEST_HELPER_FILE
+require WebConsole::Tests::TEST_HELPER_FILE
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
 
@@ -15,7 +15,7 @@ class TestQuit < Test::Unit::TestCase
   def test_quit_after_task_finishes
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
     WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
-    sleep WC_TEST_PAUSE_TIME # Give the plugin time to finish running
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running
     WebConsole::Tests::Helper::quit
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
   end
@@ -94,7 +94,7 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # Quit and start another process
     WebConsole::Tests::Helper::quit
     WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
-    sleep WC_TEST_PAUSE_TIME # Give the plugin time to finish running    
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running    
 
     # Switch windows and confirm close
     WebConsole::Tests::Helper::switch_windows

@@ -44,8 +44,8 @@ module WebConsole
     private
     
     def window_id
-      if !@window_id && ENV.has_key?(WC_WINDOW_ID_KEY)
-        @window_id = ENV[WC_WINDOW_ID_KEY]
+      if !@window_id && ENV.has_key?(WINDOW_ID_KEY)
+        @window_id = ENV[WINDOW_ID_KEY]
       end
       return @window_id
     end

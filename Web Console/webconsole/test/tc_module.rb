@@ -8,7 +8,7 @@ require CONSTANTS_FILE
 require WebConsole::MODULE_FILE
 require WebConsole::WINDOW_MANAGER_FILE
 require WebConsole::shared_test_resource("ruby/test_constants")
-require WC_TEST_HELPER_FILE
+require WebConsole::Tests::TEST_HELPER_FILE
 
 class TestWebConsoleProperties < Test::Unit::TestCase
 
@@ -97,7 +97,7 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     window_id = WebConsole::window_id_for_plugin(DATAPLUGIN_NAME)
     @window_manager = WebConsole::WindowManager.new(window_id)
 
-    sleep WC_TEST_PAUSE_TIME # Give time for script to run
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give time for script to run
 
     path_result = @window_manager.do_javascript(%Q[valueForKey('#{PATH_KEY}');])
     arguments_result = @window_manager.do_javascript(%Q[valueForKey('#{ARGUMENTS_KEY}');])
@@ -130,7 +130,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
   def test_plugin_read_from_standard_input
     test_text = "This is a test string"
     WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text + "\n")
-    sleep WC_TEST_PAUSE_TIME # Give read from standard input time to run
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
 
     javascript = File.read(LASTCODEJAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)

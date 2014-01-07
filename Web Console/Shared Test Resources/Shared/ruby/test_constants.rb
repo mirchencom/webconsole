@@ -1,4 +1,7 @@
-WC_TEST_RUBY_DIRECTORY = File.dirname(__FILE__)
-WC_TEST_HELPER_FILE = File.join(WC_TEST_RUBY_DIRECTORY, "test_helper")
-WC_TEST_APPLESCRIPT_DIRECTORY = File.join(WC_TEST_RUBY_DIRECTORY, "..", "applescript")
-WC_TEST_PAUSE_TIME = 0.5
+module WebConsole
+  module Tests
+    TEST_RUBY_DIRECTORY = File.dirname(__FILE__)
+    TEST_HELPER_FILE = File.join(TEST_RUBY_DIRECTORY, "test_helper")
+    TEST_PAUSE_TIME = 0.5
+  end
+end

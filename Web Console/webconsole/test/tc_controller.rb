@@ -8,7 +8,7 @@ require CONSTANTS_FILE
 require WebConsole::CONTROLLER_FILE
 require WebConsole::WINDOW_MANAGER_FILE
 require WebConsole::shared_test_resource("ruby/test_constants")
-require WC_TEST_HELPER_FILE
+require WebConsole::Tests::TEST_HELPER_FILE
 
 
 class TestWebConsoleController < Test::Unit::TestCase
@@ -32,7 +32,7 @@ class TestWebConsoleController < Test::Unit::TestCase
 
 
   def test_controller_with_environment_variable  
-    ENV[WC_SHARED_RESOURCES_URL_KEY] = WebConsole::shared_resources_url.to_s
+    ENV[WebConsole::SHARED_RESOURCES_URL_KEY] = WebConsole::shared_resources_url.to_s
     WebConsole::Tests::Helper::quit
     controller = WebConsole::Controller.new(nil, TEST_TEMPLATE_FILE)
     assert(!WebConsole::Tests::Helper::is_running, "Web Console should not be running.")

@@ -1,7 +1,7 @@
 require 'shellwords'
 require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
-require WC_TEST_HELPER_FILE
+require WebConsole::Tests::TEST_HELPER_FILE
 
 task :default => ['wcsearch:tests']
 

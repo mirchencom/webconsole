@@ -36,7 +36,7 @@ module WebConsole
 
     def shared_resources_url
       if !@shared_resources_url
-        @shared_resources_url = ENV.has_key?(WC_SHARED_RESOURCES_URL_KEY)? ENV[WC_SHARED_RESOURCES_URL_KEY] : WebConsole::shared_resources_url
+        @shared_resources_url = ENV.has_key?(SHARED_RESOURCES_URL_KEY)? ENV[SHARED_RESOURCES_URL_KEY] : WebConsole::shared_resources_url
       end
       return @shared_resources_url
     end

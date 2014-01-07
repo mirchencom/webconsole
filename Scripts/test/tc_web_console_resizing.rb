@@ -4,7 +4,7 @@ require "test/unit"
 require 'webconsole'
 
 require WebConsole::shared_test_resource("ruby/test_constants")
-require WC_TEST_HELPER_FILE
+require WebConsole::Tests::TEST_HELPER_FILE
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
 
@@ -42,7 +42,7 @@ class TestResizing < Test::Unit::TestCase
 
     # Quit
     WebConsole::Tests::Helper::quit
-    sleep WC_TEST_PAUSE_TIME
+    sleep WebConsole::Tests::TEST_PAUSE_TIME
 
     # Open a new window, the new window's size should match the destination bounds
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
@@ -70,7 +70,7 @@ class TestResizing < Test::Unit::TestCase
     
     # Quit
     WebConsole::Tests::Helper::quit
-    sleep WC_TEST_PAUSE_TIME
+    sleep WebConsole::Tests::TEST_PAUSE_TIME
     
     # Open a window, the window's size should match destination bounds two
     WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)

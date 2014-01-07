@@ -8,7 +8,7 @@ require CONSTANTS_FILE
 require WebConsole::MODULE_FILE
 require WebConsole::WINDOW_MANAGER_FILE
 require WebConsole::shared_test_resource("ruby/test_constants")
-require WC_TEST_HELPER_FILE
+require WebConsole::Tests::TEST_HELPER_FILE
 
 class TestWindowManagerClose < Test::Unit::TestCase
 
