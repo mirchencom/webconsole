@@ -4,8 +4,8 @@
 	<meta charset="utf-8" />
 	<title>Search</title>
 	<%= shared_stylesheet_link_tag "raster" %>
+	<%= shared_stylesheet_link_tag "../js/bullets/example/css/bullets" %>
 	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="js/bullets/example/css/bullets.css">
 	<script id="file-template" type="text/x-handlebars-template">
 		<section>
 			<header>
@@ -19,12 +19,12 @@
 		<li><strong>{{number}}:</strong>{{{text}}}</li>
 	</script>
 	<script id="match-template" type="text/x-handlebars-template"><strong>{{text}}</strong></script>
-	<script type="text/javascript" src="js/handlebars.js"></script>
-	<script type="text/javascript" src="js/mousetrap.js"></script>
-	<script type="text/javascript" src="js/zepto.js"></script>
+	<%= shared_javascript_include_tag "handlebars" %>
+	<%= shared_javascript_include_tag "mousetrap" %>
+	<%= shared_javascript_include_tag "zepto" %>
 	<script type="text/javascript" src="js/wcsearch.js"></script>
-	<script type="text/javascript" src="js/bullets/bullets.js"></script>
-	<script type="text/javascript" src="js/bullets/example/js/mousetrap_config.js"></script>
+	<%= shared_javascript_include_tag "bullets/bullets" %>
+	<%= shared_javascript_include_tag "bullets/example/js/mousetrap_config" %>
 </head>
 <body>
 

@@ -3,13 +3,13 @@
 <head>
 	<meta charset="utf-8" />
 	<title>IRB</title>
-	<link rel="stylesheet" href="css/raster.css" />
+	<%= shared_stylesheet_link_tag "raster" %>
 	<link rel="stylesheet" href="css/style.css" />
 	<script id="output-template" type="text/x-handlebars-template">
 		<pre><code>{{output}}</code></pre>
 	</script>
-	<script type="text/javascript" src="js/handlebars.js"></script>
-	<script type="text/javascript" src="js/zepto.js"></script>
+	<%= shared_javascript_include_tag "handlebars" %>
+	<%= shared_javascript_include_tag "zepto" %>
 	<script type="text/javascript" src="js/wcirb.js"></script>
 </head>
 <body>

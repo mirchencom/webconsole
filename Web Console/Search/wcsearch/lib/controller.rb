@@ -1,4 +1,3 @@
-require 'erb'
 require 'webconsole'
 
 module WcSearch
@@ -7,7 +6,6 @@ module WcSearch
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "views")
     VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
 
-    attr_writer :delegate
     def initialize(delegate = nil)      
       super(delegate, VIEW_TEMPLATE)
     end
