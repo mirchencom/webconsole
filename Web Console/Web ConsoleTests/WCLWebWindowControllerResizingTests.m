@@ -28,9 +28,9 @@
 
 - (void)testResizingWindow
 {
-    NSURL *pluginURL = [self wcl_URLForResource:kTestPluginName
-                                  withExtension:kPlugInExtension
-                                   subdirectory:kTestDataSubdirectory];
+    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPluginName
+                                                    withExtension:kPlugInExtension
+                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
 
     // The plugin needs a name for saved frames to work

@@ -8,6 +8,11 @@
 
 #import "XCTest+BundleResources.h"
 
+#import "WCLPluginManager.h"
+#import "WCLPlugin.h"
+#define kSharedTestResourcesPluginName @"Shared Test Resources"
+#define kSharedTestResourcesPathComponent @"Shared"
+
 @implementation XCTestCase (BundleResources)
 
 - (NSString *)wcl_pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory
@@ -28,12 +33,24 @@
     return fileURL;
 }
 
-- (NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL {
+- (NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL
+{
     NSError *error;
     NSString *contents = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
     NSString *errorMessage = [NSString stringWithFormat:@"There should not be an NSError. %@", error];
     NSAssert(!error, errorMessage);
     return contents;
+}
+
++ (NSURL *)wcl_URLForSharedTestResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory
+{
+    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kSharedTestResourcesPluginName];
+    NSURL *resourceURL = [plugin resourceURL];
+    
+    return [[[[resourceURL URLByAppendingPathComponent:kSharedTestResourcesPathComponent]
+              URLByAppendingPathComponent:subdirectory]
+             URLByAppendingPathComponent:name]
+            URLByAppendingPathExtension:ext];
 }
 
 @end

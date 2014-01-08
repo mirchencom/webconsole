@@ -13,5 +13,6 @@
 - (NSString *)wcl_pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory;
 - (NSURL *)wcl_URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory;
 - (NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL;
++ (NSURL *)wcl_URLForSharedTestResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory;
 
 @end

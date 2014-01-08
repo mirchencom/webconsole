@@ -56,9 +56,9 @@
     NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:@[]];
     XCTAssertNil(informativeText, @"The informative text should be nil for an empty NSArray.");
     
-    NSURL *pluginURL = [self wcl_URLForResource:kTestPluginName
-                                  withExtension:kPlugInExtension
-                                   subdirectory:kTestDataSubdirectory];
+    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPluginName
+                                                    withExtension:kPlugInExtension
+                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
     NSArray *commandPaths = @[[plugin commandPath]];
     informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];

@@ -28,6 +28,10 @@
 
 #define kTestSharedResourcePathComponent @"js/zepto.js"
 
+#pragma mark - Shared Test Resources
+
+#define kSharedTestResourcesPluginSubdirectory @"plugin"
+
 #pragma mark - Test Data
 
 #define kTestDataSubdirectory @"Data"

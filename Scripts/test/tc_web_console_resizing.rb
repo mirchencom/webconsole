@@ -5,9 +5,6 @@ require 'webconsole'
 
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
-require TEST_CONSTANTS_FILE
-
 
 class TestResizing < Test::Unit::TestCase
   WINDOWBOUNDS = "120, 230, 700, 500"
