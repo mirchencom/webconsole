@@ -10,13 +10,11 @@ require TEST_CONSTANTS_FILE
 
 
 class TestResizing < Test::Unit::TestCase
-  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
-  HELLOWORLDPLUGIN_NAME = "HelloWorld"
   WINDOWBOUNDS = "120, 230, 700, 500"
   WINDOWBOUNDSTWO = "150, 200, 600, 600"
   def test_resizing
-    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     
     bounds = WebConsole::Tests::Helper::window_bounds
 
@@ -31,12 +29,12 @@ class TestResizing < Test::Unit::TestCase
     WebConsole::Tests::Helper::set_window_bounds(destination_bounds)
 
     # Close the window
-    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     window_manager = WebConsole::WindowManager.new(window_id)
     window_manager.close
 
     # Open a new window, the new window's size should match destination bounds
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     bounds = WebConsole::Tests::Helper::window_bounds
     assert(bounds.size_matches(destination_bounds), "The windows bounds should match the destination bounds.")
 
@@ -45,15 +43,15 @@ class TestResizing < Test::Unit::TestCase
     sleep WebConsole::Tests::TEST_PAUSE_TIME
 
     # Open a new window, the new window's size should match the destination bounds
-    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     bounds = WebConsole::Tests::Helper::window_bounds
     assert(bounds.size_matches(destination_bounds), "The windows bounds should match the destination bounds.")
         
     # Open a second window, the second window's size should match the destination bounds
-    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
-    window_id_two = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id_two = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     assert_not_equal(window_id, window_id_two, "The second window's identifier should not match the first window's identifier.")
     bounds = WebConsole::Tests::Helper::window_bounds(window_id_two)
     assert(bounds.size_matches(destination_bounds), "The windows bounds should match the destination bounds.")
@@ -62,8 +60,8 @@ class TestResizing < Test::Unit::TestCase
     WebConsole::Tests::Helper::set_window_bounds(destination_bounds_two)    
     
     # Open a third window, the third window's size should match destination bounds two
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
-    window_id_three = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id_three = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     assert_not_equal(window_id, window_id_two, "The third window's identifier should not match the second window's identifier.")    
     bounds = WebConsole::Tests::Helper::window_bounds(window_id_three)
     assert(bounds.size_matches(destination_bounds_two), "The third windows bounds should match the second destination bounds.")
@@ -73,13 +71,13 @@ class TestResizing < Test::Unit::TestCase
     sleep WebConsole::Tests::TEST_PAUSE_TIME
     
     # Open a window, the window's size should match destination bounds two
-    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     bounds = WebConsole::Tests::Helper::window_bounds
     assert(bounds.size_matches(destination_bounds_two), "The windows bounds should match the destination bounds.")
     
     # Cleanup
-    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     window_manager = WebConsole::WindowManager.new(window_id)
     window_manager.close
   end

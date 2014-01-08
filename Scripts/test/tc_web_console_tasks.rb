@@ -10,11 +10,9 @@ require TEST_CONSTANTS_FILE
 
 class TestQuit < Test::Unit::TestCase
 
-  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
-  HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_quit_after_task_finishes
-    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running
     WebConsole::Tests::Helper::quit
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
@@ -82,10 +80,8 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # TODO Assert that the process is not running
   end
 
-  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
-  HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_quit_confirming_after_starting_short_second_task
-    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
+    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
 
     # Start a task with a long running process
     WebConsole::run_plugin(PRINTPLUGIN_NAME)
@@ -93,7 +89,7 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
 
     # Quit and start another process
     WebConsole::Tests::Helper::quit
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running    
 
     # Switch windows and confirm close
