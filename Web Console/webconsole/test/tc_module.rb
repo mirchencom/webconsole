@@ -12,18 +12,16 @@ require WebConsole::Tests::TEST_HELPER_FILE
 
 class TestWebConsoleProperties < Test::Unit::TestCase
 
-  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
-  HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_window_id
-    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
-    assert(WebConsole::plugin_has_windows(HELLOWORLDPLUGIN_NAME), "The plugin should have a window.")
+    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    assert(WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should have a window.")
 
-    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     window_manager = WebConsole::WindowManager.new(window_id)
     window_manager.close
 
-    assert(!WebConsole::plugin_has_windows(HELLOWORLDPLUGIN_NAME), "The plugin should not have a window.")
+    assert(!WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should not have a window.")
   end
 
   SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
@@ -72,15 +70,13 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     @window_manager.close
   end
 
-  HELLOWORLDPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "HelloWorld.bundle")
-  HELLOWORLDPLUGIN_NAME = "HelloWorld"
   def test_run_plugin
-    WebConsole::load_plugin(HELLOWORLDPLUGIN_PATH)
-    WebConsole::run_plugin(HELLOWORLDPLUGIN_NAME)
-    assert(WebConsole::plugin_has_windows(HELLOWORLDPLUGIN_NAME), "The plugin should have a window.")
+    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    assert(WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should have a window.")
 
     # Clean up
-    window_id = WebConsole::window_id_for_plugin(HELLOWORLDPLUGIN_NAME)
+    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     @window_manager = WebConsole::WindowManager.new(window_id)
   end
 
