@@ -1,2 +1,0 @@
-TEST_LIB_DIRECTORY = File.dirname(__FILE__)
-TEST_DATA_DIRECTORY = File.join(TEST_LIB_DIRECTORY, "..", "data")

@@ -5,22 +5,18 @@ require 'webconsole'
 
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
-require TEST_CONSTANTS_FILE
 
 class TestQuitTimeout < Test::Unit::TestCase
 
   QUIT_TIMEOUT = 60.0
 
-  PRINTPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Print.bundle")
-  PRINTPLUGIN_NAME = "Print"
   def setup
-    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
   end
 
   def test_quit_timeout
     # Start a task with a long running process
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     # TODO Assert that the process is running
 
     # Quit and wait for the quit timout before confirming the dialog

@@ -5,8 +5,6 @@ require 'webconsole'
 
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
-require TEST_CONSTANTS_FILE
 
 class TestQuit < Test::Unit::TestCase
 
@@ -22,15 +20,13 @@ end
 
 class TestQuitWithRunningTask < Test::Unit::TestCase
 
-  PRINTPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Print.bundle")
-  PRINTPLUGIN_NAME = "Print"
   def setup
-    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
   end
 
   def test_quit_with_running_task
     # Start a task with a long running process
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     # TODO Assert that the process is running
 
     # Quit and confirm the dialog
@@ -42,7 +38,7 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
 
   def test_cancel_quit_with_running_task
     # Start a task with a long running process
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     # TODO Assert that the process is running
 
     # Quit and cancel the dialog
@@ -60,12 +56,12 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
 
   def test_quit_confirming_after_starting_second_task
     # Start a task with a long running process
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     # TODO Assert that the process is running
 
     # Quit and start another process
     WebConsole::Tests::Helper::quit
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
 
     # Switch windows and confirm close
     WebConsole::Tests::Helper::switch_windows
@@ -84,7 +80,7 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
 
     # Start a task with a long running process
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     # TODO Assert that the process is running
 
     # Quit and start another process

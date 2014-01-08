@@ -108,12 +108,10 @@ end
 
 class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
 
-  PRINTPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Print.bundle")
-  PRINTPLUGIN_NAME = "Print"
   def setup
-    WebConsole::load_plugin(PRINTPLUGIN_PATH)
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
-    window_id = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
+    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
+    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     @window_manager = WebConsole::WindowManager.new(window_id)
   end
   
@@ -125,7 +123,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
   LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")
   def test_plugin_read_from_standard_input
     test_text = "This is a test string"
-    WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text + "\n")
+    WebConsole::plugin_read_from_standard_input(WebConsole::Tests::PRINT_PLUGIN_NAME, test_text + "\n")
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
 
     javascript = File.read(LASTCODEJAVASCRIPT_FILE)

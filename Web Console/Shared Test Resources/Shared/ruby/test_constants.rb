@@ -7,5 +7,7 @@ module WebConsole
     TEST_PLUGIN_DIRECTORY = File.join(TEST_RUBY_DIRECTORY, "..", "plugin")
     HELLOWORLD_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, "HelloWorld.bundle")
     HELLOWORLD_PLUGIN_NAME = "HelloWorld"
+    PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, "Print.bundle")
+    PRINT_PLUGIN_NAME = "Print"
   end
 end

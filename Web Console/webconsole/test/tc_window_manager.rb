@@ -99,10 +99,8 @@ end
 # TODO The Web Console functionality for the below test doesn't exist yet. The Web Console API first needs to be able to target reading from standard input for a specific window manager before this test will be possible.
 
 class TestTwoWindowManagers < Test::Unit::TestCase
-  PRINTPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Print.bundle")
-  PRINTPLUGIN_NAME = "Print"
   def setup
-    WebConsole::load_plugin(PRINTPLUGIN_PATH)
+    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
   end
   
   def teardown
@@ -119,15 +117,15 @@ class TestTwoWindowManagers < Test::Unit::TestCase
     # test_text_two = "The second test string"
 
     # Window Manager One
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
-    window_id_one = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
+    window_id_one = WebConsole::window_id_for_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     @window_manager_one = WebConsole::WindowManager.new(window_id_one)
     # WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text_one + "\n")
     # sleep PAUSE_TIME # Give read from standard input time to run
 
     # Window Manager Two
-    WebConsole::run_plugin(PRINTPLUGIN_NAME)
-    window_id_two = WebConsole::window_id_for_plugin(PRINTPLUGIN_NAME)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
+    window_id_two = WebConsole::window_id_for_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     @window_manager_two = WebConsole::WindowManager.new(window_id_two)
     # WebConsole::plugin_read_from_standard_input(PRINTPLUGIN_NAME, test_text_two + "\n")
     # sleep PAUSE_TIME # Give read from standard input time to run
