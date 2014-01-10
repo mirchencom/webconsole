@@ -5,7 +5,7 @@ require File.join(File.dirname(__FILE__), "test_constants")
 module WebConsole
   module Tests
     module Helper
-      APPLESCRIPT_DIRECTORY = File.join(TEST_RUBY_DIRECTORY, "..", "applescript")
+      APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "..", "applescript")
 
       def self.run_javascript(javascript)
         return `node -e #{Shellwords.escape(javascript)}`

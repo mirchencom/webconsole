@@ -80,23 +80,19 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     @window_manager = WebConsole::WindowManager.new(window_id)
   end
 
-  DATAPLUGIN_PATH = File.join(TEST_DATA_DIRECTORY, "Data.bundle")
-  DATAPLUGIN_NAME = "Data"
-  PATH_KEY = "Path"
-  ARGUMENTS_KEY = "Arguments"
   def test_run_plugin_in_directory_with_arguments
     arguments = "1 2 3"    
     path = File.expand_path(TEST_DATA_DIRECTORY)
 
-    WebConsole::load_plugin(DATAPLUGIN_PATH)
-    WebConsole::run_plugin(DATAPLUGIN_NAME, path, arguments.split(" "))    
-    window_id = WebConsole::window_id_for_plugin(DATAPLUGIN_NAME)
+    WebConsole::load_plugin(DATA_PLUGIN_FILE)
+    WebConsole::run_plugin(DATA_PLUGIN_NAME, path, arguments.split(" "))    
+    window_id = WebConsole::window_id_for_plugin(DATA_PLUGIN_NAME)
     @window_manager = WebConsole::WindowManager.new(window_id)
 
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give time for script to run
 
-    path_result = @window_manager.do_javascript(%Q[valueForKey('#{PATH_KEY}');])
-    arguments_result = @window_manager.do_javascript(%Q[valueForKey('#{ARGUMENTS_KEY}');])
+    path_result = @window_manager.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
+    arguments_result = @window_manager.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])
     path_result.chomp!
     arguments_result.chomp!
 
@@ -120,13 +116,12 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
     WebConsole::Tests::Helper::confirm_dialog
   end
 
-  LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")
   def test_plugin_read_from_standard_input
     test_text = "This is a test string"
     WebConsole::plugin_read_from_standard_input(WebConsole::Tests::PRINT_PLUGIN_NAME, test_text + "\n")
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
 
-    javascript = File.read(LASTCODEJAVASCRIPT_FILE)
+    javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
     result.strip!
 

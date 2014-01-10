@@ -26,9 +26,8 @@ end
 
 class TestWindowManagerDoJavaScript < Test::Unit::TestCase
 
-  TESTHTML_FILE = File.join(TEST_DATA_DIRECTORY, "index.html")
   def setup
-    html = File.read(TESTHTML_FILE)
+    html = File.read(WebConsole::Tests::INDEX_HTML_FILE)
     @window_manager = WebConsole::WindowManager.new
     @window_manager.load_html(html)
   end
@@ -37,9 +36,8 @@ class TestWindowManagerDoJavaScript < Test::Unit::TestCase
     @window_manager.close
   end
 
-  SIMPLEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "nodom.js")
   def test_do_javascript
-    javascript = File.read(SIMPLEJAVASCRIPT_FILE)
+    javascript = File.read(WebConsole::Tests::NODOM_JAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
     expected = WebConsole::Tests::Helper::run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
@@ -55,13 +53,13 @@ class TestWindowManagerLoadHTML < Test::Unit::TestCase
     @window_manager.close
   end
 
-  TESTJAVASCRIPTBODY_FILE = File.join(TEST_DATA_DIRECTORY, "body.js")
   def test_load_html
     test_text = "This is a test string"
     html = "<html><body>" + test_text + "</body></html>"
     @window_manager.load_html(html)
 
-    javascript = File.read(TESTJAVASCRIPTBODY_FILE)
+
+    javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
 
     result.strip! # Remove line break
@@ -70,11 +68,10 @@ class TestWindowManagerLoadHTML < Test::Unit::TestCase
 end
 
 class TestWindowManagerLoadHTMLWithBaseURL < Test::Unit::TestCase
-  TESTHTMLJQUERY_FILE = File.join(TEST_DATA_DIRECTORY, "indexjquery.html")
   def setup
-    html = File.read(TESTHTMLJQUERY_FILE)
+    html = File.read(WebConsole::Tests::INDEXJQUERY_HTML_FILE)
     @window_manager = WebConsole::WindowManager.new
-    @window_manager.base_url_path = File.expand_path(File.dirname(TESTHTMLJQUERY_FILE))
+    @window_manager.base_url_path = File.join(WebConsole::shared_resources_path)
     @window_manager.load_html(html)
   end
 
@@ -82,13 +79,11 @@ class TestWindowManagerLoadHTMLWithBaseURL < Test::Unit::TestCase
     @window_manager.close
   end
 
-  TESTJAVASCRIPTTEXTJQUERY_FILE = File.join(TEST_DATA_DIRECTORY, "textjquery.js")
-  TESTJAVASCRIPTTEXT_FILE = File.join(TEST_DATA_DIRECTORY, "text.js")
   def test_load_with_base_url
-    javascript = File.read(TESTJAVASCRIPTTEXTJQUERY_FILE)
+    javascript = File.read(WebConsole::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
     result = @window_manager.do_javascript(javascript)
 
-    test_javascript = File.read(TESTJAVASCRIPTTEXT_FILE)
+    test_javascript = File.read(WebConsole::Tests::TEXT_JAVASCRIPT_FILE)
     expected = @window_manager.do_javascript(test_javascript)
 
     assert_equal(expected, result, "The result should equal expected result.")
@@ -111,7 +106,7 @@ class TestTwoWindowManagers < Test::Unit::TestCase
     WebConsole::Tests::Helper::confirm_dialog
   end
 
-  LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")
+  # LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")
   def test_two_window_managers
     # test_text_one = "The first test string"
     # test_text_two = "The second test string"

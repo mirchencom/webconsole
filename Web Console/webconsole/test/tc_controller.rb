@@ -13,18 +13,15 @@ require WebConsole::Tests::TEST_HELPER_FILE
 
 class TestWebConsoleController < Test::Unit::TestCase
 
-  TESTJAVASCRIPTTEXTJQUERY_FILE = File.join(TEST_DATA_DIRECTORY, "textjquery.js")
-  TESTJAVASCRIPTTEXT_FILE = File.join(TEST_DATA_DIRECTORY, "text.js")
-
   def test_controller
     window_manager = WebConsole::WindowManager.new
     controller = WebConsole::Controller.new(window_manager, TEST_TEMPLATE_FILE)
 
     # Testing jquery assures that `zepto.js` has been loaded correctly
-    javascript = File.read(TESTJAVASCRIPTTEXTJQUERY_FILE)
+    javascript = File.read(WebConsole::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
     result = window_manager.do_javascript(javascript)
 
-    test_javascript = File.read(TESTJAVASCRIPTTEXT_FILE)
+    test_javascript = File.read(WebConsole::Tests::TEXT_JAVASCRIPT_FILE)
     expected = window_manager.do_javascript(test_javascript)
 
     assert_equal(expected, result, "The result should equal expected result.")
