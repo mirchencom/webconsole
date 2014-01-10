@@ -3,17 +3,16 @@
 require "test/unit"
 require "webconsole"
 
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
-require TEST_CONSTANTS_FILE
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
+TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
+require TEST_CONSTANTS_FILE
 
 require TEST_PIPE_HELPER_FILE
 
 class TestWcIRB < Test::Unit::TestCase
 
   WCIRB_FILE = File.join(File.dirname(__FILE__), "..", 'wcirb.rb')
-  LASTCODEJAVASCRIPT_FILE = File.join(TEST_DATA_DIRECTORY, "lastcode.js")
   def test_wcirb
     test_text = "1 + 1\n"
     test_result = "2"
@@ -24,7 +23,7 @@ class TestWcIRB < Test::Unit::TestCase
 
     window_id = WebConsole::Tests::Helper::window_id
     window_manager = WebConsole::WindowManager.new(window_id)
-    javascript = File.read(LASTCODEJAVASCRIPT_FILE)
+    javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = window_manager.do_javascript(javascript)
     result.strip!
     

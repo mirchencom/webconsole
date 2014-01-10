@@ -7,4 +7,3 @@ BRIDGE_FILE = File.join(LIB_DIRECTORY, 'bridge.rb')
 # Test Lib
 TEST_LIB_DIRECTORY = File.dirname(__FILE__)
 TEST_PIPE_HELPER_FILE = File.join(TEST_LIB_DIRECTORY, "test_pipe_helper")
-TEST_DATA_DIRECTORY = File.join(TEST_LIB_DIRECTORY, "..", "data")
