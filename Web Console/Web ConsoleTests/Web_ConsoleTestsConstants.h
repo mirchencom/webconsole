@@ -31,6 +31,8 @@
 #pragma mark - Shared Test Resources
 
 #define kSharedTestResourcesPluginSubdirectory @"plugin"
+#define kSharedTestResourcesJavaScriptSubdirectory @"js"
+#define kSharedTestResourcesHTMLSubdirectory @"html"
 
 #pragma mark - Test Data
 
@@ -46,11 +48,8 @@
 #pragma mark - JavaScript
 #define kTestDataJavaScriptExtension @"js"
 #pragma mark JavaScript Resources
-#define kTestJavaScriptNoDOMFilename @"JavaScriptNoDOM"
-#define kTestJavaScriptBodyJQueryFilename @"JavaScriptBodyJQuery"
-#define kTestJavaScriptBodyFilename @"JavaScriptBody"
-#define kTestJavaScriptTextJQueryFilename @"JavaScriptTextJQuery"
-#define kTestJavaScriptTextFilename @"JavaScriptText"
+#define kTestJavaScriptTextJQueryFilename @"textjquery"
+#define kTestJavaScriptTextFilename @"text"
 
 
 #pragma mark - Ruby

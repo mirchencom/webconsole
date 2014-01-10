@@ -83,4 +83,17 @@
     return [self.nameToPluginDictionary allValues];
 }
 
+- (NSString *)sharedResourcePath
+{
+    WCLPlugin *sharedResourcePlugin = [self pluginWithName:kSharedResourcesPluginName];
+    return [[sharedResourcePlugin resourcePath] stringByAppendingPathComponent:kSharedResourcesPathComponent];
+}
+
+- (NSURL *)sharedResourceURL
+{
+    WCLPlugin *sharedResourcePlugin = [self pluginWithName:kSharedResourcesPluginName];
+    return [[sharedResourcePlugin resourceURL] URLByAppendingPathComponent:kSharedResourcesPathComponent];
+}
+
+
 @end

@@ -23,8 +23,6 @@
 - (NSString *)commandPath;
 - (NSString *)command;
 - (NSString *)resourcePath;
-+ (NSURL *)sharedResourceURL;
-+ (NSString *)sharedResourcePath;
 - (void)runCommandPath:(NSString *)commandPath
          withArguments:(NSArray *)arguments
        inDirectoryPath:(NSString *)directoryPath;
@@ -148,8 +146,8 @@
     // Environment Dictionary
     NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
-    environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [WCLPlugin sharedResourcePath];
-    environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[WCLPlugin sharedResourceURL] absoluteString];
+    environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
+    environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
     
     // Web Window Controller
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];

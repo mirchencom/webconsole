@@ -21,5 +21,8 @@
 @end
 
 @interface WCLWebWindowControllerTestCase : XCTestCase
-- (NSString *)stringWithContentsOfTestDataFilename:(NSString *)filename extension:(NSString *)extension;
+- (NSString *)stringWithContentsOfSharedTestResource:(NSString *)filename
+                                       withExtension:(NSString *)extension
+                                        subdirectory:(NSString *)subdirectory;
+- (NSURL *)sharedResourceBaseURL;
 @end

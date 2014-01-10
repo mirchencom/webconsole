@@ -7,6 +7,7 @@
 //
 
 #import "WCLWebWindowControllerTestCase.h"
+#import "WCLPluginManager.h"
 
 @interface WCLWebWindowControllerHTMLTests : WCLWebWindowControllerTestCase
 
@@ -17,11 +18,11 @@
 #pragma mark - HTML & JavaScript
 
 - (void)testLoadHTMLWithBaseURL {
-    NSURL *fileURL = [self wcl_URLForResource:kTestDataHTMLJQUERYFilename
-                                withExtension:kTestDataHTMLExtension
-                                 subdirectory:kTestDataSubdirectory];
+    NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:kTestDataHTMLJQUERYFilename
+                                                  withExtension:kTestDataHTMLExtension
+                                                   subdirectory:kSharedTestResourcesHTMLSubdirectory];
     NSString *HTML = [self wcl_stringWithContentsOfFileURL:fileURL];
-    NSURL *baseURL = [fileURL URLByDeletingLastPathComponent];
+    NSURL *baseURL = [[WCLPluginManager sharedPluginManager] sharedResourceURL];
     
     __block BOOL completionHandlerRan = NO;
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
@@ -38,12 +39,14 @@
 	
     XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
     
-    NSString *javaScript = [self stringWithContentsOfTestDataFilename:kTestJavaScriptTextJQueryFilename
-                                                            extension:kTestDataJavaScriptExtension];
+    NSString *javaScript = [self stringWithContentsOfSharedTestResource:kTestJavaScriptTextJQueryFilename
+                                                          withExtension:kTestDataJavaScriptExtension
+                                                           subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
     NSString *result = [webWindowController doJavaScript:javaScript];
     
-    NSString *testJavaScript = [self stringWithContentsOfTestDataFilename:kTestJavaScriptTextFilename
-                                                                extension:kTestDataJavaScriptExtension];
+    NSString *testJavaScript = [self stringWithContentsOfSharedTestResource:kTestJavaScriptTextFilename
+                                                          withExtension:kTestDataJavaScriptExtension
+                                                           subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
     NSString *expectedResult = [webWindowController doJavaScript:testJavaScript];
     
     // These tests fail, but it works in actual use. I assume it is failing because of complications
@@ -55,7 +58,9 @@
 
 - (void)testLoadHTMLTwice
 {
-    NSString *HTML = [self stringWithContentsOfTestDataFilename:kTestDataHTMLFilename extension:kTestDataHTMLExtension];
+    NSString *HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+                                                          withExtension:kTestDataHTMLExtension
+                                                           subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
     
@@ -83,7 +88,9 @@
 
 - (void)testLoadHTMLInSeparateWindows
 {
-    NSString *HTML = [self stringWithContentsOfTestDataFilename:kTestDataHTMLFilename extension:kTestDataHTMLExtension];
+    NSString *HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+                                                    withExtension:kTestDataHTMLExtension
+                                                     subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
     WCLWebWindowController *webWindowController1 = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
     __block BOOL firstCompletionHandlerRan = NO;
