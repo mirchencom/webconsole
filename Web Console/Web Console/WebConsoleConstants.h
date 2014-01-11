@@ -22,6 +22,8 @@
 #define kEnvironmentVariableWindowIDKey @"WC_WINDOW_ID"
 #define kEnvironmentVariableSharedResourcePathKey @"WC_SHARED_RESOURCE_PATH"
 #define kEnvironmentVariableSharedResourceURLKey @"WC_SHARED_RESOURCE_URL"
+#define kEnvironmentVariableEncodingKey @"LC_ALL" 
+#define kEnvironmentVariableEncodingValue @"en_US.UTF-8"
 
 #define kTaskInterruptTimeout 1.0
 #define kApplicationTerminationTimeout 60.0

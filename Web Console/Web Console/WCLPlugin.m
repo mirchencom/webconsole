@@ -148,6 +148,7 @@
     environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
     environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
     environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
+    environmentDictionary[kEnvironmentVariableEncodingKey] = kEnvironmentVariableEncodingValue; // Prevents choke on special characters
     
     // Web Window Controller
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
