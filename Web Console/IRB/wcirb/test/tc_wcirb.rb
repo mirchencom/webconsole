@@ -17,7 +17,7 @@ class TestWcIRB < Test::Unit::TestCase
     test_text = "1 + 1\n"
     test_result = "2"
     
-    bridge = TestHelper::PipeHelper.new(WCIRB_FILE)
+    bridge = WcIRB::Tests::PipeHelper.new(WCIRB_FILE)
     bridge.write(test_text)
     bridge.close
 

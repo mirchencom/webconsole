@@ -15,7 +15,7 @@ class TestBridge < Test::Unit::TestCase
   def test_controller
     test_text = "Some test text"
     
-    bridge = TestHelper::PipeHelper.new(BRIDGE_FILE)
+    bridge = WcIRB::Tests::PipeHelper.new(BRIDGE_FILE)
     bridge.write(test_text)
     bridge.close
 

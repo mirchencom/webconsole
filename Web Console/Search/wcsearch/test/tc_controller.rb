@@ -17,21 +17,21 @@ require WINDOW_MANAGER_FILE
 class TestController < Test::Unit::TestCase
 
   def test_controller
-    test_search_output = TestHelper::TestData::test_search_output
-    test_data_directory = TestHelper::TestData::test_data_directory
+    test_search_output = WcSearch::Tests::TestData::test_search_output
+    test_data_directory = WcSearch::Tests::TestData::test_data_directory
 
     window_manager = WcSearch::WindowManager.new
     controller = WcSearch::Controller.new(window_manager)
     parser = WcSearch::Parser.new(controller, test_data_directory)
     parser.parse(test_search_output)
 
-    files_json = TestHelper::JavaScriptHelper::files_hash_for_window_manager(window_manager)
-    files_hash = TestHelper::Parser::parse(files_json)
+    files_json = WcSearch::Tests::JavaScriptHelper::files_hash_for_window_manager(window_manager)
+    files_hash = WcSearch::Tests::Parser::parse(files_json)
 
-    test_data_json = TestHelper::TestData::test_data_json
-    test_files_hash = TestHelper::Parser::parse(test_data_json)
+    test_data_json = WcSearch::Tests::TestData::test_data_json
+    test_files_hash = WcSearch::Tests::Parser::parse(test_data_json)
 
-    file_hashes_match = TestHelper::TestDataTester::test_file_hashes(files_hash, test_files_hash)
+    file_hashes_match = WcSearch::Tests::TestDataTester::test_file_hashes(files_hash, test_files_hash)
     assert(file_hashes_match, "The file hashes should match.")
 
     window_manager.close

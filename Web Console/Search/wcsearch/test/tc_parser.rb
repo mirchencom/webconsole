@@ -14,17 +14,17 @@ require PARSER_FILE
 class TestParser < Test::Unit::TestCase
 
   def test_parser
-    test_search_output = TestHelper::TestData::test_search_output
-    test_data_directory = TestHelper::TestData::test_data_directory
+    test_search_output = WcSearch::Tests::TestData::test_search_output
+    test_data_directory = WcSearch::Tests::TestData::test_data_directory
     
     parser = WcSearch::Parser.new(nil, test_data_directory)
     parser.parse(test_search_output)
     files_hash = parser.files_hash
 
-    test_data_json = TestHelper::TestData::test_data_json
-    test_files_hash = TestHelper::Parser::parse(test_data_json)
+    test_data_json = WcSearch::Tests::TestData::test_data_json
+    test_files_hash = WcSearch::Tests::Parser::parse(test_data_json)
 
-    file_hashes_match = TestHelper::TestDataTester::test_file_hashes(files_hash, test_files_hash)
+    file_hashes_match = WcSearch::Tests::TestDataTester::test_file_hashes(files_hash, test_files_hash)
     assert(file_hashes_match, "The file hashes should match.")
   end
 end
