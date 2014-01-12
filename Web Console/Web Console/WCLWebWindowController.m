@@ -154,7 +154,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 #warning If performance becomes a concern, this should be dispatched to another queue
                 // Another task could have started while terminating the initial set of tasks
                 // so call again recursively
-                DLog(@"Calling terminateTasksAndCloseWindow recursively because there are still running tasks");
+                DLog(@"[Termination] Calling terminateTasksAndCloseWindow recursively because there are still running tasks");
                 [self terminateTasksAndCloseWindow];
             }
         });
@@ -193,26 +193,48 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     [listener use];
 }
 
-- (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
-    NSLog(@"type = %@", type);
-    
+- (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
+{
     [listener use];
 }
 
 #pragma mark - WebResourceLoadDelegate
 
-- (void)webView:(WebView *)sender resource:(id)identifier didFinishLoadingFromDataSource:(WebDataSource *)dataSource {
+- (void)webView:(WebView *)sender resource:(id)identifier didFinishLoadingFromDataSource:(WebDataSource *)dataSource
+{
     self.completionHandler(YES);
 }
 
-- (void)webView:(WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource {    
+- (void)webView:(WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource
+{
     self.completionHandler(NO);
 }
 
 #pragma mark - WebFrameLoadDelegate
 
-- (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame {
+- (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
+{
     [self.window setTitle:title];
+}
+
+#pragma mark - WCLPLuginTaskDelegate
+
+- (void)pluginTaskWillStart:(NSTask *)task
+{
+    [self.window setDocumentEdited:YES]; // Add edited dot in close button
+    [self.mutableTasks addObject:task];
+}
+
+- (void)pluginTaskDidFinish:(NSTask *)task
+{
+    [self.window setDocumentEdited:NO]; // Remove edited dot in close button
+    [self.mutableTasks removeObject:task];
+}
+
+- (NSNumber *)pluginTaskWindowNumber
+{
+    [self showWindow:nil];
+    return [NSNumber numberWithInteger:self.window.windowNumber];
 }
 
 #pragma mark - Tasks

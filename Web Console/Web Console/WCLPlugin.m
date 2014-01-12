@@ -15,6 +15,8 @@
 
 #import "NSApplication+AppleScript.h"
 
+#import "WCLPluginTask.h"
+
 #define kPluginNameKey @"Name"
 #define kPluginCommandKey @"Command"
 
@@ -27,10 +29,6 @@
          withArguments:(NSArray *)arguments
        inDirectoryPath:(NSString *)directoryPath;
 - (void)readFromStandardInput:(NSString *)text;
-@end
-
-@interface WCLWebWindowController (Plugin)
-@property (nonatomic, strong) NSMutableArray *mutableTasks;
 @end
 
 @implementation WCLPlugin
@@ -132,7 +130,7 @@
          withArguments:(NSArray *)arguments
        inDirectoryPath:(NSString *)directoryPath
 {
-    DLog(@"runCommandPath:%@ withArguments:%@ inDirectoryPath:%@", commandPath, arguments, directoryPath);
+    DLog(@"[Task] runCommandPath:%@ withArguments:%@ inDirectoryPath:%@", commandPath, arguments, directoryPath);
     
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:commandPath];
@@ -143,56 +141,8 @@
         [task setArguments:arguments];
     }   
     
-    // Environment Dictionary
-    NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
-    environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
-    environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
-    environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
-    environmentDictionary[kEnvironmentVariableEncodingKey] = kEnvironmentVariableEncodingValue; // Prevents choke on special characters
-    
-    // Web Window Controller
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
-    [webWindowController.mutableTasks addObject:task];
-
-    // Standard Output
-    task.standardOutput = [NSPipe pipe];
-    [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
-        NSData *data = [file availableData];
-        DLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    }];
-    
-    // Standard Error
-    task.standardError = [NSPipe pipe];
-    [[task.standardError fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
-        NSData *data = [file availableData];
-        DLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    }];
-    
-    // Standard Input
-    [task setStandardInput:[NSPipe pipe]];
-    
-    // Termination handler
-    [task setTerminationHandler:^(NSTask *task) {
-        DLog(@"Terminate %@", commandPath);
-        
-        // Standard Input, Output & Error
-        [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
-        [[task.standardError fileHandleForReading] setReadabilityHandler:nil];
-        
-        [webWindowController.mutableTasks removeObject:task];
-        
-        // As per NSTask.h, NSTaskDidTerminateNotification is not posted if a termination handler is set, so post it here.
-        [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
-    }];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [webWindowController showWindow:self];
-
-        // Setting the windowNumber in the enviornmentDictionary must happen after showing the window
-        environmentDictionary[kEnvironmentVariableWindowIDKey] = [NSNumber numberWithInteger:webWindowController.window.windowNumber];
-        [task setEnvironment:environmentDictionary];
-        [task launch];
-    });
+    [WCLPluginTask runTask:task delegate:webWindowController];
 }
 
 
@@ -220,7 +170,7 @@
 
 - (void)readFromStandardInput:(NSString *)text
 {
-    DLog(@"%@ readFromStandardInput: %@", self.name, text);
+    DLog(@"[AppleScript] %@ readFromStandardInput: %@", self.name, text);
     
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self];
     

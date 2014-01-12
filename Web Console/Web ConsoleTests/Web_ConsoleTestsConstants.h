@@ -21,8 +21,8 @@
 
 #pragma mark - Window Sizes
 
-#define kTestWindowFrame NSMakeRect(158, 97, 303, 449)
-#define kTestWindowFrameTwo NSMakeRect(200, 200, 343, 409)
+#define kTestWindowFrame NSMakeRect(158, 97, 425, 450)
+#define kTestWindowFrameTwo NSMakeRect(200, 200, 333, 388)
 
 #pragma mark - Shared Resources
 

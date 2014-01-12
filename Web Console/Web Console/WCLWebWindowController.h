@@ -10,11 +10,13 @@
 
 #import <WebKit/WebKit.h>
 
+#import "WCLPluginTask.h"
+
 @class WCLPlugin;
 
 extern NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification;
 
-@interface WCLWebWindowController : NSWindowController
+@interface WCLWebWindowController : NSWindowController <WCLPluginTaskDelegate>
 
 /*! Load the HTML in the WebViewController's WebView and executes a handler block when the request completes or fails.
  * \param HTML The HTML string to load.

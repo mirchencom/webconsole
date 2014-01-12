@@ -26,7 +26,7 @@
     for (NSTask *task in tasks) {
         [task wcl_interruptWithCompletionHandler:^(BOOL success) {
             if (!success) {
-                DLog(@"Failed to interrupt a task, trying terminate");
+                DLog(@"[Termination] Failed to interrupt a task, trying terminate");
                 [task wcl_terminateWithCompletionHandler:^(BOOL success) {
                     NSAssert(success, @"Terminating NSTasks should always succeed.");
                     [mutableTasks removeObject:task];

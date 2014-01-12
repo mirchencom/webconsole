@@ -20,6 +20,7 @@
 		4530B0EF1736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0F51736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
+		453AD8AF188235CC0039A3A9 /* WCLPluginTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */; };
 		4546484D1853C6C700147962 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		454648531853C6C700147962 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 454648511853C6C700147962 /* InfoPlist.strings */; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
@@ -114,6 +115,8 @@
 		4530B0F41736E2A6000A52E2 /* Web ConsoleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Web ConsoleTests-Info.plist"; sourceTree = "<group>"; };
 		4530B0F61736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		453AD8AD188235CC0039A3A9 /* WCLPluginTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPluginTask.h; sourceTree = "<group>"; };
+		453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginTask.m; sourceTree = "<group>"; };
 		4546484C1853C6C700147962 /* Search.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Search.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		454648501853C6C700147962 /* Search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Search-Info.plist"; sourceTree = "<group>"; };
 		454648521853C6C700147962 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -313,6 +316,8 @@
 				45ADD90D1739EA58008A6AE7 /* WebWindow.xib */,
 				455B0C0B177162F0007B75DD /* WebConsoleConstants.h */,
 				4530B0D61736E2A6000A52E2 /* Supporting Files */,
+				453AD8AD188235CC0039A3A9 /* WCLPluginTask.h */,
+				453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */,
 			);
 			path = "Web Console";
 			sourceTree = "<group>";
@@ -668,6 +673,7 @@
 			files = (
 				4530B0DC1736E2A6000A52E2 /* main.m in Sources */,
 				4530B0E31736E2A6000A52E2 /* WCLAppDelegate.m in Sources */,
+				453AD8AF188235CC0039A3A9 /* WCLPluginTask.m in Sources */,
 				45ADD90C1739E883008A6AE7 /* WCLWebWindowController.m in Sources */,
 				45ADD9111739F257008A6AE7 /* WCLWebWindowsController.m in Sources */,
 				455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */,
