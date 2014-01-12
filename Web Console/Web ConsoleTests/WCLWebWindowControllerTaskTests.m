@@ -202,4 +202,26 @@
     XCTAssertFalse([webWindowControllers count], @"The WCLPlugin should not have a WCLWebWindowController.");
 }
 
+- (void)testDocumentEditingWhileRunningTask
+{
+    if (!kRunLongTests) return;
+
+    NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
+                                               ofType:kTestDataRubyExtension
+                                         subdirectory:kTestDataSubdirectory];
+    NSTask *task;
+    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+                                                                                                                      task:&task];
+    XCTAssertTrue([webWindowController.window isDocumentEdited], @"The NSWindow should be edited while running a task");
+    [WCLWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
+    
+    [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
+    XCTAssertFalse([webWindowController.window isDocumentEdited], @"The NSWindow should not be edited after running a task");
+    
+    // Clean Up
+    [webWindowController.window performClose:self];
+    BOOL windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    XCTAssert(windowWillClose, @"The NSWindow should have closed.");
+}
+
 @end
