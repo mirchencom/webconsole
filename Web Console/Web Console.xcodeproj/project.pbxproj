@@ -33,6 +33,10 @@
 		458AD5CD187A36EB003EC5E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 458AD5CB187A36EB003EC5E4 /* InfoPlist.strings */; };
 		458AD5D2187A3701003EC5E4 /* Shared Test Resources.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 458AD5C6187A36EB003EC5E4 /* Shared Test Resources.bundle */; };
 		458AD5D5187A37C1003EC5E4 /* Shared in Resources */ = {isa = PBXBuildFile; fileRef = 458AD5D3187A37BA003EC5E4 /* Shared */; };
+		458B5EDE188B041B00991BD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
+		458B5EE4188B041B00991BD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 458B5EE2188B041B00991BD4 /* InfoPlist.strings */; };
+		458B5EE9188B048700991BD4 /* Markdown.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 458B5EDD188B041B00991BD4 /* Markdown.bundle */; };
+		458B5EEB188B049C00991BD4 /* wcmarkdown in Resources */ = {isa = PBXBuildFile; fileRef = 458B5EEA188B049C00991BD4 /* wcmarkdown */; };
 		4596C05C1792316B005FC51A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4596C0621792316B005FC51A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4596C0601792316B005FC51A /* InfoPlist.strings */; };
 		4596C06717923187005FC51A /* IRB.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4596C05B1792316B005FC51A /* IRB.bundle */; };
@@ -84,6 +88,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				458B5EE9188B048700991BD4 /* Markdown.bundle in CopyFiles */,
 				458AD5D2187A3701003EC5E4 /* Shared Test Resources.bundle in CopyFiles */,
 				45EB848518764F8200205F73 /* Shared Resources.bundle in CopyFiles */,
 				45302A5B185430AF00AE50C6 /* Search.bundle in CopyFiles */,
@@ -140,6 +145,11 @@
 		458AD5CC187A36EB003EC5E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		458AD5CE187A36EB003EC5E4 /* Shared Test Resources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shared Test Resources-Prefix.pch"; sourceTree = "<group>"; };
 		458AD5D3187A37BA003EC5E4 /* Shared */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shared; sourceTree = "<group>"; };
+		458B5EDD188B041B00991BD4 /* Markdown.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Markdown.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		458B5EE1188B041B00991BD4 /* Markdown-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Markdown-Info.plist"; sourceTree = "<group>"; };
+		458B5EE3188B041B00991BD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		458B5EE5188B041B00991BD4 /* Markdown-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Markdown-Prefix.pch"; sourceTree = "<group>"; };
+		458B5EEA188B049C00991BD4 /* wcmarkdown */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcmarkdown; sourceTree = "<group>"; };
 		4596C05B1792316B005FC51A /* IRB.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRB.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		4596C05F1792316B005FC51A /* IRB-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRB-Info.plist"; sourceTree = "<group>"; };
 		4596C0611792316B005FC51A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -211,6 +221,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		458B5EDA188B041B00991BD4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				458B5EDE188B041B00991BD4 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4596C0581792316B005FC51A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -237,6 +255,7 @@
 				458AD5C8187A36EB003EC5E4 /* Shared Test Resources */,
 				4546484E1853C6C700147962 /* Search */,
 				4596C05D1792316B005FC51A /* IRB */,
+				458B5EDF188B041B00991BD4 /* Markdown */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -261,6 +280,7 @@
 				4546484C1853C6C700147962 /* Search.bundle */,
 				45EB847918764E1700205F73 /* Shared Resources.bundle */,
 				458AD5C6187A36EB003EC5E4 /* Shared Test Resources.bundle */,
+				458B5EDD188B041B00991BD4 /* Markdown.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -406,6 +426,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		458B5EDF188B041B00991BD4 /* Markdown */ = {
+			isa = PBXGroup;
+			children = (
+				458B5EEA188B049C00991BD4 /* wcmarkdown */,
+				458B5EE0188B041B00991BD4 /* Supporting Files */,
+			);
+			path = Markdown;
+			sourceTree = "<group>";
+		};
+		458B5EE0188B041B00991BD4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				458B5EE1188B041B00991BD4 /* Markdown-Info.plist */,
+				458B5EE2188B041B00991BD4 /* InfoPlist.strings */,
+				458B5EE5188B041B00991BD4 /* Markdown-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		4596C05D1792316B005FC51A /* IRB */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,6 +558,23 @@
 			productReference = 458AD5C6187A36EB003EC5E4 /* Shared Test Resources.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		458B5EDC188B041B00991BD4 /* Markdown */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 458B5EE8188B041B00991BD4 /* Build configuration list for PBXNativeTarget "Markdown" */;
+			buildPhases = (
+				458B5ED9188B041B00991BD4 /* Sources */,
+				458B5EDA188B041B00991BD4 /* Frameworks */,
+				458B5EDB188B041B00991BD4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Markdown;
+			productName = Markdown;
+			productReference = 458B5EDD188B041B00991BD4 /* Markdown.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		4596C05A1792316B005FC51A /* IRB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */;
@@ -584,6 +640,7 @@
 				4530B0EB1736E2A6000A52E2 /* Web ConsoleTests */,
 				4596C05A1792316B005FC51A /* IRB */,
 				4546484B1853C6C700147962 /* Search */,
+				458B5EDC188B041B00991BD4 /* Markdown */,
 				45EB847818764E1700205F73 /* Shared Resources */,
 				458AD5C5187A36EB003EC5E4 /* Shared Test Resources */,
 			);
@@ -600,6 +657,7 @@
 				4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */,
 				45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */,
 				45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */,
+				458B5EEB188B049C00991BD4 /* wcmarkdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +685,14 @@
 			files = (
 				458AD5CD187A36EB003EC5E4 /* InfoPlist.strings in Resources */,
 				458AD5D5187A37C1003EC5E4 /* Shared in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		458B5EDB188B041B00991BD4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				458B5EE4188B041B00991BD4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,6 +783,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		458B5ED9188B041B00991BD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4596C0571792316B005FC51A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -786,6 +859,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				458AD5CC187A36EB003EC5E4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		458B5EE2188B041B00991BD4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				458B5EE3188B041B00991BD4 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1004,6 +1085,49 @@
 			};
 			name = Release;
 		};
+		458B5EE6188B041B00991BD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Markdown/Markdown-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Markdown/Markdown-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		458B5EE7188B041B00991BD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Markdown/Markdown-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Markdown/Markdown-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		4596C0641792316B005FC51A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1120,6 +1244,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		458B5EE8188B041B00991BD4 /* Build configuration list for PBXNativeTarget "Markdown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				458B5EE6188B041B00991BD4 /* Debug */,
+				458B5EE7188B041B00991BD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */ = {
 			isa = XCConfigurationList;
