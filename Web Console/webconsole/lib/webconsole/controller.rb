@@ -43,7 +43,7 @@ module WebConsole
 
     class ::String
       def javascript_escape
-        self.gsub('\\', "\\\\\\\\").gsub("'", "\\\\'")
+        self.gsub('\\', "\\\\\\\\").gsub("\n", "\\\\\n").gsub("'", "\\\\'")
       end
 
       def javascript_escape!
