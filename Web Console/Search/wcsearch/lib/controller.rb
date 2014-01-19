@@ -43,18 +43,6 @@ addLine(#{line.number}, '#{text}', matches);
         @delegate.do_javascript(javascript)
       end
     end
-
-    private
-
-    class ::String
-      def javascript_escape
-        self.gsub('\\', "\\\\\\\\").gsub("'", "\\\\'")
-      end
-
-      def javascript_escape!
-        replace(self.javascript_escape)
-      end
-    end
     
   end
 end

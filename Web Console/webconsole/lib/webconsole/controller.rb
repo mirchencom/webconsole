@@ -40,5 +40,16 @@ module WebConsole
       end
       return @shared_resources_url
     end
+
+    class ::String
+      def javascript_escape
+        self.gsub('\\', "\\\\\\\\").gsub("'", "\\\\'")
+      end
+
+      def javascript_escape!
+        replace(self.javascript_escape)
+      end
+    end
+
   end
 end
