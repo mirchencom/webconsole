@@ -19,9 +19,35 @@ module WcMarkdown
     end    
 
     def markdown=(markdown)
-      puts @renderer.render(markdown)
-      
-      # TODO execute JavaScript to replace body with ruby
+      @html = @renderer.render(markdown)
+      # @html.strip!
+
+javascript = "replaceContent('#{@html.javascript_escape}');"
+
+# Doesn't work
+#       javascript = %Q[replaceContent('blah blah
+#         blah bha
+# ');]
+
+# javascript = javascript.gsub("\n", "\\\\\n")
+
+
+# Works?
+      # javascript = %Q[replaceContent('blah blah');]
+
+      if @delegate
+        @delegate.do_javascript(javascript)
+      end
+    end
+
+    class ::String
+      def javascript_escape
+        self.gsub('\\', "\\\\\\\\").gsub("\n", "\\\\\n").gsub("'", "\\\\'")
+      end
+
+      def javascript_escape!
+        replace(self.javascript_escape)
+      end
     end
 
   end

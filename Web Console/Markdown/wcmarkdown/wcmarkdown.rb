@@ -8,13 +8,17 @@ LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
 CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
 require CONTROLLER_FILE
 
+WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, "window_manager")
+require WINDOW_MANAGER_FILE
+
+
 if !ARGV.empty?
   file = ARGF.file
 end
 
 markdown = ARGF.read
 
-window_manager = WebConsole::WindowManager.new
+window_manager = WcMarkdown::WindowManager.new
 controller = WcMarkdown::Controller.new(window_manager, markdown)
 
 exit if !file
