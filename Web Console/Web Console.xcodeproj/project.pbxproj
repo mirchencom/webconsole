@@ -36,7 +36,6 @@
 		458B5EDE188B041B00991BD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		458B5EE4188B041B00991BD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 458B5EE2188B041B00991BD4 /* InfoPlist.strings */; };
 		458B5EE9188B048700991BD4 /* Markdown.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 458B5EDD188B041B00991BD4 /* Markdown.bundle */; };
-		458B5EEB188B049C00991BD4 /* wcmarkdown in Resources */ = {isa = PBXBuildFile; fileRef = 458B5EEA188B049C00991BD4 /* wcmarkdown */; };
 		4596C05C1792316B005FC51A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4596C0621792316B005FC51A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4596C0601792316B005FC51A /* InfoPlist.strings */; };
 		4596C06717923187005FC51A /* IRB.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4596C05B1792316B005FC51A /* IRB.bundle */; };
@@ -60,6 +59,7 @@
 		45EB848018764E1800205F73 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45EB847E18764E1800205F73 /* InfoPlist.strings */; };
 		45EB848518764F8200205F73 /* Shared Resources.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45EB847918764E1700205F73 /* Shared Resources.bundle */; };
 		45EB84871876502D00205F73 /* Shared in Resources */ = {isa = PBXBuildFile; fileRef = 45EB84861876502D00205F73 /* Shared */; };
+		45EBC3F0188C7E3800928729 /* wcmarkdown in Resources */ = {isa = PBXBuildFile; fileRef = 458B5EEA188B049C00991BD4 /* wcmarkdown */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -657,7 +657,6 @@
 				4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */,
 				45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */,
 				45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */,
-				458B5EEB188B049C00991BD4 /* wcmarkdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,6 +692,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				458B5EE4188B041B00991BD4 /* InfoPlist.strings in Resources */,
+				45EBC3F0188C7E3800928729 /* wcmarkdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1252,6 +1252,7 @@
 				458B5EE7188B041B00991BD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */ = {
 			isa = XCConfigurationList;

@@ -28,11 +28,13 @@ module WcMarkdown
 
     def markdown=(markdown)
       @html = @renderer.render(markdown)
+
       javascript = "replaceContent('#{@html.javascript_escape}');"
 
       if @delegate
         @delegate.do_javascript(javascript)
       end
     end
+
   end
 end

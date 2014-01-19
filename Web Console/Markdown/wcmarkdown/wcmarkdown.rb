@@ -11,7 +11,6 @@ require CONTROLLER_FILE
 WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, "window_manager")
 require WINDOW_MANAGER_FILE
 
-
 if !ARGV.empty?
   file = ARGF.file
 end
