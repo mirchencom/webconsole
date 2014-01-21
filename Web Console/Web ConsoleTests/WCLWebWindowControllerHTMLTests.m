@@ -58,6 +58,51 @@
 
 - (void)testLoadHTMLTwice
 {
+    WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    
+    NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:kTestDataHTMLFilename
+                                                  withExtension:kTestDataHTMLExtension
+                                                   subdirectory:kSharedTestResourcesHTMLSubdirectory];
+    NSURL *baseURL = [fileURL URLByDeletingLastPathComponent];
+    
+    NSString *HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+                                                    withExtension:kTestDataHTMLExtension
+                                                     subdirectory:kSharedTestResourcesHTMLSubdirectory];
+    __block BOOL firstCompletionHandlerRan = NO;
+    [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
+        firstCompletionHandlerRan = YES;
+        XCTAssertTrue(success, @"The first load should have succeeded.");
+    }];
+    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while ([loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+        if (firstCompletionHandlerRan) break;
+    }
+    XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
+    XCTAssertTrue([webWindowController.window.title isEqualToString:kTestDataHTMLTitle], @"The NSWindow's title should equal the test HTML title.");
+    
+    HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLJQUERYFilename
+                                          withExtension:kTestDataHTMLExtension
+                                           subdirectory:kSharedTestResourcesHTMLSubdirectory];
+    __block BOOL secondCompletionHandlerRan = NO;
+    [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
+        secondCompletionHandlerRan = YES;
+        XCTAssertTrue(success, @"The second load should have succeeded.");
+    }];
+    
+    loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
+    while ([loopUntil timeIntervalSinceNow] > 0) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
+        if (secondCompletionHandlerRan) break;
+    }
+
+    XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
+    XCTAssertTrue([webWindowController.window.title isEqualToString:kTestDataHTMLJQUERYTitle], @"The NSWindow's title should equal the test HTML title.");
+}
+
+
+- (void)testLoadHTMLTwiceWithoutWaiting
+{
     NSString *HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
                                                           withExtension:kTestDataHTMLExtension
                                                            subdirectory:kSharedTestResourcesHTMLSubdirectory];

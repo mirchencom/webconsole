@@ -20,7 +20,8 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 @interface WCLWebWindowController () <NSWindowDelegate>
 @property (weak) IBOutlet WebView *webView;
-@property (nonatomic, strong) void (^completionHandler)(BOOL success);
+@property (nonatomic, strong) void (^storedCompletionHandler)(BOOL success);
+@property (nonatomic, strong) NSMutableDictionary *requestToCompletionHandlerDictionary;
 - (void)terminateTasksAndCloseWindow;
 - (void)saveWindowFrame;
 - (NSString *)windowFrameName;
@@ -40,6 +41,17 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     return self;
 }
 
+#pragma mark - Properties
+
+- (NSMutableDictionary *)requestToCompletionHandlerDictionary
+{
+    if (_requestToCompletionHandlerDictionary) return _requestToCompletionHandlerDictionary;
+    
+    _requestToCompletionHandlerDictionary = [NSMutableDictionary dictionary];
+    
+    return _requestToCompletionHandlerDictionary;
+}
+
 #pragma mark - AppleScript
 
 - (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL))completionHandler {
@@ -54,10 +66,11 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
         // will not work, such as terminating the running process when the window closes.
         [self showWindow:self]; // If showWindow is not before loadHTMLString, then failure completion handler will not fire.
     }
-
-    [self.webView.mainFrame loadHTMLString:HTML baseURL:baseURL];
     
-    self.completionHandler = completionHandler;
+    // Store the completion handler in a property just until we can map it to a request.
+    self.storedCompletionHandler = completionHandler;
+    
+    [self.webView.mainFrame loadHTMLString:HTML baseURL:baseURL];
 }
 
 - (NSString *)doJavaScript:(NSString *)javaScript {
@@ -166,8 +179,11 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
     NSURL *URL = [request URL];
 
-    if (![webView mainFrameURL]) {
+    if (![webView mainFrameURL] ||
+        self.storedCompletionHandler) {
         // Always allow the first URL to load
+        // If the storedCompletionHandler is not nil, that means a load HTML is being called.
+        // Checking if it it's not nil allows a second load HTML with a file URL to be called without the file URL being processed separately.
         [listener use];
         return;
     }
@@ -200,14 +216,32 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 #pragma mark - WebResourceLoadDelegate
 
+- (id)webView:(WebView *)sender identifierForInitialRequest:(NSURLRequest *)request fromDataSource:(WebDataSource *)dataSource
+{
+    if (self.storedCompletionHandler) {
+        self.requestToCompletionHandlerDictionary[request] = self.storedCompletionHandler;
+        self.storedCompletionHandler = nil;
+    }
+    
+    return request;
+}
+
 - (void)webView:(WebView *)sender resource:(id)identifier didFinishLoadingFromDataSource:(WebDataSource *)dataSource
 {
-    self.completionHandler(YES);
+    void (^completionHandler)(BOOL success) = self.requestToCompletionHandlerDictionary[identifier];
+    if (completionHandler) {
+        completionHandler(YES);
+        [self.requestToCompletionHandlerDictionary removeObjectForKey:identifier];
+    }
 }
 
 - (void)webView:(WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource
 {
-    self.completionHandler(NO);
+    void (^completionHandler)(BOOL success) = self.requestToCompletionHandlerDictionary[identifier];
+    if (completionHandler) {
+        completionHandler(NO);
+        [self.requestToCompletionHandlerDictionary removeObjectForKey:identifier];
+    }
 }
 
 #pragma mark - WebFrameLoadDelegate

@@ -42,8 +42,9 @@
 #define kTestDataHTMLExtension @"html"
 #pragma mark HTML Resources
 #define kTestDataHTMLFilename @"index"
+#define kTestDataHTMLTitle @"Index"
 #define kTestDataHTMLJQUERYFilename @"indexjquery"
-
+#define kTestDataHTMLJQUERYTitle @"Index JQuery"
 
 #pragma mark - JavaScript
 #define kTestDataJavaScriptExtension @"js"
