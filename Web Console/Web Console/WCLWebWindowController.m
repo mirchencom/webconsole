@@ -176,7 +176,15 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 #pragma mark - WebPolicyDelegate
 
-- (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener {
+- (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource
+{
+#warning This disables all local caching of resources. This was added to get the HTML plugin to be able to easily refresh updated resources, but a more elegant solution that preserves caching in most cases might be preferable.
+    request = [NSURLRequest requestWithURL:[request URL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[request timeoutInterval]];
+    return request;
+}
+
+- (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
+{
     NSURL *URL = [request URL];
 
     if (![webView mainFrameURL] ||

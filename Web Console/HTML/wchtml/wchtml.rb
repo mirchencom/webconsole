@@ -27,7 +27,6 @@ window_manager.base_url_path = path
 controller = WcHTML::Controller.new(window_manager, html)
 
 listener = Listen.to(path, only: /(\.html$)|(\.css$)|(\.js$)/) { |modified, added, removed| 
-  puts "got here"
   File.open(file) { |f| 
     controller.html = f.read
   }
