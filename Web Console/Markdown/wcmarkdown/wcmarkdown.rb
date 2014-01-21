@@ -30,7 +30,9 @@ path = File.expand_path(File.dirname(file))
 
 listener = Listen.to(path, only: /^#{Regexp.quote(filename)}$/) { |modified, added, removed| 
   file = File.open(modified[0])
-  controller.markdown = file.read
+  File.open(file) { |f| 
+    controller.markdown = f.read
+  }
 }
 
 listener.start

@@ -26,9 +26,11 @@ window_manager = WebConsole::WindowManager.new
 window_manager.base_url_path = path
 controller = WcHTML::Controller.new(window_manager, html)
 
-listener = Listen.to(path, only: /^#{Regexp.quote(filename)}$/) { |modified, added, removed| 
-  file = File.open(modified[0])
-  controller.html = file.read
+listener = Listen.to(path, only: /(\.html$)|(\.css$)|(\.js$)/) { |modified, added, removed| 
+  puts "got here"
+  File.open(file) { |f| 
+    controller.html = f.read
+  }
 }
 
 listener.start
