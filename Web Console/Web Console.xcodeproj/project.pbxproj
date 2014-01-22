@@ -36,6 +36,10 @@
 		458B5EDE188B041B00991BD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		458B5EE4188B041B00991BD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 458B5EE2188B041B00991BD4 /* InfoPlist.strings */; };
 		458B5EE9188B048700991BD4 /* Markdown.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 458B5EDD188B041B00991BD4 /* Markdown.bundle */; };
+		45952CAE188F67210023E462 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
+		45952CB4188F67210023E462 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45952CB2188F67210023E462 /* InfoPlist.strings */; };
+		45952CBA188F68390023E462 /* wccoffee in Resources */ = {isa = PBXBuildFile; fileRef = 45952CB9188F68390023E462 /* wccoffee */; };
+		45952CBB188F684B0023E462 /* Coffee.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45952CAD188F67210023E462 /* Coffee.bundle */; };
 		4596C05C1792316B005FC51A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4596C0621792316B005FC51A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4596C0601792316B005FC51A /* InfoPlist.strings */; };
 		4596C06717923187005FC51A /* IRB.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4596C05B1792316B005FC51A /* IRB.bundle */; };
@@ -96,6 +100,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				45952CBB188F684B0023E462 /* Coffee.bundle in CopyFiles */,
 				45E0EAD4188DF39400A917B4 /* HTML.bundle in CopyFiles */,
 				45A42B3C188DB15A0073082D /* Git.bundle in CopyFiles */,
 				458B5EE9188B048700991BD4 /* Markdown.bundle in CopyFiles */,
@@ -160,6 +165,11 @@
 		458B5EE3188B041B00991BD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		458B5EE5188B041B00991BD4 /* Markdown-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Markdown-Prefix.pch"; sourceTree = "<group>"; };
 		458B5EEA188B049C00991BD4 /* wcmarkdown */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcmarkdown; sourceTree = "<group>"; };
+		45952CAD188F67210023E462 /* Coffee.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Coffee.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		45952CB1188F67210023E462 /* Coffee-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Coffee-Info.plist"; sourceTree = "<group>"; };
+		45952CB3188F67210023E462 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45952CB5188F67210023E462 /* Coffee-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Coffee-Prefix.pch"; sourceTree = "<group>"; };
+		45952CB9188F68390023E462 /* wccoffee */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wccoffee; sourceTree = "<group>"; };
 		4596C05B1792316B005FC51A /* IRB.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRB.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		4596C05F1792316B005FC51A /* IRB-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRB-Info.plist"; sourceTree = "<group>"; };
 		4596C0611792316B005FC51A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -249,6 +259,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45952CAA188F67210023E462 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45952CAE188F67210023E462 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4596C0581792316B005FC51A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -294,6 +312,7 @@
 				458B5EDF188B041B00991BD4 /* Markdown */,
 				45A42B32188DB0A60073082D /* Git */,
 				45E0EAC8188DF32700A917B4 /* HTML */,
+				45952CAF188F67210023E462 /* Coffee */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -321,6 +340,7 @@
 				458B5EDD188B041B00991BD4 /* Markdown.bundle */,
 				45A42B30188DB0A60073082D /* Git.bundle */,
 				45E0EAC6188DF32700A917B4 /* HTML.bundle */,
+				45952CAD188F67210023E462 /* Coffee.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -481,6 +501,25 @@
 				458B5EE1188B041B00991BD4 /* Markdown-Info.plist */,
 				458B5EE2188B041B00991BD4 /* InfoPlist.strings */,
 				458B5EE5188B041B00991BD4 /* Markdown-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		45952CAF188F67210023E462 /* Coffee */ = {
+			isa = PBXGroup;
+			children = (
+				45952CB9188F68390023E462 /* wccoffee */,
+				45952CB0188F67210023E462 /* Supporting Files */,
+			);
+			path = Coffee;
+			sourceTree = "<group>";
+		};
+		45952CB0188F67210023E462 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				45952CB1188F67210023E462 /* Coffee-Info.plist */,
+				45952CB2188F67210023E462 /* InfoPlist.strings */,
+				45952CB5188F67210023E462 /* Coffee-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -653,6 +692,23 @@
 			productReference = 458B5EDD188B041B00991BD4 /* Markdown.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		45952CAC188F67210023E462 /* Coffee */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45952CB8188F67210023E462 /* Build configuration list for PBXNativeTarget "Coffee" */;
+			buildPhases = (
+				45952CA9188F67210023E462 /* Sources */,
+				45952CAA188F67210023E462 /* Frameworks */,
+				45952CAB188F67210023E462 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Coffee;
+			productName = Coffee;
+			productReference = 45952CAD188F67210023E462 /* Coffee.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		4596C05A1792316B005FC51A /* IRB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */;
@@ -757,6 +813,7 @@
 				458AD5C5187A36EB003EC5E4 /* Shared Test Resources */,
 				45A42B2F188DB0A60073082D /* Git */,
 				45E0EAC5188DF32700A917B4 /* HTML */,
+				45952CAC188F67210023E462 /* Coffee */,
 			);
 		};
 /* End PBXProject section */
@@ -807,6 +864,15 @@
 			files = (
 				458B5EE4188B041B00991BD4 /* InfoPlist.strings in Resources */,
 				45EBC3F0188C7E3800928729 /* wcmarkdown in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45952CAB188F67210023E462 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45952CBA188F68390023E462 /* wccoffee in Resources */,
+				45952CB4188F67210023E462 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -922,6 +988,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45952CA9188F67210023E462 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4596C0571792316B005FC51A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1013,6 +1086,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				458B5EE3188B041B00991BD4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		45952CB2188F67210023E462 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45952CB3188F67210023E462 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1290,6 +1371,49 @@
 			};
 			name = Release;
 		};
+		45952CB6188F67210023E462 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Coffee/Coffee-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Coffee/Coffee-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		45952CB7188F67210023E462 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Coffee/Coffee-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Coffee/Coffee-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		4596C0641792316B005FC51A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1502,6 +1626,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		45952CB8188F67210023E462 /* Build configuration list for PBXNativeTarget "Coffee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45952CB6188F67210023E462 /* Debug */,
+				45952CB7188F67210023E462 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1527,6 +1659,7 @@
 				45E0EAD0188DF32700A917B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45EB848418764E1800205F73 /* Build configuration list for PBXNativeTarget "Shared Resources" */ = {
 			isa = XCConfigurationList;
