@@ -18,7 +18,7 @@
 #define kSharedResourcesPathComponent @"Shared"
 
 #define kEnvironmentVariablePathKey @"PATH"
-#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";
 #define kEnvironmentVariableWindowIDKey @"WC_WINDOW_ID"
 #define kEnvironmentVariableSharedResourcePathKey @"WC_SHARED_RESOURCE_PATH"
 #define kEnvironmentVariableSharedResourceURLKey @"WC_SHARED_RESOURCE_URL"
