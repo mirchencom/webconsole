@@ -1,5 +1,5 @@
-function addCode(code) {
-	var source   = $("#output-template").html();
+function addCode(code, source) {
+
 	var template = Handlebars.compile(source);
 	var data = { 
 		code: code
@@ -12,5 +12,15 @@ function addCode(code) {
 		  hljs.highlightBlock(e);
 	  });
 	});
+}
+
+function addInput(code) {
+	var source = $("#input-template").html();
+	addCode(code, source);
+}
+
+function addOutput(code) {
+	var source = $("#output-template").html();
+	addCode(code, source);
 }
 
