@@ -13,5 +13,5 @@ window_manager = WebConsole::WindowManager.new
 controller = WcCoffee::OutputController.new(window_manager)
 
 ARGF.each do |line|
-  controller.parse_line(line)
+  controller.parse_output(line)
 end

@@ -6,5 +6,9 @@ module WcCoffee
     def initialize(delegate = nil)      
       @delegate = delegate
     end
+
+    def parse_output(output)
+      add_code(output)
+    end
   end
 end

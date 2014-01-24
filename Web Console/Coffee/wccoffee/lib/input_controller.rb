@@ -11,5 +11,10 @@ module WcCoffee
       super(delegate, VIEW_TEMPLATE)
     end
 
+    def parse_input(input)
+      input = input.dup
+      input.gsub!("\uFF00","\n")
+      add_code(input)
+    end
   end
 end

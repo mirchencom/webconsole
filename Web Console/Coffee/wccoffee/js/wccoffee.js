@@ -1,8 +1,8 @@
-function addOutput(output) {
+function addCode(code) {
 	var source   = $("#output-template").html();
 	var template = Handlebars.compile(source);
 	var data = { 
-		output: output
+		code: code
 	};
 	$(template(data)).appendTo("body");
 }

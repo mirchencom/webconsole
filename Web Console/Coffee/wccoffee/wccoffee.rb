@@ -23,6 +23,6 @@ end
 command = "coffee | #{Shellwords.escape(BRIDGE_EXECUTABLE)}"
 pipe = IO.popen(command, "w")
 ARGF.each do |line|
-  controller.parse_line(line)
+  controller.parse_input(line)
   pipe.write(line)
 end
