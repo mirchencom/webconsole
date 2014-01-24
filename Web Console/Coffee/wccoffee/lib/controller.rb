@@ -11,6 +11,7 @@ module WcCoffee
     end
 
     def parse_line(line)
+      line = line.dup
       line.chomp!
       line.javascript_escape!
       if !line.strip.empty? # Ignore empty lines
