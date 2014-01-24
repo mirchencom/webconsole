@@ -4,6 +4,7 @@ module WebConsole
     require WEBCONSOLE_CONSTANTS
 
     attr_writer :base_url
+
     def initialize(window_id = nil)
       @window_id = window_id
     end
@@ -40,8 +41,6 @@ module WebConsole
     def close
       WebConsole::run_applescript(CLOSEWINDOW_SCRIPT, [window_id])
     end
-
-    private
     
     def window_id
       if !@window_id && ENV.has_key?(WINDOW_ID_KEY)
@@ -49,6 +48,8 @@ module WebConsole
       end
       return @window_id
     end
+
+    private
     
     def self.window_id_from_result(result)
       return result.split.last.to_i

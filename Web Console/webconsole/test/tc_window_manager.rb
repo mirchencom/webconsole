@@ -10,6 +10,21 @@ require WebConsole::WINDOW_MANAGER_FILE
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
+class TestWindowManagerAttributes < Test::Unit::TestCase
+
+  def test_window_id
+    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    assert(WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should have a window.")
+    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_manager = WebConsole::WindowManager.new(window_id)
+    assert(window_id == window_manager.window_id, "The window id's should be equal.")
+    window_manager.close
+  end
+
+end
+
+
 class TestWindowManagerClose < Test::Unit::TestCase
 
   def test_close
@@ -17,8 +32,8 @@ class TestWindowManagerClose < Test::Unit::TestCase
     WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     assert(WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should have a window.")
     window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    @window_manager = WebConsole::WindowManager.new(window_id)
-    @window_manager.close
+    window_manager = WebConsole::WindowManager.new(window_id)
+    window_manager.close
     assert(!WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should not have a window.")
   end
 
