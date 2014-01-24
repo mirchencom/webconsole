@@ -5,12 +5,17 @@
 	<title>Coffee</title>
 	<%= shared_stylesheet_link_tag "raster" %>
 	<link rel="stylesheet" href="css/style.css" />
+
 	<script id="output-template" type="text/x-handlebars-template">
 		<pre><code>{{code}}</code></pre>
 	</script>
 	<%= shared_javascript_include_tag "handlebars" %>
 	<%= shared_javascript_include_tag "zepto" %>
 	<script type="text/javascript" src="js/wccoffee.js"></script>
+
+	<link rel="stylesheet" href="css/highlight-default.css" />
+	<script src="js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 
