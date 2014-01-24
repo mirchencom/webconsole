@@ -4,14 +4,13 @@ require 'webconsole'
 
 CONSTANTS_FILE = File.join(File.dirname(__FILE__), "constants")
 require CONSTANTS_FILE
-require BRIDGE_CONTROLLER_FILE
-require WINDOW_MANAGER_FILE
+require OUTPUT_CONTROLLER_FILE
 
 # Window Manager
-window_manager = WcCoffee::WindowManager.new
+window_manager = WebConsole::WindowManager.new
 
 # Controller
-controller = WcCoffee::BridgeController.new(window_manager)
+controller = WcCoffee::OutputController.new(window_manager)
 
 ARGF.each do |line|
   controller.parse_line(line)
