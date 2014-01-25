@@ -1,6 +1,6 @@
 require 'webconsole'
 
-module WcREPLWrapper
+module WcREPL
   class InputController < WebConsole::Controller
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
@@ -26,17 +26,17 @@ module WcREPLWrapper
 
     end
 
-    def wcreplwrapper_header_tags
+    def wcrepl_header_tags
       return %Q[
-    #{wcreplwrapper_stylesheet_link_tag}
-    #{wcreplwrapper_handlebars_template_tags}
+    #{wcrepl_stylesheet_link_tag}
+    #{wcrepl_handlebars_template_tags}
     #{shared_javascript_include_tag("handlebars")}
   	#{shared_javascript_include_tag("zepto")}
-    #{wcreplwrapper_javascript_include_tag}
+    #{wcrepl_javascript_include_tag}
       ]
     end
 
-    def wcreplwrapper_handlebars_template_tags
+    def wcrepl_handlebars_template_tags
       return %Q[
     <script id="output-template" type="text/x-handlebars-template">
   		<pre class="output"><code>{{code}}</code></pre>
@@ -46,12 +46,12 @@ module WcREPLWrapper
   	</script>]
     end
 
-    def wcreplwrapper_stylesheet_link_tag
-      return shared_stylesheet_link_tag("../ruby/repl_wrapper/css/style")
+    def wcrepl_stylesheet_link_tag
+      return shared_stylesheet_link_tag("../ruby/wcrepl/css/style")
     end
 
-    def wcreplwrapper_javascript_include_tag
-      return shared_javascript_include_tag("../ruby/repl_wrapper/js/wcreplwrapper")
+    def wcrepl_javascript_include_tag
+      return shared_javascript_include_tag("../ruby/wcrepl/js/wcrepl")
     end
   end
 end

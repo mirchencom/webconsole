@@ -1,9 +1,9 @@
 require 'webconsole'
-require WebConsole::shared_resource("ruby/repl_wrapper/repl_wrapper")
+require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
 require File.join(File.dirname(__FILE__), "constants")
 
 module WcIRB
-  class Wrapper < WcREPLWrapper::REPLWrapper
+  class Wrapper < WcREPL::Wrapper
     require OUTPUT_CONTROLLER_FILE
     require INPUT_CONTROLLER_FILE
     require WINDOW_MANAGER_FILE

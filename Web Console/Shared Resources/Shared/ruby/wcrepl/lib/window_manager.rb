@@ -1,6 +1,6 @@
 require 'webconsole'
 
-module WcREPLWrapper
+module WcREPL
   class WindowManager < WebConsole::WindowManager
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), '..')
 

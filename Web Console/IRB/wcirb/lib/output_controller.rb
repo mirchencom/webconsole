@@ -1,7 +1,7 @@
-require WebConsole::shared_resource("ruby/repl_wrapper/repl_wrapper")
+require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
 
 module WcIRB
-  class OutputController < WcREPLWrapper::OutputController
+  class OutputController < WcREPL::OutputController
     def parse_output(output)
       if output =~ /^irb\([^)]*\):[^:]*:[^>]*>/
         # Don't add echo of input

@@ -1,7 +1,7 @@
-require WebConsole::shared_resource("ruby/repl_wrapper/repl_wrapper")
+require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
 
 module WcIRB
-  class InputController < WcREPLWrapper::InputController
+  class InputController < WcREPL::InputController
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
     VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')

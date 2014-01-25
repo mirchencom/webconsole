@@ -5,13 +5,6 @@ var WcREPL = {
 			code: code
 		};
 		return $(template(data)).appendTo("body");	
-
-		// var $newcode = $(template(data)).appendTo("body");	
-		// $(document).ready(function() {
-		//   $newcode.each(function(i, e) {
-		// 	  hljs.highlightBlock(e);
-		//   });
-		// });
 	},
 	addInput: function(code) {
 		var source = $("#input-template").html();

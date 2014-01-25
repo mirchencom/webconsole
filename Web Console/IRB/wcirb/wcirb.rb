@@ -7,4 +7,3 @@ wrapper = WcIRB::Wrapper.new("irb")
 ARGF.each do |line|
   wrapper.parse_input(line)
 end
-

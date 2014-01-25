@@ -1,6 +1,6 @@
 require 'webconsole'
 
-module WcREPLWrapper
+module WcREPL
   class OutputController < WebConsole::Controller
     def initialize(delegate = nil)
       @delegate = delegate
