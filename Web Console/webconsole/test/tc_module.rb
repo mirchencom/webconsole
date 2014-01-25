@@ -24,11 +24,13 @@ class TestWebConsoleProperties < Test::Unit::TestCase
     assert(!WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should not have a window.")
   end
 
+  # Shared Resources
+
   SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
-  WEB_CONSOLE_CONSTANTS_PATH_COMPONENT = "Shared/js/zepto.js"
-  def test_resource_path
+  SHARED_RESOURCE_PLUGIN_PATH_COMPONENT = "Shared/js/zepto.js"
+  def test_resource_path_for_plugin
     resource_path = WebConsole::resource_path_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
-    test_file = File.join(resource_path, WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
+    test_file = File.join(resource_path, SHARED_RESOURCE_PLUGIN_PATH_COMPONENT)
     assert(File.file?(test_file), "The test file should exist.")
   end
   SHARED_RESOURCE_PATH_COMPONENT = "js/zepto.js"
@@ -38,7 +40,17 @@ class TestWebConsoleProperties < Test::Unit::TestCase
     assert(File.file?(test_file), "The test file should exist.")
   end
   SHARED_TEST_RESOURCE_PATH_COMPONENT = "ruby/test_constants.rb"
-  def test_shared_resources_path
+  def test_shared_test_resources_path
+    resource_path = WebConsole::shared_test_resources_path
+    test_file = File.join(resource_path, SHARED_TEST_RESOURCE_PATH_COMPONENT)
+    assert(File.file?(test_file), "The test file should exist.")
+  end
+
+  def test_shared_resource
+    resource_path = WebConsole::shared_resource(SHARED_RESOURCE_PATH_COMPONENT)
+    assert(File.file?(resource_path), "The test file should exist.")
+  end
+  def test_shared_test_resource
     resource_path = WebConsole::shared_test_resource(SHARED_TEST_RESOURCE_PATH_COMPONENT)
     assert(File.file?(resource_path), "The test file should exist.")
   end
@@ -46,7 +58,7 @@ class TestWebConsoleProperties < Test::Unit::TestCase
   require 'open-uri'
   def test_resource_url
     resource_url = WebConsole::resource_url_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
-    test_url = URI.join(resource_url, WEB_CONSOLE_CONSTANTS_PATH_COMPONENT)
+    test_url = URI.join(resource_url, SHARED_RESOURCE_PLUGIN_PATH_COMPONENT)
 
     # Ruby doesn't handle file URLs so convert the file URL to a path
     # File URLs aren't supported by 'open-uri' but file paths are

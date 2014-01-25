@@ -35,23 +35,37 @@ module WebConsole
     return result
   end
 
+  # Shared Resources
+
   RESOURCE_PATH_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_path_for_plugin.scpt")
   def self.resource_path_for_plugin(name)
     result = self.run_applescript(RESOURCE_PATH_FOR_PLUGIN_SCRIPT, [name])
     result.chomp!
     return result
   end
+
+  # Shared Resource Path
+
   SHARED_RESOURCES_PLUGIN_NAME = "Shared Resources"
+  SHARED_TEST_RESOURCES_PLUGIN_NAME = "Shared Test Resources"
   SHARED_RESOURCES_PATH_COMPONENT = "Shared/"
   def self.shared_resources_path
-    shared_resources_path = WebConsole::resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
-    return File.join(shared_resources_path, SHARED_RESOURCES_PATH_COMPONENT)
+    shared_resources_plugin_path = WebConsole::resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
+    return File.join(shared_resources_plugin_path, SHARED_RESOURCES_PATH_COMPONENT)
   end
-  SHARED_TEST_RESOURCES_PLUGIN_NAME = "Shared Test Resources"
+  def self.shared_test_resources_path
+    shared_test_resources_plugin_path = WebConsole::resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
+    return File.join(shared_test_resources_plugin_path, SHARED_RESOURCES_PATH_COMPONENT)
+  end
+
+  def self.shared_resource(resource)
+    return File.join(self.shared_resources_path, resource)
+  end
   def self.shared_test_resource(resource)
-    shared_test_resources_path = WebConsole::resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
-    return File.join(shared_test_resources_path, SHARED_RESOURCES_PATH_COMPONENT, resource)    
+    return File.join(self.shared_test_resources_path, resource)    
   end
+
+  # Shared Resource URL
 
   RESOURCE_URL_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_url_for_plugin.scpt")
   def self.resource_url_for_plugin(name)
