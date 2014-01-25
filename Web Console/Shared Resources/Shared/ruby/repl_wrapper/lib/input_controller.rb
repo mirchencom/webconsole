@@ -18,7 +18,7 @@ module WcREPLWrapper
       input.chomp!
       input.javascript_escape!
       if !input.strip.empty? # Ignore empty lines
-        javascript = %Q[addInput('#{input}');]
+        javascript = %Q[WcREPL.addInput('#{input}');]
         if @delegate
           @delegate.do_javascript(javascript)
         end
