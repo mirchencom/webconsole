@@ -9,7 +9,7 @@ module WcCoffee
     def initialize(delegate = nil)      
       super(delegate, VIEW_TEMPLATE)
     end
-
+    
     def parse_input(input)
       input = input.dup
       input.gsub!("\uFF00", "\n")

@@ -8,6 +8,15 @@ module WcIRB
     require INPUT_CONTROLLER_FILE
     require WINDOW_MANAGER_FILE
 
+    def initialize
+      super("irb")
+    end
+
+    def parse_input(input)
+      input.gsub!("\uFF00", "\n") # \uFF00 is the unicode character Coffee uses for new lines, it's used here just to consolidate code into one line
+      super(input)
+    end
+
     def input_controller
       if !@input_controller
         @input_controller = WcIRB::InputController.new(window_manager)

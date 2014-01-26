@@ -8,6 +8,10 @@ module WcCoffee
     require INPUT_CONTROLLER_FILE
     require WINDOW_MANAGER_FILE
 
+    def initialize
+      super("coffee")
+    end
+
     def write_input(input)
       input = input.dup
       input.gsub!("\t", "\s\s\s\s") # Coffee in pty handles spaces better than tabs

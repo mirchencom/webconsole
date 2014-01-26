@@ -10,13 +10,5 @@ module WcIRB
       super(delegate, VIEW_TEMPLATE)
     end
 
-    def parse_input(input)
-      input = input.dup
-      
-      puts "input = " + input
-
-      super(input)
-    end
-
   end
 end
