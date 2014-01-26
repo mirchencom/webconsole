@@ -7,13 +7,14 @@ task :default => [:xcunit, :ruby]
 
 task :long => [:xcunit, :ruby_long]
 task :xcunit => ['xcunit:tests']
-task :ruby => [:web_console, :gems, :plugins]
+task :ruby => [:web_console, :gems, :plugins, :other]
 
 task :ruby_long => [:web_console_long, :gems, :plugins]
 task :web_console => ['web_console:tests']
 task :web_console_long => ['web_console:tests_long']
 task :gems => ['gems:tests']
 task :plugins => ['plugins:tests']
+task :other => ['other:tests']
 
 
 namespace :gems do
@@ -36,11 +37,27 @@ namespace :plugins do
   wcirb_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "IRB", "wcirb", "test", "Rakefile")
   load wcirb_test_rakefile
 
-  task :tests => [:test_wcsearch, :test_wcirb]
+  wccoffee_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Coffee", "wccoffee", "test", "Rakefile")
+  load wccoffee_test_rakefile
+
+  task :tests => [:test_wcsearch, :test_wcirb, :test_wccoffee]
 
   task :test_wcsearch => ['wcsearch:tests']
 
   task :test_wcirb => ['wcirb:tests']
+
+  task :test_wccoffee => ['wccoffee:tests']
+end
+
+
+namespace :other do
+
+  wcrepl_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Shared Resources", "Shared", "ruby", "wcrepl", "test", "Rakefile")
+  load wcrepl_test_rakefile
+
+  task :tests => [:test_wcrepl]
+
+  task :test_wcrepl => ['wcrepl:tests']
 end
 
 
