@@ -6,10 +6,7 @@ module WcREPL
 
   class Wrapper
     require 'pty'
-    def initialize(command, input_controller_override = nil, output_controller_override = nil, window_manager_override = nil)
-      @input_controller = input_controller_override
-      @output_controller = output_controller_override
-      @window_manager = window_manager_override
+    def initialize(command)
 
       PTY.spawn(command) do |output, input, pid|
         Thread.new do
