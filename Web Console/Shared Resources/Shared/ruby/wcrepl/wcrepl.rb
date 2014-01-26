@@ -20,9 +20,13 @@ module WcREPL
         @input = input
       end
     end
-    
+
     def parse_input(input)
       input_controller.parse_input(input)
+      write_input(input)
+    end
+
+    def write_input(input)
       @input.write(input)
     end
 

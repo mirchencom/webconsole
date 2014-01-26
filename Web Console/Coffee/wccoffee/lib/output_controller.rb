@@ -1,21 +1,14 @@
-require 'webconsole'
+require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
 
 module WcCoffee
-  class OutputController < WebConsole::Controller
-    def initialize(delegate = nil)      
-      @delegate = delegate
-    end
-
+  class OutputController < WcREPL::OutputController
     def parse_output(output)
-      output.sub!(/^coffee\>\s/, "")
-      output.chomp!
-      output.javascript_escape!
-      if !output.strip.empty? # Ignore empty lines
-        javascript = %Q[addOutput('#{output}');]
-        if @delegate
-          @delegate.do_javascript(javascript)
-        end
+      if output =~ /^\x1b[^coffee>]*coffee>/
+        # Don't add echo of input
+        return
       end
+      super(output)
     end
   end
+  
 end

@@ -1,28 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'Shellwords'
-require 'webconsole'
+require File.join(File.dirname(__FILE__), "lib", "wrapper")
 
-CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "constants")
-require CONSTANTS_FILE
-require INPUT_CONTROLLER_FILE
-require WINDOW_MANAGER_FILE
+wrapper = WcCoffee::Wrapper.new("coffee")
 
-# Window Manager
-window_manager = WcCoffee::WindowManager.new
-# Controller
-controller = WcCoffee::InputController.new(window_manager)
-
-if !ENV.has_key?(WebConsole::WINDOW_ID_KEY)
-  # Set the environment variable if it hasn't been set already
-  # So that when the second window_manager gets instansiated it
-  # will have the same window_id
-  ENV[WebConsole::WINDOW_ID_KEY] = window_manager.window_id.to_s
-end
-
-command = "coffee | #{Shellwords.escape(BRIDGE_EXECUTABLE)}"
-pipe = IO.popen(command, "w")
 ARGF.each do |line|
-  controller.parse_input(line)
-  pipe.write(line)
+  wrapper.parse_input(line)
 end
