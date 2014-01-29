@@ -1,0 +1,2 @@
+$ ->
+  wcGit.addBranch("test")
