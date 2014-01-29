@@ -8,5 +8,6 @@ module WcGit
       super(window_id)
       self.base_url_path = File.expand_path(BASE_DIRECTORY)
     end
+
   end
 end
