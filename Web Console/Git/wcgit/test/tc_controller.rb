@@ -39,7 +39,7 @@ class TestController < Test::Unit::TestCase
     assert(branch_element_count == 1, "There should be one branch element.")
     assert(branch_name = controller.branch, "The controller's branch should equal the branch name.")
 
-    window_manager.close
+    # window_manager.close
   end
 
 end
