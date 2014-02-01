@@ -12,7 +12,7 @@ require TEST_DATA_FILE
 require CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
 
-class TestClass < Test::Unit::TestCase
+class TestController < Test::Unit::TestCase
 
   # def test_class
   #   git_test_helper = WcGit::GitTestHelper.new
@@ -23,11 +23,16 @@ class TestClass < Test::Unit::TestCase
   #   git_test_helper.clean_up
   # end
 
-  def test_controller
+  def test_set_branch
     window_manager = WcGit::WindowManager.new
     controller = WcGit::Controller.new(window_manager)
 
-    # window_manager.close
+    branch_name = "master"
+    controller.branch = branch_name
+
+    assert(branch_name = controller.branch, "The controller's branch should equal the branch name.")
+
+    window_manager.close
   end
 
 end
