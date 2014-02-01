@@ -1,4 +1,7 @@
 @wcGit =
+  BRANCH_SELECTOR: "#branch"
+  BRANCH_TEMPLATE_SELECTOR: "#branch-template"
+  BASE_SELECTOR: "body"
   appendTemplate: (selector, data) ->
     source = $(selector).html()
     template = Handlebars.compile(source)
@@ -6,14 +9,17 @@
       result = template(data)
     else
       result = template()
-    $(result).appendTo("body")
+    $(result).appendTo(@BASE_SELECTOR)
 
 Object.defineProperty wcGit, 'branch',
-  get: -> $("#branch").text()
+  get: -> $(@BRANCH_SELECTOR).text()
   set: (value) ->
+    if $(@BRANCH_SELECTOR).length
+      $(@BRANCH_SELECTOR).text(value)
+      return
     data = 
       branch: value
-    @appendTemplate("#branch-template", data)
+    @appendTemplate(@BRANCH_TEMPLATE_SELECTOR, data)
 
 # wcGit.appendTemplate("#staged-template")
 

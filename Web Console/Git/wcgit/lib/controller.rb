@@ -28,6 +28,7 @@ module WcGit
       if @delegate
         coffeescript = "return wcGit.branch"
         branch = @delegate.do_coffeescript(coffeescript)
+        branch.chomp!
       end
       return branch
     end

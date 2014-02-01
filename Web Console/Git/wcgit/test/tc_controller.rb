@@ -30,16 +30,16 @@ class TestController < Test::Unit::TestCase
 
     branch_name = "master"
     controller.branch = branch_name
-    assert(branch_name = controller.branch, "The controller's branch should equal the branch name.")
+    assert(branch_name == controller.branch, "The controller's branch should equal the branch name.")
 
     branch_name = "development"
     controller.branch = branch_name
     window_manager_test_helper = WcGit::Tests::WindowManagerHelper.new(window_manager)
     branch_element_count = window_manager_test_helper.element_count_for_selector("[id=branch]").to_i # Alternative ID selector syntax will select multiple elements with the same ID.
     assert(branch_element_count == 1, "There should be one branch element.")
-    assert(branch_name = controller.branch, "The controller's branch should equal the branch name.")
+    assert(branch_name == controller.branch, "The controller's branch should equal the branch name.")
 
-    # window_manager.close
+    window_manager.close
   end
 
 end
