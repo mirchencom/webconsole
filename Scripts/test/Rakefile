@@ -40,13 +40,18 @@ namespace :plugins do
   wccoffee_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Coffee", "wccoffee", "test", "Rakefile")
   load wccoffee_test_rakefile
 
-  task :tests => [:test_wcsearch, :test_wcirb, :test_wccoffee]
+  wcnode_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Node", "wcnode", "test", "Rakefile")
+  load wcnode_test_rakefile
+
+  task :tests => [:test_wcsearch, :test_wcirb, :test_wccoffee, :test_wcnode]
 
   task :test_wcsearch => ['wcsearch:tests']
 
   task :test_wcirb => ['wcirb:tests']
 
   task :test_wccoffee => ['wccoffee:tests']
+
+  task :test_wcnode => ['wcnode:tests']
 end
 
 

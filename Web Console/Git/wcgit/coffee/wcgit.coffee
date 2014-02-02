@@ -11,15 +11,14 @@
       result = template()
     $(result).appendTo(@BASE_SELECTOR)
 
-Object.defineProperty wcGit, 'branch',
+Object.defineProperty wcGit, 'branchName',
   get: -> $(@BRANCH_SELECTOR).text()
-  set: (value) ->
-    if $(@BRANCH_SELECTOR).length
-      $(@BRANCH_SELECTOR).text(value)
+  set: (branchName) ->
+    branchElement = $(@BRANCH_SELECTOR)
+    if branchElement.length
+      branchElement.text(branchName)
       return
-    data = 
-      branch: value
-    @appendTemplate(@BRANCH_TEMPLATE_SELECTOR, data)
+    @appendTemplate(@BRANCH_TEMPLATE_SELECTOR, branchName: branchName)
 
 # wcGit.appendTemplate("#staged-template")
 

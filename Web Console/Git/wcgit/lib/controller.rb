@@ -23,19 +23,19 @@ module WcGit
       end
     end
 
-    def branch
-      branch = nil
+    def branch_name
+      branch_name = nil
       if @delegate
-        coffeescript = "return wcGit.branch"
-        branch = @delegate.do_coffeescript(coffeescript)
-        branch.chomp!
+        coffeescript = "return wcGit.branchName"
+        branch_name = @delegate.do_coffeescript(coffeescript)
+        branch_name.chomp!
       end
-      return branch
+      return branch_name
     end
 
-    def branch=(value)
+    def branch_name=(value)
       if @delegate
-        coffeescript = "wcGit.branch = '#{value.javascript_escape}'"
+        coffeescript = "wcGit.branchName = '#{value.javascript_escape}'"
         @delegate.do_coffeescript(coffeescript)
       end
     end

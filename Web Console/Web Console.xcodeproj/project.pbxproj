@@ -21,6 +21,10 @@
 		4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0F51736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		453AD8AF188235CC0039A3A9 /* WCLPluginTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */; };
+		454341FB189E903E00C99761 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
+		45434201189E903E00C99761 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 454341FF189E903E00C99761 /* InfoPlist.strings */; };
+		45434207189E908800C99761 /* wcnode in Resources */ = {isa = PBXBuildFile; fileRef = 45434206189E908800C99761 /* wcnode */; };
+		45434208189EB71900C99761 /* Node.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 454341FA189E903E00C99761 /* Node.bundle */; };
 		4546484D1853C6C700147962 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		454648531853C6C700147962 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 454648511853C6C700147962 /* InfoPlist.strings */; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
@@ -100,6 +104,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				45434208189EB71900C99761 /* Node.bundle in CopyFiles */,
 				45952CBB188F684B0023E462 /* Coffee.bundle in CopyFiles */,
 				45E0EAD4188DF39400A917B4 /* HTML.bundle in CopyFiles */,
 				45A42B3C188DB15A0073082D /* Git.bundle in CopyFiles */,
@@ -137,6 +142,11 @@
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		453AD8AD188235CC0039A3A9 /* WCLPluginTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPluginTask.h; sourceTree = "<group>"; };
 		453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginTask.m; sourceTree = "<group>"; };
+		454341FA189E903E00C99761 /* Node.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Node.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		454341FE189E903E00C99761 /* Node-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Node-Info.plist"; sourceTree = "<group>"; };
+		45434200189E903E00C99761 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45434202189E903E00C99761 /* Node-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Node-Prefix.pch"; sourceTree = "<group>"; };
+		45434206189E908800C99761 /* wcnode */ = {isa = PBXFileReference; lastKnownFileType = folder; path = wcnode; sourceTree = "<group>"; };
 		4546484C1853C6C700147962 /* Search.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Search.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		454648501853C6C700147962 /* Search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Search-Info.plist"; sourceTree = "<group>"; };
 		454648521853C6C700147962 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -235,6 +245,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		454341F7189E903E00C99761 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				454341FB189E903E00C99761 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		454648491853C6C700147962 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -313,6 +331,7 @@
 				45A42B32188DB0A60073082D /* Git */,
 				45E0EAC8188DF32700A917B4 /* HTML */,
 				45952CAF188F67210023E462 /* Coffee */,
+				454341FC189E903E00C99761 /* Node */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -341,6 +360,7 @@
 				45A42B30188DB0A60073082D /* Git.bundle */,
 				45E0EAC6188DF32700A917B4 /* HTML.bundle */,
 				45952CAD188F67210023E462 /* Coffee.bundle */,
+				454341FA189E903E00C99761 /* Node.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -444,6 +464,25 @@
 			children = (
 				4530B0F41736E2A6000A52E2 /* Web ConsoleTests-Info.plist */,
 				4530B0F51736E2A6000A52E2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		454341FC189E903E00C99761 /* Node */ = {
+			isa = PBXGroup;
+			children = (
+				45434206189E908800C99761 /* wcnode */,
+				454341FD189E903E00C99761 /* Supporting Files */,
+			);
+			path = Node;
+			sourceTree = "<group>";
+		};
+		454341FD189E903E00C99761 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				454341FE189E903E00C99761 /* Node-Info.plist */,
+				454341FF189E903E00C99761 /* InfoPlist.strings */,
+				45434202189E903E00C99761 /* Node-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -641,6 +680,23 @@
 			productReference = 4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		454341F9189E903E00C99761 /* Node */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45434205189E903E00C99761 /* Build configuration list for PBXNativeTarget "Node" */;
+			buildPhases = (
+				454341F6189E903E00C99761 /* Sources */,
+				454341F7189E903E00C99761 /* Frameworks */,
+				454341F8189E903E00C99761 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Node;
+			productName = Node;
+			productReference = 454341FA189E903E00C99761 /* Node.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		4546484B1853C6C700147962 /* Search */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 454648571853C6C700147962 /* Build configuration list for PBXNativeTarget "Search" */;
@@ -814,6 +870,7 @@
 				45A42B2F188DB0A60073082D /* Git */,
 				45E0EAC5188DF32700A917B4 /* HTML */,
 				45952CAC188F67210023E462 /* Coffee */,
+				454341F9189E903E00C99761 /* Node */,
 			);
 		};
 /* End PBXProject section */
@@ -837,6 +894,15 @@
 			files = (
 				4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */,
 				45898BB21785325B00AE365A /* Data in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		454341F8189E903E00C99761 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45434207189E908800C99761 /* wcnode in Resources */,
+				45434201189E903E00C99761 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +1033,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		454341F6189E903E00C99761 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		454648481853C6C700147962 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1062,6 +1135,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				4530B0F61736E2A6000A52E2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		454341FF189E903E00C99761 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45434200189E903E00C99761 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1239,6 +1320,49 @@
 				INFOPLIST_FILE = "Web ConsoleTests/Web ConsoleTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+		45434203189E903E00C99761 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Node/Node-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Node/Node-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		45434204189E903E00C99761 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Node/Node-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Node/Node-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -1599,6 +1723,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		45434205189E903E00C99761 /* Build configuration list for PBXNativeTarget "Node" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45434203189E903E00C99761 /* Debug */,
+				45434204189E903E00C99761 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		454648571853C6C700147962 /* Build configuration list for PBXNativeTarget "Search" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1633,6 +1765,7 @@
 				45952CB7188F67210023E462 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4596C0661792316B005FC51A /* Build configuration list for PBXNativeTarget "IRB" */ = {
 			isa = XCConfigurationList;
