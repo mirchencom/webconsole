@@ -11,19 +11,22 @@ class Element
       else
         return null
     set: (element) ->
-      ($ element).appendTo(@parentSelector)
+      element.appendTo(@parentSelector)
 
 class TemplateElement extends Element
   constructor: (@selector, @parentSelector, @templateSelector) ->
     super(@selector, @parentSelector)
   add: (data) ->
-    source = $(@templateSelector).html()
+    source = ($ @templateSelector).html()
     template = Handlebars.compile(source)
     if (data)
       result = template(data)
     else
       result = template()
-    @element = result
+    @element = ($ result)
+  remove: ->
+    if @element?
+      @element.remove()
 
 class BranchMessageElement extends TemplateElement
   SELECTOR: "#branch_message"
@@ -37,10 +40,13 @@ class BranchMessageElement extends TemplateElement
       return null unless @element?
       ($ @BRANCH_NAME_SELECTOR).text()
     set: (branchName) ->
+      if branchName.length == 0
+        @remove()
+        return
       if not @element?
         @add(branchName: branchName)
-      else
-        ($ @BRANCH_NAME_SELECTOR).text(branchName)
+        return
+      ($ @BRANCH_NAME_SELECTOR).text(branchName)
 
 class WcGit
   constructor: ->
@@ -51,9 +57,6 @@ class WcGit
 
 @wcGit = new WcGit
 
-# wcGit.appendTemplate("#staged-template")
-
-# TODO Setting the branch to an empty string should remove it
 # TODO Construct the rest of the templates
 # TODO I'll need some method for making sure things are appending in the right order
 # file-template

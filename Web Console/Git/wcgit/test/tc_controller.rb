@@ -29,8 +29,7 @@ class TestController < Test::Unit::TestCase
     window_manager = WcGit::WindowManager.new
     controller = WcGit::Controller.new(window_manager)
 
-# TODO Before setting the branch, the branch should be nil
-# TODO This requires writing the wrapper around JavaScripts response
+    assert(controller.branch_name.nil?, "The controller's branch name should be nil before it is set.")
 
     branch_name = "master"
     controller.branch_name = branch_name
@@ -43,7 +42,10 @@ class TestController < Test::Unit::TestCase
     assert(branch_element_count == 1, "There should be one branch element.")
     assert(branch_name == controller.branch_name, "The controller's branch name should equal the branch name.")
 
-    # window_manager.close
+    controller.branch_name = nil
+    assert(controller.branch_name.nil?, "The controller's branch name should be nil after being set to nil.")
+
+    window_manager.close
   end
 
 end

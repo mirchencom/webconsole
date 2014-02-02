@@ -29,12 +29,16 @@ module WcGit
         coffeescript = "return wcGit.branchName"
         branch_name = @delegate.do_coffeescript(coffeescript)
         branch_name.chomp!
+        if branch_name.empty?
+          branch_name = nil
+        end
       end
       return branch_name
     end
 
     def branch_name=(value)
       if @delegate
+        value ||= ""
         coffeescript = "wcGit.branchName = '#{value.javascript_escape}'"
         @delegate.do_coffeescript(coffeescript)
       end
