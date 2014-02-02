@@ -5,6 +5,7 @@ require File.join(File.dirname(__FILE__), "constants")
 module WcNode
   class Wrapper < WcREPL::Wrapper
     require INPUT_CONTROLLER_FILE
+    require OUTPUT_CONTROLLER_FILE
     require WINDOW_MANAGER_FILE
 
     def initialize
@@ -22,6 +23,12 @@ module WcNode
       super(input)
     end
 
+    def output_controller
+      if !@output_controller
+        @output_controller = WcNode::OutputController.new(window_manager)
+      end
+      return @output_controller
+    end
 
     def input_controller
       if !@input_controller
