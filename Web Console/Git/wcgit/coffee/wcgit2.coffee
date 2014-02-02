@@ -1,47 +1,59 @@
 Function::property = (prop, desc) ->
   Object.defineProperty @prototype, prop, desc
 
-# class Element
-#   constructor: (@selector) ->
-#   @property 'element',
-#     get: -> $(@BRANCH_SELECTOR).text()
-#     set: (branchName) ->
-#       branchElement = $(@BRANCH_SELECTOR)
-#       if branchElement.length
-#         branchElement.text(branchName)
-#         return
-#       @appendTemplate(@BRANCH_TEMPLATE_SELECTOR, branchName: branchName)
-# 
-# 
-# class BranchElement extends Element
-#   
+class Element
+  constructor: (@selector, @parentSelector) ->
+  @property 'element',
+    get: -> 
+      element = $(@selector)
+      if element.length
+        return element
+      else
+        return null
+    set: (element) ->
+      ($ element).appendTo(@parentSelector)
 
-class WcGit
-  BRANCH_SELECTOR: "#branch"
-  BRANCH_TEMPLATE_SELECTOR: "#branch-template"
-  BASE_SELECTOR: "body"
-  @property 'branchName',
-    get: -> $(@BRANCH_SELECTOR).text()
-    set: (branchName) ->
-      branchElement = $(@BRANCH_SELECTOR)
-      if branchElement.length
-        branchElement.text(branchName)
-        return
-      @appendTemplate(@BRANCH_TEMPLATE_SELECTOR, branchName: branchName)
-
-  appendTemplate: (selector, data) ->
-    source = $(selector).html()
+class TemplateElement extends Element
+  constructor: (@selector, @parentSelector, @templateSelector) ->
+    super(@selector, @parentSelector)
+  add: (data) ->
+    source = $(@templateSelector).html()
     template = Handlebars.compile(source)
     if (data)
       result = template(data)
     else
       result = template()
-    $(result).appendTo(@BASE_SELECTOR)
+    @element = result
+
+class BranchMessageElement extends TemplateElement
+  SELECTOR: "#branch_message"
+  PARENT_SELECTOR: "body"
+  TEMPLATE_SELECTOR: "#branch-template"
+  BRANCH_NAME_SELECTOR: "#branch"
+  constructor: () ->
+    super(@SELECTOR, @PARENT_SELECTOR, @TEMPLATE_SELECTOR)
+  @property 'branchName',
+    get: -> 
+      return null unless @element?
+      ($ @BRANCH_NAME_SELECTOR).text()
+    set: (branchName) ->
+      if not @element?
+        @add(branchName: branchName)
+      else
+        ($ @BRANCH_NAME_SELECTOR).text(branchName)
+
+class WcGit
+  constructor: ->
+    @branchMessageElement = new BranchMessageElement
+  @property 'branchName',
+    get: -> @branchMessageElement.branchName
+    set: (branchName) -> @branchMessageElement.branchName = branchName
 
 @wcGit = new WcGit
 
 # wcGit.appendTemplate("#staged-template")
 
+# TODO Setting the branch to an empty string should remove it
 # TODO Construct the rest of the templates
 # TODO I'll need some method for making sure things are appending in the right order
 # file-template

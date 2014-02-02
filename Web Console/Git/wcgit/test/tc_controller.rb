@@ -30,6 +30,7 @@ class TestController < Test::Unit::TestCase
     controller = WcGit::Controller.new(window_manager)
 
 # TODO Before setting the branch, the branch should be nil
+# TODO This requires writing the wrapper around JavaScripts response
 
     branch_name = "master"
     controller.branch_name = branch_name
