@@ -1,26 +1,61 @@
-@wcGit =
-  BRANCH_SELECTOR: "#branch"
-  BRANCH_TEMPLATE_SELECTOR: "#branch-template"
-  BASE_SELECTOR: "body"
-  appendTemplate: (selector, data) ->
-    source = $(selector).html()
+Function::property = (prop, desc) ->
+  Object.defineProperty @prototype, prop, desc
+
+class Element
+  constructor: (@selector, @parentSelector) ->
+  @property 'element',
+    get: -> 
+      element = $(@selector)
+      if element.length
+        return element
+      else
+        return null
+    set: (element) ->
+      element.appendTo(@parentSelector)
+
+class TemplateElement extends Element
+  constructor: (@selector, @parentSelector, @templateSelector) ->
+    super(@selector, @parentSelector)
+  add: (data) ->
+    source = ($ @templateSelector).html()
     template = Handlebars.compile(source)
     if (data)
       result = template(data)
     else
       result = template()
-    $(result).appendTo(@BASE_SELECTOR)
+    @element = ($ result)
+  remove: ->
+    if @element?
+      @element.remove()
 
-Object.defineProperty wcGit, 'branchName',
-  get: -> $(@BRANCH_SELECTOR).text()
-  set: (branchName) ->
-    branchElement = $(@BRANCH_SELECTOR)
-    if branchElement.length
-      branchElement.text(branchName)
-      return
-    @appendTemplate(@BRANCH_TEMPLATE_SELECTOR, branchName: branchName)
+class BranchMessageElement extends TemplateElement
+  SELECTOR: "#branch_message"
+  PARENT_SELECTOR: "body"
+  TEMPLATE_SELECTOR: "#branch-template"
+  BRANCH_NAME_SELECTOR: "#branch"
+  constructor: () ->
+    super(@SELECTOR, @PARENT_SELECTOR, @TEMPLATE_SELECTOR)
+  @property 'branchName',
+    get: -> 
+      return null unless @element?
+      ($ @BRANCH_NAME_SELECTOR).text()
+    set: (branchName) ->
+      if branchName.length == 0
+        @remove()
+        return
+      if not @element?
+        @add(branchName: branchName)
+        return
+      ($ @BRANCH_NAME_SELECTOR).text(branchName)
 
-# wcGit.appendTemplate("#staged-template")
+class WcGit
+  constructor: ->
+    @branchMessageElement = new BranchMessageElement
+  @property 'branchName',
+    get: -> @branchMessageElement.branchName
+    set: (branchName) -> @branchMessageElement.branchName = branchName
+
+@wcGit = new WcGit
 
 # TODO Construct the rest of the templates
 # TODO I'll need some method for making sure things are appending in the right order
