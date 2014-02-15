@@ -188,7 +188,7 @@
 		4530B0C31736E2A6000A52E2 = {
 			isa = PBXGroup;
 			children = (
-				457F773C18B0058E00D705C8 /* PlugIns */,
+				457F773C18B0058E00D705C8 /* Plugins */,
 				4530B0D51736E2A6000A52E2 /* Web Console */,
 				4530B0F21736E2A6000A52E2 /* Web ConsoleTests */,
 				4530B0CE1736E2A6000A52E2 /* Frameworks */,
@@ -308,7 +308,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		457F773C18B0058E00D705C8 /* PlugIns */ = {
+		457F773C18B0058E00D705C8 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
 				457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */,
@@ -321,7 +321,8 @@
 				457F795118B005BF00D705C8 /* Git.wcplugin */,
 				457F795218B005BF00D705C8 /* Coffee.wcplugin */,
 			);
-			path = PlugIns;
+			name = Plugins;
+			path = Plugins;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
