@@ -26,12 +26,6 @@
 @interface WCLPluginTests : XCTestCase
 @end
 
-@interface WCLPlugin (WCLPluginTests)
-+ (NSURL *)sharedResourceURL;
-+ (NSString *)sharedResourcePath;
-@end
-
-
 @implementation WCLPluginTests
 
 - (void)setUp
@@ -53,9 +47,10 @@
 - (void)testPlugin
 {
     NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPluginName
-                                                        withExtension:kPlugInExtension
-                                                         subdirectory:kSharedTestResourcesPluginSubdirectory];
+                                                    withExtension:kPlugInExtension
+                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
+    XCTAssertNotNil(plugin, @"The WCLPlugin should not be nil.");
     
     // Test Resource Path & URL
     BOOL isDir;
@@ -76,13 +71,13 @@
 
 - (void)testSharedResources
 {
-    NSString *testSharedResourcePath = [[WCLPlugin sharedResourcePath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
+    NSString *testSharedResourcePath = [[[WCLPluginManager sharedPluginManager] sharedResourcePath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
     BOOL isDir;
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:testSharedResourcePath isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's path.");
     XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");
 
-    NSURL *testSharedResourceURL = [[WCLPlugin sharedResourceURL] URLByAppendingPathComponent:kTestSharedResourcePathComponent];
+    NSURL *testSharedResourceURL = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] URLByAppendingPathComponent:kTestSharedResourcePathComponent];
     fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[testSharedResourceURL path] isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's URL.");
     XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");

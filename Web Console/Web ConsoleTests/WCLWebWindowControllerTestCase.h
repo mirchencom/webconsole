@@ -24,5 +24,4 @@
 - (NSString *)stringWithContentsOfSharedTestResource:(NSString *)filename
                                        withExtension:(NSString *)extension
                                         subdirectory:(NSString *)subdirectory;
-- (NSURL *)sharedResourceBaseURL;
 @end

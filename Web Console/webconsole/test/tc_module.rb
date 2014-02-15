@@ -27,7 +27,7 @@ class TestWebConsoleProperties < Test::Unit::TestCase
   # Shared Resources
 
   SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
-  SHARED_RESOURCE_PLUGIN_PATH_COMPONENT = "Shared/js/zepto.js"
+  SHARED_RESOURCE_PLUGIN_PATH_COMPONENT = "js/zepto.js"
   def test_resource_path_for_plugin
     resource_path = WebConsole::resource_path_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
     test_file = File.join(resource_path, SHARED_RESOURCE_PLUGIN_PATH_COMPONENT)

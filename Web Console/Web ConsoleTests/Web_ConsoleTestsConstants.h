@@ -16,7 +16,7 @@
 #pragma mark - Plugin
 
 #define kTestPluginName @"Print"
-#define kTestPluginCommand @"wcprint/wcprint.rb"
+#define kTestPluginCommand @"wcprint.rb"
 #define kPluginCommandPathKey @"commandPath"
 
 #pragma mark - Window Sizes

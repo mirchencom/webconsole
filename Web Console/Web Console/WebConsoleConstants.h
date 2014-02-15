@@ -12,10 +12,9 @@
 #define kDirectoryKey @"Directory"
 #define kPluginKey @"Plugin"
 #define kTextKey @"Text"
-#define kPlugInExtension @"bundle"
+#define kPlugInExtension @"wcplugin"
 
 #define kSharedResourcesPluginName @"Shared Resources"
-#define kSharedResourcesPathComponent @"Shared"
 
 #define kEnvironmentVariablePathKey @"PATH"
 #define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";

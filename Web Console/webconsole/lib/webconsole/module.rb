@@ -48,14 +48,11 @@ module WebConsole
 
   SHARED_RESOURCES_PLUGIN_NAME = "Shared Resources"
   SHARED_TEST_RESOURCES_PLUGIN_NAME = "Shared Test Resources"
-  SHARED_RESOURCES_PATH_COMPONENT = "Shared/"
   def self.shared_resources_path
-    shared_resources_plugin_path = WebConsole::resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
-    return File.join(shared_resources_plugin_path, SHARED_RESOURCES_PATH_COMPONENT)
+    return WebConsole::resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
   end
   def self.shared_test_resources_path
-    shared_test_resources_plugin_path = WebConsole::resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
-    return File.join(shared_test_resources_plugin_path, SHARED_RESOURCES_PATH_COMPONENT)
+    return WebConsole::resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
   end
 
   def self.shared_resource(resource)
@@ -73,10 +70,8 @@ module WebConsole
     result.chomp!
     return result
   end
-  require 'open-uri'
   def self.shared_resources_url
-    shared_resources_url = WebConsole::resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
-    return URI.join(shared_resources_url, SHARED_RESOURCES_PATH_COMPONENT)
+    return WebConsole::resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
   end
 
 

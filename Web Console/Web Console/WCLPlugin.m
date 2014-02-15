@@ -17,8 +17,8 @@
 
 #import "WCLPluginTask.h"
 
-#define kPluginNameKey @"Name"
-#define kPluginCommandKey @"Command"
+#define kPluginNameKey @"WCName"
+#define kPluginCommandKey @"WCCommand"
 
 @interface WCLPlugin ()
 @property (nonatomic, strong) NSBundle *bundle;
@@ -40,8 +40,9 @@
         _bundle = [NSBundle bundleWithPath:path];
         
         // Bundle Validation
-        if (!_bundle
-            || !([self name] > 0)) {
+        if (!_bundle ||
+            !([[self name] length])) {
+            DLog(@"Failed to load a bundle at path %@", path);
             return nil;
         }
     }
@@ -100,20 +101,6 @@
 - (NSArray *)orderedWindows
 {
     return [[WCLWebWindowsController sharedWebWindowsController] windowsForPlugin:self];
-}
-
-#pragma mark - Shared Resources
-
-+ (NSString *)sharedResourcePath
-{
-    WCLPlugin *sharedResourcePlugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kSharedResourcesPluginName];
-    return [[sharedResourcePlugin resourcePath] stringByAppendingPathComponent:kSharedResourcesPathComponent];
-}
-
-+ (NSURL *)sharedResourceURL
-{
-    WCLPlugin *sharedResourcePlugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kSharedResourcesPluginName];
-    return [[sharedResourcePlugin resourceURL] URLByAppendingPathComponent:kSharedResourcesPathComponent];
 }
 
 

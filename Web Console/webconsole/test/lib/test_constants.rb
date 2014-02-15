@@ -4,7 +4,7 @@ CONSTANTS_FILE = File.join(TEST_LIB_DIRECTORY, "..", "..", "lib", "webconsole", 
 
 # Plugins
 TEST_DATA_DIRECTORY = File.join(TEST_LIB_DIRECTORY, "..", "data")
-DATA_PLUGIN_FILE = File.join(TEST_DATA_DIRECTORY, "Data.bundle")
+DATA_PLUGIN_FILE = File.join(TEST_DATA_DIRECTORY, "Data.wcplugin")
 DATA_PLUGIN_NAME = "Data"
 DATA_PLUGIN_PATH_KEY = "Path"
 DATA_PLUGIN_ARGUMENTS_KEY = "Arguments"

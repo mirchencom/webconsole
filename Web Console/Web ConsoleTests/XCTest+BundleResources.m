@@ -11,7 +11,6 @@
 #import "WCLPluginManager.h"
 #import "WCLPlugin.h"
 #define kSharedTestResourcesPluginName @"Shared Test Resources"
-#define kSharedTestResourcesPathComponent @"Shared"
 
 @implementation XCTestCase (BundleResources)
 
@@ -47,8 +46,7 @@
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kSharedTestResourcesPluginName];
     NSURL *resourceURL = [plugin resourceURL];
     
-    return [[[[resourceURL URLByAppendingPathComponent:kSharedTestResourcesPathComponent]
-              URLByAppendingPathComponent:subdirectory]
+    return [[[resourceURL URLByAppendingPathComponent:subdirectory]
              URLByAppendingPathComponent:name]
             URLByAppendingPathExtension:ext];
 }

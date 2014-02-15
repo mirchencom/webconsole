@@ -1,1 +1,0 @@
-tell application "Web Console" to activatetell application "System Events" to key code 53

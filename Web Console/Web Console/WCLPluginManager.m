@@ -37,7 +37,7 @@
 }
 
 - (void)loadPlugins
-{
+{    
     NSString *builtInPlugInsPath = [[NSBundle mainBundle] builtInPlugInsPath];
     [self loadPluginsInDirectory:builtInPlugInsPath];
 //    NSArray *bundlePaths = [NSBundle pathsForResourcesOfType:kPlugInExtension inDirectory:builtInPlugInsPath];
@@ -85,14 +85,12 @@
 
 - (NSString *)sharedResourcePath
 {
-    WCLPlugin *sharedResourcePlugin = [self pluginWithName:kSharedResourcesPluginName];
-    return [[sharedResourcePlugin resourcePath] stringByAppendingPathComponent:kSharedResourcesPathComponent];
+    return [[self pluginWithName:kSharedResourcesPluginName] resourcePath];
 }
 
 - (NSURL *)sharedResourceURL
 {
-    WCLPlugin *sharedResourcePlugin = [self pluginWithName:kSharedResourcesPluginName];
-    return [[sharedResourcePlugin resourceURL] URLByAppendingPathComponent:kSharedResourcesPathComponent];
+    return [[self pluginWithName:kSharedResourcesPluginName] resourceURL];
 }
 
 
