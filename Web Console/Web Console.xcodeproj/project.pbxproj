@@ -1730,6 +1730,7 @@
 				45434204189E903E00C99761 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		454648571853C6C700147962 /* Build configuration list for PBXNativeTarget "Search" */ = {
 			isa = XCConfigurationList;

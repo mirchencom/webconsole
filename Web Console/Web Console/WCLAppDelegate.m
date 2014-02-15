@@ -16,6 +16,7 @@
 
 #import "WCLApplicationTerminationHelper.h"
 
+
 @implementation WCLAppDelegate
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification

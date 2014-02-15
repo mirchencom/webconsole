@@ -5,25 +5,12 @@ require "test/unit"
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
 require TEST_CONSTANTS_FILE
 
-require TEST_GIT_HELPER_FILE
-require TEST_DATA_FILE
-
 require TEST_WINDOW_MANAGER_HELPER
 
 require CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
 
 class TestController < Test::Unit::TestCase
-
-# TODO This should be moved to test case parser
-  # def test_class
-  #   git_helper = WcGit::Tests::GitHelper.new
-  # 
-  #   git_helper.add_file(TEST_FILE_ONE, TEST_FILE_ONE_CONTENT)
-  #   git_helper.add_file(TEST_FILE_TWO, TEST_FILE_TWO_CONTENT)
-  # 
-  #   git_helper.clean_up
-  # end
 
   def test_set_branch
     window_manager = WcGit::WindowManager.new
@@ -46,6 +33,15 @@ class TestController < Test::Unit::TestCase
     assert(controller.branch_name.nil?, "The controller's branch name should be nil after being set to nil.")
 
     window_manager.close
+  end
+
+  def test_staged_files
+    # file.status = "modified"
+    # file.staged = :staged, :unstaged, :untracked
+    # file.path
+
+    # fetchedResultsController pattern:
+    # fileDidMoveFromIndexPath to indexPath
   end
 
 end

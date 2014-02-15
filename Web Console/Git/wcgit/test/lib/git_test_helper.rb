@@ -2,8 +2,11 @@ module WcGit
   module Tests
 
     require 'fileutils'
+    require 'rugged'
+
 
     class GitHelper
+      attr_reader :path
       def initialize
         path = `mktemp -d /tmp/git_test_helper-XXXXXX`
         @path = path.chomp 
@@ -24,6 +27,10 @@ module WcGit
           content = content || ""
           f.write(content) 
         }
+      end
+
+      def git_init
+        Rugged::Repository.init_at(@path)
       end
 
       def clean_up
