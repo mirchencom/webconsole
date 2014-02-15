@@ -3,6 +3,13 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
+PROJECT_ROOT_PATH = File.join(File.dirname(__FILE__), "..", "..")
+XCODE_PROJECT_FILE_PATH = File.join(PROJECT_ROOT_PATH, "Web Console/Web Console.xcodeproj")
+XCODE_BUILD_SCHEME = "Web Console"
+WEBCONSOLE_GEM_PATH = File.join(PROJECT_ROOT_PATH, "webconsole")
+PLUGIN_PATH = File.join(PROJECT_ROOT_PATH, "Web Console", "Plugins")
+PLUGIN_RESOURCES_PATH_COMPONENT = "Contents/Resources"
+
 task :default => [:xcunit, :ruby]
 
 task :long => [:xcunit, :ruby_long]
@@ -19,7 +26,7 @@ task :other => ['other:tests']
 
 namespace :gems do
 
-  webconsole_gem_tests_rakefile = File.join(File.dirname(__FILE__), "../../Web Console/webconsole/test/Rakefile")
+  webconsole_gem_tests_rakefile = File.join(WEBCONSOLE_GEM_PATH, "test", "Rakefile")
   load webconsole_gem_tests_rakefile
 
   task :tests => [:test_webconsole]
@@ -28,19 +35,18 @@ namespace :gems do
 
 end
 
-
 namespace :plugins do
 
-  wcsearch_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Search", "wcsearch", "test", "Rakefile")
+  wcsearch_test_rakefile = File.join(PLUGIN_PATH, "Search.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
   load wcsearch_test_rakefile
 
-  wcirb_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "IRB", "wcirb", "test", "Rakefile")
+  wcirb_test_rakefile = File.join(PLUGIN_PATH, "IRB.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
   load wcirb_test_rakefile
 
-  wccoffee_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Coffee", "wccoffee", "test", "Rakefile")
+  wccoffee_test_rakefile = File.join(PLUGIN_PATH, "Coffee.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
   load wccoffee_test_rakefile
 
-  wcnode_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Node", "wcnode", "test", "Rakefile")
+  wcnode_test_rakefile = File.join(PLUGIN_PATH, "Node.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
   load wcnode_test_rakefile
 
   task :tests => [:test_wcsearch, :test_wcirb, :test_wccoffee, :test_wcnode]
@@ -57,7 +63,7 @@ end
 
 namespace :other do
 
-  wcrepl_test_rakefile = File.join(File.dirname(__FILE__), "../..", "Web Console", "Shared Resources", "Shared", "ruby", "wcrepl", "test", "Rakefile")
+  wcrepl_test_rakefile = File.join(PLUGIN_PATH, "Shared Resources.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "ruby", "wcrepl", "test", "Rakefile")
   load wcrepl_test_rakefile
 
   task :tests => [:test_wcrepl]
@@ -71,9 +77,7 @@ namespace :xcunit do
   task :tests => ['test_xcunit']
 
   task :test_xcunit do
-    xcodebuild_scheme = "Web Console"
-    xcodebuild_project_file = File.join(File.dirname(__FILE__), "../../Web Console/Web Console.xcodeproj")
-    sh "xcodebuild test -scheme #{Shellwords.escape(xcodebuild_scheme)} -project #{Shellwords.escape(xcodebuild_project_file)}"
+    sh "xcodebuild test -scheme #{Shellwords.escape(XCODE_BUILD_SCHEME)} -project #{Shellwords.escape(XCODE_PROJECT_FILE_PATH)}"
   end
 
 end

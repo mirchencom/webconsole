@@ -23,7 +23,6 @@
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
 		457F795518B0062500D705C8 /* Shared Test Resources.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */; };
-		457F795618B0065400D705C8 /* Ack.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795318B005BF00D705C8 /* Ack.wcplugin */; };
 		457F795718B0065E00D705C8 /* Coffee.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795218B005BF00D705C8 /* Coffee.wcplugin */; };
 		45898BB21785325B00AE365A /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 45898BB11785325B00AE365A /* Data */; };
 		45898BB7178532EC00AE365A /* WCLPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB4178532EC00AE365A /* WCLPlugin.m */; };
@@ -86,7 +85,6 @@
 				45DA852D18B0067300A151F3 /* Search.wcplugin in CopyFiles */,
 				45DA852C18B0067000A151F3 /* Shared Resources.wcplugin in CopyFiles */,
 				457F795718B0065E00D705C8 /* Coffee.wcplugin in CopyFiles */,
-				457F795618B0065400D705C8 /* Ack.wcplugin in CopyFiles */,
 				457F795518B0062500D705C8 /* Shared Test Resources.wcplugin in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,7 +132,6 @@
 		457F795018B005BF00D705C8 /* HTML.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTML.wcplugin; sourceTree = "<group>"; };
 		457F795118B005BF00D705C8 /* Git.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Git.wcplugin; sourceTree = "<group>"; };
 		457F795218B005BF00D705C8 /* Coffee.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Coffee.wcplugin; sourceTree = "<group>"; };
-		457F795318B005BF00D705C8 /* Ack.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Ack.wcplugin; sourceTree = "<group>"; };
 		45898BB11785325B00AE365A /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		45898BB3178532EC00AE365A /* WCLPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPlugin.h; sourceTree = "<group>"; };
 		45898BB4178532EC00AE365A /* WCLPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPlugin.m; sourceTree = "<group>"; };
@@ -323,7 +320,6 @@
 				457F795018B005BF00D705C8 /* HTML.wcplugin */,
 				457F795118B005BF00D705C8 /* Git.wcplugin */,
 				457F795218B005BF00D705C8 /* Coffee.wcplugin */,
-				457F795318B005BF00D705C8 /* Ack.wcplugin */,
 			);
 			path = PlugIns;
 			sourceTree = "<group>";

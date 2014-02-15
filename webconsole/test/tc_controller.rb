@@ -32,6 +32,7 @@ class TestWebConsoleController < Test::Unit::TestCase
     ENV[WebConsole::SHARED_RESOURCES_URL_KEY] = WebConsole::shared_resources_url.to_s
     WebConsole::Tests::Helper::quit
     controller = WebConsole::Controller.new(nil, TEST_TEMPLATE_FILE)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give time for application to quit
     assert(!WebConsole::Tests::Helper::is_running, "Web Console should not be running.")
   end
 
