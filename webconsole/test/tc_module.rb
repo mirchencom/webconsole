@@ -64,7 +64,7 @@ class TestWebConsoleProperties < Test::Unit::TestCase
     # File URLs aren't supported by 'open-uri' but file paths are
     test_url_string = test_url.to_s
     test_url_string.sub!(%r{^file:}, '')
-    test_url_string.sub!(%r{^//localhost}, '') # For 10.7
+    test_url_string.sub!(%r{^//localhost}, '') # For 10.8
     test_file = URI.unescape(test_url_string)
 
     assert(File.file?(test_file), "The test file should exist.")
@@ -77,7 +77,7 @@ class TestWebConsoleProperties < Test::Unit::TestCase
     # File URLs aren't supported by 'open-uri' but file paths are
     test_url_string = test_url.to_s
     test_url_string.sub!(%r{^file:}, '')
-    test_url_string.sub!(%r{^//localhost}, '') # For 10.7
+    test_url_string.sub!(%r{^//localhost}, '') # For 10.8
     test_file = URI.unescape(test_url_string)
 
     assert(File.file?(test_file), "The test file should exist.")
