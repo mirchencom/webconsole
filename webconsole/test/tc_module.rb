@@ -62,7 +62,11 @@ class TestWebConsoleProperties < Test::Unit::TestCase
 
     # Ruby doesn't handle file URLs so convert the file URL to a path
     # File URLs aren't supported by 'open-uri' but file paths are
-    test_file = URI.unescape(test_url.to_s.sub!(%r{^file://localhost}, ''))
+    test_url_string = test_url.to_s
+    test_url_string.sub!(%r{^file:}, '')
+    test_url_string.sub!(%r{^//localhost}, '') # For 10.7
+    test_file = URI.unescape(test_url_string)
+
     assert(File.file?(test_file), "The test file should exist.")
   end
   def test_shared_resources_url
@@ -71,7 +75,11 @@ class TestWebConsoleProperties < Test::Unit::TestCase
 
     # Ruby doesn't handle file URLs so convert the file URL to a path
     # File URLs aren't supported by 'open-uri' but file paths are
-    test_file = URI.unescape(test_url.to_s.sub!(%r{^file://localhost}, ''))
+    test_url_string = test_url.to_s
+    test_url_string.sub!(%r{^file:}, '')
+    test_url_string.sub!(%r{^//localhost}, '') # For 10.7
+    test_file = URI.unescape(test_url_string)
+
     assert(File.file?(test_file), "The test file should exist.")
   end
 end
