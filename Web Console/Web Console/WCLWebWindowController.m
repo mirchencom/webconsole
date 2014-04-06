@@ -91,8 +91,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
         [alert addButtonWithTitle:@"Close"];
         [alert addButtonWithTitle:@"Cancel"];
         [alert setMessageText:@"Do you want to close this window?"];
-        
-        
+
         NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commands];
         [alert setInformativeText:informativeText];
         [alert beginSheetModalForWindow:self.window
@@ -100,8 +99,6 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
                          didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                             contextInfo:NULL];        
         return NO;
-
-    
     }
     
     return YES;
@@ -125,6 +122,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (void)windowDidLoad
 {
+#warning Setting the window frame can be done in awakeFromNib and is safer to do from there! Move it there when I can
     NSString *windowFrameName = [self windowFrameName];
     if (windowFrameName) [self.window setFrameUsingName:windowFrameName];
 }
