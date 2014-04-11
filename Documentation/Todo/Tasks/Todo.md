@@ -2,9 +2,8 @@
 
 ## Sorting Out Public Project Management
 
+* [ ] Figure out differences between `preferences` branch and `master`
 * [ ] Fix github flavored markdown lists
-* [ ] Move Todo lists into relevant projects
-	* Check-in
 * [ ] Figure out solution for archiving old project notes
 	* [Web Console Archive](file:///Users/robenkleene/Dropbox/Text/Projects/Development/Web%20Console%20Archive/)
 
