@@ -37,7 +37,6 @@
  */
 - (WCLPlugin *)addedPluginAtURL:(NSURL *)URL;
 
-
 /*! Returns the full URL of the Shared Resource WCLPlugin’s resource directory.
  * \returns The full URL of the Shared Resource WCLPlugin’s resource directory.
  */
