@@ -3,6 +3,8 @@
 ## Sorting Out Public Project Management
 
 * [ ] Figure out differences between `preferences` branch and `master`
+* [ ] Merge and delete preferences
+* [ ] Confirm all tests pass
 * [ ] Fix github flavored markdown lists
 * [ ] Figure out solution for archiving old project notes
 	* [Web Console Archive](file:///Users/robenkleene/Dropbox/Text/Projects/Development/Web%20Console%20Archive/)
