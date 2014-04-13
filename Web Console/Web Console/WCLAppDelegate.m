@@ -16,6 +16,12 @@
 
 #import "WCLApplicationTerminationHelper.h"
 
+#import "WCLPreferencesWindowController.h"
+
+@interface WCLAppDelegate ()
+@property (nonatomic, strong) WCLPreferencesWindowController *preferencesWindowController;
+- (IBAction)showPreferencesWindow:(id)sender;
+@end
 
 @implementation WCLAppDelegate
 
@@ -25,11 +31,32 @@
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"WebKitDeveloperExtras"];
 }
 
+#pragma mark Termination
+
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 
     if ([WCLApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks]) return NSTerminateNow;
     
     return NSTerminateLater;
 }
+
+
+#pragma mark Preferences
+
+- (IBAction)showPreferencesWindow:(id)sender
+{
+    [self.preferencesWindowController showWindow:self];
+}
+
+- (WCLPreferencesWindowController *)preferencesWindowController
+{
+    if (_preferencesWindowController) return _preferencesWindowController;
+    
+    self.preferencesWindowController = [[WCLPreferencesWindowController alloc] initWithWindowNibName:kPreferencesWindowControllerNibName];
+    
+    return _preferencesWindowController;
+}
+
+
 
 @end
