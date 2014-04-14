@@ -19,14 +19,17 @@
 #define kTestPluginCommand @"wcprint.rb"
 #define kPluginCommandPathKey @"commandPath"
 
-#pragma mark - Window Sizes
+
+#pragma mark - Test Window Sizes
 
 #define kTestWindowFrame NSMakeRect(158, 97, 425, 450)
 #define kTestWindowFrameTwo NSMakeRect(200, 200, 333, 388)
 
+
 #pragma mark - Shared Resources
 
 #define kTestSharedResourcePathComponent @"js/zepto.js"
+
 
 #pragma mark - Shared Test Resources
 
@@ -34,11 +37,20 @@
 #define kSharedTestResourcesJavaScriptSubdirectory @"js"
 #define kSharedTestResourcesHTMLSubdirectory @"html"
 
+
+#pragma mark - Default Preferences
+
+#define kTestDefaultPreferencesSelectedTabValue 0
+#define kTestDefaultEnvironmentVariablePathKey @"PATH"
+#define kTestDefaultEnvironmentVariablePathValue @"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+#define kTestDefaultEnvironmentVariableEncodingKey @"LC_ALL"
+#define kTestDefaultEnvironmentVariableEncodingValue @"en_US.UTF-8"
+
 #pragma mark - Test Data
 
 #define kTestDataSubdirectory @"Data"
 
-#pragma mark - HTML
+#pragma mark HTML
 #define kTestDataHTMLExtension @"html"
 #pragma mark HTML Resources
 #define kTestDataHTMLFilename @"index"
@@ -46,21 +58,19 @@
 #define kTestDataHTMLJQUERYFilename @"indexjquery"
 #define kTestDataHTMLJQUERYTitle @"Index JQuery"
 
-#pragma mark - JavaScript
+#pragma mark JavaScript
 #define kTestDataJavaScriptExtension @"js"
 #pragma mark JavaScript Resources
 #define kTestJavaScriptTextJQueryFilename @"textjquery"
 #define kTestJavaScriptTextFilename @"text"
 
-
-#pragma mark - Ruby
+#pragma mark Ruby
 #define kTestDataRubyExtension @"rb"
 #pragma mark Ruby Resources
 #define kTestDataRubyHelloWorld @"hello_world"
 #define kTestDataSleepTwoSeconds @"sleep_two_seconds"
 
-
-#pragma mark - Shell Scripts
+#pragma mark Shell Scripts
 #define kTestDataShellScriptExtension @"sh"
 #define kTestDataInterruptFails @"interrupt_fails"
 #define kTestDataCat @"cat"

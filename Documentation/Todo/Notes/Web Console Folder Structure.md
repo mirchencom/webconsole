@@ -1,5 +1,12 @@
 # Web Console Folder Structure Work
 
+For the next step, organize test targets based on their dependencies.
+
+## Goals
+
+* It should be easy to run all tests that don't involve UI (and are therefore faster)
+* Test targets should be organized based on their dependencies, i.e., all the tests that need the `WCLTaskTestsHelper` should be in the same target as that file, and tests that don't need it should not.
+
 ## App
 
 * General

@@ -29,6 +29,10 @@
 {
     [[WCLPluginManager sharedPluginManager] loadPlugins];
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"WebKitDeveloperExtras"];
+
+    NSURL *defaultPreferencesURL = [[NSBundle mainBundle] URLForResource:@"DefaultPreferences" withExtension:@"plist"];
+    NSDictionary *defaultPreferencesDictionary = [NSDictionary dictionaryWithContentsOfURL:defaultPreferencesURL];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPreferencesDictionary];
 }
 
 #pragma mark Termination

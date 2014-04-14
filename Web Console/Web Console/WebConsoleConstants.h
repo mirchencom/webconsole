@@ -7,10 +7,10 @@
 //
 
 
-#pragma mark - Prefernces Defaults
+#pragma mark - Preferences Defaults
 
 #define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"
-
+ 
 
 #pragma mark - AppleScript Arguments Dictionary
 
@@ -28,6 +28,8 @@
 
 
 #pragma mark - Environment
+
+#define kEnvironmentDictionaryKey @"environmentDictionary"
 
 #define kEnvironmentVariablePathKey @"PATH"
 #define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";
