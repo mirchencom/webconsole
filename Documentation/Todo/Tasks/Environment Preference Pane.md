@@ -1,9 +1,5 @@
 # Environment Preference Pane
 
-* [ ] Test if I can migrate this to defaults too:
-
-	    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"WebKitDeveloperExtras"];
-
 * [ ] Delete `NSUserDefaults`, `defaults delete com.1percenter.Web-Console`
 * [ ] Write a test for `WebKitDeveloperExtras`?
 * [ ] Add it to the `UserDefaults.plist`

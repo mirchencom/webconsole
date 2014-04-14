@@ -22,15 +22,13 @@
 {
     [super setUp];
 
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kEnvironmentDictionaryKey];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDefaultPreferencesSelectedTabKey];
+    [[self class] clearUserDefaults];
 }
 
 - (void)tearDown
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kEnvironmentDictionaryKey];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDefaultPreferencesSelectedTabKey];
-
+    [[self class] clearUserDefaults];
+    
     [super tearDown];
 }
 
@@ -50,6 +48,20 @@
     
     NSString *encoding = environmentDictionary[kTestDefaultEnvironmentVariableEncodingKey];
     XCTAssertTrue([encoding isEqualToString:kTestDefaultEnvironmentVariableEncodingValue], @"The encoding should equal the default encoding.");
+}
+
+- (void)testDefaultWebDeveloperExtras
+{
+    BOOL webDeveloperExtrasEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kTestDefaultWebKitDeveloperExtrasKey];
+    XCTAssertEqual(webDeveloperExtrasEnabled, kTestDefaultWebKitDeveloperExtrasValue, @"The WebKitDeveloperExtras value should equal the default.");
+}
+
+
++ (void)clearUserDefaults
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kEnvironmentDictionaryKey];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDefaultPreferencesSelectedTabKey];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kTestDefaultWebKitDeveloperExtrasKey];
 }
 
 @end

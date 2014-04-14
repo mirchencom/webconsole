@@ -40,6 +40,8 @@
 
 #pragma mark - Default Preferences
 
+#define kTestDefaultWebKitDeveloperExtrasKey @"WebKitDeveloperExtras"
+#define kTestDefaultWebKitDeveloperExtrasValue YES
 #define kTestDefaultPreferencesSelectedTabValue 0
 #define kTestDefaultEnvironmentVariablePathKey @"PATH"
 #define kTestDefaultEnvironmentVariablePathValue @"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
