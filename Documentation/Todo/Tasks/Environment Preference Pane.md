@@ -1,23 +1,20 @@
 # Environment Preference Pane
 
-* [ ] Delete environment dictionary here, see if it is deleted from the real user app preferences
-* [ ] Implement `DefaultPreferences.plist` system
-* [ ] Write tests for it
-* [ ] Setup defaults for environment variables
-	* `#define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"`, should be replaced with this system
-	* As should these:
-	
-			#define kEnvironmentVariableEncodingKey @"LC_ALL" 
-			#define kEnvironmentVariableEncodingValue @"en_US.UTF-8"
-	
-	* And these:
+* [ ] Delete these defines after environment is tested as working properly:
 
-			#define kEnvironmentVariablePathKey @"PATH"
-			#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";
+Selected tab
 
-* [ ] After above is clear, figure out a solution for pragmatically setting my `PATH` back to:
+	#define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"
 
-		/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/
+Encoding
+
+	#define kEnvironmentVariableEncodingKey @"LC_ALL" 
+	#define kEnvironmentVariableEncodingValue @"en_US.UTF-8"
+
+Path
+
+	#define kEnvironmentVariablePathKey @"PATH"
+	#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";
 
 * [ ] Test if I can migrate this to defaults to:
 
@@ -25,7 +22,13 @@
 
 ## Notes
 
+My `PATH`:
+
 	#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";
+
+Clear `NSUserDefaults`:
+
+	defaults delete com.1percenter.Web-Console
 
 ### Files to Modify
 
