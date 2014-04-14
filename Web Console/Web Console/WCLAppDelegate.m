@@ -25,15 +25,21 @@
 
 @implementation WCLAppDelegate
 
++ (void)initialize
+{
+    NSURL *userDefaultsURL = [[NSBundle mainBundle] URLForResource:kUserDefaultsFilename
+                                                     withExtension:kUserDefaultsFileExtension];
+    NSDictionary *userDefaultsDictionary = [NSDictionary dictionaryWithContentsOfURL:userDefaultsURL];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDictionary];
+    [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:userDefaultsDictionary];
+}
+
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
     [[WCLPluginManager sharedPluginManager] loadPlugins];
     [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"WebKitDeveloperExtras"];
-
-    NSURL *defaultPreferencesURL = [[NSBundle mainBundle] URLForResource:@"DefaultPreferences" withExtension:@"plist"];
-    NSDictionary *defaultPreferencesDictionary = [NSDictionary dictionaryWithContentsOfURL:defaultPreferencesURL];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPreferencesDictionary];
 }
+
 
 #pragma mark Termination
 
@@ -60,7 +66,5 @@
     
     return _preferencesWindowController;
 }
-
-
 
 @end

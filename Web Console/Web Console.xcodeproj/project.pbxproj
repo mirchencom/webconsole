@@ -31,7 +31,7 @@
 		459389EE18FB20D900E0218E /* WCLEnvironmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459389E918FB20D900E0218E /* WCLEnvironmentViewController.xib */; };
 		459389EF18FB20D900E0218E /* WCLPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 459389EB18FB20D900E0218E /* WCLPreferencesWindowController.m */; };
 		459389F018FB20D900E0218E /* WCLPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459389EC18FB20D900E0218E /* WCLPreferencesWindowController.xib */; };
-		459389F318FB287700E0218E /* DefaultPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 459389F218FB287700E0218E /* DefaultPreferences.plist */; };
+		459389F318FB287700E0218E /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 459389F218FB287700E0218E /* UserDefaults.plist */; };
 		459389F518FB2DAB00E0218E /* Web_ConsoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */; };
 		4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */; };
 		45A34E22187263A4005BF628 /* WCLWebWindowControllerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */; };
@@ -149,7 +149,7 @@
 		459389EA18FB20D900E0218E /* WCLPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPreferencesWindowController.h; sourceTree = "<group>"; };
 		459389EB18FB20D900E0218E /* WCLPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPreferencesWindowController.m; sourceTree = "<group>"; };
 		459389EC18FB20D900E0218E /* WCLPreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WCLPreferencesWindowController.xib; sourceTree = "<group>"; };
-		459389F218FB287700E0218E /* DefaultPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultPreferences.plist; sourceTree = "<group>"; };
+		459389F218FB287700E0218E /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_ConsoleTests.m; sourceTree = "<group>"; };
 		4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+AppleScript.h"; sourceTree = "<group>"; };
 		4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+AppleScript.m"; sourceTree = "<group>"; };
@@ -389,7 +389,7 @@
 				459389EA18FB20D900E0218E /* WCLPreferencesWindowController.h */,
 				459389EB18FB20D900E0218E /* WCLPreferencesWindowController.m */,
 				459389EC18FB20D900E0218E /* WCLPreferencesWindowController.xib */,
-				459389F218FB287700E0218E /* DefaultPreferences.plist */,
+				459389F218FB287700E0218E /* UserDefaults.plist */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -474,7 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4530B0DA1736E2A6000A52E2 /* InfoPlist.strings in Resources */,
-				459389F318FB287700E0218E /* DefaultPreferences.plist in Resources */,
+				459389F318FB287700E0218E /* UserDefaults.plist in Resources */,
 				459389F018FB20D900E0218E /* WCLPreferencesWindowController.xib in Resources */,
 				4530B0E01736E2A6000A52E2 /* Credits.rtf in Resources */,
 				4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */,

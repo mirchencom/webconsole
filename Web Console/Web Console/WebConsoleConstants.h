@@ -9,6 +9,9 @@
 
 #pragma mark - Preferences Defaults
 
+#define kUserDefaultsFilename @"UserDefaults"
+#define kUserDefaultsFileExtension @"plist"
+
 #define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"
  
 
@@ -30,14 +33,9 @@
 #pragma mark - Environment
 
 #define kEnvironmentDictionaryKey @"environmentDictionary"
-
-#define kEnvironmentVariablePathKey @"PATH"
-#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";
 #define kEnvironmentVariableWindowIDKey @"WC_WINDOW_ID"
 #define kEnvironmentVariableSharedResourcePathKey @"WC_SHARED_RESOURCE_PATH"
 #define kEnvironmentVariableSharedResourceURLKey @"WC_SHARED_RESOURCE_URL"
-#define kEnvironmentVariableEncodingKey @"LC_ALL" 
-#define kEnvironmentVariableEncodingValue @"en_US.UTF-8"
 
 
 #pragma mark - Timeouts

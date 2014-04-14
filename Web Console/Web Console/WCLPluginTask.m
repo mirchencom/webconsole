@@ -64,11 +64,10 @@
 
 + (NSDictionary *)environmentDictionaryWithWindowNumber:(NSNumber *)windowNumber
 {
-    NSMutableDictionary *environmentDictionary = [[NSMutableDictionary alloc] init];
-    environmentDictionary[kEnvironmentVariablePathKey] = kEnvironmentVariablePathValue;
+    NSMutableDictionary *environmentDictionary = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey] mutableCopy];
+    
     environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
     environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
-    environmentDictionary[kEnvironmentVariableEncodingKey] = kEnvironmentVariableEncodingValue; // Prevents choke on special characters
     environmentDictionary[kEnvironmentVariableWindowIDKey] = windowNumber;
 
     return environmentDictionary;
