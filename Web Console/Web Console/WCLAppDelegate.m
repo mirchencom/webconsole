@@ -37,7 +37,6 @@
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
     [[WCLPluginManager sharedPluginManager] loadPlugins];
-    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"WebKitDeveloperExtras"];
 }
 
 

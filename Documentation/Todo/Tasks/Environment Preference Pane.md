@@ -1,49 +1,15 @@
 # Environment Preference Pane
 
-* [ ] Delete these defines after environment is tested as working properly:
-
-Selected tab
-
-	#define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"
-
-Encoding
-
-	#define kEnvironmentVariableEncodingKey @"LC_ALL" 
-	#define kEnvironmentVariableEncodingValue @"en_US.UTF-8"
-
-Path
-
-	#define kEnvironmentVariablePathKey @"PATH"
-	#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";
-
-* [ ] Test if I can migrate this to defaults to:
+* [ ] Test if I can migrate this to defaults too:
 
 	    [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"WebKitDeveloperExtras"];
 
+* [ ] Delete `NSUserDefaults`, `defaults delete com.1percenter.Web-Console`
+* [ ] Write a test for `WebKitDeveloperExtras`?
+* [ ] Add it to the `UserDefaults.plist`
+* [ ] See if I can use the Web Inspector
+
 ## Notes
 
-My `PATH`:
-
-	#define kEnvironmentVariablePathValue @"/Users/robenkleene/.rbenv/shims:/Users/robenkleene/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/npm/bin/";
-
-Clear `NSUserDefaults`:
-
-	defaults delete com.1percenter.Web-Console
-
-### Files to Modify
-
-* `WCLAppDelegate`
-* `MainMenu.xib`
-
-### Files to Add
-
-* `WCLPreferencesWindowController.h`
-* `WCLPreferencesWindowController.m`
-* `WCLPreferencesWindowController.xib`
-* `WCLEnvironmentViewController.h`
-* `WCLEnvironmentViewController.m`
-* `WCLEnvironmentViewController.xib`
-
-
-
-### Tests to Add
+	<key>WebKitDeveloperExtras</key>
+	<true/>
