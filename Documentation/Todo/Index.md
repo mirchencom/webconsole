@@ -12,6 +12,7 @@
 * [ ] Perform node module test on virtual machine
 * [ ] Try running plugin tests again on virtual machine
 * [ ] Shoot, like everywhere I should be using `require_relative`
+* [ ] All plugins should use "plugin name" as the title
 
 ## Continued
 

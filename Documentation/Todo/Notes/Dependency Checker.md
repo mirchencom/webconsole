@@ -24,6 +24,19 @@ Should be a file at:
 
 	/Web Console/Web Console/PlugIns/Shared Resources.wcplugin/Contents/Resources/ruby/wcdependenecies
 
+## Structure
+
+* `Checker`
+	* Has the main methods that get called
+	* Initializes a `Controller`, `Checker`, and `WindowManager` and ties them together
+* `Controller`	
+	* `delegate` is `WindowManager`
+* `DependencyChecker`
+	* `delegate` is `Controller`
+	* Calls the `DependencyTester`
+* `DependencyTester`
+* `WindowManager`
+
 ## Checking if a program exists
 
 	$ type -a coffee
