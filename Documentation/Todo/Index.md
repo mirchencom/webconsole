@@ -11,6 +11,7 @@
 * [ ] Perform ruby gem test on virtual machine
 * [ ] Perform node module test on virtual machine
 * [ ] Try running plugin tests again on virtual machine
+* [ ] Shoot, like everywhere I should be using `require_relative`
 
 ## Continued
 
