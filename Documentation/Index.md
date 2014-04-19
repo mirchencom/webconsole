@@ -1,8 +1,7 @@
 # Index
 
 ## Installing
-
-* [Installation Instructions](Installation%20Instructions.md)
+* [Installing Release Builds](Installing%20Release%20Builds.md)
 * [Building From Source](Building%20From%20Source.md)
 
 ## Plugins

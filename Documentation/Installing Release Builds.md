@@ -1,4 +1,6 @@
-# Installation Instructions
+# Installing Release Builds
+
+
 
 ## Requirements
 
