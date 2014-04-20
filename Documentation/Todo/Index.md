@@ -8,17 +8,13 @@
 	* Should only create a `window_manager` if a check fails
 * [x] Rake tests for wcdependencies
 	* Also add to main tests
+* [x] Shell command solution
 * [ ] Add it to `wccoffee`, `wcnode`, and `wcsearch`
 	* When integrating with a plugin, process should end if a check fails
-* [x] Shell command solution
 * [ ] Perform ruby gem test on virtual machine
-* [ ] Perform node module test on virtual machine
+* [ ] Perform shell command test on virtual machine
 * [ ] Try running plugin tests again on virtual machine
 * [ ] Setup all gems using [Plugin Dependencies](Notes/Plugin%20Dependencies.md)
-
-* `ENV['NODE_PATH'] = "/usr/local/share/npm/lib/node_modules:/usr/local/lib/node_modules"`
-	* Why am I setting the above?
-	* Remove that and put in in the defaults then run the tests
 
 ## Dependencies to check for
 
@@ -30,6 +26,7 @@
 
 ## Refactoring
 
+* [ ] Switch back to branch master
 * [ ] Replace my require full path with `require_relative` everywhere
 * [ ] Replace all javascript calls with new helper `def self.javascript_function(function, arguments)`
 	* Do a test for this
