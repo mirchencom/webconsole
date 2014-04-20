@@ -1,8 +1,18 @@
 # Dependency Checker
 
+* [ ] Has to check a batch of dependencies
+* [ ] Dependencies should only load the dependency view template HTML if a dependency check fails. This probably means changing the `Controller` API to not automatically load HTML
+	* It only needs to even initialize a `window_manager` if the check fails
 * [ ] Dependencies should be specified in a configuration file
 	* Should include an error message
 	* Should include an install message
+
+## Dependency Checker Refactor
+
+* The `controller` should not be a WebConsole controller subclass.
+	* Instead a controller should be instantiated when a dependency check first fails
+
+
 
 ## Using a preprocessor
 

@@ -5,6 +5,10 @@
 * [x] Ruby Gem Solution
 * [ ] Finish wcdependencies main API
 	* With tests
+	* Should only create a `window_manager` if a check fails
+	* When integrating with a plugin, process should end if a check fails
+* [ ] Rake tests for wcdependencies
+	* Also add to main tests
 * [ ] Add it to `wccoffee`, `wcnode`, and `wcsearch`
 * [ ] Shell command solution
 * [ ] Perform ruby gem test on virtual machine
@@ -17,6 +21,22 @@
 * [ ] Replace my require full path with `require_relative` everywhere
 * [ ] Replace all javascript calls with new helper `def self.javascript_function(function, arguments)`
 	* Do a test for this
+* [ ] I might be overly aggressively specifying scope, e.g.:
+
+		module WcIRB
+		  class Wrapper < WcREPL::Wrapper
+		  
+		  	# [...]
+		  
+		    def output_controller
+		      if !@output_controller
+		        @output_controller = WcIRB::OutputController.new(window_manager)
+		      end
+		      return @output_controller
+		    end
+	
+	I don't think I need to specify `WcIRB::` because I'm already in the `WcIRB` module?
+
 * [ ] Do that title helper method for all plugins
 	* The plugin name should be included as a environment variable
 	* Use `PLUGIN_NAME_KEY` for this
