@@ -7,6 +7,7 @@
 	* Should include an error message
 	* Should include an install message
 * [ ] Exists with `1` if a dependency fails to be found
+* [ ] `http` links should open in the browser
 
 ## Using a preprocessor
 
