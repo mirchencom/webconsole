@@ -8,6 +8,29 @@
 	* Should include an install message
 * [ ] Exists with `1` if a dependency fails to be found
 
+## Using a preprocessor
+
+Pass a method as an argument
+
+* [Passing a method as a parameter in Ruby - Stack Overflow](http://stackoverflow.com/questions/522720/passing-a-method-as-a-parameter-in-ruby)
+
+## Options Hash
+
+[hash - How to implement options hashes in Ruby? - Stack Overflow](http://stackoverflow.com/questions/14866910/how-to-implement-options-hashes-in-ruby):
+
+>		class Person
+>		
+>			def initialize(opts = {})
+>				@options = opts
+>			end
+>		
+>			def my_age
+>				return @options[:age] if @options.has_key?(:age)
+>			end
+>		
+>		end
+
+
 ## Notes
 
 File

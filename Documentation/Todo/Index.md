@@ -16,6 +16,10 @@
 
 ## Continued
 
+* [ ] Replace all javascript calls with new helper `def self.javascript_function(function, arguments)`
+	* Do a test for this
+* [ ] Do that title helper method for all plugins
+	* Add a test for it
 * [ ] Work on [Web Console Documentation](Tasks/Web%20Console%20Documentation.md)
 * [ ] Figure out how to publish the Ruby Gem
 * [ ] Figure out how to publish various extras
