@@ -3,18 +3,30 @@
 ## Plugin Dependencies
 
 * [x] Ruby Gem Solution
-* [ ] Finish wcdependencies main API
+* [x] Finish wcdependencies main API
 	* With tests
 	* Should only create a `window_manager` if a check fails
-	* When integrating with a plugin, process should end if a check fails
-* [ ] Rake tests for wcdependencies
+* [x] Rake tests for wcdependencies
 	* Also add to main tests
 * [ ] Add it to `wccoffee`, `wcnode`, and `wcsearch`
-* [ ] Shell command solution
+	* When integrating with a plugin, process should end if a check fails
+* [x] Shell command solution
 * [ ] Perform ruby gem test on virtual machine
 * [ ] Perform node module test on virtual machine
 * [ ] Try running plugin tests again on virtual machine
 * [ ] Setup all gems using [Plugin Dependencies](Notes/Plugin%20Dependencies.md)
+
+* `ENV['NODE_PATH'] = "/usr/local/share/npm/lib/node_modules:/usr/local/lib/node_modules"`
+	* Why am I setting the above?
+	* Remove that and put in in the defaults then run the tests
+
+## Dependencies to check for
+
+* `wcsearch`
+	* `pwd`
+	* `grep`
+* `wcnode`
+	* `node`
 
 ## Refactoring
 
