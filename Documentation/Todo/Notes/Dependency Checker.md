@@ -1,13 +1,8 @@
 # Dependency Checker
 
-* [ ] Re-install `webconsole` ruby gem for `PLUGIN_NAME_KEY`
-* [ ] Use Dependency Checker as a test of `require_relative`
-* [ ] The plugin name should be included as a environment variable
 * [ ] Dependencies should be specified in a configuration file
 	* Should include an error message
 	* Should include an install message
-* [ ] Exists with `1` if a dependency fails to be found
-* [ ] `http` links should open in the browser
 
 ## Using a preprocessor
 
