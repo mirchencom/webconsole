@@ -4,6 +4,8 @@ module WcDependencies
   class Checker
     require_relative 'lib/controller'
 
+    attr_reader :window_manager
+
     def check_dependencies(dependencies)
       passed = true
       dependencies.each { |dependency|  
@@ -29,7 +31,7 @@ module WcDependencies
 
     def controller
       if !@controller
-        window_manager = WindowManager.new
+        @window_manager = WindowManager.new
         @controller = Controller.new(window_manager)
       end
       return @controller
