@@ -1,5 +1,6 @@
 require 'webconsole'
 require_relative 'tester'
+require_relative 'model'
 
 module WcDependencies
   class Controller < WebConsole::Controller
@@ -12,18 +13,16 @@ module WcDependencies
     end
 
     ADD_MISSING_DEPENDENCY_FUNCTION = "addMissingDependency"
-    def check(name, type, options = {})
-      result = Tester::check(name, type)
-      if result
-        return
-      end
+    def missing_dependency(dependency)
+      name = dependency.name
+      type = self.class.string_for_type(dependency.type)
+      options = dependency.options
 
       if options.has_key?(:installation_instructions)
         installation_instructions = options[:installation_instructions]
       end      
 
-      type_string = self.class.string_for_type(type)
-      javascript = self.class.javascript_function(ADD_MISSING_DEPENDENCY_FUNCTION, [name, type_string, installation_instructions])
+      javascript = self.class.javascript_function(ADD_MISSING_DEPENDENCY_FUNCTION, [name, type, installation_instructions])
 
       if @delegate
         @delegate.do_javascript(javascript)
