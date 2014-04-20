@@ -20,8 +20,6 @@ module WcDependencies
 
       if options.has_key?(:installation_instructions)
         installation_instructions = options[:installation_instructions]
-        installation_instructions.javascript_escape!
-        installation_instructions = "'#{installation_instructions}'"
       end      
 
       type_string = self.class.string_for_type(type)
@@ -36,6 +34,7 @@ module WcDependencies
     private
 
     def self.javascript_function(function, arguments)
+      function = function.dup
       function << '('
       arguments.each { |argument|
         if argument

@@ -1,13 +1,15 @@
-body {
+body, h5 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 13px;
 }
-
 h5 {
   font-weight: normal;
   color: red;
 }
-
+blockquote {
+  margin-left: 2em;
+}
 code {
+  background-color: #DBE2EC;
 	font-family: "Menlo", monospace;  
 }
