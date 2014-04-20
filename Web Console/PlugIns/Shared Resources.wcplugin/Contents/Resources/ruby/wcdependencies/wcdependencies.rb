@@ -3,6 +3,7 @@ require_relative 'lib/model'
 module WcDependencies
   class Checker
     require_relative 'lib/controller'
+    require_relative 'lib/window_manager'
 
     attr_reader :window_manager
 
