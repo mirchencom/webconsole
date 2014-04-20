@@ -1,5 +1,5 @@
 module WcDependencies
-  module Checker
+  module Tester
     def self.check(name, type)
       case type
       when :shell_command

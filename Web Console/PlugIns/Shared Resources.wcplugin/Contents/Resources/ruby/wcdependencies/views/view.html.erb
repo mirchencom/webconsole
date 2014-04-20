@@ -4,6 +4,20 @@
 	<meta charset="utf-8" />
 	<title><%= title %></title>
 	<%= shared_stylesheet_link_tag "raster" %>
+	<link rel="stylesheet" href="css/style.css" />
+	<script id="dependency-template" type="text/x-handlebars-template">
+		<section>
+			<header>
+				<h5>Dependency <span class="type">{{type}}</span> <code class="name">{{name}}</code> not found.</h5>
+			</header>
+			{{#if installationInstructions}}
+				<p>To install <code>{{name}}</code>: {{installationInstructions}}</p>
+			{{/if}}
+		</section>
+	</script>
+	<%= shared_javascript_include_tag "handlebars" %>
+	<%= shared_javascript_include_tag "zepto" %>
+	<script type="text/javascript" src="js/wcdependencies.js"></script>
 </head>
 <body>
 
