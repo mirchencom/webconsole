@@ -66,9 +66,14 @@ namespace :other do
   wcrepl_test_rakefile = File.join(PLUGIN_PATH, "Shared Resources.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "ruby", "wcrepl", "test", "Rakefile")
   load wcrepl_test_rakefile
 
-  task :tests => [:test_wcrepl]
+  wcdependencies_test_rakefile = File.join(PLUGIN_PATH, "Shared Resources.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "ruby", "wcdependencies", "test", "Rakefile")
+  load wcdependencies_test_rakefile
+
+  task :tests => [:test_wcrepl, :test_wcdependencies]
 
   task :test_wcrepl => ['wcrepl:tests']
+
+  task :test_wcdependencies => ['wcdependencies:tests']
 end
 
 
