@@ -5,6 +5,7 @@ require "webconsole"
 
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
+require_relative "../lib/dependencies"
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
@@ -12,6 +13,13 @@ require TEST_CONSTANTS_FILE
 require WRAPPER_FILE
 
 class TestWrapper < Test::Unit::TestCase
+
+  def test_dependencies
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "WcCoffee"
+    passed = WcCoffee.check_dependencies
+    assert(passed, "The dependencies check should have passed.")
+  end
+
   def test_wrapper
     wrapper = WcCoffee::Wrapper.new
 

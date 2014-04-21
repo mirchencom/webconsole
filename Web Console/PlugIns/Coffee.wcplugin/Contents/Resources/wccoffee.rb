@@ -1,13 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'webconsole'
-require WebConsole::shared_resource("ruby/wcdependencies/wcdependencies")
 require File.join(File.dirname(__FILE__), "lib", "wrapper")
+require_relative "lib/dependencies"
 
-installation_instructions = "With <a href=\"https://www.npmjs.org\">npm</a>, <code>npm install -g coffee-script</code>."
-dependency = WcDependencies::Dependency.new("coffee", :shell_command, :installation_instructions => installation_instructions)
-checker = WcDependencies::Checker.new
-passed = checker.check(dependency)
+passed = WcCoffee.check_dependencies
 if !passed
   exit 1
 end
