@@ -2,6 +2,16 @@
 
 require 'Shellwords'
 require 'webconsole'
+require WebConsole::shared_resource("ruby/wcdependencies/wcdependencies")
+
+dependency_pwd = WcDependencies::Dependency.new("pwd", :shell_command)
+dependency_grep = WcDependencies::Dependency.new("grep", :shell_command)
+checker = WcDependencies::Checker.new
+passed = checker.check_dependencies([dependency_grep, dependency_pwd])
+if !passed
+  exit 1
+end
+
 
 LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
 
