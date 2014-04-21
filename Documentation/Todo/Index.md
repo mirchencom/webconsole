@@ -9,6 +9,7 @@
 * [x] Rake tests for wcdependencies
 	* Also add to main tests
 * [x] Shell command solution
+* [ ] Migrate dependencies to its own file and then start each test file with it for better tests
 * [ ] Add it to `wccoffee`, `wcnode`, and `wcsearch`
 	* When integrating with a plugin, process should end if a check fails
 * [ ] Perform ruby gem test on virtual machine
