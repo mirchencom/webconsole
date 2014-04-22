@@ -10,6 +10,7 @@
 	* Also add to main tests
 * [x] Shell command solution
 * [x] Try my bundler test on virtual machine
+* [ ] Continue with `wcirb`
 * [ ] Setup gem dependencies with bundler
 	* Don't install `webconsole` globally until I have all plugin tests passing
 	* I should only need `rbenv` and the `webconsole` gem installed for running tests
