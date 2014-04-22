@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
 require "test/unit"
-require "webconsole"
+require_relative '../bundle/bundler/setup'
+require 'webconsole'
 
 require WebConsole::shared_test_resource("ruby/test_constants")
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')

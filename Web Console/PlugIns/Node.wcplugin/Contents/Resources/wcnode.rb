@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require_relative '../bundle/bundler/setup'
+require 'webconsole'
 require File.join(File.dirname(__FILE__), "lib", "wrapper")
 require WebConsole::shared_resource("ruby/wcdependencies/wcdependencies")
 
