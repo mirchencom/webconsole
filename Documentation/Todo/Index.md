@@ -26,6 +26,10 @@
 * [ ] Perform shell command test on virtual machine
 * [ ] Try running plugin tests again on virtual machine
 * [ ] Setup all gems using [Plugin Dependencies](Notes/Plugin%20Dependencies.md)
+* [ ] Bundle shell scripts somehow?
+* [ ] Oy, I need a solution for shell scripts too
+	* For now just `gem install webconsole` globally
+	* After doing this test the HTML gem
 
 ## Standalone Relative Gem
 
@@ -68,6 +72,7 @@
 	* Add a test for it
 * [ ] `http` links should open in the browser
 	* Test missing dependencies homebrew link works with this
+* [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
 
 ## Continued
 
