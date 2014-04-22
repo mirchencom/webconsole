@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require_relative 'bundle/bundler/setup'
 require 'webconsole'
 require 'listen'
 

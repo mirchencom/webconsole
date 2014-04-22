@@ -1,0 +1,6 @@
+# A sample Gemfile
+source "https://rubygems.org"
+gem "webconsole"
+gem "redcarpet"
+gem "listen"
+# gem "rails"
