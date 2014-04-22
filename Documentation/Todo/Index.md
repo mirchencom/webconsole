@@ -14,6 +14,9 @@
 * [ ] Setup gem dependencies with bundler
 	* Don't install `webconsole` globally until I have all plugin tests passing
 	* I should only need `rbenv` and the `webconsole` gem installed for running tests
+* [ ] Rework `webconsole` gem so it doesn't modify itself when it runs
+	* [AppleScript Language Guide: About Handlers](https://developer.apple.com/library/mac/documentation/applescript/conceptual/applescriptlangguide/conceptual/ASLR_about_handlers.html)
+
 
 ## Getting All Tests Passing
 
