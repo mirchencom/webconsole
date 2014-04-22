@@ -1,4 +1,5 @@
-require "webconsole"
+require_relative '../bundle/bundler/setup'
+require 'webconsole'
 require WebConsole::shared_resource("ruby/wcdependencies/wcdependencies")
 
 module WcCoffee

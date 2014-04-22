@@ -1,3 +1,4 @@
+require_relative '../bundle/bundler/setup'
 require 'webconsole'
 
 module WcCoffee
