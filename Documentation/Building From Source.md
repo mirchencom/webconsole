@@ -46,3 +46,5 @@ Web Console is currently being tested with Ruby version 1.9.3-p194, instructions
 ## Tests
 
 ### Running Tests From the Command Line
+
+<!-- TODO The "webconsole" ruby gem is required  -->

@@ -1,6 +1,6 @@
 # Dependency Checker
 
-## Using a preprocessor
+## Using a Preprocessor
 
 E.g., supporting markdown for installation instructions
 

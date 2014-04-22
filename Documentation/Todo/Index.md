@@ -9,13 +9,28 @@
 * [x] Rake tests for wcdependencies
 	* Also add to main tests
 * [x] Shell command solution
-* [ ] Migrate dependencies to its own file and then start each test file with it for better tests
+* [x] Try my bundler test on virtual machine
+* [ ] Setup gem dependencies with bundler
+	* Don't install `webconsole` globally until I have all plugin tests passing
+	* I should only need `rbenv` and the `webconsole` gem installed for running tests
+
+## Getting All Tests Passing
+
+* [ ] Running tests is failing for `tc_web_console_tasks.rb` because the `require 'webconsole'` is failing in `wcprint.rb`
+	* Why is this failing? I know normal gem dependencies will fail
+	* Probably because I'm using the wrong ruby version
+* [ ] Do `wccoffee` dependency solution for `wcnode`, and `wcsearch`
 * [ ] Add it to `wccoffee`, `wcnode`, and `wcsearch`
 	* When integrating with a plugin, process should end if a check fails
 * [ ] Perform ruby gem test on virtual machine
 * [ ] Perform shell command test on virtual machine
 * [ ] Try running plugin tests again on virtual machine
 * [ ] Setup all gems using [Plugin Dependencies](Notes/Plugin%20Dependencies.md)
+
+## Standalone Relative Gem
+
+* [bundle install --standalone and a Gemfile with a :path option don't seem to work together · Issue #2071 · bundler/bundler](https://github.com/bundler/bundler/issues/2071)
+
 
 ## Dependencies to check for
 
