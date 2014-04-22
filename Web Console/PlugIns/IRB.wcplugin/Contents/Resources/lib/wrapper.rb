@@ -1,3 +1,4 @@
+require_relative '../bundle/bundler/setup'
 require 'webconsole'
 require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
 require File.join(File.dirname(__FILE__), "constants")

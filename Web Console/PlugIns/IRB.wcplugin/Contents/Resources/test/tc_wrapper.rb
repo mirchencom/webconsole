@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require "test/unit"
-require "webconsole"
-
+require_relative '../bundle/bundler/setup'
+require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
