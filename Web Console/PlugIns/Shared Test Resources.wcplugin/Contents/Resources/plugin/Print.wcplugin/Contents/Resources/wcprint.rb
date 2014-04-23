@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require_relative 'bundle/bundler/setup'
 require 'webconsole'
 
 LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
