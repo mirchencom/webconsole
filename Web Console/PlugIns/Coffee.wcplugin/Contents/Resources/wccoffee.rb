@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'webconsole'
 require File.join(File.dirname(__FILE__), "lib", "wrapper")
 require_relative "lib/dependencies"
 

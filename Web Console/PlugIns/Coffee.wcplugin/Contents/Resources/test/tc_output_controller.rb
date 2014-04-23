@@ -13,6 +13,13 @@ require INPUT_CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
 require OUTPUT_CONTROLLER_FILE
 
+class TestDependencies < Test::Unit::TestCase
+  def test_dependencies
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "Coffee"
+    passed = WcCoffee.check_dependencies
+    assert(passed, "The dependencies check should have passed.")
+  end
+end
 
 class TestOutputController < Test::Unit::TestCase
   
@@ -24,12 +31,6 @@ class TestOutputController < Test::Unit::TestCase
   
   def teardown
     @window_manager.close
-  end
-
-  def test_dependencies
-    ENV[WebConsole::PLUGIN_NAME_KEY] = "WcCoffee"
-    passed = WcCoffee.check_dependencies
-    assert(passed, "The dependencies check should have passed.")
   end
 
   def test_output_controller

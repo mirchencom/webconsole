@@ -7,10 +7,20 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
+require_relative "../lib/dependencies"
 
 require INPUT_CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
 require OUTPUT_CONTROLLER_FILE
+
+
+class TestDependencies < Test::Unit::TestCase
+  def test_dependencies
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "Node"
+    passed = WcNode.check_dependencies
+    assert(passed, "The dependencies check should have passed.")
+  end
+end
 
 class TestOutputController < Test::Unit::TestCase
   

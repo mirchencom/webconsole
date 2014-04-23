@@ -11,14 +11,15 @@ require_relative "../lib/dependencies"
 require INPUT_CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
 
-
-class TestInputController < Test::Unit::TestCase
-
+class TestDependencies < Test::Unit::TestCase
   def test_dependencies
-    ENV[WebConsole::PLUGIN_NAME_KEY] = "WcCoffee"
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "Coffee"
     passed = WcCoffee.check_dependencies
     assert(passed, "The dependencies check should have passed.")
   end
+end
+
+class TestInputController < Test::Unit::TestCase
 
   def test_input_controller
     window_manager = WcCoffee::WindowManager.new

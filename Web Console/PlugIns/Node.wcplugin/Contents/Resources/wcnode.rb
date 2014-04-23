@@ -1,14 +1,9 @@
 #!/usr/bin/env ruby
 
-require_relative '../bundle/bundler/setup'
-require 'webconsole'
 require File.join(File.dirname(__FILE__), "lib", "wrapper")
-require WebConsole::shared_resource("ruby/wcdependencies/wcdependencies")
+require_relative "lib/dependencies"
 
-installation_instructions = "With <a href=\"http://brew.sh\">Homebrew</a>, <code>brew install node</code>."
-dependency = WcDependencies::Dependency.new("node", :shell_command, :installation_instructions => installation_instructions)
-checker = WcDependencies::Checker.new
-passed = checker.check(dependency)
+passed = WcNode.check_dependencies
 if !passed
   exit 1
 end

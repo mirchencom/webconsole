@@ -3,13 +3,23 @@
 require "test/unit"
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
+
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
+require_relative "../lib/dependencies"
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
 
 require WRAPPER_FILE
+
+class TestDependencies < Test::Unit::TestCase
+  def test_dependencies
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "Node"
+    passed = WcNode.check_dependencies
+    assert(passed, "The dependencies check should have passed.")
+  end
+end
 
 class TestWrapper < Test::Unit::TestCase
   def test_wrapper

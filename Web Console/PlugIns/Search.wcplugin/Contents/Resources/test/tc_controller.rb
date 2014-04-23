@@ -4,6 +4,7 @@ require "test/unit"
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
+require_relative "../lib/dependencies"
 
 require TEST_DATA_HELPER_FILE
 require TEST_DATA_PARSER_FILE
@@ -13,6 +14,16 @@ require TEST_DATA_TESTER_FILE
 require PARSER_FILE
 require CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
+
+
+class TestDependencies < Test::Unit::TestCase
+  def test_dependencies
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "Search"
+    passed = WcSearch.check_dependencies
+    assert(passed, "The dependencies check should have passed.")
+  end
+end
+
 
 class TestController < Test::Unit::TestCase
 

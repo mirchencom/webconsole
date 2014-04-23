@@ -1,18 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'Shellwords'
-require_relative 'bundle/bundler/setup'
-require 'webconsole'
-require WebConsole::shared_resource("ruby/wcdependencies/wcdependencies")
-
-dependency_pwd = WcDependencies::Dependency.new("pwd", :shell_command)
-dependency_grep = WcDependencies::Dependency.new("grep", :shell_command)
-checker = WcDependencies::Checker.new
-passed = checker.check_dependencies([dependency_grep, dependency_pwd])
-if !passed
-  exit 1
-end
-
+require_relative "lib/dependencies"
 
 LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
 
@@ -28,6 +17,10 @@ require CONTROLLER_FILE
 WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, "window_manager")
 require WINDOW_MANAGER_FILE
 
+passed = WcSearch.check_dependencies
+if !passed
+  exit 1
+end
 
 # Window Manager
 window_manager = WcSearch::WindowManager.new

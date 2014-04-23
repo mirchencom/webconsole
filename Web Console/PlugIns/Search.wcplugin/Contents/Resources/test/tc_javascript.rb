@@ -6,10 +6,18 @@ TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
 require CONTROLLER_FILE
 require WINDOW_MANAGER_FILE
-
+require_relative "../lib/dependencies"
 
 # Test cases for some situations where `textWithMatchesProcessed` was failing.
 # To debug these situations: Run a test case and then use Web Console's Web Inspector to log console messages from the `textWithMatchesProcessed` JavaScript.
+
+class TestDependencies < Test::Unit::TestCase
+  def test_dependencies
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "Search"
+    passed = WcSearch.check_dependencies
+    assert(passed, "The dependencies check should have passed.")
+  end
+end
 
 class TestJavaScript < Test::Unit::TestCase
 

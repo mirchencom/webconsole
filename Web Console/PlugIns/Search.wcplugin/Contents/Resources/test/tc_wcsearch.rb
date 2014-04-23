@@ -5,6 +5,7 @@ require 'Shellwords'
 
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
+require_relative "../lib/dependencies"
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
 require TEST_CONSTANTS_FILE
@@ -15,6 +16,14 @@ require TEST_DATA_HELPER_FILE
 require TEST_DATA_PARSER_FILE
 require TEST_JAVASCRIPT_HELPER_FILE
 require TEST_DATA_TESTER_FILE
+
+class TestDependencies < Test::Unit::TestCase
+  def test_dependencies
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "Search"
+    passed = WcSearch.check_dependencies
+    assert(passed, "The dependencies check should have passed.")
+  end
+end
 
 class TestWcSearch < Test::Unit::TestCase
 

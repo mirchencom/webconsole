@@ -12,13 +12,16 @@ require TEST_CONSTANTS_FILE
 
 require WRAPPER_FILE
 
-class TestWrapper < Test::Unit::TestCase
-
+class TestDependencies < Test::Unit::TestCase
   def test_dependencies
-    ENV[WebConsole::PLUGIN_NAME_KEY] = "WcCoffee"
+    ENV[WebConsole::PLUGIN_NAME_KEY] = "Coffee"
     passed = WcCoffee.check_dependencies
     assert(passed, "The dependencies check should have passed.")
   end
+end
+
+
+class TestWrapper < Test::Unit::TestCase
 
   def test_wrapper
     wrapper = WcCoffee::Wrapper.new
