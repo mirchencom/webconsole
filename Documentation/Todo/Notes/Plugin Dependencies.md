@@ -7,3 +7,8 @@
 3. Edit the `Gemfile` to add required gems
 4. Run `bundle install --standalone`
 5. Add `require_relative 'bundle/bundler/setup'` to the script
+
+## Updating Gems
+
+	bundle update
+	bunlde cleanup

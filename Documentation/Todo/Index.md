@@ -25,7 +25,7 @@
 	* Don't install `webconsole` globally until I have all plugin tests passing
 	* I should only need `rbenv` and the `webconsole` gem installed for running tests
 * [ ] Run tests on virtual machine
-
+* [ ] Using `webconsole-0.0.2` but the `bundle/bundler/setup` file specifies `webconsole-0.0.1`
 
 ## Getting All Tests Passing
 
