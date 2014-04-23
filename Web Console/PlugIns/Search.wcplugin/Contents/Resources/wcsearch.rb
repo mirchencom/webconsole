@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'Shellwords'
+require_relative 'bundle/bundler/setup'
 require 'webconsole'
 require WebConsole::shared_resource("ruby/wcdependencies/wcdependencies")
 

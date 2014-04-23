@@ -1,3 +1,4 @@
+require_relative '../../bundle/bundler/setup'
 require 'json'
 
 TEST_DATA_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'test_data_constants')

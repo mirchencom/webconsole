@@ -2,6 +2,8 @@
 
 require "test/unit"
 require 'Shellwords'
+
+require_relative '../bundle/bundler/setup'
 require 'webconsole'
 
 TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
