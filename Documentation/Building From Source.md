@@ -13,11 +13,6 @@
 		git clone git@github.com:robenkleene/Web-Console.git
 
 2. Install the Ruby Gem
-
-		cd webconsole
-		gem build webconsole.gemspec
-		gem install webconsole-0.0.0.gem
-
 3. Open `Web Console/Web Console.xcodeproj`
 4. Run in Xcode
 
@@ -46,5 +41,7 @@ Web Console is currently being tested with Ruby version 1.9.3-p194, instructions
 ## Tests
 
 ### Running Tests From the Command Line
+
+	gem install webconsole
 
 <!-- TODO The "webconsole" ruby gem is required  -->

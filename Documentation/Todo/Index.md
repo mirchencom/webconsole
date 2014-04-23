@@ -2,13 +2,13 @@
 
 ## Todo
 
-1. Get all plugins setup with bundler
-2. Get all plugins setup with `WcDependencies` `Coffee` implementation
-3. Get all plugin tests to pass for gems without dependencies
-4. Confirm `coffee` fails correctly, then install `coffee`
-5. Confirm `node` fails correctly, then install `node`
-6. Install the dependencies for main tests, e.g., `webconsole gem`
-7. Get all tests to pass
+1. [x] Get all plugins setup with bundler
+2. [x] Get all plugins setup with `WcDependencies` `Coffee` implementation
+3. [x] Get all plugin tests to pass for gems without dependencies
+4. [x] Confirm `coffee` fails correctly, then install `coffee`
+5. [x] Confirm `node` fails correctly, then install `node`
+6. [ ] Install the dependencies for main tests, e.g., `gem install webconsole`
+7. [ ] Get all tests to pass
 
 ## Plugin Dependencies
 
