@@ -1,5 +1,15 @@
 # Index
 
+## Todo
+
+1. Get all plugins setup with bundler
+2. Get all plugins setup with `WcDependencies` `Coffee` implementation
+3. Get all plugin tests to pass for gems without dependencies
+4. Confirm `coffee` fails correctly, then install `coffee`
+5. Confirm `node` fails correctly, then install `node`
+6. Install the dependencies for main tests, e.g., `webconsole gem`
+7. Get all tests to pass
+
 ## Plugin Dependencies
 
 * [x] Ruby Gem Solution
@@ -10,12 +20,12 @@
 	* Also add to main tests
 * [x] Shell command solution
 * [x] Try my bundler test on virtual machine
-* [ ] Run tests on main machine
+* [x] Run tests on main machine
 * [ ] Setup gem dependencies with bundler
 	* Don't install `webconsole` globally until I have all plugin tests passing
 	* I should only need `rbenv` and the `webconsole` gem installed for running tests
 * [ ] Run tests on virtual machine
-* [ ] Update all global ruby gems
+
 
 ## Getting All Tests Passing
 
@@ -76,6 +86,7 @@
 * [ ] `http` links should open in the browser
 	* Test missing dependencies homebrew link works with this
 * [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
+* [ ] Update all global ruby gems on main machine
 
 ## Continued
 
