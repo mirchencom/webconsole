@@ -7,8 +7,11 @@
 3. [x] Get all plugin tests to pass for gems without dependencies
 4. [x] Confirm `coffee` fails correctly, then install `coffee`
 5. [x] Confirm `node` fails correctly, then install `node`
-6. [ ] Install the dependencies for main tests, e.g., `gem install webconsole`
-7. [ ] Get all tests to pass
+6. [x] Install the dependencies for main tests, e.g., `gem install webconsole`
+7. The reason `webconsole` gem is failing to load is the `webconsole` is using the system version of Ruby
+	* Upgrade everything to use mavericks default version of ruby
+	* Specify that system version in all shebang statements a-la TextMate
+8. [ ] Get all tests to pass
 
 ## Plugin Dependencies
 
