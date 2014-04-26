@@ -4,11 +4,9 @@ require "test/unit"
 require "webconsole"
 
 require WebConsole::shared_test_resource("ruby/test_constants")
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
-require TEST_CONSTANTS_FILE
 
-require INPUT_CONTROLLER_FILE
-require WINDOW_MANAGER_FILE
+require_relative "../lib/input_controller"
+require_relative "../lib/window_manager"
 
 class TestInputController < Test::Unit::TestCase
 

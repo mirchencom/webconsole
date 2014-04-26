@@ -1,8 +1,7 @@
 module WcREPL
-  require File.join(File.dirname(__FILE__), "lib", "constants.rb")
-  require INPUT_CONTROLLER_FILE
-  require OUTPUT_CONTROLLER_FILE
-  require WINDOW_MANAGER_FILE
+  require_relative "lib/input_controller"
+  require_relative "lib/output_controller"
+  require_relative "lib/window_manager"
 
   class Wrapper
     require 'pty'

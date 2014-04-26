@@ -6,10 +6,7 @@ require "webconsole"
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
-require TEST_CONSTANTS_FILE
-
-require WCREPL_FILE
+require_relative "../wcrepl"
 
 class TestWcREPL < Test::Unit::TestCase
   def test_wcrepl
