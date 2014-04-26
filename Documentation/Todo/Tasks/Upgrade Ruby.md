@@ -1,9 +1,18 @@
 # Upgrade Ruby
 
-* [ ] Set `rbenv` to use `2.0.0-p247`, this should set it in the `~/.rbenv/version` file
 * [ ] Redo Bundler to use `2.0.0-p247`
 	* Add `ruby '2.0.0'` to all `Gemfile`s
+	* Delete `.bundle` folder for all plugins
+	* Run
 * [ ] In all plugins and scripts, switch shebang to use system ruby
+
+## For all plugins
+
+1. Add `ruby '2.0.0'` to the `Gemfile`
+2. Delete the `.bundle` directory
+3. Delete the `bundle` directory
+4. Delete the `Gemfile.lock` file
+4. Run `bundle install --standalone`
 
 ## Notes
 
