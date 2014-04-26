@@ -2,7 +2,6 @@
 
 ## Todo
 
-* [ ] Do Markdown Project Management Refactoring
 * [ ] Give Web Console a proper version number
 
 ## Refactoring
