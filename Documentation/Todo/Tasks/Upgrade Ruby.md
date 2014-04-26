@@ -2,6 +2,7 @@
 
 * [ ] Set `rbenv` to use `2.0.0-p247`, this should set it in the `~/.rbenv/version` file
 * [ ] Redo Bundler to use `2.0.0-p247`
+	* Add `ruby '2.0.0'` to all `Gemfile`s
 * [ ] In all plugins and scripts, switch shebang to use system ruby
 
 ## Notes
