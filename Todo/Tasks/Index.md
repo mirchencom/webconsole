@@ -2,8 +2,6 @@
 
 ## Todo
 
-* [ ] Clean up Todo
-* [ ] Get back on master branch
 * [ ] Do Markdown Project Management Refactoring
 * [ ] Give Web Console a proper version number
 
@@ -37,6 +35,7 @@
 	* Test missing dependencies homebrew link works with this
 * [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
 * [ ] Update all global ruby gems on main machine
+* [ ] Controllers should not call `do_javascript` or `load_html` directly, instead those should call helper methods, also the `self.javascript_function` should be moved onto the view
 
 ## Building & Running Plugins
 
