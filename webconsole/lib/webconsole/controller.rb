@@ -3,9 +3,8 @@ require 'open-uri'
 
 module WebConsole
   class Controller
-    WEBCONSOLE_CONSTANTS = File.join(File.dirname(__FILE__), "constants")
-    require WEBCONSOLE_CONSTANTS
-    require MODULE_FILE
+    require_relative "constants"
+    require_relative "module"
 
     attr_reader :name
     def initialize(delegate = nil, erb_template_path = nil)

@@ -1,7 +1,6 @@
 module WebConsole
-  WEBCONSOLE_CONSTANTS = File.join(File.dirname(__FILE__), "webconsole", "constants")
-  require WEBCONSOLE_CONSTANTS
-  require WINDOW_MANAGER_FILE
-  require CONTROLLER_FILE
-  require MODULE_FILE
+  require_relative "webconsole/constants"
+  require_relative "webconsole/window_manager"
+  require_relative "webconsole/controller"
+  require_relative "webconsole/module"
 end
