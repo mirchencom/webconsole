@@ -2,63 +2,10 @@
 
 ## Todo
 
-1. [x] Get all plugins setup with bundler
-2. [x] Get all plugins setup with `WcDependencies` `Coffee` implementation
-3. [x] Get all plugin tests to pass for gems without dependencies
-4. [x] Confirm `coffee` fails correctly, then install `coffee`
-5. [x] Confirm `node` fails correctly, then install `node`
-6. [x] Install the dependencies for main tests, e.g., `gem install webconsole`
-7. The reason `webconsole` gem is failing to load is the `webconsole` is using the system version of Ruby
-	* Upgrade everything to use mavericks default version of ruby
-	* Specify that system version in all shebang statements a-la TextMate
-8. [ ] Get all tests to pass
-
-## Plugin Dependencies
-
-* [x] Ruby Gem Solution
-* [x] Finish wcdependencies main API
-	* With tests
-	* Should only create a `window_manager` if a check fails
-* [x] Rake tests for wcdependencies
-	* Also add to main tests
-* [x] Shell command solution
-* [x] Try my bundler test on virtual machine
-* [x] Run tests on main machine
-* [ ] Setup gem dependencies with bundler
-	* Don't install `webconsole` globally until I have all plugin tests passing
-	* I should only need `rbenv` and the `webconsole` gem installed for running tests
-* [ ] Run tests on virtual machine
-* [ ] Using `webconsole-0.0.2` but the `bundle/bundler/setup` file specifies `webconsole-0.0.1`
-
-## Getting All Tests Passing
-
-* [ ] Running tests is failing for `tc_web_console_tasks.rb` because the `require 'webconsole'` is failing in `wcprint.rb`
-	* Why is this failing? I know normal gem dependencies will fail
-	* Probably because I'm using the wrong ruby version
-* [ ] Do `wccoffee` dependency solution for `wcnode`, and `wcsearch`
-* [ ] Add it to `wccoffee`, `wcnode`, and `wcsearch`
-	* When integrating with a plugin, process should end if a check fails
-* [ ] Perform ruby gem test on virtual machine
-* [ ] Perform shell command test on virtual machine
-* [ ] Try running plugin tests again on virtual machine
-* [ ] Setup all gems using [Plugin Dependencies](Notes/Plugin%20Dependencies.md)
-* [ ] Bundle shell scripts somehow?
-* [ ] Oy, I need a solution for shell scripts too
-	* For now just `gem install webconsole` globally
-	* After doing this test the HTML gem
-
-## Standalone Relative Gem
-
-* [bundle install --standalone and a Gemfile with a :path option don't seem to work together · Issue #2071 · bundler/bundler](https://github.com/bundler/bundler/issues/2071)
-
-
-## Dependencies to check for
-
-* `wcsearch`
-	* `pwd`
-	* `grep`
-* `wcnode`
-	* `node`
+* [ ] Clean up Todo
+* [ ] Get back on master branch
+* [ ] Do Markdown Project Management Refactoring
+* [ ] Give Web Console a proper version number
 
 ## Refactoring
 
@@ -91,10 +38,18 @@
 * [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
 * [ ] Update all global ruby gems on main machine
 
+## Building & Running Plugins
+
+* [ ] Make it so the user can have plugins loaded from their user `Application Support` folder
+* [ ] TextMate Bundle
+* [ ] Shell Scripts
+	* These require the Ruby gem
+	* For now just `gem install webconsole` globally
+	* Test the HTML and Markdown Gems on Virtual Machine
+
 ## Continued
 
 * [ ] Work on [Web Console Documentation](Tasks/Web%20Console%20Documentation.md)
-* [ ] Figure out how to publish the Ruby Gem
 * [ ] Figure out how to publish various extras
 	* TextMate Bundle?
 	* Shell Scripts?
@@ -104,10 +59,6 @@
 		* `wcmarkdown.rb`
 		* `wcnode.rb`
 		* `wcsearch.rb`
-* [ ] Make it so the user can have plugins loaded from their user `Application Support` folder
 * [ ] Fix the `PluginEditorPrototype` toolbar for screenshots
-
-## Later
-
-* [ ] Give Web Console a proper version number
 * [ ] Record screencasts
+* [ ] Do an app icon
