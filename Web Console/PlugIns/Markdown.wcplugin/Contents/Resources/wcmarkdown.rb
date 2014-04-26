@@ -4,13 +4,8 @@ require_relative 'bundle/bundler/setup'
 require 'webconsole'
 require 'listen'
 
-LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
-
-CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
-require CONTROLLER_FILE
-
-WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, "window_manager")
-require WINDOW_MANAGER_FILE
+require_relative "lib/controller"
+require_relative "lib/window_manager"
 
 if !ARGV.empty?
   file = ARGF.file
