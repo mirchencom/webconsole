@@ -1,7 +1,6 @@
 module WebConsole
   class WindowManager
-    WEBCONSOLE_CONSTANTS = File.join(File.dirname(__FILE__), "constants")
-    require WEBCONSOLE_CONSTANTS
+    require_relative "constants"
 
     attr_writer :base_url
 
