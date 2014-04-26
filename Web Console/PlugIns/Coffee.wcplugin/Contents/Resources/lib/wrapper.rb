@@ -1,13 +1,12 @@
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
 require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
-require File.join(File.dirname(__FILE__), "constants")
 
 module WcCoffee
   class Wrapper < WcREPL::Wrapper
-    require OUTPUT_CONTROLLER_FILE
-    require INPUT_CONTROLLER_FILE
-    require WINDOW_MANAGER_FILE
+    require_relative "output_controller"
+    require_relative "input_controller"
+    require_relative "window_manager"
 
     def initialize
       super("coffee")

@@ -4,12 +4,10 @@ require "test/unit"
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
-require TEST_CONSTANTS_FILE
-require_relative "../lib/dependencies"
 
-require INPUT_CONTROLLER_FILE
-require WINDOW_MANAGER_FILE
+require_relative "../lib/dependencies"
+require_relative "../lib/input_controller"
+require_relative "../lib/window_manager"
 
 class TestDependencies < Test::Unit::TestCase
   def test_dependencies
