@@ -2,10 +2,14 @@
 
 ## Update `webconsole` gem
 
-* [ ] `require_relative`
-* [ ] Specify ruby version in gem file
-* [ ] Update gem version number
+* [x] `require_relative`
+* [x] Specify ruby version in gem file
+* [x] Update gem version number
+* [ ] Build and upload new ruby gem
 * [ ] Update all plugins to use new version of gem
+	* `bundle update`
+	* `bundle clean`
+* [ ] Make sure this causes the `Gemfile.lock` to update?
 
 ## Follow-up Cleanup
 
