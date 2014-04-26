@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
 
 require File.join(File.dirname(__FILE__), "lib", "wrapper")
 require_relative "lib/dependencies"
