@@ -1,12 +1,7 @@
 # Index
 
-## Todo
-
-* [ ] Give Web Console a proper version number
-
 ## Refactoring
 
-* [ ] Switch back to branch master
 * [ ] Replace my require full path with `require_relative` everywhere
 * [ ] Replace all javascript calls with new helper `def self.javascript_function(function, arguments)`
 	* Do a test for this
