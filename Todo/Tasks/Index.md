@@ -1,12 +1,20 @@
 # Index
 
+## Update `webconsole` gem
+
+* [ ] `require_relative`
+* [ ] Specify ruby version in gem file
+* [ ] Update gem version number
+* [ ] Update all plugins to use new version of gem
+
+## Follow-up Cleanup
+
+* [x] Replace my require full path with `require_relative` everywhere
+* [ ] Make sure everything is cleaned up
+	* Search for `LIB_` e.g., `LIB_DIRECTORY`
+
 ## Refactoring
 
-* [ ] Replace my require full path with `require_relative` everywhere
-	* Search for `LIB_` e.g., `LIB_DIRECTORY`
-* [ ] Specify ruby version in gem file
-* [ ] Replace all javascript calls with new helper `def self.javascript_function(function, arguments)`
-	* Do a test for this
 * [ ] I might be overly aggressively specifying scope, e.g.:
 
 		module WcIRB
@@ -22,19 +30,19 @@
 		    end
 	
 	I don't think I need to specify `WcIRB::` because I'm already in the `WcIRB` module?
-
-* [ ] Do that title helper method for all plugins
+* [ ] Replace all javascript calls with new helper `def self.javascript_function(function, arguments)`
+	* Do a test for this
+	* Controllers should not call `do_javascript` or `load_html` directly, instead those should call helper methods, also the `self.javascript_function` should be moved onto the view
+* [ ] Do that `title` helper method for all plugins
 	* The plugin name should be included as a environment variable
 	* Use `PLUGIN_NAME_KEY` for this
 	* Add a test for it
-* [ ] `http` links should open in the browser
-	* Test missing dependencies homebrew link works with this
-* [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
-* [ ] Update all global ruby gems on main machine
-* [ ] Controllers should not call `do_javascript` or `load_html` directly, instead those should call helper methods, also the `self.javascript_function` should be moved onto the view
+* [ ] `http` links should open in the browser?
+	* Test missing dependencies (e.g., linking to "homebrew") work with this
 
 ## Building & Running Plugins
 
+* [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
 * [ ] Make it so the user can have plugins loaded from their user `Application Support` folder
 * [ ] TextMate Bundle
 * [ ] Shell Scripts
