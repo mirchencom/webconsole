@@ -38,7 +38,7 @@
         [tasksWaitingToRun removeObjectsInArray:tasksNowRunning];
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
-    NSAssert(![tasksWaitingToRun count], @"All of the NSTasks should have started runnign.");
+    NSAssert(![tasksWaitingToRun count], @"All of the NSTasks should have started running.");
 }
 
 #pragma mark - Finishing

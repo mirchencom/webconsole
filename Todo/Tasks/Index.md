@@ -4,6 +4,7 @@
 
 * [ ] Replace my require full path with `require_relative` everywhere
 	* Search for `LIB_` e.g., `LIB_DIRECTORY`
+* [ ] Specify ruby version in gem file
 * [ ] Replace all javascript calls with new helper `def self.javascript_function(function, arguments)`
 	* Do a test for this
 * [ ] I might be overly aggressively specifying scope, e.g.:

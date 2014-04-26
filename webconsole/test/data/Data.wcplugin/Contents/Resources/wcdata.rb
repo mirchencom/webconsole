@@ -3,9 +3,7 @@
 require_relative 'bundle/bundler/setup'
 require 'webconsole'
 
-LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
-CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
-require CONTROLLER_FILE
+require_relative "lib/controller"
 
 # Window Manager
 window_manager = WebConsole::WindowManager.new
