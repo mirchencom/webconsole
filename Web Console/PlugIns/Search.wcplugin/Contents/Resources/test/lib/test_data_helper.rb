@@ -1,7 +1,6 @@
 require 'Shellwords'
 
-TEST_SCRIPT_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'test_script_constants')
-require TEST_SCRIPT_CONSTANTS_FILE # Get the TEST_DATA_DIRECTORY
+require_relative "test_script_constants" # Get the TEST_DATA_DIRECTORY
 
 module WcSearch
   module Tests

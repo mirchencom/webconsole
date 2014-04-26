@@ -1,21 +1,12 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
 
 require 'Shellwords'
+
 require_relative "lib/dependencies"
-
-LIB_DIRECTORY = File.join(File.dirname(__FILE__), "lib")
-
-CONSTANTS_FILE = File.join(LIB_DIRECTORY, "constants")
-require CONSTANTS_FILE
-
-PARSER_FILE = File.join(LIB_DIRECTORY, "parser")
-require PARSER_FILE
-
-CONTROLLER_FILE = File.join(LIB_DIRECTORY, "controller")
-require CONTROLLER_FILE
-
-WINDOW_MANAGER_FILE = File.join(LIB_DIRECTORY, "window_manager")
-require WINDOW_MANAGER_FILE
+require_relative "lib/constants"
+require_relative "lib/parser"
+require_relative "lib/controller"
+require_relative "lib/window_manager"
 
 passed = WcSearch.check_dependencies
 if !passed

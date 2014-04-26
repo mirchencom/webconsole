@@ -2,18 +2,16 @@
 
 require "test/unit"
 
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
-require TEST_CONSTANTS_FILE
-require_relative "../lib/dependencies"
+require_relative "lib/test_data_helper"
+require_relative "lib/test_data_parser"
+require_relative "lib/test_javascript_helper"
+require_relative "lib/test_parser_additions"
+require_relative "lib/test_data_tester"
 
-require TEST_DATA_HELPER_FILE
-require TEST_DATA_PARSER_FILE
-require TEST_JAVASCRIPT_HELPER_FILE
-require TEST_PARSER_ADDITIONS_FILE
-require TEST_DATA_TESTER_FILE
-require PARSER_FILE
-require CONTROLLER_FILE
-require WINDOW_MANAGER_FILE
+require_relative "../lib/dependencies"
+require_relative "../lib/parser"
+require_relative "../lib/controller"
+require_relative "../lib/window_manager"
 
 
 class TestDependencies < Test::Unit::TestCase

@@ -1,7 +1,7 @@
 require 'pathname'
 
-require File.join(File.dirname(__FILE__), 'model')
-require File.join(File.dirname(__FILE__), 'constants')
+require_relative "model"
+require_relative "constants"
 
 module WcSearch
 

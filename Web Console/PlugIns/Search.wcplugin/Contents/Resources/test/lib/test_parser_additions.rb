@@ -1,5 +1,4 @@
-require File.join(File.dirname(__FILE__), 'test_constants')
-require PARSER_FILE
+require_relative "../../lib/parser"
 
 module WcSearch
   class Parser

@@ -5,11 +5,8 @@ require 'json'
 require 'Shellwords'
 require 'pathname'
 
-TEST_LIB_DIRECTORY = File.join(File.dirname(__FILE__), "..", 'lib')
-TEST_SCRIPT_CONSTANTS_FILE = File.join(TEST_LIB_DIRECTORY, 'test_script_constants')
-require TEST_SCRIPT_CONSTANTS_FILE
-TEST_DATA_CONSTANTS_FILE = File.join(TEST_LIB_DIRECTORY, 'test_data_constants')
-require TEST_DATA_CONSTANTS_FILE
+require_relative "../lib/test_script_constants"
+require_relative "../lib/test_data_constants"
 
 command = "#{TEST_DATA_SEARCH_COMMAND} \"#{SEARCH_TERM}\" #{Shellwords.escape(TEST_DATA_DIRECTORY)}"
 match_lines = `#{command}`

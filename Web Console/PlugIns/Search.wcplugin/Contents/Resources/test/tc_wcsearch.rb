@@ -5,17 +5,16 @@ require 'Shellwords'
 
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
-require_relative "../lib/dependencies"
 
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), 'lib', 'test_constants')
-require TEST_CONSTANTS_FILE
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
-require TEST_DATA_HELPER_FILE
-require TEST_DATA_PARSER_FILE
-require TEST_JAVASCRIPT_HELPER_FILE
-require TEST_DATA_TESTER_FILE
+require_relative "lib/test_data_helper"
+require_relative "lib/test_data_parser"
+require_relative "lib/test_javascript_helper"
+require_relative "lib/test_data_tester"
+
+require_relative "../lib/dependencies"
 
 class TestDependencies < Test::Unit::TestCase
   def test_dependencies
