@@ -2,13 +2,10 @@
 
 require "test/unit"
 
-TEST_CONSTANTS_FILE = File.join(File.dirname(__FILE__), "lib", "test_constants")
-require TEST_CONSTANTS_FILE
+require_relative "lib/git_test_helper"
+require_relative "lib/test_data"
 
-require TEST_GIT_HELPER_FILE
-require TEST_DATA_FILE
-
-require GIT_MANAGER_FILE
+require "../lib/git_manager"
 
 class TestGitManager < Test::Unit::TestCase
 

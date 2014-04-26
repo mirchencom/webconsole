@@ -1,5 +1,7 @@
 # Git Client
 
+* [ ] `mktemp` is a dependency
+
 - Write a `GitTestHelper`.
 
 1. On Init makes a git repo in /tmp

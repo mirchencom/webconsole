@@ -1,3 +1,4 @@
+require_relative '../bundle/bundler/setup'
 require 'webconsole'
 require 'coffee-script'
 

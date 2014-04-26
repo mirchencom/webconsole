@@ -1,6 +1,7 @@
 module WcGit
   module Tests
 
+	require_relative '../../bundle/bundler/setup'
     require 'fileutils'
     require 'rugged'
 

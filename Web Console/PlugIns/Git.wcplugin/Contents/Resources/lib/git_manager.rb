@@ -2,6 +2,7 @@
 
 module WcGit
 
+  require_relative '../bundle/bundler/setup'
   require 'rugged'
   class GitManager
     def initialize(path)
