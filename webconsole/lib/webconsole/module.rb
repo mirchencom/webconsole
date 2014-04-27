@@ -49,10 +49,10 @@ module WebConsole
   SHARED_RESOURCES_PLUGIN_NAME = "Shared Resources"
   SHARED_TEST_RESOURCES_PLUGIN_NAME = "Shared Test Resources"
   def self.shared_resources_path
-    return WebConsole::resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
+    return resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
   end
   def self.shared_test_resources_path
-    return WebConsole::resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
+    return resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
   end
 
   def self.shared_resource(resource)
@@ -71,7 +71,7 @@ module WebConsole
     return result
   end
   def self.shared_resources_url
-    return WebConsole::resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
+    return resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
   end
 
 
