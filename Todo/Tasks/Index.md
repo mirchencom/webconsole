@@ -1,25 +1,7 @@
 # Index
 
-* [ ] Remove superfluous scope from `webconsole` gem
-* [ ] Update the gem for all plugins
-
 ## Refactoring
 
-* [ ] I might be overly aggressively specifying scope, e.g.:
-
-		module WcIRB
-		  class Wrapper < WcREPL::Wrapper
-		  
-		  	# [...]
-		  
-		    def output_controller
-		      if !@output_controller
-		        @output_controller = WcIRB::OutputController.new(window_manager)
-		      end
-		      return @output_controller
-		    end
-	
-	I don't think I need to specify `WcIRB::` because I'm already in the `WcIRB` module?
 * [ ] Replace all javascript calls with new helper `def self.javascript_function(function, arguments)`
 	* Do a test for this
 	* Controllers should not call `do_javascript` or `load_html` directly, instead those should call helper methods, also the `self.javascript_function` should be moved onto the view
