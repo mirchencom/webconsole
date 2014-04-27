@@ -15,9 +15,10 @@
 	* `bundle clean`
 * [x] Make sure this causes the `Gemfile.lock` to update?
 * [x] Follow-up above, that only latest version of `webconsole` gem exists in each bundle directory
-* [ ] Run tests locally
+* [x] Run tests locally
 * [ ] Merge changes back to master and push
 * [ ] Pull & run tests on virtual machine
+* [ ] Delete `gemupdate` branch
 
 ## Follow-up Cleanup
 
