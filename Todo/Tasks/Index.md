@@ -1,5 +1,9 @@
 # Index
 
+## Todo
+
+* [ ] Fix occasional test failure, if an `NSTask` starts and finishes running between the polling interval
+
 ## Update `webconsole` gem
 
 * [x] `require_relative`

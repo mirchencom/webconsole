@@ -267,8 +267,10 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (void)pluginTaskDidFinish:(NSTask *)task
 {
-    [self.window setDocumentEdited:NO]; // Remove edited dot in close button
     [self.mutableTasks removeObject:task];
+    if (![self.mutableTasks count]) {
+        [self.window setDocumentEdited:NO]; // Remove edited dot in close button
+    }
 }
 
 - (NSNumber *)pluginTaskWindowNumber
@@ -286,8 +288,12 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (NSMutableArray *)mutableTasks
 {
-    if (_mutableTasks) return _mutableTasks;    
+    if (_mutableTasks) {
+        return _mutableTasks;
+    }
+
     _mutableTasks = [NSMutableArray array];
+    
     return _mutableTasks;
 }
 

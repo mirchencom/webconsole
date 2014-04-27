@@ -27,17 +27,40 @@
 
 + (void)blockUntilTasksAreRunning:(NSArray *)tasks
 {
-    NSMutableArray *tasksWaitingToRun = [tasks mutableCopy];
+    __block NSMutableArray *tasksWaitingToRun = [tasks mutableCopy];
+
+    // Tasks can start and finish between run loop checks, so remove them on termination
+    __block NSMutableArray *observers = [NSMutableArray array];
+    for (NSTask *task in tasks) {
+        __block id observer;
+        observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSTaskDidTerminateNotification
+                                                                     object:task
+                                                                      queue:nil
+                                                                 usingBlock:^(NSNotification *notification) {
+                                                                     [tasksWaitingToRun removeObject:task];
+                                                                     [[NSNotificationCenter defaultCenter] removeObserver:observer];
+                                                                     [observers removeObject:observer];
+                                                                 }];
+        [observers addObject:observer];
+    }
+    
+    // Poll whether tasks are running until the count of tasks waiting to run is zero (or the timeout occurs)
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
     while ([tasksWaitingToRun count] && [loopUntil timeIntervalSinceNow] > 0) {
         NSMutableArray *tasksNowRunning = [NSMutableArray array];
         for (NSTask *task in tasksWaitingToRun) {
-            if ([task isRunning]) [tasksNowRunning addObject:task];
-
+            if ([task isRunning]) {
+                [tasksNowRunning addObject:task];
+            }
         }
         [tasksWaitingToRun removeObjectsInArray:tasksNowRunning];
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
+
+    for (id observer in observers) {
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
+    }
+    
     NSAssert(![tasksWaitingToRun count], @"All of the NSTasks should have started running.");
 }
 
@@ -75,9 +98,11 @@
 
 + (void)blockUntilTasksFinish:(NSArray *)tasks timeoutInterval:(NSTimeInterval)timeoutInterval
 {
-    NSMutableArray *observers = [NSMutableArray array];
+    __block NSMutableArray *observers = [NSMutableArray array];
     for (NSTask *task in tasks) {
-        if (![task isRunning]) continue;
+        if (![task isRunning]) {
+            continue;
+        }
 
         __block id observer;
         observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSTaskDidTerminateNotification
