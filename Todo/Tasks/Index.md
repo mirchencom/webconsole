@@ -1,31 +1,5 @@
 # Index
 
-## Todo
-
-* [ ] Fix occasional test failure, if an `NSTask` starts and finishes running between the polling interval
-
-## Update `webconsole` gem
-
-* [x] `require_relative`
-* [x] Specify ruby version in gem file
-* [x] Update gem version number
-* [x] Build and upload new ruby gem
-* [x] Update all plugins to use new version of gem
-	* `bundle update`
-	* `bundle clean`
-* [x] Make sure this causes the `Gemfile.lock` to update?
-* [x] Follow-up above, that only latest version of `webconsole` gem exists in each bundle directory
-* [x] Run tests locally
-* [ ] Merge changes back to master and push
-* [ ] Pull & run tests on virtual machine
-* [ ] Delete `gemupdate` branch
-
-## Follow-up Cleanup
-
-* [x] Replace my require full path with `require_relative` everywhere
-* [ ] Make sure everything is cleaned up
-	* Search for `LIB_` e.g., `LIB_DIRECTORY`
-
 ## Refactoring
 
 * [ ] I might be overly aggressively specifying scope, e.g.:
