@@ -25,21 +25,21 @@ module WcNode
 
     def output_controller
       if !@output_controller
-        @output_controller = WcNode::OutputController.new(window_manager)
+        @output_controller = OutputController.new(window_manager)
       end
       return @output_controller
     end
 
     def input_controller
       if !@input_controller
-        @input_controller = WcNode::InputController.new(window_manager)
+        @input_controller = InputController.new(window_manager)
       end
       return @input_controller
     end
 
     def window_manager
       if !@window_manager
-        @window_manager = WcNode::WindowManager.new
+        @window_manager = WindowManager.new
       end
       return @window_manager
     end    

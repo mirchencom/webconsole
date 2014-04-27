@@ -1,5 +1,7 @@
 # Index
 
+* [ ] Write script for updating `webconsole` gem for all plugins
+
 ## Refactoring
 
 * [ ] I might be overly aggressively specifying scope, e.g.:
