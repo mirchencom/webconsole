@@ -1,0 +1,45 @@
+BUNDLE_PATHS = [
+  "../../webconsole/test/data/Data.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Shared Test Resources.wcplugin/Contents/Resources/plugin/Print.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Shared Test Resources.wcplugin/Contents/Resources/plugin/Print.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Node.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Markdown.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/IRB.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/HTML.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Git.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Coffee.wcplugin/Contents/Resources/",
+]
+
+task :default => [:run]
+
+task :run do
+  BUNDLE_PATHS.each { |path|
+    File.directory?(path) || abort("#{path} is not a directory")
+    Dir.chdir(path) do
+      directory = `pwd`
+      puts directory
+      Rake::Task[:install].invoke(path)
+      Rake::Task[:update].reenable
+      Rake::Task[:clean].reenable
+      Rake::Task[:install].reenable
+    end
+  }
+end
+
+task :install, [:path] => :clean do |t, args|
+  puts "INSTALL"
+  path = args[:path] || abort("No path argument")
+  sh "bundle install --standalone"
+end
+
+task :clean, [:path] => :update do |t, args|
+  puts "CLEAN"
+  path = args[:path] || abort("No path argument")
+  sh "bundle clean"
+end
+
+task :update, :path do |t, args|
+  puts "UPDATE"
+  path = args[:path] || abort("No path argument")
+  sh "bundle update"
+end

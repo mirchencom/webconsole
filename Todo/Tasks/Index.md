@@ -1,6 +1,10 @@
 # Index
 
 * [ ] Write script for updating `webconsole` gem for all plugins
+	* As a rake task?
+	* Google "rake", "bundle", "update"
+	* Can I do this in code, rather than by calling subprocesses?
+* [ ] Remove superfluous scope from `webconsole` gem
 
 ## Refactoring
 
