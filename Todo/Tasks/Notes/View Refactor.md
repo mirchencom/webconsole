@@ -1,9 +1,6 @@
 # View Refactor
 
-## Get gem ready
-
-* [ ] Update gemspec
-* [ ] Push to remote branch
+* [ ] Setup `wcsearch` to use local gem
 
 ## Setup a Test
 

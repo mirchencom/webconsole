@@ -10,6 +10,7 @@
 * [ ] Replace all `do_javascript` calls with new helper method calls in gems
 * [ ] The javascript string methods should also be moved from the controller
 * [ ] HTML Plugin `tc_controller` is bringing out an API bug, if a base URL is not set, then a second call to load HTML will fail because the `window_id` will get passed in as the base URL
+	* Add a `WindowManager` test for this
 * [ ] Make HTML test pass, and do similar for markdown
 * [ ] Add those to main tests
 
@@ -21,6 +22,12 @@
 ## Refactoring
 
 * [ ] Do that `title` helper method for all plugins
+
+	    def title
+	      return ENV.has_key?(WebConsole::PLUGIN_NAME_KEY)? ENV[WebConsole::PLUGIN_NAME_KEY] : "Dependencies"
+	    end
+
+
 	* The plugin name should be included as a environment variable
 	* Use `PLUGIN_NAME_KEY` for this
 	* Add a test for it
