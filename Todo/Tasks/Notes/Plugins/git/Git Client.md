@@ -3,6 +3,7 @@
 * [ ] `mktemp` is a dependency
 
 - Write a `GitTestHelper`.
+* [ ] Write a CoffeeScript helper based off of `javascript_function`
 
 1. On Init makes a git repo in /tmp
 2. Clean up deletes that repo
