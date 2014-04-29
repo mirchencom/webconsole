@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'webconsole'
-  s.version     = '0.0.4'
+  s.version     = '0.1.0'
   s.date        = '2013-07-04'
   s.summary     = "Web Console helper gem"
   s.description = "Bridge from Ruby to AppleScript to control Web Console"
@@ -10,8 +10,11 @@ Gem::Specification.new do |s|
   s.files = %w[
     lib/webconsole.rb
     lib/webconsole/constants.rb
-    lib/webconsole/controller.rb
     lib/webconsole/module.rb
+    lib/webconsole/view/erb.rb
+    lib/webconsole/view/javascript.rb
+    lib/webconsole/view/resources.rb
+    lib/webconsole/view.rb
     lib/webconsole/window_manager.rb
     lib/applescript/resource_path_for_plugin.scpt
     lib/applescript/resource_url_for_plugin.scpt

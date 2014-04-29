@@ -9,12 +9,12 @@ namespace :webconsole do
 
   task :tests => [:clean_up]
 
-  task :test_controller do
-    controller_tests_file = File.join(File.dirname(__FILE__), "tc_controller.rb")
-    ruby Shellwords.escape(controller_tests_file)
+  task :test_view do
+    view_tests_file = File.join(File.dirname(__FILE__), "tc_view.rb")
+    ruby Shellwords.escape(view_tests_file)
   end
 
-  task :test_window_manager => [:test_controller] do
+  task :test_window_manager => [:test_view] do
     window_manager_tests_file = File.join(File.dirname(__FILE__), "tc_window_manager.rb")
     ruby Shellwords.escape(window_manager_tests_file)
   end
