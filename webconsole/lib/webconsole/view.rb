@@ -5,6 +5,7 @@ require_relative "view/resources"
 module WebConsole
   class View
 
+    attr_reader :window_manager
     def initialize
       @window_manager = WebConsole::WindowManager.new
     end

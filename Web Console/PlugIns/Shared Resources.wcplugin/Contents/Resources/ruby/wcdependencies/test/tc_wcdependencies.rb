@@ -2,9 +2,32 @@
 
 require "test/unit"
 require_relative "../wcdependencies"
-require_relative "../lib/window_manager"
 require_relative "../lib/controller"
 require_relative "lib/test_javascript_helper"
+
+module WcDependencies
+  class Checker
+
+    def close
+      if @controller
+        @controller.view.close
+      end
+    end
+
+    def view
+      return @controller.view
+    end
+
+    def controller_exists?
+      if @controller
+        return true
+      else
+        return false
+      end
+    end
+
+  end
+end
 
 class TestController < Test::Unit::TestCase
   def setup    
@@ -12,9 +35,7 @@ class TestController < Test::Unit::TestCase
   end
   
   def teardown
-    if @checker.window_manager
-      @checker.window_manager.close
-    end
+    @checker.close
   end
 
   def test_missing_dependency
@@ -24,12 +45,12 @@ class TestController < Test::Unit::TestCase
 
     assert(!passed, "The check should have failed.")
 
-    test_result_name = WcDependencies::Tests::JavaScriptHelper::last_name(@checker.window_manager)
+    test_result_name = WcDependencies::Tests::JavaScriptHelper::last_name(@checker.view)
     assert(!test_result_name.empty?, "The test result name should not be empty.")
     assert_equal(test_result_name, dependency.name, "The test result name should equal the test name.")    
 
     test_type_string = WcDependencies::Controller.send(:string_for_type, dependency.type)
-    test_result_type = WcDependencies::Tests::JavaScriptHelper::last_type(@checker.window_manager)
+    test_result_type = WcDependencies::Tests::JavaScriptHelper::last_type(@checker.view)
     assert(!test_result_type.empty?, "The test result type should not be empty.")
     assert_equal(test_result_type, test_type_string, "The test result type should equal the test type string.")
   end
@@ -40,7 +61,7 @@ class TestController < Test::Unit::TestCase
     passed = @checker.check(dependency)
 
     assert(passed, "The check should have passed")
-    assert(@checker.window_manager.nil?, "The checker's window manager should be nil.")
+    assert(!@checker.controller_exists?, "The checker's controller should not exit.")
   end
 
   def test_mixed_dependencies
@@ -62,11 +83,11 @@ class TestController < Test::Unit::TestCase
     passed = @checker.check(failing_dependency_with_installation)
     assert(!passed, "The check should have failed.")
 
-    assert_not_nil(@checker.window_manager, "The checker's window manager should not be nil.")
+    assert(@checker.controller_exists?, "The checker's controller should exist.")
     
-    test_result_count_name = WcDependencies::Tests::JavaScriptHelper::count_name(@checker.window_manager)
-    test_result_count_type = WcDependencies::Tests::JavaScriptHelper::count_type(@checker.window_manager)
-    test_result_count_installation = WcDependencies::Tests::JavaScriptHelper::count_installation(@checker.window_manager)
+    test_result_count_name = WcDependencies::Tests::JavaScriptHelper::count_name(@checker.view)
+    test_result_count_type = WcDependencies::Tests::JavaScriptHelper::count_type(@checker.view)
+    test_result_count_installation = WcDependencies::Tests::JavaScriptHelper::count_installation(@checker.view)
 
     assert_equal(test_result_count_name, test_count_name, "The test result name count should equal the test name count.")
     assert_equal(test_result_count_type, test_count_type, "The test result type count should equal the test type count.")
@@ -88,11 +109,11 @@ class TestController < Test::Unit::TestCase
     passed = @checker.check_dependencies(dependencies)
     assert(!passed, "The check should have failed.")
 
-    assert_not_nil(@checker.window_manager, "The checker's window manager should not be nil.")
+    assert(@checker.controller_exists?, "The checker's controller should exist.")
     
-    test_result_count_name = WcDependencies::Tests::JavaScriptHelper::count_name(@checker.window_manager)
-    test_result_count_type = WcDependencies::Tests::JavaScriptHelper::count_type(@checker.window_manager)
-    test_result_count_installation = WcDependencies::Tests::JavaScriptHelper::count_installation(@checker.window_manager)
+    test_result_count_name = WcDependencies::Tests::JavaScriptHelper::count_name(@checker.view)
+    test_result_count_type = WcDependencies::Tests::JavaScriptHelper::count_type(@checker.view)
+    test_result_count_installation = WcDependencies::Tests::JavaScriptHelper::count_installation(@checker.view)
 
     assert_equal(test_result_count_name, test_count_name, "The test result name count should equal the test name count.")
     assert_equal(test_result_count_type, test_count_type, "The test result type count should equal the test type count.")

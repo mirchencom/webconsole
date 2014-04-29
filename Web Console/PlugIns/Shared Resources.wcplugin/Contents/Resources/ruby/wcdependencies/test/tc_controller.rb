@@ -2,18 +2,16 @@
 
 require "test/unit"
 require_relative "../lib/controller"
-require_relative "../lib/window_manager"
 require_relative "lib/test_javascript_helper"
 require_relative "../lib/model"
 
 class TestController < Test::Unit::TestCase
   def setup
-    @window_manager = WcDependencies::WindowManager.new
-    @controller = WcDependencies::Controller.new(@window_manager)
+    @controller = WcDependencies::Controller.new
   end
   
   def teardown
-    @window_manager.close
+    @controller.view.close
   end
 
   def test_missing_dependency
@@ -21,12 +19,12 @@ class TestController < Test::Unit::TestCase
 
     @controller.missing_dependency(dependency)
 
-    test_result_name = WcDependencies::Tests::JavaScriptHelper::last_name(@window_manager)
+    test_result_name = WcDependencies::Tests::JavaScriptHelper::last_name(@controller.view)
     assert(!test_result_name.empty?, "The test result name should not be empty.")
     assert_equal(test_result_name, dependency.name, "The test result name should equal the dependency's name.")    
 
     test_type_string = @controller.class.send(:string_for_type, dependency.type)
-    test_result_type = WcDependencies::Tests::JavaScriptHelper::last_type(@window_manager)
+    test_result_type = WcDependencies::Tests::JavaScriptHelper::last_type(@controller.view)
     assert(!test_result_type.empty?, "The test result type should not be empty.")
     assert_equal(test_result_type, test_type_string, "The test result type should equal the test type string.")
   end
@@ -37,16 +35,16 @@ class TestController < Test::Unit::TestCase
 
     @controller.missing_dependency(dependency)
 
-    test_result_name = WcDependencies::Tests::JavaScriptHelper::last_name(@window_manager)
+    test_result_name = WcDependencies::Tests::JavaScriptHelper::last_name(@controller.view)
     assert(!test_result_name.empty?, "The test result name should not be empty.")
     assert_equal(test_result_name, dependency.name, "The test result name should equal the dependency's name.")
 
     test_type_string = @controller.class.send(:string_for_type, dependency.type)
-    test_result_type = WcDependencies::Tests::JavaScriptHelper::last_type(@window_manager)
+    test_result_type = WcDependencies::Tests::JavaScriptHelper::last_type(@controller.view)
     assert(!test_result_type.empty?, "The test result type should not be empty.")
     assert_equal(test_result_type, test_type_string, "The test result type should equal the test type string.")
 
-    test_result_installation = WcDependencies::Tests::JavaScriptHelper::last_installation(@window_manager)
+    test_result_installation = WcDependencies::Tests::JavaScriptHelper::last_installation(@controller.view)
     assert(test_result_installation.end_with? test_installation, "The test result installation should end with the installation.")
   end
 
@@ -63,9 +61,9 @@ class TestController < Test::Unit::TestCase
     @controller.missing_dependency(dependency_with_installation)
     @controller.missing_dependency(dependency_with_installation)
     
-    test_result_count_name = WcDependencies::Tests::JavaScriptHelper::count_name(@window_manager)
-    test_result_count_type = WcDependencies::Tests::JavaScriptHelper::count_type(@window_manager)
-    test_result_count_installation = WcDependencies::Tests::JavaScriptHelper::count_installation(@window_manager)
+    test_result_count_name = WcDependencies::Tests::JavaScriptHelper::count_name(@controller.view)
+    test_result_count_type = WcDependencies::Tests::JavaScriptHelper::count_type(@controller.view)
+    test_result_count_installation = WcDependencies::Tests::JavaScriptHelper::count_installation(@controller.view)
 
     assert_equal(test_result_count_name, test_count_name, "The test result name count should equal the test name count.")
     assert_equal(test_result_count_type, test_count_type, "The test result type count should equal the test type count.")
