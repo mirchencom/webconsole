@@ -3,7 +3,10 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
-task :default => ['webconsole:tests']
+task :default => [:webconsole, :other]
+
+task :webconsole => ['webconsole:tests']
+task :other => ['other:tests']
 
 namespace :webconsole do
 
@@ -28,4 +31,14 @@ namespace :webconsole do
     WebConsole::Tests::Helper::quit
   end
 
+end
+
+namespace :other do
+
+  wcdata_test_rakefile = File.join(File.dirname(__FILE__), "data/Data.wcplugin/Contents/Resources/test/Rakefile")
+  load wcdata_test_rakefile
+
+  task :tests => [:test_wcdata]
+
+  task :test_wcdata => ['wcdata:tests']
 end
