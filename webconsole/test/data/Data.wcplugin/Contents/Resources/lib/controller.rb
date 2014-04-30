@@ -10,30 +10,13 @@ module WcData
     end
     
     def add_key_value(key, value)
-      puts "add_key_value"      
-      javascript = javascript_add_key_value(key, value)
-      @view.do_javascript(javascript)
+      value.chomp!
+      @view.add_key_value(key, value)
     end
 
     def value_for_key(key)
-      javascript = javascript_value_for_key(key)
-      value = @view.do_javascript(javascript)
-      value.chomp!
-      return value
+      return @view.value_for_key(key)
     end
     
-    private
-    
-    def javascript_add_key_value(key, value)
-      key.javascript_escape!
-      value.chomp!
-      value.javascript_escape!
-      %Q[addKeyValue('#{key}', '#{value}');]
-    end
-    
-    def javascript_value_for_key(key)
-      key.javascript_escape!
-      %Q[valueForKey('#{key}');]
-    end
   end
 end
