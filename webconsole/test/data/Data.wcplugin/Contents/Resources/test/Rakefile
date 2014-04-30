@@ -1,0 +1,23 @@
+require 'shellwords'
+
+task :default => ['wcdata:tests']
+
+namespace :wcdata do
+
+  task :tests => [:clean_up]
+
+  task :test_controller do
+    controller_tests_file = File.join(File.dirname(__FILE__), "tc_controller.rb")
+    ruby Shellwords.escape(controller_tests_file)
+  end
+
+  task :test_wcdata => [:test_controller] do
+    wcdata_tests_file = File.join(File.dirname(__FILE__), "tc_wcdata.rb")
+    ruby Shellwords.escape(wcdata_tests_file)
+  end
+
+  task :clean_up => [:test_wcdata] do
+    WebConsole::Tests::Helper::quit
+  end
+
+end
