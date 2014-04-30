@@ -14,12 +14,12 @@ namespace :webconsole do
     ruby Shellwords.escape(view_tests_file)
   end
 
-  task :test_window_manager => [:test_view] do
-    window_manager_tests_file = File.join(File.dirname(__FILE__), "tc_window_manager.rb")
-    ruby Shellwords.escape(window_manager_tests_file)
+  task :test_window => [:test_view] do
+    window_tests_file = File.join(File.dirname(__FILE__), "tc_window.rb")
+    ruby Shellwords.escape(window_tests_file)
   end
 
-  task :test_module => [:test_window_manager] do
+  task :test_module => [:test_window] do
     module_tests_file = File.join(File.dirname(__FILE__), "tc_module.rb")
     ruby Shellwords.escape(module_tests_file)
   end

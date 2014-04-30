@@ -106,15 +106,15 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
     window_id = WebConsole::window_id_for_plugin(DATA_PLUGIN_NAME)
     @window = WebConsole::Window.new(window_id)
 
-    # sleep WebConsole::Tests::TEST_PAUSE_TIME # Give time for script to run
-    # 
-    # path_result = @window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
-    # arguments_result = @window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])
-    # path_result.chomp!
-    # arguments_result.chomp!
-    # 
-    # assert_equal(path_result, path, "The path result should match the path.")
-    # assert_equal(arguments_result, arguments, "The arguments result should match the arguments.")
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give time for script to run
+
+    path_result = @window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
+    arguments_result = @window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])
+    path_result.chomp!
+    arguments_result.chomp!
+
+    assert_equal(path_result, path, "The path result should match the path.")
+    assert_equal(arguments_result, arguments, "The arguments result should match the arguments.")
   end
 
 end
