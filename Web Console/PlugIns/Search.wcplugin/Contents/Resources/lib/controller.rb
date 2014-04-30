@@ -1,14 +1,12 @@
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
+require_relative 'view'
 
 module WcSearch
-  class Controller < WebConsole::Controller
-    BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
-    VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "views")
-    VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
+  class Controller
 
-    def initialize(delegate = nil)      
-      super(delegate, VIEW_TEMPLATE)
+    def initialize
+      @view = View.new
     end
 
     def added_file(file)
@@ -17,9 +15,9 @@ module WcSearch
       file_path.javascript_escape!
       display_file_path.javascript_escape!
       javascript = "addFile('#{file_path}', '#{display_file_path}');"
-      if @delegate
-        @delegate.do_javascript(javascript)
-      end
+
+      @view.do_javascript(javascript)
+
     end
 
     def added_line_to_file(line, file)
@@ -40,9 +38,8 @@ var matches = [#{matches_javascript}
 ];
 addLine(#{line.number}, '#{text}', matches);
 ]
-      if @delegate
-        @delegate.do_javascript(javascript)
-      end
+      @view.do_javascript(javascript)
+
     end
     
   end

@@ -1,6 +1,20 @@
 # View Refactor
 
+* [ ] Gem tests should now run tests for `wcdata`, `wcdependencies`, and `wcrepl`
+* [ ] For WcREPL and WcDependencies, the *tests* should require `webconsole` via Bundler!
+* [ ] More API changes:
+	* `WindowManager` to `Window`
+	* `Controller` has a `View` has a `Window`
+	* Make a `Controller` class again that just initializes a `View`
 * [ ] Setup `wcsearch` to use local gem
+* [ ] Maybe there should be a simple controller subclass like this:
+
+		  class Controller
+
+		    def initialize
+		      @view = View.new
+		    end
+
 
 ## Setup a Test
 

@@ -1,5 +1,5 @@
 module WebConsole
-  class WindowManager
+  class Window
     require_relative "constants"
 
     attr_writer :base_url
@@ -53,5 +53,6 @@ module WebConsole
     def self.window_id_from_result(result)
       return result.split.last.to_i
     end
+
   end
 end

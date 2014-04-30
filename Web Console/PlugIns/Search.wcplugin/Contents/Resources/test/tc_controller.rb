@@ -11,7 +11,6 @@ require_relative "lib/test_data_tester"
 require_relative "../lib/dependencies"
 require_relative "../lib/parser"
 require_relative "../lib/controller"
-require_relative "../lib/window_manager"
 
 
 class TestDependencies < Test::Unit::TestCase

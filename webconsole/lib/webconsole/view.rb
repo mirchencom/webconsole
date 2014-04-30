@@ -5,29 +5,29 @@ require_relative "view/resources"
 module WebConsole
   class View
 
-    attr_reader :window_manager
+    attr_reader :window
     def initialize
-      @window_manager = WebConsole::WindowManager.new
+      @window = WebConsole::Window.new
     end
 
     def base_url=(value)
-      @window_manager.base_url = value
+      @window.base_url = value
     end
 
     def base_url_path=(value)
-      @window_manager.base_url_path = value
+      @window.base_url_path = value
     end
 
     def load_html(html)
-      @window_manager.load_html(html)
+      @window.load_html(html)
     end
 
     def do_javascript(javascript)
-      return @window_manager.do_javascript(javascript)
+      return @window.do_javascript(javascript)
     end
 
     def close
-      @window_manager.close
+      @window.close
     end
 
   end

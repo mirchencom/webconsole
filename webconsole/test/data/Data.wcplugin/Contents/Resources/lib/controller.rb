@@ -1,30 +1,24 @@
-require_relative '../bundle/bundler/setup'
-require 'webconsole'
+require_relative "constants"
+require WEBCONSOLE_FILE
+require_relative "view"
 
 module WcData
   class Controller < WebConsole::Controller
-    BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
-    VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
-    VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
 
-    def initialize(delegate = nil)      
-      super(delegate, VIEW_TEMPLATE)
+    def initialize
+      super(WcData::View.new)
     end
-
+    
     def add_key_value(key, value)
+      puts "add_key_value"      
       javascript = javascript_add_key_value(key, value)
-      if @delegate
-        @delegate.do_javascript(javascript)
-      end    
+      @view.do_javascript(javascript)
     end
 
     def value_for_key(key)
-      value = nil
-      if @delegate
-        javascript = javascript_value_for_key(key)
-        value = @delegate.do_javascript(javascript)
-        value.chomp!
-      end
+      javascript = javascript_value_for_key(key)
+      value = @view.do_javascript(javascript)
+      value.chomp!
       return value
     end
     
