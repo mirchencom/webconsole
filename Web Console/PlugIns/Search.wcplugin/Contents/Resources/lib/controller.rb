@@ -1,7 +1,7 @@
 require_relative 'view'
 
 module WebConsole::Search
-  class Controller
+  class Controller < WebConsole::Controller
 
     def initialize
       @view = View.new

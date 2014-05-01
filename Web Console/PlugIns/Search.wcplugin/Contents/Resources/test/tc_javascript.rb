@@ -2,16 +2,18 @@
 
 require "test/unit"
 
+require_relative '../bundle/bundler/setup'
+require 'webconsole'
+
 require_relative "../lib/dependencies"
 require_relative "../lib/controller"
-require_relative "../lib/window_manager"
 
 # Test cases for some situations where `textWithMatchesProcessed` was failing.
 # To debug these situations: Run a test case and then use Web Console's Web Inspector to log console messages from the `textWithMatchesProcessed` JavaScript.
 
 class TestDependencies < Test::Unit::TestCase
   def test_dependencies
-    passed = WcSearch.check_dependencies
+    passed = WebConsole::Search.check_dependencies
     assert(passed, "The dependencies check should have passed.")
   end
 end
@@ -19,12 +21,11 @@ end
 class TestJavaScript < Test::Unit::TestCase
 
   def setup
-    @window_manager = WcSearch::WindowManager.new
-    controller = WcSearch::Controller.new(@window_manager)
+    @controller = WebConsole::Search::Controller.new
   end
   
   def teardown
-    @window_manager.close
+    @controller.view.close
   end
 
   def test_javascript_escape
@@ -42,7 +43,7 @@ var matches = [
 ];
 var text = '<string>eiusmod/eiusmod.rb</string>';
 textWithMatchesProcessed(text, 0, matches);]
-    result = @window_manager.do_javascript(javascript)
+    result = @controller.view.do_javascript(javascript)
     result.chomp!    
     assert(result == test_result, "The result should match the test result.")
   end
@@ -60,7 +61,7 @@ var matches = [
 ];
 var text = 'WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", \\\'eiusmod.rb\\\')';
 textWithMatchesProcessed(text, 0, matches);]
-    result = @window_manager.do_javascript(javascript)
+    result = @controller.view.do_javascript(javascript)
     result.chomp!
     assert(result == test_result, "The result should match the test result.")
   end
@@ -82,7 +83,7 @@ var matches = [
 ];
 var text = '    eiusmod_tests_file = File.join(File.dirname(__FILE__), "tc_eiusmod.rb")';
 textWithMatchesProcessed(text, 0, matches);]
-    result = @window_manager.do_javascript(javascript)
+    result = @controller.view.do_javascript(javascript)
     result.chomp!
     assert(result == test_result, "The result should match the test result.")
   end
@@ -113,7 +114,7 @@ var matches = [
 ];
 var text = '<eiusmod>eiusmod/eiusmod.rb</eiusmod>';
 textWithMatchesProcessed(text, 0, matches);]
-    result = @window_manager.do_javascript(javascript)
+    result = @controller.view.do_javascript(javascript)
     result.chomp!
     assert(result == test_result, "The result should match the test result.")
   end
