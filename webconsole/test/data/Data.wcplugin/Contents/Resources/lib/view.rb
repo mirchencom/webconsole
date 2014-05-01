@@ -1,4 +1,4 @@
-module WcData
+module WebConsole::Data
   class View < WebConsole::View
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")

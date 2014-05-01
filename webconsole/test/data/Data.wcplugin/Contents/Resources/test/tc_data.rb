@@ -4,6 +4,7 @@ require "test/unit"
 
 require_relative "lib/test_constants"
 require WEBCONSOLE_FILE
+
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 

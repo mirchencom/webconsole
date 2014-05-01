@@ -1,8 +1,6 @@
-require_relative "constants"
-require WEBCONSOLE_FILE
 require_relative "view"
 
-module WcData
+module WebConsole::Data
   class Controller < WebConsole::Controller
 
     def initialize

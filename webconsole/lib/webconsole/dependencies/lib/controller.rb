@@ -1,15 +1,13 @@
-require 'webconsole'
-
 require_relative 'tester'
 require_relative 'model'
 require_relative 'view'
 
-module WcDependencies
+module WebConsole::Dependencies
 
   class Controller
 
     def initialize
-      super(View.new)
+      @view = View.new
     end
 
     def missing_dependency(dependency)

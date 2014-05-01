@@ -1,10 +1,15 @@
 # View Refactor
 
+* [ ] Make data a properly namespaced plugin
 * [ ] Add title to the window, do tests for it, then wrap up `wcdependencies`
 	* Test title with and without environment variable set
 	* Test loading the view without a set title
 	* Test setting the title via the attribute
 	* Test setting the title via the environment variable
+* [ ] Enforce these new require rules
+	* There should only be one require per load path, this means
+		* `require 'webconsole'` goes only in the tests and in the main class
+		* Tests should only require the classes they need to test
 * [ ] Add new view files to rake tests
 * [ ] `wcdependencies` and `wcrepl` can probably lose their prefix, in fact I think I should move towards removing the `wc` prefix altogether
 * [ ] Gem tests should now run tests for `wcdata`, `wcdependencies`, and `wcrepl`

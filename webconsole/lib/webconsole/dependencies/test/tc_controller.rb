@@ -1,8 +1,9 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
 
 require "test/unit"
-require_relative "../lib/controller"
 require_relative "lib/test_javascript_helper"
+
+require_relative "../lib/controller"
 require_relative "../lib/model"
 
 class TestController < Test::Unit::TestCase

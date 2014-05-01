@@ -1,4 +1,4 @@
-module WcDependencies
+module WebConsole::Dependencies
   module Tester
     def self.check(name, type)
       case type

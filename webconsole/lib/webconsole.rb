@@ -1,10 +1,10 @@
 module WebConsole
   # Web Console
-  require_relative "webconsole/constants"
-  require_relative "webconsole/window"
-  require_relative "webconsole/controller"
-  require_relative "webconsole/view"
-  require_relative "webconsole/module"
+  require_relative "webconsole/lib/constants"
+  require_relative "webconsole/lib/window"
+  require_relative "webconsole/lib/controller"
+  require_relative "webconsole/lib/view"
+  require_relative "webconsole/lib/module"
 
   # Extras
   # require_relative "wcrepl/wcrepl"

@@ -1,6 +1,4 @@
-require 'webconsole'
-
-module WcDependencies
+module WebConsole::Dependencies
   
   class View < WebConsole::View
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), '..')

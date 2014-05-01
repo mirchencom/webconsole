@@ -43,7 +43,7 @@ namespace :other do
   wcdata_test_rakefile = File.join(File.dirname(__FILE__), "data/Data.wcplugin/Contents/Resources/test/Rakefile")
   load wcdata_test_rakefile
 
-  task :tests => [:test_wcdata]
+  task :tests => [:test_data]
 
-  task :test_wcdata => ['wcdata:tests']
+  task :test_data => ['data:tests']
 end

@@ -6,7 +6,7 @@ require WEBCONSOLE_FILE
 require_relative "lib/controller"
 
 # Controller
-controller = WcData::Controller.new
+controller = WebConsole::Data::Controller.new
 
 PATH_KEY = "Path"
 path = Dir.pwd.to_s

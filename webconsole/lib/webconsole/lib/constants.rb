@@ -6,5 +6,5 @@ module WebConsole
   SHARED_RESOURCES_URL_KEY = 'WC_SHARED_RESOURCES_URL'
 
   # Directories
-  APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "..", "applescript")
+  APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "..", "..", "applescript")
 end

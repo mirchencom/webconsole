@@ -1,8 +1,9 @@
-require_relative 'lib/model'
+require_relative '../../webconsole'
 
-module WcDependencies
+module WebConsole::Dependencies
   class Checker
-    require_relative 'lib/controller'
+    require_relative 'dependencies/lib/model'
+    require_relative 'dependencies/lib/controller'
 
     def check_dependencies(dependencies)
       passed = true
