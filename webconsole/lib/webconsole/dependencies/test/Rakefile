@@ -3,9 +3,9 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
-task :default => ['wcdependencies:tests']
+task :default => ['dependencies:tests']
 
-namespace :wcdependencies do
+namespace :dependencies do
   
   task :tests => [:clean_up]
 
@@ -19,12 +19,12 @@ namespace :wcdependencies do
     ruby Shellwords.escape(controller_tests_file)
   end
 
-  task :test_wcdependencies => [:test_controller] do
-    wcdependencies_tests_file = File.join(File.dirname(__FILE__), "tc_wcdependencies.rb")
-    ruby Shellwords.escape(wcdependencies_tests_file)
+  task :test_dependencies => [:test_controller] do
+    dependencies_tests_file = File.join(File.dirname(__FILE__), "tc_dependencies.rb")
+    ruby Shellwords.escape(dependencies_tests_file)
   end
 
-  task :clean_up => [:test_wcdependencies] do
+  task :clean_up => [:test_dependencies] do
     WebConsole::Tests::Helper::quit
   end
 end

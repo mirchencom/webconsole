@@ -4,7 +4,7 @@ require_relative 'view'
 
 module WebConsole::Dependencies
 
-  class Controller
+  class Controller < WebConsole::Controller
 
     def initialize
       @view = View.new

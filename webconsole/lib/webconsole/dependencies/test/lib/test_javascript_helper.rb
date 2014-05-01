@@ -1,4 +1,4 @@
-module WcDependencies
+module WebConsole::Dependencies
   module Tests
     module JavaScriptHelper
       def self.last_type(window_manager)

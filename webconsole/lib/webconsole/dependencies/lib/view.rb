@@ -15,10 +15,5 @@ module WebConsole::Dependencies
     def add_missing_dependency(name, type, installation_instructions = nil)
       self.do_javascript_function(ADD_MISSING_DEPENDENCY_FUNCTION, [name, type, installation_instructions])
     end
-
-    def title
-      return ENV.has_key?(WebConsole::PLUGIN_NAME_KEY)? ENV[WebConsole::PLUGIN_NAME_KEY] : "Dependencies"
-    end
-
   end
 end

@@ -1,5 +1,7 @@
 # View Refactor
 
+* [ ] Add Dependencies extension tests to main webconsole gem tests
+* [ ] Make Search plugin work with Dependencies extension in order to test dependencies namespacing
 * [ ] Make data a properly namespaced plugin
 * [ ] Add title to the window, do tests for it, then wrap up `wcdependencies`
 	* Test title with and without environment variable set
@@ -19,6 +21,7 @@
 	* `Controller` has a `View` has a `Window`
 	* Make a `Controller` class again that just initializes a `View`
 * [ ] Setup `wcsearch` to use local gem
+* [ ] When I add the plugin name environment variable, make sure it gets tested in the Xcode tests, because those tests won't exist anywhere else
 * [ ] Maybe there should be a simple controller subclass like this:
 
 		  class Controller
