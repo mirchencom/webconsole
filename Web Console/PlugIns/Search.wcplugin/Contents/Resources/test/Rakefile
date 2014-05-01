@@ -1,12 +1,13 @@
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
+
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 require 'shellwords'
 
-task :default => ['wcsearch:tests']
+task :default => ['search:tests']
 
-namespace :wcsearch do
+namespace :search do
   
   task :tests => [:clean_up]
 
@@ -25,12 +26,12 @@ namespace :wcsearch do
     ruby Shellwords.escape(javascript_tests_file)
   end
 
-  task :test_wcsearch => [:test_javascript] do
-    wcsearch_tests_file = File.join(File.dirname(__FILE__), "tc_wcsearch.rb")
-    ruby Shellwords.escape(wcsearch_tests_file)
+  task :test_search => [:test_javascript] do
+    search_tests_file = File.join(File.dirname(__FILE__), "tc_search.rb")
+    ruby Shellwords.escape(search_tests_file)
   end
 
-  task :clean_up => [:test_wcsearch] do
+  task :clean_up => [:test_search] do
     WebConsole::Tests::Helper::quit
   end
 end
