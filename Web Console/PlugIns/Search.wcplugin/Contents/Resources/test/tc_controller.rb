@@ -15,7 +15,6 @@ require_relative "../lib/controller"
 
 class TestDependencies < Test::Unit::TestCase
   def test_dependencies
-    ENV[WebConsole::PLUGIN_NAME_KEY] = "Search"
     passed = WcSearch.check_dependencies
     assert(passed, "The dependencies check should have passed.")
   end

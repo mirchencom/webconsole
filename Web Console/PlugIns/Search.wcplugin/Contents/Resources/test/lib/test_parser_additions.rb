@@ -1,6 +1,6 @@
 require_relative "../../lib/parser"
 
-module WcSearch
+module WebConsole::Search
   class Parser
     attr_reader :files_hash
     def parse(data)

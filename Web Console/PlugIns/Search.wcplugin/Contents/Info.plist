@@ -5,7 +5,7 @@
 	<key>WCName</key>
 	<string>Search</string>
 	<key>WCCommand</key>
-	<string>wcsearch.rb</string>
+	<string>search.rb</string>
 	<key>WCUUID</key>
 	<string>29625142-B35E-4B83-B078-589D1554DF1D</string>
 </dict>

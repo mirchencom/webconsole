@@ -2,7 +2,7 @@ require 'Shellwords'
 
 require_relative "test_script_constants" # Get the TEST_DATA_DIRECTORY
 
-module WcSearch
+module WebConsole::Search
   module Tests
     module TestData
       TEST_SCRIPTS_DIRECTORY = File.join(File.dirname(__FILE__), "..", "scripts")

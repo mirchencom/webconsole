@@ -1,4 +1,4 @@
-module WcSearch
+module WebConsole::Search
   class Tests
     class ParserInspector
       def added_file(file)

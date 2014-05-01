@@ -1,7 +1,4 @@
-require_relative '../bundle/bundler/setup'
-require 'webconsole'
-
-module WcSearch
+module WebConsole::Search
   class View < WebConsole::View
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), '..')
     VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "views")

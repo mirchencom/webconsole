@@ -1,5 +1,6 @@
 # View Refactor
 
+* [ ] All plugins use new title helper
 * [ ] Add Dependencies extension tests to main webconsole gem tests
 * [ ] Make Search plugin work with Dependencies extension in order to test dependencies namespacing
 * [ ] Make data a properly namespaced plugin

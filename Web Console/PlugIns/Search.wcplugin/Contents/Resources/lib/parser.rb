@@ -3,7 +3,7 @@ require 'pathname'
 require_relative "model"
 require_relative "constants"
 
-module WcSearch
+module WebConsole::Search
 
   class Parser
 

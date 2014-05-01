@@ -1,8 +1,6 @@
-require_relative '../bundle/bundler/setup'
-require 'webconsole'
 require_relative 'view'
 
-module WcSearch
+module WebConsole::Search
   class Controller
 
     def initialize

@@ -1,6 +1,6 @@
 SEARCH_COMMAND = "ack --color --nogroup"
 
-module WcSearch
+module WebConsole::Search
   class Parser
     ANSI_ESCAPE = '\x1b[^m]*m'
     MATCH_REGEXP = Regexp.new("#{ANSI_ESCAPE}(.+?)#{ANSI_ESCAPE}")

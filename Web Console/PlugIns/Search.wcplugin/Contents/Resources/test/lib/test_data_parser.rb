@@ -3,7 +3,7 @@ require 'json'
 
 require_relative "test_data_constants"
 
-module WcSearch
+module WebConsole::Search
   module Tests
     module Parser
 
