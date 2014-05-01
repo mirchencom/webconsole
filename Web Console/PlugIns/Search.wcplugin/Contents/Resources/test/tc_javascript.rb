@@ -21,11 +21,11 @@ end
 class TestJavaScript < Test::Unit::TestCase
 
   def setup
-    @controller = WebConsole::Search::Controller.new
+    @view = WebConsole::Search::View.new
   end
   
   def teardown
-    @controller.view.close
+    @view.close
   end
 
   def test_javascript_escape
@@ -43,7 +43,7 @@ var matches = [
 ];
 var text = '<string>eiusmod/eiusmod.rb</string>';
 textWithMatchesProcessed(text, 0, matches);]
-    result = @controller.view.do_javascript(javascript)
+    result = @view.do_javascript(javascript)
     result.chomp!    
     assert(result == test_result, "The result should match the test result.")
   end
@@ -61,7 +61,7 @@ var matches = [
 ];
 var text = 'WCSEARCH_FILE = File.join(File.dirname(__FILE__), "..", \\\'eiusmod.rb\\\')';
 textWithMatchesProcessed(text, 0, matches);]
-    result = @controller.view.do_javascript(javascript)
+    result = @view.do_javascript(javascript)
     result.chomp!
     assert(result == test_result, "The result should match the test result.")
   end
@@ -83,7 +83,7 @@ var matches = [
 ];
 var text = '    eiusmod_tests_file = File.join(File.dirname(__FILE__), "tc_eiusmod.rb")';
 textWithMatchesProcessed(text, 0, matches);]
-    result = @controller.view.do_javascript(javascript)
+    result = @view.do_javascript(javascript)
     result.chomp!
     assert(result == test_result, "The result should match the test result.")
   end
@@ -114,7 +114,7 @@ var matches = [
 ];
 var text = '<eiusmod>eiusmod/eiusmod.rb</eiusmod>';
 textWithMatchesProcessed(text, 0, matches);]
-    result = @controller.view.do_javascript(javascript)
+    result = @view.do_javascript(javascript)
     result.chomp!
     assert(result == test_result, "The result should match the test result.")
   end
