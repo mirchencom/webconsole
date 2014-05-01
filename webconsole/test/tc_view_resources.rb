@@ -4,6 +4,7 @@ require "test/unit"
 
 require_relative "lib/test_constants"
 require_relative "lib/test_javascript_constants"
+
 require_relative "../lib/webconsole"
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
@@ -18,43 +19,6 @@ class TestViewBaseURL < Test::Unit::TestCase
     assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_RESULT, "The result should equal the expected result.")
     view.close
   end
-end
-
-class TestViewJavaScript < Test::Unit::TestCase
-
-  def setup
-    @view = WebConsole::View.new
-    @view.base_url_path = TEST_BASE_URL_PATH
-    @view.load_erb_from_path(TEST_TEMPLATE_FILE)
-  end
-
-  def teardown
-    @view.close    
-  end
-
-  def test_resources
-
-    # Testing jquery assures that `zepto.js` has been loaded correctly
-    javascript = File.read(WebConsole::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
-    result = @view.do_javascript(javascript)
-
-    test_javascript = File.read(WebConsole::Tests::TEXT_JAVASCRIPT_FILE)
-    expected = @view.do_javascript(test_javascript)
-
-    assert_equal(expected, result, "The result should equal expected result.")
-
-  end
-
-  def test_javascript_function_without_arguments
-    result = @view.do_javascript_function(TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_NAME)
-    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITHOUT_ARGUMENTS_RESULT, "The result should equal the expected result.")
-  end
-
-  def test_javascript_function_with_arguments
-    result = @view.do_javascript_function(TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_NAME, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_ARGUMENTS)
-    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_RESULT, "The result should equal the expected result.")
-  end
-
 end
 
 class TestViewEnvironmentVariables < Test::Unit::TestCase
@@ -73,6 +37,52 @@ class TestViewEnvironmentVariables < Test::Unit::TestCase
     
     assert_equal(result_shared_resource_url, shared_resource_url, "The result shared resource URL should equal the shared resource URL.")
     assert(!WebConsole::Tests::Helper::is_running, "Web Console should not be running.")
+  end
+
+end
+
+class TestViewTitle < Test::Unit::TestCase
+
+  def test_no_title
+    view = WebConsole::View.new
+    view.base_url = TEST_BASE_URL
+    view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    
+    assert_nil(view.title, "The views title should be nil.")
+    
+    title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
+    title_result.chomp!
+    assert(title_result.empty?, "The title result should be empty.")
+    view.close
+  end
+
+  def test_set_title
+    view = WebConsole::View.new
+    view.base_url = TEST_BASE_URL
+    view.title = TEST_TITLE
+    view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    
+    assert_equal(view.title, TEST_TITLE, "The view's title should equal the test title.")
+  
+    title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
+    title_result.chomp!
+    assert_equal(title_result, TEST_TITLE, "The title result should equal the test title.")
+    view.close
+  end
+  
+
+  def test_title_environment_variable
+    view = WebConsole::View.new
+    view.base_url = TEST_BASE_URL
+    ENV[WebConsole::PLUGIN_NAME_KEY] = TEST_TITLE
+    view.load_erb_from_path(TEST_TEMPLATE_FILE)
+    
+    assert_equal(view.title, TEST_TITLE, "The view's title should equal the test title.")
+  
+    title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
+    title_result.chomp!
+    assert_equal(title_result, TEST_TITLE, "The title result should equal the test title.")
+    view.close
   end
 
 end

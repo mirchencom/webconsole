@@ -4,6 +4,8 @@ module WebConsole
 
     require_relative "../constants"
     require_relative "../module"
+
+    attr_accessor :title
     
     CSS_EXTENSION = ".css"
     CSS_PATH_COMPONENT = "css/"
@@ -17,6 +19,13 @@ module WebConsole
     def shared_javascript_include_tag(resource)
       uri = URI.join(shared_resources_url, JS_PATH_COMPONENT, resource + JS_EXTENSION)
       return "<script type=\"text/javascript\" src=\"#{uri.to_s}\"></script>"
+    end
+
+    def title
+      if !@title && ENV.has_key?(PLUGIN_NAME_KEY)
+        @title = ENV[PLUGIN_NAME_KEY]
+      end
+      return @title
     end
 
     private

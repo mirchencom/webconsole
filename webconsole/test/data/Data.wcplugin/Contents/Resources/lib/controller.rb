@@ -6,7 +6,7 @@ module WcData
   class Controller < WebConsole::Controller
 
     def initialize
-      super(WcData::View.new)
+      super(View.new)
     end
     
     def add_key_value(key, value)

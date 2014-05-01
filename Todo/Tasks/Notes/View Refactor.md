@@ -1,5 +1,12 @@
 # View Refactor
 
+* [ ] Add title to the window, do tests for it, then wrap up `wcdependencies`
+	* Test title with and without environment variable set
+	* Test loading the view without a set title
+	* Test setting the title via the attribute
+	* Test setting the title via the environment variable
+* [ ] Add new view files to rake tests
+* [ ] `wcdependencies` and `wcrepl` can probably lose their prefix, in fact I think I should move towards removing the `wc` prefix altogether
 * [ ] Gem tests should now run tests for `wcdata`, `wcdependencies`, and `wcrepl`
 * [ ] For WcREPL and WcDependencies, the *tests* should require `webconsole` via Bundler!
 * [ ] More API changes:

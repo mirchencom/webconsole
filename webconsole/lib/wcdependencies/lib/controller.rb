@@ -8,9 +8,8 @@ module WcDependencies
 
   class Controller
 
-    attr_reader :view
     def initialize
-      @view = View.new
+      super(View.new)
     end
 
     def missing_dependency(dependency)
