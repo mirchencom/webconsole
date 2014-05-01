@@ -1,4 +1,5 @@
-require_relative '../../webconsole'
+require_relative 'dependencies/lib/constants'
+require WEBCONSOLE_FILE
 
 module WebConsole::Dependencies
   class Checker

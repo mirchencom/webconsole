@@ -1,5 +1,3 @@
-require 'webconsole'
-
 module WcDependencies
   module Tests
     module JavaScriptHelper
