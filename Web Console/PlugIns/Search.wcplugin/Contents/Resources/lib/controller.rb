@@ -1,4 +1,5 @@
 require_relative 'view'
+require_relative 'model'
 
 module WebConsole::Search
   class Controller < WebConsole::Controller
@@ -8,37 +9,39 @@ module WebConsole::Search
     end
 
     def added_file(file)
-      file_path = file.file_path
-      display_file_path = file.display_file_path
-      file_path.javascript_escape!
-      display_file_path.javascript_escape!
-      javascript = "addFile('#{file_path}', '#{display_file_path}');"
-
-      @view.do_javascript(javascript)
-
+      @view.add_file(file.file_path, file.display_file_path)
     end
 
     def added_line_to_file(line, file)
-      matches_javascript = ""
-      line.matches.each { |match|
-        match_javascript = %Q[ 
+      matches_javascript = matches_javascript(line.matches)
+      text = line.text
+      text.javascript_escape!
+
+      javascript = %Q[
+#{matches_javascript}
+addLine(#{line.number}, '#{text}', matches);
+]
+      @view.do_javascript(javascript)
+    end
+
+    private
+
+    def matches_javascript(matches)
+      matches_json = ""
+      matches.each { |match|
+        match_json = %Q[ 
   {
     index: #{match.index},
     length: #{match.length}
   },]
-        matches_javascript << match_javascript
+        matches_json << match_json
       }
-      matches_javascript.chomp!(",");
-      text = line.text
-      text.javascript_escape!
+      matches_json.chomp!(",");
       javascript = %Q[
-var matches = [#{matches_javascript}  
+var matches = [#{matches_json}  
 ];
-addLine(#{line.number}, '#{text}', matches);
 ]
-      @view.do_javascript(javascript)
-
+      return javascript      
     end
-    
   end
 end
