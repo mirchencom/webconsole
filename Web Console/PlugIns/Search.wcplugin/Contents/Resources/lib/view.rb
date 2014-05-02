@@ -1,3 +1,5 @@
+require_relative 'model'
+
 module WebConsole::Search
   class View < WebConsole::View
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), '..')
@@ -15,8 +17,35 @@ module WebConsole::Search
       do_javascript_function(ADD_FILE_JAVASCRIPT_FUNCTION, [file_path, display_file_path])
     end
     
-    
-    def add_line_to_file(line, file)
+    def add_line(line_number, text, matches)
+      matches_javascript = self.class.matches_javascript(matches)      
+      text.javascript_escape!
+      javascript = %Q[
+#{matches_javascript}
+addLine(#{line_number}, '#{text}', matches);
+]
+      do_javascript(javascript)
     end
+
+    private
+
+    def self.matches_javascript(matches)
+      matches_json = ""
+      matches.each { |match|
+        match_json = %Q[ 
+  {
+    index: #{match.index},
+    length: #{match.length}
+  },]
+        matches_json << match_json
+      }
+      matches_json.chomp!(",");
+      javascript = %Q[
+var matches = [#{matches_json}  
+];
+]
+      return javascript      
+    end
+
   end
 end

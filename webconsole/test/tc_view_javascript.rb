@@ -19,11 +19,10 @@ class TestViewJavaScript < Test::Unit::TestCase
   end
 
   def teardown
-    @view.close    
+    @view.close
   end
 
   def test_resources
-
     # Testing jquery assures that `zepto.js` has been loaded correctly
     javascript = File.read(WebConsole::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
     result = @view.do_javascript(javascript)
@@ -32,7 +31,6 @@ class TestViewJavaScript < Test::Unit::TestCase
     expected = @view.do_javascript(test_javascript)
 
     assert_equal(expected, result, "The result should equal expected result.")
-
   end
 
   def test_javascript_function_without_arguments
@@ -41,8 +39,18 @@ class TestViewJavaScript < Test::Unit::TestCase
   end
 
   def test_javascript_function_with_arguments
-    result = @view.do_javascript_function(TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_NAME, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_ARGUMENTS)
-    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_RESULT, "The result should equal the expected result.")
+    result = @view.do_javascript_function(TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_NAME, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_STRING_ARGUMENTS)
+    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_STRING_RESULT, "The result should equal the expected result.")
+  end
+
+  def test_javascript_function_with_integer_argument
+    result = @view.do_javascript_function(TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_NAME, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_INTEGER_ARGUMENTS)
+    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_INTEGER_RESULT, "The result should equal the expected result.")
+  end
+
+  def test_javascript_function_with_float_argument
+    result = @view.do_javascript_function(TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_NAME, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_FLOAT_ARGUMENTS)
+    assert_equal(result, TEST_JAVASCRIPT_FUNCTION_WITH_ARGUMENTS_FLOAT_RESULT, "The result should equal the expected result.")
   end
 
 end
