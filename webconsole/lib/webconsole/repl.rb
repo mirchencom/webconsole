@@ -1,7 +1,10 @@
-module WcREPL
-  require_relative "lib/input_controller"
-  require_relative "lib/output_controller"
-  require_relative "lib/window_manager"
+require_relative 'extension_constants'
+require WEBCONSOLE_FILE
+
+module WebConsole::REPL
+  require_relative "repl/lib/input_controller"
+  require_relative "repl/lib/output_controller"
+  require_relative "repl/lib/view"
 
   class Wrapper
     require 'pty'
@@ -30,23 +33,25 @@ module WcREPL
 
     def input_controller
       if !@input_controller
-        @input_controller = InputController.new(window_manager)
+        @input_controller = InputController.new
+        @input_controller.view = view
       end
       return @input_controller
     end
     
     def output_controller
       if !@output_controller
-        @output_controller = OutputController.new(window_manager)
+        @output_controller = OutputController.new
+        @output_controller.view = view
       end
       return @output_controller
     end
     
-    def window_manager
-      if !@window_manager
-        @window_manager = WindowManager.new
+    def view
+      if !@view
+        @view = View.new
       end
-      return @window_manager
+      return @view
     end
 
   end

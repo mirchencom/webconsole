@@ -3,9 +3,9 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
-task :default => ['wcrepl:tests']
+task :default => ['repl:tests']
 
-namespace :wcrepl do
+namespace :repl do
   
   task :tests => [:clean_up]
 
@@ -19,12 +19,12 @@ namespace :wcrepl do
     ruby Shellwords.escape(output_controller_tests_file)
   end
 
-  task :test_wcrepl => [:test_output_controller] do
-    wcrepl_tests_file = File.join(File.dirname(__FILE__), "tc_wcrepl.rb")
-    ruby Shellwords.escape(wcrepl_tests_file)
+  task :test_repl => [:test_output_controller] do
+    repl_tests_file = File.join(File.dirname(__FILE__), "tc_repl.rb")
+    ruby Shellwords.escape(repl_tests_file)
   end
 
-  task :clean_up => [:test_wcrepl] do
+  task :clean_up => [:test_repl] do
     WebConsole::Tests::Helper::quit
   end
 end

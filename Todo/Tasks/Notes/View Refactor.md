@@ -1,6 +1,13 @@
 # View Refactor
 
-* [ ] Finish refactoring Search plugin, now make it properly use Controller vs. View separation
+* [ ] Refactor REPL extension
+* [ ] Remove extension from all instances of these
+
+		wcrepl_header_tags
+		wcrepl_handlebars_template_tags
+		wcrepl_stylesheet_link_tag
+		wcrepl_javascript_include_tag
+
 * [ ] All plugins use new title helper
 * [ ] Add Dependencies extension tests to main webconsole gem tests
 * [ ] Make Search plugin work with Dependencies extension in order to test dependencies namespacing

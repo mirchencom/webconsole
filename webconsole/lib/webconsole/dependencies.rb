@@ -1,4 +1,4 @@
-require_relative 'dependencies/lib/constants'
+require_relative 'extension_constants'
 require WEBCONSOLE_FILE
 
 module WebConsole::Dependencies

@@ -1,9 +1,8 @@
-require 'webconsole'
-
-module WcREPL
+module WebConsole::REPL
   class OutputController < WebConsole::Controller
-    def initialize(delegate = nil)
-      @delegate = delegate
+
+    attr_accessor :view
+    def initialize
     end
 
     def parse_output(output)
@@ -13,10 +12,9 @@ module WcREPL
       output.javascript_escape!
       if !output.strip.empty? # Ignore empty lines
         javascript = %Q[WcREPL.addOutput('#{output}');]
-        if @delegate
-          @delegate.do_javascript(javascript)
-        end
+        @view.do_javascript(javascript)
       end
     end
+
   end
 end
