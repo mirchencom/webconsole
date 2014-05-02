@@ -10,6 +10,16 @@ module WebConsole::REPL
       self.load_erb_from_path(VIEW_TEMPLATE)
     end
 
+    ADD_INPUT_JAVASCRIPT_FUNCTION = "WcREPL.addInput"
+    def add_input(input)
+      do_javascript_function(ADD_INPUT_JAVASCRIPT_FUNCTION, [input])      
+    end
+    
+    ADD_OUTPUT_JAVASCRIPT_FUNCTION = "WcREPL.addOutput"
+    def add_output(output)
+      do_javascript_function(ADD_OUTPUT_JAVASCRIPT_FUNCTION, [output])      
+    end
+
     # Helpers to allow easy loading of REPL resource even from another base URL
 
     def repl_header_tags
@@ -31,7 +41,6 @@ module WebConsole::REPL
   		<pre><code>{{code}}</code></pre>
   	</script>]
     end
-
 
     def repl_stylesheet_link_tag
       path = File.join(repl_base_resource_path, "css/style.css")

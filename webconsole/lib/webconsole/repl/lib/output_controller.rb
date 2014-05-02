@@ -11,8 +11,7 @@ module WebConsole::REPL
       output.chomp!
       output.javascript_escape!
       if !output.strip.empty? # Ignore empty lines
-        javascript = %Q[WcREPL.addOutput('#{output}');]
-        @view.do_javascript(javascript)
+        @view.add_output(output)
       end
     end
 
