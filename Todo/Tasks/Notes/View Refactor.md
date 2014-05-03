@@ -1,6 +1,9 @@
 # View Refactor
 
-* [ ] Update `.gemspec` to use globs
+* [ ] Fix the HTML Plugin by just making the base URL the second argument
+* [ ] HTML Plugin `tc_controller` is bringing out an API bug, if a base URL is not set, then a second call to load HTML will fail because the `window_id` will get passed in as the base URL
+	* Add a `WindowManager` test for this
+* [ ] Continue setting `coffee`, work on `tc_wrapper` test
 * [ ] Setup `coffee`, `irb`, and `node` to use new `webconsole` gem API
 * [ ] Remove extension from all instances of these
 
