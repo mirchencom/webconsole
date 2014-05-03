@@ -4,9 +4,9 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
-task :default => ['wcirb:tests']
+task :default => ['irb:tests']
 
-namespace :wcirb do
+namespace :irb do
   
   task :tests => [:clean_up]
 

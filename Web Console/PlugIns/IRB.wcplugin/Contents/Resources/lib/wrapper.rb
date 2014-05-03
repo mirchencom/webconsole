@@ -1,12 +1,10 @@
 require_relative '../bundle/bundler/setup'
-require 'webconsole'
-require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
+require 'webconsole/repl'
 
-module WcIRB
-  class Wrapper < WcREPL::Wrapper
+module WebConsole::REPL::IRB
+  class Wrapper < WebConsole::REPL::Wrapper
     require_relative "output_controller"
-    require_relative "input_controller"
-    require_relative "window_manager"
+    require_relative "view"
 
     def initialize
       super("irb")
@@ -17,26 +15,20 @@ module WcIRB
       super(input)
     end
 
-    def input_controller
-      if !@input_controller
-        @input_controller = InputController.new(window_manager)
-      end
-      return @input_controller
-    end
-
     def output_controller
       if !@output_controller
-        @output_controller = OutputController.new(window_manager)
+        @output_controller = OutputController.new
+        @output_controller.view = view
       end
       return @output_controller
     end
     
-    def window_manager
-      if !@window_manager
-        @window_manager = WindowManager.new
+    def view
+      if !@view
+        @view = View.new
       end
-      return @window_manager
-    end    
-  end
-  
+      return @view
+    end
+
+  end  
 end

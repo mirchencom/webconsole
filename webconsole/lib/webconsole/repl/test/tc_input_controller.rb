@@ -12,20 +12,19 @@ require_relative "../lib/view"
 class TestInputController < Test::Unit::TestCase
 
   def test_input_controller
-    view = WebConsole::REPL::View.new
     input_controller = WebConsole::REPL::InputController.new
-    input_controller.view = view
+    input_controller.view = WebConsole::REPL::View.new
     
     test_text = "Some test text"
     input_controller.parse_input(test_text)
     
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-    result = view.do_javascript(javascript)
+    result = input_controller.view.do_javascript(javascript)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")
 
-    view.close
+    input_controller.view.close
   end
 
 end

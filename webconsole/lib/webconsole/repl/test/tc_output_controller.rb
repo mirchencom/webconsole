@@ -12,13 +12,12 @@ require_relative "../lib/view"
 class TestOutputController < Test::Unit::TestCase
   
   def setup
-    @view = WebConsole::REPL::View.new
     @output_controller = WebConsole::REPL::OutputController.new
-    @output_controller.view = @view
+    @output_controller.view = WebConsole::REPL::View.new
   end
   
   def teardown
-    @view.close
+    @output_controller.view.close
   end
 
   def test_output_controller
@@ -26,7 +25,7 @@ class TestOutputController < Test::Unit::TestCase
     @output_controller.parse_output(test_text)
     
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-    result = @view.do_javascript(javascript)
+    result = @output_controller.view.do_javascript(javascript)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")
@@ -37,7 +36,7 @@ class TestOutputController < Test::Unit::TestCase
     @output_controller.parse_output("\x1b0000m" + test_text)
     
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-    result = @view.do_javascript(javascript)
+    result = @output_controller.view.do_javascript(javascript)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")

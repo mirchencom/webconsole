@@ -10,7 +10,7 @@ require_relative "../lib/wrapper"
 
 class TestWrapper < Test::Unit::TestCase
   def test_wrapper
-    wrapper = WcIRB::Wrapper.new
+    wrapper = WebConsole::REPL::IRB::Wrapper.new
 
     test_text = %Q[def add_numbers(num1, num2)
   return num1 + num2
@@ -23,22 +23,22 @@ add_numbers(1, 2)]
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
 
     window_id = WebConsole::Tests::Helper::window_id
-    window_manager = WebConsole::WindowManager.new(window_id)
+    window = WebConsole::Window.new(window_id)
     
     # Test Wrapper Input
     javascript = File.read(WebConsole::Tests::FIRSTCODE_JAVASCRIPT_FILE)
-    result = window_manager.do_javascript(javascript)
+    result = window.do_javascript(javascript)
     result.strip!
     result.gsub!(/<\/?span.*?>/, "") # Remove spans adding by highlight.js
     assert_equal(test_text, result, "The test text should equal the result.")
 
     # Test Wrapper Output
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-    result = window_manager.do_javascript(javascript)
+    result = window.do_javascript(javascript)
     result.strip!
     assert_equal(result, test_result, "The test result should equal the result.")
     
-    window_manager.close
+    window.close
   end
 
 end

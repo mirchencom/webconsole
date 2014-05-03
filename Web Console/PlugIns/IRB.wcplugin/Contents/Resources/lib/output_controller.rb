@@ -1,9 +1,8 @@
 require_relative '../bundle/bundler/setup'
-require 'webconsole'
-require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
+require 'webconsole/repl'
 
-module WcIRB
-  class OutputController < WcREPL::OutputController
+module WebConsole::REPL::IRB
+  class OutputController < WebConsole::REPL::OutputController
     def parse_output(output)
       if output =~ /^irb\([^)]*\):[^:]*:[^>]*>/
         # Don't add echo of input
