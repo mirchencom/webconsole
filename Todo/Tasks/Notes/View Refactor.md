@@ -1,6 +1,6 @@
 # View Refactor
 
-* [ ] Refactor REPL extension
+* [ ] Setup `coffee`, `irb`, and `node` to use new `webconsole` gem API
 * [ ] Remove extension from all instances of these
 
 		wcrepl_header_tags
