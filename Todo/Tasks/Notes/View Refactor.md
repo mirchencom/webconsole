@@ -1,5 +1,6 @@
 # View Refactor
 
+* [ ] Update `.gemspec` to use globs
 * [ ] Setup `coffee`, `irb`, and `node` to use new `webconsole` gem API
 * [ ] Remove extension from all instances of these
 

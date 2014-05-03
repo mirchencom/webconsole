@@ -7,24 +7,8 @@ Gem::Specification.new do |s|
   s.authors = ["Roben Kleene"]
   s.email = 'roben@1percenter.com'
   s.required_ruby_version = '~> 2.0'
-  s.files = %w[
-    lib/webconsole.rb
-    lib/webconsole/constants.rb
-    lib/webconsole/module.rb
-    lib/webconsole/view/erb.rb
-    lib/webconsole/view/javascript.rb
-    lib/webconsole/view/resources.rb
-    lib/webconsole/view.rb
-    lib/webconsole/window_manager.rb
-    lib/applescript/resource_path_for_plugin.scpt
-    lib/applescript/resource_url_for_plugin.scpt
-    lib/applescript/close_window.scpt
-    lib/applescript/do_javascript.scpt
-    lib/applescript/load_html.scpt
-    lib/applescript/run_plugin.scpt
-    lib/applescript/load_plugin.scpt
-    lib/applescript/plugin_has_windows.scpt
-    lib/applescript/plugin_read_from_standard_input.scpt
-    lib/applescript/window_id_for_plugin.scpt
-  ]
+  s.files = Dir.glob("lib/**/*").reject { |f| 
+    f['lib/webconsole/repl/test'] ||
+    f['lib/webconsole/dependencies/test'] 
+  }
 end
