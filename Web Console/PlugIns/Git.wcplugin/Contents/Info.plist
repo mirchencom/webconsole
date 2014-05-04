@@ -5,7 +5,7 @@
 	<key>WCName</key>
 	<string>Git</string>
 	<key>WCCommand</key>
-	<string>wcgit.rb</string>
+	<string>git.rb</string>
 	<key>WCUUID</key>
 	<string>175BE461-C8A5-445B-ADF6-B2CDDBB196EE</string>
 </dict>

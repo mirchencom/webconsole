@@ -1,17 +1,14 @@
+require_relative '../bundle/bundler/setup'
+require 'rugged'
 
-
-module WcGit
-
-  require_relative '../bundle/bundler/setup'
-  require 'rugged'
+module WebConsole::Git
   class GitManager
+
     def initialize(path)
       @path = path
 
-
       @repo = Rugged::Repository.new(@path)
       @index = @repo.index
-
 
       puts @index.inspect
       # @index = Rugged::Index.new(path)

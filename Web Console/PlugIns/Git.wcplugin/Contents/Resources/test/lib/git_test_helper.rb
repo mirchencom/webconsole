@@ -1,10 +1,9 @@
-module WcGit
+module WebConsole::Git
   module Tests
 
 	require_relative '../../bundle/bundler/setup'
     require 'fileutils'
     require 'rugged'
-
 
     class GitHelper
       attr_reader :path
