@@ -1,6 +1,14 @@
 # View Refactor
 
 * [ ] Fix the HTML Plugin by just making the base URL the second argument
+* [ ] Write tests for HTML and Markdown gems
+	* Especially the actually executables
+	* Should be able to read HTML stdin or open a file
+	* Don't both testing file modifications for now, that's too much work
+		* Just add these as todos
+* [ ] Make HTML style tests for Markdown gem
+* [ ] Double check they are cleaned up properly
+* [ ] Add them to the main tests (can main tests run right now?)
 * [ ] HTML Plugin `tc_controller` is bringing out an API bug, if a base URL is not set, then a second call to load HTML will fail because the `window_id` will get passed in as the base URL
 	* Add a `WindowManager` test for this
 * [ ] Continue setting `coffee`, work on `tc_wrapper` test
