@@ -13,10 +13,14 @@ module WebConsole
     end
 
     LOADHTML_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_html.scpt")
+    LOADHTMLWITHBASEURL_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_html_with_base_url.scpt")
     def load_html(html)
       arguments = [html]
 
+      script = LOADHTML_SCRIPT
+
       if @base_url
+        script = LOADHTMLWITHBASEURL_SCRIPT
         arguments.push(@base_url)
       end
 
@@ -24,7 +28,7 @@ module WebConsole
         arguments.push(window_id)
       end
 
-      result = WebConsole::run_applescript(LOADHTML_SCRIPT, arguments)
+      result = WebConsole::run_applescript(script, arguments)
       if !window_id
         # This allows a window manager created without a window_id and then be assigned the window_id when load_html is called.
         @window_id = self.class.window_id_from_result(result)        

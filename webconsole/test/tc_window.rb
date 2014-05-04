@@ -70,6 +70,21 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     html = "<html><body>" + test_text + "</body></html>"
     @window.load_html(html)
 
+    javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
+    result = @window.do_javascript(javascript)
+
+    result.strip! # Remove line break
+    assert_equal(test_text, result, "The result should match the test string.")
+  end
+
+  def test_load_html_twice
+    test_text = "This is a test string"
+    html = "<html><body>" + test_text + "</body></html>"
+    @window.load_html(html)
+
+    test_text = "This is a test string 2"
+    html = "<html><body>" + test_text + "</body></html>"
+    @window.load_html(html)
 
     javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
@@ -77,6 +92,7 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     result.strip! # Remove line break
     assert_equal(test_text, result, "The result should match the test string.")
   end
+
 end
 
 class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
