@@ -5,22 +5,22 @@ require 'webconsole'
 require 'listen'
 
 require_relative "lib/controller"
-require_relative "lib/window_manager"
 
 if !ARGV.empty?
   file = ARGF.file
 end
 markdown = ARGF.read
 
-window_manager = WcMarkdown::WindowManager.new
-
-if !file
-  WcMarkdown::Controller.new(window_manager, markdown)
-  exit
-end
+# This should allow the plugin to process Markdown from stdin, but
+# the Web Console Application doesn't yet support running a plugin
+# and reading from stdin simultaneously
+# if !file
+#   WebConsole::Markdown::Controller.new(markdown)
+#   exit
+# end
 
 filename = File.basename(file)
-controller = WcMarkdown::Controller.new(window_manager, markdown, filename)
+controller = WebConsole::Markdown::Controller.new(markdown, filename)
 
 path = File.expand_path(File.dirname(file))
 

@@ -1,5 +1,6 @@
 # View Refactor
 
+* [ ] `self.load_erb_from_path` to `load_erb_from_path`
 * [ ] Fix the HTML Plugin by just making the base URL the second argument
 * [ ] Write tests for HTML and Markdown gems
 	* Especially the actually executables
