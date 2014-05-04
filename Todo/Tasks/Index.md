@@ -2,6 +2,9 @@
 
 ## JavaScript Helper Method to `WebConsole::View`
 
+* [ ] Clean up notes and todos
+* [ ] Merge view refactor branch
+* [ ] When I add the plugin name environment variable, make sure it gets tested in the Xcode tests, because those tests won't exist anywhere else
 * [ ] Add the helper `def self.javascript_function(function, arguments)` to the `WebConsole::Window_Manager`
 * [ ] Write a test for it
 * [ ] Publish gem
