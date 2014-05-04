@@ -1,0 +1,44 @@
+== 0.2.5
+
+* New features
+  - Constructor Fmt() and property setter [].
+  - More flexibility for missing parameters for mode, prec.
+
+== 0.2.4 2009-08-05
+
+* New features
+  - Support for Flt types DecNum and BinNum.
+* Refactoring
+  - Code has been reorganized to use the Tolerance and Conversion
+    algorithms that have been moved to the Flt library.
+
+== 0.2.3 2008-12-23
+
+* Minor enhancements
+  - Compatibility with Ruby 1.9.1.
+  - Mr. Bones is used instead of Hoe/newgem for development tasks.
+
+== 0.2.2 2008-03-04
+
+* Minor enhancements
+  - show_plus can be passed a string (e.g. ' ') that is used as the plus sign;
+    added new show_exp_plus to control the sign display of the exponent in
+    scientific notation.
+
+== 0.2.1 2007-12-15
+
+* Minor enhancements
+  - The RepDec maximum number of digits can now be changed, and the default
+    value has been incremented to 5000 digits (was 2048). With the new value
+    the minimum value of a IEEE 754 extended number can now be shown as
+    different from zero.
+  - Performance optimizations in RepDec#setQ
+* Bug corrections
+  - Fixed a problem in the formatted output of BigDecimals which affected large numbers.
+  - Fix minor problem with nextfloat
+
+== 0.2.0 2007-09-22
+
+* Initial release
+  - The Nio library has been extracted from and old project
+    and packaged as a Gem.
