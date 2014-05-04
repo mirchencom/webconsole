@@ -5,7 +5,7 @@
 	<key>WCName</key>
 	<string>HTML</string>
 	<key>WCCommand</key>
-	<string>wchtml.rb</string>
+	<string>html.rb</string>
 	<key>WCUUID</key>
 	<string>7CD5AF0C-7C9F-43C6-A6F2-E542C729205D</string>
 </dict>

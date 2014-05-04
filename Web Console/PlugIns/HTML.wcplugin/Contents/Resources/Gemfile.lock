@@ -1,3 +1,8 @@
+PATH
+  remote: ../../../../../webconsole
+  specs:
+    webconsole (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -7,7 +12,7 @@ GEM
       celluloid (>= 0.15.0)
       nio4r (>= 0.5.0)
     ffi (1.9.3)
-    listen (2.7.2)
+    listen (2.7.4)
       celluloid (>= 0.15.2)
       celluloid-io (>= 0.15.0)
       rb-fsevent (>= 0.9.3)
@@ -17,11 +22,10 @@ GEM
     rb-inotify (0.9.4)
       ffi (>= 0.5.0)
     timers (1.1.0)
-    webconsole (0.0.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   listen
-  webconsole
+  webconsole!

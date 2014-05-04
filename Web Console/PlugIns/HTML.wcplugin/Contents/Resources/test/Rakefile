@@ -1,0 +1,27 @@
+require_relative '../bundle/bundler/setup'
+require 'webconsole'
+
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WebConsole::Tests::TEST_HELPER_FILE
+require 'shellwords'
+
+task :default => ['html:tests']
+
+namespace :html do
+  
+  task :tests => [:clean_up]
+
+  task :test_controller do
+    controller_tests_file = File.join(File.dirname(__FILE__), "tc_controller.rb")
+    ruby Shellwords.escape(controller_tests_file)
+  end
+
+  task :test_plugin => [:test_controller] do
+    plugin_tests_file = File.join(File.dirname(__FILE__), "tc_plugin.rb")
+    ruby Shellwords.escape(plugin_tests_file)
+  end
+
+  task :clean_up => [:test_plugin] do
+    WebConsole::Tests::Helper::quit
+  end
+end

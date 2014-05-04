@@ -1,4 +1,4 @@
-module WcHTML
+module WebConsole::HTML
   class Controller
 
     def initialize(delegate = nil, html)
