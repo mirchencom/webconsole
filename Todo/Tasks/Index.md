@@ -1,27 +1,15 @@
 # Index
 
-## JavaScript Helper Method to `WebConsole::View`
+## Refactor Cleanup
 
 * [ ] Clean up notes and todos
+* [ ] Make sure `dependencies` and `repl` extension tests run
+* [ ] Add `html` and `markdown` to the main tests (can main tests run right now?)
+* [ ] Double check make sure `repl` and `dependencies` tests run
+* [ ] Double check `webconsole` gem tests run with to rake tests
 * [ ] Merge view refactor branch
-* [ ] When I add the plugin name environment variable, make sure it gets tested in the Xcode tests, because those tests won't exist anywhere else
-* [ ] Add the helper `def self.javascript_function(function, arguments)` to the `WebConsole::Window_Manager`
-* [ ] Write a test for it
-* [ ] Publish gem
-* [ ] Update gems with bundler
-* [ ] Replace `wcdependencies` implementation of `javascript_function`
-* [ ] Replace all `do_javascript` calls with new helper method calls in gems
-* [ ] The javascript string methods should also be moved from the controller
-* [ ] Make HTML test pass, and do similar for markdown
-* [ ] Add those to main tests
-
-### Consider
-
-* Make `do_javascript` private? (And instead make helper methods that call it)
-* Controllers should not call `do_javascript` or `load_html` directly, instead those should call helper methods, also the `self.javascript_function` should be moved onto the view
-
-## Refactoring
-
+* [ ] Pull and test on virtual machine
+* [ ] When I add the plugin name environment variable for title, make sure it gets tested in the Xcode tests, because those tests won't exist anywhere else
 * [ ] Do that `title` helper method for all plugins
 
 	    def title
@@ -32,8 +20,7 @@
 	* The plugin name should be included as a environment variable
 	* Use `PLUGIN_NAME_KEY` for this
 	* Add a test for it
-* [ ] `http` links should open in the browser?
-	* Test missing dependencies (e.g., linking to "homebrew") work with this
+
 
 ## Building & Running Plugins
 
@@ -44,13 +31,16 @@
 	* These require the Ruby gem
 	* For now just `gem install webconsole` globally
 	* Test the HTML and Markdown Gems on Virtual Machine
+* [ ] `http` links should open in the browser?
+	* Test `WebConsole::Dependencies` works with this (e.g., linking to "homebrew" opens in the browser)
+* [ ] Fix the toolbar
 
 ## Continued
 
 * [ ] Work on [Web Console Documentation](Tasks/Web%20Console%20Documentation.md)
 * [ ] Figure out how to publish various extras
 	* TextMate Bundle?
-	* Shell Scripts?
+	* Shell Scripts? (e.g., command line utility)
 		* `wccoffee.rb`
 		* `wchtml.rb`
 		* `wcirb.rb`
