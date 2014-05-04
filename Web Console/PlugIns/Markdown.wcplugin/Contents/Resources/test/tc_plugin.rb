@@ -22,7 +22,7 @@ class TestPlugin < Test::Unit::TestCase
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
   end
 
-  def test_load_html_file
+  def test_load_markdown_file
     WebConsole::run_plugin(TEST_PLUGIN_NAME, TEST_PLUGIN_PATH, [TEST_MARKDOWN_FILE])
 
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running
