@@ -9,7 +9,7 @@ module WebConsole::Search
     def initialize
       super
       self.base_url_path = File.expand_path(BASE_DIRECTORY)
-      self.load_erb_from_path(VIEW_TEMPLATE)
+      load_erb_from_path(VIEW_TEMPLATE)
     end
 
     ADD_FILE_JAVASCRIPT_FUNCTION = "addFile"
