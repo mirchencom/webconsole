@@ -1,34 +1,28 @@
 # View Refactor
 
-* [ ] Get main tests passing
-* [ ] Make sure `repl` and `dependencies` tests pass
-
 ## Wrapping Up
 
-* [ ] All plugins use new title helper
-* [ ] Add Dependencies extension tests to main webconsole gem tests
-* [ ] Make Search plugin work with Dependencies extension in order to test dependencies namespacing
-* [ ] Make data a properly namespaced plugin
-* [ ] Add title to the window, do tests for it, then wrap up `wcdependencies`
+* [x] All plugins use new title helper
+* [x] Add Dependencies extension tests to main webconsole gem tests
+* [x] Make Search plugin work with Dependencies extension in order to test dependencies namespacing
+* [x] Make data a properly namespaced plugin
+* [x] Add title to the window, do tests for it, then wrap up `wcdependencies`
 	* Test title with and without environment variable set
 	* Test loading the view without a set title
 	* Test setting the title via the attribute
 	* Test setting the title via the environment variable
-* [ ] Enforce these new require rules
+* [x] Enforce these new require rules
 	* There should only be one require per load path, this means
 		* `require 'webconsole'` goes only in the tests and in the main class
 		* Tests should only require the classes they need to test
-* [ ] Add new view files to rake tests
-* [ ] `wcdependencies` and `wcrepl` can probably lose their prefix, in fact I think I should move towards removing the `wc` prefix altogether
-* [ ] Gem tests should now run tests for `wcdata`, `wcdependencies`, and `wcrepl`
-* [ ] For WcREPL and WcDependencies, the *tests* should require `webconsole` via Bundler!
-* [ ] More API changes:
+* [x] Gem tests should now run tests for `wcdata`, `wcdependencies`, and `wcrepl`
+* [x] For WcREPL and WcDependencies, the *tests* should require `webconsole` via Bundler!
+* [x] More API changes:
 	* `WindowManager` to `Window`
 	* `Controller` has a `View` has a `Window`
 	* Make a `Controller` class again that just initializes a `View`
-* [ ] Setup `wcsearch` to use local gem
-* [ ] When I add the plugin name environment variable, make sure it gets tested in the Xcode tests, because those tests won't exist anywhere else
-* [ ] Maybe there should be a simple controller subclass like this:
+* [x] Setup `wcsearch` to use local gem
+* [x] Maybe there should be a simple controller subclass like this:
 
 		  class Controller
 
@@ -36,12 +30,15 @@
 		      @view = View.new
 		    end
 
-
 ## Cleaning up Tests
 
+* [ ] Do a regular expression search to confirm this
+	* `wcdependencies` and `wcrepl` can probably lose their prefix, in fact I think I should move towards removing the `wc` prefix altogether
 * [ ] I've removed the `wc` prefix from all Rakefiles, so the main tests Rakefile will need to be updated
 * [ ] Make sure `dependencies` and `repl` extension tests run
 * [ ] Add `html` and `markdown` to the main tests (can main tests run right now?)
+* [ ] Double check make sure `repl` and `dependencies` tests run
+* [ ] Double check `webconsole` gem tests run with to rake tests
 
 ## Update the `webconsole` gem for all plugins
 
