@@ -4,7 +4,11 @@
 
 * [ ] Do S3 Backup
 * [ ] Merge view refactor branch
-* [ ] Delete view refactor branch
+* [ ] Git checkout master on virtual machine
+* [ ] Run tests on virtual machine
+* [ ] Check that repl, dependencies, HTML, and Markdown ran
+* [ ] Double-check bitbucket
+* [ ] Delete viewrefactor branch
 
 ## Title
 
