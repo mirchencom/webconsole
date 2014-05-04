@@ -1,15 +1,5 @@
 # Index
 
-## Refactor Cleanup
-
-* [ ] Do S3 Backup
-* [ ] Merge view refactor branch
-* [ ] Git checkout master on virtual machine
-* [ ] Run tests on virtual machine
-* [ ] Check that repl, dependencies, HTML, and Markdown ran
-* [ ] Double-check bitbucket
-* [ ] Delete viewrefactor branch
-
 ## Title
 
 * [ ] When I add the plugin name environment variable for title, make sure it gets tested in the Xcode tests, because those tests won't exist anywhere else
