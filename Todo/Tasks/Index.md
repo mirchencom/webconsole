@@ -1,11 +1,5 @@
 # Index
 
-* [ ] Clean up notes and todos
-* [ ] Make sure `dependencies` and `repl` extension tests run
-* [ ] Add `html` and `markdown` to the main tests (can main tests run right now?)
-* [ ] Double check make sure `repl` and `dependencies` tests run
-* [ ] Double check `webconsole` gem tests run with to rake tests
-
 ## Refactor Cleanup
 
 * [ ] Pull and test on virtual machine
