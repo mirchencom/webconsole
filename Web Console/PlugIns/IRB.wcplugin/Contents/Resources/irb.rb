@@ -5,7 +5,7 @@ require "webconsole"
 
 require_relative "lib/wrapper"
 
-wrapper = WebConsole::IRB::Wrapper.new
+wrapper = WebConsole::REPL::IRB::Wrapper.new
 
 ARGF.each do |line|
   wrapper.parse_input(line)
