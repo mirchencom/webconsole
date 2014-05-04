@@ -1,12 +1,10 @@
 require_relative '../bundle/bundler/setup'
-require 'webconsole'
-require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
+require 'webconsole/repl'
 
-module WcNode
-  class Wrapper < WcREPL::Wrapper
-    require_relative "input_controller"
+module WebConsole::REPL::Node
+  class Wrapper < WebConsole::REPL::Wrapper
     require_relative "output_controller"
-    require_relative "window_manager"
+    require_relative "view"
 
     def initialize
       super("node")
@@ -25,24 +23,18 @@ module WcNode
 
     def output_controller
       if !@output_controller
-        @output_controller = OutputController.new(window_manager)
+        @output_controller = OutputController.new
+        @output_controller.view = view
       end
       return @output_controller
     end
 
-    def input_controller
-      if !@input_controller
-        @input_controller = InputController.new(window_manager)
+    def view
+      if !@view
+        @view = View.new
       end
-      return @input_controller
+      return @view
     end
 
-    def window_manager
-      if !@window_manager
-        @window_manager = WindowManager.new
-      end
-      return @window_manager
-    end    
   end
-  
 end

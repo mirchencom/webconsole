@@ -12,15 +12,14 @@ require_relative "../lib/wrapper"
 
 class TestDependencies < Test::Unit::TestCase
   def test_dependencies
-    ENV[WebConsole::PLUGIN_NAME_KEY] = "Node"
-    passed = WcNode.check_dependencies
+    passed = WebConsole::REPL::Node.check_dependencies
     assert(passed, "The dependencies check should have passed.")
   end
 end
 
 class TestWrapper < Test::Unit::TestCase
   def test_wrapper
-    wrapper = WcNode::Wrapper.new
+    wrapper = WebConsole::REPL::Node::Wrapper.new
 
     test_text = %Q[var add;
 add = function(x, y) {
@@ -34,11 +33,11 @@ add(1, 2);]
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
 
     window_id = WebConsole::Tests::Helper::window_id
-    window_manager = WebConsole::WindowManager.new(window_id)
+    window = WebConsole::Window.new(window_id)
     
     # Test Wrapper Input
     javascript = File.read(WebConsole::Tests::FIRSTCODE_JAVASCRIPT_FILE)
-    result = window_manager.do_javascript(javascript)
+    result = window.do_javascript(javascript)
     result.strip!
     result.gsub!(/<\/?span.*?>/, "") # Remove spans adding by highlight.js
     result.gsub!("&gt;", ">") # Unescape entity
@@ -46,11 +45,11 @@ add(1, 2);]
     
     # Test Wrapper Output
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-    result = window_manager.do_javascript(javascript)
+    result = window.do_javascript(javascript)
     result.strip!
     assert_equal(result, test_result, "The test result should equal the result.")
     
-    window_manager.close
+    window.close
   end
 
 end

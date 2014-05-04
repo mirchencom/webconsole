@@ -5,7 +5,7 @@
 	<key>WCName</key>
 	<string>Node</string>
 	<key>WCCommand</key>
-	<string>wcnode.rb</string>
+	<string>node.rb</string>
 	<key>WCUUID</key>
 	<string>7E6C30C9-BDC4-4CA7-BBB9-8925EB60EB9F</string>
 </dict>

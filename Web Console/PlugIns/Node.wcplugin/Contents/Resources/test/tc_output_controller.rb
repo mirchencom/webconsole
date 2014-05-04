@@ -7,15 +7,12 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 
 require_relative "../lib/dependencies"
-require_relative "../lib/input_controller"
-require_relative "../lib/window_manager"
 require_relative "../lib/output_controller"
-
+require_relative "../lib/view"
 
 class TestDependencies < Test::Unit::TestCase
   def test_dependencies
-    ENV[WebConsole::PLUGIN_NAME_KEY] = "Node"
-    passed = WcNode.check_dependencies
+    passed = WebConsole::REPL::Node.check_dependencies
     assert(passed, "The dependencies check should have passed.")
   end
 end
@@ -23,13 +20,12 @@ end
 class TestOutputController < Test::Unit::TestCase
   
   def setup
-    @window_manager = WcNode::WindowManager.new
-    WcNode::InputController.new(@window_manager) # Just to get the window_manager loaded with resources
-    @output_controller = WcNode::OutputController.new(@window_manager)
+    @output_controller = WebConsole::REPL::Node::OutputController.new
+    @output_controller.view = WebConsole::REPL::Node::View.new
   end
   
   def teardown
-    @window_manager.close
+    @output_controller.view.close
   end
 
   def test_output_controller
@@ -38,7 +34,7 @@ class TestOutputController < Test::Unit::TestCase
     @output_controller.parse_output("\e[1G\e[0J> \e[3Gconsole.log(\"test\");\r\r\n")
 
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-    result = @window_manager.do_javascript(javascript)
+    result = @output_controller.view.do_javascript(javascript)
     result.strip!
 
     assert_equal(test_text, result, "The test text should equal the result.")
