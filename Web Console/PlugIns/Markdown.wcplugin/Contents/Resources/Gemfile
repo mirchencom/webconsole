@@ -4,4 +4,4 @@ ruby '2.0.0'
 gem "webconsole"
 gem "redcarpet"
 gem "listen"
-gem "nio"
+gem "nio" # "nio" is a dependency of listen, before adding it explicitely here, new machines were getting a load error.

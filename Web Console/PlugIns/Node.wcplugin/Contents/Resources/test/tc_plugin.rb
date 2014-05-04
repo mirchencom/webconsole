@@ -30,7 +30,6 @@ class TestPlugin < Test::Unit::TestCase
     WebConsole::plugin_read_from_standard_input(TEST_PLUGIN_NAME, test_code)
 
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
-    # sleep 1.0 # Pause for output to be processed
 
     window_id = WebConsole::window_id_for_plugin(TEST_PLUGIN_NAME)
     window = WebConsole::Window.new(window_id)
