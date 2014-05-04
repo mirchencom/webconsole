@@ -5,7 +5,7 @@
 	<key>WCName</key>
 	<string>Print</string>
 	<key>WCCommand</key>
-	<string>wcprint.rb</string>
+	<string>print.rb</string>
 	<key>WCUUID</key>
 	<string>33EE3C86-3377-4F6D-B8FB-89B9539152AA</string>
 </dict>

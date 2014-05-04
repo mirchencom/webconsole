@@ -1,6 +1,13 @@
 # View Refactor
 
-* [ ] Refactor Git plugin to use new webconsole gem
+* [ ] Transfer everything over to use the new gem (just print plugin)
+* [ ] Do eyeball refactor for print plugin
+* [ ] Git commit
+* [ ] Push new version of webconsole gem
+* [ ] Remove all relative references
+* [ ] Do bundle update dance for all plugins
+* [ ] Run tests and get all tests running when run from individual folders
+* [ ] Get main tests passing
 
 ## Wrapping Up
 

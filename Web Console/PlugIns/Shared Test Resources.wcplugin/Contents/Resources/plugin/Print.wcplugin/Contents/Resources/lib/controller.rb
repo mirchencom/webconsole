@@ -1,21 +1,17 @@
-require_relative '../bundle/bundler/setup'
-require 'webconsole'
+require_relative 'view'
 
-module WcPrint
+module WebConsole::Print
   class Controller < WebConsole::Controller
-    BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
-    VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
-    VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
 
-    def initialize(delegate = nil)      
-      super(delegate, VIEW_TEMPLATE)
+    def initialize
+      @view = View.new
     end
 
     def parse_line(line)
       line.chomp!
       line.javascript_escape!
       javascript = %Q[addOutput('#{line}');]
-      @delegate.do_javascript(javascript)
+      @view.do_javascript(javascript)
     end
 
   end
