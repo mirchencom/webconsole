@@ -1,13 +1,11 @@
 BUNDLE_PATHS = [
-  "../../webconsole/test/data/Data.wcplugin/Contents/Resources/",
-  "../../Web Console/Plugins/Shared Test Resources.wcplugin/Contents/Resources/plugin/Print.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/Shared Test Resources.wcplugin/Contents/Resources/plugin/Print.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/Node.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/Markdown.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/IRB.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/HTML.wcplugin/Contents/Resources/",
-  "../../Web Console/Plugins/Git.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/Coffee.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Search.wcplugin/Contents/Resources/",
 ]
 
 task :default => [:run]
