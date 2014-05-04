@@ -13,4 +13,4 @@ $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/rb-f
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/rb-inotify-0.9.4/lib")
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/listen-2.7.4/lib")
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/redcarpet-3.1.1/lib")
-$:.unshift File.expand_path("#{path}/../../../../../../../webconsole/lib")
+$:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/webconsole-0.1.0/lib")
