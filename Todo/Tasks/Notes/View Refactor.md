@@ -1,7 +1,9 @@
 # View Refactor
 
+
 * [ ] Continue setting up `IRB`, work on `tc_wrapper` test
 * [ ] Setup `coffee`, `irb`, and `node` to use new `webconsole` gem API
+* [ ] `irb`, `node`, and `coffee` `tc_plugin` tests
 * [ ] Remove extension from all instances of these
 
 		wcrepl_header_tags
