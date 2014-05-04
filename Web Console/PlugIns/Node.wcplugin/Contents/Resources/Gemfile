@@ -1,5 +1,4 @@
 # A sample Gemfile
 source "https://rubygems.org"
 ruby '2.0.0'
-gem "webconsole"
-# gem "rails"
+gem "webconsole", :path => "../../../../../webconsole"

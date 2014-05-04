@@ -1,10 +1,14 @@
+PATH
+  remote: ../../../../../webconsole
+  specs:
+    webconsole (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    webconsole (0.0.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  webconsole
+  webconsole!
