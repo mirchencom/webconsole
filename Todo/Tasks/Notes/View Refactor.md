@@ -1,15 +1,8 @@
 # View Refactor
 
+* [ ] Refactor Git plugin to use new webconsole gem
 
-* [ ] Continue setting up `IRB`, work on `tc_wrapper` test
-* [ ] Setup `coffee`, `irb`, and `node` to use new `webconsole` gem API
-* [ ] `irb`, `node`, and `coffee` `tc_plugin` tests
-* [ ] Remove extension from all instances of these
-
-		wcrepl_header_tags
-		wcrepl_handlebars_template_tags
-		wcrepl_stylesheet_link_tag
-		wcrepl_javascript_include_tag
+## Wrapping Up
 
 * [ ] All plugins use new title helper
 * [ ] Add Dependencies extension tests to main webconsole gem tests
@@ -48,13 +41,6 @@
 * [ ] I've removed the `wc` prefix from all Rakefiles, so the main tests Rakefile will need to be updated
 * [ ] Make sure `dependencies` and `repl` extension tests run
 * [ ] Add `html` and `markdown` to the main tests (can main tests run right now?)
-
-## Setup a Test
-
-* [ ] Start moving plugins over to the new version of the gem
-* [ ] Update the HTML plugin first
-	* Delete all the bundle files except the `Gemfile`
-	* Point it to the relative path to the `webconsole` gem
 
 ## Update the `webconsole` gem for all plugins
 
