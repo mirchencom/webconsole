@@ -2,11 +2,6 @@
 
 ## Refactor Cleanup
 
-* [ ] Pull and test on virtual machine
-* [ ] Do `require "nio"` solution
-* [ ] Do `node` solution (up the pause time?)
-* [ ] Pull
-* [ ] Run tests again
 * [ ] Do S3 Backup
 * [ ] Merge view refactor branch
 * [ ] Delete view refactor branch
