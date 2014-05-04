@@ -1,14 +1,20 @@
 # Index
 
-## Refactor Cleanup
-
 * [ ] Clean up notes and todos
 * [ ] Make sure `dependencies` and `repl` extension tests run
 * [ ] Add `html` and `markdown` to the main tests (can main tests run right now?)
 * [ ] Double check make sure `repl` and `dependencies` tests run
 * [ ] Double check `webconsole` gem tests run with to rake tests
-* [ ] Merge view refactor branch
+
+## Refactor Cleanup
+
 * [ ] Pull and test on virtual machine
+* [ ] Do S3 Backup
+* [ ] Merge view refactor branch
+* [ ] Delete view refactor branch
+
+## Title
+
 * [ ] When I add the plugin name environment variable for title, make sure it gets tested in the Xcode tests, because those tests won't exist anywhere else
 * [ ] Do that `title` helper method for all plugins
 
@@ -20,7 +26,6 @@
 	* The plugin name should be included as a environment variable
 	* Use `PLUGIN_NAME_KEY` for this
 	* Add a test for it
-
 
 ## Building & Running Plugins
 
