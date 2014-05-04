@@ -16,7 +16,7 @@
 #pragma mark - Plugin
 
 #define kTestPluginName @"Print"
-#define kTestPluginCommand @"wcprint.rb"
+#define kTestPluginCommand @"print.rb"
 #define kPluginCommandPathKey @"commandPath"
 
 

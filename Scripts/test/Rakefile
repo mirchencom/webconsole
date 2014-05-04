@@ -14,7 +14,7 @@ task :default => [:xcunit, :ruby]
 
 task :long => [:xcunit, :ruby_long]
 task :xcunit => ['xcunit:tests']
-task :ruby => [:web_console, :gems, :plugins, :other]
+task :ruby => [:web_console, :gems, :plugins]
 
 task :ruby_long => [:web_console_long, :gems, :plugins]
 task :web_console => ['web_console:tests']
@@ -29,53 +29,47 @@ namespace :gems do
   webconsole_gem_tests_rakefile = File.join(WEBCONSOLE_GEM_PATH, "test", "Rakefile")
   load webconsole_gem_tests_rakefile
 
-  task :tests => [:test_webconsole]
+  task :tests => [:test_webconsole, :test_webconsole_other]
 
-  task :test_webconsole => ['webconsole:clean_up']
+  task :test_webconsole => ['webconsole:tests']
+  task :test_webconsole_other => ['other:tests']
 
 end
 
 namespace :plugins do
 
-  wcsearch_test_rakefile = File.join(PLUGIN_PATH, "Search.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
-  load wcsearch_test_rakefile
+  search_test_rakefile = File.join(PLUGIN_PATH, "Search.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
+  load search_test_rakefile
 
-  wcirb_test_rakefile = File.join(PLUGIN_PATH, "IRB.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
-  load wcirb_test_rakefile
+  irb_test_rakefile = File.join(PLUGIN_PATH, "IRB.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
+  load irb_test_rakefile
 
-  wccoffee_test_rakefile = File.join(PLUGIN_PATH, "Coffee.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
-  load wccoffee_test_rakefile
+  coffee_test_rakefile = File.join(PLUGIN_PATH, "Coffee.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
+  load coffee_test_rakefile
 
-  wcnode_test_rakefile = File.join(PLUGIN_PATH, "Node.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
-  load wcnode_test_rakefile
+  node_test_rakefile = File.join(PLUGIN_PATH, "Node.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
+  load node_test_rakefile
 
-  task :tests => [:test_wcsearch, :test_wcirb, :test_wccoffee, :test_wcnode]
+  html_test_rakefile = File.join(PLUGIN_PATH, "Markdown.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
+  load html_test_rakefile
 
-  task :test_wcsearch => ['wcsearch:tests']
+  html_test_rakefile = File.join(PLUGIN_PATH, "HTML.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
+  load html_test_rakefile
 
-  task :test_wcirb => ['wcirb:tests']
+  task :tests => [:test_search, :test_irb, :test_coffee, :test_node, :test_markdown, :test_html]
 
-  task :test_wccoffee => ['wccoffee:tests']
+  task :test_search => ['search:tests']
 
-  task :test_wcnode => ['wcnode:tests']
+  task :test_irb => ['irb:tests']
+
+  task :test_coffee => ['coffee:tests']
+
+  task :test_node => ['node:tests']
+
+  task :test_markdown => ['markdown:tests']
+
+  task :test_html => ['html:tests']
 end
-
-
-namespace :other do
-
-  wcrepl_test_rakefile = File.join(PLUGIN_PATH, "Shared Resources.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "ruby", "wcrepl", "test", "Rakefile")
-  load wcrepl_test_rakefile
-
-  wcdependencies_test_rakefile = File.join(PLUGIN_PATH, "Shared Resources.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "ruby", "wcdependencies", "test", "Rakefile")
-  load wcdependencies_test_rakefile
-
-  task :tests => [:test_wcrepl, :test_wcdependencies]
-
-  task :test_wcrepl => ['wcrepl:tests']
-
-  task :test_wcdependencies => ['wcdependencies:tests']
-end
-
 
 namespace :xcunit do
 
@@ -86,7 +80,6 @@ namespace :xcunit do
   end
 
 end
-
 
 namespace :web_console do
 
@@ -113,8 +106,3 @@ namespace :web_console do
   end
 
 end
-
-
-
-
-

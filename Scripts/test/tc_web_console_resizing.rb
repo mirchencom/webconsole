@@ -27,8 +27,8 @@ class TestResizing < Test::Unit::TestCase
 
     # Close the window
     window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    window_manager = WebConsole::WindowManager.new(window_id)
-    window_manager.close
+    window = WebConsole::Window.new(window_id)
+    window.close
 
     # Open a new window, the new window's size should match destination bounds
     WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
@@ -75,8 +75,8 @@ class TestResizing < Test::Unit::TestCase
     
     # Cleanup
     window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    window_manager = WebConsole::WindowManager.new(window_id)
-    window_manager.close
+    window = WebConsole::Window.new(window_id)
+    window.close
   end
 
   class ::String
