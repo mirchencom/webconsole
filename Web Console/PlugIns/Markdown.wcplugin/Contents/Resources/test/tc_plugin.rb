@@ -12,7 +12,7 @@ require WebConsole::Tests::TEST_HELPER_FILE
 class TestPlugin < Test::Unit::TestCase
 
   def setup
-    WebConsole::load_plugin(TEST_MARKDOWN_PLUGIN_PATH)
+    WebConsole::load_plugin(TEST_PLUGIN_PATH)
   end
 
   def teardown
@@ -23,8 +23,7 @@ class TestPlugin < Test::Unit::TestCase
   end
 
   def test_load_html_file
-    WebConsole::load_plugin(TEST_MARKDOWN_PLUGIN_PATH)
-    WebConsole::run_plugin(TEST_PLUGIN_NAME, TEST_MARKDOWN_PLUGIN_PATH, [TEST_MARKDOWN_FILE])
+    WebConsole::run_plugin(TEST_PLUGIN_NAME, TEST_PLUGIN_PATH, [TEST_MARKDOWN_FILE])
 
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running
 
