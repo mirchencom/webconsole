@@ -1,7 +1,7 @@
 module WebConsole
   module Tests
     # General
-    TEST_PAUSE_TIME = 0.5
+    TEST_PAUSE_TIME = 0.75
 
     # Ruby
     TEST_RUBY_DIRECTORY = File.dirname(__FILE__)
