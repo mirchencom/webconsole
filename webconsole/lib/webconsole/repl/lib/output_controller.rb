@@ -9,7 +9,6 @@ module WebConsole::REPL
       output = output.dup
       output.gsub!(/\x1b[^m]*m/, "") # Remove escape sequences
       output.chomp!
-      output.javascript_escape!
       if !output.strip.empty? # Ignore empty lines
         @view.add_output(output)
       end

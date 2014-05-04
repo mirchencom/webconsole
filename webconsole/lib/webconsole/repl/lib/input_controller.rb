@@ -8,7 +8,6 @@ module WebConsole::REPL
     def parse_input(input)
       input = input.dup
       input.chomp!
-      input.javascript_escape!
       if !input.strip.empty? # Ignore empty lines
         @view.add_input(input)
       end
