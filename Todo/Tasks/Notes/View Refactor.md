@@ -1,18 +1,7 @@
 # View Refactor
 
 * [ ] `self.load_erb_from_path` to `load_erb_from_path`
-* [ ] Fix the HTML Plugin by just making the base URL the second argument
-* [ ] Write tests for HTML and Markdown gems
-	* Especially the actually executables
-	* Should be able to read HTML stdin or open a file
-	* Don't both testing file modifications for now, that's too much work
-		* Just add these as todos
-* [ ] Make HTML style tests for Markdown gem
-* [ ] Double check they are cleaned up properly
-* [ ] Add them to the main tests (can main tests run right now?)
-* [ ] HTML Plugin `tc_controller` is bringing out an API bug, if a base URL is not set, then a second call to load HTML will fail because the `window_id` will get passed in as the base URL
-	* Add a `WindowManager` test for this
-* [ ] Continue setting `coffee`, work on `tc_wrapper` test
+* [ ] Continue setting up `coffee`, work on `tc_wrapper` test
 * [ ] Setup `coffee`, `irb`, and `node` to use new `webconsole` gem API
 * [ ] Remove extension from all instances of these
 
@@ -53,6 +42,12 @@
 		    end
 
 
+## Cleaning up Tests
+
+* [ ] I've removed the `wc` prefix from all Rakefiles, so the main tests Rakefile will need to be updated
+* [ ] Make sure `dependencies` and `repl` extension tests run
+* [ ] Add `html` and `markdown` to the main tests (can main tests run right now?)
+
 ## Setup a Test
 
 * [ ] Start moving plugins over to the new version of the gem
@@ -69,9 +64,7 @@
 
 ## Todo
 
-
 * [ ] Also allow different rendering engines, e.g., slim etc...
-
 * [ ] Hard link in `Gemfile`'s to older version of the gem
 * [ ] Then I can freely refactor until the API looks right
 
