@@ -4,6 +4,4 @@ ruby '2.0.0'
 gem "slim"
 gem "rugged"
 gem "coffee-script"
-gem "webconsole"
-
-# gem "rails"
+gem "webconsole", :path => "../../../../../webconsole"
