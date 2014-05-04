@@ -4,9 +4,9 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
-task :default => ['wccoffee:tests']
+task :default => ['coffee:tests']
 
-namespace :wccoffee do
+namespace :coffee do
   
   task :tests => [:clean_up]
 

@@ -1,16 +1,8 @@
 require_relative '../bundle/bundler/setup'
-require 'webconsole'
-require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
+require 'webconsole/repl'
 
-module WcCoffee
-  class InputController < WcREPL::InputController
-    BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")
-    VIEWS_DIRECTORY = File.join(BASE_DIRECTORY, "view")
-    VIEW_TEMPLATE = File.join(VIEWS_DIRECTORY, 'view.html.erb')
-
-    def initialize(delegate = nil)      
-      super(delegate, VIEW_TEMPLATE)
-    end
+module WebConsole::REPL::Coffee
+  class InputController < WebConsole::REPL::InputController
     
     def parse_input(input)
       input = input.dup

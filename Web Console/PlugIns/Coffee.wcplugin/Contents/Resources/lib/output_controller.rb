@@ -1,9 +1,9 @@
 require_relative '../bundle/bundler/setup'
-require 'webconsole'
-require WebConsole::shared_resource("ruby/wcrepl/wcrepl")
+require 'webconsole/repl'
 
-module WcCoffee
-  class OutputController < WcREPL::OutputController
+module WebConsole::REPL::Coffee
+  class OutputController < WebConsole::REPL::OutputController
+
     def parse_output(output)
       if output =~ /^\x1b[^coffee>]*coffee>/
         # Don't add echo of input
@@ -11,6 +11,6 @@ module WcCoffee
       end
       super(output)
     end
-  end
-  
+
+  end  
 end
