@@ -25,7 +25,12 @@ namespace :coffee do
     ruby Shellwords.escape(wrapper_tests_file)
   end
 
-  task :clean_up => [:test_wrapper] do
+  task :test_plugin => [:test_wrapper] do
+    plugin_tests_file = File.join(File.dirname(__FILE__), "tc_plugin.rb")
+    ruby Shellwords.escape(plugin_tests_file)
+  end
+
+  task :clean_up => [:test_plugin] do
     WebConsole::Tests::Helper::quit
   end
 end

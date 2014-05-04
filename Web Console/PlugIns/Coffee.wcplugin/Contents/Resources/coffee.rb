@@ -3,12 +3,12 @@
 require File.join(File.dirname(__FILE__), "lib", "wrapper")
 require_relative "lib/dependencies"
 
-passed = WcCoffee.check_dependencies
+passed = WebConsole::REPL::Coffee.check_dependencies
 if !passed
   exit 1
 end
 
-wrapper = WcCoffee::Wrapper.new
+wrapper = WebConsole::REPL::Coffee::Wrapper.new
 
 ARGF.each do |line|  
   wrapper.parse_input(line)
