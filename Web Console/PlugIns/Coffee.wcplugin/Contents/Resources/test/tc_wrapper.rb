@@ -1,10 +1,14 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby
 
 require "test/unit"
+
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
+
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
+
+require_relative "lib/test_constants"
 
 require_relative "../lib/dependencies"
 require_relative "../lib/wrapper"
@@ -21,12 +25,8 @@ class TestWrapper < Test::Unit::TestCase
   def test_wrapper
     wrapper = WebConsole::REPL::Coffee::Wrapper.new
 
-    test_text = %Q[add = (x, y)->
-      x + y
-add(1, 2)]
-    test_result = "3"
-
-    wrapper.parse_input(test_text.gsub("\n", "\uFF00") + "\n")
+    test_code = TEST_CODE.gsub("\n", "\uFF00") + "\n"
+    wrapper.parse_input(test_code)
 
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
 
@@ -39,13 +39,13 @@ add(1, 2)]
     result.strip!
     result.gsub!(/<\/?span.*?>/, "") # Remove spans adding by highlight.js
     result.gsub!("&gt;", ">") # Unescape entity
-    assert_equal(test_text, result, "The test text should equal the result.")
+    assert_equal(TEST_CODE, result, "The test text should equal the result.")
     
     # Test Wrapper Output
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
     result.strip!
-    assert_equal(result, test_result, "The test result should equal the result.")
+    assert_equal(result, TEST_CODE_RESULT, "The test result should equal the result.")
     
     window.close
   end
