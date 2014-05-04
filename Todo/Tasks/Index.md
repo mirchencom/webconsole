@@ -3,6 +3,10 @@
 ## Refactor Cleanup
 
 * [ ] Pull and test on virtual machine
+* [ ] Do `require "nio"` solution
+* [ ] Do `node` solution (up the pause time?)
+* [ ] Pull
+* [ ] Run tests again
 * [ ] Do S3 Backup
 * [ ] Merge view refactor branch
 * [ ] Delete view refactor branch
@@ -23,8 +27,9 @@
 
 ## Building & Running Plugins
 
-* [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
 * [ ] Make it so the user can have plugins loaded from their user `Application Support` folder
+* [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
+* [ ] Upload `Git.wcplugin` to github
 * [ ] TextMate Bundle
 * [ ] Shell Scripts
 	* These require the Ruby gem
