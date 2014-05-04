@@ -1,7 +1,6 @@
 # View Refactor
 
-* [ ] `self.load_erb_from_path` to `load_erb_from_path`
-* [ ] Continue setting up `coffee`, work on `tc_wrapper` test
+* [ ] Continue setting up `IRB`, work on `tc_wrapper` test
 * [ ] Setup `coffee`, `irb`, and `node` to use new `webconsole` gem API
 * [ ] Remove extension from all instances of these
 
