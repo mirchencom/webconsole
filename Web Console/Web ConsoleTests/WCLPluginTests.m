@@ -46,7 +46,7 @@
 
 - (void)testPlugin
 {
-    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPluginName
+    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
                                                     withExtension:kPlugInExtension
                                                      subdirectory:kSharedTestResourcesPluginSubdirectory];
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
@@ -60,7 +60,7 @@
     XCTAssertTrue([[plugin resourcePath] isEqualToString:[[plugin resourceURL] path]], @"The WCLPlugin's resource path should equal the path to its resource URL.");
     
     // Test Command
-    XCTAssertEqualObjects([plugin command], kTestPluginCommand, @"The WCLPlugin's command should match the test plugin command.");
+    XCTAssertEqualObjects([plugin command], kTestPrintPluginCommand, @"The WCLPlugin's command should match the test plugin command.");
     XCTAssertTrue([[plugin commandPath] hasPrefix:[plugin resourcePath]], @"The WCLPlugin's command path should begin with it's resource path.");
     XCTAssertTrue([[plugin commandPath] hasSuffix:[plugin command]], @"The WCLPlugin's command path should end with it's command.");
 

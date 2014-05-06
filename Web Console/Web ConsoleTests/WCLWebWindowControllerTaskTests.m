@@ -56,7 +56,7 @@
     NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:@[]];
     XCTAssertNil(informativeText, @"The informative text should be nil for an empty NSArray.");
     
-    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPluginName
+    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
                                                     withExtension:kPlugInExtension
                                                      subdirectory:kSharedTestResourcesPluginSubdirectory];
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
@@ -222,6 +222,11 @@
     [webWindowController.window performClose:self];
     BOOL windowWillClose = [WCLWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
+}
+
+- (void)testPluginTaskEnvironmentDictionary
+{
+    
 }
 
 @end

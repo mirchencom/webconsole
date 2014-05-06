@@ -28,14 +28,14 @@
 
 - (void)testResizingWindow
 {
-    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPluginName
+    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
                                                     withExtension:kPlugInExtension
                                                      subdirectory:kSharedTestResourcesPluginSubdirectory];
     WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
 
     // The plugin needs a name for saved frames to work
     XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");
-    XCTAssertTrue([plugin.name isEqualToString:kTestPluginName], @"The WCLPlugin's name should equal the test plugin name.");
+    XCTAssertTrue([plugin.name isEqualToString:kTestPrintPluginName], @"The WCLPlugin's name should equal the test plugin name.");
     
     // Open an NSWindow
     WCLWebWindowController *webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];

@@ -16,6 +16,8 @@
 
 #import "WCLPlugin.h"
 
+#import "WCLPluginManager.h"
+
 NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLWebWindowControllerDidCancelCloseWindowNotification";
 
 @interface WCLWebWindowController () <NSWindowDelegate>
@@ -273,10 +275,26 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     }
 }
 
-- (NSNumber *)pluginTaskWindowNumber
+- (NSDictionary *)environmentDictionaryForPluginTask:(NSTask *)task
 {
-    [self showWindow:nil];
-    return [NSNumber numberWithInteger:self.window.windowNumber];
+    NSMutableDictionary *environmentDictionary = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey] mutableCopy];
+    
+    environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
+    environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
+
+    if (self.plugin.name) {
+        environmentDictionary[kEnvironmentVariablePluginNameKey] = self.plugin.name;
+    }
+
+    if (![self.window isVisible]) {
+        // Setting the windowNumber in the environmentDictionary must happen after showing the window
+        [self showWindow:nil];
+    }
+
+    NSNumber *windowNumber = [NSNumber numberWithInteger:self.window.windowNumber];
+    environmentDictionary[kEnvironmentVariableWindowIDKey] = windowNumber;
+
+    return environmentDictionary;
 }
 
 #pragma mark - Tasks

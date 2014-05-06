@@ -11,9 +11,10 @@
 @class WCLPluginTask;
 
 @protocol WCLPluginTaskDelegate <NSObject>
+@optional
 - (void)pluginTaskWillStart:(NSTask *)task;
 - (void)pluginTaskDidFinish:(NSTask *)task;
-- (NSNumber *)pluginTaskWindowNumber;
+- (NSDictionary *)environmentDictionaryForPluginTask:(NSTask *)task;
 @end
 
 @interface WCLPluginTask : NSObject

@@ -8,12 +8,6 @@
 
 #import "WCLPluginTask.h"
 
-#import "WCLPluginManager.h"
-
-@interface WCLPluginTask ()
-+ (NSDictionary *)environmentDictionaryWithWindowNumber:(NSNumber *)windowNumber;
-@end
-
 @implementation WCLPluginTask
 
 + (void)runTask:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate
@@ -43,34 +37,28 @@
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
         [[task.standardError fileHandleForReading] setReadabilityHandler:nil];
         
-        [delegate pluginTaskDidFinish:task];
+        if ([delegate respondsToSelector:@selector(pluginTaskDidFinish:)]) {
+            [delegate pluginTaskDidFinish:task];
+        }
         
         // As per NSTask.h, NSTaskDidTerminateNotification is not posted if a termination handler is set, so post it here.
         [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
     }];
-    
 
-    [delegate pluginTaskWillStart:task];
+    if ([delegate respondsToSelector:@selector(pluginTaskWillStart:)]) {
+        [delegate pluginTaskWillStart:task];
+    }
 
     dispatch_async(dispatch_get_main_queue(), ^{
-
-        // Setting the windowNumber in the enviornmentDictionary must happen after showing the window
-        NSDictionary *environmentDictionary = [self environmentDictionaryWithWindowNumber:[delegate pluginTaskWindowNumber]];
-        
-        [task setEnvironment:environmentDictionary];
+        NSDictionary *environmentDictionary;
+        if ([delegate respondsToSelector:@selector(environmentDictionaryForPluginTask:)]) {
+            environmentDictionary = [delegate environmentDictionaryForPluginTask:task];
+        }
+        if (environmentDictionary) {
+            [task setEnvironment:environmentDictionary];
+        }
         [task launch];
     });
-}
-
-+ (NSDictionary *)environmentDictionaryWithWindowNumber:(NSNumber *)windowNumber
-{
-    NSMutableDictionary *environmentDictionary = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey] mutableCopy];
-    
-    environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
-    environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
-    environmentDictionary[kEnvironmentVariableWindowIDKey] = windowNumber;
-
-    return environmentDictionary;
 }
 
 @end

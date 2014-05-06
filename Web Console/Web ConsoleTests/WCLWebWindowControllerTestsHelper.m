@@ -45,7 +45,9 @@
     WCLWebWindowController *webWindowController = webWindowControllers[0];
     NSAssert([webWindowController hasTasks], @"The WCLWebWindowController should have an NSTask.");
     
-    if (task) *task = webWindowController.tasks[0];
+    if (task) {
+        *task = webWindowController.tasks[0];
+    }
 
     [WCLTaskTestsHelper blockUntilTaskIsRunning:webWindowController.tasks[0]];
     
