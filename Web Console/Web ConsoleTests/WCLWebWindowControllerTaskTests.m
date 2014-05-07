@@ -226,7 +226,26 @@
 
 - (void)testPluginTaskEnvironmentDictionary
 {
+    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestTestEnvironmentPluginName
+                                                    withExtension:kPlugInExtension
+                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
+    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
+    [plugin runWithArguments:nil inDirectoryPath:nil];
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
+    WCLWebWindowController *webWindowController = webWindowControllers[0];
+    NSAssert([webWindowController hasTasks], @"The WCLWebWindowController should have an NSTask.");
+
+
+    NSTask *task = webWindowController.tasks[0];
+
+    [WCLTaskTestsHelper blockUntilTasksRunAndFinish:@[task]];
+
+    NSTaskTerminationReason terminationReason = [task terminationReason];
+    int terminationStatus = [task terminationStatus];
     
+    NSAssert(terminationReason == NSTaskTerminationReasonExit, @"The NSTask's termination reason should be exit.");
+    NSAssert(terminationStatus == 0, @"The NSTask's termination status should be 0.");
 }
 
 @end
