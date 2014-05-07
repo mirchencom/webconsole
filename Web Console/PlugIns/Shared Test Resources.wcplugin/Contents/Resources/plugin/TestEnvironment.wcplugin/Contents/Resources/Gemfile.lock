@@ -1,0 +1,10 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    webconsole (0.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  webconsole
