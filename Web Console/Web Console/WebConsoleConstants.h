@@ -35,8 +35,8 @@
 #define kEnvironmentDictionaryKey @"environmentDictionary"
 #define kEnvironmentVariableWindowIDKey @"WC_WINDOW_ID"
 #define kEnvironmentVariablePluginNameKey @"WC_PLUGIN_NAME"
-#define kEnvironmentVariableSharedResourcePathKey @"WC_SHARED_RESOURCE_PATH"
-#define kEnvironmentVariableSharedResourceURLKey @"WC_SHARED_RESOURCE_URL"
+#define kEnvironmentVariableSharedResourcesPathKey @"WC_SHARED_RESOURCES_PATH"
+#define kEnvironmentVariableSharedResourcesURLKey @"WC_SHARED_RESOURCES_URL"
 
 
 #pragma mark - Timeouts

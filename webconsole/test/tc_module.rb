@@ -24,16 +24,15 @@ class TestWebConsoleProperties < Test::Unit::TestCase
   # Shared Resources
 
   SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
-  SHARED_RESOURCE_PLUGIN_PATH_COMPONENT = "js/zepto.js"
   def test_resource_path_for_plugin
     resource_path = WebConsole::resource_path_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
-    test_file = File.join(resource_path, SHARED_RESOURCE_PLUGIN_PATH_COMPONENT)
+    test_file = File.join(resource_path, WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
     assert(File.file?(test_file), "The test file should exist.")
   end
-  SHARED_RESOURCE_PATH_COMPONENT = "js/zepto.js"
+
   def test_shared_resources_path
     resource_path = WebConsole::shared_resources_path
-    test_file = File.join(resource_path, SHARED_RESOURCE_PATH_COMPONENT)
+    test_file = File.join(resource_path, WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
     assert(File.file?(test_file), "The test file should exist.")
   end
   SHARED_TEST_RESOURCE_PATH_COMPONENT = "ruby/test_constants.rb"
@@ -44,7 +43,7 @@ class TestWebConsoleProperties < Test::Unit::TestCase
   end
 
   def test_shared_resource
-    resource_path = WebConsole::shared_resource(SHARED_RESOURCE_PATH_COMPONENT)
+    resource_path = WebConsole::shared_resource(WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
     assert(File.file?(resource_path), "The test file should exist.")
   end
   def test_shared_test_resource
@@ -55,7 +54,7 @@ class TestWebConsoleProperties < Test::Unit::TestCase
   require 'open-uri'
   def test_resource_url
     resource_url = WebConsole::resource_url_for_plugin(SHAREDRESOURCESPLUGIN_NAME)
-    test_url = URI.join(resource_url, SHARED_RESOURCE_PLUGIN_PATH_COMPONENT)
+    test_url = URI.join(resource_url, WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
 
     # Ruby doesn't handle file URLs so convert the file URL to a path
     # File URLs aren't supported by 'open-uri' but file paths are
@@ -68,7 +67,7 @@ class TestWebConsoleProperties < Test::Unit::TestCase
   end
   def test_shared_resources_url
     resource_url = WebConsole::shared_resources_url
-    test_url = URI.join(resource_url, SHARED_RESOURCE_PATH_COMPONENT)
+    test_url = URI.join(resource_url, WebConsole::Tests::TEST_SHARED_RESOURCE_PATH_COMPONENT)
 
     # Ruby doesn't handle file URLs so convert the file URL to a path
     # File URLs aren't supported by 'open-uri' but file paths are

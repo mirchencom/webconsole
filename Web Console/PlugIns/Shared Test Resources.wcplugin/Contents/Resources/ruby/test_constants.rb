@@ -28,5 +28,8 @@ module WebConsole
     NODOM_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY, "nodom.js")
     TEXT_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY, "text.js")
     TEXTJQUERY_JAVASCRIPT_FILE = File.join(TEST_JAVASCRIPT_DIRECTORY, "textjquery.js")
+
+    # Shared Resources
+    TEST_SHARED_RESOURCE_PATH_COMPONENT = "js/zepto.js"
   end
 end

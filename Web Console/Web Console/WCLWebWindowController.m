@@ -279,8 +279,8 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 {
     NSMutableDictionary *environmentDictionary = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey] mutableCopy];
     
-    environmentDictionary[kEnvironmentVariableSharedResourcePathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
-    environmentDictionary[kEnvironmentVariableSharedResourceURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
+    environmentDictionary[kEnvironmentVariableSharedResourcesPathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
+    environmentDictionary[kEnvironmentVariableSharedResourcesURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
 
     if (self.plugin.name) {
         environmentDictionary[kEnvironmentVariablePluginNameKey] = self.plugin.name;
