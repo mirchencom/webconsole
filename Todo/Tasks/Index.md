@@ -1,12 +1,12 @@
 # Index
 
-## Title
-
-* [ ] Do Mavericks warnings update
-
 ## Building & Running Plugins
 
+* [ ] Start with "Loading Cocoa Bundles: Example Code"
 * [ ] Make it so the user can have plugins loaded from their user `Application Support` folder
+
+## Git Plugin
+
 * [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
 * [ ] Upload `Git.wcplugin` to github
 * [ ] TextMate Bundle
