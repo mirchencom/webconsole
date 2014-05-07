@@ -2,6 +2,7 @@
 
 ## Title
 
+* [ ] Figure out testing the tasks termination status, then figure out making the exit status only pass if the termination status is valid, and have it only be valid if the environment variables are properly set
 * [ ] Construct an environment dictionary in the plugin (from a category?) and then modify the `WCLPluginTask` API to include a dictionary:
 
 		+ (void)runTask:(NSTask *)task environmentDictionary:(NSDictionary *)dictionary delegate:(id<WCLPluginTaskDelegate>)delegate;
