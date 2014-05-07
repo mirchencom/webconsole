@@ -43,6 +43,14 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     return self;
 }
 
+- (void)awakeFromNib
+{
+    NSString *windowFrameName = [self windowFrameName];
+    if (windowFrameName) {
+        [self.window setFrameUsingName:windowFrameName];
+    }   
+}
+
 #pragma mark - Properties
 
 - (NSMutableDictionary *)requestToCompletionHandlerDictionary
@@ -122,17 +130,12 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 #pragma mark - Save & Restore Window Frame
 
-- (void)windowDidLoad
-{
-#warning Setting the window frame can be done in awakeFromNib and is safer to do from there! Move it there when I can
-    NSString *windowFrameName = [self windowFrameName];
-    if (windowFrameName) [self.window setFrameUsingName:windowFrameName];
-}
-
 - (void)saveWindowFrame
 {
     NSString *windowFrameName = [self windowFrameName];
-    if (windowFrameName) [self.window saveFrameUsingName:windowFrameName];
+    if (windowFrameName) {
+        [self.window saveFrameUsingName:windowFrameName];
+    }
 }
 
 - (NSString *)windowFrameName
@@ -164,7 +167,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
             if (![self hasTasks]) {
                 [self.window close];
             } else {
-#warning If performance becomes a concern, this should be dispatched to another queue
+                // TODO: If performance becomes a concern, this should be dispatched to another queue
                 // Another task could have started while terminating the initial set of tasks
                 // so call again recursively
                 DLog(@"[Termination] Calling terminateTasksAndCloseWindow recursively because there are still running tasks");
@@ -178,7 +181,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource
 {
-#warning This disables all local caching of resources. This was added to get the HTML plugin to be able to easily refresh updated resources, but a more elegant solution that preserves caching in most cases might be preferable.
+    // TODO: This disables all local caching of resources. This was added to get the HTML plugin to be able to easily refresh updated resources, but a more elegant solution that preserves caching in most cases might be preferable.
     request = [NSURLRequest requestWithURL:[request URL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[request timeoutInterval]];
     return request;
 }

@@ -122,8 +122,8 @@
     XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
     [WCLWebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
-#warning Update to [webWindowController.window endSheet:[webWindowController.window attachedSheet]]; in Mavericks
-    [NSApp endSheet:[webWindowController.window attachedSheet]];
+
+    [webWindowController.window endSheet:[webWindowController.window attachedSheet]];
     
     [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
     XCTAssertFalse([webWindowController hasTasks], @"The WCLWebWindowController should not have an NSTask.");
@@ -182,8 +182,8 @@
     XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
     [WCLWebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
-#warning Update to [webWindowController.window endSheet:[webWindowController.window attachedSheet]]; in Mavericks
-    [NSApp endSheet:[webWindowController.window attachedSheet]];
+
+    [webWindowController.window endSheet:[webWindowController.window attachedSheet]];
     
     [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
     
