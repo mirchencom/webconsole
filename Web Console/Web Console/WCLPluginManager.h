@@ -16,10 +16,6 @@
  */
 + (id)sharedPluginManager;
 
-/*! Loads built-in WCLPlugins.
- */
-- (void)loadPlugins;
-
 /*! Returns the WCLPlugin with name, or nil if no Plugin with that name exists.
  * \param name The name of the Plugin to return.
  * \returns The WCLPlugin with name.
@@ -37,14 +33,20 @@
  */
 - (WCLPlugin *)addedPluginAtURL:(NSURL *)URL;
 
+/*! Returns the WCLPlugin at the specified path, or nil if no valid Plugin exists at that path.
+ * \param path The path of the Plugin to add.
+ * \returns The WCLPlugin at the specified path.
+ */
+- (WCLPlugin *)addedPluginWithPath:(NSString *)path;
+
 /*! Returns the full URL of the Shared Resource WCLPlugin’s resource directory.
  * \returns The full URL of the Shared Resource WCLPlugin’s resource directory.
  */
-- (NSURL *)sharedResourceURL;
+- (NSURL *)sharedResourcesURL;
 
 /*! Returns the full pathname of the Shared Resource WCLPlugin’s resource directory.
  * \returns The full pathname of the Shared Resource WCLPlugin’s resource directory.
  */
-- (NSString *)sharedResourcePath;
+- (NSString *)sharedResourcesPath;
 
 @end

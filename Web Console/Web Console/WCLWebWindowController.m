@@ -280,22 +280,37 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (NSDictionary *)environmentDictionaryForPluginTask:(NSTask *)task
 {
-    NSMutableDictionary *environmentDictionary = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey] mutableCopy];
-    
-    environmentDictionary[kEnvironmentVariableSharedResourcesPathKey] = [[WCLPluginManager sharedPluginManager] sharedResourcePath];
-    environmentDictionary[kEnvironmentVariableSharedResourcesURLKey] = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] absoluteString];
+    NSMutableDictionary *environmentDictionary;
+    NSDictionary *preferencesEnvironmentDictionary = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey];
+    if (preferencesEnvironmentDictionary) {
+        environmentDictionary = [preferencesEnvironmentDictionary mutableCopy];
+    } else {
+        environmentDictionary = [[NSMutableDictionary alloc] init];
+    }
 
-    if (self.plugin.name) {
-        environmentDictionary[kEnvironmentVariablePluginNameKey] = self.plugin.name;
+    NSString *sharedResourcesPath = [[WCLPluginManager sharedPluginManager] sharedResourcesPath];
+    if (sharedResourcesPath) {
+        environmentDictionary[kEnvironmentVariableSharedResourcesPathKey] = sharedResourcesPath;
+    }
+
+    NSString *sharedResourcesURL = [[[WCLPluginManager sharedPluginManager] sharedResourcesURL] absoluteString];
+    if (sharedResourcesURL) {
+        environmentDictionary[kEnvironmentVariableSharedResourcesURLKey] = sharedResourcesURL;
+    }
+
+    NSString *pluginName = self.plugin.name;
+    if (pluginName) {
+        environmentDictionary[kEnvironmentVariablePluginNameKey] = pluginName;
     }
 
     if (![self.window isVisible]) {
         // Setting the windowNumber in the environmentDictionary must happen after showing the window
         [self showWindow:nil];
     }
-
     NSNumber *windowNumber = [NSNumber numberWithInteger:self.window.windowNumber];
-    environmentDictionary[kEnvironmentVariableWindowIDKey] = windowNumber;
+    if (windowNumber) {
+        environmentDictionary[kEnvironmentVariableWindowIDKey] = windowNumber;
+    }
 
     return environmentDictionary;
 }

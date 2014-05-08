@@ -11,8 +11,6 @@
 
 @interface WCLPluginManager ()
 @property (nonatomic, strong) NSMutableDictionary *nameToPluginDictionary;
-- (void)loadPluginsInDirectory:(NSString *)plugInsPath;
-- (WCLPlugin *)addedPluginWithPath:(NSString *)path;
 @end
 
 @implementation WCLPluginManager
@@ -26,35 +24,20 @@
     return pluginManager;
 }
 
-- (id)init
+#pragma mark - Properties
+
+- (NSMutableDictionary *)nameToPluginDictionary
 {
-    self = [super init];
-    if (self) {
-        _nameToPluginDictionary = [[NSMutableDictionary alloc] init];
+    if (_nameToPluginDictionary) {
+        return _nameToPluginDictionary;
     }
     
-    return self;
-}
-
-- (void)loadPlugins
-{    
-    NSString *builtInPlugInsPath = [[NSBundle mainBundle] builtInPlugInsPath];
-    [self loadPluginsInDirectory:builtInPlugInsPath];
-//    NSArray *bundlePaths = [NSBundle pathsForResourcesOfType:kPlugInExtension inDirectory:builtInPlugInsPath];
-//    
-//    for (NSString *path in bundlePaths) {
-//        (void)[[PluginManager sharedPluginManager] addedPluginWithPath:path];
-//    }
-}
-
-- (void)loadPluginsInDirectory:(NSString *)plugInsPath
-{
-    NSArray *bundlePaths = [NSBundle pathsForResourcesOfType:kPlugInExtension inDirectory:plugInsPath];
+    _nameToPluginDictionary = [[NSMutableDictionary alloc] init];
     
-    for (NSString *path in bundlePaths) {
-        (void)[[WCLPluginManager sharedPluginManager] addedPluginWithPath:path];
-    }
+    return _nameToPluginDictionary;
 }
+
+#pragma mark - WCLPlugins
 
 - (WCLPlugin *)addedPluginAtURL:(NSURL *)URL
 {
@@ -65,7 +48,9 @@
 {
     WCLPlugin *plugin = [[WCLPlugin alloc] initWithPath:path];
 
-    if (!plugin) return nil;
+    if (!plugin) {
+        return nil;
+    }
     
     // TODO: This allows a new plugin with the same name to replace the old plugin. Is this what I want?
     // Probably yes, this allows the plugin to by modified
@@ -79,19 +64,19 @@
     return self.nameToPluginDictionary[name];
 }
 
-- (NSArray *)plugins {
+- (NSArray *)plugins
+{
     return [self.nameToPluginDictionary allValues];
 }
 
-- (NSString *)sharedResourcePath
+- (NSString *)sharedResourcesPath
 {
     return [[self pluginWithName:kSharedResourcesPluginName] resourcePath];
 }
 
-- (NSURL *)sharedResourceURL
+- (NSURL *)sharedResourcesURL
 {
     return [[self pluginWithName:kSharedResourcesPluginName] resourceURL];
 }
-
 
 @end

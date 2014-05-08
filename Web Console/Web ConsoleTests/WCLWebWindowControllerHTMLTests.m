@@ -22,7 +22,7 @@
                                                   withExtension:kTestDataHTMLExtension
                                                    subdirectory:kSharedTestResourcesHTMLSubdirectory];
     NSString *HTML = [self wcl_stringWithContentsOfFileURL:fileURL];
-    NSURL *baseURL = [[WCLPluginManager sharedPluginManager] sharedResourceURL];
+    NSURL *baseURL = [[WCLPluginManager sharedPluginManager] sharedResourcesURL];
     
     __block BOOL completionHandlerRan = NO;
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];

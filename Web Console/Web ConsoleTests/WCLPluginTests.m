@@ -71,13 +71,13 @@
 
 - (void)testSharedResources
 {
-    NSString *testSharedResourcePath = [[[WCLPluginManager sharedPluginManager] sharedResourcePath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
+    NSString *testSharedResourcePath = [[[WCLPluginManager sharedPluginManager] sharedResourcesPath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
     BOOL isDir;
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:testSharedResourcePath isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's path.");
     XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");
 
-    NSURL *testSharedResourceURL = [[[WCLPluginManager sharedPluginManager] sharedResourceURL] URLByAppendingPathComponent:kTestSharedResourcePathComponent];
+    NSURL *testSharedResourceURL = [[[WCLPluginManager sharedPluginManager] sharedResourcesURL] URLByAppendingPathComponent:kTestSharedResourcePathComponent];
     fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[testSharedResourceURL path] isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's URL.");
     XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");

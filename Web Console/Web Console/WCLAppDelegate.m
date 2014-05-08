@@ -8,7 +8,7 @@
 
 #import "WCLAppDelegate.h"
 
-#import "WCLPluginManager.h"
+#import "WCLPluginManager+LoadingPlugins.h"
 
 #import "WCLWebWindowsController.h"
 

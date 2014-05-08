@@ -28,7 +28,7 @@
 
 #define kPlugInExtension @"wcplugin"
 #define kSharedResourcesPluginName @"Shared Resources"
-
+#define kPlugInsPathComponent @"PlugIns"
 
 #pragma mark - Environment
 
