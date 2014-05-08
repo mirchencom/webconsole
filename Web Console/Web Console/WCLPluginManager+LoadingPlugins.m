@@ -23,7 +23,6 @@
     NSArray *paths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:plugInsPath error:nil];
     NSString *pluginFileExtension = [NSString stringWithFormat:@".%@", kPlugInExtension];
     NSPredicate *pluginFileExtensionPredicate = [NSPredicate predicateWithFormat:@"self ENDSWITH %@", pluginFileExtension];
-
     NSArray *pluginPathComponents = [paths filteredArrayUsingPredicate:pluginFileExtensionPredicate];
 
     for (NSString *pluginPathComponent in pluginPathComponents) {

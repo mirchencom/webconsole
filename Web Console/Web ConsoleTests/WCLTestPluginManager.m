@@ -28,8 +28,10 @@
     WCLPluginManager *pluginManager = [[WCLPluginManager alloc] init];
     
     // TODO: Should match the count of objects with the plugin extension
-
+    // TODO: Plugin should only be counted if init from path works
+    
     NSArray *pluginsPaths = [WCLPluginManager pluginsPaths];
+
     
 }
 

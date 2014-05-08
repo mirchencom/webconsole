@@ -2,7 +2,7 @@
 
 ## Todo
 
-* [ ] Do a test that asserts the count of plugins equals the count of folders found in the directories
+* [ ] Continue with `WCLPluginManager` tests, make counts of valid loaded plugins in the `pluginsPaths`
 
 ## Notes
 
