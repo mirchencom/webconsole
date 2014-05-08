@@ -1,8 +1,12 @@
 # Plugins in Application Support
 
-	~/Library/Application Support/Web Console/Plugins
+## Todo
+
+* [ ] Do a test that asserts the count of plugins equals the count of folders found in the directories
 
 ## Notes
+
+	~/Library/Application Support/Web Console/Plugins
 
 ### Loading Code
 
