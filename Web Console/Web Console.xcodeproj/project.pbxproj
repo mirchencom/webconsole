@@ -22,6 +22,8 @@
 		453AD8AF188235CC0039A3A9 /* WCLPluginTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
+		456492FF191C656D00BA048E /* IRB.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
+		45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
 		457F795518B0062500D705C8 /* Shared Test Resources.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */; };
 		457F795718B0065E00D705C8 /* Coffee.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795218B005BF00D705C8 /* Coffee.wcplugin */; };
@@ -54,9 +56,7 @@
 		45DA852D18B0067300A151F3 /* Search.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794C18B005BE00D705C8 /* Search.wcplugin */; };
 		45DA852E18B0067700A151F3 /* Node.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794D18B005BE00D705C8 /* Node.wcplugin */; };
 		45DA852F18B0067A00A151F3 /* Markdown.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794E18B005BE00D705C8 /* Markdown.wcplugin */; };
-		45DA853018B0067D00A151F3 /* IRB.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794F18B005BF00D705C8 /* IRB.wcplugin */; };
 		45DA853118B0068100A151F3 /* HTML.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795018B005BF00D705C8 /* HTML.wcplugin */; };
-		45DA853218B0068400A151F3 /* Git.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795118B005BF00D705C8 /* Git.wcplugin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,9 +85,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				45DA853218B0068400A151F3 /* Git.wcplugin in CopyFiles */,
+				45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */,
 				45DA853118B0068100A151F3 /* HTML.wcplugin in CopyFiles */,
-				45DA853018B0067D00A151F3 /* IRB.wcplugin in CopyFiles */,
 				45DA852F18B0067A00A151F3 /* Markdown.wcplugin in CopyFiles */,
 				45DA852E18B0067700A151F3 /* Node.wcplugin in CopyFiles */,
 				45DA852D18B0067300A151F3 /* Search.wcplugin in CopyFiles */,
@@ -130,6 +129,7 @@
 		455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLDoJavaScriptCommand.m; sourceTree = "<group>"; };
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
 		4561C2271874C01700CF926D /* NSRectHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSRectHelpers.h; sourceTree = "<group>"; };
+		456492FE191C656D00BA048E /* IRB.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = IRB.wcplugin; sourceTree = "<group>"; };
 		45709B1A18271237005F03E9 /* WCLPlugin+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WCLPlugin+Tests.h"; sourceTree = "<group>"; };
 		4574725617DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLApplicationTerminationHelper.h; sourceTree = "<group>"; };
 		4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLApplicationTerminationHelper.m; sourceTree = "<group>"; };
@@ -138,9 +138,7 @@
 		457F794C18B005BE00D705C8 /* Search.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Search.wcplugin; sourceTree = "<group>"; };
 		457F794D18B005BE00D705C8 /* Node.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Node.wcplugin; sourceTree = "<group>"; };
 		457F794E18B005BE00D705C8 /* Markdown.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Markdown.wcplugin; sourceTree = "<group>"; };
-		457F794F18B005BF00D705C8 /* IRB.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = IRB.wcplugin; sourceTree = "<group>"; };
 		457F795018B005BF00D705C8 /* HTML.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HTML.wcplugin; sourceTree = "<group>"; };
-		457F795118B005BF00D705C8 /* Git.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Git.wcplugin; sourceTree = "<group>"; };
 		457F795218B005BF00D705C8 /* Coffee.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Coffee.wcplugin; sourceTree = "<group>"; };
 		45898BB11785325B00AE365A /* Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Data; sourceTree = "<group>"; };
 		45898BB3178532EC00AE365A /* WCLPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPlugin.h; sourceTree = "<group>"; };
@@ -309,14 +307,13 @@
 		457F773C18B0058E00D705C8 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				456492FE191C656D00BA048E /* IRB.wcplugin */,
 				457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */,
 				457F794B18B005BE00D705C8 /* Shared Resources.wcplugin */,
 				457F794C18B005BE00D705C8 /* Search.wcplugin */,
 				457F794D18B005BE00D705C8 /* Node.wcplugin */,
 				457F794E18B005BE00D705C8 /* Markdown.wcplugin */,
-				457F794F18B005BF00D705C8 /* IRB.wcplugin */,
 				457F795018B005BF00D705C8 /* HTML.wcplugin */,
-				457F795118B005BF00D705C8 /* Git.wcplugin */,
 				457F795218B005BF00D705C8 /* Coffee.wcplugin */,
 			);
 			path = Plugins;
@@ -485,6 +482,7 @@
 				459389F318FB287700E0218E /* UserDefaults.plist in Resources */,
 				459389F018FB20D900E0218E /* WCLPreferencesWindowController.xib in Resources */,
 				4530B0E01736E2A6000A52E2 /* Credits.rtf in Resources */,
+				456492FF191C656D00BA048E /* IRB.wcplugin in Resources */,
 				4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */,
 				45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */,
 				459389EE18FB20D900E0218E /* WCLEnvironmentViewController.xib in Resources */,
