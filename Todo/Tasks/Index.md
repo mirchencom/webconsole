@@ -1,9 +1,7 @@
 # Index
 
-## Git Plugin
+## Todo
 
-* [ ] Move `Git.wcplugin` somewhere else, make it load from `Application Support`
-* [ ] Upload `Git.wcplugin` to github
 * [ ] TextMate Bundle
 * [ ] Shell Scripts
 	* These require the Ruby gem
