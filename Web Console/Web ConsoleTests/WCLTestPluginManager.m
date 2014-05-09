@@ -10,6 +10,7 @@
 
 #import "WCLPluginManager.h"
 #import "WCLPluginManager+LoadingPlugins.h"
+#import "WCLPlugin.h"
 
 @interface WCLTestPluginManager : XCTestCase
 
@@ -26,13 +27,28 @@
     // Don't use the shared plugin manager, because it will already have plugins
     // loaded.
     WCLPluginManager *pluginManager = [[WCLPluginManager alloc] init];
-    
-    // TODO: Should match the count of objects with the plugin extension
-    // TODO: Plugin should only be counted if init from path works
-    
-    NSArray *pluginsPaths = [WCLPluginManager pluginsPaths];
+    [pluginManager loadPlugins];
 
+    NSUInteger pluginCount = [[pluginManager plugins] count];
     
+    NSUInteger testPluginCount = 0;
+    NSArray *pluginsPaths = [WCLPluginManager pluginsPaths];
+    for (NSString *plugInsPath in pluginsPaths) {
+        NSArray *paths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:plugInsPath error:nil];
+        NSString *pluginFileExtension = [NSString stringWithFormat:@".%@", kPlugInExtension];
+        NSPredicate *pluginFileExtensionPredicate = [NSPredicate predicateWithFormat:@"self ENDSWITH %@", pluginFileExtension];
+        NSArray *pluginPathComponents = [paths filteredArrayUsingPredicate:pluginFileExtensionPredicate];
+        
+        for (NSString *pluginPathComponent in pluginPathComponents) {
+            NSString *pluginPath = [plugInsPath stringByAppendingPathComponent:pluginPathComponent];
+            WCLPlugin *plugin = [[WCLPlugin alloc] initWithPath:pluginPath];
+            if (plugin) {
+                testPluginCount++;
+            }
+        }
+    }
+    
+    XCTAssertEqual(pluginCount, testPluginCount, @"The plugin count should equal the test plugin count.");
 }
 
 @end

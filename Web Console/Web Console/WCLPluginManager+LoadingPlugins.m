@@ -27,7 +27,7 @@
 
     for (NSString *pluginPathComponent in pluginPathComponents) {
         NSString *pluginPath = [plugInsPath stringByAppendingPathComponent:pluginPathComponent];
-        (void)[[WCLPluginManager sharedPluginManager] addedPluginWithPath:pluginPath];
+        (void)[self addedPluginWithPath:pluginPath];
     }
 }
 
