@@ -15,4 +15,4 @@ $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/rb-i
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/listen-2.7.4/lib")
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/nio-0.2.5/lib")
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/redcarpet-3.1.1/lib")
-$:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/webconsole-0.1.0/lib")
+$:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/webconsole-0.1.1/lib")
