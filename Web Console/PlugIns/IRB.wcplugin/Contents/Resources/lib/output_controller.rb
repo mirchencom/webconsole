@@ -4,7 +4,7 @@ require 'webconsole/repl'
 module WebConsole::REPL::IRB
   class OutputController < WebConsole::REPL::OutputController
     def parse_output(output)
-      if output =~ /^irb\([^)]*\):[^:]*:[^>]*>/
+      if output =~ /^irb\([^)]*\):[^:]*:[^>]*(>|\*)/
         # Don't add echo of input
         return
       end

@@ -24,6 +24,7 @@ class TestOutputController < Test::Unit::TestCase
     test_text = "Some test text"
     @output_controller.parse_output(test_text)
     @output_controller.parse_output("irb(main):001:0> 1 + 1")
+    @output_controller.parse_output("irb(main):009:0* 1 + 1")
 
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = @output_controller.view.do_javascript(javascript)
