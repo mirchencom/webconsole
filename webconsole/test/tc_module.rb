@@ -21,6 +21,11 @@ class TestWebConsoleProperties < Test::Unit::TestCase
     assert(!WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should not have a window.")
   end
 
+  def test_exists
+    exists = WebConsole::application_exists
+    assert(exists, "The Web Console application should exist.")
+  end
+
   # Shared Resources
 
   SHAREDRESOURCESPLUGIN_NAME = "Shared Resources"
