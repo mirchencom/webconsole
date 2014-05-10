@@ -1,26 +1,38 @@
 # TextMate Bundle
 
-* [ ] Get HTML plugin workings by requiring "webconsole" and making the script work
-* [ ] Get one of the scripts working without the external shell script dependency
-* [ ] Figure out what these do
-
-		$: << ENV['TM_BUNDLE_SUPPORT']
-		$: << ENV['TM_SUPPORT_PATH']
-
-* [x] Make the new bundle
-* [x] Move the existing commands over
-* [ ] Shebangs should all use system ruby
-* [ ] Add the webconsole gem as dependency
-* [ ] Figure out how to add the webconsole gem as a dependency
-
-* [ ] List commands to support
-* [ ] Delete commands from Roben bundle
-* [ ] IRB has some problems with the prompt when running a whole file through
-
 ## If Web Console is not installed
 
-* [ ] Should fail prettily if webconsole is not installed
-* [ ] Markdown and HTML should fail if the file path is nil
+* [ ] Should fail prettily if Web Console is not installed
+* [ ] Test on Virtual Machine
+* [ ] How do BBFind and Mate etc... solve this?
+
+### Notes
+
+If Web Console is not installed, can I have a test in the webconsole gem that fails on import if the Web Console is not installed?
+
+Here's how Atom.app handles this:
+
+	if [ $OS == 'Mac' ]; then
+	  ATOM_PATH=${ATOM_PATH:-/Applications} # Set ATOM_PATH unless it is already set
+	  ATOM_APP_NAME=Atom.app
+
+	  # If ATOM_PATH isn't a executable file, use spotlight to search for Atom
+	  if [ ! -x "$ATOM_PATH/$ATOM_APP_NAME" ]; then
+	    ATOM_PATH=$(mdfind "kMDItemCFBundleIdentifier == 'com.github.atom'" | head -1 | xargs dirname)
+	  fi
+
+	  # Exit if Atom can't be found
+	  if [ -z "$ATOM_PATH" ]; then
+	    echo "Cannot locate Atom.app, it is usually located in /Applications. Set the ATOM_PATH environment variable to the directory containing Atom.app."
+	    exit 1
+	  fi
+
+	  if [ $EXPECT_OUTPUT ]; then
+	    "$ATOM_PATH/$ATOM_APP_NAME/Contents/MacOS/Atom" --executed-from="$(pwd)" --pid=$$ "$@"
+	    exit $?
+	  else
+	    open -a "$ATOM_PATH/$ATOM_APP_NAME" -n --args --executed-from="$(pwd)" --pid=$$ "$@"
+	  fi
 
 ## Commands
 
