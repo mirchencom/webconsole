@@ -5,6 +5,9 @@
 * [ ] Should fail prettily if Web Console is not installed
 * [ ] Test on Virtual Machine
 * [ ] How do BBFind and Mate etc... solve this?
+* [ ] Do AppleScript solution
+* [ ] Add new webconsole gem everywhere
+	* Update script to include TextMate bundles
 
 ### Notes
 
