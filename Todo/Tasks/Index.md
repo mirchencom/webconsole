@@ -1,14 +1,16 @@
 # Index
-
-* [ ] TextMate Bundle
-
 ## Presentation
 
-* [ ] Fix the toolbar
-* [ ] Fix the `PluginEditorPrototype` toolbar for screenshots
 * [ ] Record screencasts
+* [ ] Do `PluginEditorPrototype` screenshots
 * [ ] Do an app icon
 * [ ] Work on [Web Console Documentation](Tasks/Web%20Console%20Documentation.md)
+* [ ] Post to Github
+* [ ] Make a webpage
+
+## Testing
+
+* [ ] Test Web Console application missing TextMate bundle on Virtual Machine
 
 ## Continued
 
@@ -26,3 +28,4 @@
 		* `wcsearch.rb`
 * [ ] `http` links should open in the browser?
 	* Test `WebConsole::Dependencies` works with this (e.g., linking to "homebrew" opens in the browser)
+* [ ] Provide an `plist` option to kill a Plugin without confirming
