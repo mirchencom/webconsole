@@ -17,17 +17,17 @@ module WebConsole::Dependencies
       end
 
       def self.count_type(window_manager)
-        result = window_manager.do_javascript('$(".type").length');
+        result = window_manager.do_javascript('$(".type").length')
         return result.to_i
       end
 
       def self.count_name(window_manager)
-        result = window_manager.do_javascript('$(".name").length');
+        result = window_manager.do_javascript('$(".name").length')
         return result.to_i
       end
 
       def self.count_installation(window_manager)
-        result = window_manager.do_javascript('$(".installation").length');
+        result = window_manager.do_javascript('$(".installation").length')
         return result.to_i
       end
 
