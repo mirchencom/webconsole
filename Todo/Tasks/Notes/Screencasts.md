@@ -1,18 +1,13 @@
 # Screencasts
 
-* [ ] IRB is echo-ing output
-* [ ] Why is Node returning undefined twice?
-	* Not properly handling blank lines
-* [ ] Normalize the IRB, Coffee and Node test files
-* [ ] Write out example Markdown and HTML files
-* [ ] Write out a screencast script
-* [ ] Setup example files
-* [ ] Determine screencast strategy
-	* Google how to record screencasts with Quicktime
-	* How does Atom.io create gifs?
-* [ ] Use external flash drive
-* [ ] Record a sample screen recording for a Plugin
-* [ ] Make a gif out of it
+* [ ] Write setup windows for Gifs script
+	* Use minimum TextMate window width
+	* Pick a height that works well for all demos
+* [ ] Write AppleScripts for resizing windows
+* [ ] Add back in cascading?
+* [ ] Get Vimeo's aspect ratio
+
+		1280 x 720 px
 
 ## Screencasts
 
