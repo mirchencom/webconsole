@@ -48,4 +48,29 @@ class TestWrapper < Test::Unit::TestCase
     window.close
   end
 
+  def test_input_blank_lines
+    # When parsing this input, blank content was being interpreted which is just noise.
+    # This test confirms that with this input only one response from Node is recorded.
+
+    wrapper = WebConsole::REPL::Node::Wrapper.new
+
+    test_code = %Q[function addNumbers(x, y) {
+  return x + y;
+};
+    ]
+    test_code = test_code.gsub("\n", "\uFF00") + "\n"
+    wrapper.parse_input(test_code)
+
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+
+    window_id = WebConsole::Tests::Helper::window_id
+    window = WebConsole::Window.new(window_id)
+
+    pre_count = window.do_javascript('$("pre").length').to_i
+
+    assert_equal(pre_count, 2, "The count of <pre> elements should equal two.")
+    
+    window.close
+  end
+
 end

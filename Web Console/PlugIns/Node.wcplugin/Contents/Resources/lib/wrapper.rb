@@ -12,6 +12,7 @@ module WebConsole::REPL::Node
 
     def parse_input(input)
       input.gsub!("\uFF00", "\n") # \uFF00 is the unicode character Coffee uses for new lines, it's used here just to consolidate code into one line
+      input.gsub!(/^\s*$\n/, '') # Don't process blank lines
       super(input)
     end
 
