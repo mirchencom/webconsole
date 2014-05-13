@@ -1,12 +1,5 @@
 # Index
 
-## Todo
-
-* [ ] Search project folder in Search Plugin
-	* Maybe runs an AppleScript in the plugin support folder?
-	* Maybe search for selected word in the current project folder
-	* Maybe just include search as a shell script?
-
 ## Presentation
 
 * [ ] Record screencasts
