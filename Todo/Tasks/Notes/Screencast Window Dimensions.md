@@ -7,6 +7,7 @@ A minimum width TextMate window has these bounds:
 
     widthFromDimensions(left, top, right, bottom) = right - left
     widthFromDimensions(166, 270, 702, 414) => 536
+    heightFromDimensions(left, top, right, bottom) = bottom - top
 
 ## Video
 
@@ -58,6 +59,18 @@ Figure out which aspect ratio gives the same minimum window with for TextMate.
     
     {120, 120, 656, 308}
     widthFromDimensions(120, 120, 656, 308) => 536
+
+## Setting the Origin
+
+The origin should be set in order to center the windows.
+
+Getting the screens bounds:
+
+    bounds of window of desktop
+    {0, 0, 1440, 900}
+
+    widthFromDimensions(0, 0, 1440, 900) => 1,440
+    heightFromDimensions(0, 0, 1440, 900) => 900
 
 
 
