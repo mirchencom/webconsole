@@ -2,6 +2,7 @@
 
 ## Presentation
 
+* [ ] Write tests for webWindowController behavior
 * [ ] Record screencasts
 * [ ] Do `PluginEditorPrototype` screenshots
 * [ ] Do an app icon
