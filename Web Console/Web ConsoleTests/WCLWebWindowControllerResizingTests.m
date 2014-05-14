@@ -26,7 +26,7 @@
 
 @implementation WCLWebWindowControllerResizingTests
 
-- (void)testResizingWindow
+- (void)testResizingAndCascadingWindows
 {
     NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
                                                     withExtension:kPlugInExtension
@@ -57,6 +57,7 @@
     NSRect destinationFrameTwo = NSRectEqualToRect(windowFrame, kTestWindowFrame) ? kTestWindowFrame : kTestWindowFrameTwo;
     XCTAssertFalse(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should not equal the destination frame.");
     XCTAssertFalse(NSRectEqualToRect(destinationFrame, destinationFrameTwo), @"The NSWindow's frame should not equal the destination frame.");
+    XCTAssertFalse([webWindowController shouldCascadeWindows], @"The first WCLWebWindowController for a plugin should not cascade windows.");
     
     // Set the NSWindow's frame to the destination frame
     [webWindowController.window setFrame:destinationFrame display:NO];
@@ -64,7 +65,7 @@
     // Test that the saved frame now equals the destination frame
     savedFrame = [[self class] savedFrameNamed:plugin.name];
     XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrame), @"The saved frame should equal the destination frame.");
-
+    
     // Close the NSWindow
     [WCLWebWindowControllerTestsHelper blockUntilWebWindowControllerTasksRunAndFinish:webWindowController];
     [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
@@ -77,7 +78,9 @@
     windowFrame = [webWindowController.window frame];
     
     XCTAssertTrue(NSSizeEqualToSize(windowFrame.size, destinationFrame.size), @"The NSWindow's frame should equal the destination frame.");
-//    XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should equal the destination frame.");
+    XCTAssertFalse([webWindowController shouldCascadeWindows], @"The first WCLWebWindowController for a plugin should not cascade windows.");
+    // Rect check should only succeed if this WCLWebWindowController should not cascade windows
+    XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should equal the destination frame.");
     
     // Open a second window
     webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
@@ -86,8 +89,9 @@
     // Test that the second NSWindow's frame now equals the destination frame
     windowFrame = [webWindowController.window frame];
     XCTAssertTrue(NSSizeEqualToSize(windowFrame.size, destinationFrame.size), @"The NSWindow's sie should equal the destination size.");
-    // Rect check fails due to cascading
-//    XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should equal the destination frame.");
+    XCTAssertTrue([webWindowController shouldCascadeWindows], @"The second WCLWebWindowController for a plugin should cascade windows.");
+    // Rect check should only succeed if this WCLWebWindowController should not cascade windows
+    XCTAssertFalse(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should equal the destination frame.");
 
     // Set the second NSWindow's frame to the second destination frame
     [webWindowController.window setFrame:destinationFrameTwo display:NO];
@@ -103,19 +107,21 @@
     // Test that the third NSWindow matches the second desintation frame
     windowFrame = [webWindowController.window frame];
     XCTAssertTrue(NSSizeEqualToSize(windowFrame.size, destinationFrameTwo.size), @"The NSWindow's size should equal the destination size.");
-    // Rect check fails due to cascading
-//    XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrameTwo), @"The NSWindow's frame should equal the destination frame.");
+    XCTAssertTrue([webWindowController shouldCascadeWindows], @"The third WCLWebWindowController for a plugin should cascade windows.");
+    // Rect check should only succeed if this WCLWebWindowController should not cascade windows
+    XCTAssertFalse(NSRectEqualToRect(windowFrame, destinationFrameTwo), @"The NSWindow's frame should equal the destination frame.");
 
     // Test that the saved frame matches second destination frame
     savedFrame = [[self class] savedFrameNamed:plugin.name];
     XCTAssertTrue(NSSizeEqualToSize(savedFrame.size, destinationFrameTwo.size), @"The saved size should equal the destination size.");
-    // Rect check fails due to cascading
-//    XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrameTwo), @"The saved frame should equal the destination frame.");
+    // Rect check should only succeed if this WCLWebWindowController should not cascade windows
+    XCTAssertFalse(NSRectEqualToRect(savedFrame, destinationFrameTwo), @"The saved frame should equal the destination frame.");
 
     // Clean up
     NSArray *tasks = [[WCLWebWindowsController sharedWebWindowsController] tasks];
     [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
 }
+
 
 #pragma mark - Helpers
 

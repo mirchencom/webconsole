@@ -51,6 +51,19 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     }   
 }
 
+- (void)windowWillLoad
+{
+    if (!self.plugin) {
+        return;
+    }
+
+    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:self.plugin];
+    BOOL isFirstWindowController = [webWindowControllers isEqualToArray:@[self]];
+    if (isFirstWindowController) {
+        [self setShouldCascadeWindows:NO];
+    }
+}
+
 #pragma mark - Properties
 
 - (NSMutableDictionary *)requestToCompletionHandlerDictionary
