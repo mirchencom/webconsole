@@ -25,3 +25,7 @@
 ### Search
 
 ![Search](Documentation/images/Search.gif)
+
+## License
+
+GPLv3
