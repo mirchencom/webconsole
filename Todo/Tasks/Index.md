@@ -4,11 +4,9 @@
 
 * [x] Record screencasts
 * [x] Add license
-* [ ] Write Readme
-* [ ] Review [Web Console Documentation](Tasks/Web%20Console%20Documentation.md)
-	* Consider how documentation will work
+* [x] Write Readme
 * [ ] Post to Github
-* [ ] Make a webpage
+* [ ] Make a link on 1Percenter
 * [ ] Setup link to `PluginEditorPrototype` and add screenshots
 * [ ] Rename from `Web Console` to `WebConsole`?
 
