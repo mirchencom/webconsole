@@ -4,8 +4,8 @@ Web Console is an OS X application for creating and running custom plugins that 
 
 The Web Console application performs two main functions:
 
-1. **Runs command line tasks**: command line programs are run as subprocesses.
-2. **Provide web view with an API to running tasks**: subprocesses can manipulate the parent processes web view and displaying output and provide a user interface.
+1. **Runs command line tasks**: Command line programs are run as subprocesses.
+2. **Provide web view with an API to running tasks**: Subprocesses can manipulate the parent processes web view to displaying output and provide a user interface.
 
 There are three components that combine to make the application useful:
 
@@ -13,11 +13,11 @@ There are three components that combine to make the application useful:
 2. **[A TextMate Bundle](https://github.com/robenkleene/Web-Console-tmbundle)**
 3. **A Ruby gem**
 
-But, there is nothing inherent to Web Console the requires Ruby or TextMate. Any language can be used to write plugins, and it can integrate with any editor.
+But, there is nothing that inherently requires Ruby or TextMate. Any language can be used to write plugins, and integration can be with any editor.
 
 # Status
 
-Web Console is in pre-alpha, while the existing plugins are useful, the application is not ready for regular use and there is not a binary distribution yet.
+Web Console is in pre-alpha, while the existing plugins are useful, the application is not yet ready for regular use, and there is no binary distribution.
 
 ## Timeline
 
@@ -33,11 +33,11 @@ The [TextMate Bundle](https://github.com/robenkleene/Web-Console-tmbundle) illus
 
 # Built-in Plugins
 
-While these plugins are already useful, they are only at the proof of concept stage. Final implementations would only superficially resemble these.
+While these plugins are already useful, they are only at the proof of concept stage. Final implementations will only superficially resemble these.
 
 ## Editor Agnostic REPLs
 
-Web Console includes several REPLs, that can evaluate code from any editor (by sending it to a plugins subprocess [standard input](http://en.wikipedia.org/wiki/Standard_input). State is maintained by hosting a running instance of the REPL executable.
+Web Console includes several REPLs, that can evaluate code from any editor (by sending it to a plugins subprocesses [standard input](http://en.wikipedia.org/wiki/Standard_input)). The REPLs state is maintained by hosting a running instance of the REPL executable.
 
 ### CoffeeScript
 
