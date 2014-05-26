@@ -5,7 +5,7 @@ Web Console is an OS X application for creating and running custom plugins that 
 The Web Console application performs two main functions:
 
 1. **Runs command line tasks**: Command line programs are run as subprocesses.
-2. **Provide web view with an API to running tasks**: Subprocesses can manipulate the parent processes web view to displaying output and provide a user interface.
+2. **Provide web view with an API to the running tasks**: Subprocesses can manipulate the parent processes web view to displaying output and provide a user interface.
 
 There are three components that combine to make the application useful:
 
@@ -13,19 +13,19 @@ There are three components that combine to make the application useful:
 2. **[A TextMate Bundle](https://github.com/robenkleene/Web-Console-tmbundle)**
 3. **A Ruby gem**
 
-But, there is nothing that inherently requires Ruby or TextMate. Any language can be used to write plugins, and integration can be with any editor.
+But, there is nothing inherent to the application that requires Ruby or TextMate. Any language can be used to write plugins, and any text editor  can be integrated with.
 
 # Status
 
-Web Console is in pre-alpha, while the existing plugins are useful, the application is not yet ready for regular use, and there is no binary distribution.
+Web Console is in pre-alpha. While the existing plugins are useful, the application is not ready for regular use. There is no binary distribution yet.
 
 ## Timeline
 
 1. A plugin manager will be built.
-2. Preferences will be added for configuring Web Console to a open specific plugin by file type.
-3. The web view API will be expanded to handle loading a URL.
+2. Preferences will be added to configure Web Console to open specific plugins by file type.
+3. The web view API will be expanded to handle loading URLs.
 
-Progress on the plugin manager (#1) and the preferences for opening files with plugins (#2) is in the [Web Console Prototypes repository](https://github.com/robenkleene/Web-Console-Prototypes).
+Progress on the plugin manager (#1) and preferences for opening files with plugins (#2) is in the [Web Console Prototypes repository](https://github.com/robenkleene/Web-Console-Prototypes).
 
 # TextMate Bundle
 
@@ -96,7 +96,7 @@ User interfaces wrapped around command line programs to interact with them seaml
 
 	The gem is required for running tests (plugins themselves bundle the Ruby gem, the gem only needs to be installed globally for running tests).
 
-	All built-in Web Console plugins and tests use Ruby version 2.0.0-p247, the same version shipped with OS X Mavericks. (It's recommended that you setup a Ruby version manager before installing the Web Console Ruby gem.)
+	All built-in Web Console plugins and tests use Ruby version 2.0.0-p247, the same version that ships with OS X Mavericks. (It's recommended that you setup a Ruby version manager before installing the Web Console Ruby gem.)
 
 2. Open `Web Console/Scripts/test` in a shell and run:
 
