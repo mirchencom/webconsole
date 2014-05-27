@@ -5,10 +5,11 @@
 * [x] Record screencasts
 * [x] Add license
 * [x] Write Readme
-* [ ] Post to Github
-* [ ] Make a link on 1Percenter
+* [x] Post to Github
+* [x] Make a link on 1Percenter
+* [ ] Add README to TextMate bundle (installation instructions)
+* [ ] Review on non-retina screen
 * [ ] Setup link to `PluginEditorPrototype` and add screenshots
-* [ ] Rename from `Web Console` to `WebConsole`?
 
 ## Testing
 
@@ -16,6 +17,7 @@
 
 ## Continued
 
+* [ ] Rename from `Web Console` to `WebConsole`?
 * [ ] Do `PluginEditorPrototype` screenshots
 * [ ] Quick edit, don't have to specify XIB files by name: "Or if iOS finds a nib file in the app bundle with a name based on the view controller’s class name." UIViewController, loadView
 * [ ] Shell Scripts
