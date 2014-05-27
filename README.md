@@ -5,7 +5,7 @@ Web Console is an OS X application for creating and running custom plugins that 
 The Web Console application performs two main functions:
 
 1. **Runs command line tasks**: Command line programs are run as subprocesses.
-2. **Provide web view with an API to the running tasks**: Subprocesses can manipulate the parent processes web view to displaying output and provide a user interface.
+2. **Provides a web view with an API to the running tasks**: Subprocesses can manipulate the parent processes web view to displaying output and provide a user interface.
 
 There are three components that combine to make the application useful:
 
