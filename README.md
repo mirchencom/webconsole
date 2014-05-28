@@ -101,7 +101,3 @@ User interfaces wrapped around command line programs to interact with them seaml
 2. Open `Web Console/Scripts/test` in a shell and run:
 
 		run_tests.sh
-
-# License
-
-GPLv3
