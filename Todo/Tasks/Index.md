@@ -7,9 +7,12 @@
 * [x] Write Readme
 * [x] Post to Github
 * [x] Make a link on 1Percenter
+* [ ] Downgrade to GPLv2?
+	* Research Apple's reasons for not upgrading to GPLv3 software
+	* Research GPLv2 and app store
 * [ ] Add README to TextMate bundle (installation instructions)
+* [ ] Setup link to `PluginEditorPrototype` description and screenshots
 * [ ] Review on non-retina screen
-* [ ] Setup link to `PluginEditorPrototype` and add screenshots
 
 ## Testing
 
@@ -17,9 +20,9 @@
 
 ## Continued
 
+* [ ] Quick edit, don't have to specify XIB files by name: "Or if iOS finds a nib file in the app bundle with a name based on the view controller’s class name." UIViewController, loadView
 * [ ] Rename from `Web Console` to `WebConsole`?
 * [ ] Do `PluginEditorPrototype` screenshots
-* [ ] Quick edit, don't have to specify XIB files by name: "Or if iOS finds a nib file in the app bundle with a name based on the view controller’s class name." UIViewController, loadView
 * [ ] Shell Scripts
 	* These require the Ruby gem
 	* For now just `gem install webconsole` globally
