@@ -10,31 +10,31 @@
 	<string>Web Console</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>DF6A97FA-3E7B-4993-BE8C-0F7AD1EE1978</key>
-		<string>ssh://github.com/robenkleene/webconsole.git</string>
+		<key>C8601936635A47E0DE3C68781868AD1EF98934F6</key>
+		<string>github.com:robenkleene/webconsole.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Web Console/Web Console.xcodeproj/project.xcworkspace</string>
+	<string>Web Console/Web Console.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>DF6A97FA-3E7B-4993-BE8C-0F7AD1EE1978</key>
+		<key>C8601936635A47E0DE3C68781868AD1EF98934F6</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/robenkleene/webconsole.git</string>
+	<string>github.com:robenkleene/webconsole.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DF6A97FA-3E7B-4993-BE8C-0F7AD1EE1978</string>
+	<string>C8601936635A47E0DE3C68781868AD1EF98934F6</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DF6A97FA-3E7B-4993-BE8C-0F7AD1EE1978</string>
+			<string>C8601936635A47E0DE3C68781868AD1EF98934F6</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Web Console</string>
+			<string>Web%20Console</string>
 		</dict>
 	</array>
 </dict>
