@@ -17,7 +17,6 @@ class TestPlugin < Test::Unit::TestCase
   end
 
   def teardown
-    # window.close
     WebConsole::Tests::Helper::quit
     WebConsole::Tests::Helper::confirm_dialog
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
