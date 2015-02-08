@@ -8,21 +8,22 @@
 
 #import "NSApplication+AppleScript.h"
 
-#import "WCLPluginManager.h"
+#import "Web_Console-Swift.h"
 
 @implementation NSApplication (AppleScript)
 
 - (NSArray *)plugins
-{    
-    return [[WCLPluginManager sharedPluginManager] plugins];
-}
-
-- (id)handleLoadPluginScriptCommand:(NSScriptCommand *)command
 {
-    NSURL *pluginFileURL = [command directParameter];
-
-    return [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginFileURL];
+    return [[PluginsManager sharedInstance] plugins];
 }
+
+// TODO: Implement
+//- (id)handleLoadPluginScriptCommand:(NSScriptCommand *)command
+//{
+//    NSURL *pluginFileURL = [command directParameter];
+//
+//    return [[PluginsManager sharedInstance] addedPluginAtURL:pluginFileURL];
+//}
 
 
 @end

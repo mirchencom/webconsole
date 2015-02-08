@@ -326,11 +326,11 @@
 			</parameter>
 
         </command>
-        
-        <command name="load plugin" code="loadplgn" description="Load a plugin from a file.">
+		<!-- TODO: Implement -->
+        <!-- <command name="load plugin" code="loadplgn" description="Load a plugin from a file.">
             <direct-parameter type="file" description="The plugin file to load." />
             <result type="plugin" description="The loaded plugin." />
-		</command>
+		</command> -->
         
     </suite>
 </dictionary>

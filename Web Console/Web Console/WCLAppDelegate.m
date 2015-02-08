@@ -8,8 +8,6 @@
 
 #import "WCLAppDelegate.h"
 
-#import "WCLPluginManager+LoadingPlugins.h"
-
 #import "WCLWebWindowsController.h"
 
 #import "WCLTaskHelper.h"
@@ -32,11 +30,6 @@
     NSDictionary *userDefaultsDictionary = [NSDictionary dictionaryWithContentsOfURL:userDefaultsURL];
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDictionary];
     [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:userDefaultsDictionary];
-}
-
-- (void)applicationWillFinishLaunching:(NSNotification *)notification
-{
-    [[WCLPluginManager sharedPluginManager] loadPlugins];
 }
 
 

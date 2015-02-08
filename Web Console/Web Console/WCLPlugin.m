@@ -11,81 +11,80 @@
 #import "WCLWebWindowsController.h"
 #import "WCLWebWindowController.h"
 
-#import "WCLPluginManager.h"
-
 #import "NSApplication+AppleScript.h"
 
 #import "WCLPluginTask.h"
 
-#define kPluginNameKey @"WCName"
-#define kPluginCommandKey @"WCCommand"
-
-@interface WCLPlugin ()
-@property (nonatomic, strong) NSBundle *bundle;
-- (NSString *)commandPath;
-- (NSString *)command;
-- (NSString *)resourcePath;
-- (void)runCommandPath:(NSString *)commandPath
-         withArguments:(NSArray *)arguments
-       inDirectoryPath:(NSString *)directoryPath;
-- (void)readFromStandardInput:(NSString *)text;
-@end
+#import "WCLPlugin+Validation.h"
+#import "Web_Console-Swift.h"
 
 @implementation WCLPlugin
 
-- (id)initWithPath:(NSString *)path
+@synthesize defaultNewPlugin = _defaultNewPlugin;
+
+- (void)setDefaultNewPlugin:(BOOL)defaultNewPlugin
 {
-    self = [super init];
-    if (self) {
-        _bundle = [NSBundle bundleWithPath:path];
-        
-        // Bundle Validation
-        if (!_bundle ||
-            !([[self name] length])) {
-            DLog(@"Failed to load a bundle at path %@", path);
-            return nil;
-        }
+#warning It's problematic that using this setter without going through the plugin manager, will set the flag to true without it actually being the default new plugin
+    
+    if (_defaultNewPlugin != defaultNewPlugin) {
+        _defaultNewPlugin = defaultNewPlugin;
+    }
+}
+
+- (BOOL)isDefaultNewPlugin
+{
+    BOOL isDefaultNewPlugin = (self.pluginsManager.defaultNewPlugin == self);
+    
+    if (_defaultNewPlugin != isDefaultNewPlugin) {
+        _defaultNewPlugin = isDefaultNewPlugin;
     }
     
-    return self;
+    return _defaultNewPlugin;
 }
 
-#pragma mark - Dictionary
+#pragma mark Validation
 
-
-- (NSString *)name
+- (BOOL)validateExtensions:(id *)ioValue error:(NSError * __autoreleasing *)outError
 {
-    return [self.bundle.infoDictionary objectForKey:kPluginNameKey];
-}
-
-- (NSString *)command
-{
-    return [self.bundle.infoDictionary objectForKey:kPluginCommandKey];
-}
-
-- (NSString *)resourcePath {
-    return [self.bundle resourcePath];
-}
-
-- (NSURL *)resourceURL
-{
-    return [self.bundle resourceURL];
-}
-
-- (NSString *)resourceURLString
-{
-    return [[self.bundle resourceURL] absoluteString];
-}
-
-- (NSString *)commandPath
-{
-    NSString *command = [self command];
+    NSArray *extensions;
+    if ([*ioValue isKindOfClass:[NSArray class]]) {
+        extensions = *ioValue;
+    }
     
-    if ([command isAbsolutePath]) return command;
-
-    return [[self resourcePath] stringByAppendingPathComponent:command];
+    BOOL valid = [self extensionsAreValid:extensions];
+    if (!valid && outError) {
+        NSString *errorMessage = @"The file extensions must be unique, and can only contain alphanumeric characters.";
+        NSString *errorString = NSLocalizedString(errorMessage, @"Invalid file extensions error.");
+        
+        NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: errorString};
+        *outError = [[NSError alloc] initWithDomain:kErrorDomain
+                                               code:kErrorCodeInvalidPlugin
+                                           userInfo:userInfoDict];
+    }
+    
+    return valid;
 }
 
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    NSString *name;
+    if ([*ioValue isKindOfClass:[NSString class]]) {
+        name = *ioValue;
+    }
+    
+    BOOL valid = [self nameIsValid:name];
+    if (!valid && outError) {
+        NSString *errorMessage = @"The plugin name must be unique, and can only contain alphanumeric characters, spaces, hyphens and underscores.";
+        NSString *errorString = NSLocalizedString(errorMessage, @"Invalid plugin name error.");
+        
+        NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: errorString};
+        *outError = [[NSError alloc] initWithDomain:kErrorDomain
+                                               code:kErrorCodeInvalidPlugin
+                                           userInfo:userInfoDict];
+    }
+    
+    return valid;
+}
 
 #pragma mark - AppleScript
 

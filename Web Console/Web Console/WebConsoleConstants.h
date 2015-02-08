@@ -7,13 +7,20 @@
 //
 
 
+#define kAppName (NSString *)[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
+
 #pragma mark - Preferences Defaults
 
 #define kUserDefaultsFilename @"UserDefaults"
 #define kUserDefaultsFileExtension @"plist"
-
 #define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"
- 
+#define kFileExtensionDefaultEnabled NO
+#define kFileExtensionToPluginKey @"WCLFileExtensionToPlugin"
+#define kFileExtensionEnabledKey @"enabled"
+#define kFileExtensionPluginIdentifierKey @"pluginIdentifier"
+#define kDefaultNewPluginIdentifierKey @"WCLDefaultNewPluginIdentifier"
+#define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"
+
 
 #pragma mark - AppleScript Arguments Dictionary
 
@@ -27,8 +34,13 @@
 #pragma mark - Plugins
 
 #define kPlugInExtension @"wcplugin"
-#define kSharedResourcesPluginName @"Shared Resources"
-#define kPlugInsPathComponent @"PlugIns"
+#define kPluginNameKey @"name"
+
+
+#pragma mark - Plugins Manager Keys
+
+#define kPluginsManagerPluginsKeyPath @"plugins"
+
 
 #pragma mark - Environment
 
@@ -43,3 +55,11 @@
 
 #define kTaskInterruptTimeout 1.0
 #define kApplicationTerminationTimeout 60.0
+
+
+#pragma mark - Errors
+
+#define kErrorDomain @"com.1percenter.Web-Console"
+#define kErrorCodeInvalidPlugin -42
+
+

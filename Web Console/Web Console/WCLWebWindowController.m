@@ -14,9 +14,7 @@
 
 #import "WCLTaskHelper.h"
 
-#import "WCLPlugin.h"
-
-#import "WCLPluginManager.h"
+#import "Web_Console-Swift.h"
 
 NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLWebWindowControllerDidCancelCloseWindowNotification";
 
