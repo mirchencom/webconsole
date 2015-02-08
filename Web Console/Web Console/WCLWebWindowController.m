@@ -275,7 +275,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     [self.window setTitle:title];
 }
 
-#pragma mark - WCLPLuginTaskDelegate
+#pragma mark - WCLPluginTaskDelegate
 
 - (void)pluginTaskWillStart:(NSTask *)task
 {
