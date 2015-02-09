@@ -54,16 +54,4 @@
     return webWindowController;
 }
 
-#pragma mark - Helpers
-
-- (NSString *)stringWithContentsOfSharedTestResource:(NSString *)filename
-                                       withExtension:(NSString *)extension
-                                        subdirectory:(NSString *)subdirectory
-{
-    NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:filename
-                                                  withExtension:extension
-                                                   subdirectory:subdirectory];
-    return [self wcl_stringWithContentsOfFileURL:fileURL];
-}
-
 @end

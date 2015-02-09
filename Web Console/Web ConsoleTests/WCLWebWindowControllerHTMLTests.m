@@ -6,10 +6,15 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WCLWebWindowControllerTestCase.h"
+#import <Cocoa/Cocoa.h>
+#import <XCTest/XCTest.h>
+
+#import "Web_ConsoleTestsConstants.h"
+#import "XCTest+BundleResources.h"
 #import "Web_Console-Swift.h"
 
-@interface WCLWebWindowControllerHTMLTests : WCLWebWindowControllerTestCase
+
+@interface WCLWebWindowControllerHTMLTests : XCTestCase
 
 @end
 
@@ -39,12 +44,12 @@
 	
     XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
     
-    NSString *javaScript = [self stringWithContentsOfSharedTestResource:kTestJavaScriptTextJQueryFilename
+    NSString *javaScript = [self wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextJQueryFilename
                                                           withExtension:kTestDataJavaScriptExtension
                                                            subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
     NSString *result = [webWindowController doJavaScript:javaScript];
     
-    NSString *testJavaScript = [self stringWithContentsOfSharedTestResource:kTestJavaScriptTextFilename
+    NSString *testJavaScript = [self wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextFilename
                                                           withExtension:kTestDataJavaScriptExtension
                                                            subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
     NSString *expectedResult = [webWindowController doJavaScript:testJavaScript];
@@ -65,7 +70,7 @@
                                                    subdirectory:kSharedTestResourcesHTMLSubdirectory];
     NSURL *baseURL = [fileURL URLByDeletingLastPathComponent];
     
-    NSString *HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+    NSString *HTML = [self wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
                                                     withExtension:kTestDataHTMLExtension
                                                      subdirectory:kSharedTestResourcesHTMLSubdirectory];
     __block BOOL firstCompletionHandlerRan = NO;
@@ -81,7 +86,7 @@
     XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
     XCTAssertTrue([webWindowController.window.title isEqualToString:kTestDataHTMLTitle], @"The NSWindow's title should equal the test HTML title.");
     
-    HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLJQUERYFilename
+    HTML = [self wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLJQUERYFilename
                                           withExtension:kTestDataHTMLExtension
                                            subdirectory:kSharedTestResourcesHTMLSubdirectory];
     __block BOOL secondCompletionHandlerRan = NO;
@@ -103,7 +108,7 @@
 
 - (void)testLoadHTMLTwiceWithoutWaiting
 {
-    NSString *HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+    NSString *HTML = [self wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
                                                           withExtension:kTestDataHTMLExtension
                                                            subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
@@ -133,7 +138,7 @@
 
 - (void)testLoadHTMLInSeparateWindows
 {
-    NSString *HTML = [self stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+    NSString *HTML = [self wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
                                                     withExtension:kTestDataHTMLExtension
                                                      subdirectory:kSharedTestResourcesHTMLSubdirectory];
     

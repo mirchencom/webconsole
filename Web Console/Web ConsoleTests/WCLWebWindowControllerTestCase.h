@@ -25,7 +25,4 @@
 + (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
 + (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath;
 + (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
-- (NSString *)stringWithContentsOfSharedTestResource:(NSString *)filename
-                                       withExtension:(NSString *)extension
-                                        subdirectory:(NSString *)subdirectory;
 @end

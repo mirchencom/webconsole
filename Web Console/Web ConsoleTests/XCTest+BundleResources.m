@@ -41,6 +41,16 @@
     return contents;
 }
 
+- (NSString *)wcl_stringWithContentsOfSharedTestResource:(NSString *)filename
+                                       withExtension:(NSString *)extension
+                                        subdirectory:(NSString *)subdirectory
+{
+    NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:filename
+                                                  withExtension:extension
+                                                   subdirectory:subdirectory];
+    return [self wcl_stringWithContentsOfFileURL:fileURL];
+}
+
 + (NSURL *)wcl_URLForSharedTestResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory
 {
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kSharedTestResourcesPluginName];
