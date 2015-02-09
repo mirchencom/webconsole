@@ -1,5 +1,5 @@
 //
-//  WCLWebWindowControllerTestPluginManagerTestCase.m
+//  WCLTestPluginManagerTestCase.m
 //  Web Console
 //
 //  Created by Roben Kleene on 2/8/15.
@@ -9,11 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
 
-#import "WCLWebWindowControllerTestPluginManagerTestCase.h"
+#import "WCLTestPluginManagerTestCase.h"
+#import "Web_ConsoleTestsConstants.h"
 #import "Web_Console-Swift.h"
 
-
-@implementation WCLWebWindowControllerTestPluginManagerTestCase
+@implementation WCLTestPluginManagerTestCase
 
 - (void)setUp
 {

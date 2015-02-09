@@ -14,13 +14,17 @@
 
 #import "WCLWebWindowsController.h"
 #import "WCLWebWindowController.h"
+#import "WCLTestPluginManagerTestCase.h"
 
 @interface WCLWebWindowController (Tests)
 @property (nonatomic, readonly) WebView *webView;
 - (void)terminateTasksAndCloseWindow;
 @end
 
-@interface WCLWebWindowControllerTestCase : XCTestCase
+@interface WCLWebWindowControllerTestCase : WCLTestPluginManagerTestCase
++ (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
++ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath;
++ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
 - (NSString *)stringWithContentsOfSharedTestResource:(NSString *)filename
                                        withExtension:(NSString *)extension
                                         subdirectory:(NSString *)subdirectory;

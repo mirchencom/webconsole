@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "WCLWebWindowControllerTestPluginManagerTestCase.h"
+#import "WCLWebWindowControllerTestCase.h"
 
 // Test Helpers
 #import "WCLWebWindowControllerTestsHelper.h"
@@ -19,7 +19,7 @@
 #import "NSRectHelpers.h"
 #import "Web_ConsoleTestsConstants.h"
 
-@interface WCLWebWindowControllerResizingTests : WCLWebWindowControllerTestPluginManagerTestCase
+@interface WCLWebWindowControllerResizingTests : WCLWebWindowControllerTestCase
 + (NSRect)savedFrameNamed:(NSString *)frameName;
 - (WCLWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(WCLPlugin *)plugin;
 @end
@@ -127,7 +127,7 @@
 
 #pragma mark - Helpers
 
-- (WCLWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(WCLPlugin *)plugin
+- (WCLWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin
 {
     NSArray *originalWebWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     

@@ -33,7 +33,7 @@
     NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
-    WCLPlugin *plugin = [[WCLPlugin alloc] init];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
     [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
@@ -54,16 +54,12 @@
     NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:@[]];
     XCTAssertNil(informativeText, @"The informative text should be nil for an empty NSArray.");
     
-    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
-                                                    withExtension:kPlugInExtension
-                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
-    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
     NSArray *commandPaths = @[[plugin commandPath]];
     informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
     [[self class] testInformativeText:informativeText forCommandPaths:commandPaths];
     
-    WCLPluginManager *pluginManager = [WCLPluginManager sharedPluginManager];
-    NSArray *plugins = [pluginManager plugins];
+    NSArray *plugins = [[PluginsManager sharedInstance] plugins];
     commandPaths = [plugins valueForKey:kPluginCommandPathKey];
     informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
     [[self class] testInformativeText:informativeText forCommandPaths:commandPaths];
@@ -88,11 +84,11 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
     [WCLTaskTestsHelper blockUntilTaskFinishes:task];
     
-    WCLPlugin *plugin = webWindowController.plugin;
+    Plugin *plugin = webWindowController.plugin;
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     
@@ -111,7 +107,7 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
     [WCLWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
     
@@ -126,7 +122,7 @@
     [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
     XCTAssertFalse([webWindowController hasTasks], @"The WCLWebWindowController should not have an NSTask.");
     
-    WCLPlugin *plugin = webWindowController.plugin;
+    Plugin *plugin = webWindowController.plugin;
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     
@@ -143,7 +139,7 @@
     NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
-    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath];
+    WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath];
     
     XCTAssertTrue([webWindowController hasTasks], @"The WebWindowController should have an NSTask.");
     
@@ -168,7 +164,7 @@
                                          subdirectory:kTestDataSubdirectory];
     
     NSTask *task;
-    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
     [WCLWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
     
@@ -185,7 +181,7 @@
     
     [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
     
-    WCLPlugin *plugin = webWindowController.plugin;
+    Plugin *plugin = webWindowController.plugin;
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     
@@ -208,7 +204,7 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
     XCTAssertTrue([webWindowController.window isDocumentEdited], @"The NSWindow should be edited while running a task");
     [WCLWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
@@ -224,11 +220,11 @@
 
 - (void)testPluginTaskEnvironmentDictionary
 {
-    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestTestEnvironmentPluginName
-                                                    withExtension:kPlugInExtension
-                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
-    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestTestEnvironmentPluginName];
+    
     [plugin runWithArguments:nil inDirectoryPath:nil];
+
+    
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     WCLWebWindowController *webWindowController = webWindowControllers[0];

@@ -14,40 +14,26 @@
 #import "WCLWebWindowsController.h"
 #import "WCLWebWindowController.h"
 #import "WCLWebWindowControllerTestsHelper.h"
+#import "WCLWebWindowControllerTestCase.h"
 
 #import "NSTask+Termination.h"
 #import "WCLTaskTestsHelper.h"
 #import "WCLTaskHelper.h"
 
 #import "Web_Console-Swift.h"
+#import "WCLTestPluginManagerTestCase.h"
 
-@interface WCLPluginTests : XCTestCase
+@interface WCLPluginTests : WCLWebWindowControllerTestCase
 @end
 
 @implementation WCLPluginTests
-
-- (void)setUp
-{
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown
-{
-    [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
-    
-    [super tearDown];
-}
-
 
 #pragma mark - Plugin Bundle
 
 - (void)testPlugin
 {
-    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
-                                                    withExtension:kPlugInExtension
-                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
-    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+    
     XCTAssertNotNil(plugin, @"The WCLPlugin should not be nil.");
     
     // Test Resource Path & URL
@@ -69,13 +55,13 @@
 
 - (void)testSharedResources
 {
-    NSString *testSharedResourcePath = [[[WCLPluginManager sharedPluginManager] sharedResourcesPath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
+    NSString *testSharedResourcePath = [[[PluginsManager sharedInstance] sharedResourcesPath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
     BOOL isDir;
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:testSharedResourcePath isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's path.");
     XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");
 
-    NSURL *testSharedResourceURL = [[[WCLPluginManager sharedPluginManager] sharedResourcesURL] URLByAppendingPathComponent:kTestSharedResourcePathComponent];
+    NSURL *testSharedResourceURL = [[[PluginsManager sharedInstance] sharedResourcesURL] URLByAppendingPathComponent:kTestSharedResourcePathComponent];
     fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[testSharedResourceURL path] isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's URL.");
     XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");
@@ -89,8 +75,8 @@
                                                ofType:kTestDataShellScriptExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
-                                                                                                                      task:&task];
+    WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
+                                                                                         task:&task];
     WCLPlugin *plugin = webWindowController.plugin;
 
     static NSString *StandardInputText = @"Test String";
@@ -125,7 +111,7 @@
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
     __block BOOL completionHandlerRan = NO;
     [task wcl_interruptWithCompletionHandler:^(BOOL success) {
@@ -150,7 +136,7 @@
                                            ofType:kTestDataShellScriptExtension
                                      subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLWebWindowController *webWindowController = [WCLWebWindowControllerTestsHelper webWindowControllerRunningCommandPath:commandPath
+    WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
 
     __block BOOL completionHandlerRan = NO;
@@ -177,12 +163,12 @@
     NSString *firstCommandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                                 ofType:kTestDataRubyExtension
                                           subdirectory:kTestDataSubdirectory];
-    NSTask *firstTask = [WCLWebWindowControllerTestsHelper taskRunningCommandPath:firstCommandPath];
+    NSTask *firstTask = [[self class] taskRunningCommandPath:firstCommandPath];
 
     NSString *secondCommandPath = [self wcl_pathForResource:kTestDataInterruptFails
                                                  ofType:kTestDataShellScriptExtension
                                            subdirectory:kTestDataSubdirectory];
-    NSTask *secondTask = [WCLWebWindowControllerTestsHelper taskRunningCommandPath:secondCommandPath];
+    NSTask *secondTask = [[self class] taskRunningCommandPath:secondCommandPath];
     
     XCTAssertTrue([firstTask isRunning], @"The first NSTask should be running.");
     XCTAssertTrue([secondTask isRunning], @"The second NSTask should be running.");
@@ -210,7 +196,7 @@
     NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                            ofType:kTestDataRubyExtension
                                      subdirectory:kTestDataSubdirectory];
-    WCLPlugin *plugin = [[WCLPlugin alloc] init];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
     [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WCLWebWindowController.");
