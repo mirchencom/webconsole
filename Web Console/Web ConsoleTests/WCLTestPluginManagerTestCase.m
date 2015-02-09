@@ -20,8 +20,8 @@
     [super setUp];
     
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kSharedTestResourcesPluginName];
-    NSURL *resourceURL = [plugin resourceURL];
-    NSURL *testPluginsURL = [resourceURL URLByAppendingPathComponent:kSharedTestResourcesPluginSubdirectory];
+    NSString *resourcePath = [plugin resourcePath];
+    NSString *testPluginsPath = [resourcePath stringByAppendingPathComponent:kSharedTestResourcesPluginSubdirectory];
     
     NSError *error;
     NSURL *trashURL = [[NSFileManager defaultManager] URLForDirectory:NSTrashDirectory
@@ -30,7 +30,7 @@
                                                                create:NO
                                                                 error:&error];
     XCTAssertNil(error, @"The error should be nil");
-    PluginsManager *pluginsManager = [[PluginsManager alloc] init:@[testPluginsURL]
+    PluginsManager *pluginsManager = [[PluginsManager alloc] init:@[testPluginsPath]
                            duplicatePluginDestinationDirectoryURL:trashURL];
     
     [PluginsManager setOverrideSharedInstance:pluginsManager];

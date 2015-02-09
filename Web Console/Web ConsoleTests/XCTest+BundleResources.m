@@ -45,10 +45,12 @@
 {
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kSharedTestResourcesPluginName];
     NSURL *resourceURL = [plugin resourceURL];
-    
-    return [[[resourceURL URLByAppendingPathComponent:subdirectory]
-             URLByAppendingPathComponent:name]
-            URLByAppendingPathExtension:ext];
+
+    NSURL *fileURL = [[[resourceURL URLByAppendingPathComponent:subdirectory]
+                   URLByAppendingPathComponent:name]
+                  URLByAppendingPathExtension:ext];
+    NSAssert(fileURL, @"The file URL should not be nil");
+    return fileURL;
 }
 
 @end
