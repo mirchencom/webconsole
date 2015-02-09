@@ -26,7 +26,6 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 - (void)saveWindowFrame;
 - (NSString *)windowFrameName;
 @property (nonatomic, strong) NSMutableArray *mutableTasks;
-@property (nonatomic, strong) WCLPlugin *plugin;
 @end
 
 @implementation WCLWebWindowController
@@ -299,12 +298,12 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
         environmentDictionary = [[NSMutableDictionary alloc] init];
     }
 
-    NSString *sharedResourcesPath = [[WCLPluginManager sharedPluginManager] sharedResourcesPath];
+    NSString *sharedResourcesPath = [[PluginsManager sharedInstance] sharedResourcesPath];
     if (sharedResourcesPath) {
         environmentDictionary[kEnvironmentVariableSharedResourcesPathKey] = sharedResourcesPath;
     }
 
-    NSString *sharedResourcesURL = [[[WCLPluginManager sharedPluginManager] sharedResourcesURL] absoluteString];
+    NSString *sharedResourcesURL = [[[PluginsManager sharedInstance] sharedResourcesURL] absoluteString];
     if (sharedResourcesURL) {
         environmentDictionary[kEnvironmentVariableSharedResourcesURLKey] = sharedResourcesURL;
     }

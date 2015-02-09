@@ -23,7 +23,7 @@
 
 @implementation WCLWebWindowsController
 
-+ (id)sharedWebWindowsController
++ (instancetype)sharedWebWindowsController
 {
     static dispatch_once_t pred;
     static WCLWebWindowsController *webWindowsController = nil;

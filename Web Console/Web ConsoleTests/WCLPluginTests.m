@@ -19,9 +19,7 @@
 #import "WCLTaskTestsHelper.h"
 #import "WCLTaskHelper.h"
 
-#import "WCLPlugin.h"
-#import "WCLPluginManager.h"
-#import "WCLPlugin+Tests.h"
+#import "Web_Console-Swift.h"
 
 @interface WCLPluginTests : XCTestCase
 @end

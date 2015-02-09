@@ -98,18 +98,4 @@
     [self.pluginsController removeObjectsAtIndexes:indexes];
 }
 
-
-
-// TODO: Implement
-// #define kSharedResourcesPluginName @"Shared Resources"
-//- (NSString *)sharedResourcesPath
-//{
-//    return [[self pluginWithName:kSharedResourcesPluginName] resourcePath];
-//}
-//
-//- (NSURL *)sharedResourcesURL
-//{
-//    return [[self pluginWithName:kSharedResourcesPluginName] resourceURL];
-//}
-
 @end

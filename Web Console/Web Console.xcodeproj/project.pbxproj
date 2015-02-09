@@ -72,7 +72,8 @@
 		45B81480181483400006AA05 /* WCLPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8147F181483400006AA05 /* WCLPluginTests.m */; };
 		45B8148318161A360006AA05 /* WCLWebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */; };
 		45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */; };
-		45C3B4FB191B03950010B692 /* WCLTestPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B4FA191B03950010B692 /* WCLTestPluginManager.m */; };
+		45BE8A561A884EA400B2C5E8 /* WCLWebWindowControllerTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A551A884EA400B2C5E8 /* WCLWebWindowControllerTestPluginManagerTestCase.m */; };
+		45C3B4FB191B03950010B692 /* WCLPluginManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B4FA191B03950010B692 /* WCLPluginManagerTests.m */; };
 		45DA852C18B0067000A151F3 /* Shared Resources.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794B18B005BE00D705C8 /* Shared Resources.wcplugin */; };
 		45DA852D18B0067300A151F3 /* Search.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794C18B005BE00D705C8 /* Search.wcplugin */; };
 		45DA852E18B0067700A151F3 /* Node.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794D18B005BE00D705C8 /* Node.wcplugin */; };
@@ -149,7 +150,6 @@
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
 		4561C2271874C01700CF926D /* NSRectHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSRectHelpers.h; sourceTree = "<group>"; };
 		456492FE191C656D00BA048E /* IRB.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = IRB.wcplugin; sourceTree = "<group>"; };
-		45709B1A18271237005F03E9 /* WCLPlugin+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WCLPlugin+Tests.h"; sourceTree = "<group>"; };
 		4574725617DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLApplicationTerminationHelper.h; sourceTree = "<group>"; };
 		4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLApplicationTerminationHelper.m; sourceTree = "<group>"; };
 		457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Shared Test Resources.wcplugin"; sourceTree = "<group>"; };
@@ -225,7 +225,9 @@
 		45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTestsHelper.m; sourceTree = "<group>"; };
 		45B814841816297C0006AA05 /* WCLTaskTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLTaskTestsHelper.h; sourceTree = "<group>"; };
 		45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTaskTestsHelper.m; sourceTree = "<group>"; };
-		45C3B4FA191B03950010B692 /* WCLTestPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTestPluginManager.m; sourceTree = "<group>"; };
+		45BE8A551A884EA400B2C5E8 /* WCLWebWindowControllerTestPluginManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerTestPluginManagerTestCase.m; sourceTree = "<group>"; };
+		45BE8A571A884F2500B2C5E8 /* WCLWebWindowControllerTestPluginManagerTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLWebWindowControllerTestPluginManagerTestCase.h; sourceTree = "<group>"; };
+		45C3B4FA191B03950010B692 /* WCLPluginManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginManagerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,18 +325,19 @@
 		4530B0F21736E2A6000A52E2 /* Web ConsoleTests */ = {
 			isa = PBXGroup;
 			children = (
-				45A34E2718726711005BF628 /* WCLWebWindowControllerTestCase.h */,
-				45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */,
 				45A34E2318726470005BF628 /* WCLWebWindowControllerHTMLTests.m */,
 				45A34E2518726492005BF628 /* WCLWebWindowControllerTaskTests.m */,
 				45B3E401187269E300DCDB42 /* WCLWebWindowControllerResizingTests.m */,
+				45BE8A571A884F2500B2C5E8 /* WCLWebWindowControllerTestPluginManagerTestCase.h */,
+				45BE8A551A884EA400B2C5E8 /* WCLWebWindowControllerTestPluginManagerTestCase.m */,
+				45A34E2718726711005BF628 /* WCLWebWindowControllerTestCase.h */,
+				45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */,
 				45B8147F181483400006AA05 /* WCLPluginTests.m */,
-				45C3B4FA191B03950010B692 /* WCLTestPluginManager.m */,
+				45C3B4FA191B03950010B692 /* WCLPluginManagerTests.m */,
 				45B8148118161A360006AA05 /* WCLWebWindowControllerTestsHelper.h */,
 				45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */,
 				45B814841816297C0006AA05 /* WCLTaskTestsHelper.h */,
 				45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */,
-				45709B1A18271237005F03E9 /* WCLPlugin+Tests.h */,
 				451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */,
 				451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */,
 				451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */,
@@ -691,11 +694,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */,
-				45C3B4FB191B03950010B692 /* WCLTestPluginManager.m in Sources */,
+				45C3B4FB191B03950010B692 /* WCLPluginManagerTests.m in Sources */,
 				45B8148318161A360006AA05 /* WCLWebWindowControllerTestsHelper.m in Sources */,
 				45A34E22187263A4005BF628 /* WCLWebWindowControllerTestCase.m in Sources */,
 				45A34E2418726470005BF628 /* WCLWebWindowControllerHTMLTests.m in Sources */,
 				45B81480181483400006AA05 /* WCLPluginTests.m in Sources */,
+				45BE8A561A884EA400B2C5E8 /* WCLWebWindowControllerTestPluginManagerTestCase.m in Sources */,
 				45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */,
 				45B3E402187269E300DCDB42 /* WCLWebWindowControllerResizingTests.m in Sources */,
 				45A34E2618726492005BF628 /* WCLWebWindowControllerTaskTests.m in Sources */,
@@ -844,6 +848,11 @@
 				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Web Console/Web Console-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources",
+				);
 				INFOPLIST_FILE = "Web ConsoleTests/Web ConsoleTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -858,6 +867,11 @@
 				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Web Console/Web Console-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources",
+				);
 				INFOPLIST_FILE = "Web ConsoleTests/Web ConsoleTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";

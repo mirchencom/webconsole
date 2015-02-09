@@ -14,13 +14,11 @@
 
 #import "WCLUserInterfaceTextHelper.h"
 
-#import "WCLPlugin+Tests.h"
-
-#import "WCLPluginManager.h"
-
 #import "WCLApplicationTerminationHelper.h"
 
 #import "WCLWebWindowControllerTestsHelper.h"
+
+#import "Web_Console-Swift.h"
 
 @interface WCLWebWindowControllerTaskTests : WCLWebWindowControllerTestCase
 + (void)testInformativeText:(NSString *)informativeText forCommandPaths:(NSArray *)commandPaths;

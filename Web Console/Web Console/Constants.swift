@@ -13,6 +13,7 @@ let errorDomain = NSBundle.mainBundle().bundleIdentifier! as NSString
 let pluginsDirectoryPathComponent = "PlugIns"
 let defaultNewPluginIdentifierKey = "WCLDefaultNewPluginIdentifier"
 let defaultFileExtensionEnabled = false
+let sharedResourcesPluginName = "Shared Resources"
 
 enum Directory {
     case Caches

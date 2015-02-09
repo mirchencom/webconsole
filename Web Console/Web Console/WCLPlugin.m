@@ -94,41 +94,22 @@
 	return [[NSNameSpecifier alloc] initWithContainerClassDescription:containerClassDescription
                                                    containerSpecifier:nil
                                                                   key:@"plugins"
-                                                                 name:[self name]];
+                                                                 name:self.name];
 }
 
-- (NSArray *)orderedWindows
+- (NSString *)name
 {
-    return [[WCLWebWindowsController sharedWebWindowsController] windowsForPlugin:self];
+    NSAssert(NO, @"Subclass must override");
+    return nil;
 }
+
 
 
 #pragma mark - Task
 
 - (void)runWithArguments:(NSArray *)arguments inDirectoryPath:(NSString *)directoryPath
 {
-    [self runCommandPath:[self commandPath]
-           withArguments:arguments
-         inDirectoryPath:directoryPath];
-}
-
-- (void)runCommandPath:(NSString *)commandPath
-         withArguments:(NSArray *)arguments
-       inDirectoryPath:(NSString *)directoryPath
-{
-    DLog(@"[Task] runCommandPath:%@ withArguments:%@ inDirectoryPath:%@", commandPath, arguments, directoryPath);
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:commandPath];
-    if (directoryPath) {
-        [task setCurrentDirectoryPath:directoryPath];
-    }
-    if (arguments) {
-        [task setArguments:arguments];
-    }   
-    
-    WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowControllerForPlugin:self];
-    [WCLPluginTask runTask:task delegate:webWindowController];
+    NSAssert(NO, @"Subclass must override");
 }
 
 

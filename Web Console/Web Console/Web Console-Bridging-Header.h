@@ -12,3 +12,6 @@
 #import "WCLDirectoryWatcher.h"
 #import "WCLPluginsManager.h"
 #import "WCLFileExtensionsController.h"
+#import "WCLWebWindowsController.h"
+#import "WCLWebWindowController.h"
+#import "WCLPluginTask.h"

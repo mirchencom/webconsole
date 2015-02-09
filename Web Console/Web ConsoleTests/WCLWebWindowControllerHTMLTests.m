@@ -7,7 +7,7 @@
 //
 
 #import "WCLWebWindowControllerTestCase.h"
-#import "WCLPluginManager.h"
+#import "Web_Console-Swift.h"
 
 @interface WCLWebWindowControllerHTMLTests : WCLWebWindowControllerTestCase
 
@@ -22,7 +22,7 @@
                                                   withExtension:kTestDataHTMLExtension
                                                    subdirectory:kSharedTestResourcesHTMLSubdirectory];
     NSString *HTML = [self wcl_stringWithContentsOfFileURL:fileURL];
-    NSURL *baseURL = [[WCLPluginManager sharedPluginManager] sharedResourcesURL];
+    NSURL *baseURL = [[PluginsManager sharedInstance] sharedResourcesURL];
     
     __block BOOL completionHandlerRan = NO;
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];

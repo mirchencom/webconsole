@@ -37,7 +37,7 @@
 #define kSharedTestResourcesPluginSubdirectory @"plugin"
 #define kSharedTestResourcesJavaScriptSubdirectory @"js"
 #define kSharedTestResourcesHTMLSubdirectory @"html"
-
+#define kSharedTestResourcesPluginName @"Shared Test Resources"
 
 #pragma mark - Default Preferences
 

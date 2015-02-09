@@ -8,18 +8,18 @@
 
 #import <XCTest/XCTest.h>
 
-#import "WCLWebWindowControllerTestCase.h"
+#import "WCLWebWindowControllerTestPluginManagerTestCase.h"
 
 // Test Helpers
 #import "WCLWebWindowControllerTestsHelper.h"
 #import "WCLTaskTestsHelper.h"
 // Plugins
-#import "WCLPlugin+Tests.h"
-#import "WCLPluginManager.h"
+#import "Web_Console-Swift.h"
 
 #import "NSRectHelpers.h"
+#import "Web_ConsoleTestsConstants.h"
 
-@interface WCLWebWindowControllerResizingTests : WCLWebWindowControllerTestCase
+@interface WCLWebWindowControllerResizingTests : WCLWebWindowControllerTestPluginManagerTestCase
 + (NSRect)savedFrameNamed:(NSString *)frameName;
 - (WCLWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(WCLPlugin *)plugin;
 @end
@@ -28,11 +28,13 @@
 
 - (void)testResizingAndCascadingWindows
 {
-    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
-                                                    withExtension:kPlugInExtension
-                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
-    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] addedPluginAtURL:pluginURL];
+//    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
+//                                                    withExtension:kPlugInExtension
+//                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
+//    Plugin *plugin = [[PluginsManager sharedInstance] addedPluginAtURL:pluginURL];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
 
+    
     // The plugin needs a name for saved frames to work
     XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");
     XCTAssertTrue([plugin.name isEqualToString:kTestPrintPluginName], @"The WCLPlugin's name should equal the test plugin name.");

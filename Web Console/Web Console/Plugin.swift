@@ -58,10 +58,14 @@ class Plugin: WCLPlugin {
     
     // MARK: Paths
 
-    private var resourcePath: String? {
-        get {
-            return bundle.resourcePath
+    internal var resourcePath: String? {
+        return bundle.resourcePath
+    }
+    internal var resourceURL: NSURL? {
+        if let path = resourcePath {
+            return NSURL.fileURLWithPath(path)
         }
+        return nil
     }
     internal var infoDictionary: [NSObject : AnyObject]
     internal var infoDictionaryURL: NSURL {
@@ -164,6 +168,33 @@ class Plugin: WCLPlugin {
     override var description : String {
         let description = super.description
         return "\(description), Plugin name = \(name),  identifier = \(identifier), defaultNewPlugin = \(defaultNewPlugin), hidden = \(hidden), editable = \(editable)"
+    }
+
+    // MARK: Running
+    
+    func runWithArguments(arguments: [AnyObject]!, inDirectoryPath directoryPath: String!) {
+        self.runCommandPath(commandPath, withArguments: arguments, inDirectoryPath: directoryPath)
+    }
+
+    func runCommandPath(commandPath: String!, withArguments arguments: [AnyObject]?, inDirectoryPath directoryPath: String?) {
+        println("runCommandPath:\(commandPath) withArguments:\(arguments) inDirectoryPath:\(directoryPath)")
+        let task = NSTask()
+        task.launchPath = commandPath
+        if let directoryPath = directoryPath {
+            task.currentDirectoryPath = directoryPath
+        }
+        if let arguments = arguments {
+            task.arguments = arguments
+        }
+
+        let webWindowController = WCLWebWindowsController.sharedWebWindowsController().addedWebWindowControllerForPlugin(self)
+        WCLPluginTask.runTask(task, delegate:webWindowController)
+    }
+    
+    // MARK: Windows
+
+    func orderedWindows() -> [AnyObject]! {
+        return WCLWebWindowsController.sharedWebWindowsController().windowsForPlugin(self)
     }
 
 }

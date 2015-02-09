@@ -11,9 +11,9 @@
 @class WCLWebWindowController;
 
 @interface WCLWebWindowControllerTestsHelper : NSObject
-+ (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
-+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath;
-+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
+//+ (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
+//+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath;
+//+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
 + (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLWebWindowController *)webWindowController;
 + (void)blockUntilWindowHasAttachedSheet:(NSWindow *)window;
 + (void)blockUntilWindowIsVisible:(NSWindow *)window;

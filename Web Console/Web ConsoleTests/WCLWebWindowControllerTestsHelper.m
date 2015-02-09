@@ -15,44 +15,43 @@
 
 #import "WCLTaskTestsHelper.h"
 
-#import "WCLPlugin.h"
-#import "WCLPlugin+Tests.h"
+//#import "Web_Console-Swift.h"
 
 @implementation WCLWebWindowControllerTestsHelper
 
 
 #pragma mark - Running Tasks
 
-+ (NSTask *)taskRunningCommandPath:(NSString *)commandPath
-{
-    NSTask *task;
-    (void)[self webWindowControllerRunningCommandPath:commandPath task:&task];
-    return task;
-}
-
-+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath
-{
-    return [self webWindowControllerRunningCommandPath:commandPath task:nil];
-}
-
-+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
-{
-    WCLPlugin *plugin = [[WCLPlugin alloc] init];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
-    
-    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
-    WCLWebWindowController *webWindowController = webWindowControllers[0];
-    NSAssert([webWindowController hasTasks], @"The WCLWebWindowController should have an NSTask.");
-    
-    if (task) {
-        *task = webWindowController.tasks[0];
-    }
-
-    [WCLTaskTestsHelper blockUntilTaskIsRunning:webWindowController.tasks[0]];
-    
-    return webWindowController;
-}
+//+ (NSTask *)taskRunningCommandPath:(NSString *)commandPath
+//{
+//    NSTask *task;
+//    (void)[self webWindowControllerRunningCommandPath:commandPath task:&task];
+//    return task;
+//}
+//
+//+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath
+//{
+//    return [self webWindowControllerRunningCommandPath:commandPath task:nil];
+//}
+//
+//+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
+//{
+//    WCLPlugin *plugin = [[WCLPlugin alloc] init];
+//    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
+//    
+//    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+//    NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
+//    WCLWebWindowController *webWindowController = webWindowControllers[0];
+//    NSAssert([webWindowController hasTasks], @"The WCLWebWindowController should have an NSTask.");
+//    
+//    if (task) {
+//        *task = webWindowController.tasks[0];
+//    }
+//
+//    [WCLTaskTestsHelper blockUntilTaskIsRunning:webWindowController.tasks[0]];
+//    
+//    return webWindowController;
+//}
 
 + (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLWebWindowController *)webWindowController
 {

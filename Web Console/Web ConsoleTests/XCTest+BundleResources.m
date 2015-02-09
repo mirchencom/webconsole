@@ -8,9 +8,9 @@
 
 #import "XCTest+BundleResources.h"
 
-#import "WCLPluginManager.h"
-#import "WCLPlugin.h"
-#define kSharedTestResourcesPluginName @"Shared Test Resources"
+#import "Web_Console-Swift.h"
+#import "Web_ConsoleTestsConstants.h"
+
 
 @implementation XCTestCase (BundleResources)
 
@@ -43,7 +43,7 @@
 
 + (NSURL *)wcl_URLForSharedTestResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory
 {
-    WCLPlugin *plugin = [[WCLPluginManager sharedPluginManager] pluginWithName:kSharedTestResourcesPluginName];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kSharedTestResourcesPluginName];
     NSURL *resourceURL = [plugin resourceURL];
     
     return [[[resourceURL URLByAppendingPathComponent:subdirectory]
