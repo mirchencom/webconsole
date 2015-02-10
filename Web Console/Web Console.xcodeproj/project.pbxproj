@@ -61,6 +61,7 @@
 		456241121A8991A70047F085 /* WCLAppleScriptPluginWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */; };
 		456492FF191C656D00BA048E /* IRB.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
 		45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
+		45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
 		457F795518B0062500D705C8 /* Shared Test Resources.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */; };
 		457F795718B0065E00D705C8 /* Coffee.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795218B005BF00D705C8 /* Coffee.wcplugin */; };
@@ -169,6 +170,13 @@
 			remoteGlobalIDString = 4530B0CB1736E2A6000A52E2;
 			remoteInfo = "Web Console";
 		};
+		45729EBE1A89A270001ECC4C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4530B0C41736E2A6000A52E2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4530B0CB1736E2A6000A52E2;
+			remoteInfo = "Web Console";
+		};
 		459EC9261A8997C10098A47B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4530B0C41736E2A6000A52E2 /* Project object */;
@@ -257,6 +265,9 @@
 		456241101A8991A70047F085 /* WCLAppleScriptPluginWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLAppleScriptPluginWrapper.h; sourceTree = "<group>"; };
 		456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLAppleScriptPluginWrapper.m; sourceTree = "<group>"; };
 		456492FE191C656D00BA048E /* IRB.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = IRB.wcplugin; sourceTree = "<group>"; };
+		45729EB81A89A270001ECC4C /* PreferencesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PreferencesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45729EBB1A89A270001ECC4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPreferencesWindowControllerTests.m; sourceTree = "<group>"; };
 		4574725617DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLApplicationTerminationHelper.h; sourceTree = "<group>"; };
 		4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLApplicationTerminationHelper.m; sourceTree = "<group>"; };
 		457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Shared Test Resources.wcplugin"; sourceTree = "<group>"; };
@@ -386,6 +397,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45729EB51A89A270001ECC4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		459EC91D1A8997C10098A47B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,6 +422,7 @@
 				4530B0F21736E2A6000A52E2 /* Web ConsoleTests */,
 				459EC9211A8997C10098A47B /* PluginManagerTests */,
 				455FD2391A899C7600ACE1D4 /* FileSystemTests */,
+				45729EB91A89A270001ECC4C /* PreferencesTests */,
 				4530B0CE1736E2A6000A52E2 /* Frameworks */,
 				4530B0CD1736E2A6000A52E2 /* Products */,
 			);
@@ -416,6 +435,7 @@
 				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */,
 				459EC9201A8997C10098A47B /* PluginManagerTests.xctest */,
 				455FD2381A899C7600ACE1D4 /* FileSystemTests.xctest */,
+				45729EB81A89A270001ECC4C /* PreferencesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -528,6 +548,23 @@
 			isa = PBXGroup;
 			children = (
 				455FD23B1A899C7600ACE1D4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		45729EB91A89A270001ECC4C /* PreferencesTests */ = {
+			isa = PBXGroup;
+			children = (
+				45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */,
+				45729EBA1A89A270001ECC4C /* Supporting Files */,
+			);
+			path = PreferencesTests;
+			sourceTree = "<group>";
+		};
+		45729EBA1A89A270001ECC4C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				45729EBB1A89A270001ECC4C /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -811,6 +848,24 @@
 			productReference = 455FD2381A899C7600ACE1D4 /* FileSystemTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		45729EB71A89A270001ECC4C /* PreferencesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45729EC21A89A270001ECC4C /* Build configuration list for PBXNativeTarget "PreferencesTests" */;
+			buildPhases = (
+				45729EB41A89A270001ECC4C /* Sources */,
+				45729EB51A89A270001ECC4C /* Frameworks */,
+				45729EB61A89A270001ECC4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45729EBF1A89A270001ECC4C /* PBXTargetDependency */,
+			);
+			name = PreferencesTests;
+			productName = PreferencesTests;
+			productReference = 45729EB81A89A270001ECC4C /* PreferencesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		459EC91F1A8997C10098A47B /* PluginManagerTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 459EC92A1A8997C10098A47B /* Build configuration list for PBXNativeTarget "PluginManagerTests" */;
@@ -846,6 +901,10 @@
 						CreatedOnToolsVersion = 6.1.1;
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
 					};
+					45729EB71A89A270001ECC4C = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 4530B0CB1736E2A6000A52E2;
+					};
 					459EC91F1A8997C10098A47B = {
 						CreatedOnToolsVersion = 6.1.1;
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
@@ -868,6 +927,7 @@
 				4530B0EB1736E2A6000A52E2 /* Web ConsoleTests */,
 				459EC91F1A8997C10098A47B /* PluginManagerTests */,
 				455FD2371A899C7600ACE1D4 /* FileSystemTests */,
+				45729EB71A89A270001ECC4C /* PreferencesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -905,6 +965,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				455FD25A1A899CDE00ACE1D4 /* HTML.wcplugin in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45729EB61A89A270001ECC4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1040,6 +1107,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45729EB41A89A270001ECC4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		459EC91C1A8997C10098A47B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1093,6 +1168,11 @@
 			isa = PBXTargetDependency;
 			target = 4530B0CB1736E2A6000A52E2 /* Web Console */;
 			targetProxy = 455FD23E1A899C7600ACE1D4 /* PBXContainerItemProxy */;
+		};
+		45729EBF1A89A270001ECC4C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4530B0CB1736E2A6000A52E2 /* Web Console */;
+			targetProxy = 45729EBE1A89A270001ECC4C /* PBXContainerItemProxy */;
 		};
 		459EC9271A8997C10098A47B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1331,6 +1411,66 @@
 			};
 			name = Release;
 		};
+		45729EC01A89A270001ECC4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = PreferencesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
+			};
+			name = Debug;
+		};
+		45729EC11A89A270001ECC4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = PreferencesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
+			};
+			name = Release;
+		};
 		459EC9281A8997C10098A47B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1431,6 +1571,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		45729EC21A89A270001ECC4C /* Build configuration list for PBXNativeTarget "PreferencesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45729EC01A89A270001ECC4C /* Debug */,
+				45729EC11A89A270001ECC4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		459EC92A1A8997C10098A47B /* Build configuration list for PBXNativeTarget "PluginManagerTests" */ = {
 			isa = XCConfigurationList;
