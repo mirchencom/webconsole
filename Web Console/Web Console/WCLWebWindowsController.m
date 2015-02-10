@@ -47,7 +47,7 @@
     return [self.mutableWebWindowControllers copy];
 }
 
-- (WCLWebWindowController *)addedWebWindowControllerForPlugin:(WCLPlugin *)plugin
+- (WCLWebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin
 {
     WCLWebWindowController *webWindowController = [self addedWebWindowController];
     webWindowController.plugin = plugin;
@@ -76,7 +76,7 @@
     return [self.mutableWebWindowControllers filteredArrayUsingPredicate:pluginPredicate];
 }
 
-- (NSArray *)windowsForPlugin:(WCLPlugin *)plugin
+- (NSArray *)windowsForPlugin:(Plugin *)plugin
 {
     NSArray *pluginWebWindowControllers = [self webWindowControllersForPlugin:plugin];
     
