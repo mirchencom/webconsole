@@ -21,6 +21,38 @@
 		453AD8AF188235CC0039A3A9 /* WCLPluginTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
+		455FD24B1A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2431A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift */; };
+		455FD24C1A899C9B00ACE1D4 /* PluginsDataControllerEventTestCase+FileSystemHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2441A899C9B00ACE1D4 /* PluginsDataControllerEventTestCase+FileSystemHelpers.swift */; };
+		455FD24D1A899C9B00ACE1D4 /* PluginsDataControllerFileSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2451A899C9B00ACE1D4 /* PluginsDataControllerFileSystemTests.swift */; };
+		455FD24E1A899C9B00ACE1D4 /* PluginsDirectoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2461A899C9B00ACE1D4 /* PluginsDirectoryManagerTests.swift */; };
+		455FD24F1A899C9B00ACE1D4 /* PluginsManagerFileSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2471A899C9B00ACE1D4 /* PluginsManagerFileSystemTests.swift */; };
+		455FD2501A899C9B00ACE1D4 /* PluginsPathHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2481A899C9B00ACE1D4 /* PluginsPathHelperTests.swift */; };
+		455FD2511A899C9B00ACE1D4 /* SubprocessFileSystemModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2491A899C9B00ACE1D4 /* SubprocessFileSystemModifier.swift */; };
+		455FD2521A899C9B00ACE1D4 /* WCLDirectoryWatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD24A1A899C9B00ACE1D4 /* WCLDirectoryWatcherTests.swift */; };
+		455FD2531A899CA600ACE1D4 /* PluginsDataControllerEventTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9331A89981E0098A47B /* PluginsDataControllerEventTestCase.swift */; };
+		455FD2541A899CB200ACE1D4 /* PluginsManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9361A89981E0098A47B /* PluginsManagerTestCase.swift */; };
+		455FD2551A899CB200ACE1D4 /* TemporaryDirectoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9391A89981E0098A47B /* TemporaryDirectoryTestCase.swift */; };
+		455FD2561A899CB200ACE1D4 /* TemporaryPluginsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93A1A89981E0098A47B /* TemporaryPluginsTestCase.swift */; };
+		455FD2571A899CB200ACE1D4 /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93B1A89981E0098A47B /* TestConstants.swift */; };
+		455FD2581A899CB600ACE1D4 /* WCLKeyValueObservingTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93F1A89981E0098A47B /* WCLKeyValueObservingTestsHelper.m */; };
+		455FD2591A899CB900ACE1D4 /* XCTest+BundleResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9401A89981E0098A47B /* XCTest+BundleResources.swift */; };
+		455FD25A1A899CDE00ACE1D4 /* HTML.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 457F795018B005BF00D705C8 /* HTML.wcplugin */; };
+		455FD25B1A899D3A00ACE1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E531A87EB6D00E4BEFA /* Constants.swift */; };
+		455FD25C1A899D3A00ACE1D4 /* NSError+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E541A87EB6D00E4BEFA /* NSError+Helper.swift */; };
+		455FD25D1A899D3A00ACE1D4 /* FileExtensionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E201A87E4E600E4BEFA /* FileExtensionsController.swift */; };
+		455FD25E1A899D3A00ACE1D4 /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E221A87E4E600E4BEFA /* Plugin.swift */; };
+		455FD25F1A899D3A00ACE1D4 /* Plugin+Equality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E231A87E4E600E4BEFA /* Plugin+Equality.swift */; };
+		455FD2601A899D3A00ACE1D4 /* Plugin+Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E241A87E4E600E4BEFA /* Plugin+Initialization.swift */; };
+		455FD2611A899D3A00ACE1D4 /* Plugin+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E251A87E4E600E4BEFA /* Plugin+Validation.swift */; };
+		455FD2621A899D3A00ACE1D4 /* WCLPlugin+PluginsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E351A87E4E600E4BEFA /* WCLPlugin+PluginsManager.swift */; };
+		455FD2631A899D3A00ACE1D4 /* MultiCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E211A87E4E600E4BEFA /* MultiCollectionController.swift */; };
+		455FD2641A899D3A00ACE1D4 /* DuplicatePluginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E1F1A87E4E600E4BEFA /* DuplicatePluginController.swift */; };
+		455FD2651A899D3A00ACE1D4 /* CopyDirectoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E1E1A87E4E600E4BEFA /* CopyDirectoryController.swift */; };
+		455FD2661A899D3A00ACE1D4 /* PluginsDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E261A87E4E600E4BEFA /* PluginsDataController.swift */; };
+		455FD2671A899D3A00ACE1D4 /* PluginsDataController+Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E271A87E4E600E4BEFA /* PluginsDataController+Paths.swift */; };
+		455FD2681A899D3A00ACE1D4 /* PluginsDirectoryEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E281A87E4E600E4BEFA /* PluginsDirectoryEventHandler.swift */; };
+		455FD2691A899D3A00ACE1D4 /* PluginsDirectoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E291A87E4E600E4BEFA /* PluginsDirectoryManager.swift */; };
+		455FD26A1A899D3A00ACE1D4 /* PluginsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E2A1A87E4E600E4BEFA /* PluginsManager.swift */; };
 		4562410F1A88683C0047F085 /* WCLWebWindowControllerPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4562410E1A88683C0047F085 /* WCLWebWindowControllerPluginTests.m */; };
 		456241121A8991A70047F085 /* WCLAppleScriptPluginWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */; };
 		456492FF191C656D00BA048E /* IRB.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
@@ -126,6 +158,13 @@
 			remoteGlobalIDString = 4530B0CB1736E2A6000A52E2;
 			remoteInfo = "Web Console";
 		};
+		455FD23E1A899C7600ACE1D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4530B0C41736E2A6000A52E2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4530B0CB1736E2A6000A52E2;
+			remoteInfo = "Web Console";
+		};
 		459EC9261A8997C10098A47B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4530B0C41736E2A6000A52E2 /* Project object */;
@@ -193,6 +232,16 @@
 		455B0C081771627A007B75DD /* WCLDoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLDoJavaScriptCommand.h; sourceTree = "<group>"; };
 		455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLDoJavaScriptCommand.m; sourceTree = "<group>"; };
 		455B0C0B177162F0007B75DD /* WebConsoleConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsoleConstants.h; sourceTree = "<group>"; };
+		455FD2381A899C7600ACE1D4 /* FileSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		455FD23B1A899C7600ACE1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		455FD2431A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesAndPluginsDirectoryManagerTests.swift; sourceTree = "<group>"; };
+		455FD2441A899C9B00ACE1D4 /* PluginsDataControllerEventTestCase+FileSystemHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PluginsDataControllerEventTestCase+FileSystemHelpers.swift"; sourceTree = "<group>"; };
+		455FD2451A899C9B00ACE1D4 /* PluginsDataControllerFileSystemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginsDataControllerFileSystemTests.swift; sourceTree = "<group>"; };
+		455FD2461A899C9B00ACE1D4 /* PluginsDirectoryManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginsDirectoryManagerTests.swift; sourceTree = "<group>"; };
+		455FD2471A899C9B00ACE1D4 /* PluginsManagerFileSystemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginsManagerFileSystemTests.swift; sourceTree = "<group>"; };
+		455FD2481A899C9B00ACE1D4 /* PluginsPathHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginsPathHelperTests.swift; sourceTree = "<group>"; };
+		455FD2491A899C9B00ACE1D4 /* SubprocessFileSystemModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubprocessFileSystemModifier.swift; sourceTree = "<group>"; };
+		455FD24A1A899C9B00ACE1D4 /* WCLDirectoryWatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCLDirectoryWatcherTests.swift; sourceTree = "<group>"; };
 		4561C2271874C01700CF926D /* NSRectHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSRectHelpers.h; sourceTree = "<group>"; };
 		4562410E1A88683C0047F085 /* WCLWebWindowControllerPluginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerPluginTests.m; sourceTree = "<group>"; };
 		456241101A8991A70047F085 /* WCLAppleScriptPluginWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLAppleScriptPluginWrapper.h; sourceTree = "<group>"; };
@@ -320,6 +369,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		455FD2351A899C7600ACE1D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		459EC91D1A8997C10098A47B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -337,6 +393,7 @@
 				4530B0D51736E2A6000A52E2 /* Web Console */,
 				4530B0F21736E2A6000A52E2 /* Web ConsoleTests */,
 				459EC9211A8997C10098A47B /* PluginManagerTests */,
+				455FD2391A899C7600ACE1D4 /* FileSystemTests */,
 				4530B0CE1736E2A6000A52E2 /* Frameworks */,
 				4530B0CD1736E2A6000A52E2 /* Products */,
 			);
@@ -348,6 +405,7 @@
 				4530B0CC1736E2A6000A52E2 /* Web Console.app */,
 				4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */,
 				459EC9201A8997C10098A47B /* PluginManagerTests.xctest */,
+				455FD2381A899C7600ACE1D4 /* FileSystemTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -436,6 +494,30 @@
 			children = (
 				4530B0F41736E2A6000A52E2 /* Web ConsoleTests-Info.plist */,
 				4530B0F51736E2A6000A52E2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		455FD2391A899C7600ACE1D4 /* FileSystemTests */ = {
+			isa = PBXGroup;
+			children = (
+				455FD2431A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift */,
+				455FD2441A899C9B00ACE1D4 /* PluginsDataControllerEventTestCase+FileSystemHelpers.swift */,
+				455FD2451A899C9B00ACE1D4 /* PluginsDataControllerFileSystemTests.swift */,
+				455FD2461A899C9B00ACE1D4 /* PluginsDirectoryManagerTests.swift */,
+				455FD2471A899C9B00ACE1D4 /* PluginsManagerFileSystemTests.swift */,
+				455FD2481A899C9B00ACE1D4 /* PluginsPathHelperTests.swift */,
+				455FD2491A899C9B00ACE1D4 /* SubprocessFileSystemModifier.swift */,
+				455FD24A1A899C9B00ACE1D4 /* WCLDirectoryWatcherTests.swift */,
+				455FD23A1A899C7600ACE1D4 /* Supporting Files */,
+			);
+			path = FileSystemTests;
+			sourceTree = "<group>";
+		};
+		455FD23A1A899C7600ACE1D4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				455FD23B1A899C7600ACE1D4 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -695,6 +777,24 @@
 			productReference = 4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		455FD2371A899C7600ACE1D4 /* FileSystemTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 455FD2421A899C7600ACE1D4 /* Build configuration list for PBXNativeTarget "FileSystemTests" */;
+			buildPhases = (
+				455FD2341A899C7600ACE1D4 /* Sources */,
+				455FD2351A899C7600ACE1D4 /* Frameworks */,
+				455FD2361A899C7600ACE1D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				455FD23F1A899C7600ACE1D4 /* PBXTargetDependency */,
+			);
+			name = FileSystemTests;
+			productName = FileSystemTests;
+			productReference = 455FD2381A899C7600ACE1D4 /* FileSystemTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		459EC91F1A8997C10098A47B /* PluginManagerTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 459EC92A1A8997C10098A47B /* Build configuration list for PBXNativeTarget "PluginManagerTests" */;
@@ -726,6 +826,10 @@
 					4530B0EB1736E2A6000A52E2 = {
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
 					};
+					455FD2371A899C7600ACE1D4 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 4530B0CB1736E2A6000A52E2;
+					};
 					459EC91F1A8997C10098A47B = {
 						CreatedOnToolsVersion = 6.1.1;
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
@@ -747,6 +851,7 @@
 				4530B0CB1736E2A6000A52E2 /* Web Console */,
 				4530B0EB1736E2A6000A52E2 /* Web ConsoleTests */,
 				459EC91F1A8997C10098A47B /* PluginManagerTests */,
+				455FD2371A899C7600ACE1D4 /* FileSystemTests */,
 			);
 		};
 /* End PBXProject section */
@@ -774,6 +879,14 @@
 			files = (
 				4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */,
 				45898BB21785325B00AE365A /* Data in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		455FD2361A899C7600ACE1D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				455FD25A1A899CDE00ACE1D4 /* HTML.wcplugin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,6 +982,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		455FD2341A899C7600ACE1D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				455FD25F1A899D3A00ACE1D4 /* Plugin+Equality.swift in Sources */,
+				455FD2571A899CB200ACE1D4 /* TestConstants.swift in Sources */,
+				455FD2551A899CB200ACE1D4 /* TemporaryDirectoryTestCase.swift in Sources */,
+				455FD2611A899D3A00ACE1D4 /* Plugin+Validation.swift in Sources */,
+				455FD2601A899D3A00ACE1D4 /* Plugin+Initialization.swift in Sources */,
+				455FD24F1A899C9B00ACE1D4 /* PluginsManagerFileSystemTests.swift in Sources */,
+				455FD2531A899CA600ACE1D4 /* PluginsDataControllerEventTestCase.swift in Sources */,
+				455FD2501A899C9B00ACE1D4 /* PluginsPathHelperTests.swift in Sources */,
+				455FD2681A899D3A00ACE1D4 /* PluginsDirectoryEventHandler.swift in Sources */,
+				455FD2621A899D3A00ACE1D4 /* WCLPlugin+PluginsManager.swift in Sources */,
+				455FD24C1A899C9B00ACE1D4 /* PluginsDataControllerEventTestCase+FileSystemHelpers.swift in Sources */,
+				455FD2511A899C9B00ACE1D4 /* SubprocessFileSystemModifier.swift in Sources */,
+				455FD25D1A899D3A00ACE1D4 /* FileExtensionsController.swift in Sources */,
+				455FD25B1A899D3A00ACE1D4 /* Constants.swift in Sources */,
+				455FD2671A899D3A00ACE1D4 /* PluginsDataController+Paths.swift in Sources */,
+				455FD2561A899CB200ACE1D4 /* TemporaryPluginsTestCase.swift in Sources */,
+				455FD24B1A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift in Sources */,
+				455FD2541A899CB200ACE1D4 /* PluginsManagerTestCase.swift in Sources */,
+				455FD25E1A899D3A00ACE1D4 /* Plugin.swift in Sources */,
+				455FD2591A899CB900ACE1D4 /* XCTest+BundleResources.swift in Sources */,
+				455FD2581A899CB600ACE1D4 /* WCLKeyValueObservingTestsHelper.m in Sources */,
+				455FD2521A899C9B00ACE1D4 /* WCLDirectoryWatcherTests.swift in Sources */,
+				455FD2641A899D3A00ACE1D4 /* DuplicatePluginController.swift in Sources */,
+				455FD25C1A899D3A00ACE1D4 /* NSError+Helper.swift in Sources */,
+				455FD2661A899D3A00ACE1D4 /* PluginsDataController.swift in Sources */,
+				455FD2631A899D3A00ACE1D4 /* MultiCollectionController.swift in Sources */,
+				455FD26A1A899D3A00ACE1D4 /* PluginsManager.swift in Sources */,
+				455FD2691A899D3A00ACE1D4 /* PluginsDirectoryManager.swift in Sources */,
+				455FD24E1A899C9B00ACE1D4 /* PluginsDirectoryManagerTests.swift in Sources */,
+				455FD2651A899D3A00ACE1D4 /* CopyDirectoryController.swift in Sources */,
+				455FD24D1A899C9B00ACE1D4 /* PluginsDataControllerFileSystemTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		459EC91C1A8997C10098A47B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -917,6 +1068,11 @@
 			isa = PBXTargetDependency;
 			target = 4530B0CB1736E2A6000A52E2 /* Web Console */;
 			targetProxy = 4530B0F01736E2A6000A52E2 /* PBXContainerItemProxy */;
+		};
+		455FD23F1A899C7600ACE1D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4530B0CB1736E2A6000A52E2 /* Web Console */;
+			targetProxy = 455FD23E1A899C7600ACE1D4 /* PBXContainerItemProxy */;
 		};
 		459EC9271A8997C10098A47B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1095,6 +1251,66 @@
 			};
 			name = Release;
 		};
+		455FD2401A899C7600ACE1D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = FileSystemTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
+			};
+			name = Debug;
+		};
+		455FD2411A899C7600ACE1D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = FileSystemTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
+			};
+			name = Release;
+		};
 		459EC9281A8997C10098A47B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1187,6 +1403,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		455FD2421A899C7600ACE1D4 /* Build configuration list for PBXNativeTarget "FileSystemTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				455FD2401A899C7600ACE1D4 /* Debug */,
+				455FD2411A899C7600ACE1D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		459EC92A1A8997C10098A47B /* Build configuration list for PBXNativeTarget "PluginManagerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1194,6 +1418,7 @@
 				459EC9291A8997C10098A47B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
