@@ -58,10 +58,10 @@ class Plugin: WCLPlugin {
     
     // MARK: Paths
 
-    internal var resourcePath: String? {
+    var resourcePath: String? {
         return bundle.resourcePath
     }
-    internal var resourceURL: NSURL? {
+    var resourceURL: NSURL? {
         if let path = resourcePath {
             return NSURL.fileURLWithPath(path)
         }

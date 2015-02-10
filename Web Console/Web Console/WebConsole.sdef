@@ -246,7 +246,7 @@
 		</class>
 
         <class name="plugin" code="plgn" description="A Web Console plugin.">
-			<cocoa class="WCLPlugin"/>
+			<cocoa class="WCLAppleScriptPluginWrapper"/>
 			<property name="name" code="pnam" type="text" access="r">
 				<cocoa key="name"/>
 			</property>
@@ -326,11 +326,9 @@
 			</parameter>
 
         </command>
-		<!-- TODO: Implement -->
-        <!-- <command name="load plugin" code="loadplgn" description="Load a plugin from a file.">
+        <command name="load plugin" code="loadplgn" description="Load a plugin from a file.">
             <direct-parameter type="file" description="The plugin file to load." />
             <result type="plugin" description="The loaded plugin." />
-		</command> -->
-        
+		</command>        
     </suite>
 </dictionary>

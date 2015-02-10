@@ -86,22 +86,6 @@
     return valid;
 }
 
-#pragma mark - AppleScript
-
-- (NSScriptObjectSpecifier *)objectSpecifier
-{
-    NSScriptClassDescription *containerClassDescription = (NSScriptClassDescription *)[NSScriptClassDescription classDescriptionForClass:[NSApp class]];
-	return [[NSNameSpecifier alloc] initWithContainerClassDescription:containerClassDescription
-                                                   containerSpecifier:nil
-                                                                  key:@"plugins"
-                                                                 name:self.name];
-}
-
-- (NSString *)name
-{
-    NSAssert(NO, @"Subclass must override");
-    return nil;
-}
 
 
 
@@ -133,6 +117,12 @@
 	NSDictionary *argumentsDictionary = [command evaluatedArguments];
     NSString *text = [argumentsDictionary objectForKey:kTextKey];
     [self readFromStandardInput:text];
+}
+
+- (NSString *)name
+{
+    NSAssert(NO, @"Subclass must override");
+    return nil;
 }
 
 - (void)readFromStandardInput:(NSString *)text
