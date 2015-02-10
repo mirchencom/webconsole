@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Roben Kleene. All rights reserved.
 //
 
-#import "Web Console-Bridging-Header.h"
+#import "Web_Console-Bridging-Header.h"
 #import "WCLKeyValueObservingTestsHelper.h"
 #import "WCLFileExtension.h"
 #import "WCLFileExtension+Tests.h"

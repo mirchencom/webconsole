@@ -1,5 +1,5 @@
 //
-//  Web Console-Bridging-Header.h
+//  Web_Console-Bridging-Header.h
 //  Web Console
 //
 //  Created by Roben Kleene on 2/8/15.

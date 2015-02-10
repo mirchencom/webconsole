@@ -238,7 +238,7 @@
 		45914E351A87E4E600E4BEFA /* WCLPlugin+PluginsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WCLPlugin+PluginsManager.swift"; sourceTree = "<group>"; };
 		45914E361A87E4E600E4BEFA /* WCLPlugin+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WCLPlugin+Validation.h"; sourceTree = "<group>"; };
 		45914E371A87E4E600E4BEFA /* WCLPlugin+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WCLPlugin+Validation.m"; sourceTree = "<group>"; };
-		45914E521A87E8E700E4BEFA /* Web Console-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Web Console-Bridging-Header.h"; sourceTree = "<group>"; };
+		45914E521A87E8E700E4BEFA /* Web_Console-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Web_Console-Bridging-Header.h"; sourceTree = "<group>"; };
 		45914E531A87EB6D00E4BEFA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45914E541A87EB6D00E4BEFA /* NSError+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Helper.swift"; sourceTree = "<group>"; };
 		459389E718FB20D900E0218E /* WCLEnvironmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLEnvironmentViewController.h; sourceTree = "<group>"; };
@@ -384,7 +384,7 @@
 				459389E618FB1F5700E0218E /* Tasks */,
 				459389F118FB20EC00E0218E /* Preferences */,
 				4530B0D61736E2A6000A52E2 /* Supporting Files */,
-				45914E521A87E8E700E4BEFA /* Web Console-Bridging-Header.h */,
+				45914E521A87E8E700E4BEFA /* Web_Console-Bridging-Header.h */,
 			);
 			path = "Web Console";
 			sourceTree = "<group>";
@@ -991,7 +991,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "Web Console/Web Console-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Web Console/Web_Console-Bridging-Header.h";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1019,7 +1019,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "Web Console/Web Console-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Web Console/Web_Console-Bridging-Header.h";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
