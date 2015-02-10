@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		4502BCE3177D159900F0A5C2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */; };
+		4521E9D61A89A1780075D330 /* WCLFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D11A89A1780075D330 /* WCLFilesViewController.m */; };
+		4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D21A89A1780075D330 /* WCLFilesViewController.xib */; };
+		4521E9D81A89A1780075D330 /* WCLPluginsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D41A89A1780075D330 /* WCLPluginsViewController.m */; };
+		4521E9D91A89A1780075D330 /* WCLPluginsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D51A89A1780075D330 /* WCLPluginsViewController.xib */; };
 		4530B0D01736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0DA1736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0D81736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B0DC1736E2A6000A52E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0DB1736E2A6000A52E2 /* main.m */; };
@@ -208,6 +212,12 @@
 		451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTest+BundleResources.h"; sourceTree = "<group>"; };
 		451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTest+BundleResources.m"; sourceTree = "<group>"; };
 		451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_ConsoleTestsConstants.h; sourceTree = "<group>"; };
+		4521E9D01A89A1780075D330 /* WCLFilesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLFilesViewController.h; sourceTree = "<group>"; };
+		4521E9D11A89A1780075D330 /* WCLFilesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLFilesViewController.m; sourceTree = "<group>"; };
+		4521E9D21A89A1780075D330 /* WCLFilesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WCLFilesViewController.xib; sourceTree = "<group>"; };
+		4521E9D31A89A1780075D330 /* WCLPluginsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPluginsViewController.h; sourceTree = "<group>"; };
+		4521E9D41A89A1780075D330 /* WCLPluginsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginsViewController.m; sourceTree = "<group>"; };
+		4521E9D51A89A1780075D330 /* WCLPluginsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WCLPluginsViewController.xib; sourceTree = "<group>"; };
 		4530B0CC1736E2A6000A52E2 /* Web Console.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Web Console.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0CF1736E2A6000A52E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4530B0D21736E2A6000A52E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -680,6 +690,12 @@
 		459389F118FB20EC00E0218E /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				4521E9D01A89A1780075D330 /* WCLFilesViewController.h */,
+				4521E9D11A89A1780075D330 /* WCLFilesViewController.m */,
+				4521E9D21A89A1780075D330 /* WCLFilesViewController.xib */,
+				4521E9D31A89A1780075D330 /* WCLPluginsViewController.h */,
+				4521E9D41A89A1780075D330 /* WCLPluginsViewController.m */,
+				4521E9D51A89A1780075D330 /* WCLPluginsViewController.xib */,
 				459389E718FB20D900E0218E /* WCLEnvironmentViewController.h */,
 				459389E818FB20D900E0218E /* WCLEnvironmentViewController.m */,
 				459389E918FB20D900E0218E /* WCLEnvironmentViewController.xib */,
@@ -868,7 +884,9 @@
 				456492FF191C656D00BA048E /* IRB.wcplugin in Resources */,
 				4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */,
 				45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */,
+				4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */,
 				459389EE18FB20D900E0218E /* WCLEnvironmentViewController.xib in Resources */,
+				4521E9D91A89A1780075D330 /* WCLPluginsViewController.xib in Resources */,
 				45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -940,6 +958,8 @@
 				45898BB7178532EC00AE365A /* WCLPlugin.m in Sources */,
 				45914E381A87E4E600E4BEFA /* CopyDirectoryController.swift in Sources */,
 				45898BB8178532EC00AE365A /* WCLPluginsManager.m in Sources */,
+				4521E9D81A89A1780075D330 /* WCLPluginsViewController.m in Sources */,
+				4521E9D61A89A1780075D330 /* WCLFilesViewController.m in Sources */,
 				45914E411A87E4E600E4BEFA /* PluginsDataController+Paths.swift in Sources */,
 				45914E4A1A87E4E600E4BEFA /* WCLPlugin+PluginsManager.swift in Sources */,
 				4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */,
@@ -1410,6 +1430,7 @@
 				455FD2411A899C7600ACE1D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		459EC92A1A8997C10098A47B /* Build configuration list for PBXNativeTarget "PluginManagerTests" */ = {
 			isa = XCConfigurationList;

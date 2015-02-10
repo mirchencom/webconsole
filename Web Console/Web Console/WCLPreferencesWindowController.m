@@ -9,10 +9,8 @@
 #import "WCLPreferencesWindowController.h"
 
 #import "WCLEnvironmentViewController.h"
-
-#define kEnvironmentViewControllerNibName @"WCLEnvironmentViewController"
-#define kPluginViewControllerNibName @"WCLPluginViewController"
-#define kFilesViewControllerNibName @"WCLFilesViewController"
+#import "WCLPluginsViewController.h"
+#import "WCLFilesViewController.h"
 
 NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
 
@@ -30,6 +28,8 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
 - (NSViewController *)viewControllerForPreferencePane:(WCLPreferencePane)prefencePane;
 + (NSInteger)preferencePaneForViewController:(NSViewController *)viewController;
 @property (nonatomic, strong) WCLEnvironmentViewController *environmentViewController;
+@property (nonatomic, strong) WCLPluginsViewController *pluginsViewController;
+@property (nonatomic, strong) WCLFilesViewController *filesViewController;
 @end
 
 @implementation WCLPreferencesWindowController
@@ -58,10 +58,10 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
     [self.window setFrameUsingName:WCLPreferencesWindowFrameName];
 
     self.viewController = [self viewControllerForPreferencePane:self.preferencePane];
-
-// TODO: `setWantsLayer:YES` is required for subview animations, but it causes a display bug
-// on NSToolbarItem's selectable state
-//    [[[self window] contentView] setWantsLayer:YES];
+    
+    // TODO: `setWantsLayer:YES` is required for subview animations, but it causes a display bug
+    // on NSToolbarItem's selectable state
+    //    [[[self window] contentView] setWantsLayer:YES];
 }
 
 
@@ -245,6 +245,14 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
     if ([viewController isKindOfClass:[WCLEnvironmentViewController class]]) {
         return WCLPreferencePaneEnvironment;
     }
+
+    if ([viewController isKindOfClass:[WCLPluginsViewController class]]) {
+        return WCLPreferencePanePlugins;
+    }
+
+    if ([viewController isKindOfClass:[WCLFilesViewController class]]) {
+        return WCLPreferencePaneFiles;
+    }
     
     NSAssert(NO, @"No WCLPreferencePane for NSViewController. %@", viewController);
     return -1;
@@ -258,6 +266,12 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
         case WCLPreferencePaneEnvironment:
             viewController = self.environmentViewController;
             break;
+        case WCLPreferencePanePlugins:
+            viewController = self.pluginsViewController;
+            break;
+        case WCLPreferencePaneFiles:
+            viewController = self.filesViewController;
+            break;
         default:
             NSAssert(NO, @"No NSViewController for WCLPreferencePane. %li", (long)preferencePane);
             break;
@@ -266,13 +280,31 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
     return viewController;
 }
 
+- (WCLFilesViewController *)filesViewController
+{
+    if (_filesViewController) return _filesViewController;
+
+    _filesViewController = [[WCLFilesViewController alloc] init];
+    
+    return _filesViewController;
+}
+
 - (WCLEnvironmentViewController *)environmentViewController
 {
     if (_environmentViewController) return _environmentViewController;
-    
-    _environmentViewController = [[WCLEnvironmentViewController alloc] initWithNibName:kEnvironmentViewControllerNibName bundle:nil];
+
+    _environmentViewController = [[WCLEnvironmentViewController alloc] init];
     
     return _environmentViewController;
+}
+
+- (WCLPluginsViewController *)pluginsViewController
+{
+    if (_pluginsViewController) return _pluginsViewController;
+
+    _pluginsViewController = [[WCLPluginsViewController alloc] init];
+    
+    return _pluginsViewController;
 }
 
 @end

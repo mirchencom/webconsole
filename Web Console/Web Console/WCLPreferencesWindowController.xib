@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <deployment defaultVersion="1090" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5053"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WCLPreferencesWindowController">
@@ -28,9 +28,21 @@
                             <action selector="switchView:" target="-2" id="PLA-x7-hQ0"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="E2574EF6-8D5B-4529-BE7C-E1FE00FF3FCB" label="Plugins" paletteLabel="Plugins" tag="1" image="NSApplicationIcon" autovalidates="NO" selectable="YES" id="Zyw-Ec-deS">
+                        <connections>
+                            <action selector="switchView:" target="-2" id="zO8-ql-GfJ"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="90BEE560-AE1E-4EAF-AD23-2692DEF71A27" label="Files" paletteLabel="Files" tag="2" image="NSMultipleDocuments" autovalidates="NO" selectable="YES" id="O0P-3w-Dt7">
+                        <connections>
+                            <action selector="switchView:" target="-2" id="vZn-C3-eGd"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="1IL-9e-w1q"/>
+                    <toolbarItem reference="Zyw-Ec-deS"/>
+                    <toolbarItem reference="O0P-3w-Dt7"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
@@ -39,6 +51,8 @@
         </window>
     </objects>
     <resources>
+        <image name="NSApplicationIcon" width="128" height="128"/>
+        <image name="NSMultipleDocuments" width="32" height="32"/>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
     </resources>
 </document>

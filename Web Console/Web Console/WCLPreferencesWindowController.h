@@ -9,7 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 typedef NS_ENUM(NSInteger, WCLPreferencePane) {
-    WCLPreferencePaneEnvironment
+    WCLPreferencePaneEnvironment,
+    WCLPreferencePanePlugins,
+    WCLPreferencePaneFiles
 };
 
 #define kPreferencesWindowControllerNibName @"WCLPreferencesWindowController"

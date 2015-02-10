@@ -1,5 +1,5 @@
 //
-//  WCLEnvironmentViewController.h
+//  WCLPluginViewController.h
 //  PluginEditorPrototype
 //
 //  Created by Roben Kleene on 2/17/14.
@@ -8,6 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface WCLEnvironmentViewController : NSViewController
+@interface WCLPluginsViewController : NSViewController
 
 @end
