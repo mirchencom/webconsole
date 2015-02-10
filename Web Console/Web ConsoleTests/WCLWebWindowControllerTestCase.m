@@ -42,10 +42,11 @@
     
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
-    WCLWebWindowController *webWindowController = webWindowControllers[0];
+
+    // The last web window controller should be the newest created and therefore have the task we're looking for
+    WCLWebWindowController *webWindowController = webWindowControllers.lastObject;
     NSAssert([webWindowController hasTasks], @"The WCLWebWindowController should have an NSTask.");
 
-    // TODO: This is causing a problem with multiple web window controllers, since it's always returning the first task
     if (task) {
         *task = webWindowController.tasks[0];
     }

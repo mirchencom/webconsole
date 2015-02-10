@@ -12,7 +12,9 @@
 
 + (NSString *)informativeTextForCloseWindowForCommands:(NSArray *)commandPaths
 {
-    if (![commandPaths count]) return nil;
+    if (![commandPaths count]) {
+        return nil;
+    }
     
     NSMutableString *commandsText = [NSMutableString stringWithString:@""];
     for (NSString *commandPath in commandPaths) {

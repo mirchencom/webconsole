@@ -60,7 +60,9 @@
     [[self class] testInformativeText:informativeText forCommandPaths:commandPaths];
     
     NSArray *plugins = [[PluginsManager sharedInstance] plugins];
-    commandPaths = [plugins valueForKey:kPluginCommandPathKey];
+    NSMutableArray *mutableCommandPaths = [[plugins valueForKey:kPluginCommandPathKey] mutableCopy];
+    [mutableCommandPaths removeObjectIdenticalTo:[NSNull null]];
+    commandPaths = [mutableCommandPaths copy];
     informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
     [[self class] testInformativeText:informativeText forCommandPaths:commandPaths];
 }
@@ -224,7 +226,6 @@
     
     [plugin runWithArguments:nil inDirectoryPath:nil];
 
-    
     NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
     WCLWebWindowController *webWindowController = webWindowControllers[0];
