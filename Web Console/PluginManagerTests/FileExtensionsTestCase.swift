@@ -23,10 +23,9 @@ class FileExtensionsTestCase: PluginsManagerTestCase {
     
     override func setUp() {
         super.setUp()
-        emptyFileExtensions()
-        // Create the plugin manager
         let fileExtensionsController = FileExtensionsController(pluginsManager: PluginsManager.sharedInstance)
         FileExtensionsController.setOverrideSharedInstance(fileExtensionsController)
+        emptyFileExtensions()
     }
     
     override func tearDown() {
