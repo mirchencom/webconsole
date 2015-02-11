@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
@@ -132,9 +132,6 @@
                 <constraint firstAttribute="trailing" secondItem="zRm-B9-Vf6" secondAttribute="trailing" constant="20" id="mY8-jM-NFf"/>
                 <constraint firstItem="zRm-B9-Vf6" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="zCL-Qp-3UK"/>
             </constraints>
-            <connections>
-                <outlet property="tableView" destination="OTI-DZ-LbL" id="Nbo-v6-JZf"/>
-            </connections>
         </customView>
         <dictionaryController objectClassName="_NSControllerKeyValuePair" id="u5e-ay-6eS">
             <connections>
