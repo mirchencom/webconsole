@@ -10,5 +10,9 @@
 	<string>81400FC4-5B83-45E8-B2B2-83B2DC418B64</string>
 	<key>WCEditable</key>
 	<integer>0</integer>
+	<key>WCFileExtensions</key>
+	<array>
+		<string>md</string>
+	</array>
 </dict>
 </plist>
