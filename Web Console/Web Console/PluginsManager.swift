@@ -24,8 +24,6 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
             return overrideSharedInstance
         }
         
-        // TODO: Assert that the non-overridden instance is never returned when running tests?
-        
         return Singleton.instance
     }
 

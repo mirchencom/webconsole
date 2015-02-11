@@ -16,7 +16,7 @@
 
 @implementation WCLPluginManagerTests
 
-// TODO: Re-add this test?
+// TODO: Migrate this to PluginsManagerTests
 
 //- (void)testLoadPlugins
 //{

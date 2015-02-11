@@ -66,7 +66,7 @@
 
 - (void)testInterrupt
 {
-    // TODO: Right now there it isn't possible for a WCLWebWindowController to run multiple tasks, when this is possible, this test should be updated to use mutliple tasks.
+    // TODO: Right now there it isn't possible for a WCLWebWindowController to run multiple tasks, when this is possible, this test should be updated to use multiple tasks.
     
     NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                                ofType:kTestDataRubyExtension
