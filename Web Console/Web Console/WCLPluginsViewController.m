@@ -147,10 +147,15 @@
     [alert setMessageText:messageText];
     NSString *informativeText = [NSString stringWithFormat:@"The \"%@.%@\" package will be moved to the trash and the plugin will be removed from %@. This action cannot be undone.", pluginName, kPlugInExtension, kAppName];
     [alert setInformativeText:informativeText];
-    [alert beginSheetModalForWindow:self.view.window
-                      modalDelegate:self
-                     didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
-                        contextInfo:NULL];
+    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode != NSAlertFirstButtonReturn) return;
+        
+        NSArray *plugins = [self.pluginsArrayController selectedObjects];
+        
+        for (Plugin *plugin in plugins) {
+            [[PluginsManager sharedInstance] movePluginToTrash:plugin];
+        }
+    }];
 }
 
 - (IBAction)openPlugin:(id)sender
@@ -158,17 +163,6 @@
     NSArray *plugins = [self.pluginsArrayController selectedObjects];
     for (Plugin *plugin in plugins) {
         [plugin open];
-    }
-}
-
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-    if (returnCode != NSAlertFirstButtonReturn) return;
-
-    NSArray *plugins = [self.pluginsArrayController selectedObjects];
-
-    for (Plugin *plugin in plugins) {
-        [[PluginsManager sharedInstance] movePluginToTrash:plugin];
     }
 }
 
