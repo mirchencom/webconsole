@@ -28,12 +28,7 @@
 
 - (void)testResizingAndCascadingWindows
 {
-//    NSURL *pluginURL = [[self class] wcl_URLForSharedTestResource:kTestPrintPluginName
-//                                                    withExtension:kPlugInExtension
-//                                                     subdirectory:kSharedTestResourcesPluginSubdirectory];
-//    Plugin *plugin = [[PluginsManager sharedInstance] addedPluginAtURL:pluginURL];
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
-
     
     // The plugin needs a name for saved frames to work
     XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");

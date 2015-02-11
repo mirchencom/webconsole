@@ -113,7 +113,7 @@
     }
     XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
     
-    // TODO: If I can figure out a way to run a script that doesn't interrupt, then put the terminate here
+    // TODO: If there's a a way to run a script that doesn't interrupt, then put the terminate here
     
     XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
     XCTAssertFalse([webWindowController hasTasks], @"The WCLWebWindowController should not have any NSTasks.");
