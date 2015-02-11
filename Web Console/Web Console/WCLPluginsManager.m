@@ -34,6 +34,13 @@
     
     if (identifier) {
         plugin = [self pluginWithIdentifier:identifier];
+        if (!plugin) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDefaultNewPluginIdentifierKey];
+        }
+    }
+
+    if (!plugin) {
+        plugin = [self pluginWithName:kInitialDefaultNewPluginName];
     }
     
     _defaultNewPlugin = plugin;
@@ -70,6 +77,13 @@
     NSAssert(NO, @"Implemented in superclass");
     return nil;
 }
+
+- (Plugin *)pluginWithName:(NSString *)name
+{
+    NSAssert(NO, @"Implemented in superclass");
+    return nil;
+}
+
 
 #pragma mark Required Key-Value Coding To-Many Relationship Compliance
 
