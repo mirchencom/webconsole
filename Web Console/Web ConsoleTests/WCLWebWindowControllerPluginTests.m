@@ -39,7 +39,7 @@
     NSTask *task;
     WCLWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
                                                                                                  task:&task];
-    WCLPlugin *plugin = webWindowController.plugin;
+    Plugin *plugin = webWindowController.plugin;
     
     static NSString *StandardInputText = @"Test String";
     

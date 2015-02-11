@@ -13,8 +13,4 @@
 #pragma mark Validation
 - (BOOL)validateExtensions:(id *)ioValue error:(NSError * __autoreleasing *)outError;
 - (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError;
-#pragma mark - AppleScript
-- (void)handleRunScriptCommand:(NSScriptCommand *)command;
-- (void)handleReadFromStandardInputScriptCommand:(NSScriptCommand *)command;
-- (void)readFromStandardInput:(NSString *)text;
 @end

@@ -190,6 +190,30 @@ class Plugin: WCLPlugin {
         let webWindowController = WCLWebWindowsController.sharedWebWindowsController().addedWebWindowControllerForPlugin(self)
         WCLPluginTask.runTask(task, delegate:webWindowController)
     }
+        
+    func readFromStandardInput(text: String!) {
+
+        println("[AppleScript] \(self.name) readFromStandardInput: \(text)")
+
+        let webWindowControllers = WCLWebWindowsController.sharedWebWindowsController().webWindowControllersForPlugin(self)
+
+        if webWindowControllers.count == 0 {
+            return
+        }
+
+        let webWindowController = webWindowControllers[0] as WCLWebWindowController
+
+        if !webWindowController.hasTasks() {
+            return
+        }
+        
+        let task = webWindowController.tasks[0] as NSTask
+        let pipe = task.standardInput as NSPipe
+
+        if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
+            pipe.fileHandleForWriting.writeData(data)
+        }
+    }
     
     // MARK: Windows
 

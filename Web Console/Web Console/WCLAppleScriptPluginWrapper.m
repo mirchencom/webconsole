@@ -45,11 +45,21 @@
 
 - (void)handleRunScriptCommand:(NSScriptCommand *)command
 {
-    [self.plugin handleRunScriptCommand:command];
+    NSDictionary *argumentsDictionary = [command evaluatedArguments];
+    NSArray *arguments = [argumentsDictionary objectForKey:kArgumentsKey];
+    
+    NSURL *directoryURL = [argumentsDictionary objectForKey:kDirectoryKey];
+    
+    // TODO: Return an error if the plugin doesn't exist
+    // TODO: Return an error if the directory doesn't exist
+    
+    [self.plugin runWithArguments:arguments inDirectoryPath:[directoryURL path]];
 }
 - (void)handleReadFromStandardInputScriptCommand:(NSScriptCommand *)command
 {
-    [self.plugin handleReadFromStandardInputScriptCommand:command];
+    NSDictionary *argumentsDictionary = [command evaluatedArguments];
+    NSString *text = [argumentsDictionary objectForKey:kTextKey];
+    [self.plugin readFromStandardInput:text];
 }
 
 - (NSScriptObjectSpecifier *)objectSpecifier
