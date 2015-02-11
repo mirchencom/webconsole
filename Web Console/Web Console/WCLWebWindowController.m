@@ -105,7 +105,10 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
         
         NSArray *commands = [self.mutableTasks valueForKey:kLaunchPathKey];
 
-        if (![commands count] && [self.mutableTasks count]) return YES; // Thread protection for if the last task ended after the hasTasks if statement
+        if (![commands count] && [self.mutableTasks count]) {
+            // Thread protection for if the last task ended after the hasTasks if statement
+            return YES;
+        }
         
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"Close"];
@@ -114,10 +117,16 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
         NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commands];
         [alert setInformativeText:informativeText];
-        [alert beginSheetModalForWindow:self.window
-                          modalDelegate:self
-                         didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
-                            contextInfo:NULL];        
+
+        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode != NSAlertFirstButtonReturn) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:WCLWebWindowControllerDidCancelCloseWindowNotification object:self];
+                return;
+            }
+            
+            [self terminateTasksAndCloseWindow];
+        }];
+        
         return NO;
     }
     
@@ -153,17 +162,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     return self.plugin.name;
 }
 
-#pragma mark - Modal Delegate
-
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-{
-    if (returnCode != NSAlertFirstButtonReturn) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:WCLWebWindowControllerDidCancelCloseWindowNotification object:self];
-        return;
-    }
-
-    [self terminateTasksAndCloseWindow];
-}
+#pragma mark - Termination
 
 - (void)terminateTasksAndCloseWindow
 {
