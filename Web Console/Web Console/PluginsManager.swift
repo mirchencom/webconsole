@@ -94,7 +94,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     }
 
     func newPlugin(handler: ((newPlugin: Plugin?, error: NSError?) -> Void)?) {
-        // TODO: If no `defaultNewPlugin` is set it should have a (probably hardcoded) fallback, maybe HTML? And what if the HTML plugin is missing?
+        // May need to handle the case when no default new plugin is define in the future, but for now the fallback to the initial plugin should always work
 
         if let plugin = defaultNewPlugin {
             newPluginFromPlugin(plugin, handler: handler)

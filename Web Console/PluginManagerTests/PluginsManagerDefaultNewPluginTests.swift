@@ -11,16 +11,6 @@ import XCTest
 
 class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
 
-// TODO: This should probably be put back once a fallback exists for when no default new plugin is set
-//    override func setUp() {
-//        super.setUp()
-//        PluginsManager.sharedInstance.defaultNewPlugin = plugin
-//    }
-//    override func tearDown() {
-//        PluginsManager.sharedInstance.defaultNewPlugin = nil
-//        super.tearDown()
-//    }
-
     func testInvalidDefaultNewPluginIdentifier() {
         PluginsManager.sharedInstance.defaultNewPlugin = nil
         let UUID = NSUUID()
@@ -96,8 +86,6 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
 
         let defaultNewPluginIdentifierTwo: String? = NSUserDefaults.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
         XCTAssertNil(defaultNewPluginIdentifierTwo, "The identifier should be nil")
-        
-        // TODO: Test calling `newPlugin` for no default new plugin in preferences after behavior for that case is sorted out
     }
 
     func testDefaultNewPluginKeyValueObserving() {
