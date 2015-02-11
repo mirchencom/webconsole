@@ -147,7 +147,6 @@
 		45B8148318161A360006AA05 /* WCLWebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */; };
 		45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */; };
 		45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
-		45C3B4FB191B03950010B692 /* WCLPluginManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B4FA191B03950010B692 /* WCLPluginManagerTests.m */; };
 		45DA852C18B0067000A151F3 /* Shared Resources.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794B18B005BE00D705C8 /* Shared Resources.wcplugin */; };
 		45DA852D18B0067300A151F3 /* Search.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794C18B005BE00D705C8 /* Search.wcplugin */; };
 		45DA852E18B0067700A151F3 /* Node.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794D18B005BE00D705C8 /* Node.wcplugin */; };
@@ -368,7 +367,6 @@
 		45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTaskTestsHelper.m; sourceTree = "<group>"; };
 		45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTestPluginManagerTestCase.m; sourceTree = "<group>"; };
 		45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLTestPluginManagerTestCase.h; sourceTree = "<group>"; };
-		45C3B4FA191B03950010B692 /* WCLPluginManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginManagerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -498,7 +496,6 @@
 				45B3E401187269E300DCDB42 /* WCLWebWindowControllerResizingTests.m */,
 				45B8147F181483400006AA05 /* WCLPluginTests.m */,
 				4562410E1A88683C0047F085 /* WCLWebWindowControllerPluginTests.m */,
-				45C3B4FA191B03950010B692 /* WCLPluginManagerTests.m */,
 				45A34E2718726711005BF628 /* WCLWebWindowControllerTestCase.h */,
 				45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */,
 				45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */,
@@ -1056,7 +1053,6 @@
 			files = (
 				451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */,
 				45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */,
-				45C3B4FB191B03950010B692 /* WCLPluginManagerTests.m in Sources */,
 				45B8148318161A360006AA05 /* WCLWebWindowControllerTestsHelper.m in Sources */,
 				45A34E22187263A4005BF628 /* WCLWebWindowControllerTestCase.m in Sources */,
 				45A34E2418726470005BF628 /* WCLWebWindowControllerHTMLTests.m in Sources */,
@@ -1579,6 +1575,7 @@
 				45729EC11A89A270001ECC4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		459EC92A1A8997C10098A47B /* Build configuration list for PBXNativeTarget "PluginManagerTests" */ = {
 			isa = XCConfigurationList;

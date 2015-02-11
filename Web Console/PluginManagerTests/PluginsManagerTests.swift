@@ -66,9 +66,27 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
     
     func testBuiltInPlugins() {
         let plugins = PluginsManager.sharedInstance.plugins() as [Plugin]
+
         for plugin in plugins {
             XCTAssertEqual(plugin.pluginType, Plugin.PluginType.BuiltIn, "The plugin type should be built-in")
             XCTAssertEqual(plugin.type as String, Plugin.PluginType.BuiltIn.name(), "The type should equal the name")
         }
+
+        let count = PluginsManager.sharedInstance.plugins().count
+        var pluginsPathsCount = 0
+
+        let pluginsPaths = [Directory.BuiltInPlugins.path()]
+        for pluginsPath in pluginsPaths {
+            let contents: [AnyObject]! = NSFileManager.defaultManager().contentsOfDirectoryAtPath(pluginsPath, error: nil)
+            let paths = contents as [String]
+            let pluginFileExtensionMatch = ".\(pluginFileExtension)"
+            let pluginFileExtensionPredicate: NSPredicate! = NSPredicate(format: "self ENDSWITH %@", pluginFileExtensionMatch)
+            let pluginPaths = paths.filter {
+                pluginFileExtensionPredicate.evaluateWithObject($0)
+            }
+            pluginsPathsCount += pluginPaths.count
+        }
+
+        XCTAssert(count == pluginsPathsCount, "The counts should be equal")
     }
 }
