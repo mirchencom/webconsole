@@ -29,9 +29,9 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
     }
     
     override func tearDown() {
+        PluginsManager.sharedInstance.defaultNewPlugin = nil
         plugin = nil
         PluginsManager.setOverrideSharedInstance(nil)
-        PluginsManager.sharedInstance.defaultNewPlugin = nil
         super.tearDown()
     }
 

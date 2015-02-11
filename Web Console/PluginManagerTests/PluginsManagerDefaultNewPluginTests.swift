@@ -58,11 +58,11 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         
         createdPlugin.name = testPluginNameTwo
         createdPlugin.command = testPluginCommandTwo
+        createdPlugin.suffixes = testPluginSuffixesTwo
         
         var createdPluginTwo = newPluginWithConfirmation()
         
-        // TODO: After starting plugins have their extensions setup, test file extensions
-        // XCTAssertTrue([newPlugin.extensions isEqualToArray:plugin.extensions], @"The new WCLPlugin's file extensions should equal the WCLPlugin's file extensions.");
+        XCTAssertEqual(createdPlugin.suffixes, createdPluginTwo.suffixes, "The new WCLPlugin's file extensions should equal the WCLPlugin's file extensions.")
 
         let pluginFolderName = createdPluginTwo.bundle.bundlePath.lastPathComponent as NSString
         XCTAssertEqual(DuplicatePluginController.pluginFilenameFromName(createdPluginTwo.name), pluginFolderName, "The folder name should equal the plugin's name")

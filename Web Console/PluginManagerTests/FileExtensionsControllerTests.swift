@@ -16,9 +16,7 @@ class FileExtensionsControllerTests: FileExtensionsTestCase {
         let sortedExtensions2: NSArray = extensions2.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
         return sortedExtensions1 == sortedExtensions2
     }
-    
-    // TODO: After starting plugins have their extensions setup, test starting `WCLFileExtensionsController` has the right count of extensions at init (sum the count of plugin extensions, remove duplicates)
-    
+
     func testAddingPluginAndChangingFileExtensions() {
         var createdPlugin = newPluginWithConfirmation()
         XCTAssertFalse(FileExtensionsController.sharedInstance.suffixes().count > 0, "The file extensions count should be zero")
@@ -37,3 +35,37 @@ class FileExtensionsControllerTests: FileExtensionsTestCase {
     }
 
 }
+
+class FileExtensionsControllerBuiltInPluginsTests: XCTestCase {
+    override func setUp() {
+        super.setUp()
+        let pluginsManager = PluginsManager([Directory.BuiltInPlugins.path()],
+            duplicatePluginDestinationDirectoryURL: Directory.Trash.URL())
+        PluginsManager.setOverrideSharedInstance(pluginsManager)
+        let fileExtensionsController = FileExtensionsController(pluginsManager: PluginsManager.sharedInstance)
+        FileExtensionsController.setOverrideSharedInstance(fileExtensionsController)
+    }
+    
+    override func tearDown() {
+        FileExtensionsController.setOverrideSharedInstance(nil)
+        PluginsManager.setOverrideSharedInstance(nil)
+        super.tearDown()
+    }
+
+    func testStartingFileExtensions() {
+        let controllerSet = NSSet(array: FileExtensionsController.sharedInstance.suffixes())
+        
+        // Get the plugins set
+        let plugins = PluginsManager.sharedInstance.plugins()
+        let pluginsSet = NSMutableSet()
+        for plugin in plugins {
+            pluginsSet.addObjectsFromArray(plugin.suffixes)
+        }
+
+        XCTAssertTrue(pluginsSet.count > 0, "The cound should be greater than zero")
+        XCTAssertTrue(pluginsSet.isEqualToSet(controllerSet), "The sets should be equal")
+    }
+
+}
+
+
