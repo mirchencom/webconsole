@@ -11,7 +11,6 @@
 #import "Web_Console-Swift.h"
 #import "Web_ConsoleTestsConstants.h"
 
-
 @implementation XCTestCase (BundleResources)
 
 - (NSString *)wcl_pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory
@@ -32,35 +31,13 @@
     return fileURL;
 }
 
-- (NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL
++ (NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL
 {
     NSError *error;
     NSString *contents = [NSString stringWithContentsOfURL:fileURL encoding:NSUTF8StringEncoding error:&error];
     NSString *errorMessage = [NSString stringWithFormat:@"There should not be an NSError. %@", error];
     NSAssert(!error, errorMessage);
     return contents;
-}
-
-- (NSString *)wcl_stringWithContentsOfSharedTestResource:(NSString *)filename
-                                       withExtension:(NSString *)extension
-                                        subdirectory:(NSString *)subdirectory
-{
-    NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:filename
-                                                  withExtension:extension
-                                                   subdirectory:subdirectory];
-    return [self wcl_stringWithContentsOfFileURL:fileURL];
-}
-
-+ (NSURL *)wcl_URLForSharedTestResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory
-{
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kSharedTestResourcesPluginName];
-    NSURL *resourceURL = [plugin resourceURL];
-
-    NSURL *fileURL = [[[resourceURL URLByAppendingPathComponent:subdirectory]
-                   URLByAppendingPathComponent:name]
-                  URLByAppendingPathExtension:ext];
-    NSAssert(fileURL, @"The file URL should not be nil");
-    return fileURL;
 }
 
 @end

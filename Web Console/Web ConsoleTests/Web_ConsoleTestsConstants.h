@@ -19,7 +19,7 @@
 #define kTestPrintPluginCommand @"print.rb"
 #define kPluginCommandPathKey @"commandPath"
 #define kTestTestEnvironmentPluginName @"TestEnvironment"
-
+#define kPluginResourcesPathComponent @"Contents/Resources"
 
 #pragma mark - Test Window Sizes
 

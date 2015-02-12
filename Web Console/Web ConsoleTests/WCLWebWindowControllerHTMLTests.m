@@ -11,6 +11,7 @@
 
 #import "Web_ConsoleTestsConstants.h"
 #import "XCTest+BundleResources.h"
+#import "XCTest+SharedTestResources.h"
 #import "Web_Console-Swift.h"
 
 
@@ -26,8 +27,8 @@
     NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:kTestDataHTMLJQUERYFilename
                                                   withExtension:kTestDataHTMLExtension
                                                    subdirectory:kSharedTestResourcesHTMLSubdirectory];
-    NSString *HTML = [self wcl_stringWithContentsOfFileURL:fileURL];
-    NSURL *baseURL = [[PluginsManager sharedInstance] sharedResourcesURL];
+    NSString *HTML = [[self class] wcl_stringWithContentsOfFileURL:fileURL];
+    NSURL *baseURL = [[self class] wcl_sharedTestResourcesURL];
     
     __block BOOL completionHandlerRan = NO;
     WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
@@ -44,12 +45,12 @@
 	
     XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
     
-    NSString *javaScript = [self wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextJQueryFilename
+    NSString *javaScript = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextJQueryFilename
                                                           withExtension:kTestDataJavaScriptExtension
                                                            subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
     NSString *result = [webWindowController doJavaScript:javaScript];
     
-    NSString *testJavaScript = [self wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextFilename
+    NSString *testJavaScript = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextFilename
                                                           withExtension:kTestDataJavaScriptExtension
                                                            subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
     NSString *expectedResult = [webWindowController doJavaScript:testJavaScript];
@@ -70,7 +71,7 @@
                                                    subdirectory:kSharedTestResourcesHTMLSubdirectory];
     NSURL *baseURL = [fileURL URLByDeletingLastPathComponent];
     
-    NSString *HTML = [self wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+    NSString *HTML = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
                                                     withExtension:kTestDataHTMLExtension
                                                      subdirectory:kSharedTestResourcesHTMLSubdirectory];
     __block BOOL firstCompletionHandlerRan = NO;
@@ -86,7 +87,7 @@
     XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
     XCTAssertTrue([webWindowController.window.title isEqualToString:kTestDataHTMLTitle], @"The NSWindow's title should equal the test HTML title.");
     
-    HTML = [self wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLJQUERYFilename
+    HTML = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLJQUERYFilename
                                           withExtension:kTestDataHTMLExtension
                                            subdirectory:kSharedTestResourcesHTMLSubdirectory];
     __block BOOL secondCompletionHandlerRan = NO;
@@ -108,7 +109,7 @@
 
 - (void)testLoadHTMLTwiceWithoutWaiting
 {
-    NSString *HTML = [self wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+    NSString *HTML = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
                                                           withExtension:kTestDataHTMLExtension
                                                            subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
@@ -138,7 +139,7 @@
 
 - (void)testLoadHTMLInSeparateWindows
 {
-    NSString *HTML = [self wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
+    NSString *HTML = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLFilename
                                                     withExtension:kTestDataHTMLExtension
                                                      subdirectory:kSharedTestResourcesHTMLSubdirectory];
     

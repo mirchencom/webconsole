@@ -12,21 +12,21 @@
 #import "WCLTestPluginManagerTestCase.h"
 #import "Web_ConsoleTestsConstants.h"
 #import "Web_Console-Swift.h"
+#import "XCTest+SharedTestResources.h"
 
 @implementation WCLTestPluginManagerTestCase
 
 - (void)setUp
 {
     [super setUp];
-    
-    
-    // Test Resources Plugins
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kSharedTestResourcesPluginName];
-    NSString *resourcePath = [plugin resourcePath];
-    NSString *testPluginsPath = [resourcePath stringByAppendingPathComponent:kSharedTestResourcesPluginSubdirectory];
 
     // Built-In Plugins
     NSString *builtInPluginsPath = [[NSBundle mainBundle] builtInPlugInsPath];
+
+    // Test Resources Plugins
+    NSURL *sharedTestResourcesURL = [[self class] wcl_sharedTestResourcesURL];
+    NSURL *testPluginsURL = [sharedTestResourcesURL URLByAppendingPathComponent:kSharedTestResourcesPluginSubdirectory];
+    NSString *testPluginsPath = [testPluginsURL path];
 
     // Trash
     NSError *error;

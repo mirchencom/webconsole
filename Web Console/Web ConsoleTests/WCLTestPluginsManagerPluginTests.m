@@ -12,10 +12,10 @@
 #import "WCLTestPluginManagerTestCase.h"
 #import "Web_Console-Swift.h"
 
-@interface WCLPluginTests : XCTestCase
+@interface WCLTestPluginsManagerPluginTests : WCLTestPluginManagerTestCase
 @end
 
-@implementation WCLPluginTests
+@implementation WCLTestPluginsManagerPluginTests
 
 - (void)testSharedResources
 {
@@ -24,19 +24,12 @@
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:testSharedResourcePath isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's path.");
     XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");
-
+    
     NSURL *testSharedResourceURL = [[[PluginsManager sharedInstance] sharedResourcesURL] URLByAppendingPathComponent:kTestSharedResourcePathComponent];
     fileExists = [[NSFileManager defaultManager] fileExistsAtPath:[testSharedResourceURL path] isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's URL.");
     XCTAssertFalse(isDir, @"The test shared resource should not be a directory.");
 }
-
-@end
-
-@interface WCLTestPluginsManagerPluginTests : WCLTestPluginManagerTestCase
-@end
-
-@implementation WCLTestPluginsManagerPluginTests
 
 - (void)testPlugin
 {
