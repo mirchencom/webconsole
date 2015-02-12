@@ -14,6 +14,7 @@
 #import "WCLAppDelegate.h"
 #import "WCLPreferencesWindowController.h"
 #import "NSRectHelpers.h"
+#import "WCLTestPluginManagerTestCase.h"
 
 @interface WCLAppDelegate ()
 @property (nonatomic, strong) WCLPreferencesWindowController *preferencesWindowController;
@@ -28,29 +29,11 @@
 + (NSString *)viewSizeNameForViewController:(NSViewController *)viewController;
 @end
 
-@interface WCLPreferencesWindowControllerTests : XCTestCase
+@interface WCLPreferencesWindowControllerTests : WCLTestPluginManagerTestCase
 @property (nonatomic, strong, readonly) WCLAppDelegate *appDelegate;
 @property (nonatomic, strong, readonly) WCLPreferencesWindowController *preferencesWindowController;
 @property (nonatomic, assign) WCLPreferencePane preferencePane;
 @end
-
-//#warning Cut & paste job, remove these after merging into Web Console project
-//
-//NS_INLINE BOOL NSSizeEqualToSize (NSSize size1, NSSize size2)
-//{
-//    return (size1.height == size2.height) && (size1.width == size2.width);
-//}
-//
-//NS_INLINE BOOL NSPointEqualToPoint (NSPoint point1, NSPoint point2)
-//{
-//    return (point1.x == point2.x) && (point1.y == point2.y);
-//}
-//
-//NS_INLINE BOOL NSRectEqualToRect (NSRect rect1, NSRect rect2)
-//{
-//    return NSPointEqualToPoint(rect1.origin, rect2.origin) && NSSizeEqualToSize(rect1.size, rect2.size);
-//}
-
 
 @implementation WCLPreferencesWindowControllerTests
 

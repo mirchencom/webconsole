@@ -9,6 +9,7 @@
 #import "XCTest+SharedTestResources.h"
 #import "XCTest+BundleResources.h"
 #import "Web_ConsoleTestsConstants.h"
+#import "WebConsoleConstants.h"
 
 @implementation XCTestCase (SharedTestResources)
 

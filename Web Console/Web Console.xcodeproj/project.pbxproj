@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4502BCE3177D159900F0A5C2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		450CD3161A8C27DB00D17CF1 /* XCTest+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */; };
+		450CD3181A8C332100D17CF1 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
+		450CD3191A8C337700D17CF1 /* XCTest+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */; };
 		451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */; };
 		4521E9D61A89A1780075D330 /* WCLFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D11A89A1780075D330 /* WCLFilesViewController.m */; };
 		4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D21A89A1780075D330 /* WCLFilesViewController.xib */; };
@@ -247,6 +249,7 @@
 		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		453AD8AD188235CC0039A3A9 /* WCLPluginTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPluginTask.h; sourceTree = "<group>"; };
 		453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginTask.m; sourceTree = "<group>"; };
+		4548E1CE1A8C346A00A225BF /* PreferencesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PreferencesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		455B0BFC176FF592007B75DD /* WCLLoadHTMLScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLLoadHTMLScriptCommand.h; sourceTree = "<group>"; };
 		455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLLoadHTMLScriptCommand.m; sourceTree = "<group>"; };
 		455B0C081771627A007B75DD /* WCLDoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLDoJavaScriptCommand.h; sourceTree = "<group>"; };
@@ -415,6 +418,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		450CD3171A8C32ED00D17CF1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */,
+				45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */,
+				4561C2271874C01700CF926D /* NSRectHelpers.h */,
+				451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
 		4530B0C31736E2A6000A52E2 = {
 			isa = PBXGroup;
 			children = (
@@ -501,8 +515,6 @@
 				4562410E1A88683C0047F085 /* WCLWebWindowControllerPluginTests.m */,
 				45A34E2718726711005BF628 /* WCLWebWindowControllerTestCase.h */,
 				45A34E21187263A4005BF628 /* WCLWebWindowControllerTestCase.m */,
-				45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */,
-				45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */,
 				45B8148118161A360006AA05 /* WCLWebWindowControllerTestsHelper.h */,
 				45B8148218161A360006AA05 /* WCLWebWindowControllerTestsHelper.m */,
 				45B814841816297C0006AA05 /* WCLTaskTestsHelper.h */,
@@ -511,8 +523,7 @@
 				451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */,
 				450CD3141A8C27DB00D17CF1 /* XCTest+SharedTestResources.h */,
 				450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */,
-				451D5F8F1780B59A0051F974 /* Web_ConsoleTestsConstants.h */,
-				4561C2271874C01700CF926D /* NSRectHelpers.h */,
+				450CD3171A8C32ED00D17CF1 /* Shared */,
 				45898BB11785325B00AE365A /* Data */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
 				459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */,
@@ -559,6 +570,7 @@
 			children = (
 				45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */,
 				45729EBA1A89A270001ECC4C /* Supporting Files */,
+				4548E1CE1A8C346A00A225BF /* PreferencesTests-Bridging-Header.h */,
 			);
 			path = PreferencesTests;
 			sourceTree = "<group>";
@@ -1113,7 +1125,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				450CD3191A8C337700D17CF1 /* XCTest+SharedTestResources.m in Sources */,
 				45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */,
+				450CD3181A8C332100D17CF1 /* WCLTestPluginManagerTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1436,10 +1450,16 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources",
+				);
 				INFOPLIST_FILE = PreferencesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PreferencesTests/PreferencesTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
 			};
@@ -1465,10 +1485,16 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources",
+				);
 				INFOPLIST_FILE = PreferencesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PreferencesTests/PreferencesTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
 			};
 			name = Release;
