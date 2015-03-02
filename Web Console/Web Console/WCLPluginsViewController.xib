@@ -56,6 +56,7 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
+                                                            <binding destination="L66-AX-u2D" name="editable" keyPath="objectValue.editable" id="Irl-6u-nKt"/>
                                                             <binding destination="L66-AX-u2D" name="value" keyPath="objectValue.name" id="Bqy-p3-6Ji">
                                                                 <dictionary key="options">
                                                                     <bool key="NSValidatesImmediately" value="YES"/>
