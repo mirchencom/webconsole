@@ -11,7 +11,7 @@ import XCTest
 
 class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
     var pluginsDirectoryURL: NSURL!
-    var pluginsDirectoryPath: NSString! {
+    var pluginsDirectoryPath: String! {
         get {
             return pluginsDirectoryURL.path
         }
@@ -41,7 +41,7 @@ class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
         
         // Copy the bundle resources plugin to the plugins directory
         let bundleResourcesPluginURL: NSURL! = URLForResource(testPluginName, withExtension:pluginFileExtension)
-        let filename: NSString! = testPluginName.stringByAppendingPathExtension(pluginFileExtension)
+        let filename = testPluginName.stringByAppendingPathExtension(pluginFileExtension)!
         
         pluginURL = pluginsDirectoryURL.URLByAppendingPathComponent(filename)
         var movePluginError: NSError?

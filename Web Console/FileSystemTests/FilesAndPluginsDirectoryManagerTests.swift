@@ -217,7 +217,7 @@ extension FilesAndPluginsDirectoryManagerTests {
 
     // MARK: Plugin File Hierarchy Helpers
 
-    func createDirectoryAtPath(path: NSString) {
+    func createDirectoryAtPath(path: String) {
         var error: NSError?
         let success = NSFileManager
             .defaultManager()
@@ -229,7 +229,7 @@ extension FilesAndPluginsDirectoryManagerTests {
         XCTAssertNil(error, "The error should succeed")
     }
     
-    func createFileAtPath(path: NSString) {
+    func createFileAtPath(path: String) {
         var error: NSError?
         let success = NSFileManager.defaultManager().createFileAtPath(path,
             contents: nil,

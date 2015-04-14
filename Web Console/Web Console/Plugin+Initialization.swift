@@ -96,7 +96,7 @@ extension Plugin {
         let url = self.infoDictionaryURLForPluginURL(bundle.bundleURL)
         let infoDictionary: NSMutableDictionary? = NSMutableDictionary(contentsOfURL: url)
         if infoDictionary != nil {
-            return infoDictionary
+            return infoDictionary as [NSObject : AnyObject]?
         }
         
         if error != nil {
@@ -125,8 +125,8 @@ extension Plugin {
     }
 
     class func validCommand(infoDictionary: [NSObject : AnyObject], error: NSErrorPointer) -> String? {
-        if let command = infoDictionary[InfoDictionaryKeys.Command] as NSString? {
-            if command.length > 0 {
+        if let command = infoDictionary[InfoDictionaryKeys.Command] as? String {
+            if count(command) > 0 {
                 return command
             }
         }
@@ -142,8 +142,8 @@ extension Plugin {
     }
     
     class func validName(infoDictionary: [NSObject : AnyObject], error: NSErrorPointer) -> String? {
-        if let name = infoDictionary[InfoDictionaryKeys.Name] as NSString? {
-            if name.length > 0 {
+        if let name = infoDictionary[InfoDictionaryKeys.Name] as? String {
+            if count(name) > 0 {
                 return name
             }
         }
@@ -157,7 +157,7 @@ extension Plugin {
     }
     
     class func validIdentifier(infoDictionary: [NSObject : AnyObject], error: NSErrorPointer) -> String? {
-        if let uuidString = infoDictionary[InfoDictionaryKeys.Identifier] as NSString? {
+        if let uuidString = infoDictionary[InfoDictionaryKeys.Identifier] as? String {
             var uuid: NSUUID? = NSUUID(UUIDString: uuidString)
             if uuid != nil {
                 return uuidString
@@ -173,7 +173,7 @@ extension Plugin {
     }
 
     class func validHidden(infoDictionary: [NSObject : AnyObject], error: NSErrorPointer) -> Bool {
-        if let hidden = infoDictionary[InfoDictionaryKeys.Hidden] as Int? {
+        if let hidden = infoDictionary[InfoDictionaryKeys.Hidden] as? Int {
             return NSNumber(integer: hidden).boolValue
         }
         
@@ -188,7 +188,7 @@ extension Plugin {
     }
 
     class func validEditable(infoDictionary: [NSObject : AnyObject], error: NSErrorPointer) -> Bool {
-        if let editable = infoDictionary[InfoDictionaryKeys.Editable] as Int? {
+        if let editable = infoDictionary[InfoDictionaryKeys.Editable] as? Int {
             return NSNumber(integer: editable).boolValue
         }
         

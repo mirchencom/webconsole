@@ -22,14 +22,14 @@ class FileExtensionsControllerTests: FileExtensionsTestCase {
         XCTAssertFalse(FileExtensionsController.sharedInstance.suffixes().count > 0, "The file extensions count should be zero")
         
         createdPlugin.suffixes = testPluginSuffixesTwo
-        let extensions: [String] = FileExtensionsController.sharedInstance.suffixes() as [String]
+        let extensions: [String] = FileExtensionsController.sharedInstance.suffixes() as! [String]
         let extensionsMatch = extensionsTest(extensions, matchExtensions: testPluginSuffixesTwo)
         XCTAssertTrue(extensionsMatch, "The file extensions should match the test file extensions.")
 
         // Set file extensions to empty array
         plugin.suffixes = testPluginSuffixesEmpty
  
-        let extensionsTwo: [String] = FileExtensionsController.sharedInstance.suffixes() as [String]
+        let extensionsTwo: [String] = FileExtensionsController.sharedInstance.suffixes() as! [String]
         let extensionsTwoMatch = extensionsTest(extensionsTwo, matchExtensions: testPluginSuffixesEmpty)
         XCTAssertTrue(extensionsMatch, "The file extensions should match the empty test file extensions.")
     }
@@ -53,7 +53,7 @@ class FileExtensionsControllerBuiltInPluginsTests: XCTestCase {
     }
 
     func testStartingFileExtensions() {
-        let controllerSet = NSSet(array: FileExtensionsController.sharedInstance.suffixes())
+        let controllerSet = NSSet(array: FileExtensionsController.sharedInstance.suffixes()) as Set
         
         // Get the plugins set
         let plugins = PluginsManager.sharedInstance.plugins()

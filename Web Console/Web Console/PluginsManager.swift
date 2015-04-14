@@ -47,7 +47,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     // MARK: Accessing Plugins
     
     func pluginWithName(name: String) -> Plugin? {
-        return pluginsController.objectWithKey(name) as Plugin?
+        return pluginsController.objectWithKey(name) as? Plugin
     }
     
     func pluginWithIdentifier(identifier: String) -> Plugin? {
@@ -113,11 +113,11 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         addPlugin(plugin)
     }
 
+
     func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
-        if defaultNewPlugin? == plugin {
+        if defaultNewPlugin == plugin {
             defaultNewPlugin = nil
-        }
-        
+        }        
         removePlugin(plugin)
     }
 

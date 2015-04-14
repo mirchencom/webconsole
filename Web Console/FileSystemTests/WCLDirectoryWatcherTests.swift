@@ -101,7 +101,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     }
     
     // MARK: Modify
-    func modifyFileAtPathWithConfirmation(path: NSString) {
+    func modifyFileAtPathWithConfirmation(path: String) {
         let fileWasModifiedExpectation = expectationWithDescription("File was modified")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
             if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
@@ -290,7 +290,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
 
 
 class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
-    var testFilePath: NSString!
+    var testFilePath: String!
     
     override func setUp() {
         super.setUp()

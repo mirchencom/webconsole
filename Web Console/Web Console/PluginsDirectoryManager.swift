@@ -37,7 +37,7 @@ class PluginsPathHelper {
         return pathUntilSubpath
     }
     
-    class func pathComponentsOfPath(path: NSString, afterSubpath subpath: NSString) -> NSArray? {
+    class func pathComponentsOfPath(path: NSString, afterSubpath subpath: NSString) -> [String]? {
         let normalizedPath = path.stringByStandardizingPath as NSString
         let range = rangeInPath(normalizedPath, untilSubpath: subpath)
         if (range.location == NSNotFound) {
@@ -54,7 +54,7 @@ class PluginsPathHelper {
             // Remove the first slash if it exists
             var mutablePathComponents = NSMutableArray(array: pathComponents)
             mutablePathComponents.removeObjectAtIndex(0)
-            return mutablePathComponents
+            return NSArray(array: mutablePathComponents) as? [String]
         }
 
         return pathComponents
@@ -64,8 +64,8 @@ class PluginsPathHelper {
         let pathComponents = pathComponent.pathComponents
         let subpathComponents = subpathComponent.pathComponents
         for index in 0..<subpathComponents.count {
-            let pathComponent = pathComponents[index] as NSString
-            let subpathComponent = subpathComponents[index] as NSString
+            let pathComponent = pathComponents[index] as! NSString
+            let subpathComponent = subpathComponents[index] as! String
             if !pathComponent.isEqualToString(subpathComponent) {
                 return false
             }
@@ -80,8 +80,8 @@ class PluginsPathHelper {
             return false
         }
         for index in 0..<pathComponents.count {
-            let pathComponent = pathComponents[index] as NSString
-            let matchPathComponent = matchPathComponents[index] as NSString
+            let pathComponent = pathComponents[index] as! NSString
+            let matchPathComponent = matchPathComponents[index] as! String
             if !pathComponent.isEqualToString(matchPathComponent) {
                 return false
             }
@@ -270,7 +270,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func pluginPathFromPath(path: NSString) -> NSString? {
+    func pluginPathFromPath(path: String) -> String? {
         if let pluginPathComponent = pluginPathComponentFromPath(path) {
             if let subpath = pluginsDirectoryURL.path {
                 let pluginPath = subpath.stringByAppendingPathComponent(pluginPathComponent)
@@ -280,12 +280,12 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return nil
     }
     
-    func pluginPathComponentFromPath(path: NSString) -> NSString? {
+    func pluginPathComponentFromPath(path: String) -> String? {
         if let subpath = pluginsDirectoryURL.path {
             if let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: subpath) {
                 if (pathComponents.count > 0) {
                     var pluginSubpathComponents = pathComponents as Array
-                    let pathComponent = pluginSubpathComponents.removeAtIndex(0) as? NSString
+                    let pathComponent = pluginSubpathComponents.removeAtIndex(0)
                     return pathComponent
                 }
             }

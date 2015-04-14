@@ -12,8 +12,8 @@ import Cocoa
 
 class CopyDirectoryController {
     let copyTempDirectoryURL: NSURL
-    let tempDirectoryName: NSString
-    var trashDirectoryName: NSString {
+    let tempDirectoryName: String
+    var trashDirectoryName: String {
         get {
             return tempDirectoryName + " Recovered"
         }
@@ -51,7 +51,7 @@ class CopyDirectoryController {
 
     // MARK: Private Clean Up Helpers
 
-    class func moveContentsOfURL(URL: NSURL, toDirectoryInTrashWithName trashDirectoryName: NSString) {
+    class func moveContentsOfURL(URL: NSURL, toDirectoryInTrashWithName trashDirectoryName: String) {
         var validCachesURL = false
         if let path = URL.path {
             let hasPrefix = path.hasPrefix(Directory.Caches.path())
@@ -144,7 +144,7 @@ class CopyDirectoryController {
 
     // MARK: Private Create Directory Helpers
     
-    private class func createDirectoryIfMissingAtPath(path: NSString, error: NSErrorPointer) -> Bool {
+    private class func createDirectoryIfMissingAtPath(path: String, error: NSErrorPointer) -> Bool {
         // TODO: Should set error instead of assert
         var isDir: ObjCBool = false
         let exists = NSFileManager.defaultManager()

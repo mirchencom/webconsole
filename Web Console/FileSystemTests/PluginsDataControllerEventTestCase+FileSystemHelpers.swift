@@ -83,17 +83,17 @@ extension PluginsDataControllerEventTestCase {
     func modifyPluginWithConfirmation(plugin: Plugin, handler: (plugin: Plugin?) -> Void) {
 
         // Get the old identifier
-        let infoDictionary: Dictionary! = NSDictionary(contentsOfURL: plugin.infoDictionaryURL)
-        let identifier: String! = infoDictionary[Plugin.InfoDictionaryKeys.Identifier] as String
+        let infoDictionary = NSDictionary(contentsOfURL: plugin.infoDictionaryURL)! as Dictionary
+        let identifier = infoDictionary[Plugin.InfoDictionaryKeys.Identifier] as! String
 
         // Make a new identifier
         let UUID = NSUUID()
         let newIdentifier = UUID.UUIDString
 
         // Get the info dictionary contents
-        let infoDictionaryPath: NSString! = plugin.infoDictionaryURL.path
+        let infoDictionaryPath = plugin.infoDictionaryURL.path!
         var error: NSError?
-        let infoDictionaryContents: NSString! = NSString(contentsOfFile: infoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
+        let infoDictionaryContents = NSString(contentsOfFile: infoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error) as! String
         XCTAssertNil(error, "The error should be nil.")
         
         // Replace the old identifier with the new identifier

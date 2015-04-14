@@ -18,7 +18,7 @@ class SubprocessFileSystemModifier {
         let task = NSTask()
         task.launchPath = "/usr/bin/touch"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler)
+        SubprocessFileSystemModifier.runTask(task, handler: handler)
     }
 
     // MARK: createDirectoryAtPath
@@ -29,7 +29,7 @@ class SubprocessFileSystemModifier {
         let task = NSTask()
         task.launchPath = "/bin/mkdir"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler)
+        SubprocessFileSystemModifier.runTask(task, handler: handler)
     }
 
     // MARK: removeFileAtPath
@@ -44,7 +44,7 @@ class SubprocessFileSystemModifier {
         let task = NSTask()
         task.launchPath = "/bin/rm"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler)
+        SubprocessFileSystemModifier.runTask(task, handler: handler)
     }
     
     // MARK: removeDirectoryAtPath
@@ -63,7 +63,7 @@ class SubprocessFileSystemModifier {
         let task = NSTask()
         task.launchPath = "/bin/rm"
         task.arguments = ["-r", path]
-        SubprocessFileSystemModifier.runTask(task, handler)
+        SubprocessFileSystemModifier.runTask(task, handler: handler)
     }
 
     // MARK: copyDirectoryAtPath
@@ -99,7 +99,7 @@ class SubprocessFileSystemModifier {
         let task = NSTask()
         task.launchPath = "/bin/cp"
         task.arguments = ["-R", path, destinationPath]
-        SubprocessFileSystemModifier.runTask(task, handler)
+        SubprocessFileSystemModifier.runTask(task, handler: handler)
     }
     
     // MARK: moveItemAtPath
@@ -110,7 +110,7 @@ class SubprocessFileSystemModifier {
         let task = NSTask()
         task.launchPath = "/bin/mv"
         task.arguments = [path, destinationPath]
-        SubprocessFileSystemModifier.runTask(task, handler)
+        SubprocessFileSystemModifier.runTask(task, handler: handler)
     }
 
     // MARK: Helpers
@@ -118,7 +118,7 @@ class SubprocessFileSystemModifier {
         task.standardOutput = NSPipe()
         task.standardOutput.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
             let data = file.availableData
-            if let output: String! = NSString(data: data, encoding: NSUTF8StringEncoding) {
+            if let output = NSString(data: data, encoding: NSUTF8StringEncoding) {
                 println("standardOutput \(output)")
             }
         }
@@ -126,7 +126,7 @@ class SubprocessFileSystemModifier {
         task.standardError = NSPipe()
         task.standardError.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
             let data = file.availableData
-            if let output: String! = NSString(data: data, encoding: NSUTF8StringEncoding) {
+            if let output = NSString(data: data, encoding: NSUTF8StringEncoding) {
                 println("standardError \(output)")
                 assert(false, "There should not be output to standard error")
             }
@@ -141,7 +141,7 @@ class SubprocessFileSystemModifier {
         task.launch()
     }
 
-    class func writeToFileAtPath(path: NSString, contents: String) {
+    class func writeToFileAtPath(path: String, contents: String) {
         let echoTask = NSTask()
         echoTask.launchPath = "/bin/echo"
         echoTask.arguments = [contents]

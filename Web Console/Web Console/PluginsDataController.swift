@@ -53,7 +53,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     // MARK: PluginsDirectoryManagerDelegate
 
     func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager,
-        pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: NSString)
+        pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = pluginAtPluginPath(pluginPath) {
             if let newPlugin = Plugin.pluginWithPath(pluginPath) {

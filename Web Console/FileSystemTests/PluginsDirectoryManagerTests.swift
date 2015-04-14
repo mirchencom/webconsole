@@ -137,7 +137,7 @@ extension PluginsDirectoryManagerTests {
 class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     var pluginsDirectoryManager: PluginsDirectoryManager!
     var pluginsDirectoryEventManager: PluginsDirectoryEventManager!
-    var pluginInfoDictionaryPath: NSString!
+    var pluginInfoDictionaryPath: String!
     
     override func setUp() {
         super.setUp()
@@ -231,7 +231,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testRemoveAndAddInfoDictionary() {
         // Read in the contents of the info dictionary
         var error: NSError?
-        let infoDictionaryContents: NSString! = NSString(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
+        let infoDictionaryContents = NSString(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)! as String
         XCTAssertNil(error, "The error should be nil.")
         
         // Remove the info dictionary
@@ -258,7 +258,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testModifyInfoDictionary() {
         // Read in the contents of the info dictionary
         var error: NSError?
-        let infoDictionaryContents: NSString! = NSString(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
+        let infoDictionaryContents = NSString(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)! as String
         XCTAssertNil(error, "The error should be nil.")
         
         // Remove the info dictionary

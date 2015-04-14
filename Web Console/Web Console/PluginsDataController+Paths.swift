@@ -7,20 +7,19 @@
 //
 
 extension PluginsDataController {
-    class func pathsForPluginsAtPath(paths: NSString) -> [NSString] {
+    class func pathsForPluginsAtPath(path: String) -> [String] {
         var pluginPaths = [String]()
         
-        if let pathContents = NSFileManager.defaultManager().contentsOfDirectoryAtPath(paths, error:nil) {
+        if let pathContents = NSFileManager.defaultManager().contentsOfDirectoryAtPath(path, error:nil) {
             let fileExtension = ".\(pluginFileExtension)"
-            if let pluginPredicate = NSPredicate(format: "self ENDSWITH %@", fileExtension) {
-                let pluginPathComponents = pathContents.filter {
-                    pluginPredicate.evaluateWithObject($0)
-                }
-                for pluginPathComponent in pluginPathComponents {
-                    if let pluginPathComponenet = pluginPathComponent as? String {
-                        let pluginPath = paths.stringByAppendingPathComponent(pluginPathComponenet)
-                        pluginPaths.append(pluginPath)
-                    }
+            let pluginPredicate = NSPredicate(format: "self ENDSWITH %@", fileExtension)
+            let pluginPathComponents = pathContents.filter {
+                pluginPredicate.evaluateWithObject($0)
+            }
+            for pluginPathComponent in pluginPathComponents {
+                if let pluginPathComponenet = pluginPathComponent as? String {
+                    let pluginPath = path.stringByAppendingPathComponent(pluginPathComponenet)
+                    pluginPaths.append(pluginPath)
                 }
             }
         }
@@ -28,7 +27,7 @@ extension PluginsDataController {
         return pluginPaths
     }
     
-    class func pluginsAtPluginPaths(pluginPaths: [NSString]) -> [Plugin] {
+    class func pluginsAtPluginPaths(pluginPaths: [String]) -> [Plugin] {
         var plugins = [Plugin]()
         for pluginPath in pluginPaths {
             if let plugin = Plugin.pluginWithPath(pluginPath) {
@@ -38,7 +37,7 @@ extension PluginsDataController {
         return plugins
     }
     
-    func pluginsAtPluginsPath(path: NSString) -> [Plugin] {
+    func pluginsAtPluginsPath(path: String) -> [Plugin] {
         let pluginPaths = self.dynamicType.pathsForPluginsAtPath(path)
         let plugins = self.dynamicType.pluginsAtPluginPaths(pluginPaths)
         return plugins

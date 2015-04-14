@@ -12,7 +12,7 @@ import XCTest
 class PluginsManagerTests: PluginsManagerTestCase {
 
     func testTestPlugins() {
-        let plugins = PluginsManager.sharedInstance.plugins() as [Plugin]
+        let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
         for plugin in plugins {
             XCTAssertEqual(plugin.pluginType, Plugin.PluginType.Other, "The plugin type should be built-in")
             XCTAssertEqual(plugin.type as String, Plugin.PluginType.Other.name(), "The type should equal the name")
@@ -65,7 +65,7 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
     }
     
     func testBuiltInPlugins() {
-        let plugins = PluginsManager.sharedInstance.plugins() as [Plugin]
+        let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
 
         for plugin in plugins {
             XCTAssertEqual(plugin.pluginType, Plugin.PluginType.BuiltIn, "The plugin type should be built-in")
@@ -78,7 +78,7 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
         let pluginsPaths = [Directory.BuiltInPlugins.path()]
         for pluginsPath in pluginsPaths {
             let contents: [AnyObject]! = NSFileManager.defaultManager().contentsOfDirectoryAtPath(pluginsPath, error: nil)
-            let paths = contents as [String]
+            let paths = contents as! [String]
             let pluginFileExtensionMatch = ".\(pluginFileExtension)"
             let pluginFileExtensionPredicate: NSPredicate! = NSPredicate(format: "self ENDSWITH %@", pluginFileExtensionMatch)
             let pluginPaths = paths.filter {

@@ -14,7 +14,7 @@ class DuplicatePluginController {
     struct ClassConstants {
         static let tempDirectoryName = "Duplicate Plugin"
     }
-    class func pluginFilenameFromName(name: NSString) -> NSString {
+    class func pluginFilenameFromName(name: NSString) -> String {
         return name.stringByAppendingPathExtension(pluginFileExtension)!
     }
     func duplicatePlugin(plugin: Plugin, toDirectoryAtURL destinationDirectoryURL: NSURL, completionHandler handler: (plugin: Plugin?, error: NSError?) -> Void) {

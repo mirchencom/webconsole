@@ -201,14 +201,14 @@ class Plugin: WCLPlugin {
             return
         }
 
-        let webWindowController = webWindowControllers[0] as WCLWebWindowController
+        let webWindowController = webWindowControllers[0] as! WCLWebWindowController
 
         if !webWindowController.hasTasks() {
             return
         }
         
-        let task = webWindowController.tasks[0] as NSTask
-        let pipe = task.standardInput as NSPipe
+        let task = webWindowController.tasks[0] as! NSTask
+        let pipe = task.standardInput as! NSPipe
 
         if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
             pipe.fileHandleForWriting.writeData(data)

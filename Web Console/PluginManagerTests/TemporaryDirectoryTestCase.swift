@@ -32,13 +32,13 @@ class TemporaryDirectoryTestCase: XCTestCase {
         return path
     }
     
-    class func isValidTemporaryDirectoryPath(path: NSString) -> Bool {
+    class func isValidTemporaryDirectoryPath(path: String) -> Bool {
         var isDir: ObjCBool = false
 
         return NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDir) && isDir
     }
     
-    func removeTemporaryItemAtPathComponent(pathComponent: NSString) -> Bool {
+    func removeTemporaryItemAtPathComponent(pathComponent: String) -> Bool {
         let path = temporaryDirectoryPath.stringByAppendingPathComponent(pathComponent)
         return self.dynamicType.safelyRemoveTemporaryItemAtPath(path)
     }
@@ -50,7 +50,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         return false
     }
     
-    func removeTemporaryItemAtPath(path: NSString) -> Bool {
+    func removeTemporaryItemAtPath(path: String) -> Bool {
         if !path.hasPrefix(temporaryDirectoryPath) {
             XCTAssert(false, "Attempted to delete a temporary item that is not in the temporary directory.")
             return false

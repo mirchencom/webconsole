@@ -8,8 +8,8 @@
 
 let pluginFileExtension = "wcplugin"
 let pluginNameKey = "name"
-let applicationName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as NSString] as NSString
-let errorDomain = NSBundle.mainBundle().bundleIdentifier! as NSString
+let applicationName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as NSString] as! String
+let errorDomain = NSBundle.mainBundle().bundleIdentifier!
 let pluginsDirectoryPathComponent = "PlugIns"
 let defaultNewPluginIdentifierKey = "WCLDefaultNewPluginIdentifier"
 let defaultFileExtensionEnabled = false
@@ -25,17 +25,17 @@ enum Directory {
     func path() -> String {
         switch self {
         case .Caches:
-            let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0] as String
+            let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0] as! String
             return cachesDirectory.stringByAppendingPathComponent(applicationName)
         case .ApplicationSupport:
-            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0] as String
+            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]as! NSString
             return applicationSupportDirectory.stringByAppendingPathComponent(applicationName)
         case .ApplicationSupportPlugins:
             return Directory.ApplicationSupport.path().stringByAppendingPathComponent(pluginsDirectoryPathComponent)
         case .BuiltInPlugins:
             return NSBundle.mainBundle().builtInPlugInsPath!
         case .Trash:
-            return NSSearchPathForDirectoriesInDomains(.TrashDirectory, .UserDomainMask, true)[0] as String
+            return NSSearchPathForDirectoriesInDomains(.TrashDirectory, .UserDomainMask, true)[0] as! String
         }
     }
     func URL() -> NSURL {

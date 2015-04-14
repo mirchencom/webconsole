@@ -41,7 +41,7 @@ class PluginsDataControllerClassTests: XCTestCase {
         let pluginsDataController = PluginsDataController(testPluginsPaths, duplicatePluginDestinationDirectoryURL: Directory.Trash.URL())
         let plugins = pluginsDataController.plugins()
         
-        var pluginPaths = [NSString]()
+        var pluginPaths = [String]()
         for pluginsPath in testPluginsPaths {
             let paths = PluginsDataController.pathsForPluginsAtPath(pluginsPath)
             pluginPaths += paths
@@ -68,9 +68,9 @@ extension TemporaryDirectoryTestCase {
     
     func contentsOfFileAtURLWithConfirmation(URL: NSURL) -> String {
         var error: NSError?
-        let contents: NSString! = NSString(contentsOfURL: URL,
+        let contents = NSString(contentsOfURL: URL,
             encoding: NSUTF8StringEncoding,
-            error: &error)
+            error: &error)! as! String
         XCTAssertNil(error, "The error should be nil")
         return contents
     }
