@@ -550,8 +550,8 @@
 				455FD2461A899C9B00ACE1D4 /* PluginsDirectoryManagerTests.swift */,
 				455FD2471A899C9B00ACE1D4 /* PluginsManagerFileSystemTests.swift */,
 				455FD2481A899C9B00ACE1D4 /* PluginsPathHelperTests.swift */,
-				455FD2491A899C9B00ACE1D4 /* SubprocessFileSystemModifier.swift */,
 				455FD24A1A899C9B00ACE1D4 /* WCLDirectoryWatcherTests.swift */,
+				455FD2491A899C9B00ACE1D4 /* SubprocessFileSystemModifier.swift */,
 				455FD23A1A899C7600ACE1D4 /* Supporting Files */,
 			);
 			path = FileSystemTests;

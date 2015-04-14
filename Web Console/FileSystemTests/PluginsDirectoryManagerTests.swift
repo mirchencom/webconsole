@@ -9,12 +9,12 @@
 import Cocoa
 import XCTest
 
-class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
+class PluginsDirectoryEventManager: NSObject, PluginsDirectoryManagerDelegate {
     var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(path: NSString) -> Void>
     var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(path: NSString) -> Void>
     
     
-    init () {
+    override init () {
         self.pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers = Array<(path: NSString) -> Void>()
         self.pluginInfoDictionaryWasRemovedAtPluginPathHandlers = Array<(path: NSString) -> Void>()
     }
