@@ -17,7 +17,7 @@ class DirectoryTests: XCTestCase {
     
     func testApplicationSupport() {
         let applicationSupportDirectoryPath = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0] as! String
-        let nameKey = kCFBundleNameKey as NSString
+        let nameKey = kCFBundleNameKey as String
         let applicationName = NSBundle.mainBundle().infoDictionary![nameKey] as! String
         let applicationSupportPath = applicationSupportDirectoryPath
             .stringByAppendingPathComponent(applicationName)
@@ -26,7 +26,7 @@ class DirectoryTests: XCTestCase {
     
     func testApplicationSupportPluginsPath() {
         let applicationSupportPath = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0] as! String
-        let nameKey = kCFBundleNameKey as NSString
+        let nameKey = kCFBundleNameKey as String
         let applicationName = NSBundle.mainBundle().infoDictionary![nameKey] as! String
         let applicationSupportPluginsPath = applicationSupportPath
             .stringByAppendingPathComponent(applicationName)
@@ -36,7 +36,7 @@ class DirectoryTests: XCTestCase {
 
     func testCachesPath() {
         let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0] as! String
-        let nameKey = kCFBundleNameKey as NSString
+        let nameKey = kCFBundleNameKey as String
         let applicationName = NSBundle.mainBundle().infoDictionary![nameKey] as! String
         let cachesPath = cachesDirectory
             .stringByAppendingPathComponent(applicationName)

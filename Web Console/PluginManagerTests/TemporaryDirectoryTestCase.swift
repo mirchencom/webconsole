@@ -21,15 +21,15 @@ class TemporaryDirectoryTestCase: XCTestCase {
         static let temporaryDirectoryPathPrefix = "/var/folders"
     }
     
-    class func resolveTemporaryDirectoryPath(path: NSString) -> NSString {
+    class func resolveTemporaryDirectoryPath(path: NSString) -> String {
         // Remove the "/private" path component because FSEvents returns paths iwth this prefix
         let testPathPrefix = "/private".stringByAppendingPathComponent(ClassConstants.temporaryDirectoryPathPrefix)
-        let pathPrefixRange = path.rangeOfString(testPathPrefix);
-        if (pathPrefixRange.location == 0) {
+        let pathPrefixRange = path.rangeOfString(testPathPrefix)
+        if pathPrefixRange.location == 0 {
             return path.stringByReplacingCharactersInRange(pathPrefixRange, withString: ClassConstants.temporaryDirectoryPathPrefix)
         }
         
-        return path
+        return path as String
     }
     
     class func isValidTemporaryDirectoryPath(path: String) -> Bool {

@@ -57,10 +57,10 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
 
         var error: NSError?
         let pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(pluginURL)
-        let pluginInfoDictionaryContents: NSString! = NSString(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
+        let pluginInfoDictionaryContents: String! = String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
         XCTAssertNil(error, "The error should be nil")
         let copiedPluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(copiedPluginURL)
-        let copiedPluginInfoDictionaryContents: NSString! = NSString(contentsOfURL: copiedPluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
+        let copiedPluginInfoDictionaryContents: String! = String(contentsOfURL: copiedPluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
         XCTAssertNil(error, "The error should be nil")
         
         XCTAssertEqual(copiedPluginInfoDictionaryContents, pluginInfoDictionaryContents, "The contents should be equal")

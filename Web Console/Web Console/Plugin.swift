@@ -131,7 +131,7 @@ class Plugin: WCLPlugin {
             save()
         }
     }
-    dynamic var type: NSString {
+    dynamic var type: String {
         return pluginType.name()
     }
     dynamic var editable: Bool {

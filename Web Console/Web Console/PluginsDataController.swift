@@ -20,13 +20,13 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     }
     var delegate: PluginsDataControllerDelegate?
     var pluginDirectoryManagers: [PluginsDirectoryManager]!
-    var pluginPathToPluginDictionary: [NSString : Plugin]!
+    var pluginPathToPluginDictionary: [String : Plugin]!
     lazy var duplicatePluginController = DuplicatePluginController()
     let duplicatePluginDestinationDirectoryURL: NSURL
     
     init(_ paths: [String], duplicatePluginDestinationDirectoryURL: NSURL) {
         self.pluginDirectoryManagers = [PluginsDirectoryManager]()
-        self.pluginPathToPluginDictionary = [NSString : Plugin]()
+        self.pluginPathToPluginDictionary = [String : Plugin]()
         self.duplicatePluginDestinationDirectoryURL = duplicatePluginDestinationDirectoryURL
         
         for path in paths {
@@ -94,7 +94,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         delegate?.pluginsDataController(self, didRemovePlugin: plugin)
     }
     
-    func pluginAtPluginPath(pluginPath: NSString) -> Plugin? {
+    func pluginAtPluginPath(pluginPath: String) -> Plugin? {
         return pluginPathToPluginDictionary[pluginPath]
     }
 

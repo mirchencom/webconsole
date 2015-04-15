@@ -15,12 +15,14 @@ import Foundation
 
 class PluginsPathHelper {
 
-    class func rangeInPath(path: NSString, untilSubpath subpath: NSString) -> NSRange {
+    class func rangeInPath(path: String, untilSubpath subpath: String) -> NSRange {
         // Normalize the subpath so the same range is always returned regardless of the format of the subpath (e.g., number of slashes)
         let normalizedSubpath = subpath.stringByStandardizingPath
         
-        let subpathRange = path.rangeOfString(normalizedSubpath)
-        if (subpathRange.location == NSNotFound) {
+
+        let pathAsNSString: NSString = path
+        let subpathRange = pathAsNSString.rangeOfString(normalizedSubpath)
+        if subpathRange.location == NSNotFound {
             return subpathRange
         }
         let untilSubpathLength = subpathRange.location + subpathRange.length
@@ -28,22 +30,25 @@ class PluginsPathHelper {
         return untilSubpathRange
     }
     
-    class func subpathFromPath(path: NSString, untilSubpath subpath: NSString) -> NSString? {
+    class func subpathFromPath(path: String, untilSubpath subpath: String) -> String? {
         let range = rangeInPath(path, untilSubpath: subpath)
         if (range.location == NSNotFound) {
             return nil
         }
-        let pathUntilSubpath = path.substringWithRange(range)
+        let pathAsNSString: NSString = path
+        let pathUntilSubpath = pathAsNSString.substringWithRange(range)
         return pathUntilSubpath
     }
     
-    class func pathComponentsOfPath(path: NSString, afterSubpath subpath: NSString) -> [String]? {
-        let normalizedPath = path.stringByStandardizingPath as NSString
+    class func pathComponentsOfPath(path: String, afterSubpath subpath: String) -> [String]? {
+        let normalizedPath = path.stringByStandardizingPath
         let range = rangeInPath(normalizedPath, untilSubpath: subpath)
         if (range.location == NSNotFound) {
             return nil
         }
-        let pathComponent = normalizedPath.substringFromIndex(range.length)
+
+        let normalizedPathAsNSString: NSString = path
+        let pathComponent = normalizedPathAsNSString.substringFromIndex(range.length)
         let pathComponents = pathComponent.pathComponents
 
         if (pathComponents.count == 0) {
@@ -60,12 +65,12 @@ class PluginsPathHelper {
         return pathComponents
     }
 
-    class func pathComponent(pathComponent: NSString, containsSubpathComponent subpathComponent: NSString) -> Bool {
+    class func pathComponent(pathComponent: String, containsSubpathComponent subpathComponent: String) -> Bool {
         let pathComponents = pathComponent.pathComponents
         let subpathComponents = subpathComponent.pathComponents
         for index in 0..<subpathComponents.count {
-            let pathComponent = pathComponents[index] as! NSString
-            let subpathComponent = subpathComponents[index] as! String
+            let pathComponent = pathComponents[index] as NSString
+            let subpathComponent = subpathComponents[index]
             if !pathComponent.isEqualToString(subpathComponent) {
                 return false
             }
@@ -73,15 +78,15 @@ class PluginsPathHelper {
         return true
     }
     
-    class func pathComponent(pathComponent: NSString, isPathComponent matchPathComponent: NSString) -> Bool {
+    class func pathComponent(pathComponent: String, isPathComponent matchPathComponent: String) -> Bool {
         let pathComponents = pathComponent.pathComponents
         let matchPathComponents = matchPathComponent.pathComponents
         if pathComponents.count != matchPathComponents.count {
             return false
         }
         for index in 0..<pathComponents.count {
-            let pathComponent = pathComponents[index] as! NSString
-            let matchPathComponent = matchPathComponents[index] as! String
+            let pathComponent = pathComponents[index] as NSString
+            let matchPathComponent = matchPathComponents[index]
             if !pathComponent.isEqualToString(matchPathComponent) {
                 return false
             }
@@ -89,7 +94,7 @@ class PluginsPathHelper {
         return true
     }
     
-    class func path(path: NSString, containsSubpath subpath: NSString) -> Bool {
+    class func path(path: String, containsSubpath subpath: String) -> Bool {
         if let pathUntilSubpath = subpathFromPath(path, untilSubpath: subpath) {
             return pathUntilSubpath.stringByStandardizingPath == subpath.stringByStandardizingPath
         }
@@ -192,8 +197,8 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     
     // MARK: Evaluating Events
 
-    func shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath: NSString,
-        forDirectoryCreatedOrModifiedAtPath path: NSString) -> Bool
+    func shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath: String,
+        forDirectoryCreatedOrModifiedAtPath path: String) -> Bool
     {
         if pathContainsValidInfoDictionarySubpath(path) {
             if infoDictionaryExistsAtPluginPath(pluginPath) {
@@ -203,8 +208,8 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath: NSString,
-        forFileCreatedOrModifiedAtPath path: NSString) -> Bool
+    func shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath: String,
+        forFileCreatedOrModifiedAtPath path: String) -> Bool
     {
         if pathIsValidInfoDictionaryPath(path) {
             if infoDictionaryExistsAtPluginPath(pluginPath) {
@@ -214,8 +219,8 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func shouldFireInfoDictionaryWasRemovedAtPluginPath(pluginPath: NSString,
-        forItemRemovedAtPath path: NSString) -> Bool
+    func shouldFireInfoDictionaryWasRemovedAtPluginPath(pluginPath: String,
+        forItemRemovedAtPath path: String) -> Bool
     {
         if pathContainsValidInfoDictionarySubpath(path) {
             if !infoDictionaryExistsAtPluginPath(pluginPath) {
@@ -228,15 +233,15 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     
     // MARK: Helpers
 
-    func pathIsValidInfoDictionaryPath(path: NSString) -> Bool {
+    func pathIsValidInfoDictionaryPath(path: String) -> Bool {
         return pathHasValidInfoDictionarySubpath(path, requireExactInfoDictionaryMatch: true)
     }
 
-    func pathContainsValidInfoDictionarySubpath(path: NSString) -> Bool {
+    func pathContainsValidInfoDictionarySubpath(path: String) -> Bool {
         return pathHasValidInfoDictionarySubpath(path, requireExactInfoDictionaryMatch: false)
     }
     
-    func pathHasValidInfoDictionarySubpath(path: NSString, requireExactInfoDictionaryMatch: Bool) -> Bool {
+    func pathHasValidInfoDictionarySubpath(path: String, requireExactInfoDictionaryMatch: Bool) -> Bool {
         if let pluginPathComponents = pluginPathComponentsFromPath(path) {
             var pluginSubpathComponents = pluginPathComponents as? [String]
             if let firstPathComponent = pluginSubpathComponents?.removeAtIndex(0) {
@@ -245,7 +250,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                 }
 
                 if let pluginSubpathComponents = pluginSubpathComponents {
-                    let pluginSubpath = NSString.pathWithComponents(pluginSubpathComponents)
+                    let pluginSubpath = String.pathWithComponents(pluginSubpathComponents)
                     
                     if requireExactInfoDictionaryMatch {
                         return PluginsPathHelper.pathComponent(ClassConstants.infoDictionaryPathComponent, isPathComponent: pluginSubpath)
@@ -259,14 +264,14 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func infoDictionaryExistsAtPluginPath(pluginPath: NSString) -> Bool {
+    func infoDictionaryExistsAtPluginPath(pluginPath: String) -> Bool {
         let infoDictionaryPath = pluginPath.stringByAppendingPathComponent(ClassConstants.infoDictionaryPathComponent)
         var isDir: ObjCBool = false
         let fileExists = NSFileManager.defaultManager().fileExistsAtPath(infoDictionaryPath, isDirectory: &isDir)
         return fileExists && !isDir
     }
     
-    func infoDictionaryIsSubdirectoryOfPath(path: NSString) -> Bool {
+    func infoDictionaryIsSubdirectoryOfPath(path: String) -> Bool {
         return false
     }
 
@@ -293,7 +298,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return nil
     }
 
-    func pluginPathComponentsFromPath(path: NSString) -> NSArray? {
+    func pluginPathComponentsFromPath(path: String) -> NSArray? {
         if let subpath = pluginsDirectoryURL.path {
             let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: subpath)
             return pathComponents
@@ -301,7 +306,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return nil
     }
     
-    func pathIsSubpathOfPluginsDirectory(path: NSString) -> Bool {
+    func pathIsSubpathOfPluginsDirectory(path: String) -> Bool {
         if let subpath = pluginsDirectoryURL.path {
             return PluginsPathHelper.path(path, containsSubpath: subpath)
         }

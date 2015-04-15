@@ -12,7 +12,7 @@ import XCTest
 extension PluginsDataControllerEventTestCase {
     // MARK: Move Helpers
     
-    func movePluginWithConfirmation(plugin: Plugin, destinationPluginPath: NSString, handler: (plugin: Plugin?) -> Void) {
+    func movePluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: (plugin: Plugin?) -> Void) {
         let removeExpectation = expectationWithDescription("Plugin was removed")
         pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
@@ -40,7 +40,7 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Copy Helpers
     
-    func copyPluginWithConfirmation(plugin: Plugin, destinationPluginPath: NSString, handler: (plugin: Plugin?) -> Void) {
+    func copyPluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: (plugin: Plugin?) -> Void) {
         var newPlugin: Plugin?
         let createExpectation = expectationWithDescription("Plugin was added")
         pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
@@ -93,7 +93,7 @@ extension PluginsDataControllerEventTestCase {
         // Get the info dictionary contents
         let infoDictionaryPath = plugin.infoDictionaryURL.path!
         var error: NSError?
-        let infoDictionaryContents = NSString(contentsOfFile: infoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error) as! String
+        let infoDictionaryContents: String! = String(contentsOfFile: infoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
         XCTAssertNil(error, "The error should be nil.")
         
         // Replace the old identifier with the new identifier

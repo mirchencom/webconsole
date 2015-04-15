@@ -76,7 +76,7 @@ class CopyDirectoryController {
                 var getNameError: NSError?
                 fileURL.getResourceValue(&filename, forKey: NSURLNameKey, error: &getNameError)
                 assert(getNameError == nil, "The error should be nil")
-                if let filename = filename as? NSString {
+                if let filename = filename as? String {
                     if filename == trashDirectoryName {
                         continue
                     }

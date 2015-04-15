@@ -124,7 +124,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
 
     // MARK: Shared Resources
 
-    func sharedResourcesPath() -> NSString? {
+    func sharedResourcesPath() -> String? {
         let plugin = pluginWithName(sharedResourcesPluginName)
         return plugin?.resourcePath
     }

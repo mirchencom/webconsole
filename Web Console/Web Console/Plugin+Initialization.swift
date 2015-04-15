@@ -202,7 +202,7 @@ extension Plugin {
         return true
     }
 
-    class func validPluginTypeFromPath(path: NSString) -> PluginType {
+    class func validPluginTypeFromPath(path: String) -> PluginType {
         let pluginContainerDirectory = path.stringByDeletingLastPathComponent
         switch pluginContainerDirectory {
         case Directory.ApplicationSupportPlugins.path():

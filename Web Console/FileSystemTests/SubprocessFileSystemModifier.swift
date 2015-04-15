@@ -11,10 +11,10 @@ import Cocoa
 class SubprocessFileSystemModifier {
 
     // MARK: createFileAtPath
-    class func createFileAtPath(path: NSString) {
+    class func createFileAtPath(path: String) {
         createFileAtPath(path, handler: nil)
     }
-    class func createFileAtPath(path: NSString, handler: (Void -> Void)?) {
+    class func createFileAtPath(path: String, handler: (Void -> Void)?) {
         let task = NSTask()
         task.launchPath = "/usr/bin/touch"
         task.arguments = [path]
@@ -22,10 +22,10 @@ class SubprocessFileSystemModifier {
     }
 
     // MARK: createDirectoryAtPath
-    class func createDirectoryAtPath(path: NSString) {
+    class func createDirectoryAtPath(path: String) {
         createDirectoryAtPath(path, handler: nil)
     }
-    class func createDirectoryAtPath(path: NSString, handler: (Void -> Void)?) {
+    class func createDirectoryAtPath(path: String, handler: (Void -> Void)?) {
         let task = NSTask()
         task.launchPath = "/bin/mkdir"
         task.arguments = [path]
@@ -33,11 +33,12 @@ class SubprocessFileSystemModifier {
     }
 
     // MARK: removeFileAtPath
-    class func removeFileAtPath(path: NSString) {
+    class func removeFileAtPath(path: String) {
         removeFileAtPath(path, handler: nil)
     }
-    class func removeFileAtPath(path: NSString, handler: (Void -> Void)?) {
-        if path.rangeOfString("*").location != NSNotFound {
+    class func removeFileAtPath(path: String, handler: (Void -> Void)?) {
+        let pathAsNSString: NSString = path
+        if pathAsNSString.rangeOfString("*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")
             return
         }
@@ -48,11 +49,12 @@ class SubprocessFileSystemModifier {
     }
     
     // MARK: removeDirectoryAtPath
-    class func removeDirectoryAtPath(path: NSString) {
+    class func removeDirectoryAtPath(path: String) {
         removeDirectoryAtPath(path, handler: nil)
     }
-    class func removeDirectoryAtPath(path: NSString, handler: (Void -> Void)?) {
-        if path.rangeOfString("*").location != NSNotFound {
+    class func removeDirectoryAtPath(path: String, handler: (Void -> Void)?) {
+        let pathAsNSString: NSString = path
+        if pathAsNSString.rangeOfString("*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")
             return
         }
@@ -67,15 +69,17 @@ class SubprocessFileSystemModifier {
     }
 
     // MARK: copyDirectoryAtPath
-    class func copyDirectoryAtPath(path: NSString, toPath destinationPath: NSString) {
+    class func copyDirectoryAtPath(path: String, toPath destinationPath: String) {
         copyDirectoryAtPath(path, toPath: destinationPath, handler: nil)
     }
-    class func copyDirectoryAtPath(path: NSString, toPath destinationPath: NSString, handler: (Void -> Void)?) {
-        if path.rangeOfString("*").location != NSNotFound {
+    class func copyDirectoryAtPath(path: String, toPath destinationPath: String, handler: (Void -> Void)?) {
+        let pathAsNSString: NSString = path
+        if pathAsNSString.rangeOfString("*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")
             return
         }
-        if destinationPath.rangeOfString("*").location != NSNotFound {
+        let destinationPathAsNSString: NSString = destinationPath
+        if destinationPathAsNSString.rangeOfString("*").location != NSNotFound {
             assert(false, "The destination path should not contain a wildcard")
             return
         }
@@ -103,10 +107,10 @@ class SubprocessFileSystemModifier {
     }
     
     // MARK: moveItemAtPath
-    class func moveItemAtPath(path: NSString, toPath destinationPath: NSString) {
+    class func moveItemAtPath(path: String, toPath destinationPath: String) {
         moveItemAtPath(path, toPath: destinationPath, handler: nil)
     }
-    class func moveItemAtPath(path: NSString, toPath destinationPath: NSString, handler: (Void -> Void)?) {
+    class func moveItemAtPath(path: String, toPath destinationPath: String, handler: (Void -> Void)?) {
         let task = NSTask()
         task.launchPath = "/bin/mv"
         task.arguments = [path, destinationPath]

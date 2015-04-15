@@ -68,9 +68,9 @@ extension TemporaryDirectoryTestCase {
     
     func contentsOfFileAtURLWithConfirmation(URL: NSURL) -> String {
         var error: NSError?
-        let contents = NSString(contentsOfURL: URL,
+        let contents = String(contentsOfURL: URL,
             encoding: NSUTF8StringEncoding,
-            error: &error)! as! String
+            error: &error)!
         XCTAssertNil(error, "The error should be nil")
         return contents
     }

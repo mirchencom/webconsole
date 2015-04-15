@@ -13,7 +13,7 @@ class PluginTests: PluginsManagerTestCase {
     func infoDictionaryContentsForPluginWithConfirmation(plugin: Plugin) -> String {
         let pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPlugin(plugin).path!
         var error: NSError?
-        let infoDictionaryContents = NSString(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)! as! String
+        let infoDictionaryContents: String! = String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
         XCTAssertNil(error, "The error should be nil.")
         return infoDictionaryContents
     }
