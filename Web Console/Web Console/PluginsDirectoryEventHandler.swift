@@ -22,18 +22,18 @@ import Cocoa
 
 @objc protocol PluginsDirectoryEventHandlerDelegate {
     optional func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
-        handleCreatedOrModifiedEventsAtPluginPath pluginPath: NSString,
-        createdOrModifiedDirectoryPaths directoryPaths: [NSString]?,
-        createdOrModifiedFilePaths filePaths: [NSString]?)
+        handleCreatedOrModifiedEventsAtPluginPath pluginPath: String,
+        createdOrModifiedDirectoryPaths directoryPaths: [String]?,
+        createdOrModifiedFilePaths filePaths: [String]?)
     optional func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
-        handleRemovedEventsAtPluginPath pluginPath: NSString,
-        removedItemPaths itemPaths: [NSString]?)
+        handleRemovedEventsAtPluginPath pluginPath: String,
+        removedItemPaths itemPaths: [String]?)
 }
 
 class PluginsDirectoryEventHandler: NSObject {
-    var pluginPathToCreatedOrModifiedFilePaths: [NSString : [NSString]]
-    var pluginPathToCreatedOrModifiedDirectoryPaths: [NSString : [NSString]]
-    var pluginPathToRemovedItemPaths: [NSString : [NSString]]
+    var pluginPathToCreatedOrModifiedFilePaths: [String : [String]]
+    var pluginPathToCreatedOrModifiedDirectoryPaths: [String : [String]]
+    var pluginPathToRemovedItemPaths: [String : [String]]
     weak var delegate: PluginsDirectoryEventHandlerDelegate?
     
     struct ClassConstants {
@@ -41,14 +41,14 @@ class PluginsDirectoryEventHandler: NSObject {
     }
     
     override init() {
-        self.pluginPathToCreatedOrModifiedFilePaths = [NSString : [NSString]]()
-        self.pluginPathToCreatedOrModifiedDirectoryPaths = [NSString : [NSString]]()
-        self.pluginPathToRemovedItemPaths = [NSString : [NSString]]()
+        self.pluginPathToCreatedOrModifiedFilePaths = [String : [String]]()
+        self.pluginPathToCreatedOrModifiedDirectoryPaths = [String : [String]]()
+        self.pluginPathToRemovedItemPaths = [String : [String]]()
     }
     
     // MARK: Collecting Handlers
     
-    func addDirectoryWasCreatedOrModifiedEventAtPluginPath(pluginPath: NSString, path: NSString) {
+    func addDirectoryWasCreatedOrModifiedEventAtPluginPath(pluginPath: String, path: String) {
         if var paths = pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] {
             paths.append(path)
             pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] = paths
@@ -59,7 +59,7 @@ class PluginsDirectoryEventHandler: NSObject {
         }
     }
 
-    func addFileWasCreatedOrModifiedEventAtPluginPath(pluginPath: NSString, path: NSString) {
+    func addFileWasCreatedOrModifiedEventAtPluginPath(pluginPath: String, path: String) {
         if var paths = pluginPathToCreatedOrModifiedFilePaths[pluginPath] {
             paths.append(path)
             pluginPathToCreatedOrModifiedFilePaths[pluginPath] = paths
@@ -70,7 +70,7 @@ class PluginsDirectoryEventHandler: NSObject {
         }
     }
 
-    func addItemWasRemovedAtPluginPath(pluginPath: NSString, path: NSString) {
+    func addItemWasRemovedAtPluginPath(pluginPath: String, path: String) {
         if var paths = pluginPathToRemovedItemPaths[pluginPath] {
             paths.append(path)
             pluginPathToRemovedItemPaths[pluginPath] = paths
@@ -81,7 +81,7 @@ class PluginsDirectoryEventHandler: NSObject {
         }
     }
 
-    func fireCreatedOrModifiedEventsAfterDelayForPluginPath(pluginPath: NSString) {
+    func fireCreatedOrModifiedEventsAfterDelayForPluginPath(pluginPath: String) {
         let delay = ClassConstants.fileEventDelay * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue(), {
@@ -89,7 +89,7 @@ class PluginsDirectoryEventHandler: NSObject {
         })
     }
     
-    func fireRemovedEventsAfterDelayForPluginPath(pluginPath: NSString) {
+    func fireRemovedEventsAfterDelayForPluginPath(pluginPath: String) {
         let delay = ClassConstants.fileEventDelay * Double(NSEC_PER_SEC)
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue(), {
@@ -99,7 +99,7 @@ class PluginsDirectoryEventHandler: NSObject {
     
     // MARK: Firing Handlers
     
-    func fireCreatedOrModifiedEventsAtPluginPath(pluginPath: NSString) {
+    func fireCreatedOrModifiedEventsAtPluginPath(pluginPath: String) {
         let filePaths = pluginPathToCreatedOrModifiedFilePaths[pluginPath]
         let directoryPaths = pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath]
         
@@ -116,7 +116,7 @@ class PluginsDirectoryEventHandler: NSObject {
         pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] = nil
     }
 
-    func fireRemovedEventsAtPluginPath(pluginPath: NSString) {
+    func fireRemovedEventsAtPluginPath(pluginPath: String) {
         if let itemPaths = pluginPathToRemovedItemPaths[pluginPath] {
             delegate?.pluginsDirectoryEventHandler?(self,
                 handleRemovedEventsAtPluginPath: pluginPath,

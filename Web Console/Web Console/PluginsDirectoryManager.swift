@@ -9,8 +9,8 @@
 import Foundation
 
 @objc protocol PluginsDirectoryManagerDelegate {
-    optional func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: NSString)
-    optional func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: NSString)
+    optional func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
+    optional func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
 }
 
 class PluginsPathHelper {
@@ -145,9 +145,9 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     // MARK: PluginsDirectoryEventHandlerDelegate
 
     func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
-        handleCreatedOrModifiedEventsAtPluginPath pluginPath: NSString,
-        createdOrModifiedDirectoryPaths directoryPaths: [NSString]?,
-        createdOrModifiedFilePaths filePaths: [NSString]?)
+        handleCreatedOrModifiedEventsAtPluginPath pluginPath: String,
+        createdOrModifiedDirectoryPaths directoryPaths: [String]?,
+        createdOrModifiedFilePaths filePaths: [String]?)
     {
         if let filePaths = filePaths {
             for path in filePaths {
@@ -174,8 +174,8 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
 
     func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
-        handleRemovedEventsAtPluginPath pluginPath: NSString,
-        removedItemPaths itemPaths: [NSString]?)
+        handleRemovedEventsAtPluginPath pluginPath: String,
+        removedItemPaths itemPaths: [String]?)
     {
         if let itemPaths = itemPaths {
             for path in itemPaths {

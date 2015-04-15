@@ -72,7 +72,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     }
     
     func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager,
-        pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: NSString)
+        pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = pluginAtPluginPath(pluginPath) {
             removePlugin(oldPlugin)

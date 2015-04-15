@@ -28,7 +28,7 @@ enum Directory {
             let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0] as! String
             return cachesDirectory.stringByAppendingPathComponent(applicationName)
         case .ApplicationSupport:
-            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]as! NSString
+            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0] as! String
             return applicationSupportDirectory.stringByAppendingPathComponent(applicationName)
         case .ApplicationSupportPlugins:
             return Directory.ApplicationSupport.path().stringByAppendingPathComponent(pluginsDirectoryPathComponent)
