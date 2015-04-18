@@ -43,7 +43,7 @@ class PluginsPathHelper {
     class func pathComponentsOfPath(path: String, afterSubpath subpath: String) -> [String]? {
         let normalizedPath = path.stringByStandardizingPath
         let range = rangeInPath(normalizedPath, untilSubpath: subpath)
-        if (range.location == NSNotFound) {
+        if range.location == NSNotFound {
             return nil
         }
 
@@ -51,18 +51,14 @@ class PluginsPathHelper {
         let pathComponent = normalizedPathAsNSString.substringFromIndex(range.length)
         let pathComponents = pathComponent.pathComponents
 
-        if (pathComponents.count == 0) {
+        if pathComponents.count == 0 {
             return pathComponents
         }
-        
-        if (pathComponents[0] == "/") {
-            // Remove the first slash if it exists
-            var mutablePathComponents = NSMutableArray(array: pathComponents)
-            mutablePathComponents.removeObjectAtIndex(0)
-            return NSArray(array: mutablePathComponents) as? [String]
-        }
 
-        return pathComponents
+        // Remove slashes (path components are sometimes slashes for the first and last component)
+        var mutablePathComponents = NSMutableArray(array: pathComponents)
+        mutablePathComponents.removeObject("/")
+        return mutablePathComponents as NSArray as? [String]
     }
 
     class func pathComponent(pathComponent: String, containsSubpathComponent subpathComponent: String) -> Bool {
