@@ -132,7 +132,6 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     }
     
     func testPartialSubpathComponent() {
-        
         let testPath = pluginPath.stringByAppendingPathComponent("Contents") as String
         let testSubpath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginPathComponent) as String
         let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
@@ -170,4 +169,13 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
         XCTAssertFalse(PluginsPathHelper.pathComponent(testPluginInfoDictionaryPathComponent, containsSubpathComponent: pathComponent), "The path component should contain the subpath component")
         XCTAssertFalse(PluginsPathHelper.pathComponent(testPluginInfoDictionaryPathComponent, isPathComponent: pathComponent), "The path component should not be the path component")
     }
+
+    func testPrivateAliasPluginPathComponent() {
+        let testPath = "/private/".stringByAppendingPathComponent(pluginPath)
+        let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: pluginsDirectoryPath)!
+        let pathComponent = String.pathWithComponents(pathComponents)
+        let testPluginLastPathComponent = pluginPath.lastPathComponent
+        XCTAssertEqual(pathComponent, testPluginLastPathComponent, "The path components should be equal")
+    }
+
 }

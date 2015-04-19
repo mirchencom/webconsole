@@ -155,7 +155,6 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         super.tearDown()
     }
     
-
     // MARK: Plugin Directory Tests
     
     func testMovePlugin() {

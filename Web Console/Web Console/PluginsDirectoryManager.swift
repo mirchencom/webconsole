@@ -47,7 +47,7 @@ class PluginsPathHelper {
             return nil
         }
 
-        let normalizedPathAsNSString: NSString = path
+        let normalizedPathAsNSString: NSString = normalizedPath
         let pathComponent = normalizedPathAsNSString.substringFromIndex(range.length)
         let pathComponents = pathComponent.pathComponents
 
@@ -152,6 +152,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     {
         if let filePaths = filePaths {
             for path in filePaths {
+
                 if shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath,
                     forFileCreatedOrModifiedAtPath: path)
                 {
@@ -286,7 +287,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
             if let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: subpath) {
                 if (pathComponents.count > 0) {
                     var pluginSubpathComponents = pathComponents as Array
-                    let pathComponent = pluginSubpathComponents.removeAtIndex(0)
+                    let pathComponent = pluginSubpathComponents[0]
                     return pathComponent
                 }
             }
