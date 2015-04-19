@@ -9,27 +9,27 @@
 import Foundation
 import XCTest
 
-@objc protocol FilesAndPluginsDirectoryManagerFileDelegate {
-    optional func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String)
-    optional func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String)
-    optional func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, itemWasRemovedAtPath path: String)
+protocol FilesAndPluginsDirectoryManagerFileDelegate {
+    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String)
+    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String)
+    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, itemWasRemovedAtPath path: String)
 }
 
 class FilesAndPluginsDirectoryManager: PluginsDirectoryManager {
-    weak var fileDelegate: FilesAndPluginsDirectoryManagerFileDelegate?
+    var fileDelegate: FilesAndPluginsDirectoryManagerFileDelegate?
     
     override func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, directoryWasCreatedOrModifiedAtPath path: String!) {
-        fileDelegate?.testPluginsDirectoryManager?(self, directoryWasCreatedOrModifiedAtPath: path)
+        fileDelegate?.testPluginsDirectoryManager(self, directoryWasCreatedOrModifiedAtPath: path)
         super.directoryWatcher(directoryWatcher, directoryWasCreatedOrModifiedAtPath: path)
     }
     
     override func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, fileWasCreatedOrModifiedAtPath path: String!) {
-        fileDelegate?.testPluginsDirectoryManager?(self, fileWasCreatedOrModifiedAtPath: path)
+        fileDelegate?.testPluginsDirectoryManager(self, fileWasCreatedOrModifiedAtPath: path)
         super.directoryWatcher(directoryWatcher, fileWasCreatedOrModifiedAtPath: path)
     }
     
     override func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, itemWasRemovedAtPath path: String!) {
-        fileDelegate?.testPluginsDirectoryManager?(self, itemWasRemovedAtPath: path)
+        fileDelegate?.testPluginsDirectoryManager(self, itemWasRemovedAtPath: path)
         super.directoryWatcher(directoryWatcher, itemWasRemovedAtPath: path)
     }
 }

@@ -9,12 +9,12 @@
 import Cocoa
 import XCTest
 
-class PluginsDirectoryEventManager: NSObject, PluginsDirectoryManagerDelegate {
+class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
     var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(path: String) -> Void>
     var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(path: String) -> Void>
     
     
-    override init () {
+    init () {
         self.pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers = Array<(path: String) -> Void>()
         self.pluginInfoDictionaryWasRemovedAtPluginPathHandlers = Array<(path: String) -> Void>()
     }
@@ -22,7 +22,7 @@ class PluginsDirectoryEventManager: NSObject, PluginsDirectoryManagerDelegate {
 
     // MARK: PluginsDirectoryManagerDelegate
     
-    @objc func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String) {
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String) {
         assert(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.count > 0, "There should be at least one handler")
         
         if (pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.count > 0) {
@@ -31,7 +31,7 @@ class PluginsDirectoryEventManager: NSObject, PluginsDirectoryManagerDelegate {
         }
     }
     
-    @objc func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String) {
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String) {
         assert(pluginInfoDictionaryWasRemovedAtPluginPathHandlers.count > 0, "There should be at least one handler")
         
         if (pluginInfoDictionaryWasRemovedAtPluginPathHandlers.count > 0) {

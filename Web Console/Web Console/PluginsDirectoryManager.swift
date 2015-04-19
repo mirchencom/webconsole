@@ -8,9 +8,9 @@
 
 import Foundation
 
-@objc protocol PluginsDirectoryManagerDelegate {
-    optional func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
-    optional func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
+protocol PluginsDirectoryManagerDelegate {
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
 }
 
 class PluginsPathHelper {
@@ -102,7 +102,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     struct ClassConstants {
         static let infoDictionaryPathComponent = "Contents/Info.plist"
     }
-    weak var delegate: PluginsDirectoryManagerDelegate?
+    var delegate: PluginsDirectoryManagerDelegate?
     let pluginsDirectoryEventHandler: PluginsDirectoryEventHandler
     let directoryWatcher: WCLDirectoryWatcher
     let pluginsDirectoryURL: NSURL
@@ -156,7 +156,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                 if shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath,
                     forFileCreatedOrModifiedAtPath: path)
                 {
-                    delegate?.pluginsDirectoryManager?(self, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath: pluginPath)
                     return
                 }
                 
@@ -168,7 +168,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                 if shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath,
                     forDirectoryCreatedOrModifiedAtPath: path)
                 {
-                    delegate?.pluginsDirectoryManager?(self, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath: pluginPath)
                     return
                 }
             }
@@ -184,7 +184,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                 if shouldFireInfoDictionaryWasRemovedAtPluginPath(pluginPath,
                     forItemRemovedAtPath: path)
                 {
-                    delegate?.pluginsDirectoryManager?(self, pluginInfoDictionaryWasRemovedAtPluginPath: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasRemovedAtPluginPath: pluginPath)
                     return
                 }
             }

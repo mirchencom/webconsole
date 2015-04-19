@@ -20,27 +20,27 @@ import Cocoa
 // plugin would not be reloaded for the second edit if events are prevented
 // from firing during the delay period.
 
-@objc protocol PluginsDirectoryEventHandlerDelegate {
-    optional func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
+protocol PluginsDirectoryEventHandlerDelegate {
+    func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
         handleCreatedOrModifiedEventsAtPluginPath pluginPath: String,
         createdOrModifiedDirectoryPaths directoryPaths: [String]?,
         createdOrModifiedFilePaths filePaths: [String]?)
-    optional func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
+    func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
         handleRemovedEventsAtPluginPath pluginPath: String,
         removedItemPaths itemPaths: [String]?)
 }
 
-class PluginsDirectoryEventHandler: NSObject {
+class PluginsDirectoryEventHandler {
     var pluginPathToCreatedOrModifiedFilePaths: [String : [String]]
     var pluginPathToCreatedOrModifiedDirectoryPaths: [String : [String]]
     var pluginPathToRemovedItemPaths: [String : [String]]
-    weak var delegate: PluginsDirectoryEventHandlerDelegate?
+    var delegate: PluginsDirectoryEventHandlerDelegate?
     
     struct ClassConstants {
         static let fileEventDelay = 0.3
     }
     
-    override init() {
+    init() {
         self.pluginPathToCreatedOrModifiedFilePaths = [String : [String]]()
         self.pluginPathToCreatedOrModifiedDirectoryPaths = [String : [String]]()
         self.pluginPathToRemovedItemPaths = [String : [String]]()
@@ -107,7 +107,7 @@ class PluginsDirectoryEventHandler: NSObject {
             return
         }
         
-        delegate?.pluginsDirectoryEventHandler?(self,
+        delegate?.pluginsDirectoryEventHandler(self,
             handleCreatedOrModifiedEventsAtPluginPath: pluginPath,
             createdOrModifiedDirectoryPaths: directoryPaths,
             createdOrModifiedFilePaths: filePaths)
@@ -118,7 +118,7 @@ class PluginsDirectoryEventHandler: NSObject {
 
     func fireRemovedEventsAtPluginPath(pluginPath: String) {
         if let itemPaths = pluginPathToRemovedItemPaths[pluginPath] {
-            delegate?.pluginsDirectoryEventHandler?(self,
+            delegate?.pluginsDirectoryEventHandler(self,
                 handleRemovedEventsAtPluginPath: pluginPath,
                 removedItemPaths: itemPaths)
             pluginPathToRemovedItemPaths[pluginPath] = nil
