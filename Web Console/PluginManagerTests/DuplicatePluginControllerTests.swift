@@ -73,7 +73,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         XCTAssertTrue(longName.hasPrefix(plugin.name), "The new WCLPlugin's name should start with the WCLPlugin's name.")
         XCTAssertNotEqual(plugin.commandPath!, duplicatePlugin.commandPath!, "The command paths should not be equal")
         XCTAssertEqual(plugin.command!, duplicatePlugin.command!, "The commands should be equal")
-        let duplicatePluginFolderName = duplicatePlugin.bundle.bundlePath.lastPathComponent as String
+        let duplicatePluginFolderName = duplicatePlugin.bundle.bundlePath.lastPathComponent
         XCTAssertEqual(DuplicatePluginController.pluginFilenameFromName(duplicatePlugin.name), duplicatePluginFolderName, "The folder name should equal the plugin's name")
         
         // Clean Up
@@ -116,7 +116,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
 
         // Assert the folder name equals the plugin's identifier
-        let duplicatePluginFolderName = duplicatePlugin.bundle.bundlePath.lastPathComponent as String
+        let duplicatePluginFolderName = duplicatePlugin.bundle.bundlePath.lastPathComponent
         XCTAssertEqual(duplicatePluginFolderName, DuplicatePluginController.pluginFilenameFromName(duplicatePlugin.identifier), "The folder name should equal the identifier")
 
         // Test that the folder exists

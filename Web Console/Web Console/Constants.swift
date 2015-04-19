@@ -8,7 +8,7 @@
 
 let pluginFileExtension = "wcplugin"
 let pluginNameKey = "name"
-let applicationName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as String] as! String
+let applicationName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey] as! String
 let errorDomain = NSBundle.mainBundle().bundleIdentifier!
 let pluginsDirectoryPathComponent = "PlugIns"
 let defaultNewPluginIdentifierKey = "WCLDefaultNewPluginIdentifier"

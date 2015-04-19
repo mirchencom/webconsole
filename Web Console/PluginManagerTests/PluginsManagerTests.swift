@@ -15,7 +15,7 @@ class PluginsManagerTests: PluginsManagerTestCase {
         let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
         for plugin in plugins {
             XCTAssertEqual(plugin.pluginType, Plugin.PluginType.Other, "The plugin type should be built-in")
-            XCTAssertEqual(plugin.type as String, Plugin.PluginType.Other.name(), "The type should equal the name")
+            XCTAssertEqual(plugin.type, Plugin.PluginType.Other.name(), "The type should equal the name")
         }
     }
     
@@ -69,7 +69,7 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
 
         for plugin in plugins {
             XCTAssertEqual(plugin.pluginType, Plugin.PluginType.BuiltIn, "The plugin type should be built-in")
-            XCTAssertEqual(plugin.type as String, Plugin.PluginType.BuiltIn.name(), "The type should equal the name")
+            XCTAssertEqual(plugin.type, Plugin.PluginType.BuiltIn.name(), "The type should equal the name")
         }
 
         let count = PluginsManager.sharedInstance.plugins().count

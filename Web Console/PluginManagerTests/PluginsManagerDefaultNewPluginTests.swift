@@ -64,7 +64,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         
         XCTAssertEqual(createdPlugin.suffixes, createdPluginTwo.suffixes, "The new WCLPlugin's file extensions should equal the WCLPlugin's file extensions.")
 
-        let pluginFolderName = createdPluginTwo.bundle.bundlePath.lastPathComponent as String
+        let pluginFolderName = createdPluginTwo.bundle.bundlePath.lastPathComponent
         XCTAssertEqual(DuplicatePluginController.pluginFilenameFromName(createdPluginTwo.name), pluginFolderName, "The folder name should equal the plugin's name")
         
         let longName: String = createdPlugin.name
