@@ -54,7 +54,10 @@ extension PluginsDataControllerEventTestCase {
         
         
         let pluginPath = plugin.bundle.bundlePath
-        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath)
+        let copyExpectation = expectationWithDescription("Copy finished")
+        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+            copyExpectation.fulfill()
+        })
         
         // TODO: Once the requirement that no two plugins have the same identifier is enforced, we'll also have to change the new plugins identifier here
         
@@ -73,7 +76,10 @@ extension PluginsDataControllerEventTestCase {
         })
         
         let pluginPath = plugin.bundle.bundlePath
-        SubprocessFileSystemModifier.removeDirectoryAtPath(pluginPath)
+        let deleteExpectation = expectationWithDescription("Remove finished")
+        SubprocessFileSystemModifier.removeDirectoryAtPath(pluginPath, handler: {
+            deleteExpectation.fulfill()
+        })
         waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
     }
     

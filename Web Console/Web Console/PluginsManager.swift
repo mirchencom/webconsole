@@ -115,9 +115,11 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
 
 
     func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
-        if defaultNewPlugin == plugin {
-            defaultNewPlugin = nil
-        }        
+        if let unwrappedDefaultNewPlugin = defaultNewPlugin {
+            if unwrappedDefaultNewPlugin == plugin {
+                defaultNewPlugin = nil
+            }
+        }
         removePlugin(plugin)
     }
 
