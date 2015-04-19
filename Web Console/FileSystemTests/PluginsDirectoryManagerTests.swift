@@ -22,7 +22,7 @@ class PluginsDirectoryEventManager: NSObject, PluginsDirectoryManagerDelegate {
 
     // MARK: PluginsDirectoryManagerDelegate
     
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String) {
+    @objc func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String) {
         assert(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.count > 0, "There should be at least one handler")
         
         if (pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.count > 0) {
@@ -31,7 +31,7 @@ class PluginsDirectoryEventManager: NSObject, PluginsDirectoryManagerDelegate {
         }
     }
     
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String) {
+    @objc func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String) {
         assert(pluginInfoDictionaryWasRemovedAtPluginPathHandlers.count > 0, "There should be at least one handler")
         
         if (pluginInfoDictionaryWasRemovedAtPluginPathHandlers.count > 0) {
@@ -39,7 +39,7 @@ class PluginsDirectoryEventManager: NSObject, PluginsDirectoryManagerDelegate {
             handler(path: pluginPath)
         }
     }
-    
+
     
     // MARK: Handlers
     
@@ -106,7 +106,11 @@ extension PluginsDirectoryManagerTests {
                 createExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath)
+
+        let copyExpectation = expectationWithDescription("Copy finished")
+        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+            copyExpectation.fulfill()
+        })
         waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
     }
     func copyPluginAtPath(pluginPath: String, destinationPluginPath: String) {
@@ -129,7 +133,11 @@ extension PluginsDirectoryManagerTests {
                 removeExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.removeDirectoryAtPath(pluginPath)
+
+        let deleteExpectation = expectationWithDescription("Delete finished")
+        SubprocessFileSystemModifier.removeDirectoryAtPath(pluginPath, handler: {
+            deleteExpectation.fulfill()
+        })
         waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
     }
 }
