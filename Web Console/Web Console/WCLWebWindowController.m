@@ -66,7 +66,14 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (void)windowDidLoad
 {
-    WKWebView *webView = [[WKWebView alloc] init];
+    // TODO: Use a public API for this when it is available, `developerExtrasEnabled` is a private property
+    NSRect frame = [[self.window contentView] frame];
+    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+    [configuration.preferences setValue:@YES forKey:@"developerExtrasEnabled"];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
+
+    // WKWebView *webView = [[WKWebView alloc] init];
+    
     webView.navigationDelegate = self;
     [self.window setContentView:webView];
 }
