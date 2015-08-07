@@ -16,11 +16,14 @@
 
 #import "Web_Console-Swift.h"
 
+#import <WebKit/WebKit.h>
+
 NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLWebWindowControllerDidCancelCloseWindowNotification";
 
-@interface WCLWebWindowController () <NSWindowDelegate>
-@property (weak) IBOutlet WebView *webView;
+@interface WCLWebWindowController () <NSWindowDelegate, WKNavigationDelegate>
+@property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) void (^storedCompletionHandler)(BOOL success);
+@property (nonatomic, strong) WKNavigation *navigation;
 @property (nonatomic, strong) NSMutableDictionary *requestToCompletionHandlerDictionary;
 - (void)terminateTasksAndCloseWindow;
 - (void)saveWindowFrame;
@@ -61,7 +64,20 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 //    }
 }
 
+- (void)windowDidLoad
+{
+    WKWebView *webView = [[WKWebView alloc] init];
+    webView.navigationDelegate = self;
+    [self.window setContentView:webView];
+}
+
+
 #pragma mark - Properties
+
+- (WKWebView *)webView
+{
+    return self.window.contentView;
+}
 
 - (NSMutableDictionary *)requestToCompletionHandlerDictionary
 {
@@ -88,13 +104,19 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     }
     
     // Store the completion handler in a property just until we can map it to a request.
+    if (self.storedCompletionHandler) {
+        self.storedCompletionHandler(NO);
+    }
     self.storedCompletionHandler = completionHandler;
     
-    [self.webView.mainFrame loadHTMLString:HTML baseURL:baseURL];
+    [self.webView loadHTMLString:HTML baseURL:baseURL];
 }
 
-- (NSString *)doJavaScript:(NSString *)javaScript {
-    return [self.webView stringByEvaluatingJavaScriptFromString:javaScript];
+- (void)doJavaScript:(NSString *)javaScript completionHandler:(void (^)(id result))completionHandler
+{
+    [self.webView evaluateJavaScript:javaScript completionHandler:^(id result, NSError *error) {
+        completionHandler(result);
+    }];
 }
 
 #pragma mark - NSWindowDelegate
@@ -186,89 +208,69 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
     }];
 }
 
-#pragma mark - WebPolicyDelegate
+#pragma mark - WebResourceLoadDelegate
 
-- (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource
+// TODO: Figure out how to disable caching with `WKWebView`
+
+//- (NSURLRequest *)webView:(WebView *)sender resource:(id)identifier willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse fromDataSource:(WebDataSource *)dataSource
+//{
+//    // TODO: This disables all local caching of resources. This was added to get the HTML plugin to be able to easily refresh updated resources, but a more elegant solution that preserves caching in most cases might be preferable.
+//    request = [NSURLRequest requestWithURL:[request URL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[request timeoutInterval]];
+//    return request;
+//}
+
+#pragma mark - WKNavigationDelegate
+
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {
-    // TODO: This disables all local caching of resources. This was added to get the HTML plugin to be able to easily refresh updated resources, but a more elegant solution that preserves caching in most cases might be preferable.
-    request = [NSURLRequest requestWithURL:[request URL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:[request timeoutInterval]];
-    return request;
+    self.navigation = navigation;
 }
 
-- (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
-    NSURL *URL = [request URL];
+    if (self.navigation == navigation) {
+        self.navigation = nil;
+        self.storedCompletionHandler(YES);
+        self.storedCompletionHandler = nil;
+        [self.window setTitle:self.webView.title];
+    }
+}
 
-    if (![webView mainFrameURL] ||
-        self.storedCompletionHandler) {
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    NSURL *URL = [[navigationAction request] URL];
+    
+    // TODO: This will probably need to be debugged with `WKWebView`
+    if (self.navigation || self.storedCompletionHandler) {
         // Always allow the first URL to load
         // If the storedCompletionHandler is not nil, that means a load HTML is being called.
-        // Checking if it it's not nil allows a second load HTML with a file URL to be called without the file URL being processed separately.
-        [listener use];
+        // Checking if it it's not nil allows a second load HTML with referenced file URLs to be called
+        // without the file URL being processed differently per below.
+        decisionHandler(WKNavigationActionPolicyAllow);
         return;
     }
-
+    
     if ([[URL scheme] isEqualToString:@"file"]) {
         // Handle FILE URLs
-        switch ([actionInformation[@"WebActionNavigationTypeKey"] intValue]) {
-            case WebNavigationTypeLinkClicked:
+        switch (navigationAction.navigationType) {
+            case WKNavigationTypeLinkActivated:
                 // Links clicked
-                [[NSWorkspace sharedWorkspace] openURL:[request URL]];
+                [[NSWorkspace sharedWorkspace] openURL:URL];
+                decisionHandler(WKNavigationActionPolicyCancel);
                 break;
-            case WebNavigationTypeOther:
+            case WKNavigationTypeOther:
                 // JavaScript setting "window.location"
-                [[NSWorkspace sharedWorkspace] openURL:[request URL]];
+                [[NSWorkspace sharedWorkspace] openURL:URL];
+                decisionHandler(WKNavigationActionPolicyCancel);
                 break;
             default:
-                [listener use];
+                decisionHandler(WKNavigationActionPolicyAllow);
                 break;
         }
         return;
     }
-
-    [listener use];
-}
-
-- (void)webView:(WebView *)webView decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
-{
-    [listener use];
-}
-
-#pragma mark - WebResourceLoadDelegate
-
-- (id)webView:(WebView *)sender identifierForInitialRequest:(NSURLRequest *)request fromDataSource:(WebDataSource *)dataSource
-{
-    if (self.storedCompletionHandler) {
-        self.requestToCompletionHandlerDictionary[request] = self.storedCompletionHandler;
-        self.storedCompletionHandler = nil;
-    }
     
-    return request;
-}
-
-- (void)webView:(WebView *)sender resource:(id)identifier didFinishLoadingFromDataSource:(WebDataSource *)dataSource
-{
-    void (^completionHandler)(BOOL success) = self.requestToCompletionHandlerDictionary[identifier];
-    if (completionHandler) {
-        completionHandler(YES);
-        [self.requestToCompletionHandlerDictionary removeObjectForKey:identifier];
-    }
-}
-
-- (void)webView:(WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource
-{
-    void (^completionHandler)(BOOL success) = self.requestToCompletionHandlerDictionary[identifier];
-    if (completionHandler) {
-        completionHandler(NO);
-        [self.requestToCompletionHandlerDictionary removeObjectForKey:identifier];
-    }
-}
-
-#pragma mark - WebFrameLoadDelegate
-
-- (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
-{
-    [self.window setTitle:title];
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 #pragma mark - WCLPluginTaskDelegate

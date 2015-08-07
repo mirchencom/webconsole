@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4502BCE3177D159900F0A5C2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		450CD3161A8C27DB00D17CF1 /* XCTest+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */; };
 		450CD3181A8C332100D17CF1 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
 		450CD3191A8C337700D17CF1 /* XCTest+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */; };
@@ -24,7 +23,6 @@
 		4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0E41736E2A6000A52E2 /* MainMenu.xib */; };
 		4530B0EF1736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0F51736E2A6000A52E2 /* InfoPlist.strings */; };
-		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
 		453AD8AF188235CC0039A3A9 /* WCLPluginTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
@@ -62,6 +60,7 @@
 		455FD26A1A899D3A00ACE1D4 /* PluginsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E2A1A87E4E600E4BEFA /* PluginsManager.swift */; };
 		4562410F1A88683C0047F085 /* WCLWebWindowControllerPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4562410E1A88683C0047F085 /* WCLWebWindowControllerPluginTests.m */; };
 		456241121A8991A70047F085 /* WCLAppleScriptPluginWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */; };
+		4562CBF71B7445A100E77ACC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4562CBF61B7445A100E77ACC /* WebKit.framework */; };
 		456492FF191C656D00BA048E /* IRB.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
 		45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
 		45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */; };
@@ -246,7 +245,6 @@
 		4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Web ConsoleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0F41736E2A6000A52E2 /* Web ConsoleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Web ConsoleTests-Info.plist"; sourceTree = "<group>"; };
 		4530B0F61736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4530B1031736E3F1000A52E2 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		453AD8AD188235CC0039A3A9 /* WCLPluginTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPluginTask.h; sourceTree = "<group>"; };
 		453AD8AE188235CC0039A3A9 /* WCLPluginTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginTask.m; sourceTree = "<group>"; };
 		4548E1CE1A8C346A00A225BF /* PreferencesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PreferencesTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -269,6 +267,7 @@
 		4562410E1A88683C0047F085 /* WCLWebWindowControllerPluginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebWindowControllerPluginTests.m; sourceTree = "<group>"; };
 		456241101A8991A70047F085 /* WCLAppleScriptPluginWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLAppleScriptPluginWrapper.h; sourceTree = "<group>"; };
 		456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLAppleScriptPluginWrapper.m; sourceTree = "<group>"; };
+		4562CBF61B7445A100E77ACC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		456492FE191C656D00BA048E /* IRB.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = IRB.wcplugin; sourceTree = "<group>"; };
 		45729EB81A89A270001ECC4C /* PreferencesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PreferencesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45729EBB1A89A270001ECC4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -380,7 +379,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */,
+				4562CBF71B7445A100E77ACC /* WebKit.framework in Frameworks */,
 				4530B0D01736E2A6000A52E2 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,7 +388,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4502BCE3177D159900F0A5C2 /* WebKit.framework in Frameworks */,
 				4530B0EF1736E2A6000A52E2 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,8 +456,8 @@
 		4530B0CE1736E2A6000A52E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4562CBF61B7445A100E77ACC /* WebKit.framework */,
 				4530B0CF1736E2A6000A52E2 /* Cocoa.framework */,
-				4530B1031736E3F1000A52E2 /* WebKit.framework */,
 				4530B0D11736E2A6000A52E2 /* Other Frameworks */,
 			);
 			name = Frameworks;

@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import <WebKit/WebKit.h>
-
 #import "WCLPluginTask.h"
 
 @class Plugin;
@@ -19,7 +17,7 @@ extern NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification;
 @interface WCLWebWindowController : NSWindowController <WCLPluginTaskDelegate>
 - (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler;
 - (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler;
-- (NSString *)doJavaScript:(NSString *)javaScript;
+- (void)doJavaScript:(NSString *)javaScript completionHandler:(void (^)(id result))completionHandler;
 - (BOOL)hasTasks;
 @property (nonatomic, strong, readonly) NSArray *tasks;
 @property (nonatomic, strong) Plugin *plugin;

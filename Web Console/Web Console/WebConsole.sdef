@@ -288,7 +288,7 @@
 				<cocoa key="Target" />
 				<type type="window" />
 			</parameter>
-            <result>
+			<result>
 				<type type="any"/>
 				<type type="text"/>
 				<type type="real"/>

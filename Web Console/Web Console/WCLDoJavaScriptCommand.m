@@ -15,7 +15,6 @@
 
 - (id)performDefaultImplementation
 {
-
     NSString *javaScript = [self directParameter];
         
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
@@ -23,7 +22,12 @@
     
     WCLWebWindowController *webWindowController = (WCLWebWindowController *)window.windowController;
 
-    return [webWindowController doJavaScript:javaScript];
+    [self suspendExecution];
+    [webWindowController doJavaScript:javaScript completionHandler:^(id result) {
+        [self resumeExecutionWithResult:result];
+    }];
+
+    return nil;
 }
 
 @end

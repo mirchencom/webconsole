@@ -16,8 +16,10 @@
 #import "WCLWebWindowController.h"
 #import "WCLTestPluginManagerTestCase.h"
 
+#import <WebKit/WebKit.h>
+
 @interface WCLWebWindowController (Tests)
-@property (nonatomic, readonly) WebView *webView;
+@property (nonatomic, readonly) WKWebView *webView;
 - (void)terminateTasksAndCloseWindow;
 @end
 

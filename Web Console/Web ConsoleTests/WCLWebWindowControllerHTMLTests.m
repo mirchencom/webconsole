@@ -48,12 +48,24 @@
     NSString *javaScript = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextJQueryFilename
                                                           withExtension:kTestDataJavaScriptExtension
                                                            subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
-    NSString *result = [webWindowController doJavaScript:javaScript];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"JavaScript runs"];
+    __block NSString *result;
+    [webWindowController doJavaScript:javaScript completionHandler:^(id aResult) {
+        result = aResult;
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:kTestTimeoutInterval handler:nil];
     
     NSString *testJavaScript = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextFilename
                                                           withExtension:kTestDataJavaScriptExtension
                                                            subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
-    NSString *expectedResult = [webWindowController doJavaScript:testJavaScript];
+    expectation = [self expectationWithDescription:@"JavaScript runs"];
+    __block NSString *expectedResult;
+    [webWindowController doJavaScript:testJavaScript completionHandler:^(id aResult) {
+        expectedResult = aResult;
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:kTestTimeoutInterval handler:nil];
     
     // These tests fail, but it works in actual use. I assume it is failing because of complications
     // caused by the test running on the main thread.
