@@ -696,11 +696,11 @@
 			isa = PBXGroup;
 			children = (
 				45B0FF391B75805A008EC6EC /* LogController.swift */,
+				45B0FF441B758458008EC6EC /* WCLWebViewController.h */,
+				45B0FF451B758458008EC6EC /* WCLWebViewController.m */,
 				45B0FF3A1B75805A008EC6EC /* SplitWebViewController.swift */,
 				45B0FF3B1B75805A008EC6EC /* SplitWebWindowController.swift */,
 				45B0FF3C1B75805A008EC6EC /* SplitWebWindowsController.swift */,
-				45B0FF441B758458008EC6EC /* WCLWebViewController.h */,
-				45B0FF451B758458008EC6EC /* WCLWebViewController.m */,
 				45ADD90A1739E883008A6AE7 /* WCLWebWindowController.h */,
 				45ADD90B1739E883008A6AE7 /* WCLWebWindowController.m */,
 				45ADD90F1739F257008A6AE7 /* WCLWebWindowsController.h */,
