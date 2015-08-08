@@ -10,8 +10,19 @@ import Cocoa
 import WebKit
 import AppKit
 
-class SplitWebViewController: NSSplitViewController, WebViewControllerDelegate, LogControllerDelegate {
+let splitWebViewHeight = CGFloat(150)
 
+protocol SplitWebViewControllerDelegate: class {
+    func windowNumberForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSNumber
+    func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
+    func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
+    func splitWebViewControllerDidStartTasks(splitWebViewController: SplitWebViewController)
+    func splitWebViewControllerDidFinishTasks(splitWebViewController: SplitWebViewController)
+}
+
+class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegate, LogControllerDelegate {
+
+    weak var delegate: SplitWebViewControllerDelegate?
     var logController: LogController!
 
     var logSplitViewItemDividerIndex: Int? {
@@ -19,6 +30,11 @@ class SplitWebViewController: NSSplitViewController, WebViewControllerDelegate, 
             return index - 1
         }
         return nil
+    }
+    
+    var pluginWebViewController: WCLWebViewController {
+        let splitViewItem = splitViewItems.first as! NSSplitViewItem
+        return splitViewItem.viewController as! WCLWebViewController
     }
     
     // MARK: Life Cycle
@@ -30,7 +46,7 @@ class SplitWebViewController: NSSplitViewController, WebViewControllerDelegate, 
         logController.delegate = self
         
         for splitViewItem in splitViewItems {
-            if let webViewController = splitViewItem.viewController as? WebViewController {
+            if let webViewController = splitViewItem.viewController as? WCLWebViewController {
                 webViewController.delegate = self
             }
         }
@@ -39,6 +55,23 @@ class SplitWebViewController: NSSplitViewController, WebViewControllerDelegate, 
     override func viewWillAppear() {
         super.viewWillAppear()
         logController.setCollapsed(true, animated: false)
+    }
+    
+    // MARK: Tasks
+    
+    func hasTasks() -> Bool {
+        return tasks().count > 0
+    }
+    
+    func tasks() -> [NSTask] {
+        var tasks = [NSTask]()
+        let splitViewItems = self.splitViewItems as! [NSSplitViewItem]
+        
+        for splitViewItem in splitViewItems {
+            let webViewController = splitViewItem.viewController as! WCLWebViewController
+            tasks.append(webViewController.tasks)
+        }
+        return tasks
     }
     
     // MARK: Actions
@@ -102,13 +135,19 @@ class SplitWebViewController: NSSplitViewController, WebViewControllerDelegate, 
         }
     }
 
-    // MARK: WebViewControllerDelegate
+    // MARK: LogControllerDelegate
+    
+    func savedFrameNameForLogController(logController: LogController) -> String {
+        return "Log Frame " + pluginWebViewController.plugin.name
+    }
 
-    func webViewControllerViewWillDisappear(webViewController: WebViewController) {
+    // MARK: WCLWebViewControllerDelegate
+    
+    func webViewControllerViewWillDisappear(webViewController: WCLWebViewController) {
         // No-op only tests use this now
     }
     
-    func webViewControllerViewWillAppear(webViewController: WebViewController) {
+    func webViewControllerViewWillAppear(webViewController: WCLWebViewController) {
         if let superview = webViewController.view.superview {
             let view = webViewController.view
             
@@ -120,17 +159,34 @@ class SplitWebViewController: NSSplitViewController, WebViewControllerDelegate, 
                 multiplier: 1,
                 constant: splitWebViewHeight)
             superview.addConstraint(minimumHeightConstraint)
-
+            
             if view == logController.logView {
                 logController.restoreFrame()
             }
         }
     }
 
-    // MARK: LogControllerDelegate
-    
-    func savedFrameNameForLogController(logController: LogController) -> String {
-        return logSavedFrameName
+    func windowNumberForWebViewController(webViewController: WCLWebViewController!) -> NSNumber! {
+        // TODO: Fortify this forced unwrap
+        return delegate?.windowNumberForSplitWebViewController(self)
     }
 
+    func webViewControllerWillLoadHTML(webViewController: WCLWebViewController!) {
+        delegate?.splitWebViewControllerWillLoadHTML(self)
+    }
+
+    func webViewController(webViewController: WCLWebViewController!, didReceiveTitle title: String!) {
+        delegate?.splitWebViewController(self, didReceiveTitle: title)
+    }
+    
+    func webViewController(webViewController: WCLWebViewController!, taskWillStart task: NSTask!) {
+        delegate?.splitWebViewControllerDidStartTasks(self)
+    }
+
+    func webViewController(webViewController: WCLWebViewController!, taskDidFinish task: NSTask!) {
+        if !hasTasks() {
+            delegate?.splitWebViewControllerDidFinishTasks(self)
+        }
+    }
+    
 }

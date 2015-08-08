@@ -15,3 +15,4 @@
 #import "WCLWebWindowsController.h"
 #import "WCLWebWindowController.h"
 #import "WCLPluginTask.h"
+#import "WCLWebViewController.h"
