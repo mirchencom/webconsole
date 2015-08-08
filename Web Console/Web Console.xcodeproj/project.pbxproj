@@ -145,7 +145,6 @@
 		45B0FF3E1B75805A008EC6EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B0FF371B75805A008EC6EC /* Main.storyboard */; };
 		45B0FF3F1B75805A008EC6EC /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF391B75805A008EC6EC /* LogController.swift */; };
 		45B0FF401B75805A008EC6EC /* SplitWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF3A1B75805A008EC6EC /* SplitWebViewController.swift */; };
-		45B0FF411B75805A008EC6EC /* SplitWebWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF3B1B75805A008EC6EC /* SplitWebWindowController.swift */; };
 		45B0FF421B75805A008EC6EC /* SplitWebWindowsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF3C1B75805A008EC6EC /* SplitWebWindowsController.swift */; };
 		45B0FF461B758458008EC6EC /* WCLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF451B758458008EC6EC /* WCLWebViewController.m */; };
 		45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */; };
@@ -368,7 +367,6 @@
 		45B0FF381B75805A008EC6EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45B0FF391B75805A008EC6EC /* LogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
 		45B0FF3A1B75805A008EC6EC /* SplitWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitWebViewController.swift; sourceTree = "<group>"; };
-		45B0FF3B1B75805A008EC6EC /* SplitWebWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitWebWindowController.swift; sourceTree = "<group>"; };
 		45B0FF3C1B75805A008EC6EC /* SplitWebWindowsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitWebWindowsController.swift; sourceTree = "<group>"; };
 		45B0FF441B758458008EC6EC /* WCLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLWebViewController.h; sourceTree = "<group>"; };
 		45B0FF451B758458008EC6EC /* WCLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebViewController.m; sourceTree = "<group>"; };
@@ -699,7 +697,6 @@
 				45B0FF441B758458008EC6EC /* WCLWebViewController.h */,
 				45B0FF451B758458008EC6EC /* WCLWebViewController.m */,
 				45B0FF3A1B75805A008EC6EC /* SplitWebViewController.swift */,
-				45B0FF3B1B75805A008EC6EC /* SplitWebWindowController.swift */,
 				45ADD90A1739E883008A6AE7 /* WCLSplitWebWindowController.h */,
 				45ADD90B1739E883008A6AE7 /* WCLSplitWebWindowController.m */,
 				45B0FF3C1B75805A008EC6EC /* SplitWebWindowsController.swift */,
@@ -1061,7 +1058,6 @@
 				45914E3C1A87E4E600E4BEFA /* Plugin.swift in Sources */,
 				455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */,
 				45898BB7178532EC00AE365A /* WCLPlugin.m in Sources */,
-				45B0FF411B75805A008EC6EC /* SplitWebWindowController.swift in Sources */,
 				45914E381A87E4E600E4BEFA /* CopyDirectoryController.swift in Sources */,
 				45898BB8178532EC00AE365A /* WCLPluginsManager.m in Sources */,
 				4521E9D81A89A1780075D330 /* WCLPluginsViewController.m in Sources */,

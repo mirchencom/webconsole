@@ -147,7 +147,17 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
     }];
 }
 
-#pragma mark - WCLWebViewControllerDelegate
+#pragma mark - SplitWebViewControllerDelegate
+
+- (NSNumber *)windowNumberForSplitWebViewController:(SplitWebViewController *)splitWebViewController
+{
+    if (![self.window isVisible]) {
+        // The windowNumber must be calculated after showing the window
+        [self showWindow:nil];
+    }
+
+    return [NSNumber numberWithInteger:self.window.windowNumber];
+}
 
 - (void)splitWebViewControllerWillLoadHTML:(SplitWebViewController *)splitWebViewController
 {

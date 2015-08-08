@@ -11,6 +11,4 @@
 extern NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification;
 
 @interface WCLSplitWebWindowController : NSWindowController
-
-
 @end

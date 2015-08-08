@@ -206,11 +206,7 @@
         environmentDictionary[kEnvironmentVariablePluginNameKey] = pluginName;
     }
     
-    if (![self.window isVisible]) {
-        // Setting the windowNumber in the environmentDictionary must happen after showing the window
-        [self showWindow:nil];
-    }
-    NSNumber *windowNumber = [NSNumber numberWithInteger:self.window.windowNumber];
+    NSNumber *windowNumber = [self.delegate windowNumberForWebViewController:self];
     if (windowNumber) {
         environmentDictionary[kEnvironmentVariableWindowIDKey] = windowNumber;
     }
