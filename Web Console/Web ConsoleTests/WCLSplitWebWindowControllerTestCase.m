@@ -1,22 +1,22 @@
 //
-//  WCLWebWindowControllerTestCase.m
+//  WCLSplitWebWindowControllerTestCase.m
 //  Web Console
 //
 //  Created by Roben Kleene on 12/30/13.
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WCLWebWindowControllerTestCase.h"
+#import "WCLSplitWebWindowControllerTestCase.h"
 
-#import "WCLWebWindowControllerTestsHelper.h"
+#import "WCLSplitWebWindowControllerTestsHelper.h"
 #import "WCLTaskTestsHelper.h"
 #import "Web_Console-Swift.h"
 
-@implementation WCLWebWindowControllerTestCase
+@implementation WCLSplitWebWindowControllerTestCase
 
 - (void)tearDown
 {
-    [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    [WCLSplitWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
     [super tearDown];
 }
@@ -30,22 +30,22 @@
     return task;
 }
 
-+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath
++ (WCLSplitWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath
 {
     return [self webWindowControllerRunningCommandPath:commandPath task:nil];
 }
 
-+ (WCLWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
++ (WCLSplitWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
 {
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
     [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     
-    NSArray *webWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLWebWindowController.");
+    NSArray *webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
 
     // The last web window controller should be the newest created and therefore have the task we're looking for
-    WCLWebWindowController *webWindowController = webWindowControllers.lastObject;
-    NSAssert([webWindowController hasTasks], @"The WCLWebWindowController should have an NSTask.");
+    WCLSplitWebWindowController *webWindowController = webWindowControllers.lastObject;
+    NSAssert([webWindowController hasTasks], @"The WCLSplitWebWindowController should have an NSTask.");
 
     if (task) {
         *task = webWindowController.tasks[0];

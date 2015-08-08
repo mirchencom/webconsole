@@ -8,7 +8,7 @@
 
 #import "WCLAppDelegate.h"
 
-#import "WCLWebWindowsController.h"
+#import "WCLSplitWebWindowsController.h"
 
 #import "WCLTaskHelper.h"
 

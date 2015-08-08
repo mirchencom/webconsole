@@ -8,8 +8,8 @@
 
 #import "WCLDoJavaScriptCommand.h"
 
-#import "WCLWebWindowsController.h"
-#import "WCLWebWindowController.h"
+#import "WCLSplitWebWindowsController.h"
+#import "WCLSplitWebWindowController.h"
 
 @implementation WCLDoJavaScriptCommand
 
@@ -21,7 +21,7 @@
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     
-    WCLWebWindowController *webWindowController = (WCLWebWindowController *)window.windowController;
+    WCLSplitWebWindowController *webWindowController = (WCLSplitWebWindowController *)window.windowController;
 
     return [webWindowController doJavaScript:javaScript];
 }

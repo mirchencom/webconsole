@@ -6,7 +6,7 @@
         <plugIn identifier="com.apple.WebKitIBPlugin" version="3338"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="WCLWebWindowController">
+        <customObject id="-2" userLabel="File's Owner" customClass="WCLSplitWebWindowController">
             <connections>
                 <outlet property="webView" destination="3" id="13"/>
                 <outlet property="window" destination="1" id="12"/>

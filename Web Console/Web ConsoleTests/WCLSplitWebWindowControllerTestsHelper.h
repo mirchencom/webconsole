@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class WCLWebWindowController;
+@class WCLSplitWebWindowController;
 
-@interface WCLWebWindowControllerTestsHelper : NSObject
-+ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLWebWindowController *)webWindowController;
+@interface WCLSplitWebWindowControllerTestsHelper : NSObject
++ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLSplitWebWindowController *)webWindowController;
 + (void)blockUntilWindowHasAttachedSheet:(NSWindow *)window;
 + (void)blockUntilWindowIsVisible:(NSWindow *)window;
 + (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window;

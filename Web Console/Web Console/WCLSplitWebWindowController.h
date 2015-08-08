@@ -8,9 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-extern NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification;
+extern NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification;
 
-@interface WCLWebWindowController : NSWindowController
+@interface WCLSplitWebWindowController : NSWindowController
 
 
 @end

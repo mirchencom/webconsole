@@ -8,8 +8,8 @@
 
 #import "WCLPlugin.h"
 
-#import "WCLWebWindowsController.h"
-#import "WCLWebWindowController.h"
+#import "WCLSplitWebWindowsController.h"
+#import "WCLSplitWebWindowController.h"
 
 #import "NSApplication+AppleScript.h"
 

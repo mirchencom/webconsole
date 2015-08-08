@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WCLWebWindowController.h"
+#import "WCLSplitWebWindowController.h"
 
-#import "WCLWebWindowsController.h"
+#import "WCLSplitWebWindowsController.h"
 
 #import "WCLUserInterfaceTextHelper.h"
 
@@ -17,16 +17,16 @@
 #import "WCLTaskHelper.h"
 
 
-NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLWebWindowControllerDidCancelCloseWindowNotification";
+NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @"WCLSplitWebWindowControllerDidCancelCloseWindowNotification";
 
-@interface WCLWebWindowController () <NSWindowDelegate, SplitWebViewControllerDelegate>
+@interface WCLSplitWebWindowController () <NSWindowDelegate, SplitWebViewControllerDelegate>
 - (void)terminateTasksAndCloseWindow;
 - (void)saveWindowFrame;
 - (NSString *)windowFrameName;
 @property (weak) IBOutlet SplitWebViewController *splitWebViewController;
 @end
 
-@implementation WCLWebWindowController
+@implementation WCLSplitWebWindowController
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -70,7 +70,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
         [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
             if (returnCode != NSAlertFirstButtonReturn) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WCLWebWindowControllerDidCancelCloseWindowNotification object:self];
+                [[NSNotificationCenter defaultCenter] postNotificationName:WCLSplitWebWindowControllerDidCancelCloseWindowNotification object:self];
                 return;
             }
             
@@ -84,7 +84,7 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-    [[WCLWebWindowsController sharedWebWindowsController] removeWebWindowController:self];
+    [[WCLSplitWebWindowsController sharedWebWindowsController] removeWebWindowController:self];
 }
 
 - (void)windowDidMove:(NSNotification *)notification
@@ -126,8 +126,8 @@ NSString * const WCLWebWindowControllerDidCancelCloseWindowNotification = @"WCLW
 
 - (void)terminateTasksAndCloseWindow
 {
-    // TODO: When the API allows a WCLWebWindowController to have multiple tasks, this will need additional testing.
-    // A test where a new task is created on the WCLWebWindowController after terminateTasks:completionHandler: is called
+    // TODO: When the API allows a WCLSplitWebWindowController to have multiple tasks, this will need additional testing.
+    // A test where a new task is created on the WCLSplitWebWindowController after terminateTasks:completionHandler: is called
     // so that the ![self hasTasks] check fails and this method is called recurssively.
     NSArray *tasks = [self tasks];
     [WCLTaskHelper terminateTasks:tasks completionHandler:^(BOOL success) {

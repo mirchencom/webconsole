@@ -187,7 +187,7 @@ class Plugin: WCLPlugin {
             task.arguments = arguments
         }
 
-        let webWindowController = WCLWebWindowsController.sharedWebWindowsController().addedWebWindowControllerForPlugin(self)
+        let webWindowController = WCLSplitWebWindowsController.sharedWebWindowsController().addedWebWindowControllerForPlugin(self)
         WCLPluginTask.runTask(task, delegate:webWindowController)
     }
         
@@ -195,13 +195,13 @@ class Plugin: WCLPlugin {
 
         println("[AppleScript] \(self.name) readFromStandardInput: \(text)")
 
-        let webWindowControllers = WCLWebWindowsController.sharedWebWindowsController().webWindowControllersForPlugin(self)
+        let webWindowControllers = WCLSplitWebWindowsController.sharedWebWindowsController().webWindowControllersForPlugin(self)
 
         if webWindowControllers.count == 0 {
             return
         }
 
-        let webWindowController = webWindowControllers[0] as! WCLWebWindowController
+        let webWindowController = webWindowControllers[0] as! WCLSplitWebWindowController
 
         if !webWindowController.hasTasks() {
             return
@@ -218,7 +218,7 @@ class Plugin: WCLPlugin {
     // MARK: Windows
 
     func orderedWindows() -> [AnyObject]! {
-        return WCLWebWindowsController.sharedWebWindowsController().windowsForPlugin(self)
+        return WCLSplitWebWindowsController.sharedWebWindowsController().windowsForPlugin(self)
     }
 
 }

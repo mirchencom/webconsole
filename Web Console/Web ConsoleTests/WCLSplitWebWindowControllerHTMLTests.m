@@ -1,5 +1,5 @@
 //
-//  WCLWebWindowControllerHTMLTests.m
+//  WCLSplitWebWindowControllerHTMLTests.m
 //  Web Console
 //
 //  Created by Roben Kleene on 12/30/13.
@@ -15,11 +15,11 @@
 #import "Web_Console-Swift.h"
 
 
-@interface WCLWebWindowControllerHTMLTests : XCTestCase
+@interface WCLSplitWebWindowControllerHTMLTests : XCTestCase
 
 @end
 
-@implementation WCLWebWindowControllerHTMLTests
+@implementation WCLSplitWebWindowControllerHTMLTests
 
 #pragma mark - HTML & JavaScript
 
@@ -31,7 +31,7 @@
     NSURL *baseURL = [[self class] wcl_sharedTestResourcesURL];
     
     __block BOOL completionHandlerRan = NO;
-    WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *webWindowController = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
     [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
         completionHandlerRan = YES;
         XCTAssertTrue(success, @"The load should have succeeded.");
@@ -64,7 +64,7 @@
 
 - (void)testLoadHTMLTwice
 {
-    WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *webWindowController = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
     
     NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:kTestDataHTMLFilename
                                                   withExtension:kTestDataHTMLExtension
@@ -113,7 +113,7 @@
                                                           withExtension:kTestDataHTMLExtension
                                                            subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
-    WCLWebWindowController *webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *webWindowController = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
     
     __block BOOL firstCompletionHandlerRan = NO;
     [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
@@ -143,14 +143,14 @@
                                                     withExtension:kTestDataHTMLExtension
                                                      subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
-    WCLWebWindowController *webWindowController1 = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *webWindowController1 = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
     __block BOOL firstCompletionHandlerRan = NO;
     [webWindowController1 loadHTML:HTML completionHandler:^(BOOL success) {
         firstCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The first load should have succeeded.");
     }];
     
-    WCLWebWindowController *webWindowController2 = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *webWindowController2 = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
     __block BOOL secondCompletionHandlerRan = NO;
     [webWindowController2 loadHTML:HTML completionHandler:^(BOOL success) {
         secondCompletionHandlerRan = YES;
@@ -166,8 +166,8 @@
     XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
     XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
     
-    NSUInteger webWindowControllersCount = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two WCLWebWindowControllers. %lu", webWindowControllersCount);
+    NSUInteger webWindowControllersCount = [[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers] count];
+    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two WCLSplitWebWindowControllers. %lu", webWindowControllersCount);
 }
 
 @end

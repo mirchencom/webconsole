@@ -8,8 +8,8 @@
 
 #import "WCLApplicationTerminationHelper.h"
 
-#import "WCLWebWindowsController.h"
-#import "WCLWebWindowController.h"
+#import "WCLSplitWebWindowsController.h"
+#import "WCLSplitWebWindowController.h"
 
 @interface WCLApplicationTerminationHelper ()
 + (NSMutableArray *)webWindowControllersWithTasks;
@@ -20,7 +20,7 @@
 + (NSArray *)webWindowControllersWithTasks
 {
     NSPredicate *tasksPredicate = [NSPredicate predicateWithFormat:@"hasTasks == %@", [NSNumber numberWithBool:YES]];
-    return [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] filteredArrayUsingPredicate:tasksPredicate];
+    return [[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers] filteredArrayUsingPredicate:tasksPredicate];
 }
 
 + (BOOL)applicationShouldTerminateAndManageWebWindowControllersWithTasks
@@ -48,7 +48,7 @@
     };
 
     // Quit if the user closes all the windows with running tasks
-    for (WCLWebWindowController *webWindowController in webWindowControllersWithTasks) {
+    for (WCLSplitWebWindowController *webWindowController in webWindowControllersWithTasks) {
         __block id windowWillCloseObserver;
         windowWillCloseObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
                                                                      object:webWindowController.window
@@ -64,7 +64,7 @@
 
     // Cancel the quit if the user does not confirm closing a window with a running task
     __block id cancelWindowCloseObserver;
-    cancelWindowCloseObserver= [[NSNotificationCenter defaultCenter] addObserverForName:WCLWebWindowControllerDidCancelCloseWindowNotification
+    cancelWindowCloseObserver= [[NSNotificationCenter defaultCenter] addObserverForName:WCLSplitWebWindowControllerDidCancelCloseWindowNotification
                                                       object:nil
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification) {

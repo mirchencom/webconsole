@@ -1,5 +1,5 @@
 //
-//  WCLWebWindowControllerResizingTests.m
+//  WCLSplitWebWindowControllerResizingTests.m
 //  Web Console
 //
 //  Created by Roben Kleene on 12/30/13.
@@ -8,10 +8,10 @@
 
 #import <XCTest/XCTest.h>
 
-#import "WCLWebWindowControllerTestCase.h"
+#import "WCLSplitWebWindowControllerTestCase.h"
 
 // Test Helpers
-#import "WCLWebWindowControllerTestsHelper.h"
+#import "WCLSplitWebWindowControllerTestsHelper.h"
 #import "WCLTaskTestsHelper.h"
 // Plugins
 #import "Web_Console-Swift.h"
@@ -19,12 +19,12 @@
 #import "NSRectHelpers.h"
 #import "Web_ConsoleTestsConstants.h"
 
-@interface WCLWebWindowControllerResizingTests : WCLWebWindowControllerTestCase
+@interface WCLSplitWebWindowControllerResizingTests : WCLSplitWebWindowControllerTestCase
 + (NSRect)savedFrameNamed:(NSString *)frameName;
-- (WCLWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(WCLPlugin *)plugin;
+- (WCLSplitWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(WCLPlugin *)plugin;
 @end
 
-@implementation WCLWebWindowControllerResizingTests
+@implementation WCLSplitWebWindowControllerResizingTests
 
 - (void)testResizingAndCascadingWindows
 {
@@ -35,8 +35,8 @@
     XCTAssertTrue([plugin.name isEqualToString:kTestPrintPluginName], @"The WCLPlugin's name should equal the test plugin name.");
     
     // Open an NSWindow
-    WCLWebWindowController *webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
-    XCTAssertEqual([[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLWebWindowControllers for the WCLPlugin.");
+    WCLSplitWebWindowController *webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
+    XCTAssertEqual([[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLSplitWebWindowControllers for the WCLPlugin.");
 
     // Test that the NSWindow's frame matches the saved frame
     NSRect savedFrame = [[self class] savedFrameNamed:plugin.name];
@@ -54,7 +54,7 @@
     NSRect destinationFrameTwo = NSRectEqualToRect(windowFrame, kTestWindowFrame) ? kTestWindowFrame : kTestWindowFrameTwo;
     XCTAssertFalse(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should not equal the destination frame.");
     XCTAssertFalse(NSRectEqualToRect(destinationFrame, destinationFrameTwo), @"The NSWindow's frame should not equal the destination frame.");
-//    XCTAssertFalse([webWindowController shouldCascadeWindows], @"The first WCLWebWindowController for a plugin should not cascade windows.");
+//    XCTAssertFalse([webWindowController shouldCascadeWindows], @"The first WCLSplitWebWindowController for a plugin should not cascade windows.");
     
     // Set the NSWindow's frame to the destination frame
     [webWindowController.window setFrame:destinationFrame display:NO];
@@ -64,30 +64,30 @@
     XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrame), @"The saved frame should equal the destination frame.");
     
     // Close the NSWindow
-    [WCLWebWindowControllerTestsHelper blockUntilWebWindowControllerTasksRunAndFinish:webWindowController];
-    [WCLWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    [WCLSplitWebWindowControllerTestsHelper blockUntilWebWindowControllerTasksRunAndFinish:webWindowController];
+    [WCLSplitWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
     // Open a new NSWindow
     webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
-    XCTAssertEqual([[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLWebWindowControllers for the WCLPlugin.");
+    XCTAssertEqual([[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLSplitWebWindowControllers for the WCLPlugin.");
     
     // Test that the NSWindow's frame now equals the destination frame
     windowFrame = [webWindowController.window frame];
     
     XCTAssertTrue(NSSizeEqualToSize(windowFrame.size, destinationFrame.size), @"The NSWindow's frame should equal the destination frame.");
-//    XCTAssertFalse([webWindowController shouldCascadeWindows], @"The first WCLWebWindowController for a plugin should not cascade windows.");
-    // Rect check should only succeed if this WCLWebWindowController should not cascade windows
+//    XCTAssertFalse([webWindowController shouldCascadeWindows], @"The first WCLSplitWebWindowController for a plugin should not cascade windows.");
+    // Rect check should only succeed if this WCLSplitWebWindowController should not cascade windows
 //    XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should equal the destination frame.");
     
     // Open a second window
     webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
-    XCTAssertEqual([[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)2, @"There should be two WCLWebWindowControllers for the WCLPlugin.");
+    XCTAssertEqual([[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)2, @"There should be two WCLSplitWebWindowControllers for the WCLPlugin.");
     
     // Test that the second NSWindow's frame now equals the destination frame
     windowFrame = [webWindowController.window frame];
     XCTAssertTrue(NSSizeEqualToSize(windowFrame.size, destinationFrame.size), @"The NSWindow's sie should equal the destination size.");
-    XCTAssertTrue([webWindowController shouldCascadeWindows], @"The second WCLWebWindowController for a plugin should cascade windows.");
-    // Rect check should only succeed if this WCLWebWindowController should not cascade windows
+    XCTAssertTrue([webWindowController shouldCascadeWindows], @"The second WCLSplitWebWindowController for a plugin should cascade windows.");
+    // Rect check should only succeed if this WCLSplitWebWindowController should not cascade windows
     XCTAssertFalse(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should not equal the destination frame.");
 
     // Set the second NSWindow's frame to the second destination frame
@@ -99,32 +99,32 @@
     
     // Open a third NSWindow
     webWindowController = [self webWindowControllerRunningHelloWorldForPlugin:plugin];
-    XCTAssertEqual([[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)3, @"There should be three WCLWebWindowControllers for the WCLPlugin.");
+    XCTAssertEqual([[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] count], (NSUInteger)3, @"There should be three WCLSplitWebWindowControllers for the WCLPlugin.");
     
     // Test that the third NSWindow matches the second desintation frame
     windowFrame = [webWindowController.window frame];
     XCTAssertTrue(NSSizeEqualToSize(windowFrame.size, destinationFrameTwo.size), @"The NSWindow's size should equal the destination size.");
-    XCTAssertTrue([webWindowController shouldCascadeWindows], @"The third WCLWebWindowController for a plugin should cascade windows.");
-    // Rect check should only succeed if this WCLWebWindowController should not cascade windows
+    XCTAssertTrue([webWindowController shouldCascadeWindows], @"The third WCLSplitWebWindowController for a plugin should cascade windows.");
+    // Rect check should only succeed if this WCLSplitWebWindowController should not cascade windows
     XCTAssertFalse(NSRectEqualToRect(windowFrame, destinationFrameTwo), @"The NSWindow's frame should equal the destination frame.");
 
     // Test that the saved frame matches second destination frame
     savedFrame = [[self class] savedFrameNamed:plugin.name];
     XCTAssertTrue(NSSizeEqualToSize(savedFrame.size, destinationFrameTwo.size), @"The saved size should equal the destination size.");
-    // Rect check should only succeed if this WCLWebWindowController should not cascade windows
+    // Rect check should only succeed if this WCLSplitWebWindowController should not cascade windows
     XCTAssertFalse(NSRectEqualToRect(savedFrame, destinationFrameTwo), @"The saved frame should equal the destination frame.");
 
     // Clean up
-    NSArray *tasks = [[WCLWebWindowsController sharedWebWindowsController] tasks];
+    NSArray *tasks = [[WCLSplitWebWindowsController sharedWebWindowsController] tasks];
     [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
 }
 
 
 #pragma mark - Helpers
 
-- (WCLWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin
+- (WCLSplitWebWindowController *)webWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin
 {
-    NSArray *originalWebWindowControllers = [[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
+    NSArray *originalWebWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
     
     // Run a simple command to get the window to display
     NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
@@ -132,12 +132,12 @@
                                          subdirectory:kTestDataSubdirectory];
     [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     
-    NSMutableArray *webWindowControllers = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] mutableCopy];
+    NSMutableArray *webWindowControllers = [[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin] mutableCopy];
     [webWindowControllers removeObjectsInArray:originalWebWindowControllers];
     
     NSAssert([webWindowControllers count] == (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
-    WCLWebWindowController *webWindowController = webWindowControllers[0];
-    NSAssert(webWindowController.plugin == plugin, @"The WCLWebWindowController's WCLPlugin should equal the WCLPlugin.");
+    WCLSplitWebWindowController *webWindowController = webWindowControllers[0];
+    NSAssert(webWindowController.plugin == plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
     
     return webWindowController;
 }

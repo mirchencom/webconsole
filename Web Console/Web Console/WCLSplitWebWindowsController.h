@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class WCLWebWindowController;
+@class WCLSplitWebWindowController;
 @class Plugin;
 
-@interface WCLWebWindowsController : NSObject
+@interface WCLSplitWebWindowsController : NSObject
 + (instancetype)sharedWebWindowsController;
-- (WCLWebWindowController *)addedWebWindowController;
-- (WCLWebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin;
-- (void)removeWebWindowController:(WCLWebWindowController *)webWindowController;
+- (WCLSplitWebWindowController *)addedWebWindowController;
+- (WCLSplitWebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin;
+- (void)removeWebWindowController:(WCLSplitWebWindowController *)webWindowController;
 - (NSArray *)webWindowControllers;
 - (NSArray *)webWindowControllersForPlugin:(Plugin *)plugin;
 - (NSArray *)windowsForPlugin:(Plugin *)plugin;

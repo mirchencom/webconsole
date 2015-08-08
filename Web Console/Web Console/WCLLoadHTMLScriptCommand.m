@@ -8,8 +8,8 @@
 
 #import "WCLLoadHTMLScriptCommand.h"
 
-#import "WCLWebWindowsController.h"
-#import "WCLWebWindowController.h"
+#import "WCLSplitWebWindowsController.h"
+#import "WCLSplitWebWindowController.h"
 
 #define kFileURLPrefix @"file://"
 
@@ -30,11 +30,11 @@
         baseURL = [NSURL URLWithString:baseURLString];
     }
 
-    WCLWebWindowController *webWindowController;
+    WCLSplitWebWindowController *webWindowController;
     if (window) {
-        webWindowController = (WCLWebWindowController *)window.windowController;
+        webWindowController = (WCLSplitWebWindowController *)window.windowController;
     } else {
-        webWindowController = [[WCLWebWindowsController sharedWebWindowsController] addedWebWindowController];
+        webWindowController = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
         window = webWindowController.window;
     }
 

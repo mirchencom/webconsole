@@ -6,27 +6,27 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WCLWebWindowsController.h"
+#import "WCLSplitWebWindowsController.h"
 
-#import "WCLWebWindowController.h"
+#import "WCLSplitWebWindowController.h"
 #import "WCLPlugin.h"
 
 #define kWebWindowNibName @"WebWindow"
 
-@interface WCLWebWindowsController ()
+@interface WCLSplitWebWindowsController ()
 @property (nonatomic, strong) NSMutableArray *mutableWebWindowControllers;
 @end
 
-@interface WCLWebWindowController (WebWindowsController)
+@interface WCLSplitWebWindowController (WebWindowsController)
 @property (nonatomic, strong) WCLPlugin *plugin;
 @end
 
-@implementation WCLWebWindowsController
+@implementation WCLSplitWebWindowsController
 
 + (instancetype)sharedWebWindowsController
 {
     static dispatch_once_t pred;
-    static WCLWebWindowsController *webWindowsController = nil;
+    static WCLSplitWebWindowsController *webWindowsController = nil;
     
     dispatch_once(&pred, ^{ webWindowsController = [[self alloc] init]; });
     return webWindowsController;
@@ -47,16 +47,16 @@
     return [self.mutableWebWindowControllers copy];
 }
 
-- (WCLWebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin
+- (WCLSplitWebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin
 {
-    WCLWebWindowController *webWindowController = [self addedWebWindowController];
+    WCLSplitWebWindowController *webWindowController = [self addedWebWindowController];
     webWindowController.plugin = plugin;
     return webWindowController;
 }
 
-- (WCLWebWindowController *)addedWebWindowController
+- (WCLSplitWebWindowController *)addedWebWindowController
 {
-    WCLWebWindowController *webWindowController = [[WCLWebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
+    WCLSplitWebWindowController *webWindowController = [[WCLSplitWebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
     [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
     
@@ -65,7 +65,7 @@
     return webWindowController;
 }
 
-- (void)removeWebWindowController:(WCLWebWindowController *)webWindowController
+- (void)removeWebWindowController:(WCLSplitWebWindowController *)webWindowController
 {
     [self.mutableWebWindowControllers removeObject:webWindowController];
 }
@@ -96,7 +96,7 @@
 - (NSArray *)tasks
 {
     NSMutableArray *tasks = [NSMutableArray array];
-    for (WCLWebWindowController *webWindowController in self.mutableWebWindowControllers) {
+    for (WCLSplitWebWindowController *webWindowController in self.mutableWebWindowControllers) {
         [tasks addObjectsFromArray:webWindowController.tasks];
     }
     return tasks;

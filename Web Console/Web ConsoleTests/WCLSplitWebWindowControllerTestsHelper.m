@@ -6,21 +6,21 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "WCLWebWindowControllerTestsHelper.h"
+#import "WCLSplitWebWindowControllerTestsHelper.h"
 
 #import "Web_ConsoleTestsConstants.h"
 
-#import "WCLWebWindowsController.h"
-#import "WCLWebWindowController.h"
+#import "WCLSplitWebWindowsController.h"
+#import "WCLSplitWebWindowController.h"
 
 #import "WCLTaskTestsHelper.h"
 
 //#import "Web_Console-Swift.h"
 
-@implementation WCLWebWindowControllerTestsHelper
+@implementation WCLSplitWebWindowControllerTestsHelper
 
 
-+ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLWebWindowController *)webWindowController
++ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLSplitWebWindowController *)webWindowController
 {
     [WCLTaskTestsHelper blockUntilTasksRunAndFinish:webWindowController.tasks];
 }
@@ -78,10 +78,10 @@
 
 + (void)closeWindowsAndBlockUntilFinished
 {    
-    if (![[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count]) return;
+    if (![[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers] count]) return;
     
     NSMutableArray *observers = [NSMutableArray array];
-    for (WCLWebWindowController *webWindowController in [[WCLWebWindowsController sharedWebWindowsController] webWindowControllers]) {
+    for (WCLSplitWebWindowController *webWindowController in [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers]) {
         __block id observer;
         observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
                                                                      object:webWindowController.window
@@ -108,8 +108,8 @@
 
     NSAssert(windowsDidFinishClosing, @"The NSWindows should have finished closing.");
     
-    NSUInteger webWindowControllersCount = [[[WCLWebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    NSAssert(!webWindowControllersCount, @"There should not be any WCLWebWindowControllers.");
+    NSUInteger webWindowControllersCount = [[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers] count];
+    NSAssert(!webWindowControllersCount, @"There should not be any WCLSplitWebWindowControllers.");
 
 // There is not way to pause a test until [[[NSApplication sharedApplication] windows] count] goes to zero
 // The best we can do is test [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count] which should be
