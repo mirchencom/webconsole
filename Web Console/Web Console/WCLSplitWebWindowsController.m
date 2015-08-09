@@ -13,12 +13,8 @@
 
 #define kWebWindowNibName @"WebWindow"
 
-@interface WCLSplitWebWindowsController ()
+@interface WCLSplitWebWindowsController () <WCLSplitWebWindowControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *mutableSplitWebWindowControllers;
-@end
-
-@interface WCLSplitWebWindowController (WebWindowsController)
-@property (nonatomic, strong) WCLPlugin *plugin;
 @end
 
 @implementation WCLSplitWebWindowsController
@@ -56,18 +52,16 @@
 
 - (WCLSplitWebWindowController *)addedSplitWebWindowController
 {
-    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:bundle];
+
+    WCLSplitWebWindowController *splitWebWindowController = [storyboard instantiateControllerWithIdentifier:@"SplitWebWindow"];
 
     [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
-    
-    [self.mutableSplitWebWindowControllers addObject:splitWebWindowController];
+    splitWebWindowController.delegate = self;
+    [self addSplitWebWindowController:splitWebWindowController];
     
     return splitWebWindowController;
-}
-
-- (void)removeSplitWebWindowController:(WCLSplitWebWindowController *)splitWebWindowController
-{
-    [self.mutableSplitWebWindowControllers removeObject:splitWebWindowController];
 }
 
 - (NSArray *)splitWebWindowControllersForPlugin:(WCLPlugin *)plugin
@@ -100,6 +94,26 @@
         [tasks addObjectsFromArray:splitWebWindowController.tasks];
     }
     return tasks;
+}
+
+#pragma mark - Private
+
+- (void)removeSplitWebWindowController:(WCLSplitWebWindowController *)splitWebWindowController
+{
+    [self.mutableSplitWebWindowControllers removeObject:splitWebWindowController];
+}
+
+- (void)addSplitWebWindowController:(WCLSplitWebWindowController *)splitWebWindowController
+{
+    [self.mutableSplitWebWindowControllers addObject:splitWebWindowController];
+}
+
+
+#pragma mark - WCLSplitWebWindowControllerDelegate
+
+- (void)splitWebWindowControllerWindowWillClose:(WCLSplitWebWindowController *)splitWebWindowController
+{
+    [self removeSplitWebWindowController:splitWebWindowController];
 }
 
 @end

@@ -8,8 +8,6 @@
 
 #import "WCLSplitWebWindowController.h"
 
-#import "WCLSplitWebWindowsController.h"
-
 #import "WCLUserInterfaceTextHelper.h"
 
 #import "Web_Console-Swift.h"
@@ -98,7 +96,9 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-    [[WCLSplitWebWindowsController sharedSplitWebWindowsController] removeSplitWebWindowController:self];
+    if ([self.delegate respondsToSelector:@selector(splitWebWindowControllerWindowWillClose:)]) {
+        [self.delegate splitWebWindowControllerWindowWillClose:self];
+    }
 }
 
 - (void)windowDidMove:(NSNotification *)notification

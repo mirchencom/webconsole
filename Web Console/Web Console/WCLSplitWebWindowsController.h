@@ -15,7 +15,6 @@
 + (instancetype)sharedSplitWebWindowsController;
 - (WCLSplitWebWindowController *)addedSplitWebWindowController;
 - (WCLSplitWebWindowController *)addedSplitWebWindowControllerForPlugin:(Plugin *)plugin;
-- (void)removeSplitWebWindowController:(WCLSplitWebWindowController *)splitWebWindowController;
 - (NSArray *)splitWebWindowControllers;
 - (NSArray *)splitWebWindowControllersForPlugin:(Plugin *)plugin;
 - (NSArray *)windowsForPlugin:(Plugin *)plugin;
