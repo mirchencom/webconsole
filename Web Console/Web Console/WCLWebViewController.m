@@ -13,7 +13,7 @@
 #import "WCLPluginTask.h"
 #import "Web_Console-Swift.h"
 
-@interface WCLWebViewController () <WCLPluginTaskDelegate>
+@interface WCLWebViewController ()
 @property (weak) IBOutlet WebView *webView;
 @property (nonatomic, strong) void (^storedCompletionHandler)(BOOL success);
 @property (nonatomic, strong) NSMutableDictionary *requestToCompletionHandlerDictionary;

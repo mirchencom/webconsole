@@ -12,8 +12,8 @@ import AppKit
 
 let splitWebViewHeight = CGFloat(150)
 
-protocol SplitWebViewControllerDelegate: class {
-    func windowNumberForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSNumber
+@objc protocol SplitWebViewControllerDelegate: class {
+    func windowNumberForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSNumber!
     func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
     func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
     func splitWebViewControllerDidStartTasks(splitWebViewController: SplitWebViewController)
@@ -69,6 +69,10 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     // MARK: Tasks
+    
+    func runTask(task: NSTask) {
+        WCLPluginTask.runTask(task, delegate: pluginWebViewController)
+    }
     
     func hasTasks() -> Bool {
         return tasks().count > 0
@@ -148,8 +152,11 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
 
     // MARK: LogControllerDelegate
     
-    func savedFrameNameForLogController(logController: LogController) -> String {
-        return "Log Frame " + pluginWebViewController.plugin.name
+    func savedFrameNameForLogController(logController: LogController) -> String? {
+        if let pluginName = pluginWebViewController.plugin?.name {
+            return "Log Frame " + pluginName
+        }
+        return nil
     }
 
     // MARK: WCLWebViewControllerDelegate
@@ -177,24 +184,24 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         }
     }
 
-    func windowNumberForWebViewController(webViewController: WCLWebViewController!) -> NSNumber! {
+    func windowNumberForWebViewController(webViewController: WCLWebViewController) -> NSNumber {
         // TODO: Fortify this forced unwrap
-        return delegate?.windowNumberForSplitWebViewController(self)
+        return delegate!.windowNumberForSplitWebViewController(self)!
     }
 
-    func webViewControllerWillLoadHTML(webViewController: WCLWebViewController!) {
+    func webViewControllerWillLoadHTML(webViewController: WCLWebViewController) {
         delegate?.splitWebViewControllerWillLoadHTML(self)
     }
 
-    func webViewController(webViewController: WCLWebViewController!, didReceiveTitle title: String!) {
+    func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
         delegate?.splitWebViewController(self, didReceiveTitle: title)
     }
     
-    func webViewController(webViewController: WCLWebViewController!, taskWillStart task: NSTask!) {
+    func webViewController(webViewController: WCLWebViewController, taskWillStart task: NSTask) {
         delegate?.splitWebViewControllerDidStartTasks(self)
     }
 
-    func webViewController(webViewController: WCLWebViewController!, taskDidFinish task: NSTask!) {
+    func webViewController(webViewController: WCLWebViewController, taskDidFinish task: NSTask) {
         if !hasTasks() {
             delegate?.splitWebViewControllerDidFinishTasks(self)
         }

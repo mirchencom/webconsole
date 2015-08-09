@@ -22,7 +22,7 @@
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController taskDidFinish:(nonnull NSTask *)task;
 @end
 
-@interface WCLWebViewController : NSViewController
+@interface WCLWebViewController : NSViewController <WCLPluginTaskDelegate>
 - (void)loadHTML:(nonnull NSString *)HTML completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (void)loadHTML:(nonnull NSString *)HTML baseURL:(nullable NSURL *)baseURL completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;

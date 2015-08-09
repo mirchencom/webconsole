@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 @objc protocol LogControllerDelegate: class {
-    func savedFrameNameForLogController(logController: LogController) -> String
+    func savedFrameNameForLogController(logController: LogController) -> String?
 }
 
 @objc class LogController {

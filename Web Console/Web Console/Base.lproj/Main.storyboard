@@ -22,7 +22,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="showPreferencesWindow:" target="Ady-hI-5gd" id="Iaz-sO-nVW"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -656,7 +660,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController storyboardIdentifier="PluginWindow" id="B8D-0N-5wS" customClass="PluginWindowController" customModule="Web_Console" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="PluginWindow" id="B8D-0N-5wS" customClass="WCLSplitWebWindowController" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -674,10 +678,10 @@
             </objects>
             <point key="canvasLocation" x="60" y="242"/>
         </scene>
-        <!--Plugin View Controller-->
+        <!--Split Web View Controller-->
         <scene sceneID="11g-gw-cdL">
             <objects>
-                <splitViewController id="Liy-Az-G0f" customClass="PluginViewController" customModule="Web_Console" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="Liy-Az-G0f" customClass="SplitWebViewController" customModule="Web_Console" customModuleProvider="target" sceneMemberID="viewController">
                     <splitViewItems>
                         <splitViewItem id="mgP-uL-P1B"/>
                         <splitViewItem id="kMR-wq-kbt"/>
@@ -701,7 +705,7 @@
         <!--Web View Controller-->
         <scene sceneID="vn5-Sm-4z5">
             <objects>
-                <viewController id="vBq-W7-bS8" customClass="WebViewController" customModule="Web_Console" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vBq-W7-bS8" customClass="WCLWebViewController" sceneMemberID="viewController">
                     <view key="view" id="Gbl-dl-fKk">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="150"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -728,7 +732,7 @@
         <!--Web View Controller-->
         <scene sceneID="cJY-Mo-VmT">
             <objects>
-                <viewController id="y4s-Hp-oHQ" customClass="WebViewController" customModule="Web_Console" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="y4s-Hp-oHQ" customClass="WCLWebViewController" sceneMemberID="viewController">
                     <view key="view" id="tTG-4o-K6k">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="150"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -15,10 +15,14 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
 
 @protocol WCLSplitWebWindowControllerDelegate <NSObject>
 @optional
-- (void)splitWebWindowControllerWindowWillClose:(WCLSplitWebWindowController *)splitWebWindowController;
+- (void)splitWebWindowControllerWindowWillClose:(nonnull WCLSplitWebWindowController *)splitWebWindowController;
 @end
 
 @interface WCLSplitWebWindowController : NSWindowController
 @property (nonatomic, weak, nullable) id<WCLSplitWebWindowControllerDelegate> delegate;
 @property (nonatomic, strong, nullable) Plugin *plugin;
+- (void)runTask:(nonnull NSTask *)task;
+- (BOOL)hasTasks;
+- (nonnull NSArray *)tasks;
+
 @end

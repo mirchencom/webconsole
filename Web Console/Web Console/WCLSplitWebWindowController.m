@@ -21,7 +21,7 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 - (void)terminateTasksAndCloseWindow;
 - (void)saveWindowFrame;
 - (NSString *)windowFrameName;
-@property (weak) IBOutlet SplitWebViewController *splitWebViewController;
+@property (nonatomic, strong, readonly) SplitWebViewController *splitWebViewController;
 @end
 
 @implementation WCLSplitWebWindowController
@@ -50,12 +50,17 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 - (void)setPlugin:(Plugin *)plugin
 {
-    self.splitWebViewController.plugin = plugin
+    self.splitWebViewController.plugin = plugin;
 }
 
 - (Plugin *)plugin
 {
-    return self.splitWebViewController.plugin
+    return self.splitWebViewController.plugin;
+}
+
+- (SplitWebViewController *)splitWebViewController
+{
+    return (SplitWebViewController *)self.contentViewController;
 }
 
 #pragma mark - NSWindowDelegate
@@ -128,6 +133,11 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 #pragma mark - Tasks
 
+- (void)runTask:(NSTask *)task
+{
+    [self.splitWebViewController runTask:task];
+}
+
 - (NSArray *)tasks
 {
     return [self.splitWebViewController tasks];
@@ -196,9 +206,7 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 - (void)splitWebViewControllerDidFinishTasks:(SplitWebViewController *)splitWebViewController
 {
-    if (![self.mutableTasks count]) {
-        [self.window setDocumentEdited:NO]; // Remove edited dot in close button
-    }
+    [self.window setDocumentEdited:NO]; // Remove edited dot in close button
 }
 
 
