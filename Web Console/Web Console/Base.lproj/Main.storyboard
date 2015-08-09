@@ -715,6 +715,11 @@
                                 <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                     <nil key="identifier"/>
                                 </webPreferences>
+                                <connections>
+                                    <outlet property="frameLoadDelegate" destination="vBq-W7-bS8" id="fmi-xK-q5x"/>
+                                    <outlet property="policyDelegate" destination="vBq-W7-bS8" id="CNs-rL-2C6"/>
+                                    <outlet property="resourceLoadDelegate" destination="vBq-W7-bS8" id="IKx-Uj-wBJ"/>
+                                </connections>
                             </webView>
                         </subviews>
                         <constraints>
@@ -724,6 +729,9 @@
                             <constraint firstAttribute="trailing" secondItem="dak-ns-YRX" secondAttribute="trailing" id="VfV-uN-7Oa"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="dak-ns-YRX" id="8vY-cg-QyO"/>
+                    </connections>
                 </viewController>
                 <customObject id="Pjr-Az-jh7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -742,6 +750,11 @@
                                 <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                     <nil key="identifier"/>
                                 </webPreferences>
+                                <connections>
+                                    <outlet property="frameLoadDelegate" destination="y4s-Hp-oHQ" id="O5g-gg-JzX"/>
+                                    <outlet property="policyDelegate" destination="y4s-Hp-oHQ" id="ydH-bc-sF7"/>
+                                    <outlet property="resourceLoadDelegate" destination="y4s-Hp-oHQ" id="khQ-CQ-zwf"/>
+                                </connections>
                             </webView>
                         </subviews>
                         <constraints>
@@ -751,6 +764,9 @@
                             <constraint firstItem="aBp-ds-Eoo" firstAttribute="top" secondItem="tTG-4o-K6k" secondAttribute="top" id="v2z-BQ-QVC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="aBp-ds-Eoo" id="zQz-dn-EOD"/>
+                    </connections>
                 </viewController>
                 <customObject id="16w-I6-Afv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
