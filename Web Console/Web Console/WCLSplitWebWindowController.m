@@ -40,10 +40,6 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 - (void)awakeFromNib
 {
-    NSString *windowFrameName = [self windowFrameName];
-    if (windowFrameName) {
-        [self.window setFrameUsingName:windowFrameName];
-    }   
     self.splitWebViewController.delegate = self;
 }
 
@@ -65,6 +61,12 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 }
 
 #pragma mark - NSWindowDelegate
+
+- (void)showWindow:(id)sender
+{
+    [self restoreWindowFrame];
+    [super showWindow:sender];
+}
 
 - (BOOL)windowShouldClose:(id)sender
 {
@@ -119,11 +121,22 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 #pragma mark - Save & Restore Window Frame
 
-- (void)saveWindowFrame
+- (void)restoreWindowFrame
 {
     NSString *windowFrameName = [self windowFrameName];
     if (windowFrameName) {
-        [self.window saveFrameUsingName:windowFrameName];
+        [self.window setFrameUsingName:windowFrameName];
+    }
+}
+
+- (void)saveWindowFrame
+{
+    // Don't save the frame while the window is being constructed
+    if ([self.window isVisible]) {
+        NSString *windowFrameName = [self windowFrameName];
+        if (windowFrameName) {
+            [self.window saveFrameUsingName:windowFrameName];
+        }
     }
 }
 
