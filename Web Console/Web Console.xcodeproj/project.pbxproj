@@ -17,11 +17,8 @@
 		4521E9D81A89A1780075D330 /* WCLPluginsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D41A89A1780075D330 /* WCLPluginsViewController.m */; };
 		4521E9D91A89A1780075D330 /* WCLPluginsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D51A89A1780075D330 /* WCLPluginsViewController.xib */; };
 		4530B0D01736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
-		4530B0DA1736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0D81736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B0DC1736E2A6000A52E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0DB1736E2A6000A52E2 /* main.m */; };
-		4530B0E01736E2A6000A52E2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0DE1736E2A6000A52E2 /* Credits.rtf */; };
 		4530B0E31736E2A6000A52E2 /* WCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0E21736E2A6000A52E2 /* WCLAppDelegate.m */; };
-		4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0E41736E2A6000A52E2 /* MainMenu.xib */; };
 		4530B0EF1736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0F71736E2A6000A52E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4530B0F51736E2A6000A52E2 /* InfoPlist.strings */; };
 		4530B1041736E3F1000A52E2 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B1031736E3F1000A52E2 /* WebKit.framework */; };
@@ -140,7 +137,6 @@
 		45A34E2618726492005BF628 /* WCLSplitWebWindowControllerTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A34E2518726492005BF628 /* WCLSplitWebWindowControllerTaskTests.m */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WCLSplitWebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WCLSplitWebWindowController.m */; };
-		45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD90D1739EA58008A6AE7 /* WebWindow.xib */; };
 		45ADD9111739F257008A6AE7 /* WCLSplitWebWindowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD9101739F257008A6AE7 /* WCLSplitWebWindowsController.m */; };
 		45B0FF3E1B75805A008EC6EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B0FF371B75805A008EC6EC /* Main.storyboard */; };
 		45B0FF3F1B75805A008EC6EC /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF391B75805A008EC6EC /* LogController.swift */; };
@@ -240,13 +236,10 @@
 		4530B0D31736E2A6000A52E2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4530B0D41736E2A6000A52E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4530B0D71736E2A6000A52E2 /* Web Console-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Web Console-Info.plist"; sourceTree = "<group>"; };
-		4530B0D91736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4530B0DB1736E2A6000A52E2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4530B0DD1736E2A6000A52E2 /* Web Console-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Web Console-Prefix.pch"; sourceTree = "<group>"; };
-		4530B0DF1736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		4530B0E11736E2A6000A52E2 /* WCLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLAppDelegate.h; sourceTree = "<group>"; };
 		4530B0E21736E2A6000A52E2 /* WCLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCLAppDelegate.m; sourceTree = "<group>"; };
-		4530B0E51736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4530B0EC1736E2A6000A52E2 /* Web ConsoleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Web ConsoleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0F41736E2A6000A52E2 /* Web ConsoleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Web ConsoleTests-Info.plist"; sourceTree = "<group>"; };
 		4530B0F61736E2A6000A52E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -360,7 +353,6 @@
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WCLSplitWebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLSplitWebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WCLSplitWebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLSplitWebWindowController.m; sourceTree = "<group>"; };
-		45ADD90D1739EA58008A6AE7 /* WebWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebWindow.xib; sourceTree = "<group>"; };
 		45ADD90F1739F257008A6AE7 /* WCLSplitWebWindowsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLSplitWebWindowsController.h; sourceTree = "<group>"; };
 		45ADD9101739F257008A6AE7 /* WCLSplitWebWindowsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLSplitWebWindowsController.m; sourceTree = "<group>"; };
 		45B0FF381B75805A008EC6EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -497,6 +489,7 @@
 				459389F118FB20EC00E0218E /* Preferences */,
 				4530B0D61736E2A6000A52E2 /* Supporting Files */,
 				45914E521A87E8E700E4BEFA /* Web_Console-Bridging-Header.h */,
+				45B0FF371B75805A008EC6EC /* Main.storyboard */,
 			);
 			path = "Web Console";
 			sourceTree = "<group>";
@@ -505,10 +498,8 @@
 			isa = PBXGroup;
 			children = (
 				4530B0D71736E2A6000A52E2 /* Web Console-Info.plist */,
-				4530B0D81736E2A6000A52E2 /* InfoPlist.strings */,
 				4530B0DB1736E2A6000A52E2 /* main.m */,
 				4530B0DD1736E2A6000A52E2 /* Web Console-Prefix.pch */,
-				4530B0DE1736E2A6000A52E2 /* Credits.rtf */,
 				45ADD9051739E21A008A6AE7 /* WebConsole.sdef */,
 			);
 			name = "Supporting Files";
@@ -699,9 +690,6 @@
 				45ADD90B1739E883008A6AE7 /* WCLSplitWebWindowController.m */,
 				45ADD90F1739F257008A6AE7 /* WCLSplitWebWindowsController.h */,
 				45ADD9101739F257008A6AE7 /* WCLSplitWebWindowsController.m */,
-				45B0FF371B75805A008EC6EC /* Main.storyboard */,
-				45ADD90D1739EA58008A6AE7 /* WebWindow.xib */,
-				4530B0E41736E2A6000A52E2 /* MainMenu.xib */,
 			);
 			name = "Web Windows";
 			sourceTree = "<group>";
@@ -966,18 +954,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4530B0DA1736E2A6000A52E2 /* InfoPlist.strings in Resources */,
 				459389F318FB287700E0218E /* UserDefaults.plist in Resources */,
 				459389F018FB20D900E0218E /* WCLPreferencesWindowController.xib in Resources */,
 				45B0FF3E1B75805A008EC6EC /* Main.storyboard in Resources */,
-				4530B0E01736E2A6000A52E2 /* Credits.rtf in Resources */,
 				456492FF191C656D00BA048E /* IRB.wcplugin in Resources */,
-				4530B0E61736E2A6000A52E2 /* MainMenu.xib in Resources */,
 				45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */,
 				4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */,
 				459389EE18FB20D900E0218E /* WCLEnvironmentViewController.xib in Resources */,
 				4521E9D91A89A1780075D330 /* WCLPluginsViewController.xib in Resources */,
-				45ADD90E1739EA58008A6AE7 /* WebWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1217,30 +1201,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4530B0D81736E2A6000A52E2 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4530B0D91736E2A6000A52E2 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		4530B0DE1736E2A6000A52E2 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4530B0DF1736E2A6000A52E2 /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		4530B0E41736E2A6000A52E2 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4530B0E51736E2A6000A52E2 /* en */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
 		4530B0F51736E2A6000A52E2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
