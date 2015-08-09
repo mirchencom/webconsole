@@ -44,6 +44,7 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
     if (windowFrameName) {
         [self.window setFrameUsingName:windowFrameName];
     }   
+    self.splitWebViewController.delegate = self;
 }
 
 #pragma mark - Properties

@@ -55,7 +55,7 @@
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:bundle];
 
-    WCLSplitWebWindowController *splitWebWindowController = [storyboard instantiateControllerWithIdentifier:@"SplitWebWindow"];
+    WCLSplitWebWindowController *splitWebWindowController = [storyboard instantiateControllerWithIdentifier:@"SplitWebWindowController"];
 
     [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
     splitWebWindowController.delegate = self;
