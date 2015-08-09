@@ -187,27 +187,27 @@ class Plugin: WCLPlugin {
             task.arguments = arguments
         }
 
-        let webWindowController = WCLSplitWebWindowsController.sharedWebWindowsController().addedWebWindowControllerForPlugin(self)
-        WCLPluginTask.runTask(task, delegate:webWindowController)
+        let splitWebWindowController = WCLSplitWebWindowsController.sharedSplitWebWindowsController().addedSplitWebWindowControllerForPlugin(self)
+        WCLPluginTask.runTask(task, delegate:splitWebWindowController)
     }
         
     func readFromStandardInput(text: String!) {
 
         println("[AppleScript] \(self.name) readFromStandardInput: \(text)")
 
-        let webWindowControllers = WCLSplitWebWindowsController.sharedWebWindowsController().webWindowControllersForPlugin(self)
+        let splitWebWindowControllers = WCLSplitWebWindowsController.sharedSplitWebWindowsController().splitWebWindowControllersForPlugin(self)
 
-        if webWindowControllers.count == 0 {
+        if splitWebWindowControllers.count == 0 {
             return
         }
 
-        let webWindowController = webWindowControllers[0] as! WCLSplitWebWindowController
+        let splitWebWindowController = splitWebWindowControllers[0] as! WCLSplitWebWindowController
 
-        if !webWindowController.hasTasks() {
+        if !splitWebWindowController.hasTasks() {
             return
         }
         
-        let task = webWindowController.tasks[0] as! NSTask
+        let task = splitWebWindowController.tasks[0] as! NSTask
         let pipe = task.standardInput as! NSPipe
 
         if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
@@ -218,7 +218,7 @@ class Plugin: WCLPlugin {
     // MARK: Windows
 
     func orderedWindows() -> [AnyObject]! {
-        return WCLSplitWebWindowsController.sharedWebWindowsController().windowsForPlugin(self)
+        return WCLSplitWebWindowsController.sharedSplitWebWindowsController().windowsForPlugin(self)
     }
 
 }

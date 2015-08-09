@@ -21,9 +21,9 @@
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
     NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     
-    WCLSplitWebWindowController *webWindowController = (WCLSplitWebWindowController *)window.windowController;
+    WCLSplitWebWindowController *splitWebWindowController = (WCLSplitWebWindowController *)window.windowController;
 
-    return [webWindowController doJavaScript:javaScript];
+    return [splitWebWindowController doJavaScript:javaScript];
 }
 
 @end

@@ -23,6 +23,6 @@
 
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase
 + (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
-+ (WCLSplitWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath;
-+ (WCLSplitWebWindowController *)webWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
++ (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath;
++ (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
 @end

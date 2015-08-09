@@ -36,14 +36,14 @@
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
     [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
     
-    NSArray *webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
-    WCLSplitWebWindowController *webWindowController = webWindowControllers[0];
+    NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
+    WCLSplitWebWindowController *splitWebWindowController = splitWebWindowControllers[0];
     
-    XCTAssertEqual(webWindowController.plugin, plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
+    XCTAssertEqual(splitWebWindowController.plugin, plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
     
     // Clean up
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWebWindowControllerTasksRunAndFinish:webWindowController];
+    [WCLSplitWebWindowControllerTestsHelper blockUntilWebWindowControllerTasksRunAndFinish:splitWebWindowController];
 }
 
 
@@ -86,18 +86,18 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
+    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
     [WCLTaskTestsHelper blockUntilTaskFinishes:task];
     
-    Plugin *plugin = webWindowController.plugin;
-    NSArray *webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
+    Plugin *plugin = splitWebWindowController.plugin;
+    NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertTrue([splitWebWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
     
     [WCLSplitWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
-    webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue(![webWindowControllers count], @"The WCLPlugin should not have a WCLSplitWebWindowController.");
+    splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertTrue(![splitWebWindowControllers count], @"The WCLPlugin should not have a WCLSplitWebWindowController.");
 }
 
 - (void)testCloseWindowWithRunningTask
@@ -109,31 +109,31 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
+    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
+    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     
-    [webWindowController.window performClose:self];
-    BOOL windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    [splitWebWindowController.window performClose:self];
+    BOOL windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:splitWebWindowController.window];
     XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
+    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:splitWebWindowController.window];
 
-    [webWindowController.window endSheet:[webWindowController.window attachedSheet]];
+    [splitWebWindowController.window endSheet:[splitWebWindowController.window attachedSheet]];
     
     [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
-    XCTAssertFalse([webWindowController hasTasks], @"The WCLSplitWebWindowController should not have an NSTask.");
+    XCTAssertFalse([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should not have an NSTask.");
     
-    Plugin *plugin = webWindowController.plugin;
-    NSArray *webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
+    Plugin *plugin = splitWebWindowController.plugin;
+    NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertTrue([splitWebWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
     
-    [webWindowController.window performClose:self];
-    windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    [splitWebWindowController.window performClose:self];
+    windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:splitWebWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
     
-    webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertFalse([webWindowControllers count], @"The WCLPlugin should not have a WCLSplitWebWindowController.");
+    splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertFalse([splitWebWindowControllers count], @"The WCLPlugin should not have a WCLSplitWebWindowController.");
 }
 
 - (void)testTerminateTasksAndCloseWindow
@@ -141,15 +141,15 @@
     NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
-    WCLSplitWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath];
+    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath];
     
-    XCTAssertTrue([webWindowController hasTasks], @"The WebWindowController should have an NSTask.");
+    XCTAssertTrue([splitWebWindowController hasTasks], @"The WebWindowController should have an NSTask.");
     
-    [webWindowController terminateTasksAndCloseWindow];
+    [splitWebWindowController terminateTasksAndCloseWindow];
     
-    // TODO: When it is possible for a webWindowController to have multiple tasks, a second task should be started on this webWindowController to ensure that recursive calls to terminateTasksAndCloseWindow work.
+    // TODO: When it is possible for a splitWebWindowController to have multiple tasks, a second task should be started on this splitWebWindowController to ensure that recursive calls to terminateTasksAndCloseWindow work.
     
-    BOOL windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    BOOL windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:splitWebWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
 }
 
@@ -166,36 +166,36 @@
                                          subdirectory:kTestDataSubdirectory];
     
     NSTask *task;
-    WCLSplitWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
+    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
+    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     
     XCTAssert([task isRunning], @"The NSTask should be running.");
     shouldTerminate = [WCLApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
     XCTAssertFalse(shouldTerminate, @"The NSApplication should not terminate with a running task.");
     
-    BOOL windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    BOOL windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:splitWebWindowController.window];
     XCTAssertFalse(windowWillClose, @"The NSWindow should not close while the NSTask is running.");
     
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:webWindowController.window];
+    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowHasAttachedSheet:splitWebWindowController.window];
 
-    [webWindowController.window endSheet:[webWindowController.window attachedSheet]];
+    [splitWebWindowController.window endSheet:[splitWebWindowController.window attachedSheet]];
     
     [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
     
-    Plugin *plugin = webWindowController.plugin;
-    NSArray *webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertTrue([webWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
+    Plugin *plugin = splitWebWindowController.plugin;
+    NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertTrue([splitWebWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
     
     shouldTerminate = [WCLApplicationTerminationHelper applicationShouldTerminateAndManageWebWindowControllersWithTasks];
     XCTAssert(shouldTerminate, @"The NSApplication should terminate after the NSTask finishes running.");
     
     // Clean up
-    [webWindowController.window performClose:self];
-    windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    [splitWebWindowController.window performClose:self];
+    windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:splitWebWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
-    webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertFalse([webWindowControllers count], @"The WCLPlugin should not have a WCLSplitWebWindowController.");
+    splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertFalse([splitWebWindowControllers count], @"The WCLPlugin should not have a WCLSplitWebWindowController.");
 }
 
 - (void)testDocumentEditingWhileRunningTask
@@ -206,17 +206,17 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
+    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
-    XCTAssertTrue([webWindowController.window isDocumentEdited], @"The NSWindow should be edited while running a task");
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:webWindowController.window];
+    XCTAssertTrue([splitWebWindowController.window isDocumentEdited], @"The NSWindow should be edited while running a task");
+    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     
     [WCLTaskTestsHelper blockUntilTaskFinishes:task timeoutInterval:kTestLongTimeoutInterval];
-    XCTAssertFalse([webWindowController.window isDocumentEdited], @"The NSWindow should not be edited after running a task");
+    XCTAssertFalse([splitWebWindowController.window isDocumentEdited], @"The NSWindow should not be edited after running a task");
     
     // Clean Up
-    [webWindowController.window performClose:self];
-    BOOL windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:webWindowController.window];
+    [splitWebWindowController.window performClose:self];
+    BOOL windowWillClose = [WCLSplitWebWindowControllerTestsHelper windowWillCloseBeforeTimeout:splitWebWindowController.window];
     XCTAssert(windowWillClose, @"The NSWindow should have closed.");
 }
 
@@ -226,13 +226,13 @@
     
     [plugin runWithArguments:nil inDirectoryPath:nil];
 
-    NSArray *webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    NSAssert([webWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
-    WCLSplitWebWindowController *webWindowController = webWindowControllers[0];
-    NSAssert([webWindowController hasTasks], @"The WCLSplitWebWindowController should have an NSTask.");
+    NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    NSAssert([splitWebWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
+    WCLSplitWebWindowController *splitWebWindowController = splitWebWindowControllers[0];
+    NSAssert([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should have an NSTask.");
 
 
-    NSTask *task = webWindowController.tasks[0];
+    NSTask *task = splitWebWindowController.tasks[0];
 
     [WCLTaskTestsHelper blockUntilTasksRunAndFinish:@[task]];
 

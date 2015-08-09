@@ -20,9 +20,9 @@
 @implementation WCLSplitWebWindowControllerTestsHelper
 
 
-+ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLSplitWebWindowController *)webWindowController
++ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLSplitWebWindowController *)splitWebWindowController
 {
-    [WCLTaskTestsHelper blockUntilTasksRunAndFinish:webWindowController.tasks];
+    [WCLTaskTestsHelper blockUntilTasksRunAndFinish:splitWebWindowController.tasks];
 }
 
 #pragma mark - Window Visible
@@ -78,13 +78,13 @@
 
 + (void)closeWindowsAndBlockUntilFinished
 {    
-    if (![[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers] count]) return;
+    if (![[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllers] count]) return;
     
     NSMutableArray *observers = [NSMutableArray array];
-    for (WCLSplitWebWindowController *webWindowController in [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers]) {
+    for (WCLSplitWebWindowController *splitWebWindowController in [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllers]) {
         __block id observer;
         observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
-                                                                     object:webWindowController.window
+                                                                     object:splitWebWindowController.window
                                                                       queue:nil
                                                                  usingBlock:^(NSNotification *notification) {
                                                                      [[NSNotificationCenter defaultCenter] removeObserver:observer];
@@ -92,7 +92,7 @@
                                                                  }];
         [observers addObject:observer];
         
-        [webWindowController.window performClose:self];
+        [splitWebWindowController.window performClose:self];
     }
     
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
@@ -108,11 +108,11 @@
 
     NSAssert(windowsDidFinishClosing, @"The NSWindows should have finished closing.");
     
-    NSUInteger webWindowControllersCount = [[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    NSAssert(!webWindowControllersCount, @"There should not be any WCLSplitWebWindowControllers.");
+    NSUInteger splitWebWindowControllersCount = [[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllers] count];
+    NSAssert(!splitWebWindowControllersCount, @"There should not be any WCLSplitWebWindowControllers.");
 
 // There is not way to pause a test until [[[NSApplication sharedApplication] windows] count] goes to zero
-// The best we can do is test [[[WebWindowsController sharedWebWindowsController] webWindowControllers] count] which should be
+// The best we can do is test [[[WebWindowsController sharedSplitWebWindowsController] splitWebWindowControllers] count] which should be
 // up to date in tracking windows that are slated to be closed.
 //    NSUInteger windowsCount = [[[NSApplication sharedApplication] windows] count];
 //    NSAssert(!windowsCount, @"There should not be any Windows.");

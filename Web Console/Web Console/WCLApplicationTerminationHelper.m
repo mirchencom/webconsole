@@ -12,22 +12,22 @@
 #import "WCLSplitWebWindowController.h"
 
 @interface WCLApplicationTerminationHelper ()
-+ (NSMutableArray *)webWindowControllersWithTasks;
++ (NSMutableArray *)splitWebWindowControllersWithTasks;
 @end
 
 @implementation WCLApplicationTerminationHelper
 
-+ (NSArray *)webWindowControllersWithTasks
++ (NSArray *)splitWebWindowControllersWithTasks
 {
     NSPredicate *tasksPredicate = [NSPredicate predicateWithFormat:@"hasTasks == %@", [NSNumber numberWithBool:YES]];
-    return [[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers] filteredArrayUsingPredicate:tasksPredicate];
+    return [[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllers] filteredArrayUsingPredicate:tasksPredicate];
 }
 
 + (BOOL)applicationShouldTerminateAndManageWebWindowControllersWithTasks
 {
-    NSMutableArray *webWindowControllersWithTasks = [WCLApplicationTerminationHelper webWindowControllersWithTasks];
+    NSMutableArray *splitWebWindowControllersWithTasks = [WCLApplicationTerminationHelper splitWebWindowControllersWithTasks];
     
-    if (![webWindowControllersWithTasks count]) return YES;
+    if (![splitWebWindowControllersWithTasks count]) return YES;
 
     NSMutableArray *windowWillCloseObservers = [NSMutableArray array];
 
@@ -41,17 +41,17 @@
             if (![windowWillCloseObservers count]) {
                 // The application should only terminate if there are no NSTasks. This condition can be false if a new NSTask
                 // started after user initialized the quit.
-                BOOL shouldTerminate = [[WCLApplicationTerminationHelper webWindowControllersWithTasks] count] ? NO : YES;
+                BOOL shouldTerminate = [[WCLApplicationTerminationHelper splitWebWindowControllersWithTasks] count] ? NO : YES;
                 [NSApp replyToApplicationShouldTerminate:shouldTerminate];
             }
         }
     };
 
     // Quit if the user closes all the windows with running tasks
-    for (WCLSplitWebWindowController *webWindowController in webWindowControllersWithTasks) {
+    for (WCLSplitWebWindowController *splitWebWindowController in splitWebWindowControllersWithTasks) {
         __block id windowWillCloseObserver;
         windowWillCloseObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification
-                                                                     object:webWindowController.window
+                                                                     object:splitWebWindowController.window
                                                                       queue:nil
                                                                  usingBlock:^(NSNotification *notification) {
                                                                      [[NSNotificationCenter defaultCenter] removeObserver:windowWillCloseObserver];
@@ -59,7 +59,7 @@
                                                                      replyToApplicationShouldTerminate(NO);
                                                                  }];
         [windowWillCloseObservers addObject:windowWillCloseObserver];
-        [webWindowController.window performClose:self];
+        [splitWebWindowController.window performClose:self];
     }
 
     // Cancel the quit if the user does not confirm closing a window with a running task

@@ -12,12 +12,12 @@
 @class Plugin;
 
 @interface WCLSplitWebWindowsController : NSObject
-+ (instancetype)sharedWebWindowsController;
-- (WCLSplitWebWindowController *)addedWebWindowController;
-- (WCLSplitWebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin;
-- (void)removeWebWindowController:(WCLSplitWebWindowController *)webWindowController;
-- (NSArray *)webWindowControllers;
-- (NSArray *)webWindowControllersForPlugin:(Plugin *)plugin;
++ (instancetype)sharedSplitWebWindowsController;
+- (WCLSplitWebWindowController *)addedSplitWebWindowController;
+- (WCLSplitWebWindowController *)addedSplitWebWindowControllerForPlugin:(Plugin *)plugin;
+- (void)removeSplitWebWindowController:(WCLSplitWebWindowController *)splitWebWindowController;
+- (NSArray *)splitWebWindowControllers;
+- (NSArray *)splitWebWindowControllersForPlugin:(Plugin *)plugin;
 - (NSArray *)windowsForPlugin:(Plugin *)plugin;
 - (NSArray *)tasks;
 @end

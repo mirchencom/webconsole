@@ -14,7 +14,7 @@
 #define kWebWindowNibName @"WebWindow"
 
 @interface WCLSplitWebWindowsController ()
-@property (nonatomic, strong) NSMutableArray *mutableWebWindowControllers;
+@property (nonatomic, strong) NSMutableArray *mutableSplitWebWindowControllers;
 @end
 
 @interface WCLSplitWebWindowController (WebWindowsController)
@@ -23,62 +23,62 @@
 
 @implementation WCLSplitWebWindowsController
 
-+ (instancetype)sharedWebWindowsController
++ (instancetype)sharedSplitWebWindowsController
 {
     static dispatch_once_t pred;
-    static WCLSplitWebWindowsController *webWindowsController = nil;
+    static WCLSplitWebWindowsController *splitWebWindowsController = nil;
     
-    dispatch_once(&pred, ^{ webWindowsController = [[self alloc] init]; });
-    return webWindowsController;
+    dispatch_once(&pred, ^{ splitWebWindowsController = [[self alloc] init]; });
+    return splitWebWindowsController;
 }
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        _mutableWebWindowControllers = [[NSMutableArray alloc] init];
+        _mutableSplitWebWindowControllers = [[NSMutableArray alloc] init];
     }
     
     return self;
 }
 
-- (NSArray *)webWindowControllers
+- (NSArray *)splitWebWindowControllers
 {
-    return [self.mutableWebWindowControllers copy];
+    return [self.mutableSplitWebWindowControllers copy];
 }
 
-- (WCLSplitWebWindowController *)addedWebWindowControllerForPlugin:(Plugin *)plugin
+- (WCLSplitWebWindowController *)addedSplitWebWindowControllerForPlugin:(Plugin *)plugin
 {
-    WCLSplitWebWindowController *webWindowController = [self addedWebWindowController];
-    webWindowController.plugin = plugin;
-    return webWindowController;
+    WCLSplitWebWindowController *splitWebWindowController = [self addedSplitWebWindowController];
+    splitWebWindowController.plugin = plugin;
+    return splitWebWindowController;
 }
 
-- (WCLSplitWebWindowController *)addedWebWindowController
+- (WCLSplitWebWindowController *)addedSplitWebWindowController
 {
-    WCLSplitWebWindowController *webWindowController = [[WCLSplitWebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowController alloc] initWithWindowNibName:kWebWindowNibName];
 
     [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
     
-    [self.mutableWebWindowControllers addObject:webWindowController];
+    [self.mutableSplitWebWindowControllers addObject:splitWebWindowController];
     
-    return webWindowController;
+    return splitWebWindowController;
 }
 
-- (void)removeWebWindowController:(WCLSplitWebWindowController *)webWindowController
+- (void)removeSplitWebWindowController:(WCLSplitWebWindowController *)splitWebWindowController
 {
-    [self.mutableWebWindowControllers removeObject:webWindowController];
+    [self.mutableSplitWebWindowControllers removeObject:splitWebWindowController];
 }
 
-- (NSArray *)webWindowControllersForPlugin:(WCLPlugin *)plugin
+- (NSArray *)splitWebWindowControllersForPlugin:(WCLPlugin *)plugin
 {
     NSPredicate *pluginPredicate = [NSPredicate predicateWithFormat:@"(plugin = %@)", plugin];
-    return [self.mutableWebWindowControllers filteredArrayUsingPredicate:pluginPredicate];
+    return [self.mutableSplitWebWindowControllers filteredArrayUsingPredicate:pluginPredicate];
 }
 
 - (NSArray *)windowsForPlugin:(Plugin *)plugin
 {
-    NSArray *pluginWebWindowControllers = [self webWindowControllersForPlugin:plugin];
+    NSArray *pluginWebWindowControllers = [self splitWebWindowControllersForPlugin:plugin];
     
     NSArray *pluginWindows = [pluginWebWindowControllers valueForKeyPath:@"window"];
 
@@ -96,8 +96,8 @@
 - (NSArray *)tasks
 {
     NSMutableArray *tasks = [NSMutableArray array];
-    for (WCLSplitWebWindowController *webWindowController in self.mutableWebWindowControllers) {
-        [tasks addObjectsFromArray:webWindowController.tasks];
+    for (WCLSplitWebWindowController *splitWebWindowController in self.mutableSplitWebWindowControllers) {
+        [tasks addObjectsFromArray:splitWebWindowController.tasks];
     }
     return tasks;
 }

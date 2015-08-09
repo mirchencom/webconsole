@@ -30,16 +30,16 @@
         baseURL = [NSURL URLWithString:baseURLString];
     }
 
-    WCLSplitWebWindowController *webWindowController;
+    WCLSplitWebWindowController *splitWebWindowController;
     if (window) {
-        webWindowController = (WCLSplitWebWindowController *)window.windowController;
+        splitWebWindowController = (WCLSplitWebWindowController *)window.windowController;
     } else {
-        webWindowController = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
-        window = webWindowController.window;
+        splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+        window = splitWebWindowController.window;
     }
 
     [self suspendExecution];
-    [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
+    [splitWebWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
         [self resumeExecutionWithResult:window];
     }];
     

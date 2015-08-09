@@ -11,7 +11,7 @@
 @class WCLSplitWebWindowController;
 
 @interface WCLSplitWebWindowControllerTestsHelper : NSObject
-+ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLSplitWebWindowController *)webWindowController;
++ (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLSplitWebWindowController *)splitWebWindowController;
 + (void)blockUntilWindowHasAttachedSheet:(NSWindow *)window;
 + (void)blockUntilWindowIsVisible:(NSWindow *)window;
 + (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window;

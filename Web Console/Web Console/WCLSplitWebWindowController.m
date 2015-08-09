@@ -84,7 +84,7 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-    [[WCLSplitWebWindowsController sharedWebWindowsController] removeWebWindowController:self];
+    [[WCLSplitWebWindowsController sharedSplitWebWindowsController] removeSplitWebWindowController:self];
 }
 
 - (void)windowDidMove:(NSNotification *)notification

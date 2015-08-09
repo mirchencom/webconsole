@@ -31,8 +31,8 @@
     NSURL *baseURL = [[self class] wcl_sharedTestResourcesURL];
     
     __block BOOL completionHandlerRan = NO;
-    WCLSplitWebWindowController *webWindowController = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
-    [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+    [splitWebWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
         completionHandlerRan = YES;
         XCTAssertTrue(success, @"The load should have succeeded.");
     }];
@@ -48,12 +48,12 @@
     NSString *javaScript = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextJQueryFilename
                                                           withExtension:kTestDataJavaScriptExtension
                                                            subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
-    NSString *result = [webWindowController doJavaScript:javaScript];
+    NSString *result = [splitWebWindowController doJavaScript:javaScript];
     
     NSString *testJavaScript = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestJavaScriptTextFilename
                                                           withExtension:kTestDataJavaScriptExtension
                                                            subdirectory:kSharedTestResourcesJavaScriptSubdirectory];
-    NSString *expectedResult = [webWindowController doJavaScript:testJavaScript];
+    NSString *expectedResult = [splitWebWindowController doJavaScript:testJavaScript];
     
     // These tests fail, but it works in actual use. I assume it is failing because of complications
     // caused by the test running on the main thread.
@@ -64,7 +64,7 @@
 
 - (void)testLoadHTMLTwice
 {
-    WCLSplitWebWindowController *webWindowController = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     
     NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:kTestDataHTMLFilename
                                                   withExtension:kTestDataHTMLExtension
@@ -75,7 +75,7 @@
                                                     withExtension:kTestDataHTMLExtension
                                                      subdirectory:kSharedTestResourcesHTMLSubdirectory];
     __block BOOL firstCompletionHandlerRan = NO;
-    [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
+    [splitWebWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
         firstCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The first load should have succeeded.");
     }];
@@ -85,13 +85,13 @@
         if (firstCompletionHandlerRan) break;
     }
     XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
-    XCTAssertTrue([webWindowController.window.title isEqualToString:kTestDataHTMLTitle], @"The NSWindow's title should equal the test HTML title.");
+    XCTAssertTrue([splitWebWindowController.window.title isEqualToString:kTestDataHTMLTitle], @"The NSWindow's title should equal the test HTML title.");
     
     HTML = [[self class] wcl_stringWithContentsOfSharedTestResource:kTestDataHTMLJQUERYFilename
                                           withExtension:kTestDataHTMLExtension
                                            subdirectory:kSharedTestResourcesHTMLSubdirectory];
     __block BOOL secondCompletionHandlerRan = NO;
-    [webWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
+    [splitWebWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
         secondCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The second load should have succeeded.");
     }];
@@ -103,7 +103,7 @@
     }
 
     XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
-    XCTAssertTrue([webWindowController.window.title isEqualToString:kTestDataHTMLJQUERYTitle], @"The NSWindow's title should equal the test HTML title.");
+    XCTAssertTrue([splitWebWindowController.window.title isEqualToString:kTestDataHTMLJQUERYTitle], @"The NSWindow's title should equal the test HTML title.");
 }
 
 
@@ -113,16 +113,16 @@
                                                           withExtension:kTestDataHTMLExtension
                                                            subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
-    WCLSplitWebWindowController *webWindowController = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     
     __block BOOL firstCompletionHandlerRan = NO;
-    [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
+    [splitWebWindowController loadHTML:HTML completionHandler:^(BOOL success) {
         firstCompletionHandlerRan = YES;
         XCTAssertFalse(success, @"The first load should have failed.");
     }];
     
     __block BOOL secondCompletionHandlerRan = NO;
-    [webWindowController loadHTML:HTML completionHandler:^(BOOL success) {
+    [splitWebWindowController loadHTML:HTML completionHandler:^(BOOL success) {
         secondCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The second load should have succeeded.");
     }];
@@ -143,16 +143,16 @@
                                                     withExtension:kTestDataHTMLExtension
                                                      subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
-    WCLSplitWebWindowController *webWindowController1 = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *splitWebWindowController1 = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     __block BOOL firstCompletionHandlerRan = NO;
-    [webWindowController1 loadHTML:HTML completionHandler:^(BOOL success) {
+    [splitWebWindowController1 loadHTML:HTML completionHandler:^(BOOL success) {
         firstCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The first load should have succeeded.");
     }];
     
-    WCLSplitWebWindowController *webWindowController2 = [[WCLSplitWebWindowsController sharedWebWindowsController] addedWebWindowController];
+    WCLSplitWebWindowController *splitWebWindowController2 = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     __block BOOL secondCompletionHandlerRan = NO;
-    [webWindowController2 loadHTML:HTML completionHandler:^(BOOL success) {
+    [splitWebWindowController2 loadHTML:HTML completionHandler:^(BOOL success) {
         secondCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The second load should have succeeded.");
     }];
@@ -166,8 +166,8 @@
     XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
     XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
     
-    NSUInteger webWindowControllersCount = [[[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllers] count];
-    XCTAssertTrue(webWindowControllersCount == 2, @"There should be two WCLSplitWebWindowControllers. %lu", webWindowControllersCount);
+    NSUInteger splitWebWindowControllersCount = [[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllers] count];
+    XCTAssertTrue(splitWebWindowControllersCount == 2, @"There should be two WCLSplitWebWindowControllers. %lu", splitWebWindowControllersCount);
 }
 
 @end

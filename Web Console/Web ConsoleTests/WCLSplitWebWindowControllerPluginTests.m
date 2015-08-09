@@ -37,9 +37,9 @@
                                                ofType:kTestDataShellScriptExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
+    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                  task:&task];
-    Plugin *plugin = webWindowController.plugin;
+    Plugin *plugin = splitWebWindowController.plugin;
     
     static NSString *StandardInputText = @"Test String";
     
@@ -59,7 +59,7 @@
     
     // Clean up
     [WCLTaskTestsHelper interruptTaskAndblockUntilTaskFinishes:task];
-    XCTAssertFalse([webWindowController hasTasks], @"The WCLSplitWebWindowController should not have any NSTasks.");
+    XCTAssertFalse([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should not have any NSTasks.");
 }
 
 #pragma mark - Interrupt & Termination
@@ -72,7 +72,7 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
+    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                  task:&task];
     __block BOOL completionHandlerRan = NO;
     [task wcl_interruptWithCompletionHandler:^(BOOL success) {
@@ -87,7 +87,7 @@
     XCTAssertTrue(completionHandlerRan, @"The completion handler should have run.");
     
     XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
-    XCTAssertFalse([webWindowController hasTasks], @"The WCLSplitWebWindowController should not have any NSTasks.");
+    XCTAssertFalse([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should not have any NSTasks.");
 }
 
 - (void)testInterruptAndTerminate
@@ -97,7 +97,7 @@
                                                ofType:kTestDataShellScriptExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *webWindowController = [[self class] webWindowControllerRunningCommandPath:commandPath
+    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                  task:&task];
     
     __block BOOL completionHandlerRan = NO;
@@ -116,7 +116,7 @@
     // TODO: If there's a a way to run a script that doesn't interrupt, then put the terminate here
     
     XCTAssertFalse([task isRunning], @"The NSTask should not be running.");
-    XCTAssertFalse([webWindowController hasTasks], @"The WCLSplitWebWindowController should not have any NSTasks.");
+    XCTAssertFalse([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should not have any NSTasks.");
 }
 
 - (void)testTerminateTasks
@@ -158,16 +158,16 @@
                                          subdirectory:kTestDataSubdirectory];
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
     [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
-    NSArray *webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertEqual([webWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WCLSplitWebWindowController.");
-    WCLSplitWebWindowController *firstWebWindowController = webWindowControllers[0];
+    NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WCLSplitWebWindowController.");
+    WCLSplitWebWindowController *firstWebWindowController = splitWebWindowControllers[0];
     
     [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
-    webWindowControllers = [[WCLSplitWebWindowsController sharedWebWindowsController] webWindowControllersForPlugin:plugin];
-    XCTAssertEqual([webWindowControllers count], (NSUInteger)2, @"The WCLPlugin should have two WCLSplitWebWindowControllers.");
-    WCLSplitWebWindowController *secondWebWindowController = webWindowControllers[1];
+    splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
+    XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)2, @"The WCLPlugin should have two WCLSplitWebWindowControllers.");
+    WCLSplitWebWindowController *secondWebWindowController = splitWebWindowControllers[1];
     
-    XCTAssertEqualObjects(firstWebWindowController, webWindowControllers[0], @"The first WCLSplitWebWindowController should still be at the first index.");
+    XCTAssertEqualObjects(firstWebWindowController, splitWebWindowControllers[0], @"The first WCLSplitWebWindowController should still be at the first index.");
     XCTAssertNotEqualObjects(firstWebWindowController, secondWebWindowController, @"The WCLSplitWebWindowControllers should not be equal.");
     
     NSArray *pluginOrderedWindows = [plugin orderedWindows];
@@ -186,7 +186,7 @@
     XCTAssert(orderMatches, @"The order of the NSWindows returned by the WCLPlugin should match the order returned by the NSApplication.");
     
     // Clean up
-    NSArray *tasks = [[WCLSplitWebWindowsController sharedWebWindowsController] tasks];
+    NSArray *tasks = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] tasks];
     XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two NSTasks.");
     
     [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
