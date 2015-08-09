@@ -28,6 +28,8 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 @implementation WCLSplitWebWindowController
 
+#pragma mark - Life Cycle
+
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -44,6 +46,18 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
     if (windowFrameName) {
         [self.window setFrameUsingName:windowFrameName];
     }   
+}
+
+#pragma mark - Properties
+
+- (void)setPlugin:(Plugin *)plugin
+{
+    self.splitWebViewController.plugin = plugin
+}
+
+- (Plugin *)plugin
+{
+    return self.splitWebViewController.plugin
 }
 
 #pragma mark - NSWindowDelegate

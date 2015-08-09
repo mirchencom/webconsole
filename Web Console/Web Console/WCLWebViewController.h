@@ -12,22 +12,22 @@
 @class WCLWebViewController;
 
 @protocol WCLWebViewControllerDelegate <NSObject>
-- (NSNumber *)windowNumberForWebViewController:(WCLWebViewController *)webViewController;
+- (nonnull NSNumber *)windowNumberForWebViewController:(nonnull WCLWebViewController *)webViewController;
 @optional
-- (void)webViewControllerViewWillAppear:(WCLWebViewController *)webViewController;
-- (void)webViewControllerViewWillDisappear:(WCLWebViewController *)webViewController;
-- (void)webViewControllerWillLoadHTML:(WCLWebViewController *)webViewController;
-- (void)webViewController:(WCLWebViewController *)webViewController didReceiveTitle:(NSString *)title;
-- (void)webViewController:(WCLWebViewController *)webViewController taskWillStart:(NSTask *)task;
-- (void)webViewController:(WCLWebViewController *)webViewController taskDidFinish:(NSTask *)task;
+- (void)webViewControllerViewWillAppear:(nonnull WCLWebViewController *)webViewController;
+- (void)webViewControllerViewWillDisappear:(nonnull WCLWebViewController *)webViewController;
+- (void)webViewControllerWillLoadHTML:(nonnull WCLWebViewController *)webViewController;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController didReceiveTitle:(nonnull NSString *)title;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController taskWillStart:(nonnull NSTask *)task;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController taskDidFinish:(nonnull NSTask *)task;
 @end
 
 @interface WCLWebViewController : NSViewController
-- (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL success))completionHandler;
-- (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler;
-- (NSString *)doJavaScript:(NSString *)javaScript;
+- (void)loadHTML:(nonnull NSString *)HTML completionHandler:(nullable void (^)(BOOL success))completionHandler;
+- (void)loadHTML:(nonnull NSString *)HTML baseURL:(nullable NSURL *)baseURL completionHandler:(nullable void (^)(BOOL success))completionHandler;
+- (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
 - (BOOL)hasTasks;
-@property (nonatomic, strong, readonly) NSArray *tasks;
-@property (nonatomic, strong) Plugin *plugin;
-@property (nonatomic, weak) id<WCLWebViewControllerDelegate> delegate;
+@property (nonatomic, strong, readonly, nonnull) NSArray *tasks;
+@property (nonatomic, strong, nullable) Plugin *plugin;
+@property (nonatomic, weak, nullable) id<WCLWebViewControllerDelegate> delegate;
 @end

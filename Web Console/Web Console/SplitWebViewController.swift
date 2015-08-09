@@ -22,6 +22,8 @@ protocol SplitWebViewControllerDelegate: class {
 
 class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegate, LogControllerDelegate {
 
+    // MARK: Properties
+    
     weak var delegate: SplitWebViewControllerDelegate?
     var logController: LogController!
 
@@ -35,6 +37,15 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     var pluginWebViewController: WCLWebViewController {
         let splitViewItem = splitViewItems.first as! NSSplitViewItem
         return splitViewItem.viewController as! WCLWebViewController
+    }
+    
+    var plugin: Plugin? {
+        get {
+            return pluginWebViewController.plugin
+        }
+        set {
+            pluginWebViewController.plugin = newValue
+        }
     }
     
     // MARK: Life Cycle
