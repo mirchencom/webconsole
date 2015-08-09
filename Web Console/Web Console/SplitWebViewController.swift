@@ -67,6 +67,16 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         super.viewWillAppear()
         logController.setCollapsed(true, animated: false)
     }
+
+    // MARK: AppleScript
+    
+    func doJavaScript(javaScript: String) -> String? {
+        return pluginWebViewController.doJavaScript(javaScript)
+    }
+    
+    func loadHTML(HTML: String, baseURL: NSURL?, completionHandler:((Bool) -> Void)?) {
+        pluginWebViewController.loadHTML(HTML, baseURL: baseURL, completionHandler: completionHandler)
+    }
     
     // MARK: Tasks
     

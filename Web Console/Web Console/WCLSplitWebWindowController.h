@@ -21,8 +21,13 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
 @interface WCLSplitWebWindowController : NSWindowController
 @property (nonatomic, weak, nullable) id<WCLSplitWebWindowControllerDelegate> delegate;
 @property (nonatomic, strong, nullable) Plugin *plugin;
+#pragma mark - AppleScript
+- (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
+- (void)loadHTML:(nonnull NSString *)HTML
+         baseURL:(nullable NSURL *)baseURL
+completionHandler:(nullable void (^)(BOOL success))completionHandler;
+#pragma mark - Tasks
 - (void)runTask:(nonnull NSTask *)task;
 - (BOOL)hasTasks;
 - (nonnull NSArray *)tasks;
-
 @end

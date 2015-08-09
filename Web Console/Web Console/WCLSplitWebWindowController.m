@@ -131,6 +131,20 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
     return self.splitWebViewController.plugin.name;
 }
 
+#pragma mark - AppleScript
+
+- (NSString *)doJavaScript:(NSString *)javaScript
+{
+    return [self.splitWebViewController doJavaScript:javaScript];
+}
+
+- (void)loadHTML:(nonnull NSString *)HTML
+         baseURL:(nullable NSURL *)baseURL
+completionHandler:(nullable void (^)(BOOL success))completionHandler
+{
+    [self.splitWebViewController loadHTML:HTML baseURL:baseURL completionHandler:completionHandler];
+}
+
 #pragma mark - Tasks
 
 - (void)runTask:(NSTask *)task

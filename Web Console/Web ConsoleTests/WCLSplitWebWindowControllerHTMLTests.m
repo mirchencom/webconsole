@@ -116,13 +116,13 @@
     WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     
     __block BOOL firstCompletionHandlerRan = NO;
-    [splitWebWindowController loadHTML:HTML completionHandler:^(BOOL success) {
+    [splitWebWindowController loadHTML:HTML baseURL:nil completionHandler:^(BOOL success) {
         firstCompletionHandlerRan = YES;
         XCTAssertFalse(success, @"The first load should have failed.");
     }];
     
     __block BOOL secondCompletionHandlerRan = NO;
-    [splitWebWindowController loadHTML:HTML completionHandler:^(BOOL success) {
+    [splitWebWindowController loadHTML:HTML baseURL:nil completionHandler:^(BOOL success) {
         secondCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The second load should have succeeded.");
     }];
@@ -145,14 +145,14 @@
     
     WCLSplitWebWindowController *splitWebWindowController1 = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     __block BOOL firstCompletionHandlerRan = NO;
-    [splitWebWindowController1 loadHTML:HTML completionHandler:^(BOOL success) {
+    [splitWebWindowController1 loadHTML:HTML baseURL:nil completionHandler:^(BOOL success) {
         firstCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The first load should have succeeded.");
     }];
     
     WCLSplitWebWindowController *splitWebWindowController2 = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     __block BOOL secondCompletionHandlerRan = NO;
-    [splitWebWindowController2 loadHTML:HTML completionHandler:^(BOOL success) {
+    [splitWebWindowController2 loadHTML:HTML baseURL:nil completionHandler:^(BOOL success) {
         secondCompletionHandlerRan = YES;
         XCTAssertTrue(success, @"The second load should have succeeded.");
     }];

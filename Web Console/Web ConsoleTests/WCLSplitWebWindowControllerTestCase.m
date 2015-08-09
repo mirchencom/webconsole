@@ -12,6 +12,31 @@
 #import "WCLTaskTestsHelper.h"
 #import "Web_Console-Swift.h"
 
+#import "WCLWebViewController.h"
+
+#pragma mark - PluginWebView
+
+@interface WCLWebViewController (PluginWebView)
+@property (readonly) WebView *webView;
+@end
+
+@interface SplitWebViewController (PluginWebView)
+@property (readonly) WCLWebViewController *pluginWebViewController;
+@end
+
+@implementation WCLSplitWebWindowController (PluginWebView)
+
+- (WebView *)pluginWebView
+{
+    SplitWebViewController *splitWebViewController = (SplitWebViewController *)self.contentViewController;
+    return splitWebViewController.pluginWebViewController.webView;
+}
+
+@end
+
+
+#pragma mark - WCLSplitWebWindowControllerTestCase
+
 @implementation WCLSplitWebWindowControllerTestCase
 
 - (void)tearDown

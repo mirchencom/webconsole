@@ -54,10 +54,6 @@
 
 #pragma mark - AppleScript
 
-- (void)loadHTML:(NSString *)HTML completionHandler:(void (^)(BOOL))completionHandler {
-    [self loadHTML:HTML baseURL:nil completionHandler:completionHandler];
-}
-
 - (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {
     
     if ([self.delegate respondsToSelector:@selector(webViewControllerWillLoadHTML:)]) {

@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <WebKit/WebKit.h>
 
 #import "XCTest+BundleResources.h"
 
@@ -17,8 +18,11 @@
 #import "WCLTestPluginManagerTestCase.h"
 
 @interface WCLSplitWebWindowController (Tests)
-@property (nonatomic, readonly) WebView *webView;
 - (void)terminateTasksAndCloseWindow;
+@end
+
+@interface WCLSplitWebWindowController (PluginWebView)
+@property (nonatomic, readonly) WebView *pluginWebView;
 @end
 
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase

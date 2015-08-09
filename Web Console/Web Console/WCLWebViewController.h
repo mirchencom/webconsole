@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "WCLPluginTask.h"
+
 @class Plugin;
 @class WCLWebViewController;
 
@@ -23,8 +25,9 @@
 @end
 
 @interface WCLWebViewController : NSViewController <WCLPluginTaskDelegate>
-- (void)loadHTML:(nonnull NSString *)HTML completionHandler:(nullable void (^)(BOOL success))completionHandler;
-- (void)loadHTML:(nonnull NSString *)HTML baseURL:(nullable NSURL *)baseURL completionHandler:(nullable void (^)(BOOL success))completionHandler;
+- (void)loadHTML:(nonnull NSString *)HTML
+         baseURL:(nullable NSURL *)baseURL
+completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
 - (BOOL)hasTasks;
 @property (nonatomic, strong, readonly, nonnull) NSArray *tasks;
