@@ -40,6 +40,8 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 - (void)awakeFromNib
 {
+    // TODO: Cascade windows doesn't seem to be working since converting to a storyboard
+//    [self setShouldCascadeWindows:YES]; // This should be the default, but it's not since switching to a storyboard
     self.splitWebViewController.delegate = self;
 }
 
