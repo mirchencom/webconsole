@@ -28,14 +28,8 @@
 
 - (void)testResizingAndCascadingWindows
 {
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
-    
-    // The plugin needs a name for saved frames to work
-    XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");
-    XCTAssertTrue([plugin.name isEqualToString:kTestPrintPluginName], @"The WCLPlugin's name should equal the test plugin name.");
-    
-    // Open an NSWindow
-    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningHelloWorldForPlugin:plugin];
+    WCLSplitWebWindowController *splitWebWindowController = [self makeSplitWebWindowController];
+    Plugin *plugin = splitWebWindowController.plugin;
     [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLSplitWebWindowControllers for the WCLPlugin.");
     
@@ -70,7 +64,7 @@
     [WCLSplitWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
     
     // Open a new NSWindow
-    splitWebWindowController = [self splitWebWindowControllerRunningHelloWorldForPlugin:plugin];
+    splitWebWindowController = [self makeSplitWebWindowController];
     [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLSplitWebWindowControllers for the WCLPlugin.");
     
@@ -83,7 +77,7 @@
 //    XCTAssertTrue(NSRectEqualToRect(windowFrame, destinationFrame), @"The NSWindow's frame should equal the destination frame.");
     
     // Open a second window
-    splitWebWindowController = [self splitWebWindowControllerRunningHelloWorldForPlugin:plugin];
+    splitWebWindowController = [self makeSplitWebWindowController];
     [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)2, @"There should be two WCLSplitWebWindowControllers for the WCLPlugin.");
     
@@ -105,7 +99,7 @@
     XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrameTwo), @"The saved frame should equal the destination frame.");
     
     // Open a third NSWindow
-    splitWebWindowController = [self splitWebWindowControllerRunningHelloWorldForPlugin:plugin];
+    splitWebWindowController = [self makeSplitWebWindowController];
     [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)3, @"There should be three WCLSplitWebWindowControllers for the WCLPlugin.");
     

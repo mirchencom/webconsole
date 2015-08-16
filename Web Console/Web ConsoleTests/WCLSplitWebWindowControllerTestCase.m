@@ -81,6 +81,19 @@
     return splitWebWindowController;
 }
 
+- (WCLSplitWebWindowController *)makeSplitWebWindowController
+{
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+    
+    // The plugin needs a name for saved frames to work
+    XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");
+    XCTAssertTrue([plugin.name isEqualToString:kTestPrintPluginName], @"The WCLPlugin's name should equal the test plugin name.");
+    
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningHelloWorldForPlugin:plugin];
+    return splitWebWindowController;
+}
+
+
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin
 {
     NSArray *originalWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
