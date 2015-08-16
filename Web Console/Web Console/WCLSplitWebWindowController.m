@@ -21,7 +21,6 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 - (void)terminateTasksAndCloseWindow;
 - (void)saveWindowFrame;
 - (NSString *)windowFrameName;
-@property (nonatomic, strong, readonly) SplitWebViewController *splitWebViewController;
 @end
 
 @implementation WCLSplitWebWindowController

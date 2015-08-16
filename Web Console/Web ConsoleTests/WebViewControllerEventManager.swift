@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WCLWebViewControllerEventManager: NSObject, WCLWebViewControllerDelegate {
+class WebViewControllerEventManager: NSObject, WCLWebViewControllerDelegate {
     typealias EventBlock = (WCLWebViewController) -> ()
     
     weak var storedDelegate: WCLWebViewControllerDelegate?

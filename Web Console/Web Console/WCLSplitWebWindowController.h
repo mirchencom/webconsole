@@ -10,6 +10,7 @@
 
 @class Plugin;
 @class WCLSplitWebWindowController;
+@class SplitWebViewController;
 
 extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindowNotification;
 
@@ -21,6 +22,7 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
 @interface WCLSplitWebWindowController : NSWindowController
 @property (nonatomic, weak, nullable) id<WCLSplitWebWindowControllerDelegate> delegate;
 @property (nonatomic, strong, nullable) Plugin *plugin;
+@property (nonnull, readonly) SplitWebViewController *splitWebViewController;
 #pragma mark - AppleScript
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
 - (void)loadHTML:(nonnull NSString *)HTML

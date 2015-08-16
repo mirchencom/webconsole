@@ -9,15 +9,22 @@
 import Cocoa
 import XCTest
 
-class SplitWebViewControllerTests: XCTestCase {
+
+
+class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
+    
+    var savedFrameName: String {
+        let plugin = self.dynamicType.defaultPlugin()
+        return SplitWebViewController.savedFrameNameForPluginName(plugin.name)
+    }
     
     override func setUp() {
         super.setUp()
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(logSavedFrameName)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(savedFrameName)
     }
     
     override func tearDown() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(logSavedFrameName)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(savedFrameName)
         super.tearDown()
     }
     
@@ -117,13 +124,12 @@ class SplitWebViewControllerTests: XCTestCase {
     }
     
     func makeNewSplitWebViewController() -> SplitWebViewController {
-        PluginWindowsController.sharedInstance.openNewPluginWindow()
-        let window = NSApplication.sharedApplication().windows.last as! NSWindow
-        return window.contentViewController as! SplitWebViewController
+        let pluginWindowController = makeSplitWebWindowController()
+        return pluginWindowController.splitWebViewController
     }
     
     func makeLogViewWillAppearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
-        let webViewController = splitWebViewController.logController.logSplitViewItem.viewController as! WebViewController
+        let webViewController = splitWebViewController.logController.logSplitViewItem.viewController as! WCLWebViewController
         let viewWillAppearExpectation = expectationWithDescription("WebViewController will appear")
         let webViewControllerEventManager = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: { _ in
             viewWillAppearExpectation.fulfill()
@@ -131,7 +137,7 @@ class SplitWebViewControllerTests: XCTestCase {
     }
     
     func makeLogViewWillDisappearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
-        let webViewController = splitWebViewController.logController.logSplitViewItem.viewController as! WebViewController
+        let webViewController = splitWebViewController.logController.logSplitViewItem.viewController as! WCLWebViewController
         let viewWillDisappearExpectation = expectationWithDescription("WebViewController will appear")
         let webViewControllerEventManager = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: nil) { _ in
             viewWillDisappearExpectation.fulfill()

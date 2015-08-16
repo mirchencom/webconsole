@@ -81,9 +81,14 @@
     return splitWebWindowController;
 }
 
++ (Plugin *)defaultPlugin
+{
+    return [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+}
+
 - (WCLSplitWebWindowController *)makeSplitWebWindowController
 {
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+    Plugin *plugin = [[self class] defaultPlugin];
     
     // The plugin needs a name for saved frames to work
     XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");

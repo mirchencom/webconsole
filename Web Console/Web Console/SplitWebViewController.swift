@@ -164,11 +164,15 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     
     func savedFrameNameForLogController(logController: LogController) -> String? {
         if let pluginName = pluginWebViewController.plugin?.name {
-            return "Log Frame " + pluginName
+            return self.dynamicType.savedFrameNameForPluginName(pluginName)
         }
         return nil
     }
 
+    class func savedFrameNameForPluginName(pluginName: String) -> String {
+        return "Log Frame " + pluginName
+    }
+    
     // MARK: WCLWebViewControllerDelegate
     
     func webViewControllerViewWillDisappear(webViewController: WCLWebViewController) {
