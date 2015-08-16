@@ -11,7 +11,5 @@ build/
 *.perspectivev3
 *.mode1v3
 *.mode2v3
-
-# Xcode 4
-
 xcuserdata
+*.xccheckout
