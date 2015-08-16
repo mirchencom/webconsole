@@ -30,7 +30,6 @@
 {
     WCLSplitWebWindowController *splitWebWindowController = [self makeSplitWebWindowController];
     Plugin *plugin = splitWebWindowController.plugin;
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLSplitWebWindowControllers for the WCLPlugin.");
     
     // Test that the NSWindow's frame matches the saved frame
@@ -65,7 +64,6 @@
     
     // Open a new NSWindow
     splitWebWindowController = [self makeSplitWebWindowController];
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLSplitWebWindowControllers for the WCLPlugin.");
     
     // Test that the NSWindow's frame now equals the destination frame
@@ -78,7 +76,6 @@
     
     // Open a second window
     splitWebWindowController = [self makeSplitWebWindowController];
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)2, @"There should be two WCLSplitWebWindowControllers for the WCLPlugin.");
     
     // Test that the second NSWindow's frame now equals the destination frame
@@ -100,7 +97,6 @@
     
     // Open a third NSWindow
     splitWebWindowController = [self makeSplitWebWindowController];
-    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)3, @"There should be three WCLSplitWebWindowControllers for the WCLPlugin.");
     
     // Test that the third NSWindow matches the second desintation frame
