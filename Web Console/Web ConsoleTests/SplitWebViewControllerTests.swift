@@ -67,7 +67,7 @@ class SplitWebViewControllerTests: XCTestCase {
     func resizeLogForSplitWebViewController(splitWebViewController: SplitWebViewController, logHeight: CGFloat) {
         // Resize & Wait for Save
 
-        let name = splitWebViewController.savedFrameNameForLogController(splitWebViewController.logController)
+        let name = splitWebViewController.savedFrameNameForLogController(splitWebViewController.logController)!
         makeFrameSaveExpectationForHeight(logHeight, name: name)
         splitWebViewController.logController.configureHeight(logHeight)
         waitForExpectationsWithTimeout(testTimeout, handler: nil)

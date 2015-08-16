@@ -22,7 +22,6 @@
 
 @interface WCLSplitWebWindowControllerResizingTests : WCLSplitWebWindowControllerTestCase
 + (NSRect)savedFrameNamed:(NSString *)frameName;
-- (WCLSplitWebWindowController *)splitWebWindowControllerRunningHelloWorldForPlugin:(WCLPlugin *)plugin;
 @end
 
 @implementation WCLSplitWebWindowControllerResizingTests
@@ -132,26 +131,6 @@
 
 
 #pragma mark - Helpers
-
-- (WCLSplitWebWindowController *)splitWebWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin
-{
-    NSArray *originalWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
-    
-    // Run a simple command to get the window to display
-    NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
-                                               ofType:kTestDataRubyExtension
-                                         subdirectory:kTestDataSubdirectory];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
-    
-    NSMutableArray *splitWebWindowControllers = [[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] mutableCopy];
-    [splitWebWindowControllers removeObjectsInArray:originalWebWindowControllers];
-    
-    NSAssert([splitWebWindowControllers count] == (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
-    WCLSplitWebWindowController *splitWebWindowController = splitWebWindowControllers[0];
-    NSAssert(splitWebWindowController.plugin == plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
-    
-    return splitWebWindowController;
-}
 
 + (NSRect)savedFrameNamed:(NSString *)frameName
 {
