@@ -124,8 +124,9 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     }
     
     func makeNewSplitWebViewController() -> SplitWebViewController {
-        let pluginWindowController = makeSplitWebWindowController()
-        return pluginWindowController.splitWebViewController
+        let splitWebWindowController = makeSplitWebWindowController()
+        splitWebWindowController.window?.setFrame(testFrame, display: false)
+        return splitWebWindowController.splitWebViewController
     }
     
     func makeLogViewWillAppearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
@@ -151,13 +152,14 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
             object: nil,
             queue: nil)
         { [unowned self] _ in
-            let frame = LogController.savedFrameForName(name)
-            if frame.size.height == height {
-                expectation.fulfill()
-                if let observer = observer {
-                    NSNotificationCenter.defaultCenter().removeObserver(observer)
+            if let frame = LogController.savedFrameForName(name) {
+                if frame.size.height == height {
+                    expectation.fulfill()
+                    if let observer = observer {
+                        NSNotificationCenter.defaultCenter().removeObserver(observer)
+                    }
+                    observer = nil
                 }
-                observer = nil
             }
         }
     }

@@ -95,10 +95,12 @@ import AppKit
         }
     }
 
-    class func savedFrameForName(name: String) -> NSRect {
-        let frameString = NSUserDefaults.standardUserDefaults().stringForKey(name)
-        let frame = NSRectFromString(frameString)
-        return frame
+    class func savedFrameForName(name: String) -> NSRect? {
+        if let frameString = NSUserDefaults.standardUserDefaults().stringForKey(name) {
+            let frame = NSRectFromString(frameString)
+            return frame
+        }
+        return nil
     }
     
     func savedLogSplitViewFrame() -> NSRect? {

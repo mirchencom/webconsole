@@ -212,6 +212,11 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     return [NSNumber numberWithInteger:self.window.windowNumber];
 }
 
+- (BOOL)windowIsVisibleForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController
+{
+    return self.window.isVisible;
+}
+
 - (void)splitWebViewControllerWillLoadHTML:(SplitWebViewController *)splitWebViewController
 {
     if (![self.window isVisible]) {

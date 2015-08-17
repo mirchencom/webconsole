@@ -13,6 +13,7 @@ import AppKit
 let splitWebViewHeight = CGFloat(150)
 
 @objc protocol SplitWebViewControllerDelegate: class {
+    func windowIsVisibleForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Bool
     func windowNumberForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSNumber!
     func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
     func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
@@ -152,6 +153,12 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
 
     override func splitViewDidResizeSubviews(notification: NSNotification) {
+        if let isVisible = delegate?.windowIsVisibleForSplitWebViewController(self) {
+            if !isVisible {
+                return
+            }
+        }
+        
         if let collapsed = logController.isLogCollapsed() {
             if !collapsed {
                 logController.saveFrame()
