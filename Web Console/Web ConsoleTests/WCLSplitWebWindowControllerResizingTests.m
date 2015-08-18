@@ -21,10 +21,30 @@
 #import "Web_ConsoleTestsConstants.h"
 
 @interface WCLSplitWebWindowControllerResizingTests : WCLSplitWebWindowControllerTestCase
-+ (NSRect)savedFrameNamed:(NSString *)frameName;
+@property (nonatomic, readonly) NSString *defaultPluginSavedFrameName;
 @end
 
 @implementation WCLSplitWebWindowControllerResizingTests
+
+// TODO: Clear the saved frame in setup and teardown and delete this alternating code
+
+//#pragma mark - Properties
+//
+//- (NSString *)defaultPluginSavedFrameName
+//{
+//    Plugin *plugin = [[self class] defaultPlugin];
+//    NSString *frameName = [[self class] savedFrameNameForPlugin:plugin];
+//    return frameName;
+//}
+//
+//
+//#pragma mark - Life Cycle
+//
+//- (void)setUp
+//{
+//    [super setUp];
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
+//}
 
 - (void)tearDown
 {
@@ -39,7 +59,7 @@
     XCTAssertEqual([[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] count], (NSUInteger)1, @"There should be one WCLSplitWebWindowControllers for the WCLPlugin.");
     
     // Test that the NSWindow's frame matches the saved frame
-    NSRect savedFrame = [[self class] savedFrameNamed:plugin.name];
+    NSRect savedFrame = [[self class] savedFrameForPlugin:plugin];
     NSRect windowFrame = [splitWebWindowController.window frame];
 
     if (!NSRectEqualToRect(savedFrame, NSZeroRect)) {
@@ -61,7 +81,7 @@
     [splitWebWindowController.window setFrame:destinationFrame display:NO];
 
     // Test that the saved frame now equals the destination frame
-    savedFrame = [[self class] savedFrameNamed:plugin.name];
+    savedFrame = [[self class] savedFrameForPlugin:plugin];
     XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrame), @"The saved frame should equal the destination frame.");
     
     // Close the NSWindow
@@ -98,7 +118,7 @@
     [splitWebWindowController.window setFrame:destinationFrameTwo display:NO];
 
     // Test that the saved frame now equals the second destination frame
-    savedFrame = [[self class] savedFrameNamed:plugin.name];
+    savedFrame = [[self class] savedFrameForPlugin:plugin];
     XCTAssertTrue(NSRectEqualToRect(savedFrame, destinationFrameTwo), @"The saved frame should equal the destination frame.");
     
     // Open a third NSWindow
@@ -115,7 +135,7 @@
     XCTAssertEqual(NSRectEqualToRect(windowFrame, destinationFrameTwo), testCascadeFrameComparisonResult, @"The NSWindow's frame comparison result should match the test result.");
 
     // Test that the saved frame matches second destination frame
-    savedFrame = [[self class] savedFrameNamed:plugin.name];
+    savedFrame = [[self class] savedFrameForPlugin:plugin];
     XCTAssertTrue(NSSizeEqualToSize(savedFrame.size, destinationFrameTwo.size), @"The saved size should equal the destination size.");
     // Rect check should only succeed if this WCLSplitWebWindowController should not cascade windows
     XCTAssertEqual(NSRectEqualToRect(savedFrame, destinationFrameTwo), testCascadeFrameComparisonResult, @"The NSWindow's frame comparison result should match the test result.");
@@ -139,10 +159,16 @@
 
 #pragma mark - Helpers
 
-+ (NSRect)savedFrameNamed:(NSString *)frameName
++ (NSString *)savedFrameNameForPlugin:(Plugin *)plugin
 {
-    NSString *key = [NSString stringWithFormat:@"NSWindow Frame %@", frameName];
-    NSString *frameString = [[NSUserDefaults standardUserDefaults] stringForKey:key];
+    NSString *savedFrameName = [NSString stringWithFormat:@"NSWindow Frame %@", plugin.name];
+    return savedFrameName;
+}
+
++ (NSRect)savedFrameForPlugin:(Plugin *)plugin
+{
+    NSString *savedFrameName = [self savedFrameNameForPlugin:plugin];
+    NSString *frameString = [[NSUserDefaults standardUserDefaults] stringForKey:savedFrameName];
     return NSRectFromString(frameString); // If frame string is nil, returns NSZeroRect
 }
 
