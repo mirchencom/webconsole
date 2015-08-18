@@ -27,6 +27,7 @@
 
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase
 + (Plugin *)defaultPlugin;
++ (Plugin *)otherPlugin;
 - (WCLSplitWebWindowController *)makeSplitWebWindowController;
 - (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin;
 + (NSTask *)taskRunningCommandPath:(NSString *)commandPath;

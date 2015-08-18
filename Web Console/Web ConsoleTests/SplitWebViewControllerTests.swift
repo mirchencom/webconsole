@@ -13,18 +13,26 @@ import XCTest
 
 class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     
-    var savedFrameName: String {
+    var defaultPluginSavedFrameName: String {
         let plugin = self.dynamicType.defaultPlugin()
         return SplitWebViewController.savedFrameNameForPluginName(plugin.name)
     }
+
+    var otherPluginSavedFrameName: String {
+        let plugin = self.dynamicType.defaultPlugin()
+        return SplitWebViewController.savedFrameNameForPluginName(plugin.name)
+    }
+
     
     override func setUp() {
         super.setUp()
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(savedFrameName)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
     }
     
     override func tearDown() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(savedFrameName)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
         self.dynamicType.blockUntilAllTasksRunAndFinish()
         super.tearDown()
     }

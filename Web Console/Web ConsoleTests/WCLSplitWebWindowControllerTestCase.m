@@ -92,6 +92,11 @@
     return [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
 }
 
++ (Plugin *)otherPlugin
+{
+    return [[PluginsManager sharedInstance] pluginWithName:kTestHelloWorldPluginName];
+}
+
 - (WCLSplitWebWindowController *)makeSplitWebWindowController
 {
     Plugin *plugin = [[self class] defaultPlugin];
@@ -100,7 +105,7 @@
 
 - (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin
 {
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestHelloWorldPluginName];
+    Plugin *plugin = [[self class] otherPlugin];
     return [self makeSplitWebWindowControllerForPlugin:plugin];
 }
 
