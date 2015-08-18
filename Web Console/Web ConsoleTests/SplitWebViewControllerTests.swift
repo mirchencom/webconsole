@@ -69,6 +69,10 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         // Re-open the log in the first window and confirm it has the right height
         makeLogAppearForSplitWebViewController(splitWebViewController)
         XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
+
+        // Clean up
+        // Closing logs increases test reliability because it assures all animation blocks have finished
+        makeLogDisappearForSplitWebViewController(splitWebViewController)
     }
 
     func testSplitWebViewControllerDifferentPlugin() {
@@ -86,6 +90,12 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         let splitWebViewControllerThree = makeNewSplitWebViewController()
         makeLogAppearForSplitWebViewController(splitWebViewControllerThree)
         XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewControllerThree), testLogViewHeight, "The heights should be equal")
+
+        // Clean up
+        // Closing logs increases test reliability because it assures all animation blocks have finished
+        makeLogDisappearForSplitWebViewController(splitWebViewController)
+        makeLogDisappearForSplitWebViewController(splitWebViewControllerTwo)
+        makeLogDisappearForSplitWebViewController(splitWebViewControllerThree)
     }
 
     
