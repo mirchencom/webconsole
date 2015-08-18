@@ -17,6 +17,7 @@
 
 #define kTestPrintPluginName @"Print"
 #define kTestPrintPluginCommand @"print.rb"
+#define kTestHelloWorldPluginName @"HelloWorld"
 #define kPluginCommandPathKey @"commandPath"
 #define kTestTestEnvironmentPluginName @"TestEnvironment"
 #define kPluginResourcesPathComponent @"Contents/Resources"

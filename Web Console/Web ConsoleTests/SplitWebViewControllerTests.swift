@@ -25,6 +25,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     
     override func tearDown() {
         NSUserDefaults.standardUserDefaults().removeObjectForKey(savedFrameName)
+        self.dynamicType.blockUntilAllTasksRunAndFinish()
         super.tearDown()
     }
     
@@ -37,7 +38,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         
         // Show the log
         makeLogAppearForSplitWebViewController(splitWebViewController)
-        XCTAssertEqual(heightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
         
         // Resize the log
         resizeLogForSplitWebViewController(splitWebViewController, logHeight: testLogViewHeight)
@@ -49,7 +50,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         makeLogAppearForSplitWebViewController(splitWebViewController)
         
         // Test that the frame height was restored
-        XCTAssertEqual(heightForSplitWebViewController(splitWebViewController), testLogViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), testLogViewHeight, "The heights should be equal")
 
         // Second Window
         
@@ -57,7 +58,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         let secondSplitWebViewController = makeNewSplitWebViewController()
         XCTAssertTrue(secondSplitWebViewController.logController.logSplitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
         makeLogAppearForSplitWebViewController(secondSplitWebViewController)
-        XCTAssertEqual(heightForSplitWebViewController(secondSplitWebViewController), testLogViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeightForSplitWebViewController(secondSplitWebViewController), testLogViewHeight, "The heights should be equal")
 
         // Close the log in the first window
         makeLogDisappearForSplitWebViewController(splitWebViewController)
@@ -67,16 +68,24 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         
         // Re-open the log in the first window and confirm it has the right height
         makeLogAppearForSplitWebViewController(splitWebViewController)
-        XCTAssertEqual(heightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
     }
 
     func testSplitWebViewControllerDifferentPlugin() {
-        // 1. Make a first window with the default plugin
-        // 2. Resize the log to a different height
-        // 3. Make a second window with a different plugin (Just the name has to be different)
-        // 4. Resize the second log to a different height
-        // 5. Make a third window with the same plugin as the first
-        // 6. Show the log and confirm that it has the same height as the first plugin
+        // Make a window with the first plugin and resize the log
+        let splitWebViewController = makeNewSplitWebViewController()
+        makeLogAppearForSplitWebViewController(splitWebViewController)
+        resizeLogForSplitWebViewController(splitWebViewController, logHeight: testLogViewHeight)
+
+        // Make a window with the second plugin and resize the log
+        let splitWebViewControllerTwo = makeNewSplitWebViewControllerForOtherPugin()
+        makeLogAppearForSplitWebViewController(splitWebViewControllerTwo)
+        resizeLogForSplitWebViewController(splitWebViewControllerTwo, logHeight: testLogViewHeightTwo)
+
+        // Make a window with the first plugin again and confirm the size matches
+        let splitWebViewControllerThree = makeNewSplitWebViewController()
+        makeLogAppearForSplitWebViewController(splitWebViewControllerThree)
+        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewControllerThree), testLogViewHeight, "The heights should be equal")
     }
 
     
@@ -91,7 +100,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
 
         // Test the height & saved frame
-        XCTAssertEqual(heightForSplitWebViewController(splitWebViewController), logHeight, "The heights should be equal")
+        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), logHeight, "The heights should be equal")
         var frame: NSRect! = splitWebViewController.logController.savedLogSplitViewFrame()
         XCTAssertEqual(frame.size.height, logHeight, "The heights should be equal")
     }
@@ -130,8 +139,14 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         XCTAssertFalse(result, "The divider should never be hidden for the NSView")
     }
     
-    func heightForSplitWebViewController(splitWebViewController: SplitWebViewController) -> CGFloat {
+    func logHeightForSplitWebViewController(splitWebViewController: SplitWebViewController) -> CGFloat {
         return splitWebViewController.logController.logView!.frame.size.height
+    }
+
+    func makeNewSplitWebViewControllerForOtherPugin() -> SplitWebViewController {
+        let splitWebWindowController = makeSplitWebWindowControllerForOtherPlugin()
+        splitWebWindowController.window?.setFrame(testFrame, display: false)
+        return splitWebWindowController.splitWebViewController
     }
     
     func makeNewSplitWebViewController() -> SplitWebViewController {

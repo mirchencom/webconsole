@@ -42,7 +42,6 @@
 - (void)tearDown
 {
     [WCLSplitWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
-    
     [super tearDown];
 }
 
@@ -53,6 +52,13 @@
     NSTask *task;
     (void)[self splitWebWindowControllerRunningCommandPath:commandPath task:&task];
     return task;
+}
+
++ (void)blockUntilAllTasksRunAndFinish
+{
+    // Clean up
+    NSArray *tasks = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] tasks];
+    [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
 }
 
 + (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
@@ -89,16 +95,24 @@
 - (WCLSplitWebWindowController *)makeSplitWebWindowController
 {
     Plugin *plugin = [[self class] defaultPlugin];
-    
+    return [self makeSplitWebWindowControllerForPlugin:plugin];
+}
+
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin
+{
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestHelloWorldPluginName];
+    return [self makeSplitWebWindowControllerForPlugin:plugin];
+}
+
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerForPlugin:(Plugin *)plugin
+{
     // The plugin needs a name for saved frames to work
     XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");
-    XCTAssertTrue([plugin.name isEqualToString:kTestPrintPluginName], @"The WCLPlugin's name should equal the test plugin name.");
     
     WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningHelloWorldForPlugin:plugin];
     [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     return splitWebWindowController;
 }
-
 
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin
 {

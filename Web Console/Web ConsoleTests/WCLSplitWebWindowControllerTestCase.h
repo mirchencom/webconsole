@@ -28,7 +28,9 @@
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase
 + (Plugin *)defaultPlugin;
 - (WCLSplitWebWindowController *)makeSplitWebWindowController;
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin;
 + (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
 + (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath;
 + (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
++ (void)blockUntilAllTasksRunAndFinish;
 @end

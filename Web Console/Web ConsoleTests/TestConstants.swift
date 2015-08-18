@@ -9,5 +9,6 @@
 import Foundation
 
 let testLogViewHeight = CGFloat(300)
+let testLogViewHeightTwo = CGFloat(200)
 let testTimeout = 2.0
 let testFrame = NSMakeRect(200, 200, 500, 600)

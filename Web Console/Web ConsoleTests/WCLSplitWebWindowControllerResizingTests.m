@@ -26,6 +26,12 @@
 
 @implementation WCLSplitWebWindowControllerResizingTests
 
+- (void)tearDown
+{
+    [[self class] blockUntilAllTasksRunAndFinish];
+    [super tearDown];
+}
+
 - (void)testResizingAndCascadingWindows
 {
     WCLSplitWebWindowController *splitWebWindowController = [self makeSplitWebWindowController];
@@ -114,10 +120,21 @@
     // Rect check should only succeed if this WCLSplitWebWindowController should not cascade windows
     XCTAssertEqual(NSRectEqualToRect(savedFrame, destinationFrameTwo), testCascadeFrameComparisonResult, @"The NSWindow's frame comparison result should match the test result.");
 
-    // Clean up
-    NSArray *tasks = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] tasks];
-    [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
+    // Clean Up
+    [[self class] blockUntilAllTasksRunAndFinish];
 }
+
+- (void)testResizingWindowsWithDifferentPlugins
+{
+    // TODO: Test different plugin names
+    // 1. Make a first window with the default plugin
+    // 2. Resize the window to a different height
+    // 3. Make a second window with a different plugin (Just the name has to be different)
+    // 4. Resize the second window to a different height
+    // 5. Make a third window with the same plugin as the first
+    // 6. Test that it has the same height as the first plugin
+}
+
 
 
 #pragma mark - Helpers
