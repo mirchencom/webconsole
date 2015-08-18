@@ -122,23 +122,26 @@
     XCTAssertTrue(NSSizeEqualToSize(savedFrame.size, destinationFrameTwo.size), @"The saved size should equal the destination size.");
     // Rect check should only succeed if this WCLSplitWebWindowController should not cascade windows
     XCTAssertEqual(NSRectEqualToRect(savedFrame, destinationFrameTwo), testCascadeFrameComparisonResult, @"The NSWindow's frame comparison result should match the test result.");
-
-    // Clean Up
-    [[self class] blockUntilAllTasksRunAndFinish];
 }
 
 - (void)testResizingWindowsWithDifferentPlugins
 {
     // TODO: Test different plugin names
-    // 1. Make a first window with the default plugin
-    // 2. Resize the window to a different height
-    // 3. Make a second window with a different plugin (Just the name has to be different)
-    // 4. Resize the second window to a different height
-    // 5. Make a third window with the same plugin as the first
-    // 6. Test that it has the same height as the first plugin
+    // Make a window with the default plugin and frame
+    WCLSplitWebWindowController *splitWebWindowController = [self makeSplitWebWindowController];
+    NSRect destinationFrame = kTestWindowFrame;
+    [splitWebWindowController.window setFrame:destinationFrame display:NO];
+
+    // Make a second window with a different plugin and frame
+    WCLSplitWebWindowController *splitWebWindowControllerTwo = [self makeSplitWebWindowControllerForOtherPlugin];
+    NSRect destinationFrameTwo = kTestWindowFrameTwo;
+    [splitWebWindowControllerTwo.window setFrame:destinationFrameTwo display:NO];
+    
+    // Make a third window for the first plugin
+    WCLSplitWebWindowController *splitWebWindowControllerThree = [self makeSplitWebWindowController];
+    NSRect windowFrame = [splitWebWindowControllerThree.window frame];
+    XCTAssertTrue(NSSizeEqualToSize(windowFrame.size, destinationFrame.size), @"The NSWindow's size should equal the destination size.");
 }
-
-
 
 #pragma mark - Helpers
 
