@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require "test/unit"
+
 require_relative "lib/test_constants"
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
