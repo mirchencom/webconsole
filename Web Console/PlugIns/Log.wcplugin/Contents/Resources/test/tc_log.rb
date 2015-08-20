@@ -18,12 +18,21 @@ class TestPlugin < Test::Unit::TestCase
   def teardown
     # window.close
     WebConsole::Tests::Helper::quit
-    WebConsole::Tests::Helper::confirm_dialog
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
   end
 
   def test_log
-    puts "Got here"
+    WebConsole::run_plugin(TEST_PLUGIN_NAME)
+
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running
+
+    window_id = WebConsole::window_id_for_plugin(TEST_PLUGIN_NAME)
+    window = WebConsole::Window.new(window_id)
+
+    title = window.do_javascript(TEST_TITLE_JAVASCRIPT)
+    title.chomp!
+
+    assert_equal(title, TEST_PLUGIN_NAME, "The title should equal the test html title.")
   end
 
 end

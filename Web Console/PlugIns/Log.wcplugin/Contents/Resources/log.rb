@@ -3,6 +3,6 @@
 require_relative 'bundle/bundler/setup'
 require 'webconsole'
 
-require_relative "lib/controller"
+require_relative "lib/view"
 
 WebConsole::Log::View.new
