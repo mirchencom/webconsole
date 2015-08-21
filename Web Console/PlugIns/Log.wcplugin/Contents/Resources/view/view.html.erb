@@ -3,12 +3,13 @@
 <head>
 	<meta charset="utf-8" />
 	<title><%= title %></title>
-    <%= shared_stylesheet_link_tag "raster" %>
+	<%= shared_stylesheet_link_tag "raster" %>
 	<link rel="stylesheet" href="css/style.css" />
 	<script id="log-template" type="text/x-handlebars-template">
 		<p class="{{level}}">{{message}}</p>
 	</script>
-    <%= shared_javascript_include_tag "handlebars" %>
+	<%= shared_javascript_include_tag "handlebars" %>
+	<%= shared_javascript_include_tag "zepto" %>
 	<script type="text/javascript" src="js/wclog.js"></script>
 </head>
 <body>
