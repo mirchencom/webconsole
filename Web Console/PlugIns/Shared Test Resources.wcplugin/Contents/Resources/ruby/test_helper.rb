@@ -8,7 +8,9 @@ module WebConsole
       APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "..", "applescript")
 
       def self.run_javascript(javascript)
-        return `node -e #{Shellwords.escape(javascript)}`
+        # `osascript` requires redirecting stderr to stdout for some reason
+        return `osascript -l JavaScript -e #{Shellwords.escape(javascript)} 2>&1`.chomp!
+        # return `node -e #{Shellwords.escape(javascript)}`
       end
 
       CONFIRMDIALOGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY, "confirm_dialog.applescript")
