@@ -64,7 +64,6 @@
 		455FD26A1A899D3A00ACE1D4 /* PluginsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E2A1A87E4E600E4BEFA /* PluginsManager.swift */; };
 		4562410F1A88683C0047F085 /* WCLSplitWebWindowControllerPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4562410E1A88683C0047F085 /* WCLSplitWebWindowControllerPluginTests.m */; };
 		456241121A8991A70047F085 /* WCLAppleScriptPluginWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */; };
-		456492FF191C656D00BA048E /* IRB.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
 		45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
 		45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
@@ -972,7 +971,6 @@
 				459389F318FB287700E0218E /* UserDefaults.plist in Resources */,
 				459389F018FB20D900E0218E /* WCLPreferencesWindowController.xib in Resources */,
 				45B0FF3E1B75805A008EC6EC /* Main.storyboard in Resources */,
-				456492FF191C656D00BA048E /* IRB.wcplugin in Resources */,
 				45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */,
 				4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */,
 				459389EE18FB20D900E0218E /* WCLEnvironmentViewController.xib in Resources */,
