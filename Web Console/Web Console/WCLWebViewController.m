@@ -22,6 +22,8 @@
 
 @implementation WCLWebViewController
 
+@synthesize identifier=_identifier;
+
 #pragma mark - Life Cycle
 
 - (void)viewWillAppear
@@ -50,6 +52,17 @@
     _requestToCompletionHandlerDictionary = [NSMutableDictionary dictionary];
     
     return _requestToCompletionHandlerDictionary;
+}
+
+- (NSString * __nonnull)identifier
+{
+    if (_identifier) {
+        return _identifier;
+    }
+
+    _identifier = [[NSUUID UUID] UUIDString];
+
+    return _identifier;
 }
 
 #pragma mark - AppleScript

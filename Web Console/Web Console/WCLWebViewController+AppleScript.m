@@ -20,7 +20,7 @@
     return [[NSUniqueIDSpecifier alloc] initWithContainerClassDescription:containerClassDescription
                                                        containerSpecifier:[containerWindow objectSpecifier]
                                                                       key:@"views"
-                                                                 uniqueID:[NSNumber numberWithInt:0]];
+                                                                 uniqueID:self.identifier];
 }
 
 @end

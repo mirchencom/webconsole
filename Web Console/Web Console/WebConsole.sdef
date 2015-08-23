@@ -269,8 +269,8 @@
         
 		<class name="view" code="view" description="A view for a plugin.">
 			<cocoa class="WCLWebViewController"/>
-			<property name="id" code="ID  " type="integer" access="r" description="The unique identifier of the view.">
-				<cocoa key="uniqueID"/>
+			<property name="id" code="ID  " type="text" access="r" description="The unique identifier of the view.">
+				<cocoa key="identifier"/>
 			</property>
 		</class>
 		
