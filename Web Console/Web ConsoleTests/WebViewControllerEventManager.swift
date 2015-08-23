@@ -68,7 +68,7 @@ class WebViewControllerEventManager: NSObject, WCLWebViewControllerDelegate {
         }
     }
     
-    func windowNumberForWebViewController(webViewController: WCLWebViewController) -> NSNumber {
-        return self.storedDelegate!.windowNumberForWebViewController(webViewController)
+    func windowForWebViewController(webViewController: WCLWebViewController) -> NSWindow {
+        return self.storedDelegate!.windowForWebViewController(webViewController)
     }
 }

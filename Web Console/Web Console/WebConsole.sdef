@@ -267,6 +267,13 @@
             </responds-to>
 		</class>
         
+		<class name="view" code="view" description="A view for a plugin.">
+			<cocoa class="WCLWebViewController"/>
+			<property name="id" code="ID  " type="integer" access="r" description="The unique identifier of the view.">
+				<cocoa key="uniqueID"/>
+			</property>
+		</class>
+		
         <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML.">
             <cocoa class="WCLLoadHTMLScriptCommand"/>
             <direct-parameter type="text" description="The HTML to load." />

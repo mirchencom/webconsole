@@ -202,14 +202,9 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 #pragma mark - SplitWebViewControllerDelegate
 
-- (NSNumber *)windowNumberForSplitWebViewController:(SplitWebViewController *)splitWebViewController
+- (NSWindow *)windowForSplitWebViewController:(SplitWebViewController *)splitWebViewController
 {
-    if (![self.window isVisible]) {
-        // The windowNumber must be calculated after showing the window
-        [self showWindow:nil];
-    }
-
-    return [NSNumber numberWithInteger:self.window.windowNumber];
+    return self.window;
 }
 
 - (BOOL)windowIsVisibleForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController

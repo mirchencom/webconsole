@@ -14,7 +14,7 @@
 @class WCLWebViewController;
 
 @protocol WCLWebViewControllerDelegate <NSObject>
-- (nonnull NSNumber *)windowNumberForWebViewController:(nonnull WCLWebViewController *)webViewController;
+- (nonnull NSWindow *)windowForWebViewController:(nonnull WCLWebViewController *)webViewController;
 @optional
 - (void)webViewControllerViewWillAppear:(nonnull WCLWebViewController *)webViewController;
 - (void)webViewControllerViewWillDisappear:(nonnull WCLWebViewController *)webViewController;
