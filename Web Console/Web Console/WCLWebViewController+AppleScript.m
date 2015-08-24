@@ -12,8 +12,6 @@
 
 - (NSScriptObjectSpecifier *)objectSpecifier
 {
-    // TODO: Implement this correctly with a real key and uniqueID
-    
     NSWindow *containerWindow = [self.delegate windowForWebViewController:self];
     NSScriptClassDescription *containerClassDescription = (NSScriptClassDescription *)[NSScriptClassDescription classDescriptionForClass:[containerWindow class]];
 
