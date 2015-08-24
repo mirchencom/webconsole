@@ -281,26 +281,31 @@
 			</property>
 		</class>
 		
-        <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML.">
+        <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML in a window or view.">
             <cocoa class="WCLLoadHTMLScriptCommand"/>
             <direct-parameter type="text" description="The HTML to load." />
-			<parameter name="in" description="The window to load the HTML in." code="kfil" optional="yes">
+			<parameter name="in" description="The window or view to load the HTML in." code="kfil" optional="yes">
 				<cocoa key="Target" />
 				<type type="window" />
+				<type type="view" />
 			</parameter>
 			<parameter name="with base URL" description="The base URL to load resources from." code="burl" optional="yes">
 				<cocoa key="BaseURL" />
 				<type type="text" />
 			</parameter>
-			<result type="window" description="The window the HTML was loaded in." />
+			<result description="The window or view the HTML was loaded in.">
+				<type type="window"/>
+				<type type="view"/>
+			</result>
 		</command>
 
-        <command name="do JavaScript" code="WCSCJVSC" description="Runs JavaScript in a window.">
+        <command name="do JavaScript" code="WCSCJVSC" description="Runs JavaScript in a window or view.">
             <cocoa class="WCLDoJavaScriptCommand"/>
             <direct-parameter type="text" description="The JavaScript to run." />
-			<parameter name="in" description="The window to run the JavaScript in." code="kfil">
+			<parameter name="in" description="The window or view to run the JavaScript in." code="kfil">
 				<cocoa key="Target" />
 				<type type="window" />
+				<type type="view" />
 			</parameter>
             <result>
 				<type type="any"/>
