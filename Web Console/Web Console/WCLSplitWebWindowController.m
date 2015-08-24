@@ -160,6 +160,11 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     [self.splitWebViewController loadHTML:HTML baseURL:baseURL completionHandler:completionHandler];
 }
 
+- (nonnull NSArray *)webViewControllers
+{
+    return self.splitWebViewController.webViewControllers;
+}
+
 #pragma mark - Tasks
 
 - (void)runTask:(NSTask *)task

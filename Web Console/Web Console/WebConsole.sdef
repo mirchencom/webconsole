@@ -267,6 +267,13 @@
             </responds-to>
 		</class>
         
+        <class-extension extends="window">
+            <cocoa class="NSWindow"/>
+			<element type="view">
+				<cocoa key="views"/>
+			</element>
+		</class-extension>
+		
 		<class name="view" code="view" description="A view for a plugin.">
 			<cocoa class="WCLWebViewController"/>
 			<property name="id" code="ID  " type="text" access="r" description="The unique identifier of the view.">

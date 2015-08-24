@@ -49,6 +49,10 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         }
     }
     
+    var webViewControllers: [WCLWebViewController] {
+        return splitViewItems.map { $0.viewController as! WCLWebViewController }
+    }
+    
     // MARK: Life Cycle
     
     override func awakeFromNib() {
