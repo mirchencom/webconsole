@@ -23,6 +23,8 @@
          baseURL:(nullable NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
+    WCLSplitWebWindowController *splitWebWindowController = (WCLSplitWebWindowController *)self.windowController;
+    return [splitWebWindowController loadHTML:HTML baseURL:baseURL completionHandler:completionHandler];
 }
 
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript

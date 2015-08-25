@@ -10,6 +10,8 @@
 
 #import "WCLSplitWebWindowsController.h"
 #import "WCLSplitWebWindowController.h"
+#import "WCLPluginView.h"
+#import "NSWindow+AppleScript.h"
 
 #define kFileURLPrefix @"file://"
 
@@ -20,9 +22,15 @@
     NSString *HTML = [self directParameter];
 
     NSDictionary *argumentsDictionary = [self evaluatedArguments];
-    NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
-    NSString *baseURLString = [argumentsDictionary objectForKey:kBaseURLKey];
     
+    // Get the pluginView or make a new window if no target is specified
+    id<WCLPluginView> pluginView = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
+    if (!pluginView) {
+        WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+        pluginView = splitWebWindowController.window;
+    }
+
+    NSString *baseURLString = [argumentsDictionary objectForKey:kBaseURLKey];
     NSURL *baseURL;
     if ([baseURLString hasPrefix:kFileURLPrefix]) {
         baseURL = [NSURL fileURLWithPath:[baseURLString substringFromIndex:kFileURLPrefix.length - 1]];
@@ -30,17 +38,9 @@
         baseURL = [NSURL URLWithString:baseURLString];
     }
 
-    WCLSplitWebWindowController *splitWebWindowController;
-    if (window) {
-        splitWebWindowController = (WCLSplitWebWindowController *)window.windowController;
-    } else {
-        splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
-        window = splitWebWindowController.window;
-    }
-
     [self suspendExecution];
-    [splitWebWindowController loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
-        [self resumeExecutionWithResult:window];
+    [pluginView loadHTML:HTML baseURL:baseURL completionHandler:^(BOOL success) {
+        [self resumeExecutionWithResult:pluginView];
     }];
     
     return nil;
