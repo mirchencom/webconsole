@@ -8,22 +8,17 @@
 
 #import "WCLDoJavaScriptCommand.h"
 
-#import "WCLSplitWebWindowsController.h"
-#import "WCLSplitWebWindowController.h"
+#import "WCLPluginView.h"
 
 @implementation WCLDoJavaScriptCommand
 
 - (id)performDefaultImplementation
 {
-
     NSString *javaScript = [self directParameter];
         
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
-    NSWindow *window = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
-    
-    WCLSplitWebWindowController *splitWebWindowController = (WCLSplitWebWindowController *)window.windowController;
-
-    return [splitWebWindowController doJavaScript:javaScript];
+    id<WCLPluginView> pluginView = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
+    return [pluginView doJavaScript:javaScript];
 }
 
 @end

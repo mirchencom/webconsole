@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSWindow (AppleScript)
+#import "WCLPluginView.h"
+
+@interface NSWindow (AppleScript) <WCLPluginView>
 - (NSArray *)views;
 @end

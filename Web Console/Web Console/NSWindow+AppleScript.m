@@ -17,4 +17,18 @@
     return splitWebViewController.webViewControllers;
 }
 
+#pragma mark - WCLPluginView
+
+- (void)loadHTML:(nonnull NSString *)HTML
+         baseURL:(nullable NSURL *)baseURL
+completionHandler:(nullable void (^)(BOOL success))completionHandler
+{
+}
+
+- (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript
+{
+    WCLSplitWebWindowController *splitWebWindowController = (WCLSplitWebWindowController *)self.windowController;
+    return [splitWebWindowController doJavaScript:javaScript];
+}
+
 @end

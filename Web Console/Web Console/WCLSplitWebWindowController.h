@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "WCLPluginView.h"
-
 @class Plugin;
 @class WCLSplitWebWindowController;
 @class SplitWebViewController;
@@ -21,11 +19,15 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
 - (void)splitWebWindowControllerWindowWillClose:(nonnull WCLSplitWebWindowController *)splitWebWindowController;
 @end
 
-@interface WCLSplitWebWindowController : NSWindowController <WCLPluginView>
+@interface WCLSplitWebWindowController : NSWindowController
 @property (nonatomic, weak, nullable) id<WCLSplitWebWindowControllerDelegate> delegate;
 @property (nonatomic, strong, nullable) Plugin *plugin;
 @property (nonnull, readonly) SplitWebViewController *splitWebViewController;
 #pragma mark - AppleScript
+- (void)loadHTML:(nonnull NSString *)HTML
+         baseURL:(nullable NSURL *)baseURL
+completionHandler:(nullable void (^)(BOOL success))completionHandler;
+- (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
 - (nonnull NSArray *)webViewControllers;
 #pragma mark - Tasks
 - (void)runTask:(nonnull NSTask *)task;
