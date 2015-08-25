@@ -391,6 +391,7 @@
 		45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTaskTestsHelper.m; sourceTree = "<group>"; };
 		45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTestPluginManagerTestCase.m; sourceTree = "<group>"; };
 		45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLTestPluginManagerTestCase.h; sourceTree = "<group>"; };
+		45DCDD391B8D2B9D00EE0C1F /* WCLPluginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLPluginView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -702,6 +703,7 @@
 		459389E318FB1EE700E0218E /* Web Windows */ = {
 			isa = PBXGroup;
 			children = (
+				45DCDD391B8D2B9D00EE0C1F /* WCLPluginView.h */,
 				45B0FF391B75805A008EC6EC /* LogController.swift */,
 				45B0FF441B758458008EC6EC /* WCLWebViewController.h */,
 				45B0FF451B758458008EC6EC /* WCLWebViewController.m */,
