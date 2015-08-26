@@ -276,9 +276,13 @@
 		
 		<class name="view" code="view" description="A view for a plugin.">
 			<cocoa class="WCLWebViewController"/>
-			<property name="id" code="ID  " type="text" access="r" description="The unique identifier of the view.">
+			<property name="plugin" code="plgn" type="plugin" access="r" description="The view's plugin.">
+				<cocoa key="pluginWrapper"/>
+			</property>
+			<property name="id" code="ID  " type="text" access="r" description="The unique identifier of the view.">  
 				<cocoa key="identifier"/>
 			</property>
+
 		</class>
 		
         <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML in a window or view.">

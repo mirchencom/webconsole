@@ -8,7 +8,14 @@
 
 #import "WCLWebViewController+AppleScript.h"
 
+#import "WCLAppleScriptPluginWrapper.h"
+
 @implementation WCLWebViewController (AppleScript)
+
+- (WCLAppleScriptPluginWrapper * __nonnull)pluginWrapper
+{
+    return [[WCLAppleScriptPluginWrapper alloc] initWithPlugin:self.plugin];
+}
 
 - (NSScriptObjectSpecifier *)objectSpecifier
 {

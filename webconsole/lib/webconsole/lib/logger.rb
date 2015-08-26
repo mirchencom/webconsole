@@ -1,6 +1,7 @@
 module WebConsole
 
-  class Logger < Window
+  class Logger < View
+
     def info(message)
     end
 

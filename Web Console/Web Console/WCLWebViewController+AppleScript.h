@@ -8,6 +8,8 @@
 
 #import "WCLWebViewController.h"
 
-@interface WCLWebViewController (AppleScript)
+@class WCLAppleScriptPluginWrapper;
 
+@interface WCLWebViewController (AppleScript)
+@property (nonatomic, strong, readonly, nonnull) WCLAppleScriptPluginWrapper *pluginWrapper;
 @end

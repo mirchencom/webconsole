@@ -30,5 +30,6 @@
 @property (nonatomic, strong, readonly, nonnull) NSArray *tasks;
 @property (nonatomic, strong, nullable) Plugin *plugin;
 @property (nonatomic, weak, nullable) id<WCLWebViewControllerDelegate> delegate;
+#pragma mark - AppleScript
 @property (nonatomic, strong, readonly, nonnull) NSString *identifier;
 @end
