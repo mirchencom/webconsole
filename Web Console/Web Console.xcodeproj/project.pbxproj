@@ -165,6 +165,8 @@
 		45DA852E18B0067700A151F3 /* Node.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794D18B005BE00D705C8 /* Node.wcplugin */; };
 		45DA852F18B0067A00A151F3 /* Markdown.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794E18B005BE00D705C8 /* Markdown.wcplugin */; };
 		45DA853118B0068100A151F3 /* HTML.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795018B005BF00D705C8 /* HTML.wcplugin */; };
+		45DCDD3B1B8D4D5500EE0C1F /* Log.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 45DCDD3A1B8D4D5500EE0C1F /* Log.wcplugin */; };
+		45DCDD3C1B8D4D5B00EE0C1F /* Log.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DCDD3A1B8D4D5500EE0C1F /* Log.wcplugin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +216,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				45DCDD3C1B8D4D5B00EE0C1F /* Log.wcplugin in CopyFiles */,
 				45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */,
 				45DA853118B0068100A151F3 /* HTML.wcplugin in CopyFiles */,
 				45DA852F18B0067A00A151F3 /* Markdown.wcplugin in CopyFiles */,
@@ -392,6 +395,7 @@
 		45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTestPluginManagerTestCase.m; sourceTree = "<group>"; };
 		45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLTestPluginManagerTestCase.h; sourceTree = "<group>"; };
 		45DCDD391B8D2B9D00EE0C1F /* WCLPluginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLPluginView.h; sourceTree = "<group>"; };
+		45DCDD3A1B8D4D5500EE0C1F /* Log.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Log.wcplugin; path = PlugIns/Log.wcplugin; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -607,6 +611,7 @@
 		457F773C18B0058E00D705C8 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				45DCDD3A1B8D4D5500EE0C1F /* Log.wcplugin */,
 				456492FE191C656D00BA048E /* IRB.wcplugin */,
 				457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */,
 				457F794B18B005BE00D705C8 /* Shared Resources.wcplugin */,
@@ -985,6 +990,7 @@
 				45B0FF3E1B75805A008EC6EC /* Main.storyboard in Resources */,
 				45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */,
 				4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */,
+				45DCDD3B1B8D4D5500EE0C1F /* Log.wcplugin in Resources */,
 				459389EE18FB20D900E0218E /* WCLEnvironmentViewController.xib in Resources */,
 				4521E9D91A89A1780075D330 /* WCLPluginsViewController.xib in Resources */,
 			);
