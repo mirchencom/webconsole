@@ -12,4 +12,5 @@
 
 @interface WCLWebViewController (AppleScript)
 @property (nonatomic, strong, readonly, nonnull) WCLAppleScriptPluginWrapper *pluginWrapper;
+@property (nonatomic, strong, readonly, nonnull) NSString *pluginName;
 @end

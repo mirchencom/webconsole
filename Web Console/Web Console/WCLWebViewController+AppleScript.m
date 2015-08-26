@@ -10,7 +10,14 @@
 
 #import "WCLAppleScriptPluginWrapper.h"
 
+#import "Web_Console-Swift.h"
+
 @implementation WCLWebViewController (AppleScript)
+
+- (NSString * __nonnull)pluginName
+{
+    return self.plugin.name;
+}
 
 - (WCLAppleScriptPluginWrapper * __nonnull)pluginWrapper
 {

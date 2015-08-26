@@ -282,7 +282,9 @@
 			<property name="id" code="ID  " type="text" access="r" description="The unique identifier of the view.">  
 				<cocoa key="identifier"/>
 			</property>
-
+			<property name="plugin name" code="pnam" type="text" access="r" description="The name of the view's plugin.">  
+				<cocoa key="pluginName"/>
+			</property>
 		</class>
 		
         <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML in a window or view.">
