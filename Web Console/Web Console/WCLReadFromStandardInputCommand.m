@@ -15,6 +15,9 @@
 - (id)performDefaultImplementation {
     
     NSString *text = [self directParameter];
+    if (!text) {
+        return nil;
+    }
     
     NSDictionary *argumentsDictionary = [self evaluatedArguments];
     id<WCLPluginView> pluginView = [argumentsDictionary objectForKey:kAppleScriptTargetKey];

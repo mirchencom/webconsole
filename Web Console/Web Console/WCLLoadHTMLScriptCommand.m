@@ -20,6 +20,9 @@
 - (id)performDefaultImplementation {
 
     NSString *HTML = [self directParameter];
+    if (!HTML) {
+        return nil;
+    }
 
     NSDictionary *argumentsDictionary = [self evaluatedArguments];
     

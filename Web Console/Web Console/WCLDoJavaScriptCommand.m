@@ -15,7 +15,10 @@
 - (id)performDefaultImplementation
 {
     NSString *javaScript = [self directParameter];
-        
+    if (!javaScript) {
+        return nil;
+    }
+    
 	NSDictionary *argumentsDictionary = [self evaluatedArguments];
     id<WCLPluginView> pluginView = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
     return [pluginView doJavaScript:javaScript];

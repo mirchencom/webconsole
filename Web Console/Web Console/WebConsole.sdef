@@ -337,19 +337,15 @@
         </command>
 
         <command name="read from standard input" code="READSTIN" description="Read text from standard input.">
-
+            <cocoa class="WCLReadFromStandardInputCommand"/>
+            <direct-parameter type="text" description="The text to read from standard input." />
 			<parameter name="in" description="The window or split to read the text from standard input in." code="WEBV">
 				<cocoa key="Target" />
 				<type type="window" />
 				<type type="split" />
 			</parameter>
-
-            <parameter name="text" code="SITX" description="The text to read from standard input.">
-				<cocoa key="Text"/>
-				<type type="text"/>
-			</parameter>
-
         </command>
+
         <command name="load plugin" code="LOADPLUG" description="Load a plugin from a file.">
             <direct-parameter type="file" description="The plugin file to load." />
             <result type="plugin" description="The loaded plugin." />
