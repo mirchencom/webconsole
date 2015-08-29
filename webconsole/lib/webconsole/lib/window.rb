@@ -41,7 +41,7 @@ module WebConsole
     end
 
     READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "read_from_standard_input.scpt")
-    def self.read_from_standard_input(text)
+    def read_from_standard_input(text)
       WebConsole::run_applescript(READ_FROM_STANDARD_INPUT_SCRIPT, [text, window_id])
     end
 

@@ -135,7 +135,7 @@ class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
 
   def test_read_from_standard_input
     test_text = "This is a test string"
-    @window.plugin_read_from_standard_input(test_text + "\n")
+    @window.read_from_standard_input(test_text + "\n")
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
 
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
