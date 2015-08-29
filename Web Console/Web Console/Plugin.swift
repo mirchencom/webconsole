@@ -192,34 +192,6 @@ class Plugin: WCLPlugin {
         // TODO: Refactor this to support log plugin
         splitWebWindowController.runTask(task)
     }
-        
-    func readFromStandardInput(text: String!) {
-
-        println("[AppleScript] \(self.name) readFromStandardInput: \(text)")
-
-        let splitWebWindowControllers = WCLSplitWebWindowsController.sharedSplitWebWindowsController().splitWebWindowControllersForPlugin(self)
-
-        if splitWebWindowControllers.count == 0 {
-            return
-        }
-
-        let splitWebWindowController = splitWebWindowControllers[0] as! WCLSplitWebWindowController
-
-        // TODO: Refactor this to support log plugin
-        if !splitWebWindowController.hasTasks() {
-            return
-        }
-        
-        // TODO: Refactor this to support log plugin
-        let tasks = splitWebWindowController.tasks()
-        if let task = tasks[0] as? NSTask {
-            let pipe = task.standardInput as! NSPipe
-            
-            if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
-                pipe.fileHandleForWriting.writeData(data)
-            }
-        }
-    }
     
     // MARK: Windows
 

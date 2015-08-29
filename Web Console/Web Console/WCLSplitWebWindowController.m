@@ -160,6 +160,11 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     [self.splitWebViewController loadHTML:HTML baseURL:baseURL completionHandler:completionHandler];
 }
 
+- (void)readFromStandardInput:(nonnull NSString *)text
+{
+    return [self.splitWebViewController readFromStandardInput:text];
+}
+
 - (nonnull NSArray *)webViewControllers
 {
     return self.splitWebViewController.webViewControllers;

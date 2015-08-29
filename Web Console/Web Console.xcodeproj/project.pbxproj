@@ -74,6 +74,7 @@
 		45898BB21785325B00AE365A /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 45898BB11785325B00AE365A /* Data */; };
 		45898BB7178532EC00AE365A /* WCLPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB4178532EC00AE365A /* WCLPlugin.m */; };
 		45898BB8178532EC00AE365A /* WCLPluginsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45898BB6178532EC00AE365A /* WCLPluginsManager.m */; };
+		4590196F1B9242B400D61F6B /* WCLReadFromStandardInputCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4590196E1B9242B400D61F6B /* WCLReadFromStandardInputCommand.m */; };
 		45914E381A87E4E600E4BEFA /* CopyDirectoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E1E1A87E4E600E4BEFA /* CopyDirectoryController.swift */; };
 		45914E391A87E4E600E4BEFA /* DuplicatePluginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E1F1A87E4E600E4BEFA /* DuplicatePluginController.swift */; };
 		45914E3A1A87E4E600E4BEFA /* FileExtensionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45914E201A87E4E600E4BEFA /* FileExtensionsController.swift */; };
@@ -301,6 +302,8 @@
 		45898BB4178532EC00AE365A /* WCLPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPlugin.m; sourceTree = "<group>"; };
 		45898BB5178532EC00AE365A /* WCLPluginsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPluginsManager.h; sourceTree = "<group>"; };
 		45898BB6178532EC00AE365A /* WCLPluginsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginsManager.m; sourceTree = "<group>"; };
+		4590196D1B9242B400D61F6B /* WCLReadFromStandardInputCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLReadFromStandardInputCommand.h; sourceTree = "<group>"; };
+		4590196E1B9242B400D61F6B /* WCLReadFromStandardInputCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLReadFromStandardInputCommand.m; sourceTree = "<group>"; };
 		45914E1E1A87E4E600E4BEFA /* CopyDirectoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyDirectoryController.swift; sourceTree = "<group>"; };
 		45914E1F1A87E4E600E4BEFA /* DuplicatePluginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DuplicatePluginController.swift; sourceTree = "<group>"; };
 		45914E201A87E4E600E4BEFA /* FileExtensionsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileExtensionsController.swift; sourceTree = "<group>"; };
@@ -734,6 +737,8 @@
 				455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */,
 				455B0BFC176FF592007B75DD /* WCLLoadHTMLScriptCommand.h */,
 				455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */,
+				4590196D1B9242B400D61F6B /* WCLReadFromStandardInputCommand.h */,
+				4590196E1B9242B400D61F6B /* WCLReadFromStandardInputCommand.m */,
 			);
 			name = AppleScript;
 			sourceTree = "<group>";
@@ -1059,6 +1064,7 @@
 				45914E3D1A87E4E600E4BEFA /* Plugin+Equality.swift in Sources */,
 				45914E391A87E4E600E4BEFA /* DuplicatePluginController.swift in Sources */,
 				45914E3B1A87E4E600E4BEFA /* MultiCollectionController.swift in Sources */,
+				4590196F1B9242B400D61F6B /* WCLReadFromStandardInputCommand.m in Sources */,
 				45914E481A87E4E600E4BEFA /* WCLFileSystemEvent.m in Sources */,
 				45914E491A87E4E600E4BEFA /* WCLKeyToObjectController.m in Sources */,
 				459389ED18FB20D900E0218E /* WCLEnvironmentViewController.m in Sources */,

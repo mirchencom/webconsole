@@ -11,4 +11,5 @@
          baseURL:(nullable NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
+- (void)readFromStandardInput:(nonnull NSString *)text;
 @end

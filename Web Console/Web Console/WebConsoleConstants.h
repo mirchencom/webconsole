@@ -28,8 +28,6 @@
 #define kBaseURLKey @"BaseURL"
 #define kArgumentsKey @"Arguments"
 #define kDirectoryKey @"Directory"
-#define kTextKey @"Text"
-
 
 #pragma mark - Plugins
 

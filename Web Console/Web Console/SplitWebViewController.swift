@@ -83,6 +83,10 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         pluginWebViewController.loadHTML(HTML, baseURL: baseURL, completionHandler: completionHandler)
     }
     
+    func readFromStandardInput(text: String) {
+        pluginWebViewController.readFromStandardInput(text)
+    }
+    
     // MARK: Tasks
     
     func runTask(task: NSTask) {

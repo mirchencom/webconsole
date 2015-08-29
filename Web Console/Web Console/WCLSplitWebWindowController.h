@@ -28,6 +28,7 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
          baseURL:(nullable NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
+- (void)readFromStandardInput:(nonnull NSString *)text;
 - (nonnull NSArray *)webViewControllers;
 #pragma mark - Tasks
 - (void)runTask:(nonnull NSTask *)task;

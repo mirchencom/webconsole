@@ -55,12 +55,6 @@
     
     [self.plugin runWithArguments:arguments inDirectoryPath:[directoryURL path]];
 }
-- (void)handleReadFromStandardInputScriptCommand:(NSScriptCommand *)command
-{
-    NSDictionary *argumentsDictionary = [command evaluatedArguments];
-    NSString *text = [argumentsDictionary objectForKey:kTextKey];
-    [self.plugin readFromStandardInput:text];
-}
 
 - (NSScriptObjectSpecifier *)objectSpecifier
 {

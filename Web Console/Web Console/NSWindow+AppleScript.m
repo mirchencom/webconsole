@@ -33,4 +33,10 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     return [splitWebWindowController doJavaScript:javaScript];
 }
 
+- (void)readFromStandardInput:(nonnull NSString *)text
+{
+    WCLSplitWebWindowController *splitWebWindowController = (WCLSplitWebWindowController *)self.windowController;
+    return [splitWebWindowController readFromStandardInput:text];
+}
+
 @end
