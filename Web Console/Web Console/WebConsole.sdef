@@ -259,9 +259,6 @@
             <element type="window" access="r">
 				<cocoa key="orderedWindows"/>
 			</element>
-            <responds-to command="read from standard input">
-                <cocoa method="handleReadFromStandardInputScriptCommand:"/>
-            </responds-to>
             <responds-to command="run">
                 <cocoa method="handleRunScriptCommand:"/>
             </responds-to>
@@ -341,9 +338,11 @@
 
         <command name="read from standard input" code="READSTIN" description="Read text from standard input.">
 
-			<direct-parameter description="The plugin to run.">
-				<type type="plugin"/>
-			</direct-parameter>
+			<parameter name="in" description="The window or split to read the text from standard input in." code="WEBV">
+				<cocoa key="Target" />
+				<type type="window" />
+				<type type="split" />
+			</parameter>
 
             <parameter name="text" code="SITX" description="The text to read from standard input.">
 				<cocoa key="Text"/>
