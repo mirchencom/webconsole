@@ -9,72 +9,73 @@
 import Foundation
 import AppKit
 
-@objc protocol LogControllerDelegate: class {
-    func savedFrameNameForLogController(logController: LogController) -> String?
+@objc protocol SplitControllerDelegate: class {
+    func savedFrameNameForSplitController(splitController: SplitController) -> String?
 }
 
-@objc class LogController {
+@objc class SplitController {
 
     // MARK: Properties
     
-    var logSplitViewItem: NSSplitViewItem
+    var splitViewItem: NSSplitViewItem
     private weak var splitViewController: NSSplitViewController?
-    weak var delegate: LogControllerDelegate?
+    weak var delegate: SplitControllerDelegate?
 
-    var logHeightConstraint: NSLayoutConstraint?
+    var splitsHeightConstraint: NSLayoutConstraint?
     
+    func isCollapsed() -> Bool? {
+        return splitViewItem.collapsed
+    }
+
     private var savedFrameName: String? {
-        return delegate?.savedFrameNameForLogController(self)
+        return delegate?.savedFrameNameForSplitController(self)
     }
     
-    private var logViewController: NSViewController? {
-        return logSplitViewItem.viewController
+    private var splitsViewController: NSViewController? {
+        return splitViewItem.viewController
     }
     
-    var logView: NSView? {
-        return logViewController?.view
-    }
-
-    func isLogCollapsed() -> Bool? {
-        return logSplitViewItem.collapsed
+    var splitsView: NSView? {
+        return splitsViewController?.view
     }
     
-    var logSplitViewItemIndex: Int? {
+    var splitViewItemIndex: Int? {
         if let splitViewItems = splitViewController?.splitViewItems as? [NSSplitViewItem] {
-            return find(splitViewItems, logSplitViewItem)!
+            return find(splitViewItems, splitViewItem)!
         }
         return nil
     }
 
-    var logSplitViewSubview: NSView? {
-        if let index = logSplitViewItemIndex, subview = splitViewController?.splitView.subviews[index] as? NSView {
+    var splitViewsSubview: NSView? {
+        if let index = splitViewItemIndex, subview = splitViewController?.splitView.subviews[index] as? NSView {
             return subview
         }
         return nil
     }
     
+    
     // MARK: Life Cycle
     
     // TODO: Remove this after setup is done in interface builder
-    init(splitViewController: NSSplitViewController, logSplitViewItem: NSSplitViewItem) {
+    init(splitViewController: NSSplitViewController, splitViewItem: NSSplitViewItem) {
         self.splitViewController = splitViewController
-        self.logSplitViewItem = logSplitViewItem
+        self.splitViewItem = splitViewItem
     }
     
     // MARK: Toggle
 
     func toggleCollapsed(animated: Bool) {
-        if let collapsed = isLogCollapsed() {
+        if let collapsed = isCollapsed() {
             setCollapsed(!collapsed, animated: animated)
         }
     }
     
     func setCollapsed(collapsed: Bool, animated: Bool) {
-        if logSplitViewItem.collapsed != collapsed {
+        if splitViewItem.collapsed != collapsed {
             if animated {
-                logSplitViewItem.animator().collapsed = collapsed
+                splitViewItem.animator().collapsed = collapsed
             } else {
-                logSplitViewItem.collapsed = collapsed
+                splitViewItem.collapsed = collapsed
             }
         }
     }
@@ -82,14 +83,14 @@ import AppKit
     // MARK: Saving & Restoring Frame
     
     func restoreFrame() {
-        if let frame = savedLogSplitViewFrame() {
+        if let frame = savedSplitsViewFrame() {
             configureHeight(frame.size.height)
         }
     }
     
     func saveFrame() {
-        if let logView = logView, key = savedFrameName {
-            let frame = logView.frame
+        if let splitsView = splitsView, key = savedFrameName {
+            let frame = splitsView.frame
             let frameString = NSStringFromRect(frame)
             NSUserDefaults.standardUserDefaults().setObject(frameString, forKey:key)
         }
@@ -103,7 +104,7 @@ import AppKit
         return nil
     }
     
-    func savedLogSplitViewFrame() -> NSRect? {
+    func savedSplitsViewFrame() -> NSRect? {
         if let savedFrameName = savedFrameName {
             return self.dynamicType.savedFrameForName(savedFrameName)
         }
@@ -113,18 +114,18 @@ import AppKit
     // MARK: Constraints
     
     func configureHeight() {
-        if let frame = logView?.frame {
+        if let frame = splitsView?.frame {
             configureHeight(frame.size.height)
         }
     }
     
     func configureHeight(height: CGFloat) {
-        if let logView = logView, superview = logView.superview {
-            if let logHeightConstraint = logHeightConstraint {
-                superview.removeConstraint(logHeightConstraint)
+        if let splitsView = splitsView, superview = splitsView.superview {
+            if let splitsHeightConstraint = splitsHeightConstraint {
+                superview.removeConstraint(splitsHeightConstraint)
             }
             
-            let heightConstraint =  NSLayoutConstraint(item: logView,
+            let heightConstraint =  NSLayoutConstraint(item: splitsView,
                 attribute: NSLayoutAttribute.Height,
                 relatedBy: NSLayoutRelation.Equal,
                 toItem: nil,
@@ -134,7 +135,7 @@ import AppKit
             // Getting closer, this works for subsequent displays but not the first
             heightConstraint.priority = 300
             superview.addConstraint(heightConstraint)
-            logHeightConstraint = heightConstraint
+            splitsHeightConstraint = heightConstraint
         }
     }
 

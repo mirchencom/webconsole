@@ -21,7 +21,7 @@
 @end
 
 @interface SplitWebViewController (PluginWebView)
-@property (readonly) WCLWebViewController *pluginWebViewController;
+@property (readonly) WCLWebViewController *defaultWebViewController;
 @end
 
 @implementation WCLSplitWebWindowController (PluginWebView)
@@ -29,7 +29,7 @@
 - (WebView *)pluginWebView
 {
     SplitWebViewController *splitWebViewController = (SplitWebViewController *)self.contentViewController;
-    return splitWebViewController.pluginWebViewController.webView;
+    return splitWebViewController.defaultWebViewController.webView;
 }
 
 @end

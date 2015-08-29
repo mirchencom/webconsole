@@ -21,31 +21,31 @@ let splitWebViewHeight = CGFloat(150)
     func splitWebViewControllerDidFinishTasks(splitWebViewController: SplitWebViewController)
 }
 
-class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegate, LogControllerDelegate {
+class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegate, SplitControllerDelegate {
 
     // MARK: Properties
     
     weak var delegate: SplitWebViewControllerDelegate?
-    var logController: LogController!
+    var splitController: SplitController!
 
-    var logSplitViewItemDividerIndex: Int? {
-        if let index = logController.logSplitViewItemIndex {
+    var splitViewItemDividerIndex: Int? {
+        if let index = splitController.splitViewItemIndex {
             return index - 1
         }
         return nil
     }
     
-    var pluginWebViewController: WCLWebViewController {
+    var defaultWebViewController: WCLWebViewController {
         let splitViewItem = splitViewItems.first as! NSSplitViewItem
         return splitViewItem.viewController as! WCLWebViewController
     }
     
     var plugin: Plugin? {
         get {
-            return pluginWebViewController.plugin
+            return defaultWebViewController.plugin
         }
         set {
-            pluginWebViewController.plugin = newValue
+            defaultWebViewController.plugin = newValue
         }
     }
     
@@ -58,8 +58,8 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        logController = LogController(splitViewController: self, logSplitViewItem: splitViewItems.last as! NSSplitViewItem)
-        logController.delegate = self
+        splitController = SplitController(splitViewController: self, splitViewItem: splitViewItems.last as! NSSplitViewItem)
+        splitController.delegate = self
         
         for splitViewItem in splitViewItems {
             if let webViewController = splitViewItem.viewController as? WCLWebViewController {
@@ -70,27 +70,27 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        logController.setCollapsed(true, animated: false)
+        splitController.setCollapsed(true, animated: false)
     }
 
     // MARK: AppleScript
     
     func doJavaScript(javaScript: String) -> String? {
-        return pluginWebViewController.doJavaScript(javaScript)
+        return defaultWebViewController.doJavaScript(javaScript)
     }
     
     func loadHTML(HTML: String, baseURL: NSURL?, completionHandler:((Bool) -> Void)?) {
-        pluginWebViewController.loadHTML(HTML, baseURL: baseURL, completionHandler: completionHandler)
+        defaultWebViewController.loadHTML(HTML, baseURL: baseURL, completionHandler: completionHandler)
     }
     
     func readFromStandardInput(text: String) {
-        pluginWebViewController.readFromStandardInput(text)
+        defaultWebViewController.readFromStandardInput(text)
     }
     
     // MARK: Tasks
     
     func runTask(task: NSTask) {
-        WCLPluginTask.runTask(task, delegate: pluginWebViewController)
+        WCLPluginTask.runTask(task, delegate: defaultWebViewController)
     }
     
     func hasTasks() -> Bool {
@@ -111,7 +111,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     // MARK: Actions
     
     @IBAction func toggleLogShown(sender: AnyObject?) {
-        logController.toggleCollapsed(true)
+        splitController.toggleCollapsed(true)
     }
 
     // MARK: Validation
@@ -119,7 +119,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
         case Selector("toggleLogShown:"):
-            if let collapsed = logController.isLogCollapsed() {
+            if let collapsed = splitController.isCollapsed() {
                 menuItem.title = collapsed ? "Show Log" : "Close Log"
                 return true
             } else {
@@ -137,7 +137,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             return false
         }
         
-        return subview == logController.logSplitViewSubview
+        return subview == splitController.splitViewsSubview
     }
 
     override func splitView(splitView: NSSplitView,
@@ -148,12 +148,12 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             return false
         }
         
-        return subview == logController.logSplitViewSubview
+        return subview == splitController.splitViewsSubview
     }
     
     override func splitView(splitView: NSSplitView, shouldHideDividerAtIndex dividerIndex: Int) -> Bool {
-        if dividerIndex == logSplitViewItemDividerIndex {
-            if let collapsed = logController.isLogCollapsed() {
+        if dividerIndex == splitViewItemDividerIndex {
+            if let collapsed = splitController.isCollapsed() {
                 return collapsed
             }
         }
@@ -167,18 +167,18 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             }
         }
         
-        if let collapsed = logController.isLogCollapsed() {
+        if let collapsed = splitController.isCollapsed() {
             if !collapsed {
-                logController.saveFrame()
-                logController.configureHeight()
+                splitController.saveFrame()
+                splitController.configureHeight()
             }
         }
     }
 
-    // MARK: LogControllerDelegate
+    // MARK: SplitControllerDelegate
     
-    func savedFrameNameForLogController(logController: LogController) -> String? {
-        if let pluginName = pluginWebViewController.plugin?.name {
+    func savedFrameNameForSplitController(splitController: SplitController) -> String? {
+        if let pluginName = defaultWebViewController.plugin?.name {
             return self.dynamicType.savedFrameNameForPluginName(pluginName)
         }
         return nil
@@ -207,8 +207,8 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
                 constant: splitWebViewHeight)
             superview.addConstraint(minimumHeightConstraint)
             
-            if view == logController.logView {
-                logController.restoreFrame()
+            if view == splitController.splitsView {
+                splitController.restoreFrame()
             }
         }
     }
