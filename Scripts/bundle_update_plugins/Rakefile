@@ -17,7 +17,7 @@ task :run do
     Dir.chdir(path) do
       directory = `pwd`
       puts directory
-      Rake::Task[:install].invoke(path)
+      Rake::Task[:install].invoke
       Rake::Task[:update].reenable
       Rake::Task[:clean].reenable
       Rake::Task[:install].reenable
@@ -25,20 +25,17 @@ task :run do
   }
 end
 
-task :install, [:path] => :clean do |t, args|
+task :install => :clean do |t, args|
   puts "INSTALL"
-  path = args[:path] || abort("No path argument")
-  sh "bundle install --standalone"
+  sh "bundle install --standalone --path bundle"
 end
 
-task :clean, [:path] => :update do |t, args|
+task :clean => :update do |t, args|
   puts "CLEAN"
-  path = args[:path] || abort("No path argument")
   sh "bundle clean"
 end
 
-task :update, :path do |t, args|
+task :update do |t, args|
   puts "UPDATE"
-  path = args[:path] || abort("No path argument")
   sh "bundle update"
 end
