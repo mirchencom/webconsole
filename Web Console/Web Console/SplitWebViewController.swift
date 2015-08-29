@@ -39,12 +39,6 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         let splitViewItem = splitViewItems.first as! NSSplitViewItem
         return splitViewItem.viewController as! WCLWebViewController
     }
-
-    var logWebViewController: WCLWebViewController {
-        let splitViewItem = splitViewItems.last as! NSSplitViewItem
-        return splitViewItem.viewController as! WCLWebViewController
-    }
-
     
     var plugin: Plugin? {
         get {
@@ -72,8 +66,6 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
                 webViewController.delegate = self
             }
         }
-        
-        logWebViewController.plugin = PluginsManager.sharedInstance.pluginWithName("Log")
     }
     
     override func viewWillAppear() {
