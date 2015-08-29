@@ -245,15 +245,15 @@
             </responds-to>
 		</class>
 
-        <class name="plugin" code="plgn" description="A Web Console plugin.">
+        <class name="plugin" code="PLGN" description="A Web Console plugin.">
 			<cocoa class="WCLAppleScriptPluginWrapper"/>
 			<property name="name" code="pnam" type="text" access="r">
 				<cocoa key="name"/>
 			</property>
-			<property name="resource path" code="rpth" type="text" access="r">
+			<property name="resource path" code="RPTH" type="text" access="r">
 				<cocoa key="resourcePath"/>
 			</property>
-			<property name="resource URL" code="rurl" type="text" access="r">
+			<property name="resource URL" code="RURL" type="text" access="r">
 				<cocoa key="resourceURLString"/>
 			</property>
             <element type="window" access="r">
@@ -269,49 +269,49 @@
         
         <class-extension extends="window">
             <cocoa class="NSWindow"/>
-			<element type="view">
-				<cocoa key="views"/>
+			<element type="split">
+				<cocoa key="splits"/>
 			</element>
 		</class-extension>
 		
-		<class name="view" code="view" description="A view for a plugin.">
+		<class name="split" code="SPLT" description="A window split.">
 			<cocoa class="WCLWebViewController"/>
-			<property name="plugin" code="plgn" type="plugin" access="r" description="The view's plugin.">
+			<property name="plugin" code="plgn" type="plugin" access="r" description="The split's plugin.">
 				<cocoa key="pluginWrapper"/>
 			</property>
-			<property name="id" code="ID  " type="text" access="r" description="The unique identifier of the view.">  
+			<property name="id" code="ID  " type="text" access="r" description="The unique identifier of the split.">  
 				<cocoa key="identifier"/>
 			</property>
-			<property name="plugin name" code="pnam" type="text" access="r" description="The name of the view's plugin.">  
+			<property name="plugin name" code="pnam" type="text" access="r" description="The name of the split's plugin.">  
 				<cocoa key="pluginName"/>
 			</property>
 		</class>
 		
-        <command name="load HTML" code="WCSCHTML" description="Loads a string of HTML in a window or view.">
+        <command name="load HTML" code="LOADHTML" description="Loads a string of HTML in a window or split.">
             <cocoa class="WCLLoadHTMLScriptCommand"/>
             <direct-parameter type="text" description="The HTML to load." />
-			<parameter name="in" description="The window or view to load the HTML in." code="kfil" optional="yes">
+			<parameter name="in" description="The window or split to load the HTML in." code="WEBV" optional="yes">
 				<cocoa key="Target" />
 				<type type="window" />
-				<type type="view" />
+				<type type="split" />
 			</parameter>
-			<parameter name="with base URL" description="The base URL to load resources from." code="burl" optional="yes">
+			<parameter name="with base URL" description="The base URL to load resources from." code="BURL" optional="yes">
 				<cocoa key="BaseURL" />
 				<type type="text" />
 			</parameter>
-			<result description="The window or view the HTML was loaded in.">
+			<result description="The window or split the HTML was loaded in.">
 				<type type="window"/>
-				<type type="view"/>
+				<type type="split"/>
 			</result>
 		</command>
 
-        <command name="do JavaScript" code="WCSCJVSC" description="Runs JavaScript in a window or view.">
+        <command name="do JavaScript" code="DOJAVSCR" description="Runs JavaScript in a window or split.">
             <cocoa class="WCLDoJavaScriptCommand"/>
             <direct-parameter type="text" description="The JavaScript to run." />
-			<parameter name="in" description="The window or view to run the JavaScript in." code="kfil">
+			<parameter name="in" description="The window or split to run the JavaScript in." code="WEBV">
 				<cocoa key="Target" />
 				<type type="window" />
-				<type type="view" />
+				<type type="split" />
 			</parameter>
             <result>
 				<type type="any"/>
@@ -321,37 +321,37 @@
 			</result>
 		</command>
 
-        <command name="run" code="runplgin" description="Run a plugin.">
+        <command name="run" code="RUNAPLUG" description="Run a plugin.">
             
 			<direct-parameter description="The plugin to run.">
 				<type type="plugin"/>
 			</direct-parameter>
 
-            <parameter name="with arguments" code="agmt" description="The arguments to pass to the plugin." optional="yes">
+            <parameter name="with arguments" code="AGMT" description="The arguments to pass to the plugin." optional="yes">
 				<cocoa key="Arguments"/>
 				<type type="text" list="yes"/>
 			</parameter>
 
-            <parameter name="in directory" code="drct" description="A file reference to the directory to run the plugin in." optional="yes">
+            <parameter name="in directory" code="DRCT" description="A file reference to the directory to run the plugin in." optional="yes">
 				<cocoa key="Directory"/>
                 <type type="file"/>
             </parameter>
 
         </command>
 
-        <command name="read from standard input" code="readstin" description="Read text from standard input.">
+        <command name="read from standard input" code="READSTIN" description="Read text from standard input.">
 
 			<direct-parameter description="The plugin to run.">
 				<type type="plugin"/>
 			</direct-parameter>
 
-            <parameter name="text" code="sitx" description="The text to read from standard input.">
+            <parameter name="text" code="SITX" description="The text to read from standard input.">
 				<cocoa key="Text"/>
 				<type type="text"/>
 			</parameter>
 
         </command>
-        <command name="load plugin" code="loadplgn" description="Load a plugin from a file.">
+        <command name="load plugin" code="LOADPLUG" description="Load a plugin from a file.">
             <direct-parameter type="file" description="The plugin file to load." />
             <result type="plugin" description="The loaded plugin." />
 		</command>        
