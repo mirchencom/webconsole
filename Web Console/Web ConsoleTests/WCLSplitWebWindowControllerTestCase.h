@@ -21,8 +21,8 @@
 - (void)terminateTasksAndCloseWindow;
 @end
 
-@interface WCLSplitWebWindowController (PluginWebView)
-@property (nonatomic, readonly) WebView *pluginWebView;
+@interface WCLSplitWebWindowController (DefaultWebView)
+@property (nonatomic, readonly) WebView *defaultWebView;
 @end
 
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase

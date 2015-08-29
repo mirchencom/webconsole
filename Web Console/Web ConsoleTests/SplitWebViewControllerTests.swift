@@ -42,7 +42,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         let splitWebViewController = makeNewSplitWebViewController()
         
         // The log starts collapsed
-        XCTAssertTrue(splitWebViewController.logController.logSplitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
+        XCTAssertTrue(splitWebViewController.splitController.splitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
         
         // Show the log
         makeLogAppearForSplitWebViewController(splitWebViewController)
@@ -64,7 +64,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         
         // Make a second window and confirm it uses the saved height
         let secondSplitWebViewController = makeNewSplitWebViewController()
-        XCTAssertTrue(secondSplitWebViewController.logController.logSplitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
+        XCTAssertTrue(secondSplitWebViewController.splitController.splitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
         makeLogAppearForSplitWebViewController(secondSplitWebViewController)
         XCTAssertEqual(logHeightForSplitWebViewController(secondSplitWebViewController), testLogViewHeight, "The heights should be equal")
 
@@ -112,14 +112,14 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     func resizeLogForSplitWebViewController(splitWebViewController: SplitWebViewController, logHeight: CGFloat) {
         // Resize & Wait for Save
 
-        let name = splitWebViewController.savedFrameNameForLogController(splitWebViewController.logController)!
+        let name = splitWebViewController.savedFrameNameForSplitController(splitWebViewController.splitController)!
         makeFrameSaveExpectationForHeight(logHeight, name: name)
-        splitWebViewController.logController.configureHeight(logHeight)
+        splitWebViewController.splitController.configureHeight(logHeight)
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
 
         // Test the height & saved frame
         XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), logHeight, "The heights should be equal")
-        var frame: NSRect! = splitWebViewController.logController.savedLogSplitViewFrame()
+        var frame: NSRect! = splitWebViewController.splitController.savedSplitsViewFrame()
         XCTAssertEqual(frame.size.height, logHeight, "The heights should be equal")
     }
     
@@ -127,7 +127,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         makeLogViewWillAppearExpectationForSplitWebViewController(splitWebViewController)
         splitWebViewController.toggleLogShown(nil)
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
-        XCTAssertFalse(splitWebViewController.logController.logSplitViewItem.collapsed, "The  NSSplitViewItem should not be collapsed")
+        XCTAssertFalse(splitWebViewController.splitController.splitViewItem.collapsed, "The  NSSplitViewItem should not be collapsed")
         confirmValuesForSplitWebViewController(splitWebViewController, collapsed: false)
     }
     
@@ -135,19 +135,19 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         makeLogViewWillDisappearExpectationForSplitWebViewController(splitWebViewController)
         splitWebViewController.toggleLogShown(nil)
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
-        XCTAssertTrue(splitWebViewController.logController.logSplitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
+        XCTAssertTrue(splitWebViewController.splitController.splitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
         confirmValuesForSplitWebViewController(splitWebViewController, collapsed: true)
     }
 
     func confirmValuesForSplitWebViewController(splitWebViewController: SplitWebViewController, collapsed: Bool) {
-        let logIndex: Int! = find(splitWebViewController.splitViewItems as! [NSSplitViewItem], splitWebViewController.logController.logSplitViewItem)
+        let logIndex: Int! = find(splitWebViewController.splitViewItems as! [NSSplitViewItem], splitWebViewController.splitController.splitViewItem)
         XCTAssertNotNil(logIndex, "The index should not be nil")
         
-        var result = splitWebViewController.splitView(splitWebViewController.splitView, canCollapseSubview: splitWebViewController.logController.logSplitViewSubview!)
+        var result = splitWebViewController.splitView(splitWebViewController.splitView, canCollapseSubview: splitWebViewController.splitController.splitViewsSubview!)
         XCTAssertTrue(result, "The log NSView should be collapsable")
         result = splitWebViewController.splitView(splitWebViewController.splitView, canCollapseSubview: NSView())
         XCTAssertFalse(result , "The NSView should not be collapsable")
-        result = splitWebViewController.splitView(splitWebViewController.splitView, shouldCollapseSubview: splitWebViewController.logController.logSplitViewSubview!, forDoubleClickOnDividerAtIndex: logIndex)
+        result = splitWebViewController.splitView(splitWebViewController.splitView, shouldCollapseSubview: splitWebViewController.splitController.splitViewsSubview!, forDoubleClickOnDividerAtIndex: logIndex)
         XCTAssertTrue(result, "The log NSView should be collapsable")
         result = splitWebViewController.splitView(splitWebViewController.splitView, shouldCollapseSubview: NSView(), forDoubleClickOnDividerAtIndex: logIndex + 1)
         XCTAssertFalse(result , "The NSView should not be collapsable")
@@ -158,7 +158,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     }
     
     func logHeightForSplitWebViewController(splitWebViewController: SplitWebViewController) -> CGFloat {
-        return splitWebViewController.logController.logView!.frame.size.height
+        return splitWebViewController.splitController.splitsView!.frame.size.height
     }
 
     func makeNewSplitWebViewControllerForOtherPugin() -> SplitWebViewController {
@@ -174,7 +174,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     }
     
     func makeLogViewWillAppearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
-        let webViewController = splitWebViewController.logController.logSplitViewItem.viewController as! WCLWebViewController
+        let webViewController = splitWebViewController.splitController.splitViewItem.viewController as! WCLWebViewController
         let viewWillAppearExpectation = expectationWithDescription("WebViewController will appear")
         let webViewControllerEventManager = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: { _ in
             viewWillAppearExpectation.fulfill()
@@ -182,7 +182,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     }
     
     func makeLogViewWillDisappearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
-        let webViewController = splitWebViewController.logController.logSplitViewItem.viewController as! WCLWebViewController
+        let webViewController = splitWebViewController.splitController.splitViewItem.viewController as! WCLWebViewController
         let viewWillDisappearExpectation = expectationWithDescription("WebViewController will appear")
         let webViewControllerEventManager = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: nil) { _ in
             viewWillDisappearExpectation.fulfill()
@@ -196,7 +196,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
             object: nil,
             queue: nil)
         { [unowned self] _ in
-            if let frame = LogController.savedFrameForName(name) {
+            if let frame = SplitController.savedFrameForName(name) {
                 if frame.size.height == height {
                     expectation.fulfill()
                     if let observer = observer {

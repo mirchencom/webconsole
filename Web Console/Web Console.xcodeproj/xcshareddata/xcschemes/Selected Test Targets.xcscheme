@@ -62,6 +62,20 @@
                ReferencedContainer = "container:Web Console.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4530B0EB1736E2A6000A52E2"
+               BuildableName = "Web ConsoleTests.xctest"
+               BlueprintName = "Web ConsoleTests"
+               ReferencedContainer = "container:Web Console.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

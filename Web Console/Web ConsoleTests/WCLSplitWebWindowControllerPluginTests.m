@@ -39,8 +39,6 @@
     NSTask *task;
     WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                  task:&task];
-    Plugin *plugin = splitWebWindowController.plugin;
-    
     static NSString *StandardInputText = @"Test String";
     
     __block BOOL completionHandlerRan = NO;
@@ -50,7 +48,7 @@
         XCTAssert([standardOutputText isEqualToString:StandardInputText], @"The standard input text should match the standard output text.");
         completionHandlerRan = YES;
     }];
-    [plugin readFromStandardInput:StandardInputText];
+    [splitWebWindowController readFromStandardInput:StandardInputText];
     NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
     while (!completionHandlerRan && [loopUntil timeIntervalSinceNow] > 0) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];

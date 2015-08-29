@@ -14,19 +14,19 @@
 
 #import "WCLWebViewController.h"
 
-#pragma mark - PluginWebView
+#pragma mark - DefaultWebView
 
-@interface WCLWebViewController (PluginWebView)
+@interface WCLWebViewController (DefaultWebView)
 @property (readonly) WebView *webView;
 @end
 
-@interface SplitWebViewController (PluginWebView)
+@interface SplitWebViewController (DefaultWebView)
 @property (readonly) WCLWebViewController *defaultWebViewController;
 @end
 
-@implementation WCLSplitWebWindowController (PluginWebView)
+@implementation WCLSplitWebWindowController (DefaultWebView)
 
-- (WebView *)pluginWebView
+- (WebView *)defaultWebView
 {
     SplitWebViewController *splitWebViewController = (SplitWebViewController *)self.contentViewController;
     return splitWebViewController.defaultWebViewController.webView;
