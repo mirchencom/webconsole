@@ -1,0 +1,10 @@
+/Users/robenkleene/.rbenv/versions/2.0.0-p247/bin/ruby extconf.rb 
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+make "DESTDIR=" install
+installing default libraries

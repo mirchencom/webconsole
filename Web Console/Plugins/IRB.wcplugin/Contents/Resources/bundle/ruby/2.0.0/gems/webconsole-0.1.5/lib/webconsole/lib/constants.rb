@@ -1,0 +1,10 @@
+module WebConsole
+  # Keys
+  PLUGIN_NAME_KEY = 'WC_PLUGIN_NAME'
+  WINDOW_ID_KEY = 'WC_WINDOW_ID'
+  SHARED_RESOURCES_PATH_KEY = 'WC_SHARED_RESOURCES_PATH'
+  SHARED_RESOURCES_URL_KEY = 'WC_SHARED_RESOURCES_URL'
+
+  # Directories
+  APPLESCRIPT_DIRECTORY = File.join(File.dirname(__FILE__), "..", "..", "applescript")
+end
