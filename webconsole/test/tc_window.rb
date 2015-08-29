@@ -152,11 +152,11 @@ class TestTwoWindows < Test::Unit::TestCase
   def setup
     WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
   end
-  
+
   def teardown
     @window_one.close
     WebConsole::Tests::Helper::confirm_dialog
-  
+
     @window_two.close
     WebConsole::Tests::Helper::confirm_dialog
   end
@@ -187,15 +187,15 @@ class TestTwoWindows < Test::Unit::TestCase
     # TODO Switch the window order of window manager's one and two
 
     # javascript = File.read(LASTCODEJAVASCRIPT_FILE)
-    # 
+    #
     # # Window Manager One
     # result_one = @window_one.do_javascript(javascript)
     # result_one.strip!
-    # 
+    #
     # # Window Manager Two
     # result_two = @window_two.do_javascript(javascript)
     # result_two.strip!
-    # 
+    #
     # assert_equal(test_text_one, result_one, "The first test text should equal the first result.")
     # assert_equal(test_text_two, result_two, "The second test text should equal the second result.")
   end
