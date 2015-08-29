@@ -6,6 +6,7 @@ BUNDLE_PATHS = [
   "../../Web Console/Plugins/HTML.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/Coffee.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/Search.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Log.wcplugin/Contents/Resources/"
 ]
 
 task :default => [:run]
