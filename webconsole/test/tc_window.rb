@@ -119,6 +119,33 @@ class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
 
 end
 
+class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
+
+  def setup
+    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
+    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
+    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
+    @window = WebConsole::Window.new(window_id)
+  end
+  
+  def teardown
+    @window.close
+    WebConsole::Tests::Helper::confirm_dialog
+  end
+
+  def test_read_from_standard_input
+    test_text = "This is a test string"
+    @window.plugin_read_from_standard_input(test_text + "\n")
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+
+    javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
+    result = @window.do_javascript(javascript)
+    result.strip!
+
+    assert_equal(test_text, result, "The test text should equal the result.")
+  end
+end
+
 # TODO The Web Console functionality for the below test doesn't exist yet. The Web Console API first needs to be able to target reading from standard input for a specific window manager before this test will be possible.
 
 class TestTwoWindows < Test::Unit::TestCase

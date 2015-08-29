@@ -123,29 +123,3 @@ class TestWebConsoleRunPlugin < Test::Unit::TestCase
 
 end
 
-class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
-
-  def setup
-    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
-    WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-    @window = WebConsole::Window.new(window_id)
-  end
-  
-  def teardown
-    @window.close
-    WebConsole::Tests::Helper::confirm_dialog
-  end
-
-  def test_plugin_read_from_standard_input
-    test_text = "This is a test string"
-    WebConsole::plugin_read_from_standard_input(WebConsole::Tests::PRINT_PLUGIN_NAME, test_text + "\n")
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
-
-    javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
-    result.strip!
-
-    assert_equal(test_text, result, "The test text should equal the result.")
-  end
-end
