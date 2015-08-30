@@ -179,8 +179,16 @@ class TestTwoWindows < Test::Unit::TestCase
     @window_two.read_from_standard_input(test_text_two + "\n")
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
 
-    # TODO Swap the window order of window's one and two (e.g., bring the other one to the front)
+    # Swap the two windows to test that the window numbers persist even
+    # after the window changes.
+    window_id_before = WebConsole::Tests::Helper::window_id
+    assert_equal(window_id_before, @window_two.window_id, "The second window should be in front.")
+    WebConsole::Tests::Helper::switch_windows
+    window_id_after = WebConsole::Tests::Helper::window_id
+    assert_equal(window_id_after, @window_one.window_id, "The first window should be in front.")
+    assert_not_equal(window_id_before, window_id_after, "The front window should have changed.")
 
+    # Read the window contents
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
 
     # Window Manager One
