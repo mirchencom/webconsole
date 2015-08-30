@@ -1,3 +1,5 @@
+require_relative '../bundle/bundler/setup'
+
 module WebConsole::Log
   class View < WebConsole::View
     BASE_DIRECTORY = File.join(File.dirname(__FILE__), "..")

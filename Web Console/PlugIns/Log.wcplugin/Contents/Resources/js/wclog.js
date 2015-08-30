@@ -6,10 +6,6 @@ function warning(message) {
   log(message, "warning")
 }
 
-function info(message) {
-  log(message, "info")
-}
-
 function log(message, level) {
 	var source   = $("#log-template").html();
 	var template = Handlebars.compile(source);
