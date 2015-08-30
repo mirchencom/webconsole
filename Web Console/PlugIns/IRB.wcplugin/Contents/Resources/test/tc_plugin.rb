@@ -26,14 +26,12 @@ class TestPlugin < Test::Unit::TestCase
   def test_plugin
     WebConsole::run_plugin(TEST_PLUGIN_NAME, TEST_PLUGIN_PATH)
 
-    test_code = TEST_CODE.gsub("\n", "\uFF00") + "\n"
-
-    WebConsole::plugin_read_from_standard_input(TEST_PLUGIN_NAME, test_code)
-
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
-
     window_id = WebConsole::window_id_for_plugin(TEST_PLUGIN_NAME)
     window = WebConsole::Window.new(window_id)
+    
+    test_code = TEST_CODE.gsub("\n", "\uFF00") + "\n"
+    window.read_from_standard_input(test_code)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
 
     # Test Wrapper Input
     javascript = File.read(WebConsole::Tests::FIRSTCODE_JAVASCRIPT_FILE)
