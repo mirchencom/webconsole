@@ -1,5 +1,6 @@
 BUNDLE_PATHS = [
   "../../Web Console/Plugins/Shared Test Resources.wcplugin/Contents/Resources/plugin/Print.wcplugin/Contents/Resources/",
+  "../../Web Console/Plugins/Shared Test Resources.wcplugin/Contents/Resources/plugin/TestEnvironment.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/Node.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/Markdown.wcplugin/Contents/Resources/",
   "../../Web Console/Plugins/IRB.wcplugin/Contents/Resources/",

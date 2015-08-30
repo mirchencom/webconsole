@@ -40,6 +40,11 @@ module WebConsole
       WebConsole::run_applescript(DOJAVASCRIPT_SCRIPT, [javascript, window_id])
     end
 
+    READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "read_from_standard_input.scpt")
+    def read_from_standard_input(text)
+      WebConsole::run_applescript(READ_FROM_STANDARD_INPUT_SCRIPT, [text, window_id])
+    end
+
     CLOSEWINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "close_window.scpt")
     def close
       WebConsole::run_applescript(CLOSEWINDOW_SCRIPT, [window_id])

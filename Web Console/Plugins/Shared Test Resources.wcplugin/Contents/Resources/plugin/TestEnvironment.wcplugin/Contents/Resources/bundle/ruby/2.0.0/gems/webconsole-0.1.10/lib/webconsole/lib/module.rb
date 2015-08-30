@@ -5,6 +5,17 @@ module WebConsole
     self.run_applescript(LOAD_PLUGIN_SCRIPT, [path])
   end
 
+  EXISTS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "exists.scpt")
+  def self.application_exists
+    result = self.run_applescript(EXISTS_SCRIPT)
+    result.chomp!
+    if result == "true"
+      return true
+    else
+      return false
+    end
+  end
+
   RUN_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run_plugin.scpt")
   def self.run_plugin(name, directory = nil, arguments = nil)
     parameters = [name]
@@ -14,7 +25,9 @@ module WebConsole
     if arguments
       parameters = parameters + arguments
     end
-    self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
+    result = self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
+    result.chomp!
+    return result
   end
 
   PLUGIN_HAS_WINDOWS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_has_windows.scpt")
@@ -72,12 +85,6 @@ module WebConsole
   end
   def self.shared_resources_url
     return resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
-  end
-
-
-  PLUGIN_READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_read_from_standard_input.scpt")
-  def self.plugin_read_from_standard_input(name, text)
-    self.run_applescript(PLUGIN_READ_FROM_STANDARD_INPUT_SCRIPT, [name, text])
   end
 
   private
