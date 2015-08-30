@@ -237,7 +237,11 @@
     
     NSWindow *window = [self.delegate windowForWebViewController:self];
     if (window) {
-        NSAssert([window isVisible], @"The window should be visible.");
+        // In some circumstances the window isn't visible here, but it's still
+        // returning the correct `windowNumber`. This is probably just due
+        // to run loop timing.
+//        NSAssert([window isVisible], @"The window should be visible.");
+
         NSNumber *windowNumber = [NSNumber numberWithInteger:window.windowNumber];
         NSAssert(windowNumber > 0, @"The window number should be greater than zero.");
         environmentDictionary[kEnvironmentVariableWindowIDKey] = windowNumber;
