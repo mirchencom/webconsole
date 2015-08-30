@@ -10,4 +10,4 @@ $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/rb-f
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/rb-inotify-0.9.5/lib")
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/listen-3.0.3/lib")
 $:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/nio-0.2.5/lib")
-$:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/webconsole-0.1.5/lib")
+$:.unshift File.expand_path("#{path}/../#{ruby_engine}/#{ruby_version}/gems/webconsole-0.1.10/lib")
