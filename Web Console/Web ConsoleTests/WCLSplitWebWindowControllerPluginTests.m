@@ -37,8 +37,8 @@
                                                ofType:kTestDataShellScriptExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
-                                                                                                 task:&task];
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath
+                                                                                                        task:&task];
     static NSString *StandardInputText = @"Test String";
     
     __block BOOL completionHandlerRan = NO;
@@ -70,8 +70,9 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
-                                                                                                 task:&task];
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath
+                                                                                                        task:&task];
+    XCTAssertTrue([task isRunning], @"The NSTask should be running.");
     __block BOOL completionHandlerRan = NO;
     [task wcl_interruptWithCompletionHandler:^(BOOL success) {
         XCTAssertTrue(success, @"The interrupted should have succeeded.");
@@ -95,8 +96,8 @@
                                                ofType:kTestDataShellScriptExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
-                                                                                                 task:&task];
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath
+                                                                                                        task:&task];
     
     __block BOOL completionHandlerRan = NO;
     [task wcl_interruptWithCompletionHandler:^(BOOL success) {
@@ -122,12 +123,12 @@
     NSString *firstCommandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                                     ofType:kTestDataRubyExtension
                                               subdirectory:kTestDataSubdirectory];
-    NSTask *firstTask = [[self class] taskRunningCommandPath:firstCommandPath];
+    NSTask *firstTask = [self taskRunningCommandPath:firstCommandPath];
     
     NSString *secondCommandPath = [self wcl_pathForResource:kTestDataInterruptFails
                                                      ofType:kTestDataShellScriptExtension
                                                subdirectory:kTestDataSubdirectory];
-    NSTask *secondTask = [[self class] taskRunningCommandPath:secondCommandPath];
+    NSTask *secondTask = [self taskRunningCommandPath:secondCommandPath];
     
     XCTAssertTrue([firstTask isRunning], @"The first NSTask should be running.");
     XCTAssertTrue([secondTask isRunning], @"The second NSTask should be running.");
@@ -155,12 +156,12 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:nil];
     NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
     XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WCLSplitWebWindowController.");
     WCLSplitWebWindowController *firstWebWindowController = splitWebWindowControllers[0];
     
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:nil];
     splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
     XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)2, @"The WCLPlugin should have two WCLSplitWebWindowControllers.");
     WCLSplitWebWindowController *secondWebWindowController = splitWebWindowControllers[1];

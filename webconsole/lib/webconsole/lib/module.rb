@@ -25,7 +25,9 @@ module WebConsole
     if arguments
       parameters = parameters + arguments
     end
-    self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
+    result = self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
+    result.chomp!
+    return result
   end
 
   PLUGIN_HAS_WINDOWS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_has_windows.scpt")

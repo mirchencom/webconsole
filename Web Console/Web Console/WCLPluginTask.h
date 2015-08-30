@@ -18,5 +18,5 @@
 @end
 
 @interface WCLPluginTask : NSObject
-+ (void)runTask:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate;
++ (void)runTask:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate completionHandler:(void (^)(BOOL success))completionHandler;
 @end

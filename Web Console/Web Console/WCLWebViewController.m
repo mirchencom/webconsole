@@ -237,11 +237,9 @@
     
     NSWindow *window = [self.delegate windowForWebViewController:self];
     if (window) {
-        if (![window isVisible]) {
-            // The windowNumber must be calculated after showing the window
-            [window.windowController showWindow:nil];
-        }
+        NSAssert([window isVisible], @"The window should be visible.");
         NSNumber *windowNumber = [NSNumber numberWithInteger:window.windowNumber];
+        NSAssert(windowNumber > 0, @"The window number should be greater than zero.");
         environmentDictionary[kEnvironmentVariableWindowIDKey] = windowNumber;
     }
     

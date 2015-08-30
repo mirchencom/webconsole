@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'webconsole'
-  s.version     = '0.1.7'
+  s.version     = '0.1.9'
   s.date        = '2013-07-04'
   s.summary     = "Web Console helper gem"
   s.description = "Bridge from Ruby to AppleScript to control Web Console"

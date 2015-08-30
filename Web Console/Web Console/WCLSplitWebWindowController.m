@@ -172,9 +172,9 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 #pragma mark - Tasks
 
-- (void)runTask:(NSTask *)task
+- (void)runTask:(nonnull NSTask *)task completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
-    [self.splitWebViewController runTask:task];
+    [self.splitWebViewController runTask:task completion:completionHandler];
 }
 
 - (NSArray *)tasks
@@ -238,8 +238,12 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 }
 
 
-- (void)splitWebViewControllerDidStartTasks:(SplitWebViewController *)splitWebViewController
+- (void)splitWebViewControllerWillStartTasks:(SplitWebViewController *)splitWebViewController
 {
+    if (![self.window isVisible]) {
+        // The windowNumber must be calculated after showing the window
+        [self showWindow:nil];
+    }
     [self.window setDocumentEdited:YES]; // Add edited dot in close button
 }
 

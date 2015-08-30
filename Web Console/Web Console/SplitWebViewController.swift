@@ -17,7 +17,7 @@ let splitWebViewHeight = CGFloat(150)
     func windowForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSWindow!
     func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
     func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
-    func splitWebViewControllerDidStartTasks(splitWebViewController: SplitWebViewController)
+    func splitWebViewControllerWillStartTasks(splitWebViewController: SplitWebViewController)
     func splitWebViewControllerDidFinishTasks(splitWebViewController: SplitWebViewController)
 }
 
@@ -89,8 +89,10 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     
     // MARK: Tasks
     
-    func runTask(task: NSTask) {
-        WCLPluginTask.runTask(task, delegate: defaultWebViewController)
+    func runTask(task: NSTask, completion: ((Bool) -> ())?) {
+        WCLPluginTask.runTask(task, delegate: defaultWebViewController) { success in
+            completion?(success)
+        }
     }
     
     func hasTasks() -> Bool {
@@ -227,7 +229,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     func webViewController(webViewController: WCLWebViewController, taskWillStart task: NSTask) {
-        delegate?.splitWebViewControllerDidStartTasks(self)
+        delegate?.splitWebViewControllerWillStartTasks(self)
     }
 
     func webViewController(webViewController: WCLWebViewController, taskDidFinish task: NSTask) {

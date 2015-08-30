@@ -31,7 +31,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (void)readFromStandardInput:(nonnull NSString *)text;
 - (nonnull NSArray *)webViewControllers;
 #pragma mark - Tasks
-- (void)runTask:(nonnull NSTask *)task;
+- (void)runTask:(nonnull NSTask *)task completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (BOOL)hasTasks;
 - (nonnull NSArray *)tasks;
 @end

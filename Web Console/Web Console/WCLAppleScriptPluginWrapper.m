@@ -53,7 +53,10 @@
     // TODO: Return an error if the plugin doesn't exist
     // TODO: Return an error if the directory doesn't exist
     
-    [self.plugin runWithArguments:arguments inDirectoryPath:[directoryURL path]];
+    [command suspendExecution];
+    [self.plugin runWithArguments:arguments inDirectoryPath:[directoryURL path] completion:^(id<WCLPluginView> __nullable pluginView) {
+        [command resumeExecutionWithResult:pluginView];
+    }];
 }
 
 - (NSScriptObjectSpecifier *)objectSpecifier

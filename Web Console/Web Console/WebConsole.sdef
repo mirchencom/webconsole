@@ -319,21 +319,21 @@
 		</command>
 
         <command name="run" code="RUNAPLUG" description="Run a plugin.">
-            
 			<direct-parameter description="The plugin to run.">
 				<type type="plugin"/>
 			</direct-parameter>
-
             <parameter name="with arguments" code="AGMT" description="The arguments to pass to the plugin." optional="yes">
 				<cocoa key="Arguments"/>
 				<type type="text" list="yes"/>
 			</parameter>
-
             <parameter name="in directory" code="DRCT" description="A file reference to the directory to run the plugin in." optional="yes">
 				<cocoa key="Directory"/>
                 <type type="file"/>
             </parameter>
-
+			<result description="The window or split the plugin was run in.">
+				<type type="window"/>
+				<type type="split"/>
+			</result>
         </command>
 
         <command name="read from standard input" code="READSTIN" description="Read text from standard input.">

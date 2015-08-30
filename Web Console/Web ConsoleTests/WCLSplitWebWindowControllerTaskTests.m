@@ -34,7 +34,7 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:nil];
     
     NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
     XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
@@ -86,8 +86,8 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
-                                                                                                                      task:&task];
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath
+                                                                                                        task:&task];
     [WCLTaskTestsHelper blockUntilTaskFinishes:task];
     
     Plugin *plugin = splitWebWindowController.plugin;
@@ -109,7 +109,7 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath
                                                                                                                       task:&task];
     [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     
@@ -141,7 +141,7 @@
     NSString *commandPath = [self wcl_pathForResource:kTestDataSleepTwoSeconds
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
-    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath];
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath];
     
     XCTAssertTrue([splitWebWindowController hasTasks], @"The WebWindowController should have an NSTask.");
     
@@ -166,8 +166,8 @@
                                          subdirectory:kTestDataSubdirectory];
     
     NSTask *task;
-    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
-                                                                                                                      task:&task];
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath
+                                                                                                        task:&task];
     [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     
     XCTAssert([task isRunning], @"The NSTask should be running.");
@@ -206,8 +206,8 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     NSTask *task;
-    WCLSplitWebWindowController *splitWebWindowController = [[self class] splitWebWindowControllerRunningCommandPath:commandPath
-                                                                                                                      task:&task];
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath
+                                                                                                        task:&task];
     XCTAssertTrue([splitWebWindowController.window isDocumentEdited], @"The NSWindow should be edited while running a task");
     [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
     
@@ -224,7 +224,7 @@
 {
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestTestEnvironmentPluginName];
     
-    [plugin runWithArguments:nil inDirectoryPath:nil];
+    [plugin runWithArguments:nil inDirectoryPath:nil completion:nil];
 
     NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
     NSAssert([splitWebWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");

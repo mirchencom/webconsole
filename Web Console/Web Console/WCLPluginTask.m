@@ -8,9 +8,11 @@
 
 #import "WCLPluginTask.h"
 
+
+
 @implementation WCLPluginTask
 
-+ (void)runTask:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate
++ (void)runTask:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate completionHandler:(void (^)(BOOL success))completionHandler;
 {
     // Standard Output
     task.standardOutput = [NSPipe pipe];
@@ -45,11 +47,14 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
     }];
 
-    if ([delegate respondsToSelector:@selector(pluginTaskWillStart:)]) {
-        [delegate pluginTaskWillStart:task];
-    }
-
     dispatch_async(dispatch_get_main_queue(), ^{
+        // For some reason an infinite loop results if this isn't dispatched to the main queue.
+        // This has to run on the main queue, because it involves coordination with the UI.
+        // But even if it's already on the main queue, it still needs to be dispatched, otherwise an infinite loop results.
+        if ([delegate respondsToSelector:@selector(pluginTaskWillStart:)]) {
+            [delegate pluginTaskWillStart:task];
+        }
+        
         NSDictionary *environmentDictionary;
         if ([delegate respondsToSelector:@selector(environmentDictionaryForPluginTask:)]) {
             environmentDictionary = [delegate environmentDictionaryForPluginTask:task];
@@ -58,6 +63,8 @@
             [task setEnvironment:environmentDictionary];
         }
         [task launch];
+        
+        completionHandler(YES);
     });
 }
 

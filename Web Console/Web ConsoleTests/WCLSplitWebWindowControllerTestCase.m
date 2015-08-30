@@ -47,7 +47,7 @@
 
 #pragma mark - Running Tasks
 
-+ (NSTask *)taskRunningCommandPath:(NSString *)commandPath
+- (NSTask *)taskRunningCommandPath:(NSString *)commandPath
 {
     NSTask *task;
     (void)[self splitWebWindowControllerRunningCommandPath:commandPath task:&task];
@@ -61,29 +61,37 @@
     [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
 }
 
-+ (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
 {
     return [self splitWebWindowControllerRunningCommandPath:commandPath task:nil];
 }
 
-+ (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
 {
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
+
+    __block WCLSplitWebWindowController *splitWebWindowController;
     
-    NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
-    NSAssert([splitWebWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Running task"];
 
-    // The last web window controller should be the newest created and therefore have the task we're looking for
-    WCLSplitWebWindowController *splitWebWindowController = splitWebWindowControllers.lastObject;
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:^(id<WCLPluginView> __nullable pluginView) {
+        XCTAssertTrue([pluginView isKindOfClass:[NSWindow class]], @"The class should be an NSWindow.");
+        NSWindow *window = (NSWindow *)pluginView;
+        NSWindowController *windowController = window.windowController;
+        XCTAssertTrue([windowController isKindOfClass:[WCLSplitWebWindowController class]], @"The class should be a WCLSplitWebWindowController.");
+        splitWebWindowController = (WCLSplitWebWindowController *)windowController;
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:kTestTimeoutInterval handler:nil];
+
+    XCTAssertNotNil(splitWebWindowController, @"The WCLSplitWebWindowController should not be nil.");
+
     NSAssert([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should have an NSTask.");
-
+    
     if (task) {
         *task = splitWebWindowController.tasks[0];
     }
-
-    [WCLTaskTestsHelper blockUntilTaskIsRunning:splitWebWindowController.tasks[0]];
-
+    
     return splitWebWindowController;
 }
 
@@ -127,7 +135,7 @@
     NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil];
+    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:nil];
     
     NSMutableArray *splitWebWindowControllers = [[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] mutableCopy];
     [splitWebWindowControllers removeObjectsInArray:originalWebWindowControllers];

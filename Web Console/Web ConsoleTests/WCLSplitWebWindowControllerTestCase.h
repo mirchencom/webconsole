@@ -30,8 +30,8 @@
 + (Plugin *)otherPlugin;
 - (WCLSplitWebWindowController *)makeSplitWebWindowController;
 - (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin;
-+ (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
-+ (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath;
-+ (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
+- (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath;
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
 + (void)blockUntilAllTasksRunAndFinish;
 @end

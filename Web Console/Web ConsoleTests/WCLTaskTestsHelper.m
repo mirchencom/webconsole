@@ -16,19 +16,10 @@
 
 #pragma mark - Running
 
-+ (void)blockUntilTaskIsRunning:(NSTask *)task
-{
-    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
-    while (![task isRunning] && [loopUntil timeIntervalSinceNow] > 0) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
-    }
-    NSAssert([task isRunning], @"The NSTask should be running.");
-}
-
 + (void)blockUntilTasksAreRunning:(NSArray *)tasks
 {
     __block NSMutableArray *tasksWaitingToRun = [tasks mutableCopy];
-
+    
     // Tasks can start and finish between run loop checks, so remove them on termination
     __block NSMutableArray *observers = [NSMutableArray array];
     for (NSTask *task in tasks) {
@@ -56,13 +47,14 @@
         [tasksWaitingToRun removeObjectsInArray:tasksNowRunning];
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
     }
-
+    
     for (id observer in observers) {
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }
     
     NSAssert(![tasksWaitingToRun count], @"All of the NSTasks should have started running.");
 }
+
 
 #pragma mark - Finishing
 

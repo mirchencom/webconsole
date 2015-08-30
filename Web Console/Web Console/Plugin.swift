@@ -171,12 +171,19 @@ class Plugin: WCLPlugin {
     }
 
     // MARK: Running
-    
-    func runWithArguments(arguments: [AnyObject]!, inDirectoryPath directoryPath: String!) {
-        self.runCommandPath(commandPath, withArguments: arguments, inDirectoryPath: directoryPath)
+
+    func runWithArguments(arguments: [AnyObject]!,
+        inDirectoryPath directoryPath: String!,
+        completion: ((WCLPluginView?) -> Void)?)
+    {
+        self.runCommandPath(commandPath, withArguments: arguments, inDirectoryPath: directoryPath, completion: completion)
     }
 
-    func runCommandPath(commandPath: String!, withArguments arguments: [AnyObject]?, inDirectoryPath directoryPath: String?) {
+    func runCommandPath(commandPath: String!,
+        withArguments arguments: [AnyObject]?,
+        inDirectoryPath directoryPath: String?,
+        completion: ((WCLPluginView?) -> Void)?)
+    {
         println("runCommandPath:\(commandPath) withArguments:\(arguments) inDirectoryPath:\(directoryPath)")
         let task = NSTask()
         task.launchPath = commandPath
@@ -190,7 +197,9 @@ class Plugin: WCLPlugin {
         let splitWebWindowController = WCLSplitWebWindowsController.sharedSplitWebWindowsController().addedSplitWebWindowControllerForPlugin(self)
 
         // TODO: Refactor this to support log plugin
-        splitWebWindowController.runTask(task)
+        splitWebWindowController.runTask(task, completionHandler: { _ in
+            completion?(splitWebWindowController.window)
+        })
     }
     
     // MARK: Windows
