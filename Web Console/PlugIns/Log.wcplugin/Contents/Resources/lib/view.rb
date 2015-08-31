@@ -12,10 +12,12 @@ module WebConsole::Log
       load_erb_from_path(VIEW_TEMPLATE)
     end
 
-    def log_message
+    def log_error(message)
+      do_javascript_function("error", [message])
     end
-    
-    def log_error
+
+    def log_warning(message)
+      do_javascript_function("warning", [message])
     end
 
   end

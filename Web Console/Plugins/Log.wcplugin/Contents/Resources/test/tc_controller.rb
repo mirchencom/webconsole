@@ -12,6 +12,8 @@ require WebConsole::Tests::TEST_HELPER_FILE
 require_relative "../lib/controller"
 
 class TestView < Test::Unit::TestCase
+  MESSAGE_PREFIX = WebConsole::Logger::MESSAGE_PREFIX
+  ERROR_PREFIX = WebConsole::Logger::ERROR_PREFIX
 
   def setup
     @controller = WebConsole::Log::Controller.new
@@ -21,8 +23,14 @@ class TestView < Test::Unit::TestCase
     # @controller.view.close
   end
 
-  def test_javascript
-    @controller.parse_input("some test input")
+  def test_controller
+    message = MESSAGE_PREFIX + "Testing log error"
+    @controller.parse_input(message)
+    message = ERROR_PREFIX + "Testing log error"
+    @controller.parse_input(message)
+
+    # TODO Should do nothing if the prefix doesn't match
+    # TODO Assert blank lines do nothing
   end
 
   # Helper

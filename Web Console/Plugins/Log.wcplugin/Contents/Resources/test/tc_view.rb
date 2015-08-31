@@ -24,7 +24,7 @@ class TestView < Test::Unit::TestCase
   def test_javascript
     # Test Error
     message = "Testing log error"
-    log_error(message)
+    @view.log_error(message)
     test_message = last_log_message()
     assert_equal(message, test_message, "The messages should match")
     test_class = last_log_class()
@@ -32,7 +32,7 @@ class TestView < Test::Unit::TestCase
 
     # Test Warning
     message = "Testing log warning"
-    log_warning(message)
+    @view.log_warning(message)
     test_message = last_log_message()
     assert_equal(message, test_message, "The messages should match")
     test_class = last_log_class()
@@ -49,16 +49,6 @@ class TestView < Test::Unit::TestCase
   def last_log_message()
     result = @view.do_javascript(TEST_MESSAGE_JAVASCRIPT)
     return result.chomp
-  end
-
-  def log_error(message)
-    javascript = WebConsole::View::javascript_function("error", [message])
-    @view.do_javascript(javascript)
-  end
-
-  def log_warning(message)
-    javascript = WebConsole::View::javascript_function("warning", [message])
-    @view.do_javascript(javascript)
   end
 
 end
