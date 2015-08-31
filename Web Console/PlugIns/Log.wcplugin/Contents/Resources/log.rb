@@ -5,7 +5,7 @@ require 'webconsole'
 
 require_relative "lib/controller"
 
-wrapper = WebConsole::Log::Controller.new
+controller = WebConsole::Log::Controller.new
 
 ARGF.each do |line|
   controller.parse_input(line)

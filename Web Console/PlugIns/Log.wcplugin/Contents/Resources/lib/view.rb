@@ -16,8 +16,8 @@ module WebConsole::Log
       do_javascript_function("error", [message])
     end
 
-    def log_warning(message)
-      do_javascript_function("warning", [message])
+    def log_message(message)
+      do_javascript_function("message", [message])
     end
 
   end

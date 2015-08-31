@@ -1,9 +1,9 @@
 function error(message) {
-  log(message, "error")
+  log(message, "error");
 }
 
-function warning(message) {
-  log(message, "warning")
+function message(message) {
+  log(message, "message");
 }
 
 function log(message, level) {
