@@ -21,11 +21,11 @@ class TestView < Test::Unit::TestCase
   end
   
   def teardown
-    # @controller.view.close
+    @controller.view.close
   end
 
   def test_controller
-    message = MESSAGE_PREFIX + "Testing log error"
+    message = MESSAGE_PREFIX + "Testing log message"
     @controller.parse_input(message)
     message = ERROR_PREFIX + "Testing log error"
     @controller.parse_input(message)

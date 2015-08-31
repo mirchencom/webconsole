@@ -1,4 +1,5 @@
 require_relative '../bundle/bundler/setup'
+require_relative 'view'
 
 module WebConsole::Log
   class Controller < WebConsole::Controller
