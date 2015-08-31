@@ -11,7 +11,7 @@ require WebConsole::Tests::TEST_HELPER_FILE
 
 require_relative "../lib/view"
 
-class TestPlugin < Test::Unit::TestCase
+class TestView < Test::Unit::TestCase
 
   def setup
     @view = WebConsole::Log::View.new
@@ -21,7 +21,7 @@ class TestPlugin < Test::Unit::TestCase
     @view.close
   end
 
-  def test_view
+  def test_javascript
     # Test Error
     message = "Testing log error"
     log_error(message)

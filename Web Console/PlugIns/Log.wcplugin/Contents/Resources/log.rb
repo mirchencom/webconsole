@@ -3,6 +3,10 @@
 require_relative 'bundle/bundler/setup'
 require 'webconsole'
 
-require_relative "lib/view"
+require_relative "lib/controller"
 
-WebConsole::Log::View.new
+wrapper = WebConsole::Log::Controller.new
+
+ARGF.each do |line|
+  controller.parse_input(line)
+end

@@ -1,6 +1,10 @@
+
+
 module WebConsole
 
   class Logger < View
+    MESSAGE_PREFIX = 'MESSAGE '
+    ERROR_PREFIX = 'ERROR '
 
     def info(message)
     end
@@ -10,7 +14,6 @@ module WebConsole
 
     def error(message)
     end
-
   end
 
 end

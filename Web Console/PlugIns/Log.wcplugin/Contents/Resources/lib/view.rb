@@ -12,5 +12,11 @@ module WebConsole::Log
       load_erb_from_path(VIEW_TEMPLATE)
     end
 
+    def log_message
+    end
+    
+    def log_error
+    end
+
   end
 end
