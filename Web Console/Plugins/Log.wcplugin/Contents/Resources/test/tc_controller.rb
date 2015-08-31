@@ -9,12 +9,12 @@ require 'webconsole'
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
-require_relative "../lib/view"
+require_relative "../lib/controller"
 
 class TestView < Test::Unit::TestCase
 
   def setup
-    @controller = WebConsole::Log::View.new
+    @controller = WebConsole::Log::Controller.new
   end
   
   def teardown
@@ -22,6 +22,7 @@ class TestView < Test::Unit::TestCase
   end
 
   def test_javascript
+    @controller.parse_input("some test input")
   end
 
   # Helper
