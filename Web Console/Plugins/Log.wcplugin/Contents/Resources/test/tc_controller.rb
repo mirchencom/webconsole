@@ -2,13 +2,13 @@
 
 require "test/unit"
 
-require_relative "lib/test_constants"
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
 
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
 
+require_relative "lib/test_helper"
 require_relative "../lib/controller"
 
 class TestView < Test::Unit::TestCase
@@ -17,6 +17,7 @@ class TestView < Test::Unit::TestCase
 
   def setup
     @controller = WebConsole::Log::Controller.new
+    @test_helper = WebConsole::Log::Tests::TestHelper.new(@controller.view)
   end
   
   def teardown
@@ -31,13 +32,6 @@ class TestView < Test::Unit::TestCase
 
     # TODO Should do nothing if the prefix doesn't match
     # TODO Assert blank lines do nothing
-  end
-
-  # Helper
-
-  def last_log_class()
-    result = @controller.view.do_javascript(TEST_CLASS_JAVASCRIPT)
-    return result.chomp
   end
 
 end

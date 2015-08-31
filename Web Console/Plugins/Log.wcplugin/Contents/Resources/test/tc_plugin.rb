@@ -3,6 +3,7 @@
 require "test/unit"
 
 require_relative "lib/test_constants"
+
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
 
@@ -33,7 +34,7 @@ class TestPlugin < Test::Unit::TestCase
 
   def test_log
     # Confirm the title
-    title = @view.do_javascript(TEST_TITLE_JAVASCRIPT)
+    title = @window.do_javascript(TEST_TITLE_JAVASCRIPT)
     title.chomp!
     assert_equal(title, TEST_PLUGIN_NAME, "The title should equal the test html title.")
   end

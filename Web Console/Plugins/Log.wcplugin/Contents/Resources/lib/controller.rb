@@ -6,23 +6,26 @@ module WebConsole::Log
     ERROR_PREFIX = WebConsole::Logger::ERROR_PREFIX
 
     def parse_input(input)
-      input = input.dup
-      input.sub!(/^\s*$\n/, '') # Don't process blank lines
+      message = input.dup
 
-      if input =~ /^#{MESSAGE_PREFIX}/
-        input[MESSAGE_PREFIX] = ''
+      message.sub!(/^\s*$\n/, '') # Don't process blank lines
+
+      if message =~ /^#{MESSAGE_PREFIX}/
+        message[MESSAGE_PREFIX] = ''
+        view.log_message(message)
       elsif message =~ /^#{ERROR_PREFIX}/
-        input[ERROR_PREFIX] = ''
+        message[ERROR_PREFIX] = ''
+        view.log_error(message)
       end
 
     end
 
-    # def view
-    #   if !@view
-    #     @view = View.new
-    #   end
-    #   return @view
-    # end
+    def view
+      if !@view
+        @view = View.new
+      end
+      return @view
+    end
 
   end
 end
