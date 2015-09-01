@@ -24,7 +24,6 @@ class TestView < Test::Unit::TestCase
     @controller.view.close
   end
 
-
   def test_controller
     # Test Error
     message = "Testing log error"
@@ -44,8 +43,26 @@ class TestView < Test::Unit::TestCase
     test_class = @test_helper.last_log_class()
     assert_equal("message", test_class, "The classes should match")
 
-    # TODO Should do nothing if the prefix doesn't match
-    # TODO Assert blank lines do nothing
+    # Test No Prefix
+    @controller.parse_input("Testing no prefix")
+    test_message = @test_helper.last_log_message()
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_helper.last_log_class()
+    assert_equal("message", test_class, "The classes should match")
+
+    # Test Blank Spaces
+    @controller.parse_input("  \t")
+    test_message = @test_helper.last_log_message()
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_helper.last_log_class()
+    assert_equal("message", test_class, "The classes should match")
+
+    # Test Empty String
+    @controller.parse_input("")
+    test_message = @test_helper.last_log_message()
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_helper.last_log_class()
+    assert_equal("message", test_class, "The classes should match")
   end
 
 end
