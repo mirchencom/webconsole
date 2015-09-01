@@ -24,11 +24,25 @@ class TestView < Test::Unit::TestCase
     @controller.view.close
   end
 
+
   def test_controller
-    message = MESSAGE_PREFIX + "Testing log message"
-    @controller.parse_input(message)
-    message = ERROR_PREFIX + "Testing log error"
-    @controller.parse_input(message)
+    # Test Error
+    message = "Testing log error"
+    input = ERROR_PREFIX + message
+    @controller.parse_input(input)
+    test_message = @test_helper.last_log_message()
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_helper.last_log_class()
+    assert_equal("error", test_class, "The classes should match")
+
+    # Test Message
+    message = "Testing log message"
+    input = MESSAGE_PREFIX + message
+    @controller.parse_input(input)
+    test_message = @test_helper.last_log_message()
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_helper.last_log_class()
+    assert_equal("message", test_class, "The classes should match")
 
     # TODO Should do nothing if the prefix doesn't match
     # TODO Assert blank lines do nothing
