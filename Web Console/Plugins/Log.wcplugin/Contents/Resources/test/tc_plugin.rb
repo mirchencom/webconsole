@@ -17,13 +17,13 @@ class TestPlugin < Test::Unit::TestCase
   ERROR_PREFIX = WebConsole::Logger::ERROR_PREFIX
 
   def setup
-    WebConsole::run_plugin(TEST_PLUGIN_NAME, TEST_PLUGIN_PATH)
-   
+    WebConsole::load_plugin(TEST_PLUGIN_PATH)
+    window_id = WebConsole::run_plugin(TEST_PLUGIN_NAME, TEST_PLUGIN_PATH)
+
     # Setup the window
     # TODO I shouldn't need this sleep when testing reading from standard input
 
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running
-    window_id = WebConsole::window_id_for_plugin(TEST_PLUGIN_NAME)
     @window = WebConsole::Window.new(window_id)
     @test_helper = WebConsole::Log::Tests::TestHelper.new(@window)
   end

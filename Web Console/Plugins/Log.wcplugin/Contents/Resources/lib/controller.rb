@@ -6,6 +6,10 @@ module WebConsole::Log
     MESSAGE_PREFIX = WebConsole::Logger::MESSAGE_PREFIX
     ERROR_PREFIX = WebConsole::Logger::ERROR_PREFIX
 
+    def initialize
+      @view = View.new
+    end
+
     def parse_input(input)
       message = input.dup
 
@@ -19,13 +23,6 @@ module WebConsole::Log
         view.log_error(message)
       end
 
-    end
-
-    def view
-      if !@view
-        @view = View.new
-      end
-      return @view
     end
 
   end
