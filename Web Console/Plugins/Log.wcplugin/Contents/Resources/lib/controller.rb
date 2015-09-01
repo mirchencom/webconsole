@@ -12,9 +12,7 @@ module WebConsole::Log
 
     def parse_input(input)
       message = input.dup
-
       message.sub!(/^\s*$\n/, '') # Don't process blank lines
-
       if message =~ /^#{MESSAGE_PREFIX}/
         message[MESSAGE_PREFIX] = ''
         view.log_message(message)
