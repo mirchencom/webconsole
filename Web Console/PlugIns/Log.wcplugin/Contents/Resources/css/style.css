@@ -1,7 +1,11 @@
 body {
 	font-family: "Menlo", monospace;
 }
-li {
-	list-style: none;
-	white-space: pre-wrap;
+
+p {
+  margin-bottom: 0;
+}
+
+p.message {
+  color: red;
 }
