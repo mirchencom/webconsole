@@ -30,6 +30,13 @@
     NSDictionary *userDefaultsDictionary = [NSDictionary dictionaryWithContentsOfURL:userDefaultsURL];
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDictionary];
     [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:userDefaultsDictionary];
+
+    // TODO: This disables caching application wide. It would be nice to replace
+    // this with a more granular approach.
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:0
+                                                         diskCapacity:0
+                                                             diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
 }
 
 
