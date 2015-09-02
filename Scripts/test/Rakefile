@@ -56,7 +56,10 @@ namespace :plugins do
   html_test_rakefile = File.join(PLUGIN_PATH, "HTML.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
   load html_test_rakefile
 
-  task :tests => [:test_search, :test_irb, :test_coffee, :test_node, :test_markdown, :test_html]
+  log_test_rakefile = File.join(PLUGIN_PATH, "Log.wcplugin", PLUGIN_RESOURCES_PATH_COMPONENT, "test", "Rakefile")
+  load log_test_rakefile
+
+  task :tests => [:test_search, :test_irb, :test_coffee, :test_node, :test_markdown, :test_html, :test_log]
 
   task :test_search => ['search:tests']
 
@@ -69,6 +72,8 @@ namespace :plugins do
   task :test_markdown => ['markdown:tests']
 
   task :test_html => ['html:tests']
+
+  task :test_log => ['log:tests']
 end
 
 namespace :xcunit do
