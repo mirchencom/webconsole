@@ -74,8 +74,13 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         return defaultWebViewController.doJavaScript(javaScript)
     }
     
-    func loadHTML(HTML: String, baseURL: NSURL?, completionHandler:((Bool) -> Void)?) {
-        defaultWebViewController.loadHTML(HTML, baseURL: baseURL, completionHandler: completionHandler)
+    func loadHTML(HTML: String,
+        baseURL: NSURL?,
+        completionHandler:((Bool) -> Void)?)
+    {
+        defaultWebViewController.loadHTML(HTML,
+            baseURL: baseURL,
+            completionHandler: completionHandler)
     }
     
     func readFromStandardInput(text: String) {
@@ -91,7 +96,6 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             withArguments: arguments,
             inDirectoryPath: directoryPath,
             completionHandler: completionHandler)
-
     }
     
     // MARK: Tasks
