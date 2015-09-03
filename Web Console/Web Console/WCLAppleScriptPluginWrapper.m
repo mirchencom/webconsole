@@ -9,6 +9,7 @@
 #import "WCLAppleScriptPluginWrapper.h"
 
 #import "Web_Console-Swift.h"
+#import "WCLPluginView.h"
 
 @interface WCLAppleScriptPluginWrapper ()
 @property (nonatomic, readonly, strong) Plugin *plugin;
@@ -41,22 +42,6 @@
 - (NSArray *)orderedWindows
 {
     return [self.plugin orderedWindows];
-}
-
-- (void)handleRunScriptCommand:(NSScriptCommand *)command
-{
-    NSDictionary *argumentsDictionary = [command evaluatedArguments];
-    NSArray *arguments = [argumentsDictionary objectForKey:kArgumentsKey];
-    
-    NSURL *directoryURL = [argumentsDictionary objectForKey:kDirectoryKey];
-    
-    // TODO: Return an error if the plugin doesn't exist
-    // TODO: Return an error if the directory doesn't exist
-    
-    [command suspendExecution];
-    [self.plugin runWithArguments:arguments inDirectoryPath:[directoryURL path] completion:^(id<WCLPluginView> __nullable pluginView) {
-        [command resumeExecutionWithResult:pluginView];
-    }];
 }
 
 - (NSScriptObjectSpecifier *)objectSpecifier

@@ -14,6 +14,5 @@
 #import "WCLFileExtensionsController.h"
 #import "WCLSplitWebWindowsController.h"
 #import "WCLSplitWebWindowController.h"
-#import "WCLPluginTask.h"
 #import "WCLWebViewController.h"
 #import "NSWindow+AppleScript.h"

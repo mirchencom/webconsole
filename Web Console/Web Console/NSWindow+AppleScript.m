@@ -13,8 +13,7 @@
 
 - (NSArray *)views
 {
-    WCLSplitWebWindowController *splitWebViewController = (WCLSplitWebWindowController *)self.windowController;
-    return splitWebViewController.webViewControllers;
+    return [self.splitWebWindowController webViewControllers];
 }
 
 #pragma mark - WCLPluginView
@@ -23,20 +22,35 @@
          baseURL:(nullable NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
-    WCLSplitWebWindowController *splitWebWindowController = (WCLSplitWebWindowController *)self.windowController;
-    return [splitWebWindowController loadHTML:HTML baseURL:baseURL completionHandler:completionHandler];
+    [self.splitWebWindowController loadHTML:HTML
+                                    baseURL:baseURL
+                          completionHandler:completionHandler];
 }
 
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript
 {
-    WCLSplitWebWindowController *splitWebWindowController = (WCLSplitWebWindowController *)self.windowController;
-    return [splitWebWindowController doJavaScript:javaScript];
+    return [self.splitWebWindowController doJavaScript:javaScript];
 }
 
 - (void)readFromStandardInput:(nonnull NSString *)text
 {
-    WCLSplitWebWindowController *splitWebWindowController = (WCLSplitWebWindowController *)self.windowController;
-    return [splitWebWindowController readFromStandardInput:text];
+    [self.splitWebWindowController readFromStandardInput:text];
+}
+
+- (void)runPlugin:(nonnull Plugin *)plugin
+    withArguments:(nullable NSArray *)arguments
+  inDirectoryPath:(nullable NSString *)directoryPath
+completionHandler:(nullable void (^)(BOOL))completionHandler
+{
+    [self.splitWebWindowController runPlugin:plugin
+                               withArguments:arguments
+                             inDirectoryPath:directoryPath
+                           completionHandler:completionHandler];
+}
+
+- (WCLSplitWebWindowController *)splitWebWindowController
+{
+    return (WCLSplitWebWindowController *)self.windowController;
 }
 
 @end

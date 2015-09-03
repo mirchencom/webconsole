@@ -21,7 +21,7 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
 
 @interface WCLSplitWebWindowController : NSWindowController
 @property (nonatomic, weak, nullable) id<WCLSplitWebWindowControllerDelegate> delegate;
-@property (nonatomic, strong, nullable) Plugin *plugin;
+@property (nonatomic, strong, readonly, nullable) Plugin *plugin;
 @property (nonnull, readonly) SplitWebViewController *splitWebViewController;
 #pragma mark - AppleScript
 - (void)loadHTML:(nonnull NSString *)HTML
@@ -29,9 +29,12 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
 - (void)readFromStandardInput:(nonnull NSString *)text;
+- (void)runPlugin:(nonnull Plugin *)plugin
+    withArguments:(nullable NSArray *)arguments
+  inDirectoryPath:(nullable NSString *)directoryPath
+completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (nonnull NSArray *)webViewControllers;
 #pragma mark - Tasks
-- (void)runTask:(nonnull NSTask *)task completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (BOOL)hasTasks;
 - (nonnull NSArray *)tasks;
 @end

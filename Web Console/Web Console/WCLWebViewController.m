@@ -18,6 +18,7 @@
 @property (nonatomic, strong) void (^storedCompletionHandler)(BOOL success);
 @property (nonatomic, strong) NSMutableDictionary *requestToCompletionHandlerDictionary;
 @property (nonatomic, strong) NSMutableArray *mutableTasks;
+@property (nonatomic, strong, readwrite, nullable) Plugin *plugin;
 @end
 
 @implementation WCLWebViewController
@@ -65,7 +66,7 @@
     return _identifier;
 }
 
-#pragma mark - AppleScript
+#pragma mark - WCLPluginView
 
 - (void)readFromStandardInput:(NSString *)text
 {
@@ -101,6 +102,24 @@
 
 - (NSString *)doJavaScript:(NSString *)javaScript {
     return [self.webView stringByEvaluatingJavaScriptFromString:javaScript];
+}
+
+- (void)runPlugin:(nonnull Plugin *)plugin
+    withArguments:(nullable NSArray *)arguments
+  inDirectoryPath:(nullable NSString *)directoryPath
+completionHandler:(nullable void (^)(BOOL success))completionHandler
+{
+    if (self.plugin) {
+        return;
+    }
+
+    self.plugin = plugin;
+
+    [WCLPluginTask runTaskWithCommandPath:plugin.commandPath
+                            withArguments:arguments
+                          inDirectoryPath:directoryPath
+                                 delegate:self
+                        completionHandler:completionHandler];
 }
 
 #pragma mark - WebResourceLoadDelegate

@@ -43,13 +43,6 @@
     return [self.mutableSplitWebWindowControllers copy];
 }
 
-- (WCLSplitWebWindowController *)addedSplitWebWindowControllerForPlugin:(Plugin *)plugin
-{
-    WCLSplitWebWindowController *splitWebWindowController = [self addedSplitWebWindowController];
-    splitWebWindowController.plugin = plugin;
-    return splitWebWindowController;
-}
-
 - (WCLSplitWebWindowController *)addedSplitWebWindowController
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
@@ -64,7 +57,7 @@
     return splitWebWindowController;
 }
 
-- (NSArray *)splitWebWindowControllersForPlugin:(WCLPlugin *)plugin
+- (NSArray *)splitWebWindowControllersForPlugin:(Plugin *)plugin
 {
     NSPredicate *pluginPredicate = [NSPredicate predicateWithFormat:@"(plugin = %@)", plugin];
     return [self.mutableSplitWebWindowControllers filteredArrayUsingPredicate:pluginPredicate];

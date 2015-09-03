@@ -41,12 +41,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     var plugin: Plugin? {
-        get {
-            return defaultWebViewController.plugin
-        }
-        set {
-            defaultWebViewController.plugin = newValue
-        }
+        return defaultWebViewController.plugin
     }
     
     var webViewControllers: [WCLWebViewController] {
@@ -87,13 +82,19 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         defaultWebViewController.readFromStandardInput(text)
     }
     
-    // MARK: Tasks
-    
-    func runTask(task: NSTask, completion: ((Bool) -> ())?) {
-        WCLPluginTask.runTask(task, delegate: defaultWebViewController) { success in
-            completion?(success)
-        }
+    func runPlugin(plugin: Plugin,
+        withArguments arguments: [AnyObject]?,
+        inDirectoryPath directoryPath: String?,
+        completionHandler:((Bool) -> Void)?)
+    {
+        defaultWebViewController.runPlugin(plugin,
+            withArguments: arguments,
+            inDirectoryPath: directoryPath,
+            completionHandler: completionHandler)
+
     }
+    
+    // MARK: Tasks
     
     func hasTasks() -> Bool {
         return tasks().count > 0

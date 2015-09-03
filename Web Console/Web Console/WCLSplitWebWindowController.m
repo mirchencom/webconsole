@@ -46,11 +46,6 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 #pragma mark - Properties
 
-- (void)setPlugin:(Plugin *)plugin
-{
-    self.splitWebViewController.plugin = plugin;
-}
-
 - (Plugin *)plugin
 {
     return self.splitWebViewController.plugin;
@@ -165,17 +160,23 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     return [self.splitWebViewController readFromStandardInput:text];
 }
 
+- (void)runPlugin:(nonnull Plugin *)plugin
+    withArguments:(nullable NSArray *)arguments
+  inDirectoryPath:(nullable NSString *)directoryPath
+completionHandler:(nullable void (^)(BOOL success))completionHandler
+{
+    [self.splitWebViewController runPlugin:plugin
+                             withArguments:arguments
+                           inDirectoryPath:directoryPath
+                         completionHandler:completionHandler];
+}
+
 - (nonnull NSArray *)webViewControllers
 {
     return self.splitWebViewController.webViewControllers;
 }
 
 #pragma mark - Tasks
-
-- (void)runTask:(nonnull NSTask *)task completionHandler:(nullable void (^)(BOOL success))completionHandler
-{
-    [self.splitWebViewController runTask:task completion:completionHandler];
-}
 
 - (NSArray *)tasks
 {

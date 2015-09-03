@@ -14,7 +14,6 @@
 @interface WCLSplitWebWindowsController : NSObject
 + (instancetype)sharedSplitWebWindowsController;
 - (WCLSplitWebWindowController *)addedSplitWebWindowController;
-- (WCLSplitWebWindowController *)addedSplitWebWindowControllerForPlugin:(Plugin *)plugin;
 - (NSArray *)splitWebWindowControllers;
 - (NSArray *)splitWebWindowControllersForPlugin:(Plugin *)plugin;
 - (NSArray *)windowsForPlugin:(Plugin *)plugin;

@@ -12,8 +12,25 @@
 
 @implementation WCLPluginTask
 
-+ (void)runTask:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate completionHandler:(void (^)(BOOL success))completionHandler;
++ (void)runTaskWithCommandPath:(NSString *)commandPath
+                 withArguments:(NSArray *)arguments
+               inDirectoryPath:(NSString *)directoryPath
+                      delegate:(id<WCLPluginTaskDelegate>)delegate
+             completionHandler:(void (^)(BOOL success))completionHandler
 {
+    DLog(@"runCommandPath:%@ withArguments:%@ inDirectoryPath:%@", commandPath, arguments, directoryPath);
+    
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = commandPath;
+    
+    if (arguments) {
+        task.arguments = arguments;
+    }
+    
+    if (directoryPath) {
+        task.currentDirectoryPath = directoryPath;
+    }
+
     // Standard Output
     task.standardOutput = [NSPipe pipe];
     [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {

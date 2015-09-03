@@ -12,11 +12,15 @@
 
 @protocol WCLPluginTaskDelegate <NSObject>
 @optional
-- (void)pluginTaskWillStart:(NSTask *)task;
-- (void)pluginTaskDidFinish:(NSTask *)task;
-- (NSDictionary *)environmentDictionaryForPluginTask:(NSTask *)task;
+- (void)pluginTaskWillStart:(nonnull NSTask *)task;
+- (void)pluginTaskDidFinish:(nonnull NSTask *)task;
+- (nullable NSDictionary *)environmentDictionaryForPluginTask:(nonnull NSTask *)task;
 @end
 
 @interface WCLPluginTask : NSObject
-+ (void)runTask:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate completionHandler:(void (^)(BOOL success))completionHandler;
++ (void)runTaskWithCommandPath:(nonnull NSString *)commandPath
+                 withArguments:(nullable NSArray *)arguments
+               inDirectoryPath:(nullable NSString *)directoryPath
+                      delegate:(nullable id<WCLPluginTaskDelegate>)delegate
+             completionHandler:(nullable void (^)(BOOL success))completionHandler;
 @end

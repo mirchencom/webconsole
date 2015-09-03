@@ -259,9 +259,6 @@
             <element type="window" access="r">
 				<cocoa key="orderedWindows"/>
 			</element>
-            <responds-to command="run">
-                <cocoa method="handleRunScriptCommand:"/>
-            </responds-to>
 		</class>
         
         <class-extension extends="window">
@@ -286,15 +283,15 @@
 		
         <command name="load HTML" code="LOADHTML" description="Loads a string of HTML in a window or split.">
             <cocoa class="WCLLoadHTMLScriptCommand"/>
-            <direct-parameter type="text" description="The HTML to load." />
+            <direct-parameter type="text" description="The HTML to load."/>
 			<parameter name="in" description="The window or split to load the HTML in." code="WEBV" optional="yes">
-				<cocoa key="Target" />
-				<type type="window" />
-				<type type="split" />
+				<cocoa key="Target"/>
+				<type type="window"/>
+				<type type="split"/>
 			</parameter>
 			<parameter name="with base URL" description="The base URL to load resources from." code="BURL" optional="yes">
-				<cocoa key="BaseURL" />
-				<type type="text" />
+				<cocoa key="BaseURL"/>
+				<type type="text"/>
 			</parameter>
 			<result description="The window or split the HTML was loaded in.">
 				<type type="window"/>
@@ -304,11 +301,11 @@
 
         <command name="do JavaScript" code="DOJAVSCR" description="Runs JavaScript in a window or split.">
             <cocoa class="WCLDoJavaScriptCommand"/>
-            <direct-parameter type="text" description="The JavaScript to run." />
+            <direct-parameter type="text" description="The JavaScript to run."/>
 			<parameter name="in" description="The window or split to run the JavaScript in." code="WEBV">
-				<cocoa key="Target" />
-				<type type="window" />
-				<type type="split" />
+				<cocoa key="Target"/>
+				<type type="window"/>
+				<type type="split"/>
 			</parameter>
             <result>
 				<type type="any"/>
@@ -319,9 +316,13 @@
 		</command>
 
         <command name="run" code="RUNAPLUG" description="Run a plugin.">
-			<direct-parameter description="The plugin to run.">
-				<type type="plugin"/>
-			</direct-parameter>
+            <cocoa class="WCLRunPluginScriptCommand"/>
+			<direct-parameter type="plugin" description="The plugin to run."/>
+            <parameter name="in" code="WEBV" description="The window or split to run the plugin in." optional="yes">
+				<cocoa key="Target"/>
+				<type type="window"/>
+				<type type="split"/>
+			</parameter>
             <parameter name="with arguments" code="AGMT" description="The arguments to pass to the plugin." optional="yes">
 				<cocoa key="Arguments"/>
 				<type type="text" list="yes"/>
@@ -338,17 +339,17 @@
 
         <command name="read from standard input" code="READSTIN" description="Read text from standard input.">
             <cocoa class="WCLReadFromStandardInputCommand"/>
-            <direct-parameter type="text" description="The text to read from standard input." />
+            <direct-parameter type="text" description="The text to read from standard input."/>
 			<parameter name="in" description="The window or split to read the text from standard input in." code="WEBV">
-				<cocoa key="Target" />
-				<type type="window" />
-				<type type="split" />
+				<cocoa key="Target"/>
+				<type type="window"/>
+				<type type="split"/>
 			</parameter>
         </command>
 
         <command name="load plugin" code="LOADPLUG" description="Load a plugin from a file.">
-            <direct-parameter type="file" description="The plugin file to load." />
-            <result type="plugin" description="The loaded plugin." />
+            <direct-parameter type="file" description="The plugin file to load."/>
+            <result type="plugin" description="The loaded plugin."/>
 		</command>        
     </suite>
 </dictionary>

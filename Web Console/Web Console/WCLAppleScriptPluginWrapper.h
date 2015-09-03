@@ -16,5 +16,4 @@
 - (NSString *)resourcePath;
 - (NSString *)resourceURLString;
 - (NSArray *)orderedWindows;
-- (void)handleRunScriptCommand:(NSScriptCommand *)command;
 @end
