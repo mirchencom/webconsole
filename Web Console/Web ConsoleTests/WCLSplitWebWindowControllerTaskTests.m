@@ -220,7 +220,11 @@
 {
     WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestTestEnvironmentPluginName];
-    [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:nil];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Running task"];
+    [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:^(BOOL success) {
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:kTestTimeoutInterval handler:nil];
     
     NSAssert([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should have an NSTask.");
     NSTask *task = splitWebWindowController.tasks[0];
