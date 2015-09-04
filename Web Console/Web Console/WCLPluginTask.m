@@ -81,7 +81,9 @@
         }
         [task launch];
         
-        completionHandler(YES);
+        if (completionHandler) {
+            completionHandler(YES);
+        }
     });
 }
 

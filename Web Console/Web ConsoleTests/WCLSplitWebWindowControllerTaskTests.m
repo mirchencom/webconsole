@@ -28,18 +28,14 @@
 
 #pragma mark - Run Plugin
 
-- (void)testPlugin
+- (void)testRunPlugin
 {
-    NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
-                                               ofType:kTestDataRubyExtension
-                                         subdirectory:kTestDataSubdirectory];
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:nil];
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestHelloWorldPluginName];
+    [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:nil];
     
     NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
     XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
-    WCLSplitWebWindowController *splitWebWindowController = splitWebWindowControllers[0];
-    
     XCTAssertEqual(splitWebWindowController.plugin, plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
     
     // Clean up
@@ -222,18 +218,12 @@
 
 - (void)testPluginTaskEnvironmentDictionary
 {
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestTestEnvironmentPluginName];
+    [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:nil];
     
-    [plugin runWithArguments:nil inDirectoryPath:nil completion:nil];
-
-    NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
-    NSAssert([splitWebWindowControllers count], @"The WCLPlugin should have a WCLSplitWebWindowController.");
-    WCLSplitWebWindowController *splitWebWindowController = splitWebWindowControllers[0];
     NSAssert([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should have an NSTask.");
-
-
     NSTask *task = splitWebWindowController.tasks[0];
-
     [WCLTaskTestsHelper blockUntilTasksRunAndFinish:@[task]];
 
     NSTaskTerminationReason terminationReason = [task terminationReason];

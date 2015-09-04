@@ -11,7 +11,7 @@
 #import "WCLSplitWebWindowControllerTestsHelper.h"
 #import "WCLTaskTestsHelper.h"
 #import "Web_Console-Swift.h"
-
+#import "WCLPluginTask.h"
 #import "WCLWebViewController.h"
 
 #pragma mark - DefaultWebView
@@ -25,13 +25,15 @@
 @end
 
 @implementation WCLSplitWebWindowController (DefaultWebView)
-
 - (WebView *)defaultWebView
 {
     SplitWebViewController *splitWebViewController = (SplitWebViewController *)self.contentViewController;
     return splitWebViewController.defaultWebViewController.webView;
 }
+@end
 
+@interface WCLWebViewController (Plugin)
+@property (nonatomic, strong, readwrite, nullable) Plugin *plugin;
 @end
 
 
@@ -68,26 +70,22 @@
 
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
 {
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+    WCLWebViewController *webViewController = splitWebWindowController.splitWebViewController.defaultWebViewController;
 
-    __block WCLSplitWebWindowController *splitWebWindowController;
-    
     XCTestExpectation *expectation = [self expectationWithDescription:@"Running task"];
-
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:^(id<WCLPluginView> __nullable pluginView) {
-        XCTAssertTrue([pluginView isKindOfClass:[NSWindow class]], @"The class should be an NSWindow.");
-        NSWindow *window = (NSWindow *)pluginView;
-        NSWindowController *windowController = window.windowController;
-        XCTAssertTrue([windowController isKindOfClass:[WCLSplitWebWindowController class]], @"The class should be a WCLSplitWebWindowController.");
-        splitWebWindowController = (WCLSplitWebWindowController *)windowController;
+    [WCLPluginTask runTaskWithCommandPath:commandPath
+                            withArguments:nil
+                          inDirectoryPath:nil
+                                 delegate:webViewController
+                        completionHandler:^(BOOL success)
+    {
+        XCTAssertTrue(success, @"Running the NSTask should succeed.");
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:kTestTimeoutInterval handler:nil];
 
-    XCTAssertNotNil(splitWebWindowController, @"The WCLSplitWebWindowController should not be nil.");
-
     NSAssert([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should have an NSTask.");
-    
     if (task) {
         *task = splitWebWindowController.tasks[0];
     }
@@ -129,19 +127,14 @@
 
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin
 {
-    NSArray *originalWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
-    
     // Run a simple command to get the window to display
     NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:nil];
+    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath];
+    WCLWebViewController *webViewController = splitWebWindowController.splitWebViewController.defaultWebViewController;
+    webViewController.plugin = plugin;
     
-    NSMutableArray *splitWebWindowControllers = [[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin] mutableCopy];
-    [splitWebWindowControllers removeObjectsInArray:originalWebWindowControllers];
-    
-    NSAssert([splitWebWindowControllers count] == (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
-    WCLSplitWebWindowController *splitWebWindowController = splitWebWindowControllers[0];
     NSAssert(splitWebWindowController.plugin == plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
     
     return splitWebWindowController;

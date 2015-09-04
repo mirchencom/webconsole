@@ -152,16 +152,16 @@
 
 - (void)testOrderedWindows
 {
-    NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
-                                               ofType:kTestDataRubyExtension
-                                         subdirectory:kTestDataSubdirectory];
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:nil];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestHelloWorldPluginName];
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+    [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:nil];
+    
     NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
     XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WCLSplitWebWindowController.");
     WCLSplitWebWindowController *firstWebWindowController = splitWebWindowControllers[0];
     
-    [plugin runCommandPath:commandPath withArguments:nil inDirectoryPath:nil completion:nil];
+    splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+    [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:nil];
     splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
     XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)2, @"The WCLPlugin should have two WCLSplitWebWindowControllers.");
     WCLSplitWebWindowController *secondWebWindowController = splitWebWindowControllers[1];
@@ -185,10 +185,7 @@
     XCTAssert(orderMatches, @"The order of the NSWindows returned by the WCLPlugin should match the order returned by the NSApplication.");
     
     // Clean up
-    NSArray *tasks = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] tasks];
-    XCTAssertEqual([tasks count], (NSUInteger)2, @"There should be two NSTasks.");
-    
-    [WCLTaskTestsHelper blockUntilTasksRunAndFinish:tasks];
+    [[self class] blockUntilAllTasksRunAndFinish];
 }
 
 @end
