@@ -65,26 +65,40 @@
 
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
 {
-    return [self splitWebWindowControllerRunningCommandPath:commandPath task:nil];
+    return [self splitWebWindowControllerRunningCommandPath:commandPath plugin:nil task:nil];
+}
+
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath plugin:(Plugin *)plugin
+{
+    return [self splitWebWindowControllerRunningCommandPath:commandPath plugin:plugin task:nil];
 }
 
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task
 {
+    return [self splitWebWindowControllerRunningCommandPath:commandPath plugin:nil task:task];
+}
+
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
+                                                                     plugin:(Plugin *)plugin
+                                                                       task:(NSTask **)task
+{
     WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     WCLWebViewController *webViewController = splitWebWindowController.splitWebViewController.defaultWebViewController;
-
+    webViewController.plugin = plugin;
+    NSAssert(splitWebWindowController.plugin == plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
+    
     XCTestExpectation *expectation = [self expectationWithDescription:@"Running task"];
     [WCLPluginTask runTaskWithCommandPath:commandPath
                             withArguments:nil
                           inDirectoryPath:nil
                                  delegate:webViewController
                         completionHandler:^(BOOL success)
-    {
-        XCTAssertTrue(success, @"Running the NSTask should succeed.");
-        [expectation fulfill];
-    }];
+     {
+         XCTAssertTrue(success, @"Running the NSTask should succeed.");
+         [expectation fulfill];
+     }];
     [self waitForExpectationsWithTimeout:kTestTimeoutInterval handler:nil];
-
+    
     NSAssert([splitWebWindowController hasTasks], @"The WCLSplitWebWindowController should have an NSTask.");
     if (task) {
         *task = splitWebWindowController.tasks[0];
@@ -92,6 +106,8 @@
     
     return splitWebWindowController;
 }
+
+
 
 + (Plugin *)defaultPlugin
 {
@@ -131,13 +147,7 @@
     NSString *commandPath = [self wcl_pathForResource:kTestDataRubyHelloWorld
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
-    WCLSplitWebWindowController *splitWebWindowController = [self splitWebWindowControllerRunningCommandPath:commandPath];
-    WCLWebViewController *webViewController = splitWebWindowController.splitWebViewController.defaultWebViewController;
-    webViewController.plugin = plugin;
-    
-    NSAssert(splitWebWindowController.plugin == plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
-    
-    return splitWebWindowController;
+    return [self splitWebWindowControllerRunningCommandPath:commandPath plugin:plugin];
 }
 
 
