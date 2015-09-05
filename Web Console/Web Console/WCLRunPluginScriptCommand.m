@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Roben Kleene. All rights reserved.
 //
 
-#import "WCLRunPluginCommand.h"
+#import "WCLRunPluginScriptCommand.h"
 
 #import "Web_Console-Swift.h"
 
-@implementation WCLRunPluginCommand
+@implementation WCLRunPluginScriptCommand
 
 - (id)performDefaultImplementation {
     

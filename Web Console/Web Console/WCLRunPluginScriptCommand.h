@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WCLRunPluginCommand : NSScriptCommand
+@interface WCLRunPluginScriptCommand : NSScriptCommand
 
 @end

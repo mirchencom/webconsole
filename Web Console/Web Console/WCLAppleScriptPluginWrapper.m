@@ -44,6 +44,35 @@
     return [self.plugin orderedWindows];
 }
 
+- (id)handleRunScriptCommand:(NSScriptCommand *)command
+{
+    NSDictionary *argumentsDictionary = [command evaluatedArguments];
+    
+    // Get the pluginView or make a new window if no target is specified
+    id<WCLPluginView> pluginView = [argumentsDictionary objectForKey:kAppleScriptTargetKey];
+    if (!pluginView) {
+        WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+        pluginView = splitWebWindowController.window;
+    }
+    
+    NSArray *arguments = [argumentsDictionary objectForKey:kArgumentsKey];
+    NSURL *directoryURL = [argumentsDictionary objectForKey:kDirectoryKey];
+    
+    // TODO: Return an error if the plugin doesn't exist
+    // TODO: Return an error if the directory doesn't exist
+    
+    [command suspendExecution];
+    [pluginView runPlugin:self.plugin
+            withArguments:arguments
+          inDirectoryPath:[directoryURL path]
+        completionHandler:^(BOOL success)
+     {
+         [command resumeExecutionWithResult:pluginView];
+     }];
+    
+    return nil;
+}
+
 - (NSScriptObjectSpecifier *)objectSpecifier
 {
     NSScriptClassDescription *containerClassDescription = (NSScriptClassDescription *)[NSScriptClassDescription classDescriptionForClass:[NSApp class]];

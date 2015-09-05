@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WCLReadFromStandardInputCommand : NSScriptCommand
+@interface WCLReadFromStandardInputScriptCommand : NSScriptCommand
 
 @end

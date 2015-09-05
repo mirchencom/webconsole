@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Roben Kleene. All rights reserved.
 //
 
-#import "WCLReadFromStandardInputCommand.h"
+#import "WCLReadFromStandardInputScriptCommand.h"
 
 #import "WCLPluginView.h"
 
-@implementation WCLReadFromStandardInputCommand
+@implementation WCLReadFromStandardInputScriptCommand
 
 - (id)performDefaultImplementation {
     

@@ -259,12 +259,15 @@
             <element type="window" access="r">
 				<cocoa key="orderedWindows"/>
 			</element>
+            <responds-to command="run">
+                <cocoa method="handleRunScriptCommand:"/>
+            </responds-to>
 		</class>
         
         <class-extension extends="window">
             <cocoa class="NSWindow"/>
 			<element type="split">
-				<cocoa key="splits"/>
+				<cocoa key="views"/>
 			</element>
 		</class-extension>
 		
@@ -316,7 +319,6 @@
 		</command>
 
         <command name="run" code="RUNAPLUG" description="Run a plugin.">
-            <cocoa class="WCLRunPluginScriptCommand"/>
 			<direct-parameter type="plugin" description="The plugin to run."/>
             <parameter name="in" code="WEBV" description="The window or split to run the plugin in." optional="yes">
 				<cocoa key="Target"/>
@@ -338,7 +340,7 @@
         </command>
 
         <command name="read from standard input" code="READSTIN" description="Read text from standard input.">
-            <cocoa class="WCLReadFromStandardInputCommand"/>
+            <cocoa class="WCLReadFromStandardInputScriptCommand"/>
             <direct-parameter type="text" description="The text to read from standard input."/>
 			<parameter name="in" description="The window or split to read the text from standard input in." code="WEBV">
 				<cocoa key="Target"/>
