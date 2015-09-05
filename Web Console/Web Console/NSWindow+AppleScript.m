@@ -8,10 +8,11 @@
 
 #import "NSWindow+AppleScript.h"
 #import "WCLSplitWebWindowController.h"
+#import "WCLSplitWebWindowsController.h"
 
 @implementation NSWindow (AppleScript)
 
-- (NSArray *)views
+- (NSArray *)splits
 {
     return [self.splitWebWindowController webViewControllers];
 }

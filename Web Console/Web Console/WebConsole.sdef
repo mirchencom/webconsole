@@ -243,6 +243,9 @@
             <responds-to command="load plugin">
                 <cocoa method="handleLoadPluginScriptCommand:"/>
             </responds-to>
+            <responds-to command="create window">
+                <cocoa method="handleCreateWindowScriptCommand:"/>
+            </responds-to>
 		</class>
 
         <class name="plugin" code="PLGN" description="A Web Console plugin.">
@@ -266,8 +269,8 @@
         
         <class-extension extends="window">
             <cocoa class="NSWindow"/>
-			<element type="split">
-				<cocoa key="views"/>
+			<element type="split" access="r">
+				<cocoa key="splits"/>
 			</element>
 		</class-extension>
 		
@@ -352,6 +355,11 @@
         <command name="load plugin" code="LOADPLUG" description="Load a plugin from a file.">
             <direct-parameter type="file" description="The plugin file to load."/>
             <result type="plugin" description="The loaded plugin."/>
+		</command>
+
+        <command name="create window" code="CREATWIN" description="Create a new window.">
+            <result type="window" description="The new window."/>
 		</command>        
+
     </suite>
 </dictionary>

@@ -36,4 +36,11 @@
     return [[WCLAppleScriptPluginWrapper alloc] initWithPlugin:plugin];
 }
 
+- (id)handleCreateWindowScriptCommand:(NSScriptCommand *)command
+{
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+    [splitWebWindowController showWindow:nil];
+    return splitWebWindowController.window;
+}
+
 @end
