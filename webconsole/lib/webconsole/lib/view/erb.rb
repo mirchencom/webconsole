@@ -1,5 +1,5 @@
 module WebConsole
-  class View
+  class View < Window
 
     require 'erb'
 

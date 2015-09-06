@@ -1,5 +1,5 @@
 module WebConsole
-  class View
+  class View < Window
 
     def do_javascript_function(function, arguments = nil)
       javascript = self.class.javascript_function(function, arguments)
