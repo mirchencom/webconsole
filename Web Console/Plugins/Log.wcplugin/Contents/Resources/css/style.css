@@ -6,6 +6,6 @@ p {
   margin-bottom: 0;
 }
 
-p.message {
+p.error {
   color: red;
 }
