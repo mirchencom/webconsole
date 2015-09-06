@@ -39,19 +39,17 @@ module WebConsole
         arguments.push(@base_url)
       end
 
-      arguments.push(window_id)
-
-      WebConsole::run_applescript(script, arguments)
+      return run_script(script, arguments)
     end
 
     DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "do_javascript.scpt")
     def do_javascript(javascript)
-      WebConsole::run_applescript(DOJAVASCRIPT_SCRIPT, [javascript, window_id])
+      return run_script(DOJAVASCRIPT_SCRIPT, [javascript])
     end
 
     READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "read_from_standard_input.scpt")
     def read_from_standard_input(text)
-      WebConsole::run_applescript(READ_FROM_STANDARD_INPUT_SCRIPT, [text, window_id])
+      run_script(READ_FROM_STANDARD_INPUT_SCRIPT, [text])
     end
 
     # Window
@@ -60,8 +58,6 @@ module WebConsole
     def close
       WebConsole::run_applescript(CLOSEWINDOW_SCRIPT, [window_id])
     end
-
-    # Splits
 
     SPLIT_ID_IN_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "split_id_in_window.scpt")
     def split_id(pluginName = nil)
@@ -75,6 +71,19 @@ module WebConsole
       result.chomp!
       return result
     end
+
+    private
+
+    def run_script(script, arguments = [])
+      arguments = arguments_with_target(arguments)
+      return WebConsole::run_applescript(CLOSEWINDOW_SCRIPT, arguments)
+    end
+
+    def arguments_with_target(arguments)
+      arguments.push(window_id)
+      return arguments
+    end
+
 
   end
 end
