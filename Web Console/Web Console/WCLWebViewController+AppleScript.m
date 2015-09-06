@@ -31,7 +31,7 @@
 
     return [[NSUniqueIDSpecifier alloc] initWithContainerClassDescription:containerClassDescription
                                                        containerSpecifier:[containerWindow objectSpecifier]
-                                                                      key:@"views"
+                                                                      key:@"splits"
                                                                  uniqueID:self.identifier];
 }
 
