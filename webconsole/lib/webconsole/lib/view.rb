@@ -24,7 +24,7 @@ module WebConsole
     # Web
 
     def arguments_with_target(arguments)
-      arguments = super.arugments_with_target
+      arguments = super(arguments)
       arguments.push(view_id)
       return arguments
     end
