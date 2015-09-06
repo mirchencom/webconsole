@@ -48,6 +48,13 @@ module WebConsole
     return result
   end
 
+  CREATE_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "create_window.scpt")
+  def self.create_window
+    result = self.run_applescript(CREATE_WINDOW_SCRIPT)
+    result.chomp!
+    return result
+  end
+
   # Shared Resources
 
   RESOURCE_PATH_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_path_for_plugin.scpt")
