@@ -76,7 +76,7 @@ module WebConsole
 
     def run_script(script, arguments = [])
       arguments = arguments_with_target(arguments)
-      return WebConsole::run_applescript(CLOSEWINDOW_SCRIPT, arguments)
+      return WebConsole::run_applescript(script, arguments)
     end
 
     def arguments_with_target(arguments)
