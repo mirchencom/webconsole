@@ -71,7 +71,7 @@ module WebConsole
         arguments.push(pluginName)
       end
 
-      result = self.run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, [arguments])
+      result = WebConsole::run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
       result.chomp!
       return result
     end

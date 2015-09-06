@@ -10,8 +10,8 @@ module WebConsole
 
     def view_id
       if !@view_id
-        if ENV.has_key?(VIEW_ID_KEY)
-          @view_id = ENV[VIEW_ID_KEY]
+        if ENV.has_key?(SPLIT_ID_KEY)
+          @view_id = ENV[SPLIT_ID_KEY]
         else
           @view_id = split_id
         end
