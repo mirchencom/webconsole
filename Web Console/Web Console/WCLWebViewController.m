@@ -110,6 +110,7 @@
 completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
     if (self.plugin) {
+        completionHandler(NO);
         return;
     }
 
