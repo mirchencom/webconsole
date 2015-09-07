@@ -135,6 +135,10 @@ module WebConsole
         end
       }
     end
-    return `#{command}`
+    result = `#{command}`
+    if result.chomp.empty?
+      return nil
+    end
+    return result
   end
 end
