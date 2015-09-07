@@ -32,7 +32,7 @@ class TestView < Test::Unit::TestCase
     test_class = @test_helper.last_log_class()
     assert_equal("error", test_class, "The classes should match")
 
-    # Test Warning
+    # Test Message
     message = "Testing log message"
     @view.log_message(message)
     test_message = @test_helper.last_log_message()

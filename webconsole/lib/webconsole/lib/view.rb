@@ -7,6 +7,10 @@ module WebConsole
   class View < Window
 
     # Properties
+    def initialize(window_id = nil, view_id = nil)
+      super(window_id)
+      @view_id = view_id
+    end
 
     def view_id
       if !@view_id

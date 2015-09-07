@@ -3,8 +3,10 @@
 require "test/unit"
 
 require_relative "../lib/webconsole"
+require_relative "lib/test_view_helper"
+require_relative "lib/test_javascript_constants"
 
-class TestLogger < Test::Unit::TestCase
+class TestConstants < Test::Unit::TestCase
 
   def test_constants
     message_prefix = WebConsole::Logger::MESSAGE_PREFIX
@@ -13,4 +15,53 @@ class TestLogger < Test::Unit::TestCase
     assert_not_nil(message_prefix, "The error prefix should not be nil.")
   end
 
+end
+
+
+class TestUnintializedLogger < Test::Unit::TestCase
+
+  def test_logger
+    logger = WebConsole::Logger.new
+    
+
+    # Test Message
+    message = "Testing log message"
+    logger.info(message)
+
+    # Make sure the log messages before accessing the logger's `view_id` and `window_id` because those run the logger.
+    # This test should test logging a message and running the logger itself simultaneously.
+    # This is why the `LoggerViewHelper` is intialized after logging the message.
+    logger_view_helper = LoggerViewHelper.new(logger.window_id, logger.view_id)
+
+    test_message = logger_view_helper.last_log_message
+    assert_equal(message, test_message, "The messages should match")
+    test_class = logger_view_helper.last_log_class
+    assert_equal("message", test_class, "The classes should match")
+    
+  end
+  
+
+end
+
+
+class TestLogger < Test::Unit::TestCase
+
+  def test_logger
+  end
+
+  # TODO Test multi-line input
+
+end
+
+# Helper
+
+class LoggerViewHelper < TestViewHelper
+  
+  def last_log_message
+    do_javascript(TEST_MESSAGE_JAVASCRIPT)
+  end
+  
+  def last_log_class
+    do_javascript(TEST_CLASS_JAVASCRIPT)
+  end
 end

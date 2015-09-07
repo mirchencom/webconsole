@@ -29,6 +29,14 @@ module WebConsole
     result.chomp!
     return result
   end
+  
+  RUN_PLUGIN_IN_SPLIT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run_plugin_in_split.scpt")
+  def self.run_plugin_in_split(window_id, split_id)
+    parameters = [window_id, split_id]
+    result = self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
+    result.chomp!
+    return result
+  end
 
   PLUGIN_HAS_WINDOWS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_has_windows.scpt")
   def self.plugin_has_windows(name)
@@ -57,6 +65,14 @@ module WebConsole
     end
 
     result = self.run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
+    result.chomp!
+    return result
+  end
+
+  SPLIT_ID_IN_WINDOW_LAST_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "split_id_in_window_last.scpt")
+  def self.split_id_in_window_last(window_id)
+    arguments = [window_id]
+    result = self.run_applescript(SPLIT_ID_IN_WINDOW_LAST_SCRIPT, arguments)
     result.chomp!
     return result
   end
