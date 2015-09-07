@@ -31,11 +31,15 @@ module WebConsole
   
     def view_id
       if !@view_id
+        # First see if there's an existing log plugin
         @view_id = WebConsole::split_id_in_window(window_id, LOG_PLUGIN_NAME)
-      end
-      if !@view_id
-        @view_id = WebConsole::split_id_in_window_last(window_id)
-        WebConsole::run_plugin_in_split(LOG_PLUGIN_NAME, window_id, @view_id)
+
+        # If not, run one
+        if !@view_id
+          @view_id = WebConsole::split_id_in_window_last(window_id)
+          WebConsole::run_plugin_in_split(LOG_PLUGIN_NAME, window_id, @view_id)
+        end
+
       end
 
       return @view_id

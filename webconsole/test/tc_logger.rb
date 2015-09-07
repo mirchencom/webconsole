@@ -28,13 +28,11 @@ class TestUnintializedLogger < Test::Unit::TestCase
   def test_logger
     logger = WebConsole::Logger.new
     
-
     # Test Message
     message = "Testing log message\n"
     logger.info(message)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
     
-
     # Make sure the log messages before accessing the logger's `view_id` and `window_id` because those run the logger.
     # This test should test logging a message and running the logger itself simultaneously.
     # This is why the `LoggerViewHelper` is intialized after logging the message.
