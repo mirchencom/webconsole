@@ -25,6 +25,12 @@ end
 
 class TestUnintializedLogger < Test::Unit::TestCase
 
+  def teardown
+    WebConsole::Tests::Helper::quit
+    WebConsole::Tests::Helper::confirm_dialog
+    assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
+  end
+  
   def test_logger
     logger = WebConsole::Logger.new
     
@@ -63,10 +69,10 @@ end
 class LoggerViewHelper < TestViewHelper
   
   def last_log_message
-    do_javascript(TEST_MESSAGE_JAVASCRIPT)
+    return do_javascript(TEST_MESSAGE_JAVASCRIPT)
   end
   
   def last_log_class
-    do_javascript(TEST_CLASS_JAVASCRIPT)
+    return do_javascript(TEST_CLASS_JAVASCRIPT).chomp
   end
 end

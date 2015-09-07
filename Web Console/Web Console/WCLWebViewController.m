@@ -263,6 +263,8 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     if (pluginName) {
         environmentDictionary[kEnvironmentVariablePluginNameKey] = pluginName;
     }
+
+    environmentDictionary[kEnvironmentVariableSplitIDKey] = self.identifier;
     
     NSWindow *window = [self.delegate windowForWebViewController:self];
     if (window) {

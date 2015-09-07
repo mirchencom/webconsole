@@ -9,11 +9,13 @@ module WebConsole
     LOG_PLUGIN_NAME = 'Log'
 
     def info(message)
+      message = message.dup
       message.gsub!(%r{^}, MESSAGE_PREFIX)
       log_message(message)
     end
 
     def error(message)
+      message = message.dup
       message.gsub!(%r{^}, ERROR_PREFIX)
       log_message(message)
     end

@@ -45,6 +45,7 @@
 
 #define kEnvironmentDictionaryKey @"environmentDictionary"
 #define kEnvironmentVariableWindowIDKey @"WC_WINDOW_ID"
+#define kEnvironmentVariableSplitIDKey @"WC_SPLIT_ID"
 #define kEnvironmentVariablePluginNameKey @"WC_PLUGIN_NAME"
 #define kEnvironmentVariableSharedResourcesPathKey @"WC_SHARED_RESOURCES_PATH"
 #define kEnvironmentVariableSharedResourcesURLKey @"WC_SHARED_RESOURCES_URL"
