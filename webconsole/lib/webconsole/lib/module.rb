@@ -48,6 +48,19 @@ module WebConsole
     return result
   end
 
+  SPLIT_ID_IN_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "split_id_in_window.scpt")
+  def self.split_id_in_window(window_id, pluginName = nil)
+    arguments = [window_id]
+
+    if pluginName
+      arguments.push(pluginName)
+    end
+
+    result = self.run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
+    result.chomp!
+    return result
+  end
+
   CREATE_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "create_window.scpt")
   def self.create_window
     result = self.run_applescript(CREATE_WINDOW_SCRIPT)
