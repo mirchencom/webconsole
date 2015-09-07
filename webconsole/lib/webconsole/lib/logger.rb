@@ -35,7 +35,7 @@ module WebConsole
       end
       if !@view_id
         @view_id = WebConsole::split_id_in_window_last(window_id)
-        WebConsole::run_plugin_in_split(window_id, @view_id)
+        WebConsole::run_plugin_in_split(LOG_PLUGIN_NAME, window_id, @view_id)
       end
 
       return @view_id

@@ -31,9 +31,9 @@ module WebConsole
   end
   
   RUN_PLUGIN_IN_SPLIT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run_plugin_in_split.scpt")
-  def self.run_plugin_in_split(window_id, split_id)
-    parameters = [window_id, split_id]
-    result = self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
+  def self.run_plugin_in_split(name, window_id, split_id)
+    parameters = [name, window_id, split_id]
+    result = self.run_applescript(RUN_PLUGIN_IN_SPLIT_SCRIPT, parameters)
     result.chomp!
     return result
   end

@@ -27,7 +27,11 @@
         task.arguments = arguments;
     }
     
+
+    
     if (directoryPath) {
+        // TODO: Add test that the directory path is valid, log a message if debug is on and it's not valid
+        // Also return and do nothing in this case, remember to fire the completion handler
         task.currentDirectoryPath = directoryPath;
     }
 
