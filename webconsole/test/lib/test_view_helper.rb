@@ -1,7 +1,9 @@
+require_relative '../../lib/webconsole'
+
 class TestViewHelper
 
     def initialize(window_id, view_id)
-      @view = View.new(window_id, view_id)
+      @view = WebConsole::View.new(window_id, view_id)
     end
 
     def do_javascript(javascript)

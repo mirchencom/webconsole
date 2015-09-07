@@ -6,6 +6,11 @@ require_relative "../lib/webconsole"
 require_relative "lib/test_view_helper"
 require_relative "lib/test_javascript_constants"
 
+require 'webconsole'
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WebConsole::Tests::TEST_HELPER_FILE
+
+
 class TestConstants < Test::Unit::TestCase
 
   def test_constants
@@ -25,8 +30,10 @@ class TestUnintializedLogger < Test::Unit::TestCase
     
 
     # Test Message
-    message = "Testing log message"
+    message = "Testing log message\n"
     logger.info(message)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    
 
     # Make sure the log messages before accessing the logger's `view_id` and `window_id` because those run the logger.
     # This test should test logging a message and running the logger itself simultaneously.
