@@ -22,7 +22,6 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
 @interface WCLSplitWebWindowController : NSWindowController
 @property (nonatomic, weak, nullable) id<WCLSplitWebWindowControllerDelegate> delegate;
 @property (nonatomic, strong, readonly, nullable) Plugin *plugin;
-@property (nonnull, readonly) SplitWebViewController *splitWebViewController;
 #pragma mark - AppleScript
 - (void)loadHTML:(nonnull NSString *)HTML
          baseURL:(nullable NSURL *)baseURL

@@ -17,8 +17,11 @@
 #import "WCLSplitWebWindowController.h"
 #import "WCLTestPluginManagerTestCase.h"
 
+@class SplitWebViewController;
+
 @interface WCLSplitWebWindowController (Tests)
 - (void)terminateTasksAndCloseWindow;
+@property (nonatomic, readonly) SplitWebViewController *splitWebViewController;
 @end
 
 @interface WCLSplitWebWindowController (DefaultWebView)
