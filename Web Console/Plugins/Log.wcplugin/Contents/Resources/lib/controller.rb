@@ -15,10 +15,14 @@ module WebConsole::Log
       message.sub!(/^\s*$\n/, '') # Don't process blank lines
       if message =~ /^#{MESSAGE_PREFIX}/
         message[MESSAGE_PREFIX] = ''
-        view.log_message(message)
+        if !message.empty?
+          view.log_message(message)
+        end
       elsif message =~ /^#{ERROR_PREFIX}/
         message[ERROR_PREFIX] = ''
-        view.log_error(message)
+        if !message.empty?
+          view.log_error(message)
+        end
       end
 
     end

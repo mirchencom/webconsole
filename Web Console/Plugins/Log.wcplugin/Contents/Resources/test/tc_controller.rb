@@ -50,6 +50,13 @@ class TestView < Test::Unit::TestCase
     test_class = @test_helper.last_log_class()
     assert_equal("message", test_class, "The classes should match")
 
+    # Test Only Prefix
+    @controller.parse_input(MESSAGE_PREFIX)
+    test_message = @test_helper.last_log_message()
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_helper.last_log_class()
+    assert_equal("message", test_class, "The classes should match")
+
     # Test Blank Spaces
     @controller.parse_input("  \t")
     test_message = @test_helper.last_log_message()
