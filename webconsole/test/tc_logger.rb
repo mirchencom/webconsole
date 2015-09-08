@@ -30,15 +30,15 @@ class TestUnintializedLogger < Test::Unit::TestCase
     WebConsole::Tests::Helper::confirm_dialog
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
   end
-  
+
   def test_logger
     logger = WebConsole::Logger.new
-    
+
     # Test Message
-    message = "Testing log message\n"
+    message = "Testing log message"
     logger.info(message)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
-    
+
     # Make sure the log messages before accessing the logger's `view_id` and `window_id` because those run the logger.
     # This test should test logging a message and running the logger itself simultaneously.
     # This is why the `LoggerViewHelper` is intialized after logging the message.
@@ -48,20 +48,40 @@ class TestUnintializedLogger < Test::Unit::TestCase
     assert_equal(message, test_message, "The messages should match")
     test_class = logger_view_helper.last_log_class
     assert_equal("message", test_class, "The classes should match")
-    
+
   end
-  
 
 end
 
 
 class TestLogger < Test::Unit::TestCase
 
+  def setup
+    @logger = WebConsole::Logger.new
+    @logger.show
+    @logger_view_helper = LoggerViewHelper.new(@logger.window_id, @logger.view_id)
+  end
+
+  def teardown
+    WebConsole::Tests::Helper::quit
+    WebConsole::Tests::Helper::confirm_dialog
+    assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
+  end
+
   def test_logger
+    # Test Message
+    message = "Testing log message"
+    @logger.info(message)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    test_message = @logger_view_helper.last_log_message
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @logger_view_helper.last_log_class
+    assert_equal("message", test_class, "The classes should match")
   end
 
   # TODO Test multi-line input
 
+  # TODO Test line endings the logger should handle this
 end
 
 # Helper
@@ -69,7 +89,7 @@ end
 class LoggerViewHelper < TestViewHelper
   
   def last_log_message
-    return do_javascript(TEST_MESSAGE_JAVASCRIPT)
+    return do_javascript(TEST_MESSAGE_JAVASCRIPT).chomp
   end
   
   def last_log_class

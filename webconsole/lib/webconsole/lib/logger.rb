@@ -8,9 +8,30 @@ module WebConsole
     ERROR_PREFIX = 'ERROR '
     LOG_PLUGIN_NAME = 'Log'
 
+    # Toggle
+
+    SHOW_LOG_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "show_log.scpt")
+    def show
+      WebConsole::run_applescript(SHOW_LOG_SCRIPT, [window_id])
+    end
+    
+    HIDE_LOG_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "hide_log.scpt")
+    def hide
+      WebConsole::run_applescript(HIDE_LOG_SCRIPT, [window_id])
+    end
+    
+    TOGGLE_LOG_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "toggle_log.scpt")
+    def toggle
+      WebConsole::run_applescript(TOGGLE_LOG_SCRIPT, [window_id])
+    end
+
+    # Messages
+
     def info(message)
       message = message.dup
-      message.gsub!(%r{^}, MESSAGE_PREFIX)
+      message.gsub!(%r{^}, MESSAGE_PREFIX) # Prefix all lines
+      # Strip trailing white space
+      # Add a line break
       log_message(message)
     end
 
@@ -19,6 +40,8 @@ module WebConsole
       message.gsub!(%r{^}, ERROR_PREFIX)
       log_message(message)
     end
+
+    # Properties
 
     def window_id
       if !@window_id
@@ -51,6 +74,8 @@ module WebConsole
 
     READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "read_from_standard_input.scpt")  
     def log_message(message)
+      message.rstrip!
+      message += "\n"
       WebConsole::run_applescript(READ_FROM_STANDARD_INPUT_SCRIPT, [message, window_id, view_id])
     end
   
