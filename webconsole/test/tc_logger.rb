@@ -77,11 +77,46 @@ class TestLogger < Test::Unit::TestCase
     assert_equal(message, test_message, "The messages should match")
     test_class = @logger_view_helper.last_log_class
     assert_equal("message", test_class, "The classes should match")
+
+    # TODO: Assert the count of `<p>` tags
+
+    # Test Error
+    message = "Testing log error"
+    @logger.error(message)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    test_message = @logger_view_helper.last_log_message
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @logger_view_helper.last_log_class
+    assert_equal("error", test_class, "The classes should match")
+
+    # TODO: Assert the count of `<p>` tags
   end
 
-  # TODO Test multi-line input
+  def test_long_input
+    # Test Message
+    message = %q(
+Line 1
+Line 2
+Line 3
+)
+    @logger.info(message)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    
+    # TODO: Assert there should be three `<p>` tags
 
-  # TODO Test line endings the logger should handle this
+    # test_message = @logger_view_helper.last_log_message
+    # assert_equal(message, test_message, "The messages should match")
+    # test_class = @logger_view_helper.last_log_class
+    # assert_equal("message", test_class, "The classes should match")
+
+    # Get the body text
+  end
+
+  # TODO: Test multi-line input
+
+  # TODO: Test line endings the logger should handle this
+
+
 end
 
 # Helper
