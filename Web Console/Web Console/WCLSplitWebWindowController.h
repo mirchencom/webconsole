@@ -33,6 +33,9 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler;
   inDirectoryPath:(nullable NSString *)directoryPath
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (nonnull NSArray *)webViewControllers;
+- (void)showLog;
+- (void)hideLog;
+- (void)toggleLog;
 #pragma mark - Tasks
 - (BOOL)hasTasks;
 - (nonnull NSArray *)tasks;

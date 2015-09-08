@@ -176,6 +176,21 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     return self.splitWebViewController.webViewControllers;
 }
 
+- (void)showLog
+{
+    [self.splitWebViewController showLog];
+}
+
+- (void)hideLog
+{
+    [self.splitWebViewController hideLog];
+}
+
+- (void)toggleLog
+{
+    [self.splitWebViewController toggleLog];
+}
+
 #pragma mark - Tasks
 
 - (NSArray *)tasks

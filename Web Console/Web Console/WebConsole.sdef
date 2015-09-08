@@ -272,8 +272,29 @@
 			<element type="split" access="r">
 				<cocoa key="splits"/>
 			</element>
+            <responds-to command="show log in">
+                <cocoa method="handleShowLogScriptCommand:"/>
+            </responds-to>
+            <responds-to command="hide log in">
+                <cocoa method="handleHideLogScriptCommand:"/>
+            </responds-to>
+            <responds-to command="toggle log in">
+                <cocoa method="handleToggleLogScriptCommand:"/>
+            </responds-to>
 		</class-extension>
 		
+        <command name="show log in" code="SHOWLOGG" description="Show the log.">
+			<direct-parameter type="window" description="The window to show the log in."/>
+        </command>
+
+        <command name="hide log in" code="HIDELOGG" description="Hide the log.">
+			<direct-parameter type="window" description="The window to hide the log in."/>
+        </command>
+
+        <command name="toggle log in" code="TOGGLOGG" description="Toggle the log.">
+			<direct-parameter type="window" description="The window to toggle the log in."/>
+        </command>
+
 		<class name="split" code="SPLT" description="A window split.">
 			<cocoa class="WCLWebViewController"/>
 			<property name="plugin" code="plgn" type="plugin" access="r" description="The split's plugin.">

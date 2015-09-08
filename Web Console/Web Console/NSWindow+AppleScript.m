@@ -12,6 +12,32 @@
 
 @implementation NSWindow (AppleScript)
 
+#pragma mark - WCLSplitWebWindowController
+
+- (WCLSplitWebWindowController *)splitWebWindowController
+{
+    return (WCLSplitWebWindowController *)self.windowController;
+}
+
+#pragma mark - Log
+
+- (void)handleShowLogScriptCommand:(NSScriptCommand *)command
+{
+    [[self splitWebWindowController] showLog];
+}
+
+- (void)handleHideLogScriptCommand:(NSScriptCommand *)command
+{
+    [[self splitWebWindowController] hideLog];
+}
+
+- (void)handleToggleLogScriptCommand:(NSScriptCommand *)command
+{
+    [[self splitWebWindowController] toggleLog];
+}
+
+#pragma mark - Splits
+
 - (NSArray *)splits
 {
     return [self.splitWebWindowController webViewControllers];
@@ -23,19 +49,19 @@
          baseURL:(nullable NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
-    [self.splitWebWindowController loadHTML:HTML
-                                    baseURL:baseURL
-                          completionHandler:completionHandler];
+    [[self splitWebWindowController] loadHTML:HTML
+                                      baseURL:baseURL
+                            completionHandler:completionHandler];
 }
 
 - (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript
 {
-    return [self.splitWebWindowController doJavaScript:javaScript];
+    return [[self splitWebWindowController] doJavaScript:javaScript];
 }
 
 - (void)readFromStandardInput:(nonnull NSString *)text
 {
-    [self.splitWebWindowController readFromStandardInput:text];
+    [[self splitWebWindowController] readFromStandardInput:text];
 }
 
 - (void)runPlugin:(nonnull Plugin *)plugin
@@ -43,15 +69,10 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
   inDirectoryPath:(nullable NSString *)directoryPath
 completionHandler:(nullable void (^)(BOOL))completionHandler
 {
-    [self.splitWebWindowController runPlugin:plugin
-                               withArguments:arguments
-                             inDirectoryPath:directoryPath
-                           completionHandler:completionHandler];
-}
-
-- (WCLSplitWebWindowController *)splitWebWindowController
-{
-    return (WCLSplitWebWindowController *)self.windowController;
+    [[self splitWebWindowController] runPlugin:plugin
+                                 withArguments:arguments
+                               inDirectoryPath:directoryPath
+                             completionHandler:completionHandler];
 }
 
 @end

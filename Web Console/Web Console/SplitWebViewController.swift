@@ -118,9 +118,23 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     // MARK: Actions
     
     @IBAction func toggleLogShown(sender: AnyObject?) {
-        splitController.toggleCollapsed(true)
+        toggleLog()
     }
 
+    // MARK: Log
+
+    func showLog() {
+        splitController.setCollapsed(false, animated: true)
+    }
+
+    func hideLog() {
+        splitController.setCollapsed(true, animated: true)
+    }
+
+    func toggleLog() {
+        splitController.toggleCollapsed(true)
+    }
+    
     // MARK: Validation
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
