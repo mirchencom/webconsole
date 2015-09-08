@@ -23,17 +23,23 @@
 
 - (void)handleShowLogScriptCommand:(NSScriptCommand *)command
 {
-    [[self splitWebWindowController] showLog];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self splitWebWindowController] showLog];
+    });
 }
 
 - (void)handleHideLogScriptCommand:(NSScriptCommand *)command
 {
-    [[self splitWebWindowController] hideLog];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self splitWebWindowController] hideLog];
+    });
 }
 
 - (void)handleToggleLogScriptCommand:(NSScriptCommand *)command
 {
-    [[self splitWebWindowController] toggleLog];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self splitWebWindowController] toggleLog];
+    });
 }
 
 #pragma mark - Splits
