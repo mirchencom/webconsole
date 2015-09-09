@@ -12,6 +12,11 @@ class TestViewHelper
       return @view.do_javascript_function('innerTextOfBodyChildAtIndex', [index])
     end
 
+    def number_of_log_messages
+      # TODO: Do JavaScript should coerce types
+      return @view.do_javascript(TEST_MESSAGE_COUNT_JAVASCRIPT).chomp.to_i
+    end
+
     def last_log_message
       return @view.do_javascript(TEST_MESSAGE_JAVASCRIPT).chomp
     end

@@ -62,11 +62,11 @@ class TestLogger < Test::Unit::TestCase
     @test_view_helper = TestViewHelper.new(@logger.window_id, @logger.view_id)
   end
 
-  # def teardown
-  #   WebConsole::Tests::Helper::quit
-  #   WebConsole::Tests::Helper::confirm_dialog
-  #   assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
-  # end
+  def teardown
+    WebConsole::Tests::Helper::quit
+    WebConsole::Tests::Helper::confirm_dialog
+    assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
+  end
 
   def test_logger
     # Test Message
@@ -77,8 +77,8 @@ class TestLogger < Test::Unit::TestCase
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class
     assert_equal("message", test_class, "The classes should match")
-
-    # TODO: Assert the count of `<p>` tags
+    test_count = @test_view_helper.number_of_log_messages
+    assert_equal(test_count, 1, "The number of log messages should match")
 
     # Test Error
     message = "Testing log error"
@@ -88,8 +88,8 @@ class TestLogger < Test::Unit::TestCase
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class
     assert_equal("error", test_class, "The classes should match")
-
-    # TODO: Assert the count of `<p>` tags
+    test_count = @test_view_helper.number_of_log_messages
+    assert_equal(test_count, 2, "The number of log messages should match")
   end
 
   def test_long_input
@@ -101,8 +101,13 @@ Line 3
 )
     @logger.info(message)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
-    
+    test_count = @test_view_helper.number_of_log_messages
+    assert_equal(test_count, 3, "The number of log messages should match")    
+
+
     line_one = @test_view_helper.log_message_at_index(0)
+
+
     @logger.info(line_one)
 
     # TODO: Assert there should be three `<p>` tags
