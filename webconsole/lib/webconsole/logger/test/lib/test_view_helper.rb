@@ -1,5 +1,3 @@
-require_relative '../../lib/webconsole'
-
 class TestViewHelper
 
     def initialize(window_id, view_id)

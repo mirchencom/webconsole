@@ -65,10 +65,11 @@ module WebConsole
     end
 
     result = self.run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
+    result.chomp!
 
-    if result
-      # TODO Remove this when doing `run_applescript` refactor
-      result.chomp!
+    if result.empty?
+      # TODO: Remove this when doing `run_applescript` refactor
+      return nil
     end
 
     return result
@@ -142,9 +143,12 @@ module WebConsole
     end
 
     result = `#{command}`
-    if result.chomp.empty?
-      return nil
-    end
+
+    # TODO: Figure out a better way to do this when doing `run_applescript` refactor
+    # if result.chomp.empty?
+    #   return nil
+    # end
+
     return result
   end
 end

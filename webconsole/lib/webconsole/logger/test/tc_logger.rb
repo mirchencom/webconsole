@@ -2,13 +2,13 @@
 
 require "test/unit"
 
-require_relative "../lib/webconsole"
-require_relative "lib/test_view_helper"
-require_relative "lib/test_javascript_constants"
-
-require 'webconsole'
+require_relative "lib/test_constants"
+require WEBCONSOLE_FILE
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
+
+require_relative "lib/test_view_helper"
+require_relative "../../logger"
 
 
 class TestConstants < Test::Unit::TestCase
@@ -116,6 +116,7 @@ Line 3
 
   # TODO: Test line endings the logger should handle this
 
+  # TODO: Test white space at beginning and end of lines
 
 end
 
