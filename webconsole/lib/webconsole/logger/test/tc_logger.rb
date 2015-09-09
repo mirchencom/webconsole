@@ -31,7 +31,7 @@ class TestUnintializedLogger < Test::Unit::TestCase
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
   end
 
-  def test_logger
+  def test_uninitialized_logger
     logger = WebConsole::Logger.new
 
     # Test Message
@@ -62,11 +62,11 @@ class TestLogger < Test::Unit::TestCase
     @test_view_helper = TestViewHelper.new(@logger.window_id, @logger.view_id)
   end
 
-  def teardown
-    WebConsole::Tests::Helper::quit
-    WebConsole::Tests::Helper::confirm_dialog
-    assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
-  end
+  # def teardown
+  #   WebConsole::Tests::Helper::quit
+  #   WebConsole::Tests::Helper::confirm_dialog
+  #   assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
+  # end
 
   def test_logger
     # Test Message
@@ -102,6 +102,9 @@ Line 3
     @logger.info(message)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
     
+    line_one = @test_view_helper.log_message_at_index(0)
+    @logger.info(line_one)
+
     # TODO: Assert there should be three `<p>` tags
 
     # test_message = @test_view_helper.last_log_message
