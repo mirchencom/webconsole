@@ -41,12 +41,12 @@ class TestUnintializedLogger < Test::Unit::TestCase
 
     # Make sure the log messages before accessing the logger's `view_id` and `window_id` because those run the logger.
     # This test should test logging a message and running the logger itself simultaneously.
-    # This is why the `LoggerViewHelper` is intialized after logging the message.
-    logger_view_helper = LoggerViewHelper.new(logger.window_id, logger.view_id)
+    # This is why the `TestViewHelper` is intialized after logging the message.
+    test_view_helper = TestViewHelper.new(logger.window_id, logger.view_id)
 
-    test_message = logger_view_helper.last_log_message
+    test_message = test_view_helper.last_log_message
     assert_equal(message, test_message, "The messages should match")
-    test_class = logger_view_helper.last_log_class
+    test_class = test_view_helper.last_log_class
     assert_equal("message", test_class, "The classes should match")
 
   end
@@ -59,7 +59,7 @@ class TestLogger < Test::Unit::TestCase
   def setup
     @logger = WebConsole::Logger.new
     @logger.show
-    @logger_view_helper = LoggerViewHelper.new(@logger.window_id, @logger.view_id)
+    @test_view_helper = TestViewHelper.new(@logger.window_id, @logger.view_id)
   end
 
   def teardown
@@ -73,9 +73,9 @@ class TestLogger < Test::Unit::TestCase
     message = "Testing log message"
     @logger.info(message)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @logger_view_helper.last_log_message
+    test_message = @test_view_helper.last_log_message
     assert_equal(message, test_message, "The messages should match")
-    test_class = @logger_view_helper.last_log_class
+    test_class = @test_view_helper.last_log_class
     assert_equal("message", test_class, "The classes should match")
 
     # TODO: Assert the count of `<p>` tags
@@ -84,9 +84,9 @@ class TestLogger < Test::Unit::TestCase
     message = "Testing log error"
     @logger.error(message)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @logger_view_helper.last_log_message
+    test_message = @test_view_helper.last_log_message
     assert_equal(message, test_message, "The messages should match")
-    test_class = @logger_view_helper.last_log_class
+    test_class = @test_view_helper.last_log_class
     assert_equal("error", test_class, "The classes should match")
 
     # TODO: Assert the count of `<p>` tags
@@ -104,9 +104,9 @@ Line 3
     
     # TODO: Assert there should be three `<p>` tags
 
-    # test_message = @logger_view_helper.last_log_message
+    # test_message = @test_view_helper.last_log_message
     # assert_equal(message, test_message, "The messages should match")
-    # test_class = @logger_view_helper.last_log_class
+    # test_class = @test_view_helper.last_log_class
     # assert_equal("message", test_class, "The classes should match")
 
     # Get the body text
@@ -118,17 +118,4 @@ Line 3
 
   # TODO: Test white space at beginning and end of lines
 
-end
-
-# Helper
-
-class LoggerViewHelper < TestViewHelper
-  
-  def last_log_message
-    return do_javascript(TEST_MESSAGE_JAVASCRIPT).chomp
-  end
-  
-  def last_log_class
-    return do_javascript(TEST_CLASS_JAVASCRIPT).chomp
-  end
 end
