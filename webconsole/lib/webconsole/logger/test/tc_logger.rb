@@ -135,10 +135,9 @@ class TestLogger < Test::Unit::TestCase
     test_class = @test_view_helper.last_log_class()
     assert_equal("message", test_class, "The classes should match")
 
-
     # TODO: Also add the following tests the `Log.wcplugin`
 
-    # TODO: Test line endings the logger should handle this
+    # TODO: Test new lines the logger should handle this
 
     # TODO: Test right and left whitespace
   end
@@ -146,6 +145,7 @@ class TestLogger < Test::Unit::TestCase
   def test_long_input
     message = %q(
 Line 1
+
 Line 2
 Line 3
 )
