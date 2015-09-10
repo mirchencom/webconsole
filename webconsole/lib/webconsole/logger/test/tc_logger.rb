@@ -69,16 +69,7 @@ class TestLogger < Test::Unit::TestCase
   end
 
   def test_logger
-    # Test Message
-    message = "Testing log message"
-    @logger.info(message)
-    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
-    test_message = @test_view_helper.last_log_message
-    assert_equal(message, test_message, "The messages should match")
-    test_class = @test_view_helper.last_log_class
-    assert_equal("message", test_class, "The classes should match")
-    test_count = @test_view_helper.number_of_log_messages
-    assert_equal(1, test_count, "The number of log messages should match")
+    test_count = 0
 
     # Test Error
     message = "Testing log error"
@@ -88,12 +79,71 @@ class TestLogger < Test::Unit::TestCase
     assert_equal(message, test_message, "The messages should match")
     test_class = @test_view_helper.last_log_class
     assert_equal("error", test_class, "The classes should match")
-    test_count = @test_view_helper.number_of_log_messages
-    assert_equal(2, test_count, "The number of log messages should match")
+    result_count = @test_view_helper.number_of_log_messages
+    test_count += 1
+    assert_equal(test_count, result_count, "The number of log messages should match")
+
+    # Test Message
+    message = "Testing log message"
+    @logger.info(message)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    test_message = @test_view_helper.last_log_message
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_view_helper.last_log_class
+    assert_equal("message", test_class, "The classes should match")
+    result_count = @test_view_helper.number_of_log_messages
+    test_count += 1
+    assert_equal(test_count, result_count, "The number of log messages should match")
+
+    # Test Only Error Prefix
+    message = WebConsole::Logger::ERROR_PREFIX.rstrip # Note the trailing whitespace is trimmed
+    @logger.info(message)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    test_message = @test_view_helper.last_log_message
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_view_helper.last_log_class
+    assert_equal("message", test_class, "The classes should match")
+    result_count = @test_view_helper.number_of_log_messages
+    test_count += 1
+    assert_equal(test_count, result_count, "The number of log messages should match")
+
+    # Test Only Message Prefix
+    message = WebConsole::Logger::MESSAGE_PREFIX.rstrip # Note the trailing whitespace is trimmed
+    @logger.info(message)
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    test_message = @test_view_helper.last_log_message
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_view_helper.last_log_class
+    assert_equal("message", test_class, "The classes should match")
+    result_count = @test_view_helper.number_of_log_messages
+    test_count += 1
+    assert_equal(test_count, result_count, "The number of log messages should match")
+
+    # Test Blank Spaces
+    @logger.info("  \t")
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    test_message = @test_view_helper.last_log_message()
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_view_helper.last_log_class()
+    assert_equal("message", test_class, "The classes should match")
+
+    # Test Empty String
+    @logger.info("")
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    test_message = @test_view_helper.last_log_message()
+    assert_equal(message, test_message, "The messages should match")
+    test_class = @test_view_helper.last_log_class()
+    assert_equal("message", test_class, "The classes should match")
+
+
+    # TODO: Also add the following tests the `Log.wcplugin`
+
+    # TODO: Test line endings the logger should handle this
+
+    # TODO: Test right and left whitespace
   end
 
   def test_long_input
-    # Test Message
     message = %q(
 Line 1
 Line 2
@@ -101,31 +151,14 @@ Line 3
 )
     @logger.info(message)
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
-    test_count = @test_view_helper.number_of_log_messages
-    assert_equal(test_count, 3, "The number of log messages should match")    
+    result_count = @test_view_helper.number_of_log_messages
+    assert_equal(result_count, 3, "The number of log messages should match")    
 
     (1..3).each { |i|
       result = @test_view_helper.log_message_at_index(i - 1)
       test_result = "Line #{i}"
       assert_equal(result, test_result, "The number of log messages should match")    
     }
-
-    # @logger.info(line_one)
-
-    # TODO: Assert there should be three `<p>` tags
-
-    # test_message = @test_view_helper.last_log_message
-    # assert_equal(message, test_message, "The messages should match")
-    # test_class = @test_view_helper.last_log_class
-    # assert_equal("message", test_class, "The classes should match")
-
-    # Get the body text
   end
-
-  # TODO: Test multi-line input
-
-  # TODO: Test line endings the logger should handle this
-
-  # TODO: Test white space at beginning and end of lines
 
 end
