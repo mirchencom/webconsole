@@ -78,7 +78,7 @@ class TestLogger < Test::Unit::TestCase
     test_class = @test_view_helper.last_log_class
     assert_equal("message", test_class, "The classes should match")
     test_count = @test_view_helper.number_of_log_messages
-    assert_equal(test_count, 1, "The number of log messages should match")
+    assert_equal(1, test_count, "The number of log messages should match")
 
     # Test Error
     message = "Testing log error"
@@ -89,7 +89,7 @@ class TestLogger < Test::Unit::TestCase
     test_class = @test_view_helper.last_log_class
     assert_equal("error", test_class, "The classes should match")
     test_count = @test_view_helper.number_of_log_messages
-    assert_equal(test_count, 2, "The number of log messages should match")
+    assert_equal(2, test_count, "The number of log messages should match")
   end
 
   def test_long_input
@@ -104,11 +104,13 @@ Line 3
     test_count = @test_view_helper.number_of_log_messages
     assert_equal(test_count, 3, "The number of log messages should match")    
 
+    (1..3).each { |i|
+      result = @test_view_helper.log_message_at_index(i - 1)
+      test_result = "Line #{i}"
+      assert_equal(result, test_result, "The number of log messages should match")    
+    }
 
-    line_one = @test_view_helper.log_message_at_index(0)
-
-
-    @logger.info(line_one)
+    # @logger.info(line_one)
 
     # TODO: Assert there should be three `<p>` tags
 
