@@ -137,9 +137,20 @@ class TestLogger < Test::Unit::TestCase
 
     # TODO: Also add the following tests the `Log.wcplugin`
 
-    # TODO: Test new lines the logger should handle this
+    # Test Whitespace
+    # White space to the left should be preserved, whitespace to the right should be removed
+    # This test fails because retrieving the `innerText` doesn't preserve whitepace.
 
-    # TODO: Test right and left whitespace
+    # message = "\t Testing log message"
+    # @logger.info(message + "\t ")
+    # sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
+    # test_message = @test_view_helper.last_log_message
+    # assert_equal(message, test_message, "The messages should match")
+    # test_class = @test_view_helper.last_log_class
+    # assert_equal("message", test_class, "The classes should match")
+    # result_count = @test_view_helper.number_of_log_messages
+    # test_count += 1
+    # assert_equal(test_count, result_count, "The number of log messages should match")
   end
 
   def test_long_input
