@@ -46,13 +46,17 @@ namespace :other do
   dependencies_test_rakefile = File.join(File.dirname(__FILE__), "../lib/webconsole/dependencies/test/Rakefile")
   load dependencies_test_rakefile
 
+  logger_test_rakefile = File.join(File.dirname(__FILE__), "../lib/webconsole/logger/test/Rakefile")
+  load logger_test_rakefile
+
   repl_test_rakefile = File.join(File.dirname(__FILE__), "../lib/webconsole/repl/test/Rakefile")
   load repl_test_rakefile
 
-  task :tests => [:test_data, :test_dependencies, :test_repl]
+  task :tests => [:test_data, :test_dependencies, :test_logger, :test_repl]
 
   task :test_data => ['data:tests']
   task :test_dependencies => ['dependencies:tests']
   task :test_repl => ['repl:tests']
+  task :test_logger => ['logger:tests']
 
 end
