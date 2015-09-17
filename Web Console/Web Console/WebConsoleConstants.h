@@ -34,6 +34,7 @@
 #define kPlugInExtension @"wcplugin"
 #define kPluginNameKey @"name"
 #define kInitialDefaultNewPluginName @"HTML"
+#define kLogPluginName @"Log"
 
 
 #pragma mark - Plugins Manager Keys

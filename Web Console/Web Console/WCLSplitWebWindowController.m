@@ -238,6 +238,14 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     return self.window.isVisible;
 }
 
+- (Plugin * __nullable)logPluginForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController
+{
+    if ([self.delegate respondsToSelector:@selector(logPluginForSplitWebViewController:)]) {
+        return [self.delegate logPluginForSplitWebWindowController:self];
+    }
+    return nil;
+}
+
 - (void)splitWebViewControllerWillLoadHTML:(SplitWebViewController *)splitWebViewController
 {
     if (![self.window isVisible]) {
@@ -252,7 +260,6 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
     [self.window setTitle:title];
 }
-
 
 - (void)splitWebViewControllerWillStartTasks:(SplitWebViewController *)splitWebViewController
 {

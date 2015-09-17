@@ -17,6 +17,7 @@ extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindo
 @protocol WCLSplitWebWindowControllerDelegate <NSObject>
 @optional
 - (void)splitWebWindowControllerWindowWillClose:(nonnull WCLSplitWebWindowController *)splitWebWindowController;
+- (nullable Plugin *)logPluginForSplitWebWindowController:(nonnull WCLSplitWebWindowController *)splitWebViewController;
 @end
 
 @interface WCLSplitWebWindowController : NSWindowController

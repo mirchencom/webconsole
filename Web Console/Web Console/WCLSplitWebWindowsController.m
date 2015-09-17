@@ -10,6 +10,7 @@
 
 #import "WCLSplitWebWindowController.h"
 #import "WCLPlugin.h"
+#import "Web_Console-Swift.h"
 
 #define kWebWindowNibName @"WebWindow"
 
@@ -107,6 +108,11 @@
 - (void)splitWebWindowControllerWindowWillClose:(WCLSplitWebWindowController *)splitWebWindowController
 {
     [self removeSplitWebWindowController:splitWebWindowController];
+}
+
+- (nullable Plugin *)logPluginForSplitWebWindowController:(nonnull WCLSplitWebWindowController *)splitWebViewController
+{
+    return [[PluginsManager sharedInstance] pluginWithName:kLogPluginName];
 }
 
 @end

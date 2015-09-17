@@ -19,6 +19,7 @@ let splitWebViewHeight = CGFloat(150)
     func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
     func splitWebViewControllerWillStartTasks(splitWebViewController: SplitWebViewController)
     func splitWebViewControllerDidFinishTasks(splitWebViewController: SplitWebViewController)
+    func logPluginForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Plugin?
 }
 
 class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegate, SplitControllerDelegate {
@@ -59,13 +60,38 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         return splitViewItem.viewController as! WCLWebViewController
     }
     
+    func logError(text: String) {
+        let preparedText = prepareLog(text: text, prefix: logMessagePrefix)
+        logReadFromStandardInput(preparedText)
+    }
+
+    func logMessage(text: String) {
+        let preparedText = prepareLog(text: text, prefix: logErrorPrefix)
+        logReadFromStandardInput(preparedText)
+    }
+    
+    func prepareLog(#text: String, prefix: String) -> String {
+        var prependedText = prefix + text
+        prependedText = prependedText.stringByReplacingOccurrencesOfString("\n", withString: "\n\(prefix)")
+        prependedText += "\n"
+        return prependedText
+    }
+    
     func logReadFromStandardInput(text: String) {
+        var readReadFromStandardInputBlock = { [weak self]() -> Void in
+            if let strongSelf = self {
+                strongSelf.logWebViewController.readFromStandardInput(text)
+            }
+        }
+        
         if logWebViewController.plugin == nil {
-            if let logPlugin = PluginsManager.sharedInstance.pluginWithName(logPluginName) {
+            if let logPlugin = delegate?.logPluginForSplitWebViewController(self) {
                 logWebViewController.runPlugin(logPlugin, withArguments: nil, inDirectoryPath: nil, completionHandler: { (success) -> Void in
-                    
+                    readReadFromStandardInputBlock()
                 })
             }
+        } else {
+            readReadFromStandardInputBlock()
         }
     }
     
