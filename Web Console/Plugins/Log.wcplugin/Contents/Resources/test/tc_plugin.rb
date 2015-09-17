@@ -6,6 +6,7 @@ require_relative "lib/test_constants"
 
 require_relative '../bundle/bundler/setup'
 require 'webconsole'
+require 'webconsole/logger'
 
 require WebConsole::shared_test_resource("ruby/test_constants")
 require WebConsole::Tests::TEST_HELPER_FILE
