@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     json (1.8.3)
-    webconsole (0.1.13)
+    webconsole (0.1.14)
 
 PLATFORMS
   ruby
@@ -10,3 +10,6 @@ PLATFORMS
 DEPENDENCIES
   json
   webconsole
+
+BUNDLED WITH
+   1.10.6

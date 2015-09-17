@@ -11,7 +11,7 @@ GEM
     rb-fsevent (0.9.6)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    webconsole (0.1.13)
+    webconsole (0.1.14)
 
 PLATFORMS
   ruby
@@ -20,3 +20,6 @@ DEPENDENCIES
   listen
   nio
   webconsole
+
+BUNDLED WITH
+   1.10.6

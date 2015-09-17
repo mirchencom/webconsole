@@ -1,0 +1,20 @@
+require 'shellwords'
+require 'webconsole'
+require WebConsole::shared_test_resource("ruby/test_constants")
+require WebConsole::Tests::TEST_HELPER_FILE
+
+task :default => ['logger:tests']
+
+namespace :logger do
+  
+  task :tests => [:clean_up]
+
+  task :test_logger do
+    logger_tests_file = File.join(File.dirname(__FILE__), "tc_logger.rb")
+    ruby Shellwords.escape(logger_tests_file)
+  end
+
+  task :clean_up => [:test_logger] do
+    WebConsole::Tests::Helper::quit
+  end
+end
