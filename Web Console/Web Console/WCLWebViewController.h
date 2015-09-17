@@ -23,6 +23,8 @@
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController didReceiveTitle:(nonnull NSString *)title;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController taskWillStart:(nonnull NSTask *)task;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController taskDidFinish:(nonnull NSTask *)task;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController didReceiveStandardOutput:(nonnull NSString *)text;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController didReceiveStandardError:(nonnull NSString *)text;
 @end
 
 @interface WCLWebViewController : NSViewController <WCLPluginTaskDelegate, WCLPluginView>

@@ -15,6 +15,7 @@ let defaultNewPluginIdentifierKey = "WCLDefaultNewPluginIdentifier"
 let defaultFileExtensionEnabled = false
 let initialDefaultNewPluginName = "HTML"
 let sharedResourcesPluginName = "Shared Resources"
+let logPluginName = "Log"
 
 enum Directory {
     case Caches

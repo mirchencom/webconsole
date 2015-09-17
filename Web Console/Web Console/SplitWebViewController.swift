@@ -48,12 +48,33 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         return splitViewItems.map { $0.viewController as! WCLWebViewController }
     }
     
+    // MARK: Log
+    
+    var logSplitViewItem: NSSplitViewItem {
+        return splitViewItems.last as! NSSplitViewItem
+    }
+
+    var logWebViewController: WCLWebViewController {
+        let splitViewItem = splitViewItems.last as! NSSplitViewItem
+        return splitViewItem.viewController as! WCLWebViewController
+    }
+    
+    func logReadFromStandardInput(text: String) {
+        if logWebViewController.plugin == nil {
+            if let logPlugin = PluginsManager.sharedInstance.pluginWithName(logPluginName) {
+                logWebViewController.runPlugin(logPlugin, withArguments: nil, inDirectoryPath: nil, completionHandler: { (success) -> Void in
+                    
+                })
+            }
+        }
+    }
+    
     // MARK: Life Cycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        splitController = SplitController(splitViewController: self, splitViewItem: splitViewItems.last as! NSSplitViewItem)
+        splitController = SplitController(splitViewController: self, splitViewItem: logSplitViewItem)
         splitController.delegate = self
         
         for splitViewItem in splitViewItems {
@@ -256,5 +277,12 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             delegate?.splitWebViewControllerDidFinishTasks(self)
         }
     }
-    
+
+    func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
+        
+    }
+
+    func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
+
+    }
 }

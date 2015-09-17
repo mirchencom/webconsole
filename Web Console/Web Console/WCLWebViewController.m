@@ -239,6 +239,18 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
 }
 
+- (void)pluginTask:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text
+{
+    
+}
+
+- (void)pluginTask:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text
+{
+    // Get the task
+    // If it doesn't exist create it
+    // If it does exist
+}
+
 - (NSDictionary *)environmentDictionaryForPluginTask:(NSTask *)task
 {
     NSMutableDictionary *environmentDictionary;
