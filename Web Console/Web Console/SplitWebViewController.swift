@@ -52,6 +52,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     // MARK: Log
     
     var shouldLog: Bool {
+        // TODO: This should check the plugins debug flag
 #if DEBUG
         return true
 #else
