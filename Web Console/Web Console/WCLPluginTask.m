@@ -18,16 +18,12 @@
                       delegate:(id<WCLPluginTaskDelegate>)delegate
              completionHandler:(void (^)(BOOL success))completionHandler
 {
-    DLog(@"runCommandPath:%@ withArguments:%@ inDirectoryPath:%@", commandPath, arguments, directoryPath);
-    
     NSTask *task = [[NSTask alloc] init];
     task.launchPath = commandPath;
     
     if (arguments) {
         task.arguments = arguments;
     }
-    
-
     
     if (directoryPath) {
         // TODO: Add test that the directory path is valid, log a message if debug is on and it's not valid
@@ -39,14 +35,18 @@
     task.standardOutput = [NSPipe pipe];
     [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
-        DLog(@"[Task] standardOutput %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        DLog(@"[Task] standardOutput %@", text);
+        [self processStandardOutput:text task:task delegate:delegate];
     }];
     
     // Standard Error
     task.standardError = [NSPipe pipe];
     [[task.standardError fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
-        DLog(@"[Task] standardError %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+        NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        DLog(@"[Task] standardError %@", text);
+        [self processStandardError:text task:task delegate:delegate];
     }];
     
     // Standard Input
@@ -83,6 +83,10 @@
         if (environmentDictionary) {
             [task setEnvironment:environmentDictionary];
         }
+
+        NSString *runText = [NSString stringWithFormat:@"runCommandPath: %@ withArguments: %@ inDirectoryPath: %@", commandPath, arguments, directoryPath];
+        DLog(@"%@", runText);
+        [self processStandardOutput:runText task:task delegate:delegate];
         [task launch];
         
         if (completionHandler) {
@@ -90,5 +94,20 @@
         }
     });
 }
+
++ (void)processStandardOutput:(NSString *)text task:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate
+{
+    if ([delegate respondsToSelector:@selector(pluginTask:didReadFromStandardOutput:)]) {
+        [delegate pluginTask:task didReadFromStandardOutput:text];
+    }
+}
+
++ (void)processStandardError:(NSString *)text task:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate
+{
+    if ([delegate respondsToSelector:@selector(pluginTask:didReadFromStandardError:)]) {
+        [delegate pluginTask:task didReadFromStandardError:text];
+    }
+}
+
 
 @end

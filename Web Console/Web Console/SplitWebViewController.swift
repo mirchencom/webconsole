@@ -305,10 +305,10 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
 
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
-        
+        logMessage(text)
     }
 
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
-
+        logError(text)
     }
 }
