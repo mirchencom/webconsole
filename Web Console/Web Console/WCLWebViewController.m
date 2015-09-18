@@ -241,14 +241,16 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 - (void)pluginTask:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text
 {
-    
+    if ([self.delegate respondsToSelector:@selector(webViewController:didReceiveStandardError:)]) {
+        [self.delegate webViewController:self didReceiveStandardError:text];
+    }
 }
 
 - (void)pluginTask:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text
 {
-    // Get the task
-    // If it doesn't exist create it
-    // If it does exist
+    if ([self.delegate respondsToSelector:@selector(webViewController:didReceiveStandardOutput:)]) {
+        [self.delegate webViewController:self didReceiveStandardOutput:text];
+    }
 }
 
 - (NSDictionary *)environmentDictionaryForPluginTask:(NSTask *)task

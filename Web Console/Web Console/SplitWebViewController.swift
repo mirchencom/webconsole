@@ -51,6 +51,14 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     
     // MARK: Log
     
+    var shouldLog: Bool {
+#if DEBUG
+        return true
+#else
+        return false
+#endif
+    }
+    
     var logSplitViewItem: NSSplitViewItem {
         return splitViewItems.last as! NSSplitViewItem
     }
@@ -305,10 +313,14 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
 
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
-        logMessage(text)
+        if shouldLog {
+            logMessage(text)
+        }
     }
 
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
-        logError(text)
+        if shouldLog {
+            logError(text)
+        }
     }
 }
