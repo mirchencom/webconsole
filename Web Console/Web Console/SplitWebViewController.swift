@@ -69,12 +69,12 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     func logError(text: String) {
-        let preparedText = prepareLog(text: text, prefix: logMessagePrefix)
+        let preparedText = prepareLog(text: text, prefix: logErrorPrefix)
         logReadFromStandardInput(preparedText)
     }
 
     func logMessage(text: String) {
-        let preparedText = prepareLog(text: text, prefix: logErrorPrefix)
+        let preparedText = prepareLog(text: text, prefix: logMessagePrefix)
         logReadFromStandardInput(preparedText)
     }
     
@@ -313,12 +313,22 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
 
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
+        if webViewController == logWebViewController {
+            // Don't log messages from the log itself
+            return
+        }
+        
         if shouldLog {
             logMessage(text)
         }
     }
 
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
+        if webViewController == logWebViewController {
+            // Don't log messages from the log itself
+            return
+        }
+        
         if shouldLog {
             logError(text)
         }

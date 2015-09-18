@@ -240,7 +240,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 - (Plugin * __nullable)logPluginForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController
 {
-    if ([self.delegate respondsToSelector:@selector(logPluginForSplitWebViewController:)]) {
+    if ([self.delegate respondsToSelector:@selector(logPluginForSplitWebWindowController:)]) {
         return [self.delegate logPluginForSplitWebWindowController:self];
     }
     return nil;

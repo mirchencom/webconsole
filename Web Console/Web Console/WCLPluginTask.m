@@ -84,7 +84,7 @@
             [task setEnvironment:environmentDictionary];
         }
 
-        NSString *runText = [NSString stringWithFormat:@"runCommandPath: %@ withArguments: %@ inDirectoryPath: %@", commandPath, arguments, directoryPath];
+        NSString *runText = [NSString stringWithFormat:@"run: %@\n arguments: %@\n in directory: %@", commandPath, arguments, directoryPath];
         DLog(@"%@", runText);
         [self processStandardOutput:runText task:task delegate:delegate];
         [task launch];
