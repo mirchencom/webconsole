@@ -300,7 +300,10 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
 
     func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
-        delegate?.splitWebViewController(self, didReceiveTitle: title)
+        if webViewController == defaultWebViewController {
+            // Don't set the title from the log
+            delegate?.splitWebViewController(self, didReceiveTitle: title)
+        }
     }
     
     func webViewController(webViewController: WCLWebViewController, taskWillStart task: NSTask) {
