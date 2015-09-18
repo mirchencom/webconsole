@@ -83,8 +83,8 @@
         if (environmentDictionary) {
             [task setEnvironment:environmentDictionary];
         }
-
-        NSString *runText = [NSString stringWithFormat:@"run: %@\n arguments: %@\n in directory: %@", commandPath.lastPathComponent, arguments, directoryPath];
+        
+        NSString *runText = [self runTextWithCommandPath:commandPath arguments:arguments directoryPath:directoryPath];
         DLog(@"%@", runText);
         [self processStandardOutput:runText task:task delegate:delegate];
         [task launch];
@@ -93,6 +93,33 @@
             completionHandler(YES);
         }
     });
+}
+
++ (NSString *)runTextWithCommandPath:(NSString *)commandPath
+                           arguments:(NSArray *)arguments
+                       directoryPath:(NSString *)directoryPath
+{
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    
+    NSString *commandName = commandPath.lastPathComponent;
+    if (commandName) {
+        NSString *item = [NSString stringWithFormat:@"running: %@", commandName];
+        [items addObject:item];
+    }
+    
+    if (arguments) {
+        NSString *argumentsList = [arguments componentsJoinedByString:@", "];
+        NSString *item = [NSString stringWithFormat:@"with arguments: %@", argumentsList];
+        [items addObject:item];
+    }
+
+    if (directoryPath) {
+        NSString *item = [NSString stringWithFormat:@"in directory: %@", directoryPath];
+        [items addObject:item];
+    }
+    
+    NSString *runText = [items componentsJoinedByString:@"\n"];
+    return runText;
 }
 
 + (void)processStandardOutput:(NSString *)text task:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate
