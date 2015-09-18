@@ -1339,6 +1339,7 @@
 				GCC_PREFIX_HEADER = "Web Console/Web Console-Prefix.pch";
 				INFOPLIST_FILE = "Web Console/Web Console-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

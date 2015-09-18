@@ -176,7 +176,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         toggleLog()
     }
 
-    // MARK: Log
+    // MARK: Toggle Log
 
     func showLog() {
         splitController.setCollapsed(false, animated: true)
