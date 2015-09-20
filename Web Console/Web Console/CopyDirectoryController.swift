@@ -50,7 +50,7 @@ class CopyDirectoryController {
 
     // MARK: Private Clean Up Helpers
 
-    class func moveContentsOfURL(URL: NSURL, toDirectoryInTrashWithName trashDirectoryName: String) {
+    class func moveContentsOfURL(URL: NSURL, toDirectoryInTrashWithName trashDirectoryName: String) throws {
         var validCachesURL = false
         if let path = URL.path {
             let hasPrefix = path.hasPrefix(Directory.Caches.path())
@@ -72,8 +72,9 @@ class CopyDirectoryController {
                 var filename: AnyObject?
                 do {
                     try fileURL.getResourceValue(&filename, forKey: NSURLNameKey)
-                } catch {
+                } catch let error as NSError {
                     assert(false, "The error should be nil")
+                    throw error
                 }
                 
                 if let filename = filename as? String {
@@ -92,8 +93,9 @@ class CopyDirectoryController {
                     let destinationFileURL = trashDirectoryURL.URLByAppendingPathComponent(UUIDString)
                     do {
                         try NSFileManager.defaultManager().moveItemAtURL(fileURL, toURL: destinationFileURL)
-                    } catch {
+                    } catch let error as NSError {
                         assert(false, "The move should succeed")
+                        throw error
                     }
                 }
             }
@@ -117,9 +119,7 @@ class CopyDirectoryController {
 
     // MARK: Private Duplicate Helpers
     
-    private class func URLOfItemCopiedFromURL(URL: NSURL, toDirectoryURL directoryURL: NSURL) -> NSURL? {
-        // TODO: Improve error handling
-
+    private class func URLOfItemCopiedFromURL(URL: NSURL, toDirectoryURL directoryURL: NSURL) throws -> NSURL? {
         // Setup the destination directory
         createDirectoryIfMissingAtURL(directoryURL)
         
@@ -130,9 +130,9 @@ class CopyDirectoryController {
         do {
             try NSFileManager.defaultManager().copyItemAtURL(URL, toURL: destinationURL)
             return destinationURL
-        } catch {
-            // TODO: Improve error handling here, this might happen if the user's disk is full for example
+        } catch let error as NSError {
             assert(false, "The copy should succeed")
+            throw error
         }
 
         return nil
@@ -141,7 +141,7 @@ class CopyDirectoryController {
 
     // MARK: Private Create Directory Helpers
     
-    private class func createDirectoryIfMissingAtPath(path: String) {
+    private class func createDirectoryIfMissingAtPath(path: String) throws {
         // TODO: Should set error instead of assert
         var isDir: ObjCBool = false
         let exists = NSFileManager.defaultManager()
@@ -156,15 +156,20 @@ class CopyDirectoryController {
         
         do {
             try NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
-        } catch {
-            // TODO: Improve error handling here, this might happen if the user's disk is full for example
+        } catch let error as NSError {
             assert(false, "The create should succeed")
+            throw error
         }
     }
     
-    private class func createDirectoryIfMissingAtURL(URL: NSURL) {
+    private class func createDirectoryIfMissingAtURL(URL: NSURL) throws {
         if let path = URL.path {
-            createDirectoryIfMissingAtPath(path)
+            do {
+                try createDirectoryIfMissingAtPath(path)
+            } catch let error as NSError {
+                assert(false, "The create should succeed")
+                throw error
+            }
         }
         
         assert(false, "Getting the path should succeed")

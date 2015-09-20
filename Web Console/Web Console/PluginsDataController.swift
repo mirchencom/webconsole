@@ -13,11 +13,13 @@ protocol PluginsDataControllerDelegate {
     func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin)
 }
 
+enum FileSystemError: ErrorType {
+    case FileExistsForDirectoryError
+}
+
 
 class PluginsDataController: PluginsDirectoryManagerDelegate {
-    struct ClassConstants {
-        static let errorCode = -44
-    }
+
     var delegate: PluginsDataControllerDelegate?
     var pluginDirectoryManagers: [PluginsDirectoryManager]!
     var pluginPathToPluginDictionary: [String : Plugin]!
@@ -34,11 +36,10 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
             for plugin in plugins {
                 pluginPathToPluginDictionary[plugin.bundle.bundlePath] = plugin
             }
-            if let pluginsDirectoryURL = NSURL(fileURLWithPath: path) {
-                let pluginDirectoryManager = PluginsDirectoryManager(pluginsDirectoryURL: pluginsDirectoryURL)
-                pluginDirectoryManager.delegate = self
-                pluginDirectoryManagers.append(pluginDirectoryManager)
-            }
+            let pluginsDirectoryURL = NSURL(fileURLWithPath: path)
+            let pluginDirectoryManager = PluginsDirectoryManager(pluginsDirectoryURL: pluginsDirectoryURL)
+            pluginDirectoryManager.delegate = self
+            pluginDirectoryManagers.append(pluginDirectoryManager)
         }
     }
 
@@ -105,8 +106,8 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         assert(plugin.editable, "The plugin should be editable")
         removePlugin(plugin)
         let pluginPath = plugin.bundle.bundlePath
-        let pluginDirectoryPath = pluginPath.stringByDeletingLastPathComponent
-        let pluginDirectoryName = pluginPath.lastPathComponent
+        let pluginDirectoryPath = NSString(string: pluginPath).stringByDeletingLastPathComponent
+        let pluginDirectoryName = NSString(string: pluginPath).lastPathComponent
         NSWorkspace.sharedWorkspace().performFileOperation(NSWorkspaceRecycleOperation,
             source: pluginDirectoryPath,
             destination: "",
@@ -136,31 +137,25 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         }
     }
 
-    class func createDirectoryIfMissing(directoryURL: NSURL, error: NSErrorPointer) -> Bool {
+    class func createDirectoryIfMissing(directoryURL: NSURL) throws {
         var isDir: ObjCBool = false
         let exists = NSFileManager.defaultManager().fileExistsAtPath(directoryURL.path!, isDirectory: &isDir)
         if (exists && isDir) {
-            return true
+            return
         }
         
         if (exists && !isDir) {
-            if error != nil {
-                let errorString = NSLocalizedString("A file exists at the destination directory.", comment: "Invalid destination directory error")
-                error.memory = NSError.errorWithDescription(errorString, code: ClassConstants.errorCode)
-            }
-            return false
+            throw FileSystemError.FileExistsForDirectoryError
         }
 
         var createError: NSError?
-        let success = NSFileManager.defaultManager().createDirectoryAtURL(directoryURL,
-            withIntermediateDirectories: true,
-            attributes: nil,
-            error: &createError)
-        if error != nil {
-            error.memory = createError
+
+        do {
+            try NSFileManager.defaultManager().createDirectoryAtURL(directoryURL, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            assert(false, "Creating the directory should succeed")
+            throw error
         }
-        
-        return success
     }
     
 }

@@ -9,18 +9,15 @@
 extension PluginsDataController {
     class func pathsForPluginsAtPath(path: String) -> [String] {
         var pluginPaths = [String]()
-        
-        if let pathContents = NSFileManager.defaultManager().contentsOfDirectoryAtPath(path, error:nil) {
+        if let pathContents = try? NSFileManager.defaultManager().contentsOfDirectoryAtPath(path) {
             let fileExtension = ".\(pluginFileExtension)"
             let pluginPredicate = NSPredicate(format: "self ENDSWITH %@", fileExtension)
             let pluginPathComponents = pathContents.filter {
                 pluginPredicate.evaluateWithObject($0)
             }
             for pluginPathComponent in pluginPathComponents {
-                if let pluginPathComponenet = pluginPathComponent as? String {
-                    let pluginPath = path.stringByAppendingPathComponent(pluginPathComponenet)
-                    pluginPaths.append(pluginPath)
-                }
+                let pluginPath = NSString(string: path).stringByAppendingPathComponent(pluginPathComponent)
+                pluginPaths.append(pluginPath)
             }
         }
         
