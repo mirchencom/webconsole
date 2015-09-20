@@ -9,11 +9,11 @@
 import Foundation
 import AppKit
 
-@objc protocol SplitControllerDelegate: class {
+protocol SplitControllerDelegate: class {
     func savedFrameNameForSplitController(splitController: SplitController) -> String?
 }
 
-@objc class SplitController {
+class SplitController {
 
     // MARK: Properties
     
@@ -40,14 +40,14 @@ import AppKit
     }
     
     var splitViewItemIndex: Int? {
-        if let splitViewItems = splitViewController?.splitViewItems as? [NSSplitViewItem] {
-            return find(splitViewItems, splitViewItem)!
+        if let splitViewItems = splitViewController?.splitViewItems {
+            return splitViewItems.indexOf(splitViewItem)!
         }
         return nil
     }
 
     var splitViewsSubview: NSView? {
-        if let index = splitViewItemIndex, subview = splitViewController?.splitView.subviews[index] as? NSView {
+        if let index = splitViewItemIndex, subview = splitViewController?.splitView.subviews[index] {
             return subview
         }
         return nil

@@ -37,7 +37,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     var defaultWebViewController: WCLWebViewController {
-        let splitViewItem = splitViewItems.first as! NSSplitViewItem
+        let splitViewItem: NSSplitViewItem! = splitViewItems.first
         return splitViewItem.viewController as! WCLWebViewController
     }
     
@@ -61,25 +61,25 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     var logSplitViewItem: NSSplitViewItem {
-        return splitViewItems.last as! NSSplitViewItem
+        return splitViewItems.last!
     }
 
     var logWebViewController: WCLWebViewController {
-        let splitViewItem = splitViewItems.last as! NSSplitViewItem
+        let splitViewItem = splitViewItems.last!
         return splitViewItem.viewController as! WCLWebViewController
     }
     
     func logError(text: String) {
-        let preparedText = prepareLog(text: text, prefix: logErrorPrefix)
+        let preparedText = prepareLog(text, prefix: logErrorPrefix)
         logReadFromStandardInput(preparedText)
     }
 
     func logMessage(text: String) {
-        let preparedText = prepareLog(text: text, prefix: logMessagePrefix)
+        let preparedText = prepareLog(text, prefix: logMessagePrefix)
         logReadFromStandardInput(preparedText)
     }
     
-    func prepareLog(#text: String, prefix: String) -> String {
+    func prepareLog(text: String, prefix: String) -> String {
         var prependedText = prefix + text
         prependedText = prependedText.stringByReplacingOccurrencesOfString("\n", withString: "\n\(prefix)")
         prependedText += "\n"
@@ -87,7 +87,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     func logReadFromStandardInput(text: String) {
-        var readReadFromStandardInputBlock = { [weak self]() -> Void in
+        let readReadFromStandardInputBlock = { [weak self]() -> Void in
             if let strongSelf = self {
                 strongSelf.logWebViewController.readFromStandardInput(text)
             }
@@ -162,7 +162,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     
     func tasks() -> [NSTask] {
         var tasks = [NSTask]()
-        let splitViewItems = self.splitViewItems as! [NSSplitViewItem]
+        let splitViewItems = self.splitViewItems
         
         for splitViewItem in splitViewItems {
             let webViewController = splitViewItem.viewController as! WCLWebViewController

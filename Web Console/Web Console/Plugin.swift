@@ -24,7 +24,7 @@ extension Plugin {
 class Plugin: WCLPlugin {
     struct ClassConstants {
         static let errorCode = -43
-        static let infoDictionaryPathComponent = "Contents".stringByAppendingPathComponent("Info.plist")
+        static let infoDictionaryPathComponent = NSString(string: "Contents").stringByAppendingPathComponent("Info.plist")
     }
     internal let bundle: NSBundle
     let hidden: Bool
@@ -116,7 +116,7 @@ class Plugin: WCLPlugin {
         get {
             if let resourcePath = resourcePath {
                 if let command = command {
-                    return resourcePath.stringByAppendingPathComponent(command)
+                    return NSString(string: resourcePath).stringByAppendingPathComponent(command)
                 }
             }
             return nil

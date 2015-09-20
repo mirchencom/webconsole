@@ -55,7 +55,7 @@ import Cocoa
     }
     
     func insertObject(object: AnyObject, inObjectsAtIndex index: Int) {
-        var replacedObject: AnyObject? = nameToObjectController.addObject(object)
+        let replacedObject: AnyObject? = nameToObjectController.addObject(object)
         mutableObjects.insertObject(object, atIndex: index)
         if let replacedObject: AnyObject = replacedObject {
             let index = mutableObjects.indexOfObject(replacedObject)
@@ -66,7 +66,7 @@ import Cocoa
     }
     
     func insertObjects(objects: [AnyObject], atIndexes indexes: NSIndexSet) {
-        var replacedObjects: NSArray? = nameToObjectController.addObjectsFromArray(objects)
+        let replacedObjects: NSArray? = nameToObjectController.addObjectsFromArray(objects)
         mutableObjects.insertObjects(objects, atIndexes: indexes)
         if let replacedObjects: NSArray = replacedObjects {
             let indexes = mutableObjects.indexesOfObjectsPassingTest({
