@@ -6,6 +6,11 @@
 //  Copyright (c) 2015 Roben Kleene. All rights reserved.
 //
 
+
+enum PluginLoadError: ErrorType {
+    case InvalidBundleError
+}
+
 extension Plugin {
     struct InfoDictionaryKeys {
         static let Name = "WCName"
