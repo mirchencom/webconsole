@@ -13,11 +13,6 @@ protocol PluginsDataControllerDelegate {
     func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin)
 }
 
-enum FileSystemError: ErrorType {
-    case FileExistsForDirectoryError
-}
-
-
 class PluginsDataController: PluginsDirectoryManagerDelegate {
 
     var delegate: PluginsDataControllerDelegate?
@@ -119,12 +114,10 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     
     func duplicatePlugin(plugin: Plugin, handler: ((plugin: Plugin?, error: NSError?) -> Void)?) {
 
-        var error: NSError?        
-        let success = self.dynamicType.createDirectoryIfMissing(duplicatePluginDestinationDirectoryURL, error: &error)
-
-        if !success || error != nil {
+        do {
+            try self.dynamicType.createDirectoryIfMissing(duplicatePluginDestinationDirectoryURL)
+        } catch let error as NSError {
             handler?(plugin: nil, error: error)
-            return
         }
 
         duplicatePluginController.duplicatePlugin(plugin,

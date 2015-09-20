@@ -22,27 +22,39 @@ class CopyDirectoryController {
     init(tempDirectoryName: String) {
         self.tempDirectoryName = tempDirectoryName
         self.copyTempDirectoryURL = Directory.Caches.URL().URLByAppendingPathComponent(tempDirectoryName)
-        self.cleanUp()
+        do {
+            try self.cleanUp()
+        } catch let error as NSError {
+            assert(false, "Failed to clean up \(error)")
+        }
     }
     
 
     // MARK: Public
     
-    func cleanUp() {
-        self.dynamicType.moveContentsOfURL(copyTempDirectoryURL, toDirectoryInTrashWithName: trashDirectoryName)
+    func cleanUp() throws {
+        do {
+            try self.dynamicType.moveContentsOfURL(copyTempDirectoryURL, toDirectoryInTrashWithName: trashDirectoryName)
+        } catch let error as NSError {
+            throw error
+        }
     }
     
-    func copyItemAtURL(URL: NSURL, completionHandler handler: (URL: NSURL?) -> Void) {
+    func copyItemAtURL(URL: NSURL, completionHandler handler: (URL: NSURL?, error: NSError?) -> Void) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let copiedURL = self.dynamicType.URLOfItemCopiedFromURL(URL, toDirectoryURL: self.copyTempDirectoryURL)
-            dispatch_async(dispatch_get_main_queue()) {
-                handler(URL: copiedURL)
-                if let path = copiedURL?.path {
-                    let fileExists = NSFileManager.defaultManager().fileExistsAtPath(path)
-                    assert(!fileExists, "The file should not exist")
-                } else {
-                    assert(false, "Getting the path should succeed")
+            do {
+                let copiedURL = try self.dynamicType.URLOfItemCopiedFromURL(URL, toDirectoryURL: self.copyTempDirectoryURL)
+                dispatch_async(dispatch_get_main_queue()) {
+                    handler(URL: copiedURL, error: nil)
+                    if let path = copiedURL?.path {
+                        let fileExists = NSFileManager.defaultManager().fileExistsAtPath(path)
+                        assert(!fileExists, "The file should not exist")
+                    } else {
+                        assert(false, "Getting the path should succeed")
+                    }
                 }
+            } catch let error as NSError {
+                handler(URL: nil, error: error)
             }
         }
     }
@@ -83,7 +95,12 @@ class CopyDirectoryController {
 
                     let trashDirectoryURL = URL.URLByAppendingPathComponent(trashDirectoryName)
                     if !foundFilesToRecover {
-                        createDirectoryIfMissingAtURL(trashDirectoryURL)
+                        do {
+                            try createDirectoryIfMissingAtURL(trashDirectoryURL)
+                        } catch let error as NSError {
+                            throw error
+                        }
+                        
                         foundFilesToRecover = true
                     }
                     
@@ -118,8 +135,12 @@ class CopyDirectoryController {
     // MARK: Private Duplicate Helpers
     
     private class func URLOfItemCopiedFromURL(URL: NSURL, toDirectoryURL directoryURL: NSURL) throws -> NSURL? {
-        // Setup the destination directory
-        createDirectoryIfMissingAtURL(directoryURL)
+        do {
+            // Setup the destination directory
+            try createDirectoryIfMissingAtURL(directoryURL)
+        } catch let error as NSError {
+            throw error
+        }
         
         let uuid = NSUUID()
         let uuidString = uuid.UUIDString
@@ -131,8 +152,6 @@ class CopyDirectoryController {
         } catch let error as NSError {
             throw error
         }
-
-        return nil
     }
 
 
@@ -141,13 +160,12 @@ class CopyDirectoryController {
     private class func createDirectoryIfMissingAtPath(path: String) throws {
         // TODO: Should set error instead of assert
         var isDir: ObjCBool = false
-        let exists = NSFileManager.defaultManager()
-            .fileExistsAtPath(path,
-                isDirectory: &isDir)
-        
+        let exists = NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDir)
+
         if exists {
-            let success = isDir ? true : false
-            assert(success, "The file should be a directory")
+            if !isDir {
+                throw FileSystemError.FileExistsForDirectoryError
+            }
             return
         }
         

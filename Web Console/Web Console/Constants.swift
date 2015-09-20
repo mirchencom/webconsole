@@ -18,6 +18,10 @@ let sharedResourcesPluginName = "Shared Resources"
 let logErrorPrefix = "ERROR "
 let logMessagePrefix = "MESSAGE "
 
+enum FileSystemError: ErrorType {
+    case FileExistsForDirectoryError
+}
+
 enum Directory {
     case Caches
     case ApplicationSupport
