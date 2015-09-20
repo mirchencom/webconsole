@@ -148,12 +148,9 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
             throw FileSystemError.FileExistsForDirectoryError
         }
 
-        var createError: NSError?
-
         do {
             try NSFileManager.defaultManager().createDirectoryAtURL(directoryURL, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
-            assert(false, "Creating the directory should succeed")
             throw error
         }
     }

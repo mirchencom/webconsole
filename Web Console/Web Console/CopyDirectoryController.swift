@@ -73,7 +73,6 @@ class CopyDirectoryController {
                 do {
                     try fileURL.getResourceValue(&filename, forKey: NSURLNameKey)
                 } catch let error as NSError {
-                    assert(false, "The error should be nil")
                     throw error
                 }
                 
@@ -94,7 +93,6 @@ class CopyDirectoryController {
                     do {
                         try NSFileManager.defaultManager().moveItemAtURL(fileURL, toURL: destinationFileURL)
                     } catch let error as NSError {
-                        assert(false, "The move should succeed")
                         throw error
                     }
                 }
@@ -131,7 +129,6 @@ class CopyDirectoryController {
             try NSFileManager.defaultManager().copyItemAtURL(URL, toURL: destinationURL)
             return destinationURL
         } catch let error as NSError {
-            assert(false, "The copy should succeed")
             throw error
         }
 
@@ -157,7 +154,6 @@ class CopyDirectoryController {
         do {
             try NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
-            assert(false, "The create should succeed")
             throw error
         }
     }
@@ -167,7 +163,6 @@ class CopyDirectoryController {
             do {
                 try createDirectoryIfMissingAtPath(path)
             } catch let error as NSError {
-                assert(false, "The create should succeed")
                 throw error
             }
         }
