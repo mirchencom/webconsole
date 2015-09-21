@@ -23,7 +23,6 @@ extension Plugin {
 
 class Plugin: WCLPlugin {
     struct ClassConstants {
-        static let errorCode = -43
         static let infoDictionaryPathComponent = NSString(string: "Contents").stringByAppendingPathComponent("Info.plist")
     }
     internal let bundle: NSBundle

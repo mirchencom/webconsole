@@ -7,10 +7,6 @@
 //
 
 
-enum PluginLoadError: ErrorType {
-    case InvalidBundleError
-}
-
 extension Plugin {
     struct InfoDictionaryKeys {
         static let Name = "WCName"
@@ -35,6 +31,10 @@ extension Plugin {
         }
     }
     
+    enum PluginLoadError: ErrorType {
+        case InvalidBundleError()
+    }
+    
     class func pluginWithURL(url: NSURL) -> Plugin? {
         if let path = url.path {
             return self.pluginWithPath(path)
@@ -42,7 +42,27 @@ extension Plugin {
         return nil
     }
 
+//    class func pluginWithPath2(path:string) -> Plugin? {
+//
+//    }
+    
     class func pluginWithPath(path: String) -> Plugin? {
+
+        
+        
+//        do {
+//            try buyFavoriteSnack("Alice", vendingMachine: vendingMachine)
+//        } catch VendingMachineError.InvalidSelection {
+//            print("Invalid Selection.")
+//        } catch VendingMachineError.OutOfStock {
+//            print("Out of Stock.")
+//        } catch VendingMachineError.InsufficientFunds(let coinsNeeded) {
+//            print("Insufficient funds. Please insert an additional \(coinsNeeded) coins.")
+//        }
+        
+        
+        
+        
         var error: NSError?
         if let bundle = validBundle(path, error: &error) {
             if let infoDictionary = validInfoDictionary(bundle, error: &error) {
