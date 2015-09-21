@@ -32,35 +32,54 @@ extension Plugin {
     }
     
     enum PluginLoadError: ErrorType {
-        case InvalidBundleError()
+        case InvalidBundleError(path: String)
+        case InvalidInfoDictionaryError(URL: NSURL)
+        case InvalidFileExtensionsError(infoDictionary: [NSObject : AnyObject])
+        case InvalidCommandError(infoDictionary: [NSObject : AnyObject])
+        case InvalidNameError(infoDictionary: [NSObject : AnyObject])
+        case InvalidIdentifierError(infoDictionary: [NSObject : AnyObject])
+        case InvalidHiddenError(infoDictionary: [NSObject : AnyObject])
+        case InvalidEditableError(infoDictionary: [NSObject : AnyObject])
     }
     
     class func pluginWithURL(url: NSURL) -> Plugin? {
         if let path = url.path {
-            return self.pluginWithPath(path)
+            return self.pluginWithPath2(path)
         }
         return nil
     }
 
-//    class func pluginWithPath2(path:string) -> Plugin? {
-//
-//    }
+    class func pluginWithPath2(path: String) -> Plugin? {
+        do {
+            let plugin = try pluginWithPath(path)
+            return plugin
+        } catch PluginLoadError.InvalidBundleError(let path) {
+            print("Bundle is invalid at path \(path).")
+        } catch PluginLoadError.InvalidInfoDictionaryError(let URL) {
+            print("Info.plist is invalid at URL \(URL).")
+        } catch PluginLoadError.InvalidFileExtensionsError(let infoDictionary) {
+            print("Plugin file extensions are invalid \(infoDictionary).")
+        } catch PluginLoadError.InvalidCommandError(let infoDictionary) {
+            print("Plugin command is invalid \(infoDictionary).")
+        } catch PluginLoadError.InvalidNameError(let infoDictionary) {
+            print("Plugin name is invalid \(infoDictionary).")
+        } catch PluginLoadError.InvalidIdentifierError(let infoDictionary) {
+            print("Plugin UUID is invalid \(infoDictionary).")
+        } catch PluginLoadError.InvalidHiddenError(let infoDictionary) {
+            print("Plugin hidden is invalid \(infoDictionary).")
+        } catch PluginLoadError.InvalidEditableError(let infoDictionary) {
+            print("Plugin editable is invalid \(infoDictionary).")
+        } catch {
+            print("Failed to load plugin at path \(path).")
+        }
+    }
     
-    class func pluginWithPath(path: String) -> Plugin? {
-
-        
-        
-//        do {
-//            try buyFavoriteSnack("Alice", vendingMachine: vendingMachine)
-//        } catch VendingMachineError.InvalidSelection {
-//            print("Invalid Selection.")
-//        } catch VendingMachineError.OutOfStock {
-//            print("Out of Stock.")
-//        } catch VendingMachineError.InsufficientFunds(let coinsNeeded) {
-//            print("Insufficient funds. Please insert an additional \(coinsNeeded) coins.")
-//        }
-        
-        
+    class func pluginWithPath(path: String) throws -> Plugin? {
+        do {
+            let bundle = try validBundle(path)
+        } catch let error as NSError {
+            throw error
+        }
         
         
         var error: NSError?
@@ -104,49 +123,28 @@ extension Plugin {
     
     // MARK: Info Dictionary
     
-    class func validBundle(path: String, error: NSErrorPointer) -> NSBundle? {
+    class func validBundle(path: String) throws -> NSBundle? {
         if let bundle = NSBundle(path: path) as NSBundle? {
             return bundle
         }
-        
-        if error != nil {
-            let errorString = NSLocalizedString("Bundle is invalid at path \(path).", comment: "Invalid plugin bundle error")
-            error.memory = NSError.errorWithDescription(errorString, code: ClassConstants.errorCode)
-        }
-        
-        return nil
+        throw PluginLoadError.InvalidBundleError(path: path)
     }
     
-    class func validInfoDictionary(bundle: NSBundle, error: NSErrorPointer) -> [NSObject : AnyObject]? {
-        let url = self.infoDictionaryURLForPluginURL(bundle.bundleURL)
-        let infoDictionary: NSMutableDictionary? = NSMutableDictionary(contentsOfURL: url)
-        if infoDictionary != nil {
-            return infoDictionary as [NSObject : AnyObject]?
+    class func validInfoDictionary(bundle: NSBundle, error: NSErrorPointer) throws -> [NSObject : AnyObject]? {
+        let URL = self.infoDictionaryURLForPluginURL(bundle.bundleURL)
+
+        if let infoDictionary = NSDictionary(contentsOfURL: URL) {
+            return infoDictionary as? [NSObject : AnyObject]
         }
-        
-        if error != nil {
-            if let path = url.path {
-                let errorString = NSLocalizedString("Info.plist is invalid at path \(path).", comment: "Invalid plugin Info.plist error")
-                error.memory = NSError.errorWithDescription(errorString, code: ClassConstants.errorCode)
-            }
-        }
-        
-        return nil
+        throw PluginLoadError.InvalidInfoDictionaryError(URL: URL)
     }
 
-    class func validSuffixes(infoDictionary: [NSObject : AnyObject], error: NSErrorPointer) -> [String]? {
+    class func validSuffixes(infoDictionary: [NSObject : AnyObject], error: NSErrorPointer) throws -> [String]? {
         if let suffixes = infoDictionary[InfoDictionaryKeys.Suffixes] as? [String] {
             return suffixes
         }
 
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Suffixes] {
-            if error != nil {
-                let errorString = NSLocalizedString("Plugin file extensions is invalid \(infoDictionary).", comment: "Invalid plugin file extensions error")
-                error.memory = NSError.errorWithDescription(errorString, code: ClassConstants.errorCode)
-            }
-        }
-        
-        return nil
+        throw PluginLoadError.InvalidFileExtensionsError(infoDictionary: infoDictionary)
     }
 
     class func validCommand(infoDictionary: [NSObject : AnyObject], error: NSErrorPointer) -> String? {
