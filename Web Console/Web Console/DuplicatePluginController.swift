@@ -15,45 +15,46 @@ class DuplicatePluginController {
         static let tempDirectoryName = "Duplicate Plugin"
     }
     class func pluginFilenameFromName(name: String) -> String {
-        return name.stringByAppendingPathExtension(pluginFileExtension)!
+        return NSString(string: name).stringByAppendingPathExtension(pluginFileExtension)!
     }
     func duplicatePlugin(plugin: Plugin, toDirectoryAtURL destinationDirectoryURL: NSURL, completionHandler handler: (plugin: Plugin?, error: NSError?) -> Void) {
         let pluginFileURL = plugin.bundle.bundleURL
         copyDirectoryController.copyItemAtURL(pluginFileURL, completionHandler: { (URL, error) -> Void in
-            assert(URL != nil, "The URL should not be nil")
-            assert(error == nil, "The error should be nil")
+            
+            guard error == nil else {
+                handler(plugin: nil, error: error)
+                return
+            }
             
             var plugin: Plugin?
-            var error: NSError?
             if let URL = URL {
                 let UUID = NSUUID()
                 let movedFilename = self.dynamicType.pluginFilenameFromName(UUID.UUIDString)
                 let movedDestinationURL = destinationDirectoryURL.URLByAppendingPathComponent(movedFilename)
-                var moveError: NSError?
-                let moveSuccess = NSFileManager.defaultManager().moveItemAtURL(URL,
-                    toURL: movedDestinationURL,
-                    error: &moveError)
-                assert(moveSuccess, "The move should succeed")
-                assert(moveError == nil, "The error should be nil")
-                if !moveSuccess || moveError != nil {
-                    println("Failed to move a plugin directory to \(movedDestinationURL) \(moveError)")
+                
+                
+                do {
+                    try NSFileManager.defaultManager().moveItemAtURL(URL, toURL: movedDestinationURL)
+                } catch let error as NSError {
+                    handler(plugin: nil, error: error)
                 }
+                
                 if let movedPlugin = Plugin.pluginWithURL(movedDestinationURL) {
                     movedPlugin.editable = true
                     movedPlugin.renameWithUniqueName()
                     movedPlugin.identifier = UUID.UUIDString
                     plugin = movedPlugin
                     
-                    // Attempt to move the plugin to a directory based on its name
-                    var renameError: NSError?
+                    // Attempt to move the plugin to a directory based on its name (this can safely fail)
                     let renamedPluginFilename = self.dynamicType.pluginFilenameFromName(movedPlugin.name)
                     let renamedDestinationURL = movedDestinationURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(renamedPluginFilename)
-                    let renameSuccess = NSFileManager.defaultManager().moveItemAtURL(movedDestinationURL,
-                        toURL: renamedDestinationURL,
-                        error: &renameError)
-                    if !renameSuccess || renameError != nil {
-                        println("Failed to move a plugin directory to \(renamedDestinationURL) \(error)")
-                    } else if let renamedPlugin = Plugin.pluginWithURL(renamedDestinationURL) {
+                    do {
+                        try NSFileManager.defaultManager().moveItemAtURL(movedDestinationURL, toURL: renamedDestinationURL)
+                    } catch let error as NSError {
+                        handler(plugin: nil, error: error)
+                    }
+                    
+                    if let renamedPlugin = Plugin.pluginWithURL(renamedDestinationURL) {
                         plugin = renamedPlugin
                     }
                 }
