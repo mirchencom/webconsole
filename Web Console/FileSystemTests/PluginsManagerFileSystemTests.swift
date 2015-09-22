@@ -19,7 +19,8 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
     
     func testAddAndDeletePlugin() {
         let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
-        let destinationPluginPath = pluginPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(destinationPluginFilename)
+        let destinationPluginParentPath = NSString(string: pluginPath)
+        let destinationPluginPath = NSString(string: destinationPluginParentPath.stringByDeletingLastPathComponent).stringByAppendingPathComponent(destinationPluginFilename)
         
         var newPlugin: Plugin!
         copyPluginWithConfirmation(plugin, destinationPluginPath: destinationPluginPath, handler: { (plugin) -> Void in

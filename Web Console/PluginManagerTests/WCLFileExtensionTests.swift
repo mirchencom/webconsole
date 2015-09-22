@@ -72,7 +72,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             forKeyPath: testFileExtensionEnabledKeyPath,
             options: NSKeyValueObservingOptions.New)
         {
-            ([NSObject : AnyObject]!) -> Void in
+            (_) -> Void in
             isEnabled = self.fileExtension.enabled
         }
 
@@ -91,7 +91,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             forKeyPath: testFileExtensionEnabledKeyPath,
             options: NSKeyValueObservingOptions.New)
         {
-            ([NSObject : AnyObject]!) -> Void in
+            (_) -> Void in
             isEnabled = self.fileExtension.enabled
         }
 
@@ -111,7 +111,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
             options: NSKeyValueObservingOptions.New)
         {
-            ([NSObject : AnyObject]!) -> Void in
+            (_) -> Void in
             observedChange = true
         }
 
@@ -123,7 +123,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
 
         // Test changing the selected plugin
         
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
         createdPlugin.suffixes = testPluginSuffixes
 
         observedChange = false
@@ -131,7 +131,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
             options: NSKeyValueObservingOptions.New)
         {
-                ([NSObject : AnyObject]!) -> Void in
+                (_) -> Void in
                 observedChange = true
         }
         XCTAssertFalse(observedChange, "The change should not have been observed.")
@@ -147,34 +147,34 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
             options: NSKeyValueObservingOptions.New)
         {
-            ([NSObject : AnyObject]!) -> Void in
+            (_) -> Void in
             observedChange = true
         }
         XCTAssertFalse(observedChange, "The change should not have been observed.")
         fileExtension.selectedPlugin = nil
         XCTAssertTrue(observedChange, "The key-value observing change should have occurred.")
-        XCTAssertEqual(fileExtension.selectedPlugin, fileExtension.plugins()[0] as! Plugin, "The WCLFileExtension's selected WCLPlugin should be the first WCLPlugin.")
+        XCTAssertEqual(fileExtension.selectedPlugin, fileExtension.plugins()[0], "The WCLFileExtension's selected WCLPlugin should be the first WCLPlugin.")
         confirmPluginIdentifierInFileExtensionPluginDictionary()
     }
 
     func testChangingPluginsFileExtensions() {
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
         createdPlugin.suffixes = testPluginSuffixesEmpty
 
-        XCTAssertFalse(contains(fileExtension.plugins() as! [Plugin], createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
+        XCTAssertFalse(fileExtension.plugins().contains(createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
 
-        var plugins = fileExtension.plugins() as! [Plugin]
+        var plugins = fileExtension.plugins()
         WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
             forKeyPath: testFileExtensionPluginsKey,
             options: NSKeyValueObservingOptions.New)
         {
-            ([NSObject : AnyObject]!) -> Void in
-            plugins = self.fileExtension.plugins() as! [Plugin]
+            (_) -> Void in
+            plugins = self.fileExtension.plugins()
         }
-        XCTAssertFalse(contains(plugins, createdPlugin), "The WCLPlugins should not contain the new WCLPlugin.")
+        XCTAssertFalse(plugins.contains(createdPlugin), "The WCLPlugins should not contain the new WCLPlugin.")
         createdPlugin.suffixes = testPluginSuffixes
-        XCTAssertTrue(contains(plugins, createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
-        XCTAssertTrue(contains(fileExtension.plugins() as! [Plugin], createdPlugin), "The WCLFileExtension's WCLPlugins should contain the new WCLPlugin.")
+        XCTAssertTrue(plugins.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
+        XCTAssertTrue(fileExtension.plugins().contains(createdPlugin), "The WCLFileExtension's WCLPlugins should contain the new WCLPlugin.")
 
         fileExtension.selectedPlugin = createdPlugin
         
@@ -185,8 +185,8 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             forKeyPath: testFileExtensionPluginsKey,
             options: NSKeyValueObservingOptions.New)
         {
-            ([NSObject : AnyObject]!) -> Void in
-            plugins = self.fileExtension.plugins() as! [Plugin]
+            (_) -> Void in
+            plugins = self.fileExtension.plugins()
         }
 
         // Test key-value observing for the selected plugin property
@@ -195,7 +195,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
             options: NSKeyValueObservingOptions.New)
         {
-            ([NSObject : AnyObject]!) -> Void in
+            (_) -> Void in
             observedChange = true
         }
         XCTAssertFalse(observedChange, "The change should not have been observed.")
@@ -203,30 +203,30 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         createdPlugin.suffixes = testPluginSuffixesEmpty
 
         // Test the file extensions plugins property changed
-        XCTAssertFalse(contains(plugins, createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
-        XCTAssertFalse(contains(fileExtension.plugins() as! [Plugin], createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
+        XCTAssertFalse(plugins.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
+        XCTAssertFalse(fileExtension.plugins().contains(createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
 
         // Test the file extensions selected plugin property changed
         XCTAssertTrue(observedChange, "The key-value observing change should have occurred.")
         XCTAssertNotEqual(fileExtension.selectedPlugin, createdPlugin, "The WCLFileExtension's selected WCLPlugin should not be the new WCLPlugin.")
-        XCTAssertEqual(fileExtension.selectedPlugin, fileExtension.plugins()[0] as! Plugin, "The WCLFileExtension's selected WCLPlugin should be the first WCLPlugin.")
+        XCTAssertEqual(fileExtension.selectedPlugin, fileExtension.plugins()[0], "The WCLFileExtension's selected WCLPlugin should be the first WCLPlugin.")
 
         confirmPluginIdentifierInFileExtensionPluginDictionary()
     }
 
     func testDeletingSelectedPlugin() {
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
         createdPlugin.suffixes = testPluginSuffixes
         fileExtension.selectedPlugin = createdPlugin
 
         // Test key-value observing for the plugins property
-        var plugins = fileExtension.plugins() as! [Plugin]
+        var plugins = fileExtension.plugins()
         WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
             forKeyPath: testFileExtensionPluginsKey,
             options: NSKeyValueObservingOptions.New)
         {
-            ([NSObject : AnyObject]!) -> Void in
-            plugins = self.fileExtension.plugins() as! [Plugin]
+            (_) -> Void in
+            plugins = self.fileExtension.plugins()
         }
         
         // Test key-value observing for the selected plugin property
@@ -235,7 +235,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
             options: NSKeyValueObservingOptions.New)
             {
-                ([NSObject : AnyObject]!) -> Void in
+                (_) -> Void in
                 observedChange = true
         }
         XCTAssertFalse(observedChange, "The change should not have been observed.")
@@ -244,13 +244,13 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
 
         // Test the file extensions plugins property changed
-        XCTAssertFalse(contains(plugins, createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
-        XCTAssertFalse(contains(fileExtension.plugins() as! [Plugin], createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
+        XCTAssertFalse(plugins.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
+        XCTAssertFalse(fileExtension.plugins().contains(createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
 
         // Test the file extensions selected plugin property changed
         XCTAssertTrue(observedChange, "The key-value observing change should have occurred.")
         XCTAssertNotEqual(fileExtension.selectedPlugin, createdPlugin, "The WCLFileExtension's selected WCLPlugin should not be the new WCLPlugin.")
-        XCTAssertEqual(fileExtension.selectedPlugin, fileExtension.plugins()[0] as! Plugin, "The WCLFileExtension's selected WCLPlugin should be the first WCLPlugin.")
+        XCTAssertEqual(fileExtension.selectedPlugin, fileExtension.plugins()[0], "The WCLFileExtension's selected WCLPlugin should be the first WCLPlugin.")
         
         confirmPluginIdentifierInFileExtensionPluginDictionary()
     }

@@ -26,7 +26,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
     }
     
     func testSettingAndDeletingDefaultNewPlugin() {
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
         PluginsManager.sharedInstance.defaultNewPlugin = createdPlugin
         
         // Assert the WCLPlugin's isDefaultNewPlugin property
@@ -52,7 +52,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
     
 
     func testDefaultNewPlugin() {
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
 
         PluginsManager.sharedInstance.defaultNewPlugin = createdPlugin
         
@@ -60,11 +60,12 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         createdPlugin.command = testPluginCommandTwo
         createdPlugin.suffixes = testPluginSuffixesTwo
         
-        var createdPluginTwo = newPluginWithConfirmation()
+        let createdPluginTwo = newPluginWithConfirmation()
         
         XCTAssertEqual(createdPlugin.suffixes, createdPluginTwo.suffixes, "The new WCLPlugin's file extensions should equal the WCLPlugin's file extensions.")
 
-        let pluginFolderName = createdPluginTwo.bundle.bundlePath.lastPathComponent
+        let bundlePath = createdPluginTwo.bundle.bundlePath
+        let pluginFolderName = NSString(string: bundlePath).lastPathComponent
         XCTAssertEqual(DuplicatePluginController.pluginFilenameFromName(createdPluginTwo.name), pluginFolderName, "The folder name should equal the plugin's name")
         
         let longName: String = createdPlugin.name
@@ -76,7 +77,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
     }
     
     func testSettingDefaultNewPluginToNil() {
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
         PluginsManager.sharedInstance.defaultNewPlugin = createdPlugin
         
         let defaultNewPluginIdentifier: String? = NSUserDefaults.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
@@ -89,7 +90,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
     }
 
     func testDefaultNewPluginKeyValueObserving() {
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
         XCTAssertFalse(createdPlugin.defaultNewPlugin, "The WCLPlugin should not be the default new WCLPlugin.")
 
         var isDefaultNewPlugin = createdPlugin.defaultNewPlugin
@@ -105,7 +106,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         XCTAssertTrue(createdPlugin.defaultNewPlugin, "The WCLPlugin should be the default new WCLPlugin.")
 
         // Test that key-value observing notifications occur when second new plugin is set as the default new plugin
-        var createdPluginTwo = newPluginWithConfirmation()
+        let createdPluginTwo = newPluginWithConfirmation()
         
         XCTAssertFalse(createdPluginTwo.defaultNewPlugin, "The WCLPlugin should not be the default new WCLPlugin.")
         

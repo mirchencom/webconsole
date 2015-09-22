@@ -119,7 +119,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
 
         // Test the height & saved frame
         XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), logHeight, "The heights should be equal")
-        var frame: NSRect! = splitWebViewController.splitController.savedSplitsViewFrame()
+        let frame: NSRect! = splitWebViewController.splitController.savedSplitsViewFrame()
         XCTAssertEqual(frame.size.height, logHeight, "The heights should be equal")
     }
     
@@ -140,7 +140,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     }
 
     func confirmValuesForSplitWebViewController(splitWebViewController: SplitWebViewController, collapsed: Bool) {
-        let logIndex: Int! = find(splitWebViewController.splitViewItems as! [NSSplitViewItem], splitWebViewController.splitController.splitViewItem)
+        let logIndex: Int! = splitWebViewController.splitViewItems.indexOf(splitWebViewController.splitController.splitViewItem)
         XCTAssertNotNil(logIndex, "The index should not be nil")
         
         var result = splitWebViewController.splitView(splitWebViewController.splitView, canCollapseSubview: splitWebViewController.splitController.splitViewsSubview!)
@@ -176,7 +176,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     func makeLogViewWillAppearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
         let webViewController = splitWebViewController.splitController.splitViewItem.viewController as! WCLWebViewController
         let viewWillAppearExpectation = expectationWithDescription("WebViewController will appear")
-        let webViewControllerEventManager = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: { _ in
+        let _ = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: { _ in
             viewWillAppearExpectation.fulfill()
         }, viewWillDisappearBlock: nil)
     }
@@ -184,7 +184,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     func makeLogViewWillDisappearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
         let webViewController = splitWebViewController.splitController.splitViewItem.viewController as! WCLWebViewController
         let viewWillDisappearExpectation = expectationWithDescription("WebViewController will appear")
-        let webViewControllerEventManager = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: nil) { _ in
+        let _ = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: nil) { _ in
             viewWillDisappearExpectation.fulfill()
         }
     }
@@ -195,7 +195,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         observer = NSNotificationCenter.defaultCenter().addObserverForName(NSUserDefaultsDidChangeNotification,
             object: nil,
             queue: nil)
-        { [unowned self] _ in
+        { _ in
             if let frame = SplitController.savedFrameForName(name) {
                 if frame.size.height == height {
                     expectation.fulfill()
