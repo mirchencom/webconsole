@@ -22,6 +22,10 @@ extension Plugin {
 
 
 class Plugin: WCLPlugin {
+    enum PluginWriteError: ErrorType {
+        case FailToWriteDictionaryError(URL: NSURL)
+    }
+    
     struct ClassConstants {
         static let infoDictionaryPathComponent = NSString(string: "Contents").stringByAppendingPathComponent("Info.plist")
     }
@@ -148,17 +152,21 @@ class Plugin: WCLPlugin {
     
     private func save() {
         let infoDictionaryURL = self.infoDictionaryURL
-        var error: NSError?
-        self.dynamicType.writeDictionary(infoDictionary, toURL: infoDictionaryURL, error: &error)
+        do {
+            try self.dynamicType.writeDictionary(infoDictionary, toURL: infoDictionaryURL)
+        } catch PluginWriteError.FailToWriteDictionaryError(let URL) {
+            print("Failed to write an info dictionary at URL \(URL)")
+        } catch let error as NSError {
+            print("Failed to write an info dictionary \(error)")
+        }
+
     }
-    class func writeDictionary(dictionary: [NSObject : AnyObject], toURL url: NSURL, error: NSErrorPointer) {
+
+    class func writeDictionary(dictionary: [NSObject : AnyObject], toURL URL: NSURL) throws {
         let writableDictionary = NSDictionary(dictionary: dictionary)
-        let success = writableDictionary.writeToURL(url, atomically: true)
-        if !success && error != nil {
-            if let path = url.path {
-                let errorString = NSLocalizedString("Failed to write to dictionary at path \(path).", comment: "Failed to write to dictionary")
-                error.memory = NSError.errorWithDescription(errorString, code: ClassConstants.errorCode)
-            }
+        let success = writableDictionary.writeToURL(URL, atomically: true)
+        if !success {
+            throw PluginWriteError.FailToWriteDictionaryError(URL: URL)
         }
     }
 
