@@ -40,7 +40,6 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
     }
     
     func newPluginWithConfirmation() -> Plugin {
-        var error: NSError?
         var createdPlugin: Plugin!
         let createdPluginExpectation = expectationWithDescription("Create new plugin")
         PluginsManager.sharedInstance.newPlugin { (newPlugin, error) -> Void in
@@ -53,7 +52,6 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
     }
  
     func newPluginFromPluginWithConfirmation(plugin: Plugin) -> Plugin {
-        var error: NSError?
         var createdPlugin: Plugin!
         let createdPluginExpectation = expectationWithDescription("Create new plugin")
         PluginsManager.sharedInstance.newPluginFromPlugin(plugin) { (newPlugin, error) -> Void in
