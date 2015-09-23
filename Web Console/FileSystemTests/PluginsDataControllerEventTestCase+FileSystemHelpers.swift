@@ -98,9 +98,13 @@ extension PluginsDataControllerEventTestCase {
 
         // Get the info dictionary contents
         let infoDictionaryPath = plugin.infoDictionaryURL.path!
-        var error: NSError?
-        let infoDictionaryContents: String! = String(contentsOfFile: infoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
-        XCTAssertNil(error, "The error should be nil.")
+
+        var infoDictionaryContents: String!
+        do {
+            infoDictionaryContents = try String(contentsOfFile: infoDictionaryPath, encoding: NSUTF8StringEncoding)
+        } catch {
+            XCTAssertNil(false, "Getting the info dictionary contents shoudld succeed.")
+        }
         
         // Replace the old identifier with the new identifier
         let newInfoDictionaryContents = infoDictionaryContents.stringByReplacingOccurrencesOfString(identifier, withString: newIdentifier)

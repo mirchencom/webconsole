@@ -56,7 +56,8 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
     func testMovePlugin() {
         let pluginPath = plugin.bundle.bundlePath
         let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
-        let destinationPluginPath = pluginPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(destinationPluginFilename)
+        let pluginParentDirectory = NSString(string: pluginPath).stringByDeletingLastPathComponent
+        let destinationPluginPath =  NSString(string: pluginParentDirectory).stringByAppendingPathComponent(destinationPluginFilename)
         
         // Move the plugin
         var newPlugin: Plugin!
@@ -79,9 +80,7 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
         XCTAssertEqual(PluginsManager.sharedInstance.plugins().count, 1, "The plugins count should be one")
     }
     
-    func testEditPlugin() {
-        let pluginPath = plugin.bundle.bundlePath
-        
+    func testEditPlugin() {        
         // Move the plugin
         var newPlugin: Plugin!
         modifyPluginWithConfirmation(plugin, handler: { (plugin) -> Void in
