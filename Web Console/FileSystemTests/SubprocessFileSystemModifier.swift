@@ -120,26 +120,26 @@ class SubprocessFileSystemModifier {
     // MARK: Helpers
     class func runTask(task: NSTask, handler: (Void -> Void)?) {
         task.standardOutput = NSPipe()
-        task.standardOutput.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
+        task.standardOutput!.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
             let data = file.availableData
             if let output = NSString(data: data, encoding: NSUTF8StringEncoding) {
-                println("standardOutput \(output)")
+                print("standardOutput \(output)")
             }
         }
         
         task.standardError = NSPipe()
-        task.standardError.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
+        task.standardError!.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
             let data = file.availableData
             if let output = NSString(data: data, encoding: NSUTF8StringEncoding) {
-                println("standardError \(output)")
+                print("standardError \(output)")
                 assert(false, "There should not be output to standard error")
             }
         }
         
         task.terminationHandler = { (task: NSTask!) -> Void in
             handler?()
-            task.standardOutput.fileHandleForReading.readabilityHandler = nil
-            task.standardError.fileHandleForReading.readabilityHandler = nil
+            task.standardOutput!.fileHandleForReading.readabilityHandler = nil
+            task.standardError!.fileHandleForReading.readabilityHandler = nil
         }
         
         task.launch()

@@ -22,9 +22,9 @@ class PluginsDataControllerFileSystemTests: PluginsDataControllerEventTestCase {
             newPlugin = copiedPlugin
         })
         XCTAssertNotNil(newPlugin, "The plugin should not be nil")
-        XCTAssertTrue(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), newPlugin), "The plugins should contain the plugin")
+        XCTAssertTrue(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(newPlugin), "The plugins should contain the plugin")
         removePluginWithConfirmation(newPlugin)
-        XCTAssertFalse(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), newPlugin), "The plugins should not contain the plugin")
+        XCTAssertFalse(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(newPlugin), "The plugins should not contain the plugin")
     }
     
     func testMovePlugin() {
@@ -37,8 +37,8 @@ class PluginsDataControllerFileSystemTests: PluginsDataControllerEventTestCase {
             newPlugin = plugin
         })
         XCTAssertNotNil(newPlugin, "The plugin should not be nil")
-        XCTAssertFalse(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), plugin), "The plugins should not contain the plugin")
-        XCTAssertTrue(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), newPlugin), "The plugins should contain the plugin")
+        XCTAssertFalse(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(plugin), "The plugins should not contain the plugin")
+        XCTAssertTrue(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(newPlugin), "The plugins should contain the plugin")
         
         // Move the plugin back
         var newPluginTwo: Plugin!
@@ -46,8 +46,8 @@ class PluginsDataControllerFileSystemTests: PluginsDataControllerEventTestCase {
             newPluginTwo = movedPlugin
         })
         XCTAssertNotNil(newPluginTwo, "The plugin should not be nil")
-        XCTAssertFalse(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), newPlugin), "The plugins should not contain the plugin")
-        XCTAssertTrue(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), newPluginTwo), "The plugins should contain the plugin")
+        XCTAssertFalse(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(newPlugin), "The plugins should not contain the plugin")
+        XCTAssertTrue(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(newPluginTwo), "The plugins should contain the plugin")
     }
     
     func testEditPlugin() {        
@@ -57,8 +57,8 @@ class PluginsDataControllerFileSystemTests: PluginsDataControllerEventTestCase {
             newPlugin = modifiedPlugin
         })
         XCTAssertNotNil(newPlugin, "The plugin should not be nil")
-        XCTAssertFalse(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), plugin), "The plugins should not contain the plugin")
-        XCTAssertTrue(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), newPlugin), "The plugins should contain the plugin")
+        XCTAssertFalse(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(plugin), "The plugins should not contain the plugin")
+        XCTAssertTrue(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(newPlugin), "The plugins should contain the plugin")
     }
 
     // TODO: Test plugins made invalid are not loaded?
