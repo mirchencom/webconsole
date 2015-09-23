@@ -51,13 +51,13 @@ class MultiCollectionControllerInitTests: PluginsManagerTestCase {
         XCTAssertEqual(pluginsController.objects().count, 2, "The plugins count should be one")
         
         // Test New Plugins
-        XCTAssertEqual(pluginsController.objectWithKey(newPluginTwo.name)! as! Plugin, newPluginTwo, "The plugins should be equal")
+        XCTAssertEqual(pluginsController.objectWithKey(newPluginTwo.name)! as? Plugin, newPluginTwo, "The plugins should be equal")
         XCTAssertTrue(pluginsController.objects().containsObject(newPluginTwo), "The plugins should contain the second new plugin")
         XCTAssertFalse(pluginsController.objects().containsObject(newPlugin), "The plugins should not contain the new plugin")
         XCTAssertFalse(pluginsController.objects().containsObject(plugin), "The plugins should not contain the temporary plugin")
         
         // Test New Plugins Changed Name
-        XCTAssertEqual(pluginsController.objectWithKey(newPluginChangedNameTwo.name)! as! Plugin, newPluginChangedNameTwo, "The plugins should be equal")
+        XCTAssertEqual(pluginsController.objectWithKey(newPluginChangedNameTwo.name)! as? Plugin, newPluginChangedNameTwo, "The plugins should be equal")
         XCTAssertTrue(pluginsController.objects().containsObject(newPluginChangedNameTwo), "The plugins should contain the second new plugin changed name")
         XCTAssertFalse(pluginsController.objects().containsObject(newPluginChangedName), "The plugins should not contain the new plugin changed name")
         
@@ -91,7 +91,7 @@ class MultiCollectionControllerTests: PluginsManagerTestCase {
         let newPlugin = Plugin.pluginWithURL(destinationPluginURL)!
         pluginsController.addObject(newPlugin)
         XCTAssertEqual(pluginsController.objects().count, 1, "The plugins count should be one")
-        XCTAssertEqual(pluginsController.objectWithKey(newPlugin.name)! as! Plugin, newPlugin, "The plugins should be equal")
+        XCTAssertEqual(pluginsController.objectWithKey(newPlugin.name)! as? Plugin, newPlugin, "The plugins should be equal")
         XCTAssertTrue(pluginsController.objects().containsObject(newPlugin), "The plugins should contain the new plugin")
         XCTAssertFalse(pluginsController.objects().containsObject(plugin), "The plugins should not contain the temporary plugin")
         
@@ -132,13 +132,13 @@ class MultiCollectionControllerTests: PluginsManagerTestCase {
         XCTAssertEqual(pluginsController.objects().count, 2, "The plugins count should be one")
         
         // Test New Plugins
-        XCTAssertEqual(pluginsController.objectWithKey(newPluginTwo.name)! as! Plugin, newPluginTwo, "The plugins should be equal")
+        XCTAssertEqual(pluginsController.objectWithKey(newPluginTwo.name)! as? Plugin, newPluginTwo, "The plugins should be equal")
         XCTAssertTrue(pluginsController.objects().containsObject(newPluginTwo), "The plugins should contain the second new plugin")
         XCTAssertFalse(pluginsController.objects().containsObject(newPlugin), "The plugins should not contain the new plugin")
         XCTAssertFalse(pluginsController.objects().containsObject(plugin), "The plugins should not contain the temporary plugin")
         
         // Test New Plugins Changed Name
-        XCTAssertEqual(pluginsController.objectWithKey(newPluginChangedNameTwo.name)! as! Plugin, newPluginChangedNameTwo, "The plugins should be equal")
+        XCTAssertEqual(pluginsController.objectWithKey(newPluginChangedNameTwo.name)! as? Plugin, newPluginChangedNameTwo, "The plugins should be equal")
         XCTAssertTrue(pluginsController.objects().containsObject(newPluginChangedNameTwo), "The plugins should contain the second new plugin changed name")
         XCTAssertFalse(pluginsController.objects().containsObject(newPluginChangedName), "The plugins should not contain the new plugin changed name")
 

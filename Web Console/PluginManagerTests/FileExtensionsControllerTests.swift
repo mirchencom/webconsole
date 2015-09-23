@@ -12,13 +12,13 @@ import XCTest
 class FileExtensionsControllerTests: FileExtensionsTestCase {
 
     func extensionsTest(extensions1: [String], matchExtensions extensions2: [String]) -> Bool {
-        let sortedExtensions1: NSArray = extensions1.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-        let sortedExtensions2: NSArray = extensions2.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+        let sortedExtensions1: NSArray = extensions1.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+        let sortedExtensions2: NSArray = extensions2.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
         return sortedExtensions1 == sortedExtensions2
     }
 
     func testAddingPluginAndChangingFileExtensions() {
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
         XCTAssertFalse(FileExtensionsController.sharedInstance.suffixes().count > 0, "The file extensions count should be zero")
         
         createdPlugin.suffixes = testPluginSuffixesTwo
@@ -31,7 +31,7 @@ class FileExtensionsControllerTests: FileExtensionsTestCase {
  
         let extensionsTwo: [String] = FileExtensionsController.sharedInstance.suffixes() as! [String]
         let extensionsTwoMatch = extensionsTest(extensionsTwo, matchExtensions: testPluginSuffixesEmpty)
-        XCTAssertTrue(extensionsMatch, "The file extensions should match the empty test file extensions.")
+        XCTAssertTrue(extensionsTwoMatch, "The file extensions should match the empty test file extensions.")
     }
 
 }

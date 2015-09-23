@@ -226,7 +226,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
 
         XCTAssertEqual(PluginsManager.sharedInstance.pluginsDataController.plugins().count, 2, "The plugins count should be two")
-        XCTAssertTrue(contains(PluginsManager.sharedInstance.pluginsDataController.plugins(), newPlugin!), "The plugins should contain the plugin")
+        XCTAssertTrue(PluginsManager.sharedInstance.pluginsDataController.plugins().contains(newPlugin!), "The plugins should contain the plugin")
         
         // Trash the duplicated plugin
         let removeExpectation = expectationWithDescription("Plugin was removed")
@@ -248,12 +248,10 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         XCTAssertTrue(createSuccess, "Creating the file should succeed.")
         XCTAssertNil(error, "The error should succeed.")
         
-        var newPlugin: Plugin?
         let duplicateExpectation = expectationWithDescription("Plugin was duplicated")
         PluginsManager.sharedInstance.pluginsDataController.duplicatePlugin(plugin, handler: { (duplicatePlugin, error) -> Void in
             XCTAssertNil(duplicatePlugin, "The duplicate plugin should be nil")
             XCTAssertNotNil(error, "The error should not be nil")
-            newPlugin = duplicatePlugin
             duplicateExpectation.fulfill()
         })
         
@@ -275,12 +273,10 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         XCTAssertTrue(createSuccess, "Creating the file should succeed.")
         XCTAssertNil(error, "The error should succeed.")
         
-        var newPlugin: Plugin?
         let duplicateExpectation = expectationWithDescription("Plugin was duplicated")
         PluginsManager.sharedInstance.pluginsDataController.duplicatePlugin(plugin, handler: { (duplicatePlugin, error) -> Void in
             XCTAssertNil(duplicatePlugin, "The duplicate plugin should be nil")
             XCTAssertNotNil(error, "The error should not be nil")
-            newPlugin = duplicatePlugin
             duplicateExpectation.fulfill()
         })
         

@@ -16,18 +16,18 @@ class DirectoryTests: XCTestCase {
     }
     
     func testApplicationSupport() {
-        let applicationSupportDirectoryPath = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0] as! String
+        let applicationSupportDirectoryPath = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
         let nameKey = kCFBundleNameKey
-        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey] as! String
+        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey as String] as! String
         let applicationSupportPath = applicationSupportDirectoryPath
             .stringByAppendingPathComponent(applicationName)
         XCTAssert(applicationSupportPath == Directory.ApplicationSupport.path(), "The paths should match")
     }
     
     func testApplicationSupportPluginsPath() {
-        let applicationSupportPath = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0] as! String
+        let applicationSupportPath = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
         let nameKey = kCFBundleNameKey
-        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey] as! String
+        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey as String] as! String
         let applicationSupportPluginsPath = applicationSupportPath
             .stringByAppendingPathComponent(applicationName)
             .stringByAppendingPathComponent(pluginsDirectoryPathComponent)
@@ -35,9 +35,9 @@ class DirectoryTests: XCTestCase {
     }
 
     func testCachesPath() {
-        let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0] as! String
+        let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
         let nameKey = kCFBundleNameKey
-        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey] as! String
+        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey as String] as! String
         let cachesPath = cachesDirectory
             .stringByAppendingPathComponent(applicationName)
         XCTAssert(cachesPath == Directory.Caches.path(), "The paths should match")
