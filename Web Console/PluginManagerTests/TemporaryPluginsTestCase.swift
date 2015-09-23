@@ -29,29 +29,30 @@ class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
         // Create the plugins directory
         pluginsDirectoryURL = temporaryDirectoryURL
             .URLByAppendingPathComponent(pluginsDirectoryPathComponent)
-        var createDirectoryError: NSError?
-        let createSuccess = NSFileManager
-            .defaultManager()
-            .createDirectoryAtURL(pluginsDirectoryURL,
-                withIntermediateDirectories: false,
-                attributes: nil,
-                error: &createDirectoryError)
-        XCTAssertTrue(createSuccess, "The create should succeed")
-        XCTAssertNil(createDirectoryError, "The error should be nil")
-        
+
+        do {
+            try NSFileManager
+                .defaultManager()
+                .createDirectoryAtURL(pluginsDirectoryURL,
+                    withIntermediateDirectories: false,
+                    attributes: nil)
+        } catch let error as NSError {
+            XCTAssertTrue(false, "Creating the directory should succeed \(error)")
+        }
+       
         // Copy the bundle resources plugin to the plugins directory
         let bundleResourcesPluginURL: NSURL! = URLForResource(testPluginName, withExtension:pluginFileExtension)
         let filename = testPluginName.stringByAppendingPathExtension(pluginFileExtension)!
         
         pluginURL = pluginsDirectoryURL.URLByAppendingPathComponent(filename)
-        var movePluginError: NSError?
-        let moveSuccess = NSFileManager
-            .defaultManager()
-            .copyItemAtURL(bundleResourcesPluginURL,
-                toURL: pluginURL,
-                error: &movePluginError)
-        XCTAssertTrue(moveSuccess, "The move should succeed")
-        XCTAssertNil(movePluginError, "The error should be nil")
+        do {
+            try NSFileManager
+                .defaultManager()
+                .copyItemAtURL(bundleResourcesPluginURL,
+                    toURL: pluginURL)
+        } catch let error as NSError {
+            XCTAssertTrue(false, "Moving the directory should succeed \(error)")
+        }
     }
     
     override func tearDown() {
@@ -59,8 +60,12 @@ class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
         pluginURL = nil
         
         // Remove the plugins directory (containing the plugin)
-        let success = removeTemporaryItemAtPathComponent(pluginsDirectoryPathComponent)
-        XCTAssertTrue(success, "Removing the plugins directory should have succeeded")
+        do {
+            try removeTemporaryItemAtPathComponent(pluginsDirectoryPathComponent)
+        } catch let error as NSError {
+            XCTAssertTrue(false, "Removing the plugins directory should have succeeded \(error)")
+        }
+        
         super.tearDown()
     }
     

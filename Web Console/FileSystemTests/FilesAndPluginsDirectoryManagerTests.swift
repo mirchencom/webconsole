@@ -218,24 +218,22 @@ extension FilesAndPluginsDirectoryManagerTests {
     // MARK: Plugin File Hierarchy Helpers
 
     func createDirectoryAtPath(path: String) {
-        var error: NSError?
-        let success = NSFileManager
-            .defaultManager()
-            .createDirectoryAtPath(path,
-                withIntermediateDirectories: false,
-                attributes: nil,
-                error: &error)
-        XCTAssertTrue(success, "Creating the directory should succeed.")
-        XCTAssertNil(error, "The error should succeed")
+        do {
+            try NSFileManager
+                .defaultManager()
+                .createDirectoryAtPath(path,
+                    withIntermediateDirectories: false,
+                    attributes: nil)
+        } catch let error as NSError {
+            XCTAssertTrue(false, "Creating the directory should succeed. \(error)")
+        }
     }
     
     func createFileAtPath(path: String) {
-        var error: NSError?
         let success = NSFileManager.defaultManager().createFileAtPath(path,
             contents: nil,
             attributes: nil)
         XCTAssertTrue(success, "Creating the file should succeed.")
-        XCTAssertNil(error, "The error should succeed.")
     }
     
 
@@ -285,8 +283,11 @@ extension FilesAndPluginsDirectoryManagerTests {
         } else {
             if !requireConfirmation {
                 let testPluginDirectoryPath = path.stringByAppendingPathComponent(testPluginDirectoryName)
-                let success = removeTemporaryItemAtPath(testPluginDirectoryPath)
-                XCTAssertTrue(success, "Removing the directory should succeed.")
+                do {
+                    try removeTemporaryItemAtPath(testPluginDirectoryPath)
+                } catch let error as NSError {
+                    XCTAssertTrue(false, "Removing the directory should succeed. \(error)")
+                }
             } else {
                 createExpectationForPluginInfoDictionaryWasRemovedAtPluginPath(testPluginDirectoryPath)
                 removeFileAtPathWithConfirmation(testInfoDictionaryFilePath)

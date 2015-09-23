@@ -38,4 +38,8 @@ extension String {
     var pathExtension: String {
         return (self as NSString).pathExtension
     }
+
+    var stringByDeletingPathExtension: String {
+        return (self as NSString).stringByDeletingPathExtension
+    }
 }
