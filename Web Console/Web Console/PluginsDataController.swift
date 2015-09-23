@@ -101,8 +101,8 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         assert(plugin.editable, "The plugin should be editable")
         removePlugin(plugin)
         let pluginPath = plugin.bundle.bundlePath
-        let pluginDirectoryPath = NSString(string: pluginPath).stringByDeletingLastPathComponent
-        let pluginDirectoryName = NSString(string: pluginPath).lastPathComponent
+        let pluginDirectoryPath = pluginPath.stringByDeletingLastPathComponent
+        let pluginDirectoryName = pluginPath.lastPathComponent
         NSWorkspace.sharedWorkspace().performFileOperation(NSWorkspaceRecycleOperation,
             source: pluginDirectoryPath,
             destination: "",

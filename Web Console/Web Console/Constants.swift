@@ -32,12 +32,12 @@ enum Directory {
         switch self {
         case .Caches:
             let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-            return NSString(string: cachesDirectory).stringByAppendingPathComponent(applicationName)
+            return cachesDirectory.stringByAppendingPathComponent(applicationName)
         case .ApplicationSupport:
             let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
-            return NSString(string: applicationSupportDirectory).stringByAppendingPathComponent(applicationName)
+            return applicationSupportDirectory.stringByAppendingPathComponent(applicationName)
         case .ApplicationSupportPlugins:
-            return NSString(string: Directory.ApplicationSupport.path()).stringByAppendingPathComponent(pluginsDirectoryPathComponent)
+            return Directory.ApplicationSupport.path().stringByAppendingPathComponent(pluginsDirectoryPathComponent)
         case .BuiltInPlugins:
             return NSBundle.mainBundle().builtInPlugInsPath!
         case .Trash:

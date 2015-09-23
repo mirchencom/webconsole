@@ -33,7 +33,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
     
     class func resolveTemporaryDirectoryPath(path: NSString) -> String {
         // Remove the "/private" path component because FSEvents returns paths iwth this prefix
-        let testPathPrefix = NSString(string: "/private").stringByAppendingPathComponent(ClassConstants.temporaryDirectoryPathPrefix)
+        let testPathPrefix = "/private".stringByAppendingPathComponent(ClassConstants.temporaryDirectoryPathPrefix)
         let pathPrefixRange = path.rangeOfString(testPathPrefix)
         if pathPrefixRange.location == 0 {
             return path.stringByReplacingCharactersInRange(pathPrefixRange, withString: ClassConstants.temporaryDirectoryPathPrefix)
@@ -49,7 +49,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
     }
     
     func removeTemporaryItemAtPathComponent(pathComponent: String) throws {
-        let path = NSString(string: temporaryDirectoryPath).stringByAppendingPathComponent(pathComponent)
+        let path = temporaryDirectoryPath.stringByAppendingPathComponent(pathComponent)
         do {
             try self.dynamicType.safelyRemoveTemporaryItemAtPath(path)
         } catch let error as NSError {
@@ -95,8 +95,8 @@ class TemporaryDirectoryTestCase: XCTestCase {
         super.setUp()
 
         if let temporaryDirectory = NSTemporaryDirectory() as String? {
-            let identifierDirectoryPath = NSString(string: temporaryDirectory).stringByAppendingPathComponent(ClassConstants.bundleIdentifier)
-            let path = NSString(string: identifierDirectoryPath).stringByAppendingPathComponent(className)
+            let identifierDirectoryPath = temporaryDirectory.stringByAppendingPathComponent(ClassConstants.bundleIdentifier)
+            let path = identifierDirectoryPath.stringByAppendingPathComponent(className)
             if NSFileManager.defaultManager().fileExistsAtPath(path) {
                 do {
                     try self.dynamicType.safelyRemoveTemporaryItemAtPath(path)

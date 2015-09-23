@@ -18,4 +18,24 @@ extension String {
     func stringByAppendingPathExtension(ext: String) -> String? {
         return (self as NSString).stringByAppendingPathExtension(ext)
     }
+
+    var stringByDeletingLastPathComponent: String {
+        return (self as NSString).stringByDeletingLastPathComponent
+    }
+
+    var lastPathComponent: String {
+        return (self as NSString).lastPathComponent
+    }
+
+    var stringByStandardizingPath: String {
+        return (self as NSString).stringByStandardizingPath
+    }
+    
+    var pathComponents: [String] {
+        return (self as NSString).pathComponents
+    }
+
+    var pathExtension: String {
+        return (self as NSString).pathExtension
+    }
 }

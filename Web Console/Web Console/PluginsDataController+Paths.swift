@@ -16,7 +16,7 @@ extension PluginsDataController {
                 pluginPredicate.evaluateWithObject($0)
             }
             for pluginPathComponent in pluginPathComponents {
-                let pluginPath = NSString(string: path).stringByAppendingPathComponent(pluginPathComponent)
+                let pluginPath = path.stringByAppendingPathComponent(pluginPathComponent)
                 pluginPaths.append(pluginPath)
             }
         }
