@@ -37,12 +37,14 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
             if let URL = URL {
                 let movedFilename = testDirectoryName
                 let movedDestinationURL = self.pluginsDirectoryURL.URLByAppendingPathComponent(movedFilename)
-                var moveError: NSError?
-                let moveSuccess = NSFileManager.defaultManager().moveItemAtURL(URL,
-                    toURL: movedDestinationURL,
-                    error: &moveError)
-                XCTAssertTrue(moveSuccess, "The move should succeed")
-                XCTAssertNil(moveError, "The error should be nil")
+
+                do {
+                    try NSFileManager.defaultManager().moveItemAtURL(URL,
+                        toURL: movedDestinationURL)
+                } catch {
+                    XCTAssertTrue(false, "The move should succeed")
+                }
+
                 copiedPluginURL = movedDestinationURL
                 copyExpectation.fulfill()
             }
@@ -55,8 +57,11 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         XCTAssertTrue(exists, "The item should exist")
         XCTAssertTrue(isDir, "The item should be a directory")
 
-        var error: NSError?
+
         let pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(pluginURL)
+        
+        var error: NSError?
+
         let pluginInfoDictionaryContents: String! = String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
         XCTAssertNil(error, "The error should be nil")
         let copiedPluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(copiedPluginURL)

@@ -12,10 +12,11 @@ import XCTest
 extension TemporaryPluginsTestCase {
     func fileURLOfDuplicatedItemAtURL(fileURL: NSURL, withFilename filename: String) -> NSURL {
         let destinationFileURL = fileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(filename)
-        var copyError: NSError?
-        let copySuccess = NSFileManager.defaultManager().copyItemAtURL(fileURL, toURL: destinationFileURL, error: &copyError)
-        XCTAssertTrue(copySuccess, "The copy should succeed")
-        XCTAssertNil(copyError, "The error should be nil")
+        do {
+            try NSFileManager.defaultManager().copyItemAtURL(fileURL, toURL: destinationFileURL)
+        } catch {
+            XCTAssertTrue(false, "The copy should succeed")
+        }
         return destinationFileURL
     }
 }
@@ -63,10 +64,11 @@ class MultiCollectionControllerInitTests: PluginsManagerTestCase {
         
         for pluginURL: NSURL in newPluginURLs {
             // Clean up
-            var removeError: NSError?
-            let success = NSFileManager.defaultManager().removeItemAtURL(pluginURL, error: &removeError)
-            XCTAssertTrue(success, "The remove should succeed")
-            XCTAssertNil(removeError, "The error should be nil")
+            do {
+                try NSFileManager.defaultManager().removeItemAtURL(pluginURL)
+            } catch {
+                XCTAssertTrue(false, "The remove should succeed")
+            }
         }
     }
 
@@ -96,10 +98,11 @@ class MultiCollectionControllerTests: PluginsManagerTestCase {
         XCTAssertFalse(pluginsController.objects().containsObject(plugin), "The plugins should not contain the temporary plugin")
         
         // Clean up
-        var removeError: NSError?
-        let success = NSFileManager.defaultManager().removeItemAtURL(destinationPluginURL, error: &removeError)
-        XCTAssertTrue(success, "The remove should succeed")
-        XCTAssertNil(removeError, "The error should be nil")
+        do {
+            try NSFileManager.defaultManager().removeItemAtURL(destinationPluginURL)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
     }
 
     func testAddPlugins() {
@@ -144,10 +147,11 @@ class MultiCollectionControllerTests: PluginsManagerTestCase {
 
         for pluginURL: NSURL in newPluginURLs {
             // Clean up
-            var removeError: NSError?
-            let success = NSFileManager.defaultManager().removeItemAtURL(pluginURL, error: &removeError)
-            XCTAssertTrue(success, "The remove should succeed")
-            XCTAssertNil(removeError, "The error should be nil")
+            do {
+                try NSFileManager.defaultManager().removeItemAtURL(pluginURL)
+            } catch {
+                XCTAssertTrue(false, "The remove should succeed")
+            }            
         }
     }
 }
