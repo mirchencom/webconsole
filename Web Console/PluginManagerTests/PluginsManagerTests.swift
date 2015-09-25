@@ -77,16 +77,21 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
 
         let pluginsPaths = [Directory.BuiltInPlugins.path()]
         for pluginsPath in pluginsPaths {
-            let contents: [AnyObject]! = NSFileManager.defaultManager().contentsOfDirectoryAtPath(pluginsPath, error: nil)
-            let paths = contents as! [String]
-            let pluginFileExtensionMatch = ".\(pluginFileExtension)"
-            let pluginFileExtensionPredicate: NSPredicate! = NSPredicate(format: "self ENDSWITH %@", pluginFileExtensionMatch)
-            let pluginPaths = paths.filter {
-                pluginFileExtensionPredicate.evaluateWithObject($0)
-            }
-            pluginsPathsCount += pluginPaths.count
-        }
 
+            do {
+                let contents: [AnyObject]! = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(pluginsPath)
+                let paths = contents as! [String]
+                let pluginFileExtensionMatch = ".\(pluginFileExtension)"
+                let pluginFileExtensionPredicate: NSPredicate! = NSPredicate(format: "self ENDSWITH %@", pluginFileExtensionMatch)
+                let pluginPaths = paths.filter {
+                    pluginFileExtensionPredicate.evaluateWithObject($0)
+
+                }
+                pluginsPathsCount += pluginPaths.count
+            } catch {
+                XCTAssertTrue(false, "Getting the contents should succeed")
+            }
+        }
         XCTAssert(count == pluginsPathsCount, "The counts should be equal")
     }
 }

@@ -377,10 +377,11 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         })
             
         // Test remove the second file with NSFileManager
-        var error: NSError?
-        let result = NSFileManager.defaultManager().removeItemAtPath(testFilePathTwo, error: &error)
-        XCTAssertTrue(result, "The move should have succeeded")
-        XCTAssertNil(error, "The error should be nil")
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(testFilePathTwo)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
         
         // Remove file
         SubprocessFileSystemModifier.removeFileAtPath(testFilePath)
@@ -432,10 +433,12 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         // Test remove the second file with NSFileManager
         let fileManagerRemoveExpectation = expectationWithDescription("File manager created file")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            var error: NSError?
-            let result = NSFileManager.defaultManager().removeItemAtPath(testFilePathTwo, error: &error)
-            XCTAssertTrue(result, "The move should have succeeded")
-            XCTAssertNil(error, "The error shoudl be nil")
+            do {
+                try NSFileManager.defaultManager().removeItemAtPath(testFilePathTwo)
+            } catch {
+                XCTAssertTrue(false, "The remove should succeed")
+            }
+
             fileManagerRemoveExpectation.fulfill()
         }
         

@@ -80,9 +80,10 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         XCTAssertTrue(isDir, "The item should be a directory")
         
         // Clean up trash
-        var removeError: NSError?
-        let success = NSFileManager.defaultManager().removeItemAtPath(trashedPluginPath, error: &removeError)
-        XCTAssertTrue(success, "The remove should succeed")
-        XCTAssertNil(removeError, "The error should be nil")
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(trashedPluginPath)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
     }
 }
