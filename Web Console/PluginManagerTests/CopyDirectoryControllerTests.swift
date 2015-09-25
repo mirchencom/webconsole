@@ -59,20 +59,22 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
 
 
         let pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(pluginURL)
-        
-        var error: NSError?
-
-        let pluginInfoDictionaryContents: String! = String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
-        XCTAssertNil(error, "The error should be nil")
         let copiedPluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(copiedPluginURL)
-        let copiedPluginInfoDictionaryContents: String! = String(contentsOfURL: copiedPluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
-        XCTAssertNil(error, "The error should be nil")
         
-        XCTAssertEqual(copiedPluginInfoDictionaryContents, pluginInfoDictionaryContents, "The contents should be equal")
+        do {
+            let pluginInfoDictionaryContents: String! = try String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding)
+            let copiedPluginInfoDictionaryContents: String! = try String(contentsOfURL: copiedPluginInfoDictionaryURL, encoding: NSUTF8StringEncoding)
+            XCTAssertEqual(copiedPluginInfoDictionaryContents, pluginInfoDictionaryContents, "The contents should be equal")
+        } catch {
+            XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
+        }
         
         // Cleanup
-        let success = removeTemporaryItemAtURL(copiedPluginURL)
-        XCTAssertTrue(success, "The remove should succeed")
+        do {
+            try removeTemporaryItemAtURL(copiedPluginURL)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
     }
 
     func testCleanUpOnInit() {
@@ -97,27 +99,28 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
 
         // Assert the contents is empty
-        var contentsError: NSError?
-        let keys: Array<AnyObject> = [NSURLNameKey]
-        let options = NSDirectoryEnumerationOptions.SkipsHiddenFiles | NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants
-        let contents = NSFileManager.defaultManager().contentsOfDirectoryAtURL(copyDirectoryController.copyTempDirectoryURL,
-            includingPropertiesForKeys: keys,
-            options: options,
-            error: &contentsError)
-        XCTAssertNil(contentsError, "The error should be nil")
-        XCTAssertFalse(contents!.isEmpty, "The contents should not be empty")
+        do {
+            let contents = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(copyDirectoryController.copyTempDirectoryURL,
+                includingPropertiesForKeys: [NSURLNameKey],
+                options: [.SkipsHiddenFiles, .SkipsSubdirectoryDescendants])
+            XCTAssertFalse(contents.isEmpty, "The contents should not be empty")
+        } catch {
+            XCTAssertTrue(false, "Getting the contents should succeed")
+        }
 
         // Init a new CopyDirectoryController
         let copyDirectoryControllerTwo = CopyDirectoryController(tempDirectoryName: ClassConstants.tempDirectoryName)
         
         // Assert directory is empty
-        var contentsErrorTwo: NSError?
-        let contentsTwo = NSFileManager.defaultManager().contentsOfDirectoryAtURL(copyDirectoryController.copyTempDirectoryURL,
-            includingPropertiesForKeys: keys,
-            options: options,
-            error: &contentsErrorTwo)
-        XCTAssertNil(contentsErrorTwo, "The error should be nil")
-        XCTAssertTrue(contentsTwo!.isEmpty, "The contents should be empty")
+
+        do {
+            let contentsTwo = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(copyDirectoryController.copyTempDirectoryURL,
+                includingPropertiesForKeys: [NSURLNameKey],
+                options: [.SkipsHiddenFiles, .SkipsSubdirectoryDescendants])
+            XCTAssertTrue(contentsTwo.isEmpty, "The contents should be empty")
+        } catch {
+            XCTAssertTrue(false, "Getting the contents should succeed")
+        }
 
         // Clean Up
         let recoveredFilesPath = Directory.Trash.path().stringByAppendingPathComponent(copyDirectoryControllerTwo.trashDirectoryName)
@@ -127,9 +130,10 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         XCTAssertTrue(isDir, "The item should be a directory")
 
         // Clean up trash
-        var removeError: NSError?
-        let success = NSFileManager.defaultManager().removeItemAtPath(recoveredFilesPath, error: &removeError)
-        XCTAssertTrue(success, "The remove should succeed")
-        XCTAssertNil(removeError, "The error should be nil")
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(recoveredFilesPath)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
     }
 }
