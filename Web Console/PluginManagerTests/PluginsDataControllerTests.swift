@@ -100,7 +100,11 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         
         // Clean Up
         let rootDirectoryURL: NSURL! = directoryURL.URLByDeletingLastPathComponent
-        removeTemporaryItemAtURL(rootDirectoryURL)
+        do {
+            try removeTemporaryItemAtURL(rootDirectoryURL)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
     }
     
     func testCreateDirectoryWithPathBlocked() {
@@ -125,7 +129,11 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         XCTAssertEqual(testFileContents, contents, "The contents should be equal")
         
         // Clean Up
-        removeTemporaryItemAtURL(directoryURL)
+        do {
+            try removeTemporaryItemAtURL(directoryURL)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
     }
 
     func testCreateDirectoryWithFirstPathComponentBlocked() {
@@ -151,7 +159,12 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         XCTAssertEqual(testFileContents, contents, "The contents should be equal")
         
         // Clean Up
-        removeTemporaryItemAtURL(blockingFileURL)
+        
+        do {
+            try removeTemporaryItemAtURL(blockingFileURL)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
     }
 
     func testCreateDirectoryWithSecondPathComponentBlocked() {
@@ -184,7 +197,12 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         XCTAssertEqual(testFileContents, contents, "The contents should be equal")
         
         // Clean Up
-        removeTemporaryItemAtURL(containerDirectoryURL)
+        do {
+            try removeTemporaryItemAtURL(containerDirectoryURL)
+        } catch {
+            XCTAssertTrue(false, "The remove should succeed")
+        }
+
     }
 
 }

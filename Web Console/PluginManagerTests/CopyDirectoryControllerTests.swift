@@ -87,12 +87,14 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
                 let movedFilename = testDirectoryName
                 let movedDirectoryURL: NSURL! = URL.URLByDeletingLastPathComponent
                 let movedDestinationURL = movedDirectoryURL.URLByAppendingPathComponent(movedFilename)
-                var moveError: NSError?
-                let moveSuccess = NSFileManager.defaultManager().moveItemAtURL(URL,
-                    toURL: movedDestinationURL,
-                    error: &moveError)
-                XCTAssertTrue(moveSuccess, "The move should succeed")
-                XCTAssertNil(moveError, "The error should be nil")
+
+                do {
+                    try NSFileManager.defaultManager().moveItemAtURL(URL,
+                        toURL: movedDestinationURL)
+                } catch {
+                    XCTAssertTrue(false, "The move should succeed")
+                }
+
                 copyExpectation.fulfill()
             }
         })
