@@ -189,7 +189,12 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         let pluginFilename = pluginPath.lastPathComponent
         let copiedPluginPath = temporaryDirectoryPath.stringByAppendingPathComponent(pluginFilename)
         copyPluginAtPath(pluginPath, destinationPluginPath: copiedPluginPath)
-        removeTemporaryItemAtPath(copiedPluginPath)
+        
+        do {
+            try removeTemporaryItemAtPath(copiedPluginPath)
+        } catch {
+            XCTAssertTrue(false, "The remove should suceed")
+        }
     }
     
     func testCopyFromUnwatchedDirectory() {
@@ -202,7 +207,11 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         copyPluginAtPathWithConfirmation(movedPluginPath, destinationPluginPath: pluginPath)
 
         // Cleanup
-        removeTemporaryItemAtPath(movedPluginPath)
+        do {
+            try removeTemporaryItemAtPath(movedPluginPath)
+        } catch {
+            XCTAssertTrue(false, "The remove should suceed")
+        }
     }
     
     

@@ -77,8 +77,11 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         XCTAssertEqual(DuplicatePluginController.pluginFilenameFromName(duplicatePlugin.name), duplicatePluginFolderName, "The folder name should equal the plugin's name")
         
         // Clean Up
-        let success = removeTemporaryItemAtURL(duplicatePluginURL)
-        XCTAssertTrue(success, "The remove should succeed")
+        do {
+            try removeTemporaryItemAtURL(duplicatePluginURL)
+        } catch {
+            XCTAssertTrue(false, "The remove should suceed")
+        }
     }
     
     func testDuplicatePluginWithFolderNameBlocked() {
