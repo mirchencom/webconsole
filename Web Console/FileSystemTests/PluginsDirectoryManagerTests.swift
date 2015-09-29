@@ -246,9 +246,13 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     
     func testRemoveAndAddInfoDictionary() {
         // Read in the contents of the info dictionary
-        var error: NSError?
-        let infoDictionaryContents: String! = String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
-        XCTAssertNil(error, "The error should be nil.")
+
+        var infoDictionaryContents: String!
+        do {
+            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding)
+        } catch {
+            XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
+        }
         
         // Remove the info dictionary
         let expectation = expectationWithDescription("Info dictionary was removed")
@@ -273,9 +277,14 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
     func testModifyInfoDictionary() {
         // Read in the contents of the info dictionary
-        var error: NSError?
-        let infoDictionaryContents: String! = String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
-        XCTAssertNil(error, "The error should be nil.")
+        var infoDictionaryContents: String!
+        do {
+            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding)
+        } catch {
+            XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
+        }
+
+    
         
         // Remove the info dictionary
         let expectation = expectationWithDescription("Info dictionary was created or modified")
