@@ -12,9 +12,13 @@ class PluginTests: PluginsManagerTestCase {
 
     func infoDictionaryContentsForPluginWithConfirmation(plugin: Plugin) -> String {
         let pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPlugin(plugin).path!
-        var error: NSError?
-        let infoDictionaryContents: String! = String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding, error: &error)
-        XCTAssertNil(error, "The error should be nil.")
+        var infoDictionaryContents: String!
+        do {
+            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding)
+        } catch {
+            XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
+        }
+        
         return infoDictionaryContents
     }
     
@@ -50,70 +54,95 @@ class PluginTests: PluginsManagerTestCase {
         plugin.name = testPluginName
         
         // Test that the name is valid for this plugin
-        var error: NSError?
         var name: AnyObject? = testPluginName
-        var valid = plugin.validateName(&name, error: &error)
-        XCTAssertTrue(valid, "The name should be valid")
-        XCTAssertNil(error, "The error should be nil")
+        do {
+            try plugin.validateName(&name)
+        } catch {
+            XCTAssertTrue(false, "Validation should succeed")
+        }
 
         // Test an invalid object
-        error = nil
         name = []
-        valid = plugin.validateName(&name, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        var error: NSError?
+        do {
+            try plugin.validateName(&name)
+        } catch let nameError as NSError {
+            error = nameError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
 
-        
         // Create a new plugin
         var createdPlugin = newPluginWithConfirmation()
 
         // Test that the name is not valid for another plugin
         error = nil
         name = testPluginName
-        valid = createdPlugin.validateName(&name, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try createdPlugin.validateName(&name)
+        } catch let nameError as NSError {
+            error = nameError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
 
         // Test that the new plugins name is invalid
         error = nil
         name = createdPlugin.name
-        valid = plugin.validateName(&name, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try plugin.validateName(&name)
+        } catch let nameError as NSError {
+            error = nameError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
         // Inverse
         error = nil
         name = plugin.name
-        valid = createdPlugin.validateName(&name, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try createdPlugin.validateName(&name)
+        } catch let nameError as NSError {
+            error = nameError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
         
         // Test that the name is now valid for the second plugin
         name = plugin.name
         plugin.name = testPluginNameNoPlugin
         error = nil
-        valid = createdPlugin.validateName(&name, error:&error)
-        XCTAssertTrue(valid, "The name should be valid")
+        do {
+            try createdPlugin.validateName(&name)
+        } catch let nameError as NSError {
+            error = nameError
+        }
         XCTAssertNil(error, "The error should be nil.")
 
         // Test that the new name is now invalid
         error = nil
         name = plugin.name
-        valid = createdPlugin.validateName(&name, error:&error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try createdPlugin.validateName(&name)
+        } catch let nameError as NSError {
+            error = nameError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
 
         // Test that the created plugins name is valid after deleting
         error = nil
         name = createdPlugin.name
-        valid = plugin.validateName(&name, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try plugin.validateName(&name)
+        } catch let nameError as NSError {
+            error = nameError
+        }
+
         XCTAssertNotNil(error, "The error should not be nil.")
         // Delete
         movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
         // Test that the new name is now valid
         error = nil;
-        valid = plugin.validateName(&name, error:&error)
-        XCTAssertTrue(valid, "The name should be valid")
+        do {
+            try plugin.validateName(&name)
+        } catch let nameError as NSError {
+            error = nameError
+        }
         XCTAssertNil(error, "The error should be nil.")
     }
 
