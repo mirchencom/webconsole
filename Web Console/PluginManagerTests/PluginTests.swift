@@ -72,7 +72,7 @@ class PluginTests: PluginsManagerTestCase {
         XCTAssertNotNil(error, "The error should not be nil.")
 
         // Create a new plugin
-        var createdPlugin = newPluginWithConfirmation()
+        let createdPlugin = newPluginWithConfirmation()
 
         // Test that the name is not valid for another plugin
         error = nil
@@ -109,10 +109,9 @@ class PluginTests: PluginsManagerTestCase {
         error = nil
         do {
             try createdPlugin.validateName(&name)
-        } catch let nameError as NSError {
-            error = nameError
+        } catch {
+            XCTAssertTrue(false, "Validation should succeed")
         }
-        XCTAssertNil(error, "The error should be nil.")
 
         // Test that the new name is now invalid
         error = nil
@@ -132,7 +131,6 @@ class PluginTests: PluginsManagerTestCase {
         } catch let nameError as NSError {
             error = nameError
         }
-
         XCTAssertNotNil(error, "The error should not be nil.")
         // Delete
         movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
@@ -140,46 +138,58 @@ class PluginTests: PluginsManagerTestCase {
         error = nil;
         do {
             try plugin.validateName(&name)
-        } catch let nameError as NSError {
-            error = nameError
+        } catch {
+            XCTAssertTrue(false, "Validation should succeed")
         }
-        XCTAssertNil(error, "The error should be nil.")
     }
 
     func testSuffixValidation() {
         // Test Valid Extensions
-        var error: NSError?
         var suffixes: AnyObject? = testPluginSuffixesTwo
-        var valid = plugin.validateExtensions(&suffixes, error: &error)
-        XCTAssertTrue(valid, "The name should be valid")
-        XCTAssertNil(error, "The error should be nil.")
+        do {
+            try plugin.validateExtensions(&suffixes)
+        } catch {
+            XCTAssertFalse(true, "Validation should succeed.")
+        }
 
         // Test Invalid Duplicate Extensions
-        error = nil
+        var error: NSError?
         suffixes = [testPluginSuffix, testPluginSuffix]
-        valid = plugin.validateExtensions(&suffixes, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try plugin.validateExtensions(&suffixes)
+        } catch let nameError as NSError {
+            error = nameError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
 
         // Test Invalid Length Extensions
         error = nil
         suffixes = [testPluginSuffix, ""]
-        valid = plugin.validateExtensions(&suffixes, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try plugin.validateExtensions(&suffixes)
+        } catch let validationError as NSError {
+            error = validationError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
 
         // Test Invalid Object Extensions
         error = nil
         suffixes = [testPluginSuffix, []]
-        valid = plugin.validateExtensions(&suffixes, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try plugin.validateExtensions(&suffixes)
+        } catch let validationError as NSError {
+            error = validationError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
 
         // Test Invalid Character Extensions
         error = nil
         suffixes = [testPluginSuffix, "jkl;"]
-        valid = plugin.validateExtensions(&suffixes, error: &error)
-        XCTAssertFalse(valid, "The name should not be valid")
+        do {
+            try plugin.validateExtensions(&suffixes)
+        } catch let validationError as NSError {
+            error = validationError
+        }
         XCTAssertNotNil(error, "The error should not be nil.")
     }
 
@@ -191,10 +201,11 @@ class PluginTests: PluginsManagerTestCase {
         // Duplicate the plugins folder, this should not cause a second plugin to be added to the plugin manager since the copy originated from the same process
         let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
         let destinationPluginURL: NSURL! = pluginURL.URLByDeletingLastPathComponent?.URLByAppendingPathComponent(destinationPluginFilename)
-        var error: NSError?
-        let success = NSFileManager.defaultManager().copyItemAtURL(pluginURL, toURL: destinationPluginURL, error: &error)
-        XCTAssert(success, "The copy should succeed")
-        XCTAssertNil(error, "The error should be nil")
+        do {
+            try NSFileManager.defaultManager().copyItemAtURL(pluginURL, toURL: destinationPluginURL)
+        } catch {
+            XCTAssertTrue(false, "The copy should succeed")
+        }
 
         let newPlugin: Plugin! = Plugin.pluginWithURL(destinationPluginURL)
         XCTAssertNotEqual(plugin, newPlugin, "The plugins should not be equal")
