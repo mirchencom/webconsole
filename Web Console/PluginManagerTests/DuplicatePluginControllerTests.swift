@@ -26,10 +26,15 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
     func testDuplicatePlugin() {
         // Test that the plugin starts not editable
         XCTAssertFalse(plugin.editable, "The plugin should not be editable")
-        var error: NSError?
+
         var pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(pluginURL)
-        var pluginInfoDictionaryContents: String! = String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
-        XCTAssertNil(error, "The error should be nil")
+        var pluginInfoDictionaryContents: String!
+        do {
+            pluginInfoDictionaryContents = try String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding)
+        } catch {
+            XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
+        }
+
         var pluginInfoDictionaryContentsAsNSString: NSString = pluginInfoDictionaryContents
         var range = pluginInfoDictionaryContentsAsNSString.rangeOfString(Plugin.InfoDictionaryKeys.Editable)
         XCTAssertFalse(range.location == NSNotFound, "The string should have been found")
@@ -55,10 +60,13 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
 
         // Test that the new plugin is editable
         XCTAssertTrue(duplicatePlugin.editable, "The duplicated plugin should be editable")
-        error = nil
         pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(duplicatePlugin.bundle.bundleURL)
-        pluginInfoDictionaryContents = String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding, error: &error)
-        XCTAssertNil(error, "The error should be nil")
+
+        do {
+            pluginInfoDictionaryContents = try String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding)
+        } catch {
+            XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
+        }
 
         pluginInfoDictionaryContentsAsNSString = pluginInfoDictionaryContents
         range = pluginInfoDictionaryContentsAsNSString.rangeOfString(Plugin.InfoDictionaryKeys.Editable)
@@ -91,15 +99,16 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         
         // Create a folder at the destination URL
         let destinationFolderURL = pluginsDirectoryURL.URLByAppendingPathComponent(destinationName)
-        var createDirectoryError: NSError?
-        let createSuccess = NSFileManager
-            .defaultManager()
-            .createDirectoryAtURL(destinationFolderURL,
-                withIntermediateDirectories: false,
-                attributes: nil,
-                error: &createDirectoryError)
-        XCTAssertTrue(createSuccess, "The create should succeed")
-        XCTAssertNil(createDirectoryError, "The error should be nil")
+
+        do {
+            try NSFileManager
+                .defaultManager()
+                .createDirectoryAtURL(destinationFolderURL,
+                    withIntermediateDirectories: false,
+                    attributes: nil)
+        } catch {
+            XCTAssertTrue(false, "The create should succeed")
+        }
 
         // Test that the folder exists
         var isDir: ObjCBool = false
