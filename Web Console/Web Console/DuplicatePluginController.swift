@@ -50,12 +50,11 @@ class DuplicatePluginController {
                     let renamedDestinationURL = movedDestinationURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(renamedPluginFilename)
                     do {
                         try NSFileManager.defaultManager().moveItemAtURL(movedDestinationURL, toURL: renamedDestinationURL)
+                        if let renamedPlugin = Plugin.pluginWithURL(renamedDestinationURL) {
+                            plugin = renamedPlugin
+                        }
                     } catch let error as NSError {
-                        handler(plugin: nil, error: error)
-                    }
-                    
-                    if let renamedPlugin = Plugin.pluginWithURL(renamedDestinationURL) {
-                        plugin = renamedPlugin
+                        print("Failed to move a plugin directory to \(renamedDestinationURL) \(error)")
                     }
                 }
             }

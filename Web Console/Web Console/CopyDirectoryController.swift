@@ -183,8 +183,8 @@ class CopyDirectoryController {
             } catch let error as NSError {
                 throw error
             }
+        } else {
+            assert(false, "Getting the path should succeed")
         }
-        
-        assert(false, "Getting the path should succeed")
     }
 }

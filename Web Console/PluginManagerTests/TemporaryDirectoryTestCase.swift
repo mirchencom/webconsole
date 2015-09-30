@@ -64,8 +64,9 @@ class TemporaryDirectoryTestCase: XCTestCase {
             } catch let error as NSError {
                 throw error
             }
+        } else {
+            throw TemporaryDirectoryError.InvalidURLError(URL: URL)
         }
-        throw TemporaryDirectoryError.InvalidURLError(URL: URL)
     }
     
     func removeTemporaryItemAtPath(path: String) throws {
