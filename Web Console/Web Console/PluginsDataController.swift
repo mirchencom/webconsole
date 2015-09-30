@@ -118,6 +118,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
             try self.dynamicType.createDirectoryIfMissing(duplicatePluginDestinationDirectoryURL)
         } catch let error as NSError {
             handler?(plugin: nil, error: error)
+            return
         }
 
         duplicatePluginController.duplicatePlugin(plugin,

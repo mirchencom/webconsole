@@ -31,12 +31,12 @@ class DuplicatePluginController {
                 let UUID = NSUUID()
                 let movedFilename = self.dynamicType.pluginFilenameFromName(UUID.UUIDString)
                 let movedDestinationURL = destinationDirectoryURL.URLByAppendingPathComponent(movedFilename)
-                
-                
+
                 do {
                     try NSFileManager.defaultManager().moveItemAtURL(URL, toURL: movedDestinationURL)
                 } catch let error as NSError {
                     handler(plugin: nil, error: error)
+                    return
                 }
                 
                 if let movedPlugin = Plugin.pluginWithURL(movedDestinationURL) {

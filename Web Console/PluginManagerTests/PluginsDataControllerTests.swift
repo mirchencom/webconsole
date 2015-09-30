@@ -118,12 +118,14 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         createFileWithConfirmationAtURL(directoryURL, contents: testFileContents)
         
         // Attempt
+        var error: NSError?
         do {
             try PluginsDataController.createDirectoryIfMissing(directoryURL)
-        } catch {
-            XCTAssertTrue(false, "Creating the directory should succeed")
+        } catch let createError as NSError {
+            error = createError
         }
-
+        XCTAssertNotNil(error, "The error should not be nil")
+        
         // Confirm the File Still Exists
         confirmFileExistsAtURL(directoryURL)
         
