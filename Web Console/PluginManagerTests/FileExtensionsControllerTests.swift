@@ -27,7 +27,7 @@ class FileExtensionsControllerTests: FileExtensionsTestCase {
         XCTAssertTrue(extensionsMatch, "The file extensions should match the test file extensions.")
 
         // Set file extensions to empty array
-        plugin.suffixes = testPluginSuffixesEmpty
+        createdPlugin.suffixes = testPluginSuffixesEmpty
  
         let extensionsTwo: [String] = FileExtensionsController.sharedInstance.suffixes() as! [String]
         let extensionsTwoMatch = extensionsTest(extensionsTwo, matchExtensions: testPluginSuffixesEmpty)
