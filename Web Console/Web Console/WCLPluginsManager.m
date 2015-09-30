@@ -28,14 +28,14 @@
         return _defaultNewPlugin;
     }
     
-    NSString *identifier = [[NSUserDefaults standardUserDefaults] stringForKey:kDefaultNewPluginIdentifierKey];
+    NSString *identifier = [[UserDefaultsManager standardUserDefaults] stringForKey:kDefaultNewPluginIdentifierKey];
     
     Plugin *plugin;
     
     if (identifier) {
         plugin = [self pluginWithIdentifier:identifier];
         if (!plugin) {
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDefaultNewPluginIdentifierKey];
+            [[UserDefaultsManager standardUserDefaults] removeObjectForKey:kDefaultNewPluginIdentifierKey];
         }
     }
 
@@ -56,7 +56,7 @@
     
     if (!defaultNewPlugin) {
         // Do this early so that the subsequent calls to the getter don't reset the default new plugin
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDefaultNewPluginIdentifierKey];
+        [[UserDefaultsManager standardUserDefaults] removeObjectForKey:kDefaultNewPluginIdentifierKey];
     }
     
     Plugin *oldDefaultNewPlugin = _defaultNewPlugin;
@@ -67,7 +67,7 @@
     _defaultNewPlugin.defaultNewPlugin = YES;
     
     if (_defaultNewPlugin) {
-        [[NSUserDefaults standardUserDefaults] setObject:_defaultNewPlugin.identifier
+        [[UserDefaultsManager standardUserDefaults] setObject:_defaultNewPlugin.identifier
                                                   forKey:kDefaultNewPluginIdentifierKey];
     }
 }

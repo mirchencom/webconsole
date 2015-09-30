@@ -11,6 +11,7 @@
 		450CD3161A8C27DB00D17CF1 /* XCTest+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */; };
 		450CD3181A8C332100D17CF1 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
 		450CD3191A8C337700D17CF1 /* XCTest+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */; };
+		4511EBA41BBCA23400B1023E /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
 		451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */; };
 		4521E9D61A89A1780075D330 /* WCLFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D11A89A1780075D330 /* WCLFilesViewController.m */; };
 		4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D21A89A1780075D330 /* WCLFilesViewController.xib */; };
@@ -30,6 +31,9 @@
 		454762B61B810F7600030F1F /* SplitWebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACAA1B80FA7500AB8963 /* SplitWebViewControllerTests.swift */; };
 		4550593A1B8A6A6D00AE3314 /* WCLWebViewController+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 455059391B8A6A6D00AE3314 /* WCLWebViewController+AppleScript.m */; };
 		4550593D1B8AB1EE00AE3314 /* NSWindow+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4550593C1B8AB1EE00AE3314 /* NSWindow+AppleScript.m */; };
+		455839AB1BBCA61D00EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
+		455839AC1BBCA62600EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
+		455839AD1BBCA63200EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
 		455FD24B1A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2431A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift */; };
@@ -228,6 +232,7 @@
 /* Begin PBXFileReference section */
 		450CD3141A8C27DB00D17CF1 /* XCTest+SharedTestResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTest+SharedTestResources.h"; sourceTree = "<group>"; };
 		450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTest+SharedTestResources.m"; sourceTree = "<group>"; };
+		4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		4518E2B81A886244009A6A66 /* Web ConsoleTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Web ConsoleTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		451D5F8A1780B5450051F974 /* XCTest+BundleResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTest+BundleResources.h"; sourceTree = "<group>"; };
 		451D5F8B1780B5450051F974 /* XCTest+BundleResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTest+BundleResources.m"; sourceTree = "<group>"; };
@@ -700,6 +705,7 @@
 				45B375C5179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m */,
 				4530B0E11736E2A6000A52E2 /* WCLAppDelegate.h */,
 				4530B0E21736E2A6000A52E2 /* WCLAppDelegate.m */,
+				4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */,
 			);
 			name = General;
 			sourceTree = "<group>";
@@ -1074,6 +1080,7 @@
 				459389EF18FB20D900E0218E /* WCLPreferencesWindowController.m in Sources */,
 				45914E401A87E4E600E4BEFA /* PluginsDataController.swift in Sources */,
 				4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */,
+				4511EBA41BBCA23400B1023E /* UserDefaultsManager.swift in Sources */,
 				45914E3E1A87E4E600E4BEFA /* Plugin+Initialization.swift in Sources */,
 				45914E461A87E4E600E4BEFA /* WCLFileExtension.m in Sources */,
 				45914E4B1A87E4E600E4BEFA /* WCLPlugin+Validation.m in Sources */,
@@ -1096,6 +1103,7 @@
 				45B8148318161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m in Sources */,
 				450CD3161A8C27DB00D17CF1 /* XCTest+SharedTestResources.m in Sources */,
 				4596ACAE1B80FF0D00AB8963 /* TestConstants.swift in Sources */,
+				455839AB1BBCA61D00EC03B6 /* UserDefaultsManager.swift in Sources */,
 				45A34E2418726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m in Sources */,
 				4596ACB21B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m in Sources */,
 				454762B61B810F7600030F1F /* SplitWebViewControllerTests.swift in Sources */,
@@ -1159,6 +1167,7 @@
 			files = (
 				450CD3191A8C337700D17CF1 /* XCTest+SharedTestResources.m in Sources */,
 				45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */,
+				455839AD1BBCA63200EC03B6 /* UserDefaultsManager.swift in Sources */,
 				450CD3181A8C332100D17CF1 /* WCLTestPluginManagerTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1181,6 +1190,7 @@
 				459EC94D1A89981E0098A47B /* TemporaryDirectoryTestCase.swift in Sources */,
 				459EC9521A89981E0098A47B /* XCTest+BundleResources.swift in Sources */,
 				459EC9611A899A340098A47B /* CopyDirectoryController.swift in Sources */,
+				455839AC1BBCA62600EC03B6 /* UserDefaultsManager.swift in Sources */,
 				459EC9581A8999AF0098A47B /* WCLPlugin+PluginsManager.swift in Sources */,
 				459EC9441A89981E0098A47B /* FileExtensionsControllerTests.swift in Sources */,
 				459EC9461A89981E0098A47B /* MultiCollectionControllerTests.swift in Sources */,

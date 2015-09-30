@@ -26,13 +26,13 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     
     override func setUp() {
         super.setUp()
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
+        UserDefaultsManager.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
+        UserDefaultsManager.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
     }
     
     override func tearDown() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
-        NSUserDefaults.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
+        UserDefaultsManager.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
+        UserDefaultsManager.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
         self.dynamicType.blockUntilAllTasksRunAndFinish()
         super.tearDown()
     }
@@ -190,7 +190,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     }
     
     func makeFrameSaveExpectationForHeight(height: CGFloat, name: String) {
-        let expectation = expectationWithDescription("NSUserDefaults did change")
+        let expectation = expectationWithDescription("UserDefaults did change")
         var observer: NSObjectProtocol?
         observer = NSNotificationCenter.defaultCenter().addObserverForName(NSUserDefaultsDidChangeNotification,
             object: nil,

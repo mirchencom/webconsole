@@ -92,12 +92,12 @@ class SplitController {
         if let splitsView = splitsView, key = savedFrameName {
             let frame = splitsView.frame
             let frameString = NSStringFromRect(frame)
-            NSUserDefaults.standardUserDefaults().setObject(frameString, forKey:key)
+            UserDefaultsManager.standardUserDefaults().setObject(frameString, forKey:key)
         }
     }
 
     class func savedFrameForName(name: String) -> NSRect? {
-        if let frameString = NSUserDefaults.standardUserDefaults().stringForKey(name) {
+        if let frameString = UserDefaultsManager.standardUserDefaults().stringForKey(name) {
             let frame = NSRectFromString(frameString)
             return frame
         }

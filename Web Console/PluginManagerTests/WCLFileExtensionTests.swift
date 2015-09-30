@@ -49,7 +49,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
     }
 
     override func tearDown() {
-        NSUserDefaults.standardUserDefaults().setValue(nil, forKey: fileExtensionToPluginKey)
+        UserDefaultsManager.standardUserDefaults().setValue(nil, forKey: fileExtensionToPluginKey)
         super.tearDown()
     }
     
@@ -80,7 +80,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         XCTAssertEqual(isEnabled, inverseEnabled, "The key-value observing change notification for the WCLFileExtensions's enabled property should have occurred.")
         XCTAssertEqual(fileExtension.enabled, inverseEnabled, "The WCLFileExtension's isEnabled should equal the inverse enabled.")
 
-        // Test NSUserDefaults
+        // Test UserDefaults
         var enabledInDictionary = fileExtensionPluginDictionary.valueForKey(testFileExtensionEnabledKeyPath) as! Bool
         XCTAssertEqual(enabledInDictionary, fileExtension.enabled, "The enabled value in the dictionary should match the WCLFileExtension's enabled property")
 
@@ -99,7 +99,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         XCTAssertEqual(isEnabled, inverseEnabled, "The key-value observing change notification for the WCLFileExtensions's enabled property should have occurred.")
         XCTAssertEqual(fileExtension.enabled, inverseEnabled, "The WCLFileExtension's isEnabled should equal the inverse enabled.")
 
-        // Test NSUserDefaults
+        // Test UserDefaults
         enabledInDictionary = fileExtensionPluginDictionary.valueForKey(testFileExtensionEnabledKeyPath) as! Bool
         XCTAssertEqual(enabledInDictionary, fileExtension.enabled, "The enabled value in the dictionary should match the WCLFileExtension's enabled property")
     }

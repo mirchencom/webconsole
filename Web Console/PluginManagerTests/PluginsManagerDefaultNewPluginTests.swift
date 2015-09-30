@@ -15,13 +15,13 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         PluginsManager.sharedInstance.defaultNewPlugin = nil
         let UUID = NSUUID()
         let UUIDString = UUID.UUIDString
-        NSUserDefaults.standardUserDefaults().setObject(UUIDString, forKey: defaultNewPluginIdentifierKey)
+        UserDefaultsManager.standardUserDefaults().setObject(UUIDString, forKey: defaultNewPluginIdentifierKey)
 
         let defaultNewPlugin = PluginsManager.sharedInstance.defaultNewPlugin
         let initialDefaultNewPlugin: Plugin! = PluginsManager.sharedInstance.pluginWithName(initialDefaultNewPluginName)
         XCTAssertEqual(defaultNewPlugin, initialDefaultNewPlugin, "The plugins should be equal")
         
-        let identifier = NSUserDefaults.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
+        let identifier = UserDefaultsManager.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
         XCTAssertNil(identifier, "The default new WCLPlugin identifier should be nil.")
     }
     
@@ -33,7 +33,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         XCTAssertTrue(createdPlugin.defaultNewPlugin, "The WCLPlugin should be the default new WCLPlugin.")
         
         // Assert the default new plugin identifier in NSUserDefaults
-        let defaultNewPluginIdentifier: String! = NSUserDefaults.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
+        let defaultNewPluginIdentifier: String! = UserDefaultsManager.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
         XCTAssertEqual(createdPlugin.identifier, defaultNewPluginIdentifier, "The default WCLPlugin's identifier should equal the WCLPlugin's identifier.")
         
         // Assert the default new plugin is returned from the WCLPluginManager
@@ -46,7 +46,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         let initialDefaultNewPlugin: Plugin! = PluginsManager.sharedInstance.pluginWithName(initialDefaultNewPluginName)
         XCTAssertEqual(defaultNewPluginTwo, initialDefaultNewPlugin, "The plugins should be equal")
 
-        let defaultNewPluginIdentifierTwo = NSUserDefaults.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
+        let defaultNewPluginIdentifierTwo = UserDefaultsManager.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
         XCTAssertNil(defaultNewPluginIdentifierTwo, "The default new WCLPlugin identifier should be nil.")
     }
     
@@ -80,12 +80,12 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         let createdPlugin = newPluginWithConfirmation()
         PluginsManager.sharedInstance.defaultNewPlugin = createdPlugin
         
-        let defaultNewPluginIdentifier: String? = NSUserDefaults.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
+        let defaultNewPluginIdentifier: String? = UserDefaultsManager.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
         XCTAssertNotNil(defaultNewPluginIdentifier, "The identifier should not be nil")
 
         PluginsManager.sharedInstance.defaultNewPlugin = nil
 
-        let defaultNewPluginIdentifierTwo: String? = NSUserDefaults.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
+        let defaultNewPluginIdentifierTwo: String? = UserDefaultsManager.standardUserDefaults().stringForKey(defaultNewPluginIdentifierKey)
         XCTAssertNil(defaultNewPluginIdentifierTwo, "The identifier should be nil")
     }
 

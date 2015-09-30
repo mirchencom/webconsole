@@ -11,6 +11,7 @@
 #import "WCLEnvironmentViewController.h"
 #import "WCLPluginsViewController.h"
 #import "WCLFilesViewController.h"
+#import "Web_Console-Swift.h"
 
 NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
 
@@ -41,7 +42,7 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
     self = [super initWithWindow:window];
     if (self) {
         [self setShouldCascadeWindows:NO];
-        _preferencePane = [[NSUserDefaults standardUserDefaults] integerForKey:kDefaultPreferencesSelectedTabKey];;
+        _preferencePane = [[UserDefaultsManager standardUserDefaults] integerForKey:kDefaultPreferencesSelectedTabKey];;
     }
     return self;
 }
@@ -97,14 +98,14 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
 
     NSString *viewSizeName = [[self class] viewSizeNameForViewController:self.viewController];
 
-    [[NSUserDefaults standardUserDefaults] setObject:NSStringFromSize(viewSize)
+    [[UserDefaultsManager standardUserDefaults] setObject:NSStringFromSize(viewSize)
                                               forKey:viewSizeName];
 }
 
 + (NSSize)savedViewSizeForViewController:(NSViewController *)viewController
 {
     NSString *viewSizeName = [[self class] viewSizeNameForViewController:viewController];
-    NSString *viewSizeString = [[NSUserDefaults standardUserDefaults] objectForKey:viewSizeName];
+    NSString *viewSizeString = [[UserDefaultsManager standardUserDefaults] objectForKey:viewSizeName];
     return NSSizeFromString(viewSizeString);
 }
 
@@ -155,7 +156,7 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
     
     [self setViewController:viewController animated:animated];
 
-    [[NSUserDefaults standardUserDefaults] setInteger:preferencePane forKey:kDefaultPreferencesSelectedTabKey];
+    [[UserDefaultsManager standardUserDefaults] setInteger:preferencePane forKey:kDefaultPreferencesSelectedTabKey];
 }
 
 - (void)setViewController:(NSViewController *)viewController
@@ -184,7 +185,7 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
         // Configure the view
         [[self class] setupConstraintsForView:view inView:contentView];
         
-        // Restore the frame for the view from NSUserDefaults
+        // Restore the frame for the view from UserDefaults
         NSSize viewSize = [[self class] savedViewSizeForViewController:viewController];
         if (viewSize.height != 0 &&
             viewSize.width != 0) {

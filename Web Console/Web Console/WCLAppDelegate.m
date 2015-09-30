@@ -16,6 +16,8 @@
 
 #import "WCLPreferencesWindowController.h"
 
+#import "Web_Console-Swift.h"
+
 @interface WCLAppDelegate ()
 @property (nonatomic, strong) WCLPreferencesWindowController *preferencesWindowController;
 - (IBAction)showPreferencesWindow:(id)sender;
@@ -29,8 +31,8 @@
         NSURL *userDefaultsURL = [[NSBundle mainBundle] URLForResource:kUserDefaultsFilename
                                                          withExtension:kUserDefaultsFileExtension];
         NSDictionary *userDefaultsDictionary = [NSDictionary dictionaryWithContentsOfURL:userDefaultsURL];
-        [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDictionary];
-        [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:userDefaultsDictionary];
+        [[UserDefaultsManager standardUserDefaults] registerDefaults:userDefaultsDictionary];
+        [[UserDefaultsManager sharedUserDefaultsController] setInitialValues:userDefaultsDictionary];
         
         // TODO: This disables caching application wide. It would be nice to replace
         // this with a more granular approach.

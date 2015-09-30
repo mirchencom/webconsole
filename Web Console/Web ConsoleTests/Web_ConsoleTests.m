@@ -12,6 +12,8 @@
 
 #import "WCLPreferencesWindowController.h"
 
+#import "Web_Console-Swift.h"
+
 @interface Web_ConsoleTests : XCTestCase
 
 @end
@@ -34,14 +36,14 @@
 
 - (void)testDefaultPreferencePane
 {
-    WCLPreferencePane preferencePane = [[NSUserDefaults standardUserDefaults] integerForKey:kDefaultPreferencesSelectedTabKey];;
+    WCLPreferencePane preferencePane = [[UserDefaultsManager standardUserDefaults] integerForKey:kDefaultPreferencesSelectedTabKey];;
 
     XCTAssertEqual(preferencePane, kTestDefaultPreferencesSelectedTabValue, @"The WCLPreferencePane should equal the default WCLPreferencePane.");
 }
 
 - (void)testDefaultEnvironment
 {
-    NSDictionary *environmentDictionary = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey];
+    NSDictionary *environmentDictionary = [[UserDefaultsManager standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey];
     
     NSString *path = environmentDictionary[kTestDefaultEnvironmentVariablePathKey];
     XCTAssertTrue([path isEqualToString:kTestDefaultEnvironmentVariablePathValue], @"The path should equal the default path.");
@@ -52,16 +54,16 @@
 
 - (void)testDefaultWebDeveloperExtras
 {
-    BOOL webDeveloperExtrasEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kTestDefaultWebKitDeveloperExtrasKey];
+    BOOL webDeveloperExtrasEnabled = [[UserDefaultsManager standardUserDefaults] boolForKey:kTestDefaultWebKitDeveloperExtrasKey];
     XCTAssertEqual(webDeveloperExtrasEnabled, kTestDefaultWebKitDeveloperExtrasValue, @"The WebKitDeveloperExtras value should equal the default.");
 }
 
 
 + (void)clearUserDefaults
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kEnvironmentDictionaryKey];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDefaultPreferencesSelectedTabKey];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kTestDefaultWebKitDeveloperExtrasKey];
+    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:kEnvironmentDictionaryKey];
+    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:kDefaultPreferencesSelectedTabKey];
+    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:kTestDefaultWebKitDeveloperExtrasKey];
 }
 
 @end

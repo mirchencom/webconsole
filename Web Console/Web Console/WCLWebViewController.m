@@ -256,7 +256,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 - (NSDictionary *)environmentDictionaryForPluginTask:(NSTask *)task
 {
     NSMutableDictionary *environmentDictionary;
-    NSDictionary *preferencesEnvironmentDictionary = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey];
+    NSDictionary *preferencesEnvironmentDictionary = [[UserDefaultsManager standardUserDefaults] dictionaryForKey:kEnvironmentDictionaryKey];
     if (preferencesEnvironmentDictionary) {
         environmentDictionary = [preferencesEnvironmentDictionary mutableCopy];
     } else {

@@ -153,7 +153,7 @@ static void *WCLFileExtensionContext;
 }
 
 
-#pragma mark - NSUserDefaults Dictionary
+#pragma mark - UserDefaults Dictionary
 
 - (NSMutableDictionary *)fileExtensionPluginDictionary
 {
@@ -183,12 +183,12 @@ static void *WCLFileExtensionContext;
 
 + (void)setfileExtensionToPluginDictionary:(NSDictionary *)fileExtensionToPluginDictionary
 {
-    [[NSUserDefaults standardUserDefaults] setValue:fileExtensionToPluginDictionary forKey:kFileExtensionToPluginKey];
+    [[UserDefaultsManager standardUserDefaults] setValue:fileExtensionToPluginDictionary forKey:kFileExtensionToPluginKey];
 }
 
 + (NSDictionary *)fileExtensionToPluginDictionary
 {
-    return [[NSUserDefaults standardUserDefaults] valueForKey:kFileExtensionToPluginKey];
+    return [[UserDefaultsManager standardUserDefaults] valueForKey:kFileExtensionToPluginKey];
 }
 
 - (void)dealloc

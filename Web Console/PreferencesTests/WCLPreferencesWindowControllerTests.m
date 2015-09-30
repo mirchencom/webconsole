@@ -15,6 +15,7 @@
 #import "WCLPreferencesWindowController.h"
 #import "NSRectHelpers.h"
 #import "WCLTestPluginManagerTestCase.h"
+#import "Web_Console-Swift.h"
 
 @interface WCLAppDelegate ()
 @property (nonatomic, strong) WCLPreferencesWindowController *preferencesWindowController;
@@ -271,14 +272,14 @@
 + (NSRect)savedFrameForPreferencesWindow
 {
     NSString *windowFrameKey = [[self class] prefrencesWindowSavedFrameKey];
-    NSString *frameString = [[NSUserDefaults standardUserDefaults] stringForKey:windowFrameKey];
+    NSString *frameString = [[UserDefaultsManager standardUserDefaults] stringForKey:windowFrameKey];
     return NSRectFromString(frameString); // If frame string is nil, returns NSZeroRect
 }
 
 + (void)clearPreferencesWindowSavedFrame
 {
     NSString *windowFrameKey = [[self class] prefrencesWindowSavedFrameKey];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:windowFrameKey];
+    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:windowFrameKey];
 }
 
 - (void)clearPreferencePaneSavedSizes
@@ -290,7 +291,7 @@
 
     for (NSViewController *viewController in viewControllers) {
         NSString *viewSizeName = [WCLPreferencesWindowController viewSizeNameForViewController:viewController];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:viewSizeName];
+        [[UserDefaultsManager standardUserDefaults] removeObjectForKey:viewSizeName];
     }
 }
 

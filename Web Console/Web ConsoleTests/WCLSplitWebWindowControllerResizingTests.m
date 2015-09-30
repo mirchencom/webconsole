@@ -40,13 +40,13 @@
 - (void)setUp
 {
     [super setUp];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
+    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
 }
 
 - (void)tearDown
 {
     [[self class] blockUntilAllTasksRunAndFinish];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
+    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
     [super tearDown];
 }
 
@@ -154,7 +154,7 @@
 + (NSRect)savedFrameForPlugin:(Plugin *)plugin
 {
     NSString *savedFrameName = [self savedFrameNameForPlugin:plugin];
-    NSString *frameString = [[NSUserDefaults standardUserDefaults] stringForKey:savedFrameName];
+    NSString *frameString = [[UserDefaultsManager standardUserDefaults] stringForKey:savedFrameName];
     return NSRectFromString(frameString); // If frame string is nil, returns NSZeroRect
 }
 
