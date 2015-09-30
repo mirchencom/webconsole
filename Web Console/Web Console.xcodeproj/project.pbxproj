@@ -170,7 +170,6 @@
 		45DA852E18B0067700A151F3 /* Node.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794D18B005BE00D705C8 /* Node.wcplugin */; };
 		45DA852F18B0067A00A151F3 /* Markdown.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794E18B005BE00D705C8 /* Markdown.wcplugin */; };
 		45DA853118B0068100A151F3 /* HTML.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795018B005BF00D705C8 /* HTML.wcplugin */; };
-		45DCDD3B1B8D4D5500EE0C1F /* Log.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 45DCDD3A1B8D4D5500EE0C1F /* Log.wcplugin */; };
 		45DCDD3C1B8D4D5B00EE0C1F /* Log.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DCDD3A1B8D4D5500EE0C1F /* Log.wcplugin */; };
 /* End PBXBuildFile section */
 
@@ -206,15 +205,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		452E2F871788F7D600EAD55B /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		457F795418B0061600D705C8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -872,11 +862,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4530B1001736E2A6000A52E2 /* Build configuration list for PBXNativeTarget "Web ConsoleTests" */;
 			buildPhases = (
-				452E2F871788F7D600EAD55B /* CopyFiles */,
 				4530B0E71736E2A6000A52E2 /* Sources */,
 				4530B0E81736E2A6000A52E2 /* Frameworks */,
 				4530B0E91736E2A6000A52E2 /* Resources */,
-				4530B0EA1736E2A6000A52E2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1002,7 +990,6 @@
 				45B0FF3E1B75805A008EC6EC /* Main.storyboard in Resources */,
 				45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */,
 				4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */,
-				45DCDD3B1B8D4D5500EE0C1F /* Log.wcplugin in Resources */,
 				459389EE18FB20D900E0218E /* WCLEnvironmentViewController.xib in Resources */,
 				4521E9D91A89A1780075D330 /* WCLPluginsViewController.xib in Resources */,
 			);
@@ -1041,22 +1028,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4530B0EA1736E2A6000A52E2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4530B0C81736E2A6000A52E2 /* Sources */ = {
