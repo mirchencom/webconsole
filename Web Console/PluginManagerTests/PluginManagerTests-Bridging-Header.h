@@ -10,3 +10,4 @@
 #import "WCLKeyValueObservingTestsHelper.h"
 #import "WCLFileExtension.h"
 #import "WCLFileExtension+Tests.h"
+#import "XCTestCase+UserDefaults.h"

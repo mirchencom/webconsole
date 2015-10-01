@@ -34,6 +34,8 @@
 		455839AB1BBCA61D00EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
 		455839AC1BBCA62600EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
 		455839AD1BBCA63200EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
+		455839B01BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */; settings = {ASSET_TAGS = (); }; };
+		455839B11BBCB49A00EC03B6 /* XCTestCase+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */; settings = {ASSET_TAGS = (); }; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
 		455FD24B1A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2431A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift */; };
@@ -264,6 +266,8 @@
 		455059391B8A6A6D00AE3314 /* WCLWebViewController+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WCLWebViewController+AppleScript.m"; sourceTree = "<group>"; };
 		4550593B1B8AB1EE00AE3314 /* NSWindow+AppleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+AppleScript.h"; sourceTree = "<group>"; };
 		4550593C1B8AB1EE00AE3314 /* NSWindow+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+AppleScript.m"; sourceTree = "<group>"; };
+		455839AE1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+UserDefaults.h"; sourceTree = "<group>"; };
+		455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestCase+UserDefaults.m"; sourceTree = "<group>"; };
 		455B0BFC176FF592007B75DD /* WCLLoadHTMLScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLLoadHTMLScriptCommand.h; sourceTree = "<group>"; };
 		455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLLoadHTMLScriptCommand.m; sourceTree = "<group>"; };
 		455B0C081771627A007B75DD /* WCLDoJavaScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLDoJavaScriptCommand.h; sourceTree = "<group>"; };
@@ -447,6 +451,8 @@
 		450CD3171A8C32ED00D17CF1 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				455839AE1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.h */,
+				455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */,
 				45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */,
 				45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */,
 				4561C2271874C01700CF926D /* NSRectHelpers.h */,
@@ -551,11 +557,11 @@
 				450CD3141A8C27DB00D17CF1 /* XCTest+SharedTestResources.h */,
 				450CD3151A8C27DB00D17CF1 /* XCTest+SharedTestResources.m */,
 				4596ACAD1B80FF0D00AB8963 /* TestConstants.swift */,
+				459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */,
+				4518E2B81A886244009A6A66 /* Web ConsoleTests-Bridging-Header.h */,
 				450CD3171A8C32ED00D17CF1 /* Shared */,
 				45898BB11785325B00AE365A /* Data */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
-				459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */,
-				4518E2B81A886244009A6A66 /* Web ConsoleTests-Bridging-Header.h */,
 			);
 			path = "Web ConsoleTests";
 			sourceTree = "<group>";
@@ -1117,6 +1123,7 @@
 				45A34E2618726492005BF628 /* WCLSplitWebWindowControllerTaskTests.m in Sources */,
 				459389F518FB2DAB00E0218E /* Web_ConsoleTests.m in Sources */,
 				453495DD1B810494007FAA09 /* Plugin.swift in Sources */,
+				455839B01BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m in Sources */,
 				4596ACB01B80FF4900AB8963 /* SplitWebViewController.swift in Sources */,
 				45B4FE491BB2388B007CB801 /* String+Paths.swift in Sources */,
 			);
@@ -1183,6 +1190,7 @@
 				459EC95C1A8999F20098A47B /* PluginsDataController+Paths.swift in Sources */,
 				459EC9571A8999A60098A47B /* Plugin+Validation.swift in Sources */,
 				459EC9561A8999A30098A47B /* Plugin+Initialization.swift in Sources */,
+				455839B11BBCB49A00EC03B6 /* XCTestCase+UserDefaults.m in Sources */,
 				459EC9411A89981E0098A47B /* CopyDirectoryControllerTests.swift in Sources */,
 				459EC95B1A8999EC0098A47B /* PluginsDataController.swift in Sources */,
 				459EC9601A899A320098A47B /* DuplicatePluginController.swift in Sources */,
@@ -1559,6 +1567,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = "$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources";
 				INFOPLIST_FILE = PluginManagerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1590,6 +1599,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = "$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources";
 				INFOPLIST_FILE = PluginManagerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;

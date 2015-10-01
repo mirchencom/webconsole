@@ -11,6 +11,16 @@ import XCTest
 
 class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
 
+    override func setUp() {
+        setUpMockUserDefaults()
+        super.setUp()
+    }
+    
+    override func tearDown() {
+        tearDownMockUserDefaults()
+        super.tearDown()
+    }
+    
     func testInvalidDefaultNewPluginIdentifier() {
         PluginsManager.sharedInstance.defaultNewPlugin = nil
         let UUID = NSUUID()

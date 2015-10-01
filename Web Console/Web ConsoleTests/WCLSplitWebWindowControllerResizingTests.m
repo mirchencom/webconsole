@@ -19,6 +19,7 @@
 
 #import "NSRectHelpers.h"
 #import "Web_ConsoleTestsConstants.h"
+#import "XCTestCase+UserDefaults.h"
 
 @interface WCLSplitWebWindowControllerResizingTests : WCLSplitWebWindowControllerTestCase
 @property (nonatomic, readonly) NSString *defaultPluginSavedFrameName;
@@ -40,6 +41,7 @@
 - (void)setUp
 {
     [super setUp];
+    [self setUpMockUserDefaults];
     [[UserDefaultsManager standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
 }
 
@@ -47,6 +49,7 @@
 {
     [[self class] blockUntilAllTasksRunAndFinish];
     [[UserDefaultsManager standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
+    [self tearDownMockUserDefaults];
     [super tearDown];
 }
 

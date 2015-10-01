@@ -11,6 +11,7 @@
 #import "Web_ConsoleTestsConstants.h"
 
 #import "WCLPreferencesWindowController.h"
+#import "XCTestCase+UserDefaults.h"
 
 #import "Web_Console-Swift.h"
 
@@ -23,14 +24,14 @@
 - (void)setUp
 {
     [super setUp];
-
+    [self setUpMockUserDefaults];
     [[self class] clearUserDefaults];
 }
 
 - (void)tearDown
 {
     [[self class] clearUserDefaults];
-    
+    [self tearDownMockUserDefaults];
     [super tearDown];
 }
 
