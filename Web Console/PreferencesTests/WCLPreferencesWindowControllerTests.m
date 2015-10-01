@@ -16,7 +16,6 @@
 #import "NSRectHelpers.h"
 #import "WCLTestPluginManagerTestCase.h"
 #import "Web_Console-Swift.h"
-#import "XCTestCase+UserDefaults.h"
 
 @interface WCLAppDelegate ()
 @property (nonatomic, strong) WCLPreferencesWindowController *preferencesWindowController;
@@ -44,7 +43,7 @@
 - (void)setUp
 {
     [super setUp];
-    [self setUpMockUserDefaults];
+    // NSUserDefaults cannot be mocked because `NSWindow saveFrameUsingName:` saves directly to `standardUserDefaults`
     [[self class] clearPreferencesWindowSavedFrame];
     NSRect savedPreferencesWindowFrame = [[self class] savedFrameForPreferencesWindow];
     XCTAssertTrue(NSRectEqualToRect(savedPreferencesWindowFrame, NSZeroRect), @"The saved preferences window frame should equal NSZeroRect.");
@@ -62,7 +61,6 @@
     [self.appDelegate.preferencesWindowController.window performClose:nil];
     XCTAssertFalse([self.preferencesWindowController.window isVisible], @"The WCLPreferncesWindowController's NSWindow should not visible");
 
-    [self tearDownMockUserDefaults];
     [[self class] clearPreferencesWindowSavedFrame];
     [self clearPreferencePaneSavedSizes];
     
