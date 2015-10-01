@@ -8,7 +8,7 @@
 
 import Cocoa
 import XCTest
-
+@testable import Web_Console
 
 
 class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
@@ -32,10 +32,10 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     }
     
     override func tearDown() {
-        tearDownMockUserDefaults()
+        self.dynamicType.blockUntilAllTasksRunAndFinish()
         UserDefaultsManager.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
         UserDefaultsManager.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
-        self.dynamicType.blockUntilAllTasksRunAndFinish()
+        tearDownMockUserDefaults()
         super.tearDown()
     }
     

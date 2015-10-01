@@ -31,11 +31,9 @@
 		454762B61B810F7600030F1F /* SplitWebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACAA1B80FA7500AB8963 /* SplitWebViewControllerTests.swift */; };
 		4550593A1B8A6A6D00AE3314 /* WCLWebViewController+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 455059391B8A6A6D00AE3314 /* WCLWebViewController+AppleScript.m */; };
 		4550593D1B8AB1EE00AE3314 /* NSWindow+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4550593C1B8AB1EE00AE3314 /* NSWindow+AppleScript.m */; };
-		455839AB1BBCA61D00EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
-		455839AC1BBCA62600EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
-		455839AD1BBCA63200EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
 		455839B01BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */; settings = {ASSET_TAGS = (); }; };
 		455839B11BBCB49A00EC03B6 /* XCTestCase+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */; settings = {ASSET_TAGS = (); }; };
+		455839B21BBCC04F00EC03B6 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
 		455FD24B1A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2431A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift */; };
@@ -111,8 +109,6 @@
 		459389F518FB2DAB00E0218E /* Web_ConsoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */; };
 		4596ACA91B80FA6700AB8963 /* WebViewControllerEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACA81B80FA6700AB8963 /* WebViewControllerEventManager.swift */; };
 		4596ACAE1B80FF0D00AB8963 /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACAD1B80FF0D00AB8963 /* TestConstants.swift */; };
-		4596ACAF1B80FF3500AB8963 /* SplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF391B75805A008EC6EC /* SplitController.swift */; };
-		4596ACB01B80FF4900AB8963 /* SplitWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF3A1B75805A008EC6EC /* SplitWebViewController.swift */; };
 		4596ACB21B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACB11B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m */; };
 		4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */; };
 		459EC9411A89981E0098A47B /* CopyDirectoryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC92C1A89981E0098A47B /* CopyDirectoryControllerTests.swift */; };
@@ -1105,11 +1101,9 @@
 				451D5F8C1780B5450051F974 /* XCTest+BundleResources.m in Sources */,
 				4596ACA91B80FA6700AB8963 /* WebViewControllerEventManager.swift in Sources */,
 				45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */,
-				4596ACAF1B80FF3500AB8963 /* SplitController.swift in Sources */,
 				45B8148318161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m in Sources */,
 				450CD3161A8C27DB00D17CF1 /* XCTest+SharedTestResources.m in Sources */,
 				4596ACAE1B80FF0D00AB8963 /* TestConstants.swift in Sources */,
-				455839AB1BBCA61D00EC03B6 /* UserDefaultsManager.swift in Sources */,
 				45A34E2418726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m in Sources */,
 				4596ACB21B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m in Sources */,
 				454762B61B810F7600030F1F /* SplitWebViewControllerTests.swift in Sources */,
@@ -1124,7 +1118,6 @@
 				459389F518FB2DAB00E0218E /* Web_ConsoleTests.m in Sources */,
 				453495DD1B810494007FAA09 /* Plugin.swift in Sources */,
 				455839B01BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m in Sources */,
-				4596ACB01B80FF4900AB8963 /* SplitWebViewController.swift in Sources */,
 				45B4FE491BB2388B007CB801 /* String+Paths.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1174,7 +1167,6 @@
 			files = (
 				450CD3191A8C337700D17CF1 /* XCTest+SharedTestResources.m in Sources */,
 				45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */,
-				455839AD1BBCA63200EC03B6 /* UserDefaultsManager.swift in Sources */,
 				450CD3181A8C332100D17CF1 /* WCLTestPluginManagerTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1198,7 +1190,6 @@
 				459EC94D1A89981E0098A47B /* TemporaryDirectoryTestCase.swift in Sources */,
 				459EC9521A89981E0098A47B /* XCTest+BundleResources.swift in Sources */,
 				459EC9611A899A340098A47B /* CopyDirectoryController.swift in Sources */,
-				455839AC1BBCA62600EC03B6 /* UserDefaultsManager.swift in Sources */,
 				459EC9581A8999AF0098A47B /* WCLPlugin+PluginsManager.swift in Sources */,
 				459EC9441A89981E0098A47B /* FileExtensionsControllerTests.swift in Sources */,
 				459EC9461A89981E0098A47B /* MultiCollectionControllerTests.swift in Sources */,
@@ -1215,6 +1206,7 @@
 				459EC9471A89981E0098A47B /* PluginsDataControllerEventTestCase.swift in Sources */,
 				459EC9501A89981E0098A47B /* WCLFileExtensionTests.swift in Sources */,
 				459EC95A1A8999D80098A47B /* PluginsManager.swift in Sources */,
+				455839B21BBCC04F00EC03B6 /* UserDefaultsManager.swift in Sources */,
 				459EC95F1A899A1C0098A47B /* PluginsDirectoryManager.swift in Sources */,
 				459EC94C1A89981E0098A47B /* PluginTests.swift in Sources */,
 				459EC9631A899A640098A47B /* NSError+Helper.swift in Sources */,
