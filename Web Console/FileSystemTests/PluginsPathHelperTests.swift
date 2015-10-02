@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     func isRange(range: NSRange, equalToRange comparisonRange: NSRange) -> Bool {
         return range.location == comparisonRange.location && range.length == comparisonRange.length

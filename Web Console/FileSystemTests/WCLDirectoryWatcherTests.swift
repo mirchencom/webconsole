@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 class WCLDirectoryWatcherEventManager: NSObject, WCLDirectoryWatcherDelegate {
     var fileWasCreatedOrModifiedAtPathHandlers: Array<((path: String) -> Void)>
     var directoryWasCreatedOrModifiedAtPathHandlers: Array<((path: String) -> Void)>

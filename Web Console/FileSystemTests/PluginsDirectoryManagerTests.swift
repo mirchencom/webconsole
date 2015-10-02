@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
     var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(path: String) -> Void>
     var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(path: String) -> Void>

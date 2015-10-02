@@ -9,6 +9,8 @@
 import Foundation
 import XCTest
 
+@testable import Web_Console
+
 protocol FilesAndPluginsDirectoryManagerFileDelegate {
     func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String)
     func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String)

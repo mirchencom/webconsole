@@ -9,6 +9,8 @@
 import Foundation
 import XCTest
 
+@testable import Web_Console
+
 extension PluginsDataControllerEventTestCase {
     // MARK: Move Helpers
     
