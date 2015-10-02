@@ -1,0 +1,13 @@
+//
+//  Objective-C Tests.xcconfig
+//  Web Console
+//
+//  Created by Roben Kleene on 10/1/15.
+//  Copyright © 2015 Roben Kleene. All rights reserved.
+//
+
+
+// The path to the generated `-Swift.h` header file for the host app
+// In order to test Swift classes in another from Objective-C code, the
+// generated Swift Objective-C header needs to be imported.
+HEADER_SEARCH_PATHS = $(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources

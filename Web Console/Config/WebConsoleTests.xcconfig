@@ -1,0 +1,9 @@
+//
+//  WebConsoleTests.xcconfig
+//  Web Console
+//
+//  Created by Roben Kleene on 10/1/15.
+//  Copyright © 2015 Roben Kleene. All rights reserved.
+//
+
+#include "SwiftObjC.xcconfig"

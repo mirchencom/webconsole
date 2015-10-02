@@ -257,6 +257,8 @@
 		455059391B8A6A6D00AE3314 /* WCLWebViewController+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WCLWebViewController+AppleScript.m"; sourceTree = "<group>"; };
 		4550593B1B8AB1EE00AE3314 /* NSWindow+AppleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+AppleScript.h"; sourceTree = "<group>"; };
 		4550593C1B8AB1EE00AE3314 /* NSWindow+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+AppleScript.m"; sourceTree = "<group>"; };
+		455092301BBE00AF007B76EA /* SwiftObjC.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SwiftObjC.xcconfig; sourceTree = "<group>"; };
+		455092311BBE0182007B76EA /* WebConsoleTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = WebConsoleTests.xcconfig; sourceTree = "<group>"; };
 		455839AE1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+UserDefaults.h"; sourceTree = "<group>"; };
 		455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestCase+UserDefaults.m"; sourceTree = "<group>"; };
 		455B0BFC176FF592007B75DD /* WCLLoadHTMLScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLLoadHTMLScriptCommand.h; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 		4530B0C31736E2A6000A52E2 = {
 			isa = PBXGroup;
 			children = (
+				4550922F1BBE006C007B76EA /* Config */,
 				457F773C18B0058E00D705C8 /* Plugins */,
 				4530B0D51736E2A6000A52E2 /* Web Console */,
 				4530B0F21736E2A6000A52E2 /* Web ConsoleTests */,
@@ -564,6 +567,15 @@
 				4530B0F51736E2A6000A52E2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4550922F1BBE006C007B76EA /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				455092301BBE00AF007B76EA /* SwiftObjC.xcconfig */,
+				455092311BBE0182007B76EA /* WebConsoleTests.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		455FD2391A899C7600ACE1D4 /* FileSystemTests */ = {
@@ -1345,6 +1357,7 @@
 		};
 		4530B1011736E2A6000A52E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 455092311BBE0182007B76EA /* WebConsoleTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
 				CLANG_ENABLE_MODULES = YES;
@@ -1352,11 +1365,6 @@
 				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Web Console/Web Console-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources",
-				);
 				INFOPLIST_FILE = "Web ConsoleTests/Web ConsoleTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1percenter.${PRODUCT_NAME:rfc1034identifier}";
@@ -1369,6 +1377,7 @@
 		};
 		4530B1021736E2A6000A52E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 455092311BBE0182007B76EA /* WebConsoleTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
 				CLANG_ENABLE_MODULES = YES;
@@ -1376,11 +1385,6 @@
 				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Web Console/Web Console-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources",
-				);
 				INFOPLIST_FILE = "Web ConsoleTests/Web ConsoleTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1percenter.${PRODUCT_NAME:rfc1034identifier}";
