@@ -26,7 +26,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     
     override func setUp() {
         super.setUp()
-        setUpMockUserDefaults()
+        mockUserDefaultsSetUp()
         UserDefaultsManager.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
         UserDefaultsManager.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
     }
@@ -35,7 +35,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         self.dynamicType.blockUntilAllTasksRunAndFinish()
         UserDefaultsManager.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
         UserDefaultsManager.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
-        tearDownMockUserDefaults()
+        mockUserDefaultsTearDown()
         super.tearDown()
     }
     

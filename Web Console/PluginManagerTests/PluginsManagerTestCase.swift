@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 class PluginsManagerTestCase: TemporaryPluginsTestCase {
     var plugin: Plugin!
     

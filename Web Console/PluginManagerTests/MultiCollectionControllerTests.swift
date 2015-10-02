@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 extension TemporaryPluginsTestCase {
     func fileURLOfDuplicatedItemAtURL(fileURL: NSURL, withFilename filename: String) -> NSURL {
         let destinationFileURL = fileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(filename)

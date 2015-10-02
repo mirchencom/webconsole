@@ -8,6 +8,8 @@
 
 import XCTest
 
+@testable import Web_Console
+
 class PluginTests: PluginsManagerTestCase {
 
     func infoDictionaryContentsForPluginWithConfirmation(plugin: Plugin) -> String {

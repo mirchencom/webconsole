@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 #import <WebKit/WebKit.h>
 
-#import "XCTest+BundleResources.h"
+#import "XCTestCase+BundleResources.h"
 
 #import "Web_ConsoleTestsConstants.h"
 

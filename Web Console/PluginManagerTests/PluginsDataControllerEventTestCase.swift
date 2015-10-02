@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 class PluginDataEventManager: PluginsDataControllerDelegate {
     var pluginWasAddedHandlers: Array<(plugin: Plugin) -> Void>
     var pluginWasRemovedHandlers: Array<(plugin: Plugin) -> Void>

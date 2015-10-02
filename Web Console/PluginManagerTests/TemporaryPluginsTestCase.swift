@@ -9,6 +9,8 @@
 import Foundation
 import XCTest
 
+@testable import Web_Console
+
 class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
     var pluginsDirectoryURL: NSURL!
     var pluginsDirectoryPath: String! {

@@ -10,8 +10,8 @@
 #import <XCTest/XCTest.h>
 
 #import "Web_ConsoleTestsConstants.h"
-#import "XCTest+BundleResources.h"
-#import "XCTest+SharedTestResources.h"
+#import "XCTestCase+BundleResources.h"
+#import "XCTestCase+SharedTestResources.h"
 #import "Web_Console-Swift.h"
 
 

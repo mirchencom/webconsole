@@ -12,7 +12,7 @@
 #import "WCLTestPluginManagerTestCase.h"
 #import "Web_ConsoleTestsConstants.h"
 #import "Web_Console-Swift.h"
-#import "XCTest+SharedTestResources.h"
+#import "XCTestCase+SharedTestResources.h"
 
 @implementation WCLTestPluginManagerTestCase
 

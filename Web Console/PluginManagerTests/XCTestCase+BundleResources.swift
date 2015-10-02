@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-extension XCTest {
+extension XCTestCase {
     func pathForResource(name: String?, ofType ext: String?, inDirectory bundlePath: String) -> String? {
         return NSBundle(forClass:self.dynamicType).pathForResource(name, ofType:ext, inDirectory:bundlePath)
     }

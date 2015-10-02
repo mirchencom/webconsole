@@ -18,6 +18,13 @@ let sharedResourcesPluginName = "Shared Resources"
 let logErrorPrefix = "ERROR "
 let logMessagePrefix = "MESSAGE "
 
+// MARK: User Defaults
+
+let userDefaultsFilename = "UserDefaults"
+let userDefaultsFileExtension = "plist"
+
+// MARK: File System
+
 enum FileSystemError: ErrorType {
     case FileExistsForDirectoryError
 }

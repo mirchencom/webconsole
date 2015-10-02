@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 let fileExtensionToPluginKey = "WCLFileExtensionToPlugin"
 
 class WCLFileExtensionTests: FileExtensionsTestCase {
@@ -46,13 +48,13 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         plugin.suffixes = testPluginSuffixes
         XCTAssertEqual(FileExtensionsController.sharedInstance.suffixes().count, 1, "The file extensions count should equal one.")
         fileExtension = FileExtensionsController.sharedInstance.fileExtensionForSuffix(testPluginSuffix)
-        setUpMockUserDefaults()
+        mockUserDefaultsSetUp()
         UserDefaultsManager.standardUserDefaults().setValue(nil, forKey: fileExtensionToPluginKey)
     }
 
     override func tearDown() {
         UserDefaultsManager.standardUserDefaults().setValue(nil, forKey: fileExtensionToPluginKey)
-        tearDownMockUserDefaults()
+        mockUserDefaultsTearDown()
         super.tearDown()
     }
     

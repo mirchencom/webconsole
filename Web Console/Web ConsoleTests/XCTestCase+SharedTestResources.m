@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "XCTest+SharedTestResources.h"
-#import "XCTest+BundleResources.h"
+#import "XCTestCase+SharedTestResources.h"
+#import "XCTestCase+BundleResources.h"
 #import "Web_ConsoleTestsConstants.h"
 #import "WebConsoleConstants.h"
 

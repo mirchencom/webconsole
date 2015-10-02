@@ -9,15 +9,17 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
 
     override func setUp() {
-        setUpMockUserDefaults()
+        mockUserDefaultsSetUp()
         super.setUp()
     }
     
     override func tearDown() {
-        tearDownMockUserDefaults()
+        mockUserDefaultsTearDown()
         super.tearDown()
     }
     

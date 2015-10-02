@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 
 #import "Web_ConsoleTestsConstants.h"
-#import "XCTest+BundleResources.h"
+#import "XCTestCase+BundleResources.h"
 
 #import "WCLSplitWebWindowsController.h"
 #import "WCLSplitWebWindowController.h"

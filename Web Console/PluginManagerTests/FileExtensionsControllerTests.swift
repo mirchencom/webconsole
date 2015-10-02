@@ -9,6 +9,8 @@
 import Cocoa
 import XCTest
 
+@testable import Web_Console
+
 class FileExtensionsControllerTests: FileExtensionsTestCase {
 
     func extensionsTest(extensions1: [String], matchExtensions extensions2: [String]) -> Bool {

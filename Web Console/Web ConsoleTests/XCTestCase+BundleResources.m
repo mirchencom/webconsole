@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roben Kleene. All rights reserved.
 //
 
-#import "XCTest+BundleResources.h"
+#import "XCTestCase+BundleResources.h"
 
 #import "Web_Console-Swift.h"
 #import "Web_ConsoleTestsConstants.h"

@@ -8,6 +8,7 @@
 
 let defaultTimeout = 20.0
 
+@testable import Web_Console
 
 // MARK: Plugin
 
