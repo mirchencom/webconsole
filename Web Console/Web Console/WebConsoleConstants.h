@@ -20,6 +20,7 @@
 #define kFileExtensionPluginIdentifierKey @"pluginIdentifier"
 #define kDefaultNewPluginIdentifierKey @"WCLDefaultNewPluginIdentifier"
 #define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"
+#define kDebugModeEnabledKey @"WCLDebugModeEnabled"
 
 
 #pragma mark - AppleScript Arguments Dictionary

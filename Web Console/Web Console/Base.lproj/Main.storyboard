@@ -606,6 +606,12 @@
                                                 <action selector="toggleLogShown:" target="Ady-hI-5gd" id="50a-ad-WcG"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Debug Mode" id="8jq-eY-cJ2">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <binding destination="2NX-9h-CFA" name="value" keyPath="values.WCLDebugModeEnabled" id="ekQ-S7-YDf"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -654,6 +660,7 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="WCLAppDelegate"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="2NX-9h-CFA"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>

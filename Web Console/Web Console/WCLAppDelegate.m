@@ -20,6 +20,7 @@
 
 @interface WCLAppDelegate ()
 @property (nonatomic, strong) WCLPreferencesWindowController *preferencesWindowController;
+@property (nonatomic, assign, getter=isDebugModeEnabled) BOOL debugModeEnabled;
 - (IBAction)showPreferencesWindow:(id)sender;
 @end
 
@@ -43,7 +44,6 @@
     }
 }
 
-
 #pragma mark Termination
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
@@ -53,13 +53,24 @@
     return NSTerminateLater;
 }
 
-
-#pragma mark Preferences
+#pragma mark IBActions
 
 - (IBAction)showPreferencesWindow:(id)sender
 {
     [self.preferencesWindowController showWindow:self];
 }
+
+- (IBAction)toggleDebugMode:(id)sender
+{
+    BOOL toggled = !self.debugModeEnabled;
+    if (toggled) {
+        [[UserDefaultsManager standardUserDefaults] setBool:YES forKey:kDebugModeEnabledKey];
+    } else {
+        [[UserDefaultsManager standardUserDefaults] removeObjectForKey:kDebugModeEnabledKey];
+    }
+}
+
+#pragma mark Properties
 
 - (WCLPreferencesWindowController *)preferencesWindowController
 {
