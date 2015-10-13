@@ -99,7 +99,7 @@ NSString * const WCLPreferencesWindowFrameName = @"WCLPreferences";
     NSString *viewSizeName = [[self class] viewSizeNameForViewController:self.viewController];
 
     [[UserDefaultsManager standardUserDefaults] setObject:NSStringFromSize(viewSize)
-                                              forKey:viewSizeName];
+                                                   forKey:viewSizeName];
 }
 
 + (NSSize)savedViewSizeForViewController:(NSViewController *)viewController

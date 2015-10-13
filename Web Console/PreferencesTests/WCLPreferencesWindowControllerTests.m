@@ -250,7 +250,7 @@
 {
     // NSWindow's setFrameUsingName: and saveFrameUsingName: methods adjust for the toolbar
     
-    static NSInteger toolbarHeight = 55;
+    static NSInteger toolbarHeight = 56;
     NSRect comparisonRect = NSMakeRect(windowFrameWithoutToolbar.origin.x,
                                        windowFrameWithoutToolbar.origin.y - toolbarHeight,
                                        windowFrameWithoutToolbar.size.width,
