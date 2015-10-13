@@ -10,7 +10,7 @@
 #import "WebConsoleConstants.h"
 #import "Web_Console-Swift.h"
 
-#define kTestMockUserDefaultsSuiteName @"WebConsoleTests"
+#define kTestMockUserDefaultsSuiteName @"com.1percenter.WebConsoleTests"
 
 @implementation XCTestCase (UserDefaults)
 

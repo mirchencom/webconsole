@@ -43,7 +43,7 @@
 - (void)setUp
 {
     [super setUp];
-    // NSUserDefaults cannot be mocked because `NSWindow saveFrameUsingName:` saves directly to `standardUserDefaults`
+    // NSUserDefaults cannot be mocked here because `NSWindow saveFrameUsingName:` saves directly to `standardUserDefaults`
     [[self class] clearPreferencesWindowSavedFrame];
     NSRect savedPreferencesWindowFrame = [[self class] savedFrameForPreferencesWindow];
     XCTAssertTrue(NSRectEqualToRect(savedPreferencesWindowFrame, NSZeroRect), @"The saved preferences window frame should equal NSZeroRect.");

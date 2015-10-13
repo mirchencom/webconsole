@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="8191"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -689,6 +689,7 @@
                     <splitView key="splitView" dividerStyle="paneSplitter" id="68S-pd-iBO">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <connections>
                             <outlet property="delegate" destination="Liy-Az-G0f" id="e7o-OV-DsQ"/>
                         </connections>
@@ -712,6 +713,7 @@
                         <subviews>
                             <webView translatesAutoresizingMaskIntoConstraints="NO" id="dak-ns-YRX">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="150"/>
+                                <animations/>
                                 <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                     <nil key="identifier"/>
                                 </webPreferences>
@@ -728,6 +730,7 @@
                             <constraint firstAttribute="bottom" secondItem="dak-ns-YRX" secondAttribute="bottom" id="Bpt-fN-QjW"/>
                             <constraint firstAttribute="trailing" secondItem="dak-ns-YRX" secondAttribute="trailing" id="VfV-uN-7Oa"/>
                         </constraints>
+                        <animations/>
                     </view>
                     <connections>
                         <outlet property="webView" destination="dak-ns-YRX" id="8vY-cg-QyO"/>
@@ -747,6 +750,7 @@
                         <subviews>
                             <webView translatesAutoresizingMaskIntoConstraints="NO" id="aBp-ds-Eoo">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="150"/>
+                                <animations/>
                                 <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12">
                                     <nil key="identifier"/>
                                 </webPreferences>
@@ -763,6 +767,7 @@
                             <constraint firstAttribute="bottom" secondItem="aBp-ds-Eoo" secondAttribute="bottom" id="RCx-VT-OJm"/>
                             <constraint firstItem="aBp-ds-Eoo" firstAttribute="top" secondItem="tTG-4o-K6k" secondAttribute="top" id="v2z-BQ-QVC"/>
                         </constraints>
+                        <animations/>
                     </view>
                     <connections>
                         <outlet property="webView" destination="aBp-ds-Eoo" id="zQz-dn-EOD"/>

@@ -27,7 +27,11 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     // MARK: Properties
     
     weak var delegate: SplitWebViewControllerDelegate?
-    var splitController: SplitController!
+    lazy var splitController: SplitController = {
+        let splitController = SplitController(splitViewController: self, splitViewItem: self.logSplitViewItem)
+        splitController.delegate = self
+        return splitController
+    }()
 
     var splitViewItemDividerIndex: Int? {
         if let index = splitController.splitViewItemIndex {
@@ -105,13 +109,10 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     // MARK: Life Cycle
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        splitController = SplitController(splitViewController: self, splitViewItem: logSplitViewItem)
-        splitController.delegate = self
-        
         for splitViewItem in splitViewItems {
             if let webViewController = splitViewItem.viewController as? WCLWebViewController {
                 webViewController.delegate = self
