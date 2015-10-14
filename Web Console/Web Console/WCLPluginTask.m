@@ -69,9 +69,9 @@
     }];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        // For some reason an infinite loop results if this isn't dispatched to the main queue.
-        // This has to run on the main queue, because it involves coordination with the UI.
-        // But even if it's already on the main queue, it still needs to be dispatched, otherwise an infinite loop results.
+        // An infinite loop results if this isn't dispatched to the main queue.
+        // Even if it's already on the main queue, it still needs to be
+        // dispatched, or the infinite loop results.
         if ([delegate respondsToSelector:@selector(pluginTaskWillStart:)]) {
             [delegate pluginTaskWillStart:task];
         }

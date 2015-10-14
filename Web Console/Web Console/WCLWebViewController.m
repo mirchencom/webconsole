@@ -23,7 +23,7 @@
 
 @implementation WCLWebViewController
 
-@synthesize identifier=_identifier;
+@synthesize identifier = _identifier;
 
 #pragma mark - Life Cycle
 
@@ -223,8 +223,8 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 - (void)pluginTaskWillStart:(NSTask *)task
 {
-    if ([self.delegate respondsToSelector:@selector(webViewController:taskWillStart:)]) {
-        [self.delegate webViewController:self taskWillStart:task];
+    if ([self.delegate respondsToSelector:@selector(webViewController:willStartTask:)]) {
+        [self.delegate webViewController:self willStartTask:task];
     }
 
     [self.mutableTasks addObject:task];
@@ -234,8 +234,8 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
     [self.mutableTasks removeObject:task];
 
-    if ([self.delegate respondsToSelector:@selector(webViewController:taskDidFinish:)]) {
-        [self.delegate webViewController:self taskDidFinish:task];
+    if ([self.delegate respondsToSelector:@selector(webViewController:didFinishTask:)]) {
+        [self.delegate webViewController:self didFinishTask:task];
     }
 }
 

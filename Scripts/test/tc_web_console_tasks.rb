@@ -91,7 +91,7 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     # Switch windows and confirm close
     WebConsole::Tests::Helper::switch_windows
     WebConsole::Tests::Helper::confirm_dialog
-    assert(!WebConsole::Tests::Helper::is_running, "The application should be running.")
+    assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
     # TODO Assert that the process is not running  
   end
 

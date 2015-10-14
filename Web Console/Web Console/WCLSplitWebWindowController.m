@@ -18,12 +18,15 @@
 NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @"WCLSplitWebWindowControllerDidCancelCloseWindowNotification";
 
 @interface WCLSplitWebWindowController () <NSWindowDelegate, SplitWebViewControllerDelegate>
+@property (nonatomic, readonly) Plugin *logPlugin;
 - (void)terminateTasksAndCloseWindow;
 - (void)saveWindowFrame;
 - (NSString *)windowFrameName;
 @end
 
 @implementation WCLSplitWebWindowController
+
+@synthesize logPlugin = _logPlugin;
 
 #pragma mark - Life Cycle
 
@@ -51,9 +54,55 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
     return self.splitWebViewController.plugin;
 }
 
+- (Plugin *)logPlugin
+{
+    if (_logPlugin) {
+        return _logPlugin;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(logPluginForSplitWebWindowController:)]) {
+        _logPlugin = [self.delegate logPluginForSplitWebWindowController:self];
+    }
+    return _logPlugin;
+}
+
 - (SplitWebViewController *)splitWebViewController
 {
     return (SplitWebViewController *)self.contentViewController;
+}
+
+#pragma mark - Helpers
+
+- (nonnull NSArray *)commandsNotRequiringConfirmation
+{
+    NSString *logCommandPath = self.logPlugin.commandPath;
+    if (logCommandPath) {
+        return @[logCommandPath];
+    }
+    
+    return @[];
+}
+
+- (nonnull NSArray *)commandsRequiringConfirmation
+{
+    NSArray *tasks = [self tasks];
+    NSArray *commands = [tasks valueForKey:kLaunchPathKey];
+    
+    if (![commands count] && [tasks count]) {
+        return @[];
+    }
+    
+    NSMutableArray *commandsRequiringConfirmation = [commands mutableCopy];
+    
+    // Remove the log from the commands requiring confirmation
+    [commandsRequiringConfirmation removeObjectsInArray:[self commandsNotRequiringConfirmation]];
+    
+    return commandsRequiringConfirmation;
+}
+
+- (BOOL)hasCommandsRequiringConfirmation
+{
+    return [[self commandsRequiringConfirmation] count] > 0;
 }
 
 #pragma mark - NSWindowDelegate
@@ -66,37 +115,34 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
 - (BOOL)windowShouldClose:(id)sender
 {
-    if ([self hasTasks]) {
-        
-        NSArray *tasks = [self tasks];
-        NSArray *commands = [tasks valueForKey:kLaunchPathKey];
-
-        if (![commands count] && [tasks count]) {
-            // Thread protection for if the last task ended after the hasTasks if statement
-            return YES;
-        }
-        
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"Close"];
-        [alert addButtonWithTitle:@"Cancel"];
-        [alert setMessageText:@"Do you want to close this window?"];
-
-        NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commands];
-        [alert setInformativeText:informativeText];
-
-        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode != NSAlertFirstButtonReturn) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:WCLSplitWebWindowControllerDidCancelCloseWindowNotification object:self];
-                return;
-            }
-            
-            [self terminateTasksAndCloseWindow];
-        }];
-        
+    if (![self hasTasks]) {
+        return YES;
+    }
+    
+    NSArray *commandsRequiringConfirmation = [self commandsRequiringConfirmation];
+    if (![commandsRequiringConfirmation count]) {
+        [self terminateTasksAndCloseWindow];
         return NO;
     }
     
-    return YES;
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"Close"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert setMessageText:@"Do you want to close this window?"];
+
+    NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandsRequiringConfirmation];
+    [alert setInformativeText:informativeText];
+
+    [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode != NSAlertFirstButtonReturn) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:WCLSplitWebWindowControllerDidCancelCloseWindowNotification object:self];
+            return;
+        }
+        
+        [self terminateTasksAndCloseWindow];
+    }];
+    
+    return NO;
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
@@ -240,10 +286,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 - (Plugin * __nullable)logPluginForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController
 {
-    if ([self.delegate respondsToSelector:@selector(logPluginForSplitWebWindowController:)]) {
-        return [self.delegate logPluginForSplitWebWindowController:self];
-    }
-    return nil;
+    return self.logPlugin;
 }
 
 - (void)splitWebViewControllerWillLoadHTML:(SplitWebViewController *)splitWebViewController
@@ -261,18 +304,23 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     [self.window setTitle:title];
 }
 
-- (void)splitWebViewControllerWillStartTasks:(SplitWebViewController *)splitWebViewController
+- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController willStartTask:(NSTask *)task
 {
     if (![self.window isVisible]) {
         // The windowNumber must be calculated after showing the window
         [self showWindow:nil];
     }
-    [self.window setDocumentEdited:YES]; // Add edited dot in close button
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.window setDocumentEdited:[self hasCommandsRequiringConfirmation]]; // Add edited dot in close button
+    });
 }
 
-- (void)splitWebViewControllerDidFinishTasks:(SplitWebViewController *)splitWebViewController
+- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController didFinishTask:(NSTask *)task
 {
-    [self.window setDocumentEdited:NO]; // Remove edited dot in close button
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.window setDocumentEdited:[self hasCommandsRequiringConfirmation]]; // Remove edited dot in close button
+    });
 }
 
 
