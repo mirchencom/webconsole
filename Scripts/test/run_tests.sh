@@ -3,9 +3,10 @@
 usage () {
 	echo "Usage: run_tests.sh [-lrc]"
 	echo
-	echo "-l : Run long tests"
-	echo "-r : Run ruby tests"
-	echo "-x : Run only XCUnit tests"
+	echo "Default is Xcode tests and ruby tests"
+	echo "-l : Also run long tests"
+	echo "-r : Run only ruby tests"
+	echo "-x : Run only Xcode tests"
 }
 
 LONG=false
