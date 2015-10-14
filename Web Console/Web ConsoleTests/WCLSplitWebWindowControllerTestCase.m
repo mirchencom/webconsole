@@ -13,6 +13,7 @@
 #import "Web_Console-Swift.h"
 #import "WCLPluginTask.h"
 #import "WCLWebViewController.h"
+#import "XCTestCase+UserDefaults.h"
 
 #pragma mark - DefaultWebView
 
@@ -41,9 +42,16 @@
 
 @implementation WCLSplitWebWindowControllerTestCase
 
+- (void)setUp
+{
+    [super setUp];
+    [self setUpMockUserDefaults];
+}
+
 - (void)tearDown
 {
     [WCLSplitWebWindowControllerTestsHelper closeWindowsAndBlockUntilFinished];
+    [self tearDownMockUserDefaults];
     [super tearDown];
 }
 

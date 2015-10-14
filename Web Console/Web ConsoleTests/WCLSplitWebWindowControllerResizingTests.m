@@ -40,14 +40,14 @@
 - (void)setUp
 {
     [super setUp];
-    // NSUserDefaults cannot be mocked because `NSWindow saveFrameUsingName:` saves directly to `standardUserDefaults`
-    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
+    // Mocked `NSUserDefaults` cannot be used because `NSWindow saveFrameUsingName:` saves directly to `standardUserDefaults`
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
 }
 
 - (void)tearDown
 {
     [[self class] blockUntilAllTasksRunAndFinish];
-    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:self.defaultPluginSavedFrameName];
     [super tearDown];
 }
 
@@ -155,7 +155,7 @@
 + (NSRect)savedFrameForPlugin:(Plugin *)plugin
 {
     NSString *savedFrameName = [self savedFrameNameForPlugin:plugin];
-    NSString *frameString = [[UserDefaultsManager standardUserDefaults] stringForKey:savedFrameName];
+    NSString *frameString = [[NSUserDefaults standardUserDefaults] stringForKey:savedFrameName];
     return NSRectFromString(frameString); // If frame string is nil, returns NSZeroRect
 }
 

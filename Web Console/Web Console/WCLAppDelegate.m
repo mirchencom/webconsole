@@ -32,8 +32,10 @@
         NSURL *userDefaultsURL = [[NSBundle mainBundle] URLForResource:kUserDefaultsFilename
                                                          withExtension:kUserDefaultsFileExtension];
         NSDictionary *userDefaultsDictionary = [NSDictionary dictionaryWithContentsOfURL:userDefaultsURL];
-        [[UserDefaultsManager standardUserDefaults] registerDefaults:userDefaultsDictionary];
-        [[UserDefaultsManager sharedUserDefaultsController] setInitialValues:userDefaultsDictionary];
+        // `UserDefaultsManager` is not used here so that cases that need to
+        // work with `NSUserDefaults` directly have proper defaults.
+        [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDictionary];
+        [[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:userDefaultsDictionary];
         
         // TODO: This disables caching application wide. It would be nice to replace
         // this with a more granular approach.

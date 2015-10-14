@@ -18,8 +18,9 @@
 {
     NSURL *userDefaultsURL = [[NSBundle mainBundle] URLForResource:kUserDefaultsFilename
                                                      withExtension:kUserDefaultsFileExtension];
-    NSDictionary *userDefaultsDictionary = [NSDictionary dictionaryWithContentsOfURL:userDefaultsURL];
-
+    NSMutableDictionary *userDefaultsDictionary = [NSMutableDictionary dictionaryWithContentsOfURL:userDefaultsURL];
+    userDefaultsDictionary[kDebugModeEnabledKey] = @NO;
+    
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:kTestMockUserDefaultsSuiteName];
     [userDefaults registerDefaults:userDefaultsDictionary];
     NSUserDefaultsController *userDefaultsController = [[NSUserDefaultsController alloc] initWithDefaults:userDefaults initialValues:userDefaultsDictionary];

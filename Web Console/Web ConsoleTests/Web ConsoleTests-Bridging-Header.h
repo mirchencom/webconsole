@@ -4,4 +4,3 @@
 
 #import "Web_Console-Bridging-Header.h"
 #import "WCLSplitWebWindowControllerTestCase.h"
-#import "XCTestCase+UserDefaults.h"
