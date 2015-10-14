@@ -272,14 +272,14 @@
 + (NSRect)savedFrameForPreferencesWindow
 {
     NSString *windowFrameKey = [[self class] prefrencesWindowSavedFrameKey];
-    NSString *frameString = [[UserDefaultsManager standardUserDefaults] stringForKey:windowFrameKey];
+    NSString *frameString = [[NSUserDefaults standardUserDefaults] stringForKey:windowFrameKey];
     return NSRectFromString(frameString); // If frame string is nil, returns NSZeroRect
 }
 
 + (void)clearPreferencesWindowSavedFrame
 {
     NSString *windowFrameKey = [[self class] prefrencesWindowSavedFrameKey];
-    [[UserDefaultsManager standardUserDefaults] removeObjectForKey:windowFrameKey];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:windowFrameKey];
 }
 
 - (void)clearPreferencePaneSavedSizes
@@ -291,7 +291,7 @@
 
     for (NSViewController *viewController in viewControllers) {
         NSString *viewSizeName = [WCLPreferencesWindowController viewSizeNameForViewController:viewController];
-        [[UserDefaultsManager standardUserDefaults] removeObjectForKey:viewSizeName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:viewSizeName];
     }
 }
 
