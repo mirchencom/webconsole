@@ -12,6 +12,9 @@ let applicationName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as 
 let errorDomain = NSBundle.mainBundle().bundleIdentifier!
 let pluginsDirectoryPathComponent = "PlugIns"
 let defaultNewPluginIdentifierKey = "WCLDefaultNewPluginIdentifier"
+let debugModeEnabledKey = "WCLDebugModeEnabled"
+
+
 let defaultFileExtensionEnabled = false
 let initialDefaultNewPluginName = "HTML"
 let sharedResourcesPluginName = "Shared Resources"
