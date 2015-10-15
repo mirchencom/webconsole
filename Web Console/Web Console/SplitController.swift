@@ -122,6 +122,9 @@ class SplitController {
     func configureHeight(height: CGFloat) {
         if let splitsView = splitsView, superview = splitsView.superview {
             if let splitsHeightConstraint = splitsHeightConstraint {
+                if splitsHeightConstraint.constant == height {
+                    return
+                }
                 superview.removeConstraint(splitsHeightConstraint)
             }
             
@@ -132,7 +135,6 @@ class SplitController {
                 attribute: NSLayoutAttribute.NotAnAttribute,
                 multiplier: 1,
                 constant: height)
-            // Getting closer, this works for subsequent displays but not the first
             heightConstraint.priority = 300
             superview.addConstraint(heightConstraint)
             splitsHeightConstraint = heightConstraint
