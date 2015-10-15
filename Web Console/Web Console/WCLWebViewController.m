@@ -221,15 +221,15 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 #pragma mark - WCLPluginTaskDelegate
 
-- (void)pluginTaskDidStart:(NSTask *)task
+- (void)pluginTaskWillStart:(NSTask *)task
 {
     // Add the task before calling the delegate, so the delegate gets the
     // expected result when inspecting this classes tasks
     // (e.g., `[thisObject hasTasks]` is true)
     [self.mutableTasks addObject:task];
     
-    if ([self.delegate respondsToSelector:@selector(webViewController:didStartTask:)]) {
-        [self.delegate webViewController:self didStartTask:task];
+    if ([self.delegate respondsToSelector:@selector(webViewController:willStartTask:)]) {
+        [self.delegate webViewController:self willStartTask:task];
     }
 }
 

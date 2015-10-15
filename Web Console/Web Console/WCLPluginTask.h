@@ -12,7 +12,7 @@
 
 @protocol WCLPluginTaskDelegate <NSObject>
 @optional
-- (void)pluginTaskDidStart:(nonnull NSTask *)task;
+- (void)pluginTaskWillStart:(nonnull NSTask *)task;
 - (void)pluginTaskDidFinish:(nonnull NSTask *)task;
 - (void)pluginTask:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text;
 - (void)pluginTask:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text;

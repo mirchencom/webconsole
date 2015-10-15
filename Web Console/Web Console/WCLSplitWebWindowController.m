@@ -304,9 +304,9 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     [self.window setTitle:title];
 }
 
-- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController didStartTask:(NSTask *)task
+- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController willStartTask:(NSTask *)task
 {
-    // `didStartTask` is always called on the main queue
+    // `willStartTask` is always called on the main queue
     
     if (![self.window isVisible]) {
         // The windowNumber must be calculated after showing the window
