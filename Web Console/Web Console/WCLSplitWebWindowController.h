@@ -39,5 +39,6 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (void)toggleLog;
 #pragma mark - Tasks
 - (BOOL)hasTasks;
+- (BOOL)hasTasksRequiringConfirmation;
 - (nonnull NSArray *)tasks;
 @end

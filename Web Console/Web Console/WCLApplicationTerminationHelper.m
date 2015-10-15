@@ -19,7 +19,7 @@
 
 + (NSArray *)splitWebWindowControllersWithTasks
 {
-    NSPredicate *tasksPredicate = [NSPredicate predicateWithFormat:@"hasTasks == %@", [NSNumber numberWithBool:YES]];
+    NSPredicate *tasksPredicate = [NSPredicate predicateWithFormat:@"hasTasksRequiringConfirmation == %@", [NSNumber numberWithBool:YES]];
     return [[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllers] filteredArrayUsingPredicate:tasksPredicate];
 }
 
@@ -47,7 +47,7 @@
         }
     };
 
-    // Quit if the user closes all the windows with running tasks
+    // Quit if the user closes all the windows with running tasks requiring confirmation
     for (WCLSplitWebWindowController *splitWebWindowController in splitWebWindowControllersWithTasks) {
         __block id windowWillCloseObserver;
         windowWillCloseObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSWindowWillCloseNotification

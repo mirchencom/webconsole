@@ -100,7 +100,7 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
     return commandsRequiringConfirmation;
 }
 
-- (BOOL)hasCommandsRequiringConfirmation
+- (BOOL)hasTasksRequiringConfirmation
 {
     return [[self commandsRequiringConfirmation] count] > 0;
 }
@@ -312,16 +312,15 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.window setDocumentEdited:[self hasCommandsRequiringConfirmation]]; // Add edited dot in close button
+        [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]]; // Add edited dot in close button
     });
 }
 
 - (void)splitWebViewController:(SplitWebViewController *)splitWebViewController didFinishTask:(NSTask *)task
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.window setDocumentEdited:[self hasCommandsRequiringConfirmation]]; // Remove edited dot in close button
+        [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]]; // Remove edited dot in close button
     });
 }
-
 
 @end
