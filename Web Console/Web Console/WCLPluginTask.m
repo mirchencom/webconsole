@@ -72,9 +72,6 @@
         // An infinite loop results if this isn't dispatched to the main queue.
         // Even if it's already on the main queue, it still needs to be
         // dispatched, or the infinite loop results.
-        if ([delegate respondsToSelector:@selector(pluginTaskWillStart:)]) {
-            [delegate pluginTaskWillStart:task];
-        }
         
         NSDictionary *environmentDictionary;
         if ([delegate respondsToSelector:@selector(environmentDictionaryForPluginTask:)]) {
@@ -88,6 +85,10 @@
         DLog(@"%@", runText);
         [self processStandardOutput:runText task:task delegate:delegate];
         [task launch];
+        
+        if ([delegate respondsToSelector:@selector(pluginTaskDidStart:)]) {
+            [delegate pluginTaskDidStart:task];
+        }
         
         if (completionHandler) {
             completionHandler(YES);

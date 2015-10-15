@@ -304,16 +304,16 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     [self.window setTitle:title];
 }
 
-- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController willStartTask:(NSTask *)task
+- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController didStartTask:(NSTask *)task
 {
+    // `didStartTask` is always called on the main queue
+    
     if (![self.window isVisible]) {
         // The windowNumber must be calculated after showing the window
         [self showWindow:nil];
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]]; // Add edited dot in close button
-    });
+    [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]]; // Add edited dot in close button
 }
 
 - (void)splitWebViewController:(SplitWebViewController *)splitWebViewController didFinishTask:(NSTask *)task
