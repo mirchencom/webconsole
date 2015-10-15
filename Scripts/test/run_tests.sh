@@ -37,6 +37,18 @@ if $XCUNIT ; then
 	exit 0
 fi
 
+# If plugin tests are going to run, test their dependencies
+function check_dependency {
+    result=`which $1`
+	if [ $? -ne 0 ]; then
+		echo "Dependency not found: $1" >&2
+		exit 1
+	fi
+}
+
+check_dependency coffee
+check_dependency node
+
 if $LONG ; then
 	rake long
 	exit 0
