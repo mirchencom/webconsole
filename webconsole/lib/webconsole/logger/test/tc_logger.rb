@@ -27,7 +27,6 @@ class TestUnintializedLogger < Test::Unit::TestCase
 
   def teardown
     WebConsole::Tests::Helper::quit
-    WebConsole::Tests::Helper::confirm_dialog
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
   end
 
@@ -64,7 +63,6 @@ class TestLogger < Test::Unit::TestCase
 
   def teardown
     WebConsole::Tests::Helper::quit
-    WebConsole::Tests::Helper::confirm_dialog
     assert(!WebConsole::Tests::Helper::is_running, "The application should not be running.")
   end
 
