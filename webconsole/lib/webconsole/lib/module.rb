@@ -53,6 +53,12 @@ module WebConsole
   def self.window_id_for_plugin(name)
     result = self.run_applescript(WINDOW_ID_FOR_PLUGIN_SCRIPT, [name])
     result.chomp!
+
+    if result.empty?
+      # TODO: Remove this when doing `run_applescript` refactor
+      return nil
+    end
+
     return result
   end
 
