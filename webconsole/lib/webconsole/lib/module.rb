@@ -38,17 +38,6 @@ module WebConsole
     return result
   end
 
-  PLUGIN_HAS_WINDOWS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "plugin_has_windows.scpt")
-  def self.plugin_has_windows(name)
-    result = self.run_applescript(PLUGIN_HAS_WINDOWS_SCRIPT, [name])
-    result.chomp!
-    if result == "true"
-      return true
-    else
-      return false
-    end
-  end
-
   WINDOW_ID_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "window_id_for_plugin.scpt")
   def self.window_id_for_plugin(name)
     result = self.run_applescript(WINDOW_ID_FOR_PLUGIN_SCRIPT, [name])

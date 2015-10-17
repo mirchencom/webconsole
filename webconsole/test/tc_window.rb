@@ -11,9 +11,9 @@ class TestWindowAttributes < Test::Unit::TestCase
 
   def test_window_id
     WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
-    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    assert(WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should have a window.")
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    assert(window_id != nil, "The window_id should not be nil")
+    assert(WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME) == window_id, "The window_id's should be equal")
     window = WebConsole::Window.new(window_id)
     assert(window_id == window.window_id, "The window id's should be equal.")
     window.close
@@ -26,12 +26,10 @@ class TestWindowClose < Test::Unit::TestCase
 
   def test_close
     WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
-    WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    assert(WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should have a window.")
-    window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    window_id = WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
     window = WebConsole::Window.new(window_id)
     window.close
-    assert(!WebConsole::plugin_has_windows(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME), "The plugin should not have a window.")
+    assert(WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME) == nil, "The plugin should not have a window.")
   end
 
 end
