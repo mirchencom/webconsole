@@ -11,8 +11,8 @@ GEM
     rb-fsevent (0.9.6)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    redcarpet (3.3.2)
-    webconsole (0.1.14)
+    redcarpet (3.3.3)
+    webconsole (0.1.16)
 
 PLATFORMS
   ruby
