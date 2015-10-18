@@ -34,7 +34,6 @@ class TestPlugin < Test::Unit::TestCase
   def test_log_title
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give the plugin time to finish running
     title = @window.do_javascript(TEST_TITLE_JAVASCRIPT)
-    title.chomp!
     assert_equal(title, TEST_PLUGIN_NAME, "The title should equal the test html title.")
   end
 

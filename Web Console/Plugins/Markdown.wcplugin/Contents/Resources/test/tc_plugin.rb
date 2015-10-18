@@ -31,8 +31,6 @@ class TestPlugin < Test::Unit::TestCase
     window = WebConsole::Window.new(window_id)
 
     header = window.do_javascript(TEST_H1_JAVASCRIPT)
-    header.chomp!
-
     assert_equal(header, TEST_MARKDOWN_HEADER, "The title should equal the test html title.")
   end
 

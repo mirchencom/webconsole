@@ -33,7 +33,6 @@ class TestWrapper < Test::Unit::TestCase
     # Test Wrapper Output
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
-    result.strip!
     assert_equal(result, TEST_CODE_RESULT, "The test result should equal the result.")
     
     window.close

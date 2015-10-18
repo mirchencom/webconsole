@@ -34,18 +34,18 @@ class TestPlugin < Test::Unit::TestCase
     sleep WebConsole::Tests::TEST_PAUSE_TIME # Pause for output to be processed
 
 
-    # Test Wrapper Input
+    # # Test Wrapper Input
     javascript = File.read(WebConsole::Tests::FIRSTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
     result.strip!
     result.gsub!(/<\/?span.*?>/, "") # Remove spans adding by highlight.js
     result.gsub!("&gt;", ">") # Unescape entity
     assert_equal(TEST_CODE, result, "The test text should equal the result.")
-    
+
+
     # Test Wrapper Output
     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
     result = window.do_javascript(javascript)
-    result.strip!
     assert_equal(result, TEST_CODE_RESULT, "The test result should equal the result.")
   end
 

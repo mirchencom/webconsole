@@ -6,4 +6,4 @@ add = function(x, y) {
   return x + y;
 };
 add(1, 2);]
-TEST_CODE_RESULT = "3"
+TEST_CODE_RESULT = 3

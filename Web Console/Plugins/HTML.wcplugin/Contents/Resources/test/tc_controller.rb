@@ -17,15 +17,11 @@ class TestController < Test::Unit::TestCase
     controller = WebConsole::HTML::Controller.new(window, html)
 
     title = window.do_javascript(TEST_TITLE_JAVASCRIPT)
-    title.chomp!
-
     assert_equal(title, TEST_HTML_TITLE, "The title should equal the test html title.")
 
     html_two = File.read(TEST_HTML_FILE_TWO)
     controller.html = html_two
-    title_two = window.do_javascript(TEST_TITLE_JAVASCRIPT)
-    title_two.chomp!
-    
+    title_two = window.do_javascript(TEST_TITLE_JAVASCRIPT)    
     assert_equal(title_two, TEST_HTML_TITLE_TWO, "The second title should equal the second test html title.")
 
     window.close

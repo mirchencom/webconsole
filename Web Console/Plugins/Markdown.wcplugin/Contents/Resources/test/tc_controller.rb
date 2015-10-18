@@ -18,8 +18,6 @@ class TestController < Test::Unit::TestCase
     controller = WebConsole::Markdown::Controller.new(markdown, filename)
     
     header = controller.view.do_javascript(TEST_H1_JAVASCRIPT)
-    header.chomp!
-
     assert_equal(header, TEST_MARKDOWN_HEADER, "The header should equal the test html title.")
     
     markdown_two = File.read(TEST_MARKDOWN_FILE_TWO)
