@@ -76,6 +76,5 @@ module WebConsole
       return arguments
     end
 
-
   end
 end

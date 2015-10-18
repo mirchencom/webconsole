@@ -51,8 +51,7 @@ class TestViewTitle < Test::Unit::TestCase
     assert_nil(view.title, "The views title should be nil.")
     
     title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
-    title_result.chomp!
-    assert(title_result.empty?, "The title result should be empty.")
+    assert(title_result == nil, "The title result should be nil.")
     view.close
   end
 
@@ -65,7 +64,6 @@ class TestViewTitle < Test::Unit::TestCase
     assert_equal(view.title, TEST_TITLE, "The view's title should equal the test title.")
   
     title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
-    title_result.chomp!
     assert_equal(title_result, TEST_TITLE, "The title result should equal the test title.")
     view.close
   end
@@ -80,7 +78,6 @@ class TestViewTitle < Test::Unit::TestCase
     assert_equal(view.title, TEST_TITLE, "The view's title should equal the test title.")
   
     title_result = view.do_javascript(TEST_TITLE_JAVASCRIPT)
-    title_result.chomp!
     assert_equal(title_result, TEST_TITLE, "The title result should equal the test title.")
     view.close
   end

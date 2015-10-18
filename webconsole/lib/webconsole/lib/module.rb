@@ -8,7 +8,6 @@ module WebConsole
   EXISTS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "exists.scpt")
   def self.application_exists
     result = self.run_applescript(EXISTS_SCRIPT)
-    result.chomp!
     if result == "true"
       return true
     else
@@ -25,30 +24,19 @@ module WebConsole
     if arguments
       parameters = parameters + arguments
     end
-    result = self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
-    result.chomp!
-    return result
+
+    return self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
   end
   
   RUN_PLUGIN_IN_SPLIT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run_plugin_in_split.scpt")
   def self.run_plugin_in_split(name, window_id, split_id)
     parameters = [name, window_id, split_id]
-    result = self.run_applescript(RUN_PLUGIN_IN_SPLIT_SCRIPT, parameters)
-    result.chomp!
-    return result
+    return self.run_applescript(RUN_PLUGIN_IN_SPLIT_SCRIPT, parameters)
   end
 
   WINDOW_ID_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "window_id_for_plugin.scpt")
   def self.window_id_for_plugin(name)
-    result = self.run_applescript(WINDOW_ID_FOR_PLUGIN_SCRIPT, [name])
-    result.chomp!
-
-    if result.empty?
-      # TODO: Remove this when doing `run_applescript` refactor
-      return nil
-    end
-
-    return result
+    return self.run_applescript(WINDOW_ID_FOR_PLUGIN_SCRIPT, [name])
   end
 
   SPLIT_ID_IN_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "split_id_in_window.scpt")
@@ -59,39 +47,25 @@ module WebConsole
       arguments.push(pluginName)
     end
 
-    result = self.run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
-    result.chomp!
-
-    if result.empty?
-      # TODO: Remove this when doing `run_applescript` refactor
-      return nil
-    end
-
-    return result
+    return self.run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
   end
 
   SPLIT_ID_IN_WINDOW_LAST_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "split_id_in_window_last.scpt")
   def self.split_id_in_window_last(window_id)
     arguments = [window_id]
-    result = self.run_applescript(SPLIT_ID_IN_WINDOW_LAST_SCRIPT, arguments)
-    result.chomp!
-    return result
+    return self.run_applescript(SPLIT_ID_IN_WINDOW_LAST_SCRIPT, arguments)
   end
 
   CREATE_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "create_window.scpt")
   def self.create_window
-    result = self.run_applescript(CREATE_WINDOW_SCRIPT)
-    result.chomp!
-    return result
+    return self.run_applescript(CREATE_WINDOW_SCRIPT)
   end
 
   # Shared Resources
 
   RESOURCE_PATH_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_path_for_plugin.scpt")
   def self.resource_path_for_plugin(name)
-    result = self.run_applescript(RESOURCE_PATH_FOR_PLUGIN_SCRIPT, [name])
-    result.chomp!
-    return result
+    return self.run_applescript(RESOURCE_PATH_FOR_PLUGIN_SCRIPT, [name])
   end
 
   # Shared Resource Path
@@ -116,9 +90,7 @@ module WebConsole
 
   RESOURCE_URL_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_url_for_plugin.scpt")
   def self.resource_url_for_plugin(name)
-    result = self.run_applescript(RESOURCE_URL_FOR_PLUGIN_SCRIPT, [name])
-    result.chomp!
-    return result
+    return self.run_applescript(RESOURCE_URL_FOR_PLUGIN_SCRIPT, [name])
   end
   def self.shared_resources_url
     return resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
@@ -139,11 +111,43 @@ module WebConsole
 
     result = `#{command}`
 
-    # TODO: Figure out a better way to do this when doing `run_applescript` refactor
-    # if result.chomp.empty?
-    #   return nil
-    # end
+    result.chomp!
+
+    if result.empty?
+      return nil
+    end
+
+    if result.is_integer?
+      return result.to_i
+    end
+
+    if result.is_float?
+      return result.to_f
+    end
 
     return result
   end
+
+  class ::String
+    def is_float?
+      !!Float(self) rescue false
+    end
+
+    def is_integer?
+      self.to_i.to_s == self
+    end
+  end
+
+  class ::Float
+    def javascript_argument
+      return self.to_s
+    end
+  end
+
+  class ::Integer
+    def javascript_argument
+      return self.to_s
+    end
+  end
+
 end

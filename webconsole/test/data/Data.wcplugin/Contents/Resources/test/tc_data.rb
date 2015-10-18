@@ -24,8 +24,6 @@ class TestClass < Test::Unit::TestCase
     
     path_result = window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_PATH_KEY}');])
     arguments_result = window.do_javascript(%Q[valueForKey('#{DATA_PLUGIN_ARGUMENTS_KEY}');])
-    path_result.chomp!
-    arguments_result.chomp!
     
     assert_equal(path_result, path, "The path result should match the path.")
     assert_equal(arguments_result, arguments, "The arguments result should match the arguments.")

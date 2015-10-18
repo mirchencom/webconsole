@@ -13,16 +13,15 @@ class TestViewHelper
     end
 
     def number_of_log_messages
-      # TODO: Do JavaScript should coerce types
-      return @view.do_javascript(TEST_MESSAGE_COUNT_JAVASCRIPT).chomp.to_i
+      return @view.do_javascript(TEST_MESSAGE_COUNT_JAVASCRIPT)
     end
 
     def last_log_message
-      return @view.do_javascript(TEST_MESSAGE_JAVASCRIPT).chomp
+      return @view.do_javascript(TEST_MESSAGE_JAVASCRIPT)
     end
   
     def last_log_class
-      return @view.do_javascript(TEST_CLASS_JAVASCRIPT).chomp
+      return @view.do_javascript(TEST_CLASS_JAVASCRIPT)
     end
 
 end

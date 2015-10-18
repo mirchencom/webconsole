@@ -21,9 +21,7 @@ module WebConsole
 
       WINDOWIDAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY, "window_id.applescript")
       def self.window_id
-        result = self.run_applescript(WINDOWIDAPPLESCRIPT_FILE)
-        result.chomp!
-        return result      
+        return self.run_applescript(WINDOWIDAPPLESCRIPT_FILE)
       end
 
       CANCELDIALOGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY, "cancel_dialog.applescript")
@@ -40,7 +38,6 @@ module WebConsole
       ISRUNNINGAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY, "is_running.applescript")
       def self.is_running
         result = self.run_applescript(ISRUNNINGAPPLESCRIPT_FILE)
-        result.chomp!
         if result == "true"
           return true
         else
@@ -55,9 +52,7 @@ module WebConsole
 
       WINDOWBOUNDSAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY, "window_bounds.applescript")
       def self.window_bounds(window_id = nil)
-        result = self.run_applescript(WINDOWBOUNDSAPPLESCRIPT_FILE, [window_id])
-        result.chomp!
-        return result
+        return self.run_applescript(WINDOWBOUNDSAPPLESCRIPT_FILE, [window_id])
       end
 
       SETWINDOWBOUNDSAPPLESCRIPT_FILE = File.join(APPLESCRIPT_DIRECTORY, "set_window_bounds.applescript")
@@ -70,7 +65,7 @@ module WebConsole
       end
 
       private
-  
+
       def self.run_applescript(script, arguments = nil)
         command = "osascript #{Shellwords.escape(script)}"
         if arguments
@@ -81,7 +76,46 @@ module WebConsole
             end
           }
         end
-        return `#{command}`
+
+        result = `#{command}`
+
+        result.chomp!
+
+        if result.empty?
+          return nil
+        end
+
+        if result.is_integer?
+          return result.to_i
+        end
+
+        if result.is_float?
+          return result.to_f
+        end
+
+        return result
+      end
+
+      class ::String
+        def is_float?
+          !!Float(self) rescue false
+        end
+
+        def is_integer?
+          self.to_i.to_s == self
+        end
+      end
+
+      class ::Float
+        def javascript_argument
+          return self.to_s
+        end
+      end
+
+      class ::Integer
+        def javascript_argument
+          return self.to_s
+        end
       end
 
     end
