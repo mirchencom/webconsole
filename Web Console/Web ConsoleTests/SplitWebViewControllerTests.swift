@@ -26,7 +26,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     
     override func setUp() {
         super.setUp()
-        // Superclass mocks `UserDefaultsManager`
+        // Superclass mocks `standardUserDefaults`
         UserDefaultsManager.standardUserDefaults().removeObjectForKey(defaultPluginSavedFrameName)
         UserDefaultsManager.standardUserDefaults().removeObjectForKey(otherPluginSavedFrameName)
     }
@@ -44,6 +44,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         
         // The log starts collapsed
         XCTAssertTrue(splitWebViewController.splitController.splitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
+        XCTAssertEqual(logMenuItem().title, showLogMenuItemTitle, "The titles should be equal")
         
         // Show the log
         makeLogAppearForSplitWebViewController(splitWebViewController)
@@ -58,9 +59,11 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         // Reshow the log
         makeLogAppearForSplitWebViewController(splitWebViewController)
         
+        XCTAssertEqual(logMenuItem().title, hideLogMenuItemTitle, "The titles should be equal")
+        
         // Test that the frame height was restored
         XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), testLogViewHeight, "The heights should be equal")
-
+        
         // Second Window
         
         // Make a second window and confirm it uses the saved height
@@ -69,6 +72,10 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         makeLogAppearForSplitWebViewController(secondSplitWebViewController)
         XCTAssertEqual(logHeightForSplitWebViewController(secondSplitWebViewController), testLogViewHeight, "The heights should be equal")
 
+        // TODO: Assert there are two open windows
+        
+        // TODO: Assert this window has the right text
+        
         // Close the log in the first window
         makeLogDisappearForSplitWebViewController(splitWebViewController)
         
@@ -79,6 +86,10 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         makeLogAppearForSplitWebViewController(splitWebViewController)
         XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
 
+        // TODO: Assert this window has the right text
+        
+        // TODO: Bring the other window to the front and assert it has the right text
+        
         // Clean up
         // Closing logs increases test reliability because it assures all animation blocks have finished
         makeLogDisappearForSplitWebViewController(splitWebViewController)
@@ -108,8 +119,23 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     }
 
     
-    // MARK: Helpers
+    // MARK: Menu Helpers
     
+    func updateViewMenuItem() {
+        viewMenuItem().submenu!.update()
+    }
+    
+    func viewMenuItem() -> NSMenuItem {
+        return NSApplication.sharedApplication().mainMenu!.itemAtIndex(4)!
+    }
+    
+    func logMenuItem() -> NSMenuItem {
+        let logMenuItem = viewMenuItem().submenu!.itemAtIndex(2)!
+        return logMenuItem
+    }
+    
+    // MARK: Resize Helpers
+
     func resizeLogForSplitWebViewController(splitWebViewController: SplitWebViewController, logHeight: CGFloat) {
         // Resize & Wait for Save
 
@@ -130,6 +156,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
         XCTAssertFalse(splitWebViewController.splitController.splitViewItem.collapsed, "The  NSSplitViewItem should not be collapsed")
         confirmValuesForSplitWebViewController(splitWebViewController, collapsed: false)
+        updateViewMenuItem()
     }
     
     func makeLogDisappearForSplitWebViewController(splitWebViewController: SplitWebViewController) {
@@ -138,6 +165,7 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
         XCTAssertTrue(splitWebViewController.splitController.splitViewItem.collapsed, "The  NSSplitViewItem should be collapsed")
         confirmValuesForSplitWebViewController(splitWebViewController, collapsed: true)
+        updateViewMenuItem()
     }
 
     func confirmValuesForSplitWebViewController(splitWebViewController: SplitWebViewController, collapsed: Bool) {
@@ -165,12 +193,14 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
     func makeNewSplitWebViewControllerForOtherPugin() -> SplitWebViewController {
         let splitWebWindowController = makeSplitWebWindowControllerForOtherPlugin()
         splitWebWindowController.window?.setFrame(testFrame, display: false)
+        updateViewMenuItem()
         return splitWebWindowController.splitWebViewController
     }
     
     func makeNewSplitWebViewController() -> SplitWebViewController {
         let splitWebWindowController = makeSplitWebWindowController()
         splitWebWindowController.window?.setFrame(testFrame, display: false)
+        updateViewMenuItem()
         return splitWebWindowController.splitWebViewController
     }
     

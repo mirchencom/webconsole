@@ -193,7 +193,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         switch menuItem.action {
         case Selector("toggleLogShown:"):
             if let collapsed = splitController.isCollapsed() {
-                menuItem.title = collapsed ? "Show Log" : "Hide Log"
+                menuItem.title = collapsed ? showLogMenuItemTitle : hideLogMenuItemTitle
                 return true
             } else {
                 return false

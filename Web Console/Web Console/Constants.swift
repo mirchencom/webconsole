@@ -13,7 +13,8 @@ let errorDomain = NSBundle.mainBundle().bundleIdentifier!
 let pluginsDirectoryPathComponent = "PlugIns"
 let defaultNewPluginIdentifierKey = "WCLDefaultNewPluginIdentifier"
 let debugModeEnabledKey = "WCLDebugModeEnabled"
-
+let showLogMenuItemTitle = "Show Log"
+let hideLogMenuItemTitle = "Hide Log"
 
 let defaultFileExtensionEnabled = false
 let initialDefaultNewPluginName = "HTML"
