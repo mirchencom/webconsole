@@ -79,16 +79,20 @@ class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
         makeLogDisappearForSplitWebViewController(splitWebViewController)
         XCTAssertEqual(logMenuItem().title, hideLogMenuItemTitle, "The titles should be equal") // Should still be "Hide Log" because the other window is in front
         
+        // Switch the order of the windows and make sure the menu item text updates
+        let windows = NSApplication.sharedApplication().windows.filter { $0.windowController?.contentViewController == splitWebViewController }
+        windows[0].makeKeyAndOrderFront(nil)
+        updateViewMenuItem()
+        XCTAssertEqual(logMenuItem().title, showLogMenuItemTitle, "The titles should be equal")
+
         // Wait for the new frame to be saved
         resizeLogForSplitWebViewController(secondSplitWebViewController, logHeight: splitWebViewHeight)
         
         // Re-open the log in the first window and confirm it has the right height
         makeLogAppearForSplitWebViewController(splitWebViewController)
         XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
-        XCTAssertEqual(logMenuItem().title, hideLogMenuItemTitle, "The titles should be equal") // Should still be "Hide Log" because the other window is in front
+        XCTAssertEqual(logMenuItem().title, hideLogMenuItemTitle, "The titles should be equal")
         
-        // TODO: Bring the other window to the front and assert it has the right text
-
         // Clean up
         // Closing logs increases test reliability because it assures all animation blocks have finished
         makeLogDisappearForSplitWebViewController(splitWebViewController)
