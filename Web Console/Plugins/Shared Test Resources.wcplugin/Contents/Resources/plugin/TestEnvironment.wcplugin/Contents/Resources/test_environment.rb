@@ -21,6 +21,12 @@ class TestEnviroment < Test::Unit::TestCase
     assert_equal(plugin_name, TEST_PLUGIN_NAME, "The plugin name should equal the test plugin name.")
   end
 
+  def test_split_id_key
+    assert(ENV.has_key?(WebConsole::SPLIT_ID_KEY), "The split id key should exist.")
+    window_id = ENV[WebConsole::SPLIT_ID_KEY]
+    assert(!window_id.is_integer?, "The split id should not be an integer.")
+  end
+
   def test_window_id_key
     assert(ENV.has_key?(WebConsole::WINDOW_ID_KEY), "The window id key should exist.")
     window_id = ENV[WebConsole::WINDOW_ID_KEY]
