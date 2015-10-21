@@ -44,9 +44,9 @@
 
 #pragma mark - Splits
 
-- (NSArray *)splits
+- (nonnull NSArray<id <WCLPluginView>> *)splits
 {
-    return [self.splitWebWindowController webViewControllers];
+    return (NSArray<id <WCLPluginView>> *)[self.splitWebWindowController webViewControllers];
 }
 
 #pragma mark - WCLPluginView

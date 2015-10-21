@@ -11,6 +11,7 @@
 @class Plugin;
 @class WCLSplitWebWindowController;
 @class SplitWebViewController;
+@class WCLWebViewController;
 
 extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindowNotification;
 
@@ -33,7 +34,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler;
     withArguments:(nullable NSArray *)arguments
   inDirectoryPath:(nullable NSString *)directoryPath
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
-- (nonnull NSArray *)webViewControllers;
+- (nonnull NSArray<WCLWebViewController *> *)webViewControllers;
 - (void)showLog;
 - (void)hideLog;
 - (void)toggleLog;

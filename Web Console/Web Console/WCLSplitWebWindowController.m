@@ -217,7 +217,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
                          completionHandler:completionHandler];
 }
 
-- (nonnull NSArray *)webViewControllers
+- (nonnull NSArray<WCLWebViewController *> *)webViewControllers
 {
     return self.splitWebViewController.webViewControllers;
 }

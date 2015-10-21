@@ -11,5 +11,5 @@
 #import "WCLPluginView.h"
 
 @interface NSWindow (AppleScript) <WCLPluginView>
-- (NSArray *)splits;
+- (nonnull NSArray<id <WCLPluginView>> *)splits;
 @end
