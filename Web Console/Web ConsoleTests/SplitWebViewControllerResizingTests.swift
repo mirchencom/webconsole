@@ -11,7 +11,7 @@ import XCTest
 @testable import Web_Console
 
 
-class SplitWebViewControllerTests: WCLSplitWebWindowControllerTestCase {
+class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     
     var defaultPluginSavedFrameName: String {
         let plugin = self.dynamicType.defaultPlugin()
