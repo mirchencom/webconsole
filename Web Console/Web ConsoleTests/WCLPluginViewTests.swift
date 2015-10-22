@@ -48,6 +48,9 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
             subdirectory: sharedTestResourcesJavaScriptSubdirectory)
         var title = split.doJavaScript(titleJavaScript)
         XCTAssertEqual(title, testDataHTMLTitle, "The titles should be equal")
+        XCTAssertEqual(splitWebWindowController.window!.title, testDataHTMLTitle, "The titles should be equal")
+
+        
         
         // Load the HTML in the second split
         let splitTwo = splits[1]
@@ -67,5 +70,6 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
         // Test the title in the first window again
         title = split.doJavaScript(titleJavaScript)
         XCTAssertEqual(title, testDataHTMLTitle, "The titles should be equal")
+        XCTAssertEqual(splitWebWindowController.window!.title, testDataHTMLTitle, "The titles should be equal")
     }
 }
