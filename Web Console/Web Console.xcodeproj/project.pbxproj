@@ -16,6 +16,7 @@
 		4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D21A89A1780075D330 /* WCLFilesViewController.xib */; };
 		4521E9D81A89A1780075D330 /* WCLPluginsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D41A89A1780075D330 /* WCLPluginsViewController.m */; };
 		4521E9D91A89A1780075D330 /* WCLPluginsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D51A89A1780075D330 /* WCLPluginsViewController.xib */; };
+		452A0FD01BD70AAB00CCCCD5 /* WCLPluginViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A0FCF1BD70AAB00CCCCD5 /* WCLPluginViewTests.swift */; settings = {ASSET_TAGS = (); }; };
 		4530B0D01736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0DC1736E2A6000A52E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0DB1736E2A6000A52E2 /* main.m */; };
 		4530B0E31736E2A6000A52E2 /* WCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0E21736E2A6000A52E2 /* WCLAppDelegate.m */; };
@@ -200,6 +201,7 @@
 		4521E9D31A89A1780075D330 /* WCLPluginsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLPluginsViewController.h; sourceTree = "<group>"; };
 		4521E9D41A89A1780075D330 /* WCLPluginsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPluginsViewController.m; sourceTree = "<group>"; };
 		4521E9D51A89A1780075D330 /* WCLPluginsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WCLPluginsViewController.xib; sourceTree = "<group>"; };
+		452A0FCF1BD70AAB00CCCCD5 /* WCLPluginViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCLPluginViewTests.swift; sourceTree = "<group>"; };
 		4530B0CC1736E2A6000A52E2 /* Web Console.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Web Console.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4530B0CF1736E2A6000A52E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4530B0D21736E2A6000A52E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -496,6 +498,7 @@
 			children = (
 				4596ACAA1B80FA7500AB8963 /* SplitWebViewControllerTests.swift */,
 				4596ACA81B80FA6700AB8963 /* WebViewControllerEventManager.swift */,
+				452A0FCF1BD70AAB00CCCCD5 /* WCLPluginViewTests.swift */,
 				45A34E2318726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m */,
 				45A34E2518726492005BF628 /* WCLSplitWebWindowControllerTaskTests.m */,
 				45B3E401187269E300DCDB42 /* WCLSplitWebWindowControllerResizingTests.m */,
@@ -1071,6 +1074,7 @@
 			files = (
 				451D5F8C1780B5450051F974 /* XCTestCase+BundleResources.m in Sources */,
 				4596ACA91B80FA6700AB8963 /* WebViewControllerEventManager.swift in Sources */,
+				452A0FD01BD70AAB00CCCCD5 /* WCLPluginViewTests.swift in Sources */,
 				45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */,
 				45B8148318161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m in Sources */,
 				450CD3161A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m in Sources */,

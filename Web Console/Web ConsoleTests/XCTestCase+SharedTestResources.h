@@ -9,11 +9,11 @@
 #import <XCTest/XCTest.h>
 
 @interface XCTestCase (SharedTestResources)
-+ (NSURL *)wcl_sharedTestResourcesURL;
-+ (NSURL *)wcl_URLForSharedTestResource:(NSString *)name
-                          withExtension:(NSString *)ext
-                           subdirectory:(NSString *)subdirectory;
-+ (NSString *)wcl_stringWithContentsOfSharedTestResource:(NSString *)filename
-                                           withExtension:(NSString *)extension
-                                            subdirectory:(NSString *)subdirectory;
++ (nonnull NSURL *)wcl_sharedTestResourcesURL;
++ (nonnull NSURL *)wcl_URLForSharedTestResource:(nonnull NSString *)name
+                          withExtension:(nonnull NSString *)ext
+                           subdirectory:(nonnull NSString *)subdirectory;
++ (nonnull NSString *)wcl_stringWithContentsOfSharedTestResource:(nonnull NSString *)filename
+                                           withExtension:(nonnull NSString *)extension
+                                            subdirectory:(nonnull NSString *)subdirectory;
 @end
