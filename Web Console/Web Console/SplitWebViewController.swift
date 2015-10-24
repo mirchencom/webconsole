@@ -55,7 +55,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     
     // MARK: Log
     
-    var shouldLog: Bool {
+    var shouldDebugLog: Bool {
         return UserDefaultsManager.standardUserDefaults().boolForKey(debugModeEnabledKey)
     }
     
@@ -68,12 +68,18 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         return splitViewItem.viewController as! WCLWebViewController
     }
     
-    func logError(text: String) {
+    func logDebugError(text: String) {
+        if shouldDebugLog {
+            return
+        }
         let preparedText = prepareLog(text, prefix: logErrorPrefix)
         logReadFromStandardInput(preparedText)
     }
 
-    func logMessage(text: String) {
+    func logDebugMessage(text: String) {
+        if !shouldDebugLog {
+            return
+        }
         let preparedText = prepareLog(text, prefix: logMessagePrefix)
         logReadFromStandardInput(preparedText)
     }
@@ -310,15 +316,40 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         delegate?.splitWebViewController(self, didFinishTask: task)
     }
 
+    func webViewController(webViewController: WCLWebViewController,
+        didRunCommandPath commandPath: String,
+        arguments: [String]?,
+        directoryPath: String?)
+    {
+        if webViewController == logWebViewController {
+            // Don't log messages from the log itself
+            return
+        }
+
+        var items = [String]()
+        let commandName = commandPath.lastPathComponent
+        items.append("running: \(commandName)")
+        if let arguments = arguments {
+            let item = arguments.joinWithSeparator(", ")
+            items.append("with arguments: \(item)")
+        }
+
+        if let directoryPath = directoryPath {
+            items.append("in directory: \(directoryPath)")
+        }
+
+        let runText = items.joinWithSeparator("\n")
+        print(runText)
+        logDebugMessage(runText)
+    }
+    
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
             return
         }
         
-        if shouldLog {
-            logMessage(text)
-        }
+        logDebugMessage(text)
     }
 
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
@@ -327,8 +358,6 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             return
         }
         
-        if shouldLog {
-            logError(text)
-        }
+        logDebugError(text)
     }
 }

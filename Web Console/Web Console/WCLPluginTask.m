@@ -74,6 +74,9 @@
         // dispatched, or the infinite loop results.
         
         if ([delegate respondsToSelector:@selector(pluginTaskWillStart:)]) {
+            // The plugin task delegate must be informed before calculating
+            // the environment dictionary in order to assure that the
+            // correct window number is returned.
             [delegate pluginTaskWillStart:task];
         }
         
@@ -85,42 +88,16 @@
             [task setEnvironment:environmentDictionary];
         }
         
-        NSString *runText = [self runTextWithCommandPath:commandPath arguments:arguments directoryPath:directoryPath];
-        DLog(@"%@", runText);
-        [self processStandardOutput:runText task:task delegate:delegate];
         [task launch];
+
+        if ([delegate respondsToSelector:@selector(pluginTask:didRunCommandPath:arguments:directoryPath:)]) {
+            [delegate pluginTask:task didRunCommandPath:commandPath arguments:arguments directoryPath:directoryPath];
+        }
         
         if (completionHandler) {
             completionHandler(YES);
         }
     });
-}
-
-+ (NSString *)runTextWithCommandPath:(NSString *)commandPath
-                           arguments:(NSArray *)arguments
-                       directoryPath:(NSString *)directoryPath
-{
-    NSMutableArray *items = [[NSMutableArray alloc] init];
-    
-    NSString *commandName = commandPath.lastPathComponent;
-    if (commandName) {
-        NSString *item = [NSString stringWithFormat:@"running: %@", commandName];
-        [items addObject:item];
-    }
-    
-    if (arguments) {
-        NSString *argumentsList = [arguments componentsJoinedByString:@", "];
-        NSString *item = [NSString stringWithFormat:@"with arguments: %@", argumentsList];
-        [items addObject:item];
-    }
-
-    if (directoryPath) {
-        NSString *item = [NSString stringWithFormat:@"in directory: %@", directoryPath];
-        [items addObject:item];
-    }
-    
-    NSString *runText = [items componentsJoinedByString:@"\n"];
-    return runText;
 }
 
 + (void)processStandardOutput:(NSString *)text task:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate

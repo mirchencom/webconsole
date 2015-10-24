@@ -16,6 +16,9 @@
 - (void)pluginTaskDidFinish:(nonnull NSTask *)task;
 - (void)pluginTask:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text;
 - (void)pluginTask:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text;
+- (void)pluginTask:(nonnull NSTask *)task didRunCommandPath:(nonnull NSString *)commandPath
+         arguments:(nullable NSArray<NSString *> *)arguments
+     directoryPath:(nullable NSString *)directoryPath;
 - (nullable NSDictionary *)environmentDictionaryForPluginTask:(nonnull NSTask *)task;
 @end
 

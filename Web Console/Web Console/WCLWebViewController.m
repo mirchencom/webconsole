@@ -246,6 +246,15 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
 }
 
+- (void)pluginTask:(NSTask *)task didRunCommandPath:(NSString *)commandPath
+         arguments:(NSArray *)arguments
+     directoryPath:(NSString *)directoryPath
+{
+    if ([self.delegate respondsToSelector:@selector(webViewController:didRunCommandPath:arguments:directoryPath:)]) {
+        [self.delegate webViewController:self didRunCommandPath:commandPath arguments:arguments directoryPath:directoryPath];
+    }
+}
+
 - (void)pluginTask:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text
 {
     if ([self.delegate respondsToSelector:@selector(webViewController:didReceiveStandardError:)]) {
