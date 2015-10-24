@@ -36,7 +36,6 @@
     [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
         NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        DLog(@"[Task] standardOutput %@", text);
         [self processStandardOutput:text task:task delegate:delegate];
     }];
     
@@ -45,7 +44,6 @@
     [[task.standardError fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
         NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        DLog(@"[Task] standardError %@", text);
         [self processStandardError:text task:task delegate:delegate];
     }];
     

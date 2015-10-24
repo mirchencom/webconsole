@@ -69,6 +69,8 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     func logDebugError(text: String) {
+        print("Debug Error: \(text)")
+        
         if shouldDebugLog {
             return
         }
@@ -77,6 +79,8 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
 
     func logDebugMessage(text: String) {
+        print("Debug Message: \(text)")
+
         if !shouldDebugLog {
             return
         }
@@ -338,9 +342,19 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             items.append("in directory: \(directoryPath)")
         }
 
-        let runText = items.joinWithSeparator("\n")
-        print(runText)
-        logDebugMessage(runText)
+        let text = items.joinWithSeparator("\n")
+
+        logDebugMessage(text)
+    }
+    
+    func webViewController(webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
+        if webViewController == logWebViewController {
+            // Don't log messages from the log itself
+            return
+        }
+
+        let text = "Read from standard input: \(text)"
+        logDebugMessage(text)
     }
     
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {

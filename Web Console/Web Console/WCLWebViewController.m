@@ -70,9 +70,6 @@
 
 - (void)readFromStandardInput:(NSString *)text
 {
-    DLog(@"[AppleScript] %@ readFromStandardInput: %@", self.plugin.name, text);
-    
-    // TODO: Refactor this to support log plugin
     if (![self hasTasks]) {
         return;
     }
@@ -86,6 +83,10 @@
     }
     
     [pipe.fileHandleForWriting writeData:data];
+
+    if ([self.delegate respondsToSelector:@selector(webViewController:didReadFromStandardInput:)]) {
+        [self.delegate webViewController:self didReadFromStandardInput:text];
+    }
 }
 
 - (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {
