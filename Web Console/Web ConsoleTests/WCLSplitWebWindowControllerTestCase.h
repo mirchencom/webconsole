@@ -31,10 +31,14 @@
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase
 + (Plugin *)defaultPlugin;
 + (Plugin *)otherPlugin;
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerForPlugin:(Plugin *)plugin;
 - (WCLSplitWebWindowController *)makeSplitWebWindowController;
 - (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin;
 - (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath;
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath task:(NSTask **)task;
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
+                                                                     plugin:(Plugin *)plugin
+                                                                       task:(NSTask **)task;
 + (void)blockUntilAllTasksRunAndFinish;
 @end

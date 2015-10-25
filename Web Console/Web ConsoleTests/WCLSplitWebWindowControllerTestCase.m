@@ -130,16 +130,16 @@
 - (WCLSplitWebWindowController *)makeSplitWebWindowController
 {
     Plugin *plugin = [[self class] defaultPlugin];
-    return [self makeSplitWebWindowControllerForPlugin:plugin];
+    return [self makeSplitWebWindowControllerRunningHelloWorldForPlugin:plugin];
 }
 
 - (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin
 {
     Plugin *plugin = [[self class] otherPlugin];
-    return [self makeSplitWebWindowControllerForPlugin:plugin];
+    return [self makeSplitWebWindowControllerRunningHelloWorldForPlugin:plugin];
 }
 
-- (WCLSplitWebWindowController *)makeSplitWebWindowControllerForPlugin:(Plugin *)plugin
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin
 {
     // The plugin needs a name for saved frames to work
     XCTAssertNotNil(plugin.name, @"The WCLPlugin should have a name.");
@@ -156,6 +156,21 @@
                                                ofType:kTestDataRubyExtension
                                          subdirectory:kTestDataSubdirectory];
     return [self splitWebWindowControllerRunningCommandPath:commandPath plugin:plugin];
+}
+
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerForPlugin:(Plugin *)plugin
+{
+    WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Running task"];
+    [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:^(BOOL success) {
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:kTestTimeoutInterval handler:nil];
+    
+    [WCLSplitWebWindowControllerTestsHelper blockUntilWindowIsVisible:splitWebWindowController.window];
+    
+    return splitWebWindowController;
 }
 
 

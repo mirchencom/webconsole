@@ -318,6 +318,16 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
 
     func webViewController(webViewController: WCLWebViewController, didFinishTask task: NSTask) {
         delegate?.splitWebViewController(self, didFinishTask: task)
+
+        if webViewController == logWebViewController {
+            // Don't log messages from the log itself
+            return
+        }
+
+        if let commandName = task.launchPath?.lastPathComponent {
+            let text = "finished running: \(commandName)"
+            logDebugMessage(text)
+        }
     }
 
     func webViewController(webViewController: WCLWebViewController,
