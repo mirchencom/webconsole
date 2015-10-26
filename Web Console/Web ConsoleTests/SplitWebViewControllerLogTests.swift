@@ -30,12 +30,11 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
 
         var task: NSTask?
 //        var task: AutoreleasingUnsafeMutablePointer<NSTask?> = nil
-        splitWebWindowControllerRunningCommandPath(logPlugin.commandPath, plugin: logPlugin, task: &task)
+        splitWebWindowController = splitWebWindowControllerRunningCommandPath(logPlugin.commandPath, plugin: logPlugin, task: &task)
 NSLog("task = \(task?.launchPath)")
         // TODO: For some reason the task is getting stuck here
         
         WCLTaskTestsHelper.blockUntilTaskFinishes(task, timeoutInterval: 20)
-
         splits = splitWebWindowController.window!.splits()
         XCTAssertEqual(splits.count, 2, "There should be two splits")
     }
