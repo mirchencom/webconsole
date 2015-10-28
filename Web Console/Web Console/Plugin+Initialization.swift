@@ -18,6 +18,8 @@ extension Plugin {
         case InvalidIdentifierError(infoDictionary: [NSObject : AnyObject])
         case InvalidHiddenError(infoDictionary: [NSObject : AnyObject])
         case InvalidEditableError(infoDictionary: [NSObject : AnyObject])
+        case InvalidDebugModeEnabledError(infoDictionary: [NSObject : AnyObject])
+        
     }
 
     struct InfoDictionaryKeys {
@@ -27,7 +29,7 @@ extension Plugin {
         static let Suffixes = "WCFileExtensions"
         static let Hidden = "WCHidden"
         static let Editable = "WCEditable"
-        static let DebugEnabled = "WCDebugModeEnabled"
+        static let DebugModeEnabled = "WCDebugModeEnabled"
     }
 
     enum PluginType {
@@ -71,6 +73,8 @@ extension Plugin {
             print("Plugin hidden is invalid \(infoDictionary).")
         } catch PluginLoadError.InvalidEditableError(let infoDictionary) {
             print("Plugin editable is invalid \(infoDictionary).")
+        } catch PluginLoadError.InvalidDebugModeEnabledError(let infoDictionary) {
+            print("Plugin debug mode enabled is invalid \(infoDictionary).")
         } catch {
             print("Failed to load plugin at path \(path).")
         }
@@ -91,7 +95,7 @@ extension Plugin {
                 let suffixes = try validSuffixes(infoDictionary)
                 let hidden = try validHidden(infoDictionary)
                 let editable = try validEditable(infoDictionary)
-                let debugEnabled = try validDebugEnabled(infoDictionary)
+                let debugModeEnabled = try validDebugModeEnabled(infoDictionary)
                 
 
                 // Plugin
@@ -104,7 +108,7 @@ extension Plugin {
                     suffixes: suffixes,
                     hidden: hidden,
                     editable: editable,
-                    debugEnabled: debugEnabled)
+                    debugModeEnabled: debugModeEnabled)
 
             }
         } catch let error as NSError {
@@ -208,14 +212,14 @@ extension Plugin {
         return true
     }
 
-    class func validDebugEnabled(infoDictionary: [NSObject : AnyObject]) throws -> Bool {
-        if let debugEnabled = infoDictionary[InfoDictionaryKeys.DebugEnabled] as? Int {
-            return NSNumber(integer: debugEnabled).boolValue
+    class func validDebugModeEnabled(infoDictionary: [NSObject : AnyObject]) throws -> Bool {
+        if let debugModeEnabled = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] as? Int {
+            return NSNumber(integer: debugModeEnabled).boolValue
         }
         
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Editable] {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] {
             // A missing editable is valid, but an existing malformed one is not
-            throw PluginLoadError.InvalidEditableError(infoDictionary: infoDictionary)
+            throw PluginLoadError.InvalidDebugModeEnabledError(infoDictionary: infoDictionary)
         }
         
         return false
