@@ -102,6 +102,10 @@
 }
 
 - (NSString *)doJavaScript:(NSString *)javaScript {
+    if ([self.delegate respondsToSelector:@selector(webViewController:willDoJavaScript:)]) {
+        [self.delegate webViewController:self willDoJavaScript:javaScript];
+    }
+    
     return [self.webView stringByEvaluatingJavaScriptFromString:javaScript];
 }
 

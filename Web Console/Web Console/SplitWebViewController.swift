@@ -325,7 +325,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         }
 
         if let commandName = task.launchPath?.lastPathComponent {
-            let text = "finished running: \(commandName)"
+            let text = "Finished running: \(commandName)"
             logDebugMessage(text)
         }
     }
@@ -342,14 +342,14 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
 
         var items = [String]()
         let commandName = commandPath.lastPathComponent
-        items.append("running: \(commandName)")
+        items.append("Running: \(commandName)")
         if let arguments = arguments {
             let item = arguments.joinWithSeparator(", ")
-            items.append("with arguments: \(item)")
+            items.append("With arguments: \(item)")
         }
 
         if let directoryPath = directoryPath {
-            items.append("in directory: \(directoryPath)")
+            items.append("In directory: \(directoryPath)")
         }
 
         let text = items.joinWithSeparator("\n")
@@ -364,6 +364,16 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         }
 
         let text = "Read from standard input: \(text)"
+        logDebugMessage(text)
+    }
+
+    func webViewController(webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
+        if webViewController == logWebViewController {
+            // Don't log messages from the log itself
+            return
+        }
+
+        let text = "Do JavaScript: \(javaScript)"
         logDebugMessage(text)
     }
     

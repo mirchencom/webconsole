@@ -31,7 +31,9 @@
                 arguments:(nullable NSArray<NSString *> *)arguments
             directoryPath:(nullable NSString *)directoryPath;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
- didReadFromStandardInput:(nonnull NSString *)text;
+ willDoJavaScript:(nonnull NSString *)text;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController
+ didReadFromStandardInput:(nonnull NSString *)javaScript;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
  didReceiveStandardOutput:(nonnull NSString *)text;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController

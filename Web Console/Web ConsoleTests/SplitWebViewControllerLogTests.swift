@@ -12,6 +12,7 @@ import XCTest
 class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
 
     var splitWebWindowController: WCLSplitWebWindowController!
+    var splitWebViewController: SplitWebViewController!
     var splits: [WCLPluginView]!
     var logSplit: WCLPluginView {
         get {
@@ -26,15 +27,8 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
     
     override func setUp() {
         super.setUp()
-        let logPlugin = PluginsManager.sharedInstance.pluginWithName(testLogPlugin)!
-
-        var task: NSTask?
-//        var task: AutoreleasingUnsafeMutablePointer<NSTask?> = nil
-        splitWebWindowController = splitWebWindowControllerRunningCommandPath(logPlugin.commandPath, plugin: logPlugin, task: &task)
-NSLog("task = \(task?.launchPath)")
-        // TODO: For some reason the task is getting stuck here
-        
-        WCLTaskTestsHelper.blockUntilTaskFinishes(task, timeoutInterval: 20)
+        splitWebWindowController = makeSplitWebWindowController()
+        splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
         splits = splitWebWindowController.window!.splits()
         XCTAssertEqual(splits.count, 2, "There should be two splits")
     }
@@ -55,9 +49,19 @@ NSLog("task = \(task?.launchPath)")
     // TODO: Run a normal plugin, and test the `logDebugMessage()` and `logDebugError()`, with debug on
     // TODO: Run a normal plugin, and test the `logDebugMessage()` and `logDebugError()`, with debug off
     
-//    func testLogPluginWithDebugOff() {
+//    func testLogPluginWithDebugOn() {
+//        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: "WCLDebugModeEnabled")
+//        //userDefaultsDictionary[kDebugModeEnabledKey] = @NO;
+//        
+//        var text = testLogPluginInfoMessage
+//        splitWebViewController.logDebugMessage(text)
+//        
+//        // Block until the message is logged here, probably by adding an intermediary event handler?
 //        let firstLogMessage = logSplit.doJavaScript(firstParagraphJavaScript)
-//        XCTAssertEqual(firstLogMessage, testLogPluginInfoMessage)
+//        XCTAssertEqual(firstLogMessage, text)
+//
+//        text = testLogPluginErrorMessage
+//        splitWebViewController.logDebugError(text)
 //        let lastLogMessage = logSplit.doJavaScript(lastParagraphJavaScript)
 //        XCTAssertEqual(lastLogMessage, testLogPluginErrorMessage)
 //    }
