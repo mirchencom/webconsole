@@ -27,6 +27,7 @@ extension Plugin {
         static let Suffixes = "WCFileExtensions"
         static let Hidden = "WCHidden"
         static let Editable = "WCEditable"
+        static let DebugEnabled = "WCDebugModeEnabled"
     }
 
     enum PluginType {
@@ -85,11 +86,13 @@ extension Plugin {
                 let name = try validName(infoDictionary)
             {
                 // Optional Keys
+                let pluginType = validPluginTypeFromPath(path)
                 let command = try validCommand(infoDictionary)
                 let suffixes = try validSuffixes(infoDictionary)
                 let hidden = try validHidden(infoDictionary)
                 let editable = try validEditable(infoDictionary)
-                let pluginType = validPluginTypeFromPath(path)
+                let debugEnabled = try validDebugEnabled(infoDictionary)
+                
 
                 // Plugin
                 return Plugin(bundle: bundle,
@@ -100,7 +103,8 @@ extension Plugin {
                     command: command,
                     suffixes: suffixes,
                     hidden: hidden,
-                    editable: editable)
+                    editable: editable,
+                    debugEnabled: debugEnabled)
 
             }
         } catch let error as NSError {
@@ -204,6 +208,19 @@ extension Plugin {
         return true
     }
 
+    class func validDebugEnabled(infoDictionary: [NSObject : AnyObject]) throws -> Bool {
+        if let debugEnabled = infoDictionary[InfoDictionaryKeys.DebugEnabled] as? Int {
+            return NSNumber(integer: debugEnabled).boolValue
+        }
+        
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Editable] {
+            // A missing editable is valid, but an existing malformed one is not
+            throw PluginLoadError.InvalidEditableError(infoDictionary: infoDictionary)
+        }
+        
+        return false
+    }
+    
     class func validPluginTypeFromPath(path: String) -> PluginType {
         let pluginContainerDirectory = path.stringByDeletingLastPathComponent
         switch pluginContainerDirectory {

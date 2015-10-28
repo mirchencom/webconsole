@@ -31,6 +31,7 @@ class Plugin: WCLPlugin {
     }
     internal let bundle: NSBundle
     let hidden: Bool
+    let debugEnabled: Bool
     let pluginType: PluginType
     
     init(bundle: NSBundle,
@@ -41,15 +42,17 @@ class Plugin: WCLPlugin {
         command: String?,
         suffixes: [String]?,
         hidden: Bool,
-        editable: Bool)
+        editable: Bool,
+        debugEnabled: Bool)
     {
         self.infoDictionary = infoDictionary
+        self.pluginType = pluginType
         self.bundle = bundle
         self.name = name
         self.identifier = identifier
         self.hidden = hidden
         self.editable = editable
-        self.pluginType = pluginType
+        self.debugEnabled = debugEnabled
         
         // Optional
         self.command = command

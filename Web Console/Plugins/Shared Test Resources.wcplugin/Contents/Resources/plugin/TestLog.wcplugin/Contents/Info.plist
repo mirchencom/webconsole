@@ -8,5 +8,7 @@
 	<string>test_log.rb</string>
 	<key>WCUUID</key>
 	<string>7A95638E-798D-437C-9404-08E7DC68655B</string>
+	<key>WCDebugModeEnabled</key>
+	<integer>1</integer>
 </dict>
 </plist>
