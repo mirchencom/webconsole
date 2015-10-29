@@ -23,6 +23,7 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
     }
     
     override func tearDown() {
+        self.dynamicType.blockUntilAllTasksRunAndFinish()
         splitWebWindowController = nil
         super.tearDown()
     }
