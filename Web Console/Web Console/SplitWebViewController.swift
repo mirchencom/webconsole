@@ -59,6 +59,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         if let debugModeEnabled = self.plugin?.debugModeEnabled where debugModeEnabled {
             return true
         }
+
         return UserDefaultsManager.standardUserDefaults().boolForKey(debugModeEnabledKey)
     }
     
@@ -74,7 +75,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     func logDebugError(text: String) {
         print("Debug Error: \(text)")
         
-        if shouldDebugLog {
+        if !shouldDebugLog {
             return
         }
         let preparedText = prepareLog(text, prefix: logErrorPrefix)
