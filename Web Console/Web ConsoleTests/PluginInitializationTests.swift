@@ -12,20 +12,20 @@ import XCTest
 class PluginInitializationTests: WCLTestPluginManagerTestCase {
 
     func testHelloWorldPlugin() {
-        guard let logPlugin = PluginsManager.sharedInstance.pluginWithName(testHelloWorldPluginName) else {
+        guard let helloWorldPlugin = PluginsManager.sharedInstance.pluginWithName(testHelloWorldPluginName) else {
             XCTAssertTrue(false)
             return
         }
-
-        XCTAssertEqual(logPlugin.pluginType, Plugin.PluginType.Other)
-        XCTAssertEqual(logPlugin.identifier, "9DF1F4D6-16BA-4D18-88D2-155CF262035F")
-        XCTAssertEqual(logPlugin.name, "HelloWorld")
-        XCTAssertEqual(logPlugin.command, "hello_world.rb")
-        XCTAssertEqual(logPlugin.hidden, false)
-        XCTAssertEqual(logPlugin.editable, true)
-        XCTAssertEqual(logPlugin.debugModeEnabled, false)
+        
+        XCTAssertEqual(helloWorldPlugin.pluginType, Plugin.PluginType.Other)
+        XCTAssertEqual(helloWorldPlugin.identifier, "9DF1F4D6-16BA-4D18-88D2-155CF262035F")
+        XCTAssertEqual(helloWorldPlugin.name, "HelloWorld")
+        XCTAssertEqual(helloWorldPlugin.command, "hello_world.rb")
+        XCTAssertEqual(helloWorldPlugin.hidden, false)
+        XCTAssertEqual(helloWorldPlugin.editable, true)
+        XCTAssertEqual(helloWorldPlugin.debugModeEnabled, false)
     }
-    
+
     func testLogPlugin() {
         guard let logPlugin = PluginsManager.sharedInstance.pluginWithName(testLogPluginName) else {
             XCTAssertTrue(false)
@@ -40,6 +40,5 @@ class PluginInitializationTests: WCLTestPluginManagerTestCase {
         XCTAssertEqual(logPlugin.editable, true)
         XCTAssertEqual(logPlugin.debugModeEnabled, true)
     }
-
 
 }

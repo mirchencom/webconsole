@@ -9,6 +9,38 @@
 import XCTest
 @testable import Web_Console
 
+class SplitWebViewControllerPluginDebugModeEnabledTests: WCLSplitWebWindowControllerTestCase {
+
+    func testPluginDebugEnabled() {
+        guard let logPlugin = PluginsManager.sharedInstance.pluginWithName(testLogPluginName) else {
+            XCTAssertTrue(false)
+            return
+        }
+
+        // Run `HelloWorld` because the `TestLog` Plugin requires AppleScript
+        // which is blocked when running tests.
+        let splitWebWindowController = makeSplitWebWindowControllerRunningHelloWorldForPlugin(logPlugin)
+        let splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
+        
+        XCTAssertFalse(UserDefaultsManager
+            .standardUserDefaults()
+            .boolForKey("WCLDebugModeEnabled"),
+            "Debug mode should be disabled in `standardUserDefaults`")
+        XCTAssertTrue(splitWebViewController.shouldDebugLog)
+        
+        // Clean Up
+        self.dynamicType.blockUntilAllTasksRunAndFinish()
+    }
+
+}
+
+class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTestCase {
+    // TODO: Do above test with a plugin that doesn't automatically have debug enabled, and confirm that toggling
+    // the user default toggles `shouldDebugLog`
+//        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: "WCLDebugModeEnabled")
+}
+
+
 class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
 
     var splitWebWindowController: WCLSplitWebWindowController!
@@ -43,7 +75,7 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
         super.tearDown()
     }
-
+    
     // TODO: Test the `TestLog` plugin with debug on
     // TODO: Test the `TestLog` plugin with debug off
     // TODO: Run a normal plugin, and test the `logDebugMessage()` and `logDebugError()`, with debug on

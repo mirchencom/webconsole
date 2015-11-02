@@ -31,6 +31,7 @@
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase
 + (Plugin *)defaultPlugin;
 + (Plugin *)otherPlugin;
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin;
 - (WCLSplitWebWindowController *)makeSplitWebWindowControllerForPlugin:(Plugin *)plugin;
 - (WCLSplitWebWindowController *)makeSplitWebWindowController;
 - (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin;
