@@ -30,6 +30,7 @@ let sharedTestResourcesJavaScriptSubdirectory = "js"
 
 // MARK: Plugins
 
+let testHelloWorldPluginName = "HelloWorld"
 let testLogPluginName = "TestLog"
 let testLogPluginErrorMessage = "Testing log error"
 let testLogPluginInfoMessage = "Testing log message"
