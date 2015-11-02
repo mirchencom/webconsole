@@ -10,14 +10,14 @@
 		450CD3161A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m */; };
 		450CD3181A8C332100D17CF1 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
 		450CD3191A8C337700D17CF1 /* XCTestCase+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m */; };
-		4511EBA41BBCA23400B1023E /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; settings = {ASSET_TAGS = (); }; };
+		4511EBA41BBCA23400B1023E /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; };
 		451D5F8C1780B5450051F974 /* XCTestCase+BundleResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 451D5F8B1780B5450051F974 /* XCTestCase+BundleResources.m */; };
 		4521E9D61A89A1780075D330 /* WCLFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D11A89A1780075D330 /* WCLFilesViewController.m */; };
 		4521E9D71A89A1780075D330 /* WCLFilesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D21A89A1780075D330 /* WCLFilesViewController.xib */; };
 		4521E9D81A89A1780075D330 /* WCLPluginsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D41A89A1780075D330 /* WCLPluginsViewController.m */; };
 		4521E9D91A89A1780075D330 /* WCLPluginsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4521E9D51A89A1780075D330 /* WCLPluginsViewController.xib */; };
-		452A0FD01BD70AAB00CCCCD5 /* WCLPluginViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A0FCF1BD70AAB00CCCCD5 /* WCLPluginViewTests.swift */; settings = {ASSET_TAGS = (); }; };
-		452A0FD21BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A0FD11BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift */; settings = {ASSET_TAGS = (); }; };
+		452A0FD01BD70AAB00CCCCD5 /* WCLPluginViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A0FCF1BD70AAB00CCCCD5 /* WCLPluginViewTests.swift */; };
+		452A0FD21BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A0FD11BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift */; };
 		4530B0D01736E2A6000A52E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4530B0CF1736E2A6000A52E2 /* Cocoa.framework */; };
 		4530B0DC1736E2A6000A52E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0DB1736E2A6000A52E2 /* main.m */; };
 		4530B0E31736E2A6000A52E2 /* WCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4530B0E21736E2A6000A52E2 /* WCLAppDelegate.m */; };
@@ -27,7 +27,7 @@
 		454762B61B810F7600030F1F /* SplitWebViewControllerResizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACAA1B80FA7500AB8963 /* SplitWebViewControllerResizingTests.swift */; };
 		4550593A1B8A6A6D00AE3314 /* WCLWebViewController+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 455059391B8A6A6D00AE3314 /* WCLWebViewController+AppleScript.m */; };
 		4550593D1B8AB1EE00AE3314 /* NSWindow+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4550593C1B8AB1EE00AE3314 /* NSWindow+AppleScript.m */; };
-		455839B01BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */; settings = {ASSET_TAGS = (); }; };
+		455839B01BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */; };
 		455B0BFE176FF592007B75DD /* WCLLoadHTMLScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0BFD176FF592007B75DD /* WCLLoadHTMLScriptCommand.m */; };
 		455B0C0A1771627A007B75DD /* WCLDoJavaScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B0C091771627A007B75DD /* WCLDoJavaScriptCommand.m */; };
 		455FD24B1A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FD2431A899C9B00ACE1D4 /* FilesAndPluginsDirectoryManagerTests.swift */; };
@@ -42,7 +42,7 @@
 		455FD2541A899CB200ACE1D4 /* PluginsManagerTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9361A89981E0098A47B /* PluginsManagerTestCase.swift */; };
 		455FD2551A899CB200ACE1D4 /* TemporaryDirectoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9391A89981E0098A47B /* TemporaryDirectoryTestCase.swift */; };
 		455FD2561A899CB200ACE1D4 /* TemporaryPluginsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93A1A89981E0098A47B /* TemporaryPluginsTestCase.swift */; };
-		455FD2571A899CB200ACE1D4 /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93B1A89981E0098A47B /* TestConstants.swift */; };
+		455FD2571A899CB200ACE1D4 /* PluginManagerTestsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93B1A89981E0098A47B /* PluginManagerTestsConstants.swift */; };
 		455FD2581A899CB600ACE1D4 /* WCLKeyValueObservingTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93F1A89981E0098A47B /* WCLKeyValueObservingTestsHelper.m */; };
 		455FD2591A899CB900ACE1D4 /* XCTestCase+BundleResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9401A89981E0098A47B /* XCTestCase+BundleResources.swift */; };
 		455FD25A1A899CDE00ACE1D4 /* HTML.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 457F795018B005BF00D705C8 /* HTML.wcplugin */; };
@@ -86,11 +86,11 @@
 		459389F318FB287700E0218E /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 459389F218FB287700E0218E /* UserDefaults.plist */; };
 		459389F518FB2DAB00E0218E /* Web_ConsoleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */; };
 		4596ACA91B80FA6700AB8963 /* WebViewControllerEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACA81B80FA6700AB8963 /* WebViewControllerEventManager.swift */; };
-		4596ACAE1B80FF0D00AB8963 /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACAD1B80FF0D00AB8963 /* TestConstants.swift */; };
+		4596ACAE1B80FF0D00AB8963 /* Web_ConsoleTestsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACAD1B80FF0D00AB8963 /* Web_ConsoleTestsConstants.swift */; };
 		4596ACB21B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596ACB11B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m */; };
 		4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */; };
-		459C46311BBE074B0064BA9E /* XCTestCase+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C46301BBE074B0064BA9E /* XCTestCase+UserDefaults.swift */; settings = {ASSET_TAGS = (); }; };
-		459C46321BBE101D0064BA9E /* XCTestCase+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C46301BBE074B0064BA9E /* XCTestCase+UserDefaults.swift */; settings = {ASSET_TAGS = (); }; };
+		459C46311BBE074B0064BA9E /* XCTestCase+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C46301BBE074B0064BA9E /* XCTestCase+UserDefaults.swift */; };
+		459C46321BBE101D0064BA9E /* XCTestCase+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459C46301BBE074B0064BA9E /* XCTestCase+UserDefaults.swift */; };
 		459EC9411A89981E0098A47B /* CopyDirectoryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC92C1A89981E0098A47B /* CopyDirectoryControllerTests.swift */; };
 		459EC9421A89981E0098A47B /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC92D1A89981E0098A47B /* DirectoryTests.swift */; };
 		459EC9431A89981E0098A47B /* DuplicatePluginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC92E1A89981E0098A47B /* DuplicatePluginControllerTests.swift */; };
@@ -105,13 +105,14 @@
 		459EC94C1A89981E0098A47B /* PluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9381A89981E0098A47B /* PluginTests.swift */; };
 		459EC94D1A89981E0098A47B /* TemporaryDirectoryTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9391A89981E0098A47B /* TemporaryDirectoryTestCase.swift */; };
 		459EC94E1A89981E0098A47B /* TemporaryPluginsTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93A1A89981E0098A47B /* TemporaryPluginsTestCase.swift */; };
-		459EC94F1A89981E0098A47B /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93B1A89981E0098A47B /* TestConstants.swift */; };
+		459EC94F1A89981E0098A47B /* PluginManagerTestsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93B1A89981E0098A47B /* PluginManagerTestsConstants.swift */; };
 		459EC9501A89981E0098A47B /* WCLFileExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93D1A89981E0098A47B /* WCLFileExtensionTests.swift */; };
 		459EC9511A89981E0098A47B /* WCLKeyValueObservingTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93F1A89981E0098A47B /* WCLKeyValueObservingTestsHelper.m */; };
 		459EC9521A89981E0098A47B /* XCTestCase+BundleResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9401A89981E0098A47B /* XCTestCase+BundleResources.swift */; };
 		459EC9531A8998DF0098A47B /* HTML.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 457F795018B005BF00D705C8 /* HTML.wcplugin */; };
 		45A34E2418726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A34E2318726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m */; };
 		45A34E2618726492005BF628 /* WCLSplitWebWindowControllerTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A34E2518726492005BF628 /* WCLSplitWebWindowControllerTaskTests.m */; };
+		45A38FA91BE1A8DD00C5DFDF /* PluginInitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A38FA81BE1A8DD00C5DFDF /* PluginInitializationTests.swift */; };
 		45ADD9061739E21A008A6AE7 /* WebConsole.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 45ADD9051739E21A008A6AE7 /* WebConsole.sdef */; };
 		45ADD90C1739E883008A6AE7 /* WCLSplitWebWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD90B1739E883008A6AE7 /* WCLSplitWebWindowController.m */; };
 		45ADD9111739F257008A6AE7 /* WCLSplitWebWindowsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ADD9101739F257008A6AE7 /* WCLSplitWebWindowsController.m */; };
@@ -123,7 +124,7 @@
 		45B375C6179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C5179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m */; };
 		45B375C9179B8347002BCEF6 /* WCLTaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C8179B8347002BCEF6 /* WCLTaskHelper.m */; };
 		45B3E402187269E300DCDB42 /* WCLSplitWebWindowControllerResizingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B3E401187269E300DCDB42 /* WCLSplitWebWindowControllerResizingTests.m */; };
-		45B4FE471BB233B2007CB801 /* String+Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4FE461BB233B2007CB801 /* String+Paths.swift */; settings = {ASSET_TAGS = (); }; };
+		45B4FE471BB233B2007CB801 /* String+Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4FE461BB233B2007CB801 /* String+Paths.swift */; };
 		45B81480181483400006AA05 /* WCLTestPluginsManagerPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8147F181483400006AA05 /* WCLTestPluginsManagerPluginTests.m */; };
 		45B8148318161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m */; };
 		45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */; };
@@ -307,7 +308,7 @@
 		459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_ConsoleTests.m; sourceTree = "<group>"; };
 		4596ACA81B80FA6700AB8963 /* WebViewControllerEventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerEventManager.swift; sourceTree = "<group>"; };
 		4596ACAA1B80FA7500AB8963 /* SplitWebViewControllerResizingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitWebViewControllerResizingTests.swift; sourceTree = "<group>"; };
-		4596ACAD1B80FF0D00AB8963 /* TestConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
+		4596ACAD1B80FF0D00AB8963 /* Web_ConsoleTestsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Web_ConsoleTestsConstants.swift; sourceTree = "<group>"; };
 		4596ACB11B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLSplitWebWindowControllerTestCase.m; sourceTree = "<group>"; };
 		4596C06E1793151A005FC51A /* NSApplication+AppleScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+AppleScript.h"; sourceTree = "<group>"; };
 		4596C06F1793151A005FC51A /* NSApplication+AppleScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+AppleScript.m"; sourceTree = "<group>"; };
@@ -329,7 +330,7 @@
 		459EC9381A89981E0098A47B /* PluginTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginTests.swift; sourceTree = "<group>"; };
 		459EC9391A89981E0098A47B /* TemporaryDirectoryTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TemporaryDirectoryTestCase.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		459EC93A1A89981E0098A47B /* TemporaryPluginsTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporaryPluginsTestCase.swift; sourceTree = "<group>"; };
-		459EC93B1A89981E0098A47B /* TestConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
+		459EC93B1A89981E0098A47B /* PluginManagerTestsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginManagerTestsConstants.swift; sourceTree = "<group>"; };
 		459EC93C1A89981E0098A47B /* WCLFileExtension+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WCLFileExtension+Tests.h"; sourceTree = "<group>"; };
 		459EC93D1A89981E0098A47B /* WCLFileExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCLFileExtensionTests.swift; sourceTree = "<group>"; };
 		459EC93E1A89981E0098A47B /* WCLKeyValueObservingTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLKeyValueObservingTestsHelper.h; sourceTree = "<group>"; };
@@ -338,6 +339,7 @@
 		45A34E2318726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLSplitWebWindowControllerHTMLTests.m; sourceTree = "<group>"; };
 		45A34E2518726492005BF628 /* WCLSplitWebWindowControllerTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLSplitWebWindowControllerTaskTests.m; sourceTree = "<group>"; };
 		45A34E2718726711005BF628 /* WCLSplitWebWindowControllerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLSplitWebWindowControllerTestCase.h; sourceTree = "<group>"; };
+		45A38FA81BE1A8DD00C5DFDF /* PluginInitializationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginInitializationTests.swift; sourceTree = "<group>"; };
 		45ADD9051739E21A008A6AE7 /* WebConsole.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebConsole.sdef; sourceTree = "<group>"; };
 		45ADD90A1739E883008A6AE7 /* WCLSplitWebWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLSplitWebWindowController.h; sourceTree = "<group>"; };
 		45ADD90B1739E883008A6AE7 /* WCLSplitWebWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLSplitWebWindowController.m; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 		4530B0F21736E2A6000A52E2 /* Web ConsoleTests */ = {
 			isa = PBXGroup;
 			children = (
+				45A38FA81BE1A8DD00C5DFDF /* PluginInitializationTests.swift */,
 				452A0FD11BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift */,
 				4596ACAA1B80FA7500AB8963 /* SplitWebViewControllerResizingTests.swift */,
 				452A0FCF1BD70AAB00CCCCD5 /* WCLPluginViewTests.swift */,
@@ -519,7 +522,7 @@
 				450CD3151A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m */,
 				455839AE1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.h */,
 				455839AF1BBCAB0800EC03B6 /* XCTestCase+UserDefaults.m */,
-				4596ACAD1B80FF0D00AB8963 /* TestConstants.swift */,
+				4596ACAD1B80FF0D00AB8963 /* Web_ConsoleTestsConstants.swift */,
 				459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */,
 				4518E2B81A886244009A6A66 /* Web ConsoleTests-Bridging-Header.h */,
 				450CD3171A8C32ED00D17CF1 /* Shared */,
@@ -813,7 +816,7 @@
 				459EC9361A89981E0098A47B /* PluginsManagerTestCase.swift */,
 				459EC9391A89981E0098A47B /* TemporaryDirectoryTestCase.swift */,
 				459EC93A1A89981E0098A47B /* TemporaryPluginsTestCase.swift */,
-				459EC93B1A89981E0098A47B /* TestConstants.swift */,
+				459EC93B1A89981E0098A47B /* PluginManagerTestsConstants.swift */,
 				459EC93E1A89981E0098A47B /* WCLKeyValueObservingTestsHelper.h */,
 				459EC93F1A89981E0098A47B /* WCLKeyValueObservingTestsHelper.m */,
 				459EC9401A89981E0098A47B /* XCTestCase+BundleResources.swift */,
@@ -1079,10 +1082,11 @@
 				4596ACA91B80FA6700AB8963 /* WebViewControllerEventManager.swift in Sources */,
 				452A0FD21BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift in Sources */,
 				452A0FD01BD70AAB00CCCCD5 /* WCLPluginViewTests.swift in Sources */,
+				45A38FA91BE1A8DD00C5DFDF /* PluginInitializationTests.swift in Sources */,
 				45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */,
 				45B8148318161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m in Sources */,
 				450CD3161A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m in Sources */,
-				4596ACAE1B80FF0D00AB8963 /* TestConstants.swift in Sources */,
+				4596ACAE1B80FF0D00AB8963 /* Web_ConsoleTestsConstants.swift in Sources */,
 				45A34E2418726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m in Sources */,
 				459C46321BBE101D0064BA9E /* XCTestCase+UserDefaults.swift in Sources */,
 				4596ACB21B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m in Sources */,
@@ -1101,7 +1105,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				455FD2571A899CB200ACE1D4 /* TestConstants.swift in Sources */,
+				455FD2571A899CB200ACE1D4 /* PluginManagerTestsConstants.swift in Sources */,
 				455FD2551A899CB200ACE1D4 /* TemporaryDirectoryTestCase.swift in Sources */,
 				455FD24F1A899C9B00ACE1D4 /* PluginsManagerFileSystemTests.swift in Sources */,
 				455FD2531A899CA600ACE1D4 /* PluginsDataControllerEventTestCase.swift in Sources */,
@@ -1141,7 +1145,7 @@
 				459EC9441A89981E0098A47B /* FileExtensionsControllerTests.swift in Sources */,
 				459EC9461A89981E0098A47B /* MultiCollectionControllerTests.swift in Sources */,
 				459EC9481A89981E0098A47B /* PluginsDataControllerTests.swift in Sources */,
-				459EC94F1A89981E0098A47B /* TestConstants.swift in Sources */,
+				459EC94F1A89981E0098A47B /* PluginManagerTestsConstants.swift in Sources */,
 				459EC94B1A89981E0098A47B /* PluginsManagerTests.swift in Sources */,
 				459EC94A1A89981E0098A47B /* PluginsManagerTestCase.swift in Sources */,
 				459EC9431A89981E0098A47B /* DuplicatePluginControllerTests.swift in Sources */,
