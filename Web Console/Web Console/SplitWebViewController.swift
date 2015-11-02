@@ -108,9 +108,12 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         
         if logWebViewController.plugin == nil {
             if let logPlugin = delegate?.logPluginForSplitWebViewController(self) {
-                logWebViewController.runPlugin(logPlugin, withArguments: nil, inDirectoryPath: nil, completionHandler: { (success) -> Void in
-                    readReadFromStandardInputBlock()
-                })
+                logWebViewController.runPlugin(logPlugin,
+                    withArguments: nil,
+                    inDirectoryPath: nil,
+                    completionHandler: { (success) -> Void in
+                        readReadFromStandardInputBlock()
+                    })
             }
         } else {
             readReadFromStandardInputBlock()

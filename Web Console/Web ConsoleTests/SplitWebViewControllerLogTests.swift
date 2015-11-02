@@ -67,24 +67,12 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
 
     var splitWebWindowController: WCLSplitWebWindowController!
     var splitWebViewController: SplitWebViewController!
-    var splits: [WCLPluginView]!
-    var logSplit: WCLPluginView {
-        get {
-            return self.splits[1]
-        }
-    }
-    var pluginSplit: WCLPluginView {
-        get {
-            return self.splits[0]
-        }
-    }
     
     override func setUp() {
         super.setUp()
         splitWebWindowController = makeSplitWebWindowController()
         splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
-        splits = splitWebWindowController.window!.splits()
-        XCTAssertEqual(splits.count, 2, "There should be two splits")
+//        splitWebViewController.logWebViewController.delegate
     }
     
     override func tearDown() {
