@@ -44,10 +44,18 @@ class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTes
         let splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
         
         // Confirm that `shouldDebugLog` matches the preference
-        XCTAssertFalse(UserDefaultsManager.standardUserDefaults().boolForKey("WCLDebugModeEnabled"))
+        XCTAssertFalse(UserDefaultsManager.standardUserDefaults().boolForKey(debugModeEnabledKey))
         XCTAssertFalse(splitWebViewController.shouldDebugLog)
 
-//        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: "WCLDebugModeEnabled")
+        // Toggle
+        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: debugModeEnabledKey)
+        XCTAssertTrue(UserDefaultsManager.standardUserDefaults().boolForKey(debugModeEnabledKey))
+        XCTAssertTrue(splitWebViewController.shouldDebugLog)
+
+        // Toggle Again
+        UserDefaultsManager.standardUserDefaults().setBool(false, forKey: debugModeEnabledKey)
+        XCTAssertFalse(UserDefaultsManager.standardUserDefaults().boolForKey(debugModeEnabledKey))
+        XCTAssertFalse(splitWebViewController.shouldDebugLog)
         
         // Clean Up
         self.dynamicType.blockUntilAllTasksRunAndFinish()
