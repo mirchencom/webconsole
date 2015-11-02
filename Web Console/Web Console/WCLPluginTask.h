@@ -23,7 +23,7 @@
 @end
 
 @interface WCLPluginTask : NSObject
-+ (void)runTaskWithCommandPath:(nonnull NSString *)commandPath
++ (nonnull NSTask *)runTaskWithCommandPath:(nonnull NSString *)commandPath
                  withArguments:(nullable NSArray *)arguments
                inDirectoryPath:(nullable NSString *)directoryPath
                       delegate:(nullable id<WCLPluginTaskDelegate>)delegate

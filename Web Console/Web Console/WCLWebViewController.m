@@ -121,7 +121,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
     self.plugin = plugin;
 
-    [WCLPluginTask runTaskWithCommandPath:plugin.commandPath
+    (void)[WCLPluginTask runTaskWithCommandPath:plugin.commandPath
                             withArguments:arguments
                           inDirectoryPath:directoryPath
                                  delegate:self

@@ -11,7 +11,7 @@ import XCTest
 
 class SplitWebViewControllerPluginDebugModeEnabledTests: WCLSplitWebWindowControllerTestCase {
 
-    func testPluginDebugEnabled() {
+    func testPluginDebugModeEnabled() {
         guard let logPlugin = PluginsManager.sharedInstance.pluginWithName(testLogPluginName) else {
             XCTAssertTrue(false)
             return
@@ -22,10 +22,12 @@ class SplitWebViewControllerPluginDebugModeEnabledTests: WCLSplitWebWindowContro
         let splitWebWindowController = makeSplitWebWindowControllerRunningHelloWorldForPlugin(logPlugin)
         let splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
         
+        // Confirm the preference is off
         XCTAssertFalse(UserDefaultsManager
             .standardUserDefaults()
-            .boolForKey("WCLDebugModeEnabled"),
+            .boolForKey(debugModeEnabledKey),
             "Debug mode should be disabled in `standardUserDefaults`")
+        // Debug should be enabled, even though the preference is off
         XCTAssertTrue(splitWebViewController.shouldDebugLog)
         
         // Clean Up
@@ -35,9 +37,21 @@ class SplitWebViewControllerPluginDebugModeEnabledTests: WCLSplitWebWindowContro
 }
 
 class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTestCase {
-    // TODO: Do above test with a plugin that doesn't automatically have debug enabled, and confirm that toggling
-    // the user default toggles `shouldDebugLog`
+
+    func testToggleDebugMode() {
+
+        let splitWebWindowController = makeSplitWebWindowController()
+        let splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
+        
+        // Confirm that `shouldDebugLog` matches the preference
+        XCTAssertFalse(UserDefaultsManager.standardUserDefaults().boolForKey("WCLDebugModeEnabled"))
+        XCTAssertFalse(splitWebViewController.shouldDebugLog)
+
 //        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: "WCLDebugModeEnabled")
+        
+        // Clean Up
+        self.dynamicType.blockUntilAllTasksRunAndFinish()
+    }
 }
 
 

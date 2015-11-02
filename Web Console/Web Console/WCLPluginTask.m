@@ -12,7 +12,7 @@
 
 @implementation WCLPluginTask
 
-+ (void)runTaskWithCommandPath:(NSString *)commandPath
++ (nonnull NSTask *)runTaskWithCommandPath:(NSString *)commandPath
                  withArguments:(NSArray *)arguments
                inDirectoryPath:(NSString *)directoryPath
                       delegate:(id<WCLPluginTaskDelegate>)delegate
@@ -96,6 +96,8 @@
             completionHandler(YES);
         }
     });
+
+    return task;
 }
 
 + (void)processStandardOutput:(NSString *)text task:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate
