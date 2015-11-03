@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>WCName</key>
+	<string>Cat</string>
+	<key>WCCommand</key>
+	<string>cat.sh</string>
+	<key>WCUUID</key>
+	<string>AAC76D4F-FC05-44A6-BFEA-4AF5000AA92D</string>
+	<key>WCDebugModeEnabled</key>
+	<integer>1</integer>
+</dict>
+</plist>
