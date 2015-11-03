@@ -77,7 +77,7 @@
     NSTask *task = self.tasks[0];
     NSPipe *pipe = [task standardInput];
     NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
-    
+
     if (!data) {
         return;
     }

@@ -15,11 +15,11 @@ let splitWebViewHeight = CGFloat(150)
 @objc protocol SplitWebViewControllerDelegate: class {
     func windowIsVisibleForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Bool
     func windowForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSWindow!
+    func logPluginForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Plugin?
     func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
     func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
     func splitWebViewController(splitWebViewController: SplitWebViewController, willStartTask task: NSTask)
     func splitWebViewController(splitWebViewController: SplitWebViewController, didFinishTask task: NSTask)
-    func logPluginForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Plugin?
 }
 
 class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegate, SplitControllerDelegate {

@@ -8,6 +8,47 @@
 
 @testable import Web_Console
 
+class SplitWebViewControllerEventRouter: NSObject, SplitWebViewControllerDelegate {
+    weak var delegate: SplitWebViewControllerDelegate!
+    
+    init(delegate: SplitWebViewControllerDelegate) {
+        self.delegate = delegate
+    }
+
+    // MARK: SplitWebViewControllerDelegate Handled
+    
+    func logPluginForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Plugin? {
+        return PluginsManager.sharedInstance.pluginWithName(testCatPluginName)!
+    }
+    
+    // MARK: SplitWebViewControllerDelegate Forwarded
+    
+    func windowIsVisibleForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Bool {
+        return self.delegate.windowIsVisibleForSplitWebViewController(splitWebViewController)
+    }
+ 
+    func windowForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSWindow! {
+        return self.delegate.windowForSplitWebViewController(splitWebViewController)
+    }
+
+    func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String) {
+        return self.delegate.splitWebViewController(splitWebViewController, didReceiveTitle: title)
+    }
+    
+    func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController) {
+        self.delegate.splitWebViewControllerWillLoadHTML(splitWebViewController)
+    }
+ 
+    func splitWebViewController(splitWebViewController: SplitWebViewController, willStartTask task: NSTask) {
+        self.delegate.splitWebViewController(splitWebViewController, willStartTask: task)
+    }
+
+    func splitWebViewController(splitWebViewController: SplitWebViewController, didFinishTask task: NSTask) {
+        return self.delegate.splitWebViewController(splitWebViewController, didFinishTask: task)
+    }
+    
+}
+
 class WebViewControllerEventRouter: NSObject, WCLWebViewControllerDelegate {
     weak var delegate: WCLWebViewControllerDelegate!
     
@@ -15,32 +56,52 @@ class WebViewControllerEventRouter: NSObject, WCLWebViewControllerDelegate {
         self.delegate = delegate
     }
 
+
+    // MARK: WCLWebViewControllerDelegate Handled
+    
+    func webViewController(webViewController: WCLWebViewController,
+        didRunCommandPath commandPath: String,
+        arguments: [String]?,
+        directoryPath: String?)
+    {
+
+    }
+    
+    func webViewController(webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
+        self.delegate.webViewController?(webViewController, didReadFromStandardInput: text)
+    }
+
+
+    // MARK: WCLWebViewControllerDelegate Forwarded
+    
     func windowForWebViewController(webViewController: WCLWebViewController) -> NSWindow {
         return self.delegate.windowForWebViewController(webViewController)
     }
-//    - (nonnull NSWindow *)windowForWebViewController:(nonnull WCLWebViewController *)webViewController
     
+    func webViewController(webViewController: WCLWebViewController, didFinishTask task: NSTask) {
+        self.delegate.webViewController?(webViewController, didFinishTask: task)
+    }
+
     
+    func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
+        self.delegate.webViewController?(webViewController, didReceiveStandardError: text)
+    }
     
-    //    - (void)webViewControllerWillLoadHTML:(nonnull WCLWebViewController *)webViewController;
-    //    - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-    //    didReceiveTitle:(nonnull NSString *)title;
-    //    - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-    //    willStartTask:(nonnull NSTask *)task;
-    //    - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-    //    didFinishTask:(nonnull NSTask *)task;
-    //    - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-    //    didRunCommandPath:(nonnull NSString *)commandPath
-    //    arguments:(nullable NSArray<NSString *> *)arguments
-    //    directoryPath:(nullable NSString *)directoryPath;
-    //    - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-    //    willDoJavaScript:(nonnull NSString *)text;
-    //    - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-    //    didReadFromStandardInput:(nonnull NSString *)javaScript;
-    //    - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-    //    didReceiveStandardOutput:(nonnull NSString *)text;
-    //    - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-    //    didReceiveStandardError:(nonnull NSString *)text;
+    func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
+        self.delegate.webViewController?(webViewController, didReceiveStandardOutput: text)
+    }
+    
+    func webViewController(webViewController: WCLWebViewController, willStartTask task: NSTask) {
+        self.delegate.webViewController?(webViewController, willStartTask: task)
+    }
+
+    func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
+        self.delegate.webViewController?(webViewController, didReceiveTitle: title)
+    }
+    
+    func webViewController(webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
+        self.delegate.webViewController?(webViewController, willDoJavaScript: javaScript)
+    }
 }
 
 //class PluginDataEventManager: PluginsDataControllerDelegate {
