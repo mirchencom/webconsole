@@ -8,29 +8,30 @@
 
 @testable import Web_Console
 
-class SplitWebViewControllerEventRouter: NSObject, SplitWebViewControllerDelegate {
-    weak var delegate: SplitWebViewControllerDelegate!
-    
-    init(delegate: SplitWebViewControllerDelegate) {
-        self.delegate = delegate
-    }
+// MARK: SplitWebViewControllerEventRouter
 
-    // MARK: SplitWebViewControllerDelegate Handled
+class SplitWebViewControllerEventRouter: NSObject {
+    weak var delegate: SplitWebViewControllerDelegate!
+}
+
+extension SplitWebViewControllerEventRouter: SplitWebViewControllerDelegate {
+
+    // MARK: Handled
     
     func logPluginForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Plugin? {
         return PluginsManager.sharedInstance.pluginWithName(testCatPluginName)!
     }
     
-    // MARK: SplitWebViewControllerDelegate Forwarded
+    // MARK: Forwarded
     
     func windowIsVisibleForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Bool {
         return self.delegate.windowIsVisibleForSplitWebViewController(splitWebViewController)
     }
- 
+    
     func windowForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSWindow! {
         return self.delegate.windowForSplitWebViewController(splitWebViewController)
     }
-
+    
     func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String) {
         return self.delegate.splitWebViewController(splitWebViewController, didReceiveTitle: title)
     }
@@ -38,41 +39,72 @@ class SplitWebViewControllerEventRouter: NSObject, SplitWebViewControllerDelegat
     func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController) {
         self.delegate.splitWebViewControllerWillLoadHTML(splitWebViewController)
     }
- 
+    
     func splitWebViewController(splitWebViewController: SplitWebViewController, willStartTask task: NSTask) {
         self.delegate.splitWebViewController(splitWebViewController, willStartTask: task)
     }
-
+    
     func splitWebViewController(splitWebViewController: SplitWebViewController, didFinishTask task: NSTask) {
         return self.delegate.splitWebViewController(splitWebViewController, didFinishTask: task)
+    }
+
+}
+
+
+// MARK: WebViewControllerEventRouter
+
+class WebViewControllerEventRouter: NSObject {
+
+    typealias didReadFromStandardInputHandler = (text: String) -> Void
+    typealias didRunCommandPathHandler = (commandPath: String,
+        arguments: [String]?,
+        directoryPath: String?) -> Void
+    var didReadFromStandardInputHandlers: [didReadFromStandardInputHandler]
+    var didRunCommandPathHandlers: [didRunCommandPathHandler]
+
+    weak var delegate: WCLWebViewControllerDelegate!
+    
+    override init() {
+        self.didReadFromStandardInputHandlers = [didReadFromStandardInputHandler]()
+        self.didRunCommandPathHandlers = [didRunCommandPathHandler]()
     }
     
 }
 
-class WebViewControllerEventRouter: NSObject, WCLWebViewControllerDelegate {
-    weak var delegate: WCLWebViewControllerDelegate!
+extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
     
-    init(delegate: WCLWebViewControllerDelegate) {
-        self.delegate = delegate
-    }
-
-
-    // MARK: WCLWebViewControllerDelegate Handled
+    // MARK: Handled
     
     func webViewController(webViewController: WCLWebViewController,
         didRunCommandPath commandPath: String,
         arguments: [String]?,
         directoryPath: String?)
     {
+        self.delegate.webViewController?(webViewController,
+            didRunCommandPath: commandPath,
+            arguments: arguments,
+            directoryPath: directoryPath)
+        
+        if didRunCommandPathHandlers.count < 1 {
+            XCTAssertTrue(false, "There should be at least one handler")
+        }
 
+        let handler = didRunCommandPathHandlers[0]
+        handler(commandPath: commandPath, arguments: arguments, directoryPath: directoryPath)
     }
     
     func webViewController(webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
         self.delegate.webViewController?(webViewController, didReadFromStandardInput: text)
+
+        if didReadFromStandardInputHandlers.count < 1 {
+            XCTAssertTrue(false, "There should be at least one handler")
+        }
+        
+        let handler = didReadFromStandardInputHandlers[0]
+        handler(text: text)
     }
-
-
-    // MARK: WCLWebViewControllerDelegate Forwarded
+    
+    // MARK: Forwarded
     
     func windowForWebViewController(webViewController: WCLWebViewController) -> NSWindow {
         return self.delegate.windowForWebViewController(webViewController)
@@ -81,7 +113,6 @@ class WebViewControllerEventRouter: NSObject, WCLWebViewControllerDelegate {
     func webViewController(webViewController: WCLWebViewController, didFinishTask task: NSTask) {
         self.delegate.webViewController?(webViewController, didFinishTask: task)
     }
-
     
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
         self.delegate.webViewController?(webViewController, didReceiveStandardError: text)
@@ -94,7 +125,7 @@ class WebViewControllerEventRouter: NSObject, WCLWebViewControllerDelegate {
     func webViewController(webViewController: WCLWebViewController, willStartTask task: NSTask) {
         self.delegate.webViewController?(webViewController, willStartTask: task)
     }
-
+    
     func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
         self.delegate.webViewController?(webViewController, didReceiveTitle: title)
     }
@@ -102,51 +133,5 @@ class WebViewControllerEventRouter: NSObject, WCLWebViewControllerDelegate {
     func webViewController(webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
         self.delegate.webViewController?(webViewController, willDoJavaScript: javaScript)
     }
-}
 
-//class PluginDataEventManager: PluginsDataControllerDelegate {
-//    var pluginWasAddedHandlers: Array<(plugin: Plugin) -> Void>
-//    var pluginWasRemovedHandlers: Array<(plugin: Plugin) -> Void>
-//    var delegate: PluginsDataControllerDelegate?
-//
-//    init () {
-//        self.pluginWasAddedHandlers = Array<(plugin: Plugin) -> Void>()
-//        self.pluginWasRemovedHandlers = Array<(plugin: Plugin) -> Void>()
-//    }
-//
-//
-//    // MARK: PluginsDataControllerDelegate
-//
-//    func pluginsDataController(pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
-//        delegate?.pluginsDataController(pluginsDataController, didAddPlugin: plugin)
-//
-//        assert(pluginWasAddedHandlers.count > 0, "There should be at least one handler")
-//
-//        if (pluginWasAddedHandlers.count > 0) {
-//            let handler = pluginWasAddedHandlers.removeAtIndex(0)
-//            handler(plugin: plugin)
-//        }
-//    }
-//
-//    func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
-//        delegate?.pluginsDataController(pluginsDataController, didRemovePlugin: plugin)
-//
-//        assert(pluginWasRemovedHandlers.count > 0, "There should be at least one handler")
-//
-//        if (pluginWasRemovedHandlers.count > 0) {
-//            let handler = pluginWasRemovedHandlers.removeAtIndex(0)
-//            handler(plugin: plugin)
-//        }
-//    }
-//
-//    // MARK: Handlers
-//
-//    func addPluginWasAddedHandler(handler: (plugin: Plugin) -> Void) {
-//        pluginWasAddedHandlers.append(handler)
-//    }
-//
-//    func addPluginWasRemovedHandler(handler: (plugin: Plugin) -> Void) {
-//        pluginWasRemovedHandlers.append(handler)
-//    }
-//
-//}
+}

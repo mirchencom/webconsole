@@ -65,17 +65,39 @@ class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTes
 
 class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
 
+    var webViewControllerEventRouter: WebViewControllerEventRouter!
+    var splitWebViewControllerEventRouter: SplitWebViewControllerEventRouter!
     var splitWebWindowController: WCLSplitWebWindowController!
     var splitWebViewController: SplitWebViewController!
     
     override func setUp() {
         super.setUp()
-        splitWebWindowController = makeSplitWebWindowController()
+        let catPlugin = PluginsManager.sharedInstance.pluginWithName(testCatPluginName)!
+        splitWebWindowController = makeSplitWebWindowControllerForPlugin(catPlugin)
         splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
-//        splitWebViewController.logWebViewController.delegate
+
+        // Swap the `splitWebViewControllerEventRouter` for the `splitWebViewController`'s delegate
+        splitWebViewControllerEventRouter = SplitWebViewControllerEventRouter()
+        splitWebViewControllerEventRouter.delegate = splitWebViewController.delegate
+        splitWebViewController.delegate = splitWebViewControllerEventRouter
+
+        // Swap the `webViewControllerEventRouter` for the `logWebViewController`'s delegate
+        webViewControllerEventRouter = WebViewControllerEventRouter()
+        webViewControllerEventRouter.delegate = splitWebViewController.logWebViewController.delegate
+        splitWebViewController.logWebViewController.delegate = webViewControllerEventRouter
     }
     
     override func tearDown() {
+        // Revert the `webViewControllerEventRouter` as the `logWebViewController`'s delegate
+        splitWebViewController.logWebViewController.delegate = webViewControllerEventRouter.delegate
+        webViewControllerEventRouter.delegate = nil
+        webViewControllerEventRouter = nil
+        
+        // Revert the `splitWebViewControllerEventRouter` as the `splitWebViewController`'s delegate
+        splitWebViewController.delegate = splitWebViewControllerEventRouter.delegate
+        splitWebViewController.delegate = nil
+        splitWebViewController = nil
+        
         splitWebWindowController = nil
         let expectation = expectationWithDescription("Terminate tasks")
         WCLTaskHelper.terminateTasks(splitWebWindowController.tasks()) { (success) -> Void in
