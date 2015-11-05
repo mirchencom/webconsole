@@ -72,8 +72,13 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
     
     override func setUp() {
         super.setUp()
-        let catPlugin = PluginsManager.sharedInstance.pluginWithName(testCatPluginName)!
-        splitWebWindowController = makeSplitWebWindowControllerForPlugin(catPlugin)
+
+        // The setup:
+        // 1. The `splitWebViewController`'s main split will run the default plugin
+        // 2. The `splitWebViewController`'s `logWebViewController` will run the `testCatPluginName`
+        // 3. Events for the `logWebViewController` can be managed through the `webViewControllerEventRouter`
+
+        splitWebWindowController = WCLSplitWebWindowsController.sharedSplitWebWindowsController().addedSplitWebWindowController()
         splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
 
         // Swap the `splitWebViewControllerEventRouter` for the `splitWebViewController`'s delegate
@@ -108,25 +113,23 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
         super.tearDown()
     }
     
-    // TODO: Test the `TestLog` plugin with debug on
-    // TODO: Test the `TestLog` plugin with debug off
-    // TODO: Run a normal plugin, and test the `logDebugMessage()` and `logDebugError()`, with debug on
-    // TODO: Run a normal plugin, and test the `logDebugMessage()` and `logDebugError()`, with debug off
+    func testDebugLog() {
+        let logRunExpectation = expectationWithDescription("Log run")
+        webViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
+            logRunExpectation.fulfill()
+        }
+
+        let logReadFromStandardInputExpectation = expectationWithDescription("Log read from standard input")
+        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+            logReadFromStandardInputExpectation.fulfill()
+        }
+
+        let pluginRunExpectation = expectationWithDescription("Plugin run")
+        let plugin = PluginsManager.sharedInstance.pluginWithName(testHelloWorldPluginName)!
+        splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
+            pluginRunExpectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
     
-//    func testLogPluginWithDebugOn() {
-//        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: "WCLDebugModeEnabled")
-//        //userDefaultsDictionary[kDebugModeEnabledKey] = @NO;
-//        
-//        var text = testLogPluginInfoMessage
-//        splitWebViewController.logDebugMessage(text)
-//        
-//        // Block until the message is logged here, probably by adding an intermediary event handler?
-//        let firstLogMessage = logSplit.doJavaScript(firstParagraphJavaScript)
-//        XCTAssertEqual(firstLogMessage, text)
-//
-//        text = testLogPluginErrorMessage
-//        splitWebViewController.logDebugError(text)
-//        let lastLogMessage = logSplit.doJavaScript(lastParagraphJavaScript)
-//        XCTAssertEqual(lastLogMessage, testLogPluginErrorMessage)
-//    }
 }

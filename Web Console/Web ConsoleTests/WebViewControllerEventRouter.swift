@@ -55,18 +55,26 @@ extension SplitWebViewControllerEventRouter: SplitWebViewControllerDelegate {
 
 class WebViewControllerEventRouter: NSObject {
 
-    typealias didReadFromStandardInputHandler = (text: String) -> Void
-    typealias didRunCommandPathHandler = (commandPath: String,
+    typealias DidReadFromStandardInputHandler = (text: String) -> Void
+    typealias DidRunCommandPathHandler = (commandPath: String,
         arguments: [String]?,
         directoryPath: String?) -> Void
-    var didReadFromStandardInputHandlers: [didReadFromStandardInputHandler]
-    var didRunCommandPathHandlers: [didRunCommandPathHandler]
+    var didReadFromStandardInputHandlers: [DidReadFromStandardInputHandler]
+    var didRunCommandPathHandlers: [DidRunCommandPathHandler]
 
     weak var delegate: WCLWebViewControllerDelegate!
     
     override init() {
-        self.didReadFromStandardInputHandlers = [didReadFromStandardInputHandler]()
-        self.didRunCommandPathHandlers = [didRunCommandPathHandler]()
+        self.didReadFromStandardInputHandlers = [DidReadFromStandardInputHandler]()
+        self.didRunCommandPathHandlers = [DidRunCommandPathHandler]()
+    }
+    
+    func addDidReadFromStandardInputHandler(handler: DidReadFromStandardInputHandler) {
+        didReadFromStandardInputHandlers.append(handler)
+    }
+
+    func addDidRunCommandPathHandlers(handler: DidRunCommandPathHandler) {
+        didRunCommandPathHandlers.append(handler)
     }
     
 }
