@@ -90,6 +90,10 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
         webViewControllerEventRouter = WebViewControllerEventRouter()
         webViewControllerEventRouter.delegate = splitWebViewController.logWebViewController.delegate
         splitWebViewController.logWebViewController.delegate = webViewControllerEventRouter
+
+        // Turn on debug mode
+        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: debugModeEnabledKey)
+        XCTAssertTrue(splitWebViewController.shouldDebugLog)
     }
     
     override func tearDown() {
@@ -103,13 +107,13 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
         splitWebViewController.delegate = nil
         splitWebViewController = nil
         
-        splitWebWindowController = nil
         let expectation = expectationWithDescription("Terminate tasks")
         WCLTaskHelper.terminateTasks(splitWebWindowController.tasks()) { (success) -> Void in
             XCTAssert(success)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        splitWebWindowController = nil
         super.tearDown()
     }
     
