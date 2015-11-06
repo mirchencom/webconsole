@@ -72,6 +72,13 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         return splitViewItem.viewController as! WCLWebViewController
     }
     
+    lazy var logReadFromStandardInputOperationQueue: NSOperationQueue = {
+        let queue = NSOperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        queue.suspended = true
+        return queue
+    }()
+    
     func logDebugError(text: String) {
         print("Debug Error: \(text)")
         
@@ -100,7 +107,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     }
     
     func logReadFromStandardInput(text: String) {
-        let readReadFromStandardInputBlock = { [weak self]() -> Void in
+        logReadFromStandardInputOperationQueue.addOperationWithBlock { [weak self]() -> Void in
             if let strongSelf = self {
                 strongSelf.logWebViewController.readFromStandardInput(text)
             }
@@ -111,12 +118,12 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
                 logWebViewController.runPlugin(logPlugin,
                     withArguments: nil,
                     inDirectoryPath: nil,
-                    completionHandler: { (success) -> Void in
-                        readReadFromStandardInputBlock()
+                    completionHandler: { [weak self](success) -> Void in
+                        if let strongSelf = self {
+                            strongSelf.logReadFromStandardInputOperationQueue.suspended = false
+                        }
                     })
             }
-        } else {
-            readReadFromStandardInputBlock()
         }
     }
     

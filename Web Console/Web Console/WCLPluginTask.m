@@ -52,8 +52,7 @@
     
     // Termination handler
     [task setTerminationHandler:^(NSTask *task) {
-        DLog(@"[Task] termination launchPath %@", task.launchPath);
-        
+
         // Standard Input, Output & Error
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
         [[task.standardError fileHandleForReading] setReadabilityHandler:nil];

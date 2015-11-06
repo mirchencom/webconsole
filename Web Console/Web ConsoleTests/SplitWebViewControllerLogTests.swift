@@ -118,22 +118,39 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
     }
     
     func testDebugLog() {
-        let logRunExpectation = expectationWithDescription("Log run")
+
+        let logRunExpectation = expectationWithDescription("For running the log plugin")
         webViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
             logRunExpectation.fulfill()
         }
 
-        let logReadFromStandardInputExpectation = expectationWithDescription("Log read from standard input")
+        // One read from standard input expectation for plugin starting to run
+        let logReadFromStandardInputExpectation = expectationWithDescription("For start running log message")
         webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectation.fulfill()
         }
 
+        // Another for plugin finishing running
+        let logReadFromStandardInputExpectationTwo = expectationWithDescription("For finished running log message")
+        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+            logReadFromStandardInputExpectationTwo.fulfill()
+        }
+
+        // Another for plugin finishing running
+        let logReadFromStandardInputExpectationThree = expectationWithDescription("For log plugins output")
+        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+            logReadFromStandardInputExpectationThree.fulfill()
+        }
+
+        
         let pluginRunExpectation = expectationWithDescription("Plugin run")
         let plugin = PluginsManager.sharedInstance.pluginWithName(testHelloWorldPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             pluginRunExpectation.fulfill()
         }
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
+
+
     }
     
 }

@@ -97,18 +97,19 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
             XCTAssertTrue(false, "There should be at least one handler")
         }
 
-        let handler = didRunCommandPathHandlers[0]
+        let handler = didRunCommandPathHandlers.removeAtIndex(0)
         handler(commandPath: commandPath, arguments: arguments, directoryPath: directoryPath)
     }
     
     func webViewController(webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
+        
         self.delegate.webViewController?(webViewController, didReadFromStandardInput: text)
 
         if didReadFromStandardInputHandlers.count < 1 {
             XCTAssertTrue(false, "There should be at least one handler")
         }
         
-        let handler = didReadFromStandardInputHandlers[0]
+        let handler = didReadFromStandardInputHandlers.removeAtIndex(0)
         handler(text: text)
     }
     
