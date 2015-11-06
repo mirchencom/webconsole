@@ -150,7 +150,20 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
         }
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
 
-
     }
-    
+
+    func testDebugModeOff() {
+        // Turn off debug mode
+        UserDefaultsManager.standardUserDefaults().setBool(false, forKey: debugModeEnabledKey)
+        XCTAssertFalse(splitWebViewController.shouldDebugLog)
+
+        let pluginRunExpectation = expectationWithDescription("Plugin run")
+        let plugin = PluginsManager.sharedInstance.pluginWithName(testHelloWorldPluginName)!
+        splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
+            pluginRunExpectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
+
+
 }
