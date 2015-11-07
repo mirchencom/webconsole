@@ -318,7 +318,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 #pragma mark - Tasks
 
-- (NSArray *)tasks
+- (NSArray<NSTask *> *)tasks
 {
     return [NSArray arrayWithArray:self.mutableTasks];
 }

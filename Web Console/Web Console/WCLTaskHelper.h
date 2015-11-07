@@ -14,6 +14,9 @@
  * \param tasks An array of NSTasks to terminate.
  * \param completionHandler The handler block to execute.
  */
-+ (void)terminateTasks:(NSArray *)tasks completionHandler:(void (^)(BOOL success))completionHandler;
++ (void)terminateTask:(nonnull NSTask *)task
+    completionHandler:(nullable void (^)(BOOL success))completionHandler;
++ (void)terminateTasks:(nonnull NSArray<NSTask *> *)tasks
+     completionHandler:(nullable void (^)(BOOL success))completionHandler;
 
 @end

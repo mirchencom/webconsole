@@ -239,7 +239,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 #pragma mark - Tasks
 
-- (NSArray *)tasks
+- (nonnull NSArray<NSTask *> *)tasks;
 {
     return [self.splitWebViewController tasks];
 }

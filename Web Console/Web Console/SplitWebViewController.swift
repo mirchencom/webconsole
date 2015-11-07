@@ -186,7 +186,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         
         for splitViewItem in splitViewItems {
             let webViewController = splitViewItem.viewController as! WCLWebViewController
-            tasks += webViewController.tasks as! [NSTask]
+            tasks += webViewController.tasks
         }
         return tasks
     }

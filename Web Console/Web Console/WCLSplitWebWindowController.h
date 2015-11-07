@@ -41,5 +41,5 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler;
 #pragma mark - Tasks
 - (BOOL)hasTasks;
 - (BOOL)hasTasksRequiringConfirmation;
-- (nonnull NSArray *)tasks;
+- (nonnull NSArray<NSTask *> *)tasks;
 @end

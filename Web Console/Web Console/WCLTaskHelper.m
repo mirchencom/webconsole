@@ -11,7 +11,14 @@
 
 @implementation WCLTaskHelper
 
-+ (void)terminateTasks:(NSArray *)tasks completionHandler:(void (^)(BOOL success))completionHandler
++ (void)terminateTask:(nonnull NSTask *)task
+    completionHandler:(nullable void (^)(BOOL success))completionHandler
+{
+    [self terminateTasks:@[task] completionHandler:completionHandler];
+}
+
++ (void)terminateTasks:(nonnull NSArray<NSTask *> *)tasks
+     completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
     NSMutableArray *mutableTasks = [NSMutableArray arrayWithArray:tasks];
     __block BOOL tasksTerminated = NO;
@@ -19,7 +26,10 @@
     void (^completionHandlerBlock)() = ^void () {
         if (![mutableTasks count]) {
             tasksTerminated = YES;
-            completionHandler(YES);
+            if (completionHandler) {
+                completionHandler(YES);
+            }
+
         }
     };
 
@@ -43,7 +53,9 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         if (!tasksTerminated) {
-            completionHandler(NO);
+            if (completionHandler) {
+                completionHandler(NO);
+            }
         }
     });
 }
