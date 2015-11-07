@@ -69,8 +69,15 @@ class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
         super.setUp()
 
         // Turn on debug mode
+        XCTAssertFalse(splitWebViewController.shouldDebugLog)
         UserDefaultsManager.standardUserDefaults().setBool(true, forKey: debugModeEnabledKey)
         XCTAssertTrue(splitWebViewController.shouldDebugLog)
+    }
+    
+    override func tearDown() {
+        UserDefaultsManager.standardUserDefaults().setBool(false, forKey: debugModeEnabledKey)
+        XCTAssertFalse(splitWebViewController.shouldDebugLog)
+        super.tearDown()
     }
     
     func testDebugLog() {

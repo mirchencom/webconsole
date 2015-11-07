@@ -502,9 +502,9 @@
 		4530B0F21736E2A6000A52E2 /* Web ConsoleTests */ = {
 			isa = PBXGroup;
 			children = (
-				45D8F4441BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift */,
 				45A38FA81BE1A8DD00C5DFDF /* PluginInitializationTests.swift */,
 				452A0FD11BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift */,
+				45D8F4441BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift */,
 				4596ACAA1B80FA7500AB8963 /* SplitWebViewControllerResizingTests.swift */,
 				452A0FCF1BD70AAB00CCCCD5 /* WCLPluginViewTests.swift */,
 				4532D6751BE718A0003F665A /* WebViewControllerEventRouterTestCase.swift */,
