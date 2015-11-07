@@ -63,58 +63,14 @@ class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTes
 }
 
 
-class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
+class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
 
-    var webViewControllerEventRouter: WebViewControllerEventRouter!
-    var splitWebViewControllerEventRouter: SplitWebViewControllerEventRouter!
-    var splitWebWindowController: WCLSplitWebWindowController!
-    var splitWebViewController: SplitWebViewController!
-    
     override func setUp() {
         super.setUp()
-
-        // The setup:
-        // 1. The `splitWebViewController`'s main split will run the default plugin
-        // 2. The `splitWebViewController`'s `logWebViewController` will run the `testCatPluginName`
-        // 3. Events for the `logWebViewController` can be managed through the `webViewControllerEventRouter`
-
-        splitWebWindowController = WCLSplitWebWindowsController.sharedSplitWebWindowsController().addedSplitWebWindowController()
-        splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
-
-        // Swap the `splitWebViewControllerEventRouter` for the `splitWebViewController`'s delegate
-        splitWebViewControllerEventRouter = SplitWebViewControllerEventRouter()
-        splitWebViewControllerEventRouter.delegate = splitWebViewController.delegate
-        splitWebViewController.delegate = splitWebViewControllerEventRouter
-
-        // Swap the `webViewControllerEventRouter` for the `logWebViewController`'s delegate
-        webViewControllerEventRouter = WebViewControllerEventRouter()
-        webViewControllerEventRouter.delegate = splitWebViewController.logWebViewController.delegate
-        splitWebViewController.logWebViewController.delegate = webViewControllerEventRouter
 
         // Turn on debug mode
         UserDefaultsManager.standardUserDefaults().setBool(true, forKey: debugModeEnabledKey)
         XCTAssertTrue(splitWebViewController.shouldDebugLog)
-    }
-    
-    override func tearDown() {
-        // Revert the `webViewControllerEventRouter` as the `logWebViewController`'s delegate
-        splitWebViewController.logWebViewController.delegate = webViewControllerEventRouter.delegate
-        webViewControllerEventRouter.delegate = nil
-        webViewControllerEventRouter = nil
-        
-        // Revert the `splitWebViewControllerEventRouter` as the `splitWebViewController`'s delegate
-        splitWebViewController.delegate = splitWebViewControllerEventRouter.delegate
-        splitWebViewController.delegate = nil
-        splitWebViewController = nil
-        
-        let expectation = expectationWithDescription("Terminate tasks")
-        WCLTaskHelper.terminateTasks(splitWebWindowController.tasks()) { (success) -> Void in
-            XCTAssert(success)
-            expectation.fulfill()
-        }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
-        splitWebWindowController = nil
-        super.tearDown()
     }
     
     func testDebugLog() {
@@ -142,7 +98,6 @@ class SplitWebViewControllerLogTests: WCLSplitWebWindowControllerTestCase {
             logReadFromStandardInputExpectationThree.fulfill()
         }
 
-        
         let pluginRunExpectation = expectationWithDescription("Plugin run")
         let plugin = PluginsManager.sharedInstance.pluginWithName(testHelloWorldPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in

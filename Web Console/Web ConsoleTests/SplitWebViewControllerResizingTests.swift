@@ -11,6 +11,71 @@ import XCTest
 @testable import Web_Console
 
 
+class WebViewControllerLifeCycleEventRouter: NSObject, WCLWebViewControllerDelegate {
+    typealias EventBlock = (WCLWebViewController) -> ()
+    
+    weak var storedDelegate: WCLWebViewControllerDelegate?
+    var viewWillAppearBlock: EventBlock?
+    var viewWillDisappearBlock: EventBlock?
+    
+    init(webViewController: WCLWebViewController,
+        viewWillAppearBlock: EventBlock? = nil,
+        viewWillDisappearBlock: EventBlock? = nil)
+    {
+        super.init()
+        self.storedDelegate = webViewController.delegate
+        webViewController.delegate = self
+        
+        
+        if let viewWillAppearBlock = viewWillAppearBlock {
+            self.viewWillAppearBlock = { webViewController in
+                viewWillAppearBlock(webViewController)
+                self.storedDelegate?.webViewControllerViewWillAppear!(webViewController)
+                self.viewWillAppearBlock = nil
+                self.blockFired(webViewController)
+            }
+        }
+        
+        if let viewWillDisappearBlock = viewWillDisappearBlock {
+            self.viewWillDisappearBlock = { webViewController in
+                viewWillDisappearBlock(webViewController)
+                self.storedDelegate?.webViewControllerViewWillDisappear!(webViewController)
+                self.viewWillDisappearBlock = nil
+                self.blockFired(webViewController)
+            }
+        }
+        
+    }
+    
+    func blockFired(webViewController: WCLWebViewController) {
+        if viewWillAppearBlock == nil && viewWillDisappearBlock == nil {
+            webViewController.delegate = self.storedDelegate
+        }
+    }
+    
+    // MARK: WCLWebViewControllerDelegate
+    
+    @objc func webViewControllerViewWillAppear(webViewController: WCLWebViewController) {
+        if let viewWillAppearBlock = viewWillAppearBlock {
+            viewWillAppearBlock(webViewController)
+        } else {
+            self.storedDelegate!.webViewControllerViewWillAppear!(webViewController)
+        }
+    }
+    
+    @objc func webViewControllerViewWillDisappear(webViewController: WCLWebViewController) {
+        if let viewWillDisappearBlock = viewWillDisappearBlock {
+            viewWillDisappearBlock(webViewController)
+        } else {
+            self.storedDelegate!.webViewControllerViewWillDisappear!(webViewController)
+        }
+    }
+    
+    func windowForWebViewController(webViewController: WCLWebViewController) -> NSWindow {
+        return self.storedDelegate!.windowForWebViewController(webViewController)
+    }
+}
+
 class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     
     var defaultPluginSavedFrameName: String {
@@ -210,7 +275,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     func makeLogViewWillAppearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
         let webViewController = splitWebViewController.splitController.splitViewItem.viewController as! WCLWebViewController
         let viewWillAppearExpectation = expectationWithDescription("WebViewController will appear")
-        let _ = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: { _ in
+        let _ = WebViewControllerLifeCycleEventRouter(webViewController: webViewController, viewWillAppearBlock: { _ in
             viewWillAppearExpectation.fulfill()
         }, viewWillDisappearBlock: nil)
     }
@@ -218,7 +283,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     func makeLogViewWillDisappearExpectationForSplitWebViewController(splitWebViewController: SplitWebViewController) {
         let webViewController = splitWebViewController.splitController.splitViewItem.viewController as! WCLWebViewController
         let viewWillDisappearExpectation = expectationWithDescription("WebViewController will appear")
-        let _ = WebViewControllerEventManager(webViewController: webViewController, viewWillAppearBlock: nil) { _ in
+        let _ = WebViewControllerLifeCycleEventRouter(webViewController: webViewController, viewWillAppearBlock: nil) { _ in
             viewWillDisappearExpectation.fulfill()
         }
     }
