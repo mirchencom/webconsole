@@ -13,9 +13,19 @@ import XCTest
 class SplitWebViewControllerConfirmationTests: WebViewControllerEventRouterTestCase {
 
     func testTasksRequiringConfirmation() {
+        XCTAssertEqual(WCLApplicationTerminationHelper.splitWebWindowControllersWithTasks().count, 0)
         startPluginAndLogTasks()
-
+        XCTAssertEqual(WCLApplicationTerminationHelper.splitWebWindowControllersWithTasks().count, 1)
+        XCTAssertTrue(splitWebWindowController.hasTasksRequiringConfirmation())
+        XCTAssertEqual(splitWebWindowController.commandsRequiringConfirmation().count, 1)
+        XCTAssertEqual(splitWebWindowController.commandsNotRequiringConfirmation().count, 1)
+        XCTAssertTrue(splitWebWindowController.window!.documentEdited)
         terminatePluginTask()
+        XCTAssertEqual(WCLApplicationTerminationHelper.splitWebWindowControllersWithTasks().count, 0)
+        XCTAssertFalse(splitWebWindowController.hasTasksRequiringConfirmation())
+        XCTAssertEqual(splitWebWindowController.commandsRequiringConfirmation().count, 0)
+        XCTAssertEqual(splitWebWindowController.commandsNotRequiringConfirmation().count, 1)
+        XCTAssertFalse(splitWebWindowController.window!.documentEdited)
     }
     
     func startPluginAndLogTasks() {

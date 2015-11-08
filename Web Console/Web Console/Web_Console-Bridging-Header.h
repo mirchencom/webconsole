@@ -16,3 +16,7 @@
 #import "WCLSplitWebWindowController.h"
 #import "WCLWebViewController.h"
 #import "NSWindow+AppleScript.h"
+
+// MARK: For tests
+
+#import "WCLApplicationTerminationHelper.h"

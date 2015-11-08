@@ -7,3 +7,4 @@
 #import "XCTestCase+SharedTestResources.h"
 #import "WCLTaskHelper.h"
 #import "WCLTaskTestsHelper.h"
+#import "WCLApplicationTerminationHelper+Tests.h"
