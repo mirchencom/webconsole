@@ -64,19 +64,14 @@ class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTes
 
 
 class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
-
-    override func setUp() {
-        super.setUp()
-
-        // Turn on debug mode
-        XCTAssertFalse(splitWebViewController.shouldDebugLog)
-        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: debugModeEnabledKey)
-        XCTAssertTrue(splitWebViewController.shouldDebugLog)
-    }
     
+
     override func tearDown() {
-        UserDefaultsManager.standardUserDefaults().setBool(false, forKey: debugModeEnabledKey)
-        XCTAssertFalse(splitWebViewController.shouldDebugLog)
+        if splitWebViewController.defaultWebViewController.tasks.count > 0 {
+            let pluginTask = splitWebViewController.defaultWebViewController.tasks[0]
+            WCLTaskTestsHelper.blockUntilTaskFinishes(pluginTask)
+        }
+
         super.tearDown()
     }
     

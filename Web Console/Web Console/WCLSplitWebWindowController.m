@@ -63,6 +63,7 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
     if ([self.delegate respondsToSelector:@selector(logPluginForSplitWebWindowController:)]) {
         _logPlugin = [self.delegate logPluginForSplitWebWindowController:self];
     }
+
     return _logPlugin;
 }
 
