@@ -13,6 +13,8 @@ module WebConsole
     HELLOWORLD_PLUGIN_NAME = "HelloWorld"
     PRINT_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, "Print.wcplugin")
     PRINT_PLUGIN_NAME = "Print"
+    TESTLOG_PLUGIN_FILE = File.join(TEST_PLUGIN_DIRECTORY, "TestLog.wcplugin")
+    TESTLOG_PLUGIN_NAME = "TestLog"
 
     # HTML
     TEST_HTML_DIRECTORY = File.join(File.dirname(__FILE__), "..", "html")
