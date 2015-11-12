@@ -82,20 +82,17 @@ class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
             logRunExpectation.fulfill()
         }
 
-        // One read from standard input expectation for plugin starting to run
         let logReadFromStandardInputExpectation = expectationWithDescription("For start running log message")
         webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectation.fulfill()
         }
 
-        // Another for plugin finishing running
         let logReadFromStandardInputExpectationTwo = expectationWithDescription("For finished running log message")
         webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectationTwo.fulfill()
         }
 
-        // Another for plugin finishing running
-        let logReadFromStandardInputExpectationThree = expectationWithDescription("For log plugins output")
+        let logReadFromStandardInputExpectationThree = expectationWithDescription("For the plugins output")
         webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectationThree.fulfill()
         }
@@ -105,10 +102,58 @@ class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             pluginRunExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
 
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
     }
 
+    func testDebugLogReadFromStandardInput() {
+        let logRunExpectation = expectationWithDescription("For running the log plugin")
+        webViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
+            logRunExpectation.fulfill()
+        }
+        
+        let logReadFromStandardInputExpectation = expectationWithDescription("For start running log message")
+        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+            logReadFromStandardInputExpectation.fulfill()
+        }
+        
+        
+        let logReadFromStandardInputExpectationThree = expectationWithDescription("For the plugins output")
+        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+            logReadFromStandardInputExpectationThree.fulfill()
+        }
+
+        let logReadFromStandardInputExpectationFour = expectationWithDescription("For logging reading for standard input")
+        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+            logReadFromStandardInputExpectationFour.fulfill()
+        }
+        
+        let pluginRunExpectation = expectationWithDescription("Plugin run")
+        let plugin = PluginsManager.sharedInstance.pluginWithName(testCatPluginName)!
+        splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
+            self.splitWebWindowController.readFromStandardInput("Testing read from standard input")
+            pluginRunExpectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+
+        
+        // Clean up
+        let logReadFromStandardInputExpectationTwo = expectationWithDescription("For finished running log message")
+        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+            logReadFromStandardInputExpectationTwo.fulfill()
+        }
+        
+        let pluginTask = splitWebViewController.defaultWebViewController.tasks[0]
+        let terminatePluginTaskExpectation = expectationWithDescription("Terminate plugin task")
+        WCLTaskHelper.terminateTask(pluginTask) { (success) -> Void in
+            XCTAssertTrue(success)
+            terminatePluginTaskExpectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
+    
     func testDebugModeOff() {
         // Turn off debug mode
         UserDefaultsManager.standardUserDefaults().setBool(false, forKey: debugModeEnabledKey)
@@ -121,6 +166,5 @@ class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
         }
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
     }
-
-
+    
 }
