@@ -18,25 +18,35 @@ class TestQuitWithRunningTask < Test::Unit::TestCase
     @log_view = WebConsole::View.new(window_id, view_id)
   end
 
-  # def teardown
-  #   WebConsole::Tests::Helper::quit
-  #   WebConsole::Tests::Helper::confirm_dialog
-  # end
+  def teardown
+    WebConsole::Tests::Helper::quit
+  end
 
   def test_log
-    text = inner_text_at_index(0)
-puts "text = " + text.to_s
-
+    assert_equal(inner_text_at_index(0), "Running: test_log.rb")
+    assert_equal(class_at_index(0), "message")
+    assert_equal(inner_text_at_index(1), "Testing log message")
+    assert_equal(class_at_index(1), "message")
+    assert_equal(inner_text_at_index(2), "Testing print to standard error")
+    assert_equal(class_at_index(2), "error")
+    assert_equal(inner_text_at_index(3), "Testing print to standard input")
+    assert_equal(class_at_index(3), "message")
+    assert_equal(inner_text_at_index(4), "Do JavaScript: document.body.innerHTML = \"test\";")
+    assert_equal(class_at_index(4), "message")
+    assert_equal(inner_text_at_index(5), "Testing log error")
+    assert_equal(class_at_index(5), "error")
+    assert_equal(inner_text_at_index(6), "Finished running: test_log.rb")
+    assert_equal(class_at_index(6), "message")
   end
 
   def inner_text_at_index(index)
     javascript = "document.getElementsByTagName(\"p\")[#{index.to_i}].innerText;"
-    @log_view.do_javascript(javascript)
+    @log_view.do_javascript(javascript).chomp
   end
 
   def class_at_index(index)
     javascript = "document.getElementsByTagName(\"p\")[#{index.to_i}].className;"
-    @log_view.do_javascript(javascript)
+    @log_view.do_javascript(javascript).chomp
   end
 
 end
