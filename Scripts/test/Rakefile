@@ -91,8 +91,13 @@ namespace :web_console do
   task :tests => [:clean_up]
   task :tests_long => [:test_web_console_long, :tests]
 
-  task :clean_up => [:test_web_console_tasks, :test_web_console_resizing] do
+  task :clean_up => [:test_web_console_tasks, :test_web_console_resizing, :test_web_console_log] do
     WebConsole::Tests::Helper::quit
+  end
+
+  task :test_web_console_log do
+    web_console_tests_file = File.join(File.dirname(__FILE__), "tc_web_console_log.rb")
+    ruby Shellwords.escape(web_console_tests_file)
   end
 
   task :test_web_console_tasks do
