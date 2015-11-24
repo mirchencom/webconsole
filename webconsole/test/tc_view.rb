@@ -50,19 +50,19 @@ class TestViewDoJavaScript < Test::Unit::TestCase
   end
 end
 
-class TestLoadHTMLTwoViews < Test::Unit::TestCase
+class TestTwoViews < Test::Unit::TestCase
 
   def setup
-    @window = WebConsole::Window.new
-    @view_one = WebConsole::View.new(@window.window_id, @window.split_id)
-    @view_two = WebConsole::View.new(@window.window_id, @window.split_id_last)
+    window = WebConsole::Window.new
+    @view_one = WebConsole::View.new(window.window_id, window.split_id)
+    @view_two = WebConsole::View.new(window.window_id, window.split_id_last)
   end
 
   def teardown
-    @window.close
+    @view_one.close
   end
 
-  def test_load_html_in_two_views
+  def test_load_html
     test_text_one = "This is a test string"
     html = "<html><body>" + test_text_one + "</body></html>"
     @view_one.load_html(html)
@@ -82,37 +82,14 @@ class TestLoadHTMLTwoViews < Test::Unit::TestCase
 
 end
 
-# class TestWindowLoadHTMLWithBaseURL < Test::Unit::TestCase
-#   def setup
-#     html = File.read(WebConsole::Tests::INDEXJQUERY_HTML_FILE)
-#     @window = WebConsole::Window.new
-#     @window.base_url_path = File.join(WebConsole::shared_resources_path)
-#     @window.load_html(html)
-#   end
-#
-#   def teardown
-#     @window.close
-#   end
-#
-#   def test_load_with_base_url
-#     javascript = File.read(WebConsole::Tests::TEXTJQUERY_JAVASCRIPT_FILE)
-#     result = @window.do_javascript(javascript)
-#
-#     test_javascript = File.read(WebConsole::Tests::TEXT_JAVASCRIPT_FILE)
-#     expected = @window.do_javascript(test_javascript)
-#
-#     assert_equal(expected, result, "The result should equal expected result.")
-#   end
-#
-# end
-#
-# class TestWebConsolePluginReadFromStandardInput < Test::Unit::TestCase
+# class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
 #
 #   def setup
 #     WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
-#     WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-#     window_id = WebConsole::window_id_for_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
+#     window_id = WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
 #     @window = WebConsole::Window.new(window_id)
+#     @view_one = WebConsole::View.new(@window.window_id, @window.split_id)
+#     @view_two = WebConsole::View.new(@window.window_id, @window.split_id_last)
 #   end
 #
 #   def teardown
@@ -132,7 +109,8 @@ end
 #     assert_equal(test_text, result, "The test text should equal the result.")
 #   end
 # end
-#
+
+
 # class TestTwoWindows < Test::Unit::TestCase
 #   def setup
 #     WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
