@@ -67,7 +67,7 @@ class TestTwoViews < Test::Unit::TestCase
     html = "<html><body>" + test_text_one + "</body></html>"
     @view_one.load_html(html)
 
-    test_text_two = "This is a test string 2"
+    test_text_two = "This is a test string two"
     html = "<html><body>" + test_text_two + "</body></html>"
     @view_two.load_html(html)
 
@@ -82,33 +82,40 @@ class TestTwoViews < Test::Unit::TestCase
 
 end
 
-# class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
-#
-#   def setup
-#     WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
-#     window_id = WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-#     @window = WebConsole::Window.new(window_id)
-#     @view_one = WebConsole::View.new(@window.window_id, @window.split_id)
-#     @view_two = WebConsole::View.new(@window.window_id, @window.split_id_last)
-#   end
-#
-#   def teardown
-#     @window.close
-#     WebConsole::Tests::Helper::confirm_dialog
-#   end
-#
-#   def test_read_from_standard_input
-#     test_text = "This is a test string"
-#     @window.read_from_standard_input(test_text + "\n")
-#     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
-#
-#     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-#     result = @window.do_javascript(javascript)
-#     result.strip!
-#
-#     assert_equal(test_text, result, "The test text should equal the result.")
-#   end
-# end
+class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
+
+  def setup
+    WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
+    window_id = WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
+    window = WebConsole::Window.new(window_id)
+    @view_one = WebConsole::View.new(window.window_id, window.split_id)
+    @view_two = WebConsole::View.new(window.window_id, window.split_id_last)
+  end
+
+  # def teardown
+  #   @view_one.close
+  #   WebConsole::Tests::Helper::confirm_dialog
+  # end
+
+  def test_read_from_standard_input
+    test_text_one = "This is a test string"
+    @view_one.read_from_standard_input(test_text_one + "\n")
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+
+    test_text_two = "This is a test string two"
+    @view_two.read_from_standard_input(test_text_two + "\n")
+    sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
+
+    javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
+    result = @view_one.do_javascript(javascript)
+    result.strip!
+    assert_equal(test_text_one, result, "The test text should equal the result.")
+
+    result = @view_two.do_javascript(javascript)
+    result.strip!
+    assert_equal(test_text_two, result, "The test text should equal the result.")
+  end
+end
 
 
 # class TestTwoWindows < Test::Unit::TestCase
