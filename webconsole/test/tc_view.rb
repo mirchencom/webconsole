@@ -30,34 +30,21 @@ class TestViewAttributes < Test::Unit::TestCase
 
 end
 
-
-class TestWindowClose < Test::Unit::TestCase
-
-  def test_close
-    WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
-    window_id = WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
-    window = WebConsole::Window.new(window_id)
-    window.close
-    assert(WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME) == nil, "The plugin should not have a window.")
-  end
-
-end
-
-class TestWindowDoJavaScript < Test::Unit::TestCase
+class TestViewDoJavaScript < Test::Unit::TestCase
 
   def setup
     html = File.read(WebConsole::Tests::INDEX_HTML_FILE)
-    @window = WebConsole::Window.new
-    @window.load_html(html)
+    @view = WebConsole::Window.new
+    @view.load_html(html)
   end
 
   def teardown
-    @window.close
+    @view.close
   end
 
   def test_do_javascript
     javascript = File.read(WebConsole::Tests::NODOM_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
+    result = @view.do_javascript(javascript)
     expected = WebConsole::Tests::Helper::run_javascript(javascript)
     assert_equal(expected.to_i, result.to_i, "The result should match expected result.")
   end
