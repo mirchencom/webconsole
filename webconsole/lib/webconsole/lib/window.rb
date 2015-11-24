@@ -59,9 +59,12 @@ module WebConsole
       WebConsole::run_applescript(CLOSEWINDOW_SCRIPT, [window_id])
     end
 
-    SPLIT_ID_IN_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "split_id_in_window.scpt")
     def split_id
       return WebConsole::split_id_in_window(window_id)
+    end
+
+    def split_id_last
+      return WebConsole::split_id_in_window_last(window_id)
     end
 
     private

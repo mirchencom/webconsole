@@ -50,41 +50,32 @@ class TestViewDoJavaScript < Test::Unit::TestCase
   end
 end
 
-class TestWindowLoadHTML < Test::Unit::TestCase
+class TestLoadHTMLTwoViews < Test::Unit::TestCase
+
   def setup
     @window = WebConsole::Window.new
+    @view_one = WebConsole::View.new(@window.window_id, @window.split_id)
+    @view_two = WebConsole::View.new(@window.window_id, @window.split_id_last)
   end
 
   def teardown
     @window.close
   end
 
-  def test_load_html
-    test_text = "This is a test string"
-    html = "<html><body>" + test_text + "</body></html>"
-    @window.load_html(html)
-
-    javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
-
-    result.strip! # Remove line break
-    assert_equal(test_text, result, "The result should match the test string.")
-  end
-
-  def test_load_html_twice
-    test_text = "This is a test string"
-    html = "<html><body>" + test_text + "</body></html>"
-    @window.load_html(html)
-
-    test_text = "This is a test string 2"
-    html = "<html><body>" + test_text + "</body></html>"
-    @window.load_html(html)
-
-    javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
-    result = @window.do_javascript(javascript)
-
-    result.strip! # Remove line break
-    assert_equal(test_text, result, "The result should match the test string.")
+  def test_load_html_in_two_views
+    # test_text_one = "This is a test string"
+    # html = "<html><body>" + test_text_one + "</body></html>"
+    # @window.load_html(html)
+    #
+    # test_text = "This is a test string 2"
+    # html = "<html><body>" + test_text + "</body></html>"
+    # @window.load_html(html)
+    #
+    # javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
+    # result = @window.do_javascript(javascript)
+    #
+    # result.strip! # Remove line break
+    # assert_equal(test_text, result, "The result should match the test string.")
   end
 
 end
