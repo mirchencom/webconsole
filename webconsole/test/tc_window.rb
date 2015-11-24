@@ -71,7 +71,6 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 
-    result.strip! # Remove line break
     assert_equal(test_text, result, "The result should match the test string.")
   end
 
@@ -87,7 +86,6 @@ class TestWindowLoadHTML < Test::Unit::TestCase
     javascript = File.read(WebConsole::Tests::BODY_JAVASCRIPT_FILE)
     result = @window.do_javascript(javascript)
 
-    result.strip! # Remove line break
     assert_equal(test_text, result, "The result should match the test string.")
   end
 
