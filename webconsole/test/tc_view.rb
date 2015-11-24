@@ -12,14 +12,20 @@ class TestViewAttributes < Test::Unit::TestCase
   def test_view_id
     WebConsole::load_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_FILE)
     window_id = WebConsole::run_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    assert(window_id != nil)
+    split_id = WebConsole::split_id_in_window(window_id)
+    assert(split_id != nil)
+    split_id_two = WebConsole::split_id_in_window(window_id, WebConsole::Tests::HELLOWORLD_PLUGIN_NAME)
+    assert(split_id_two != nil)
+    assert(split_id == split_id_two)
+    split_id_three = WebConsole::split_id_in_window_last(window_id)
+    assert(split_id != split_id_three)
 
-    # Assert `view_id` is not equal to `window_id`
+    view = WebConsole::View.new(window_id, split_id)
+    assert(split_id == view.view_id)
+    assert(window_id == view.window_id)
 
-    assert(window_id != nil, "The window_id should not be nil")
-    assert(WebConsole::window_id_for_plugin(WebConsole::Tests::HELLOWORLD_PLUGIN_NAME) == window_id, "The window_id's should be equal")
-    window = WebConsole::Window.new(window_id)
-    assert(window_id == window.window_id, "The window id's should be equal.")
-    window.close
+    view.close
   end
 
 end
