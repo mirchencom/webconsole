@@ -34,6 +34,31 @@ class SplitWebViewControllerPluginDebugModeEnabledTests: WCLSplitWebWindowContro
         self.dynamicType.blockUntilAllTasksRunAndFinish()
     }
 
+    func testPluginDebugModeEnabledFalse() {
+        guard let printPlugin = PluginsManager.sharedInstance.pluginWithName(testPrintPluginName) else {
+            XCTAssertTrue(false)
+            return
+        }
+        
+        // Run `HelloWorld` because the `Print` Plugin requires AppleScript
+        // which is blocked when running tests.
+        let splitWebWindowController = makeSplitWebWindowControllerRunningHelloWorldForPlugin(printPlugin)
+        let splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
+        
+        // Turn on debug mode
+        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: debugModeEnabledKey)
+
+        // Confirm the preference is On
+        XCTAssertTrue(UserDefaultsManager
+            .standardUserDefaults()
+            .boolForKey(debugModeEnabledKey))
+        // Debug should be disabled, even though the preference is on
+        XCTAssertFalse(splitWebViewController.shouldDebugLog)
+        
+        // Clean Up
+        self.dynamicType.blockUntilAllTasksRunAndFinish()
+    }
+    
 }
 
 class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTestCase {

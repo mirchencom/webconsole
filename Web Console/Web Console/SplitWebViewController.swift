@@ -56,8 +56,11 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
     // MARK: Log
     
     var shouldDebugLog: Bool {
-        if let debugModeEnabled = self.plugin?.debugModeEnabled where debugModeEnabled {
-            return true
+        if let debugModeEnabled = self.plugin?.debugModeEnabled {
+            // The plugin's setting overrides the preference, so a plugin can
+            // force debug mode on or off. The user preference is only used if
+            // the key is missing.
+            return debugModeEnabled
         }
 
         return UserDefaultsManager.standardUserDefaults().boolForKey(debugModeEnabledKey)
