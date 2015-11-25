@@ -23,7 +23,7 @@ class PluginInitializationTests: WCLTestPluginManagerTestCase {
         XCTAssertEqual(helloWorldPlugin.command, "hello_world.rb")
         XCTAssertEqual(helloWorldPlugin.hidden, false)
         XCTAssertEqual(helloWorldPlugin.editable, true)
-        XCTAssertEqual(helloWorldPlugin.debugModeEnabled, false)
+        XCTAssertNil(helloWorldPlugin.debugModeEnabled)
     }
 
     func testLogPlugin() {
@@ -41,4 +41,13 @@ class PluginInitializationTests: WCLTestPluginManagerTestCase {
         XCTAssertEqual(logPlugin.debugModeEnabled, true)
     }
 
+    func testPrintPlugin() {
+        guard let logPlugin = PluginsManager.sharedInstance.pluginWithName(testPrintPluginName) else {
+            XCTAssertTrue(false)
+            return
+        }
+        
+        XCTAssertEqual(logPlugin.debugModeEnabled, false)
+    }
+    
 }
