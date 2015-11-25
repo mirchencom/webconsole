@@ -56,7 +56,9 @@ end
 
 class TestWindowLoadHTML < Test::Unit::TestCase
   def setup
-    @window = WebConsole::Window.new
+    window_id = WebConsole::create_window
+    @window = WebConsole::Window.new(window_id)
+    assert(window_id == @window.window_id)
   end
 
   def teardown
