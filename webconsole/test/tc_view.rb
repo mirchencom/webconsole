@@ -88,14 +88,18 @@ class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
     WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
     window_id = WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
     window = WebConsole::Window.new(window_id)
+
+    split_id = WebConsole::run_plugin_in_split(WebConsole::Tests::PRINT_PLUGIN_NAME, window_id, window.split_id_last)
+    assert(window.split_id_last, split_id)
+
     @view_one = WebConsole::View.new(window.window_id, window.split_id)
     @view_two = WebConsole::View.new(window.window_id, window.split_id_last)
   end
 
-  # def teardown
-  #   @view_one.close
-  #   WebConsole::Tests::Helper::confirm_dialog
-  # end
+  def teardown
+    @view_one.close
+    WebConsole::Tests::Helper::confirm_dialog
+  end
 
   def test_read_from_standard_input
     test_text_one = "This is a test string"
@@ -116,62 +120,3 @@ class TestTwoViewsReadFromStandardInput < Test::Unit::TestCase
     assert_equal(test_text_two, result, "The test text should equal the result.")
   end
 end
-
-
-# class TestTwoWindows < Test::Unit::TestCase
-#   def setup
-#     WebConsole::load_plugin(WebConsole::Tests::PRINT_PLUGIN_FILE)
-#
-#     # Window One
-#     window_id_one = WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-#     @window_one = WebConsole::Window.new(window_id_one)
-#
-#     # Window Manager Two
-#     window_id_two = WebConsole::run_plugin(WebConsole::Tests::PRINT_PLUGIN_NAME)
-#     @window_two = WebConsole::Window.new(window_id_two)
-#
-#     assert_not_equal(window_id_one, window_id_two, "Window managers one and two should have different window ids.")
-#   end
-#
-#   def teardown
-#     @window_one.close
-#     WebConsole::Tests::Helper::confirm_dialog
-#
-#     @window_two.close
-#     WebConsole::Tests::Helper::confirm_dialog
-#   end
-#
-#   def test_two_windows
-#     test_text_one = "The first test string"
-#     test_text_two = "The second test string"
-#
-#     @window_one.read_from_standard_input(test_text_one + "\n")
-#     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
-#
-#     @window_two.read_from_standard_input(test_text_two + "\n")
-#     sleep WebConsole::Tests::TEST_PAUSE_TIME # Give read from standard input time to run
-#
-#     # Swap the two windows to test that the window numbers persist even
-#     # after the window changes.
-#     window_id_before = WebConsole::Tests::Helper::window_id
-#     assert_equal(window_id_before, @window_two.window_id, "The second window should be in front.")
-#     WebConsole::Tests::Helper::switch_windows
-#     window_id_after = WebConsole::Tests::Helper::window_id
-#     assert_equal(window_id_after, @window_one.window_id, "The first window should be in front.")
-#     assert_not_equal(window_id_before, window_id_after, "The front window should have changed.")
-#
-#     # Read the window contents
-#     javascript = File.read(WebConsole::Tests::LASTCODE_JAVASCRIPT_FILE)
-#
-#     # Window Manager One
-#     result_one = @window_one.do_javascript(javascript)
-#     result_one.strip!
-#
-#     # Window Manager Two
-#     result_two = @window_two.do_javascript(javascript)
-#     result_two.strip!
-#
-#     assert_equal(test_text_one, result_one, "The first test text should equal the first result.")
-#     assert_equal(test_text_two, result_two, "The second test text should equal the second result.")
-#   end
-# end
