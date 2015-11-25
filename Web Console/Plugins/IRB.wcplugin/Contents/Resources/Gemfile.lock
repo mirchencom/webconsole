@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    webconsole (0.1.17)
+    webconsole (0.1.18)
 
 PLATFORMS
   ruby
