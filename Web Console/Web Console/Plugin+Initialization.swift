@@ -212,7 +212,7 @@ extension Plugin {
         return true
     }
 
-    class func validDebugModeEnabled(infoDictionary: [NSObject : AnyObject]) throws -> Bool {
+    class func validDebugModeEnabled(infoDictionary: [NSObject : AnyObject]) throws -> Bool? {
         if let debugModeEnabled = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] as? Int {
             return NSNumber(integer: debugModeEnabled).boolValue
         }
@@ -222,7 +222,7 @@ extension Plugin {
             throw PluginLoadError.InvalidDebugModeEnabledError(infoDictionary: infoDictionary)
         }
         
-        return false
+        return nil
     }
     
     class func validPluginTypeFromPath(path: String) -> PluginType {

@@ -31,7 +31,7 @@ class Plugin: WCLPlugin {
     }
     internal let bundle: NSBundle
     let hidden: Bool
-    let debugModeEnabled: Bool
+    let debugModeEnabled: Bool?
     let pluginType: PluginType
     
     init(bundle: NSBundle,
@@ -43,7 +43,7 @@ class Plugin: WCLPlugin {
         suffixes: [String]?,
         hidden: Bool,
         editable: Bool,
-        debugModeEnabled: Bool)
+        debugModeEnabled: Bool?)
     {
         self.infoDictionary = infoDictionary
         self.pluginType = pluginType

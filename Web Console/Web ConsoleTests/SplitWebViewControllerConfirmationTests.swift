@@ -40,7 +40,7 @@ class SplitWebViewControllerConfirmationTests: WebViewControllerEventRouterTestC
         }
         
         let pluginRunExpectation = expectationWithDescription("Plugin run")
-        let plugin = PluginsManager.sharedInstance.pluginWithName(testPrintPluginName)!
+        let plugin = PluginsManager.sharedInstance.pluginWithName(testCatPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             pluginRunExpectation.fulfill()
         }
@@ -51,17 +51,6 @@ class SplitWebViewControllerConfirmationTests: WebViewControllerEventRouterTestC
     }
     
     func terminatePluginTask() {
-        let pluginTerminateReadFromStandardInputExpectationOne = expectationWithDescription("Terminate plugin log message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
-            pluginTerminateReadFromStandardInputExpectationOne.fulfill()
-        }
-
-        // Terminating the task results in two error messages
-        let pluginTerminateReadFromStandardInputExpectationTwo = expectationWithDescription("Terminate plugin log message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
-            pluginTerminateReadFromStandardInputExpectationTwo.fulfill()
-        }
-        
         let pluginFinishedReadFromStandardInputExpectation = expectationWithDescription("Finished running plugin log message")
         webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             pluginFinishedReadFromStandardInputExpectation.fulfill()

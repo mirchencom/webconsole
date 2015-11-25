@@ -19,7 +19,7 @@ extension SplitWebWindowControllerEventRouter: WCLSplitWebWindowControllerDelega
     // MARK: Handled
     
     func logPluginForSplitWebWindowController(splitWebViewController: WCLSplitWebWindowController) -> Plugin? {
-        return PluginsManager.sharedInstance.pluginWithName(testCatPluginName)!
+        return PluginsManager.sharedInstance.pluginWithName(testPrintPluginName)!
     }
 
     // MARK: Forwarded
