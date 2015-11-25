@@ -118,7 +118,7 @@
 
 + (Plugin *)defaultPlugin
 {
-    return [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+    return [[PluginsManager sharedInstance] pluginWithName:kTestCatPluginName];
 }
 
 + (Plugin *)otherPlugin
