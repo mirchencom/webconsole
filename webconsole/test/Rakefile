@@ -17,7 +17,12 @@ namespace :webconsole do
     ruby Shellwords.escape(window_tests_file)
   end
 
-  task :test_view_resources => [:test_window] do
+  task :test_view => [:test_window] do
+    view_tests_file = File.join(File.dirname(__FILE__), "tc_view.rb")
+    ruby Shellwords.escape(view_tests_file)
+  end
+
+  task :test_view_resources => [:test_view] do
     view_resources_tests_file = File.join(File.dirname(__FILE__), "tc_view_resources.rb")
     ruby Shellwords.escape(view_resources_tests_file)
   end
