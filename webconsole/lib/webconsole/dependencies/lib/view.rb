@@ -13,7 +13,7 @@ module WebConsole::Dependencies
 
     ADD_MISSING_DEPENDENCY_FUNCTION = "addMissingDependency"
     def add_missing_dependency(name, type, installation_instructions = nil)
-      self.do_javascript_function(ADD_MISSING_DEPENDENCY_FUNCTION, [name, type, installation_instructions])
+      do_javascript_function(ADD_MISSING_DEPENDENCY_FUNCTION, [name, type, installation_instructions])
     end
   end
 end

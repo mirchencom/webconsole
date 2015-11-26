@@ -12,7 +12,7 @@ module WebConsole::Dependencies
     require 'shellwords'
     def self.check_shell_command(name)
       command = "type -a #{Shellwords.escape(name)} > /dev/null 2>&1"
-      return system(command)
+      system(command)
     end
 
   end

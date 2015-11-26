@@ -11,22 +11,16 @@ require_relative "lib/test_javascript_helper"
 module WebConsole::Dependencies
   class Checker
 
-    def close
-      if @controller
-        @controller.view.close
-      end
+    def close      
+      @controller.view.close if @controller
     end
 
     def view
-      return @controller.view
+      @controller.view
     end
 
     def controller_exists?
-      if @controller
-        return true
-      else
-        return false
-      end
+      !@controller.nil?
     end
 
   end
