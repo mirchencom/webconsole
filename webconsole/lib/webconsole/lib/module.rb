@@ -96,19 +96,11 @@ module WebConsole
 
     result.chomp!
 
-    if result.empty?
-      return nil
-    end
-
-    if result.is_integer?
-      return result.to_i
-    end
-
-    if result.is_float?
-      return result.to_f
-    end
-
-    return result
+    return nil if result.empty?
+    return result.to_i if result.is_integer?
+    return result.to_f if result.is_float?
+    
+    result
   end
 
   class ::String
