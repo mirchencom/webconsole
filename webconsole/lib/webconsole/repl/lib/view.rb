@@ -23,7 +23,7 @@ module WebConsole::REPL
     # Helpers to allow easy loading of REPL resource even from another base URL
 
     def repl_header_tags
-      return %Q[
+      %Q[
     #{repl_stylesheet_link_tag}
     #{repl_handlebars_template_tags}
     #{shared_javascript_include_tag("handlebars")}
@@ -33,7 +33,7 @@ module WebConsole::REPL
     end
 
     def repl_handlebars_template_tags
-      return %Q[
+      %Q[
     <script id="output-template" type="text/x-handlebars-template">
   		<pre class="output"><code>{{code}}</code></pre>
   	</script>
@@ -45,23 +45,23 @@ module WebConsole::REPL
     def repl_stylesheet_link_tag
       path = File.join(repl_base_resource_path, "css/style.css")
       url = repl_url_for_path(path)
-      return stylesheet_link_tag(url)
+      stylesheet_link_tag(url)
     end
 
     def repl_javascript_include_tag
       path = File.join(repl_base_resource_path, "js/wcrepl.js")
       url = repl_url_for_path(path)
-      return javascript_include_tag(url)
+      javascript_include_tag(url)
     end
 
     require 'open-uri'
     def repl_url_for_path(path)
       uri = URI::encode(path)
-      return "file://" + uri
+      "file://" + uri
     end
 
     def repl_base_resource_path
-      path = File.expand_path(File.join(File.dirname(__FILE__), "../"))
+      File.expand_path(File.join(File.dirname(__FILE__), "../"))
     end
 
   end

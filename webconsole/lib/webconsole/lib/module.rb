@@ -8,64 +8,51 @@ module WebConsole
   EXISTS_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "exists.scpt")
   def self.application_exists
     result = self.run_applescript(EXISTS_SCRIPT)
-    if result == "true"
-      return true
-    else
-      return false
-    end
+    result == "true" ? true : false
   end
 
   RUN_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run_plugin.scpt")
   def self.run_plugin(name, directory = nil, arguments = nil)
     parameters = [name]
-    if directory
-      parameters.push(directory)
-    end
-    if arguments
-      parameters = parameters + arguments
-    end
-
-    return self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
+    parameters.push(directory) unless directory.nil?
+    parameters += arguments unless arguments.nil?
+    self.run_applescript(RUN_PLUGIN_SCRIPT, parameters)
   end
   
   RUN_PLUGIN_IN_SPLIT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "run_plugin_in_split.scpt")
   def self.run_plugin_in_split(name, window_id, split_id)
     parameters = [name, window_id, split_id]
-    return self.run_applescript(RUN_PLUGIN_IN_SPLIT_SCRIPT, parameters)
+    self.run_applescript(RUN_PLUGIN_IN_SPLIT_SCRIPT, parameters)
   end
 
   WINDOW_ID_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "window_id_for_plugin.scpt")
   def self.window_id_for_plugin(name)
-    return self.run_applescript(WINDOW_ID_FOR_PLUGIN_SCRIPT, [name])
+    self.run_applescript(WINDOW_ID_FOR_PLUGIN_SCRIPT, [name])
   end
 
   SPLIT_ID_IN_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "split_id_in_window.scpt")
   def self.split_id_in_window(window_id, pluginName = nil)
     arguments = [window_id]
-
-    if pluginName
-      arguments.push(pluginName)
-    end
-
-    return self.run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
+    arguments.push(pluginName) unless pluginName.nil?
+    self.run_applescript(SPLIT_ID_IN_WINDOW_SCRIPT, arguments)
   end
 
   SPLIT_ID_IN_WINDOW_LAST_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "split_id_in_window_last.scpt")
   def self.split_id_in_window_last(window_id)
     arguments = [window_id]
-    return self.run_applescript(SPLIT_ID_IN_WINDOW_LAST_SCRIPT, arguments)
+    self.run_applescript(SPLIT_ID_IN_WINDOW_LAST_SCRIPT, arguments)
   end
 
   CREATE_WINDOW_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "create_window.scpt")
   def self.create_window
-    return self.run_applescript(CREATE_WINDOW_SCRIPT)
+    self.run_applescript(CREATE_WINDOW_SCRIPT)
   end
 
   # Shared Resources
 
   RESOURCE_PATH_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_path_for_plugin.scpt")
   def self.resource_path_for_plugin(name)
-    return self.run_applescript(RESOURCE_PATH_FOR_PLUGIN_SCRIPT, [name])
+    self.run_applescript(RESOURCE_PATH_FOR_PLUGIN_SCRIPT, [name])
   end
 
   # Shared Resource Path
@@ -73,27 +60,27 @@ module WebConsole
   SHARED_RESOURCES_PLUGIN_NAME = "Shared Resources"
   SHARED_TEST_RESOURCES_PLUGIN_NAME = "Shared Test Resources"
   def self.shared_resources_path
-    return resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
+    resource_path_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
   end
   def self.shared_test_resources_path
-    return resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
+    resource_path_for_plugin(SHARED_TEST_RESOURCES_PLUGIN_NAME)
   end
 
   def self.shared_resource(resource)
-    return File.join(self.shared_resources_path, resource)
+    File.join(self.shared_resources_path, resource)
   end
   def self.shared_test_resource(resource)
-    return File.join(self.shared_test_resources_path, resource)    
+    File.join(self.shared_test_resources_path, resource)    
   end
 
   # Shared Resource URL
 
   RESOURCE_URL_FOR_PLUGIN_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "resource_url_for_plugin.scpt")
   def self.resource_url_for_plugin(name)
-    return self.run_applescript(RESOURCE_URL_FOR_PLUGIN_SCRIPT, [name])
+    self.run_applescript(RESOURCE_URL_FOR_PLUGIN_SCRIPT, [name])
   end
   def self.shared_resources_url
-    return resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
+    resource_url_for_plugin(SHARED_RESOURCES_PLUGIN_NAME)
   end
 
   private
@@ -130,7 +117,7 @@ module WebConsole
 
   class ::String
     def is_float?
-      !!Float(self) rescue false
+      true if Float(self) rescue false
     end
 
     def is_integer?
@@ -139,15 +126,11 @@ module WebConsole
   end
 
   class ::Float
-    def javascript_argument
-      return self.to_s
-    end
+    alias_method :javascript_argument, :to_s
   end
 
   class ::Integer
-    def javascript_argument
-      return self.to_s
-    end
+    alias_method :javascript_argument, :to_s
   end
 
 end

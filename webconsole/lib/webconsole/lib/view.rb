@@ -13,14 +13,7 @@ module WebConsole
     end
 
     def view_id
-      if !@view_id
-        if ENV.has_key?(SPLIT_ID_KEY)
-          @view_id = ENV[SPLIT_ID_KEY]
-        else
-          @view_id = split_id
-        end
-      end
-      return @view_id
+      @view_id ||= ENV.has_key?(SPLIT_ID_KEY) ? ENV[SPLIT_ID_KEY] : split_id
     end
 
     private
@@ -28,9 +21,7 @@ module WebConsole
     # Web
 
     def arguments_with_target(arguments)
-      arguments = super(arguments)
-      arguments.push(view_id)
-      return arguments
+      super(arguments).push(view_id)
     end
 
   end

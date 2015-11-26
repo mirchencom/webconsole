@@ -44,30 +44,16 @@ module WebConsole
     # Properties
 
     def window_id
-      if !@window_id
-        if ENV.has_key?(WINDOW_ID_KEY)
-          @window_id = ENV[WINDOW_ID_KEY]
-        else
-          @window_id = WebConsole::create_window
-        end
-      end
-      return @window_id
+      @window_id ||= ENV.has_key?(WINDOW_ID_KEY) ? ENV[WINDOW_ID_KEY] : WebConsole::create_window
     end
   
     def view_id
-      if !@view_id
-        # First see if there's an existing log plugin
-        @view_id = WebConsole::split_id_in_window(window_id, LOG_PLUGIN_NAME)
+      @view_id ||= WebConsole::split_id_in_window(window_id, LOG_PLUGIN_NAME)
+      return @view_id unless @view_id.nil?
 
-        # If not, run one
-        if !@view_id
-          @view_id = WebConsole::split_id_in_window_last(window_id)
-          WebConsole::run_plugin_in_split(LOG_PLUGIN_NAME, window_id, @view_id)
-        end
-
-      end
-
-      return @view_id
+      @view_id = WebConsole::split_id_in_window_last(window_id)
+      WebConsole::run_plugin_in_split(LOG_PLUGIN_NAME, window_id, @view_id)
+      @view_id  
     end
 
     private

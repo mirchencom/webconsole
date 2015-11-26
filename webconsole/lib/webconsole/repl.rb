@@ -8,6 +8,7 @@ module WebConsole::REPL
 
   class Wrapper
     require 'pty'
+
     def initialize(command)
 
       PTY.spawn(command) do |output, input, pid|
@@ -18,6 +19,7 @@ module WebConsole::REPL
         end
         @input = input
       end
+
     end
 
     def parse_input(input)
@@ -32,26 +34,15 @@ module WebConsole::REPL
     private
 
     def input_controller
-      if !@input_controller
-        @input_controller = InputController.new
-        @input_controller.view = view
-      end
-      return @input_controller
+      @input_controller ||= InputController.new(view)
     end
     
     def output_controller
-      if !@output_controller
-        @output_controller = OutputController.new
-        @output_controller.view = view
-      end
-      return @output_controller
+      @output_controller ||= OutputController.new(view)
     end
     
     def view
-      if !@view
-        @view = View.new
-      end
-      return @view
+      @view ||= View.new
     end
 
   end

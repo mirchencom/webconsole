@@ -15,14 +15,7 @@ module WebConsole
     end
     
     def window_id
-      if !@window_id
-        if ENV.has_key?(WINDOW_ID_KEY)
-          @window_id = ENV[WINDOW_ID_KEY]
-        else
-          @window_id = WebConsole::create_window
-        end
-      end
-      return @window_id
+      @window_id ||= ENV.has_key?(WINDOW_ID_KEY) ? ENV[WINDOW_ID_KEY] : WebConsole::create_window
     end
     
     # Web
@@ -39,12 +32,12 @@ module WebConsole
         arguments.push(@base_url)
       end
 
-      return run_script(script, arguments)
+      run_script(script, arguments)
     end
 
     DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "do_javascript.scpt")
     def do_javascript(javascript)
-      return run_script(DOJAVASCRIPT_SCRIPT, [javascript])
+      run_script(DOJAVASCRIPT_SCRIPT, [javascript])
     end
 
     READ_FROM_STANDARD_INPUT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "read_from_standard_input.scpt")
@@ -60,23 +53,22 @@ module WebConsole
     end
 
     def split_id
-      return WebConsole::split_id_in_window(window_id)
+      WebConsole::split_id_in_window(window_id)
     end
 
     def split_id_last
-      return WebConsole::split_id_in_window_last(window_id)
+      WebConsole::split_id_in_window_last(window_id)
     end
 
     private
 
     def run_script(script, arguments = [])
       arguments = arguments_with_target(arguments)
-      return WebConsole::run_applescript(script, arguments)
+      WebConsole::run_applescript(script, arguments)
     end
 
     def arguments_with_target(arguments)
       arguments.push(window_id)
-      return arguments
     end
 
   end

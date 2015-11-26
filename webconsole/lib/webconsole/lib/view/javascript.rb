@@ -3,7 +3,7 @@ module WebConsole
 
     def do_javascript_function(function, arguments = nil)
       javascript = self.class.javascript_function(function, arguments)
-      return do_javascript(javascript)
+      do_javascript(javascript)
     end
 
     def self.javascript_function(function, arguments = nil)
@@ -23,15 +23,13 @@ module WebConsole
       end
 
       function << ');'
-
-      return function
     end
 
     private
 
     class ::String
       def javascript_argument
-        return "'#{self.javascript_escape}'"
+        "'#{self.javascript_escape}'"
       end
 
       def javascript_escape

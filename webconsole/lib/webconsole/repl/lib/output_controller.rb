@@ -2,7 +2,8 @@ module WebConsole::REPL
   class OutputController < WebConsole::Controller
 
     attr_accessor :view
-    def initialize
+    def initialize(view)
+      @view = view
     end
 
     def parse_output(output)
