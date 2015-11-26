@@ -86,14 +86,10 @@ module WebConsole
   private
 
   def self.run_applescript(script, arguments = nil)
-    command = "osascript #{Shellwords.escape(script)}"
+    command = "osascript #{script.shell_escape}"
+
     if arguments
-      arguments.each { |argument|
-        if argument
-          argument = argument.to_s
-          command = command + " " + Shellwords.escape(argument)
-        end
-      }
+      command += " " + arguments.compact.map(&:to_s).map(&:shell_escape).join(' ')
     end
 
     result = `#{command}`
@@ -123,6 +119,15 @@ module WebConsole
     def is_integer?
       self.to_i.to_s == self
     end
+
+    def shell_escape
+      Shellwords.escape(self)
+    end
+
+    def shell_escape!
+      replace(shell_escape)
+    end
+
   end
 
   class ::Float
