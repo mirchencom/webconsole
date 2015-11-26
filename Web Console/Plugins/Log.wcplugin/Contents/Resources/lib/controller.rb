@@ -17,15 +17,11 @@ module WebConsole::Log
       if message =~ /^#{MESSAGE_PREFIX}/
         message[MESSAGE_PREFIX] = ''
         message.rstrip!
-        if !message.empty?
-          view.log_message(message)
-        end
+        view.log_message(message) unless message.empty?
       elsif message =~ /^#{ERROR_PREFIX}/
         message[ERROR_PREFIX] = ''
         message.rstrip!
-        if !message.empty?
-          view.log_error(message)
-        end
+        view.log_error(message) unless message.empty?
       end
 
     end

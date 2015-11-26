@@ -6,9 +6,7 @@ require 'listen'
 
 require_relative "lib/controller"
 
-if !ARGV.empty?
-  file = ARGF.file
-end
+file = ARGF.file unless ARGV.empty?
 markdown = ARGF.read
 
 # This should allow the plugin to process Markdown from stdin, but

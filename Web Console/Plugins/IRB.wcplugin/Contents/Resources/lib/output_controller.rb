@@ -16,11 +16,8 @@ module WebConsole::REPL::IRB
       # else
       #   return
       # end
-
-      if output =~ /^irb\([^)]*\):[^:]*:[^>]*(>|\*)/
-        # Don't add echo of input
-        return
-      end
+      
+      return if output =~ /^irb\([^)]*\):[^:]*:[^>]*(>|\*)/ # Don't add echo of input
 
       output = output.dup
       output.sub!(/^=>\s/, "") # Remove output prompt

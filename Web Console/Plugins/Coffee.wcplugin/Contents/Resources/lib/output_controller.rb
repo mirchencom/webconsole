@@ -5,10 +5,7 @@ module WebConsole::REPL::Coffee
   class OutputController < WebConsole::REPL::OutputController
 
     def parse_output(output)
-      if output =~ /^\x1b[^coffee>]*coffee>/
-        # Don't add echo of input
-        return
-      end
+      return if output =~ /^\x1b[^coffee>]*coffee>/ # Don't add echo of input
       super(output)
     end
 

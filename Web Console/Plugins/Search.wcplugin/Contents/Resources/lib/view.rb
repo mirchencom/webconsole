@@ -40,11 +40,10 @@ addLine(#{line_number}, '#{text}', matches);
         matches_json << match_json
       }
       matches_json.chomp!(",");
-      javascript = %Q[
+      %Q[
 var matches = [#{matches_json}  
 ];
 ]
-      return javascript      
     end
 
   end

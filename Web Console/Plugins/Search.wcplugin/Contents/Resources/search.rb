@@ -11,19 +11,13 @@ require_relative "lib/parser"
 require_relative "lib/controller"
 
 passed = WebConsole::Search.check_dependencies
-if !passed
-  exit 1
-end
+exit 1 unless passed
 
 # Parser
 controller = WebConsole::Search::Controller.new
 
-if ARGV[1]
-  directory = ARGV[1].dup
-end
-if !directory
-  directory = `pwd`
-end
+directory = ARGV[1].dup if ARGV[1]
+directory = `pwd` unless directory
 
 parser = WebConsole::Search::Parser.new(controller, directory)
 
@@ -31,9 +25,7 @@ parser = WebConsole::Search::Parser.new(controller, directory)
 term = ARGV[0]
 directory.chomp!
 
-if !term || !directory
-  exit 1
-end
+exit 1 unless term && directory
 
 command = "#{SEARCH_COMMAND} #{Shellwords.escape(term)} #{Shellwords.escape(directory)}"
 pipe = IO.popen(command)

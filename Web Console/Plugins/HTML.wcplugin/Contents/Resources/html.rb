@@ -6,9 +6,7 @@ require 'listen'
 
 require_relative "lib/controller"
 
-if !ARGV.empty?
-  file = ARGF.file
-end
+file = ARGF.file unless ARGV.empty?
 
 html = ARGF.read
 

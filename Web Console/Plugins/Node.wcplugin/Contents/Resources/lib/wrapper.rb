@@ -23,17 +23,11 @@ module WebConsole::REPL::Node
     end
 
     def output_controller
-      if !@output_controller
-        @output_controller = OutputController.new(view)
-      end
-      return @output_controller
+      @output_controller ||= OutputController.new(view)
     end
 
     def view
-      if !@view
-        @view = View.new
-      end
-      return @view
+      @view ||= View.new
     end
 
   end

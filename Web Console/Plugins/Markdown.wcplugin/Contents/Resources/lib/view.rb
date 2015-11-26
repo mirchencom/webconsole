@@ -18,10 +18,8 @@ module WebConsole::Markdown
     end    
 
     def title
-      if @filename
-        return @filename
-      end
-      return super
+      return @filename if @filename
+      super
     end
 
     REPLACE_CONTENT_JAVASCRIPT_FUNCTION = "replaceContent"

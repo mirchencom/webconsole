@@ -4,11 +4,7 @@ module WebConsole::Search
       attr_reader :file_path, :display_file_path, :lines
       def initialize(file_path, display_file_path = nil)
         @file_path = file_path
-        if display_file_path
-          @display_file_path = display_file_path
-        else
-          @display_file_path = file_path
-        end
+        @display_file_path = display_file_path ? display_file_path : file_path
         @lines = Array.new
       end
 

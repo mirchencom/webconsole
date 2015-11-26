@@ -3,15 +3,11 @@ module WebConsole::HTML
 
     def initialize(delegate = nil, html)
       @delegate = delegate
-      if @delegate
-        @delegate.load_html(html)
-      end
+      @delegate.load_html(html) if @delegate
     end
 
     def html=(html)
-      if @delegate
-        @delegate.load_html(html)
-      end
+      @delegate.load_html(html) if @delegate
     end
 
   end

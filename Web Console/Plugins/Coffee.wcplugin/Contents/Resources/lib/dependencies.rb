@@ -7,6 +7,6 @@ module WebConsole::REPL::Coffee
     installation_instructions = "With <a href=\"https://www.npmjs.org\">npm</a>, <code>npm install -g coffee-script</code>."
     dependency = WebConsole::Dependencies::Dependency.new("coffee", :shell_command, :installation_instructions => installation_instructions)
     checker = WebConsole::Dependencies::Checker.new
-    return checker.check(dependency)
+    checker.check(dependency)
   end
 end

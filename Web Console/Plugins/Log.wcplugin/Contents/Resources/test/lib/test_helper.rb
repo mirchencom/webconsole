@@ -9,11 +9,11 @@ module WebConsole::Log
       end
 
       def last_log_class()
-        return @view.do_javascript(TEST_CLASS_JAVASCRIPT)
+        @view.do_javascript(TEST_CLASS_JAVASCRIPT)
       end
 
       def last_log_message()
-        return @view.do_javascript(TEST_MESSAGE_JAVASCRIPT)
+        @view.do_javascript(TEST_MESSAGE_JAVASCRIPT)
       end
 
     end

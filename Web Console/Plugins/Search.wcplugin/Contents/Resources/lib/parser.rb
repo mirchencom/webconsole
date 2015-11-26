@@ -24,13 +24,11 @@ module WebConsole::Search
       end
 
       file = @files_hash[file_path]
-      if !file
+      unless file
         file = Match::File.new(file_path, display_file_path)
         @files_hash[file_path] = file
 
-        if @delegate 
-          @delegate.added_file(file)
-        end
+        @delegate.added_file(file) if @delegate 
       end
 
       line_number = metadata_captures[1].to_i
@@ -55,9 +53,7 @@ module WebConsole::Search
 
       line.text = text
       
-      if @delegate
-        @delegate.added_line_to_file(line, file)
-      end
+      @delegate.added_line_to_file(line, file) if @delegate
     end
   end
 end
