@@ -3,7 +3,8 @@ require 'webconsole/repl'
 
 module WebConsole::REPL::IRB
   class OutputController < WebConsole::REPL::OutputController
-    def initialize
+    def initialize(view)
+      super(view)
       @SEEN_PROMPT = false
     end
 

@@ -12,8 +12,8 @@ require_relative "../lib/output_controller"
 class TestOutputController < Test::Unit::TestCase
 
   def setup
-    @output_controller = WebConsole::REPL::IRB::OutputController.new
-    @output_controller.view = WebConsole::REPL::IRB::View.new
+    view = WebConsole::REPL::IRB::View.new
+    @output_controller = WebConsole::REPL::IRB::OutputController.new(view)
   end
   
   def teardown

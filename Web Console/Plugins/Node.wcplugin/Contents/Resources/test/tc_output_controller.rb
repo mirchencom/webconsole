@@ -20,8 +20,8 @@ end
 class TestOutputController < Test::Unit::TestCase
   
   def setup
-    @output_controller = WebConsole::REPL::Node::OutputController.new
-    @output_controller.view = WebConsole::REPL::Node::View.new
+    view = WebConsole::REPL::Node::View.new
+    @output_controller = WebConsole::REPL::Node::OutputController.new(view)
   end
   
   def teardown

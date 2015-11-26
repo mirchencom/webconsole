@@ -20,16 +20,14 @@ module WebConsole::REPL::Coffee
 
     def input_controller
       if !@input_controller
-        @input_controller = InputController.new
-        @input_controller.view = view
+        @input_controller = InputController.new(view)
       end
       return @input_controller
     end
 
     def output_controller
       if !@output_controller
-        @output_controller = OutputController.new
-        @output_controller.view = view
+        @output_controller = OutputController.new(view)
       end
       return @output_controller
     end

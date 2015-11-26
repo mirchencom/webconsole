@@ -21,8 +21,8 @@ end
 class TestOutputController < Test::Unit::TestCase
   
   def setup
-    @output_controller = WebConsole::REPL::Coffee::OutputController.new
-    @output_controller.view = WebConsole::REPL::Coffee::View.new
+    view = WebConsole::REPL::Coffee::View.new
+    @output_controller = WebConsole::REPL::Coffee::OutputController.new(view)
   end
   
   def teardown

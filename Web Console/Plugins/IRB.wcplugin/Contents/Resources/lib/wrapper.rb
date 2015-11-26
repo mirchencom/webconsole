@@ -17,8 +17,7 @@ module WebConsole::REPL::IRB
 
     def output_controller
       if !@output_controller
-        @output_controller = OutputController.new
-        @output_controller.view = view
+        @output_controller = OutputController.new(view)
       end
       return @output_controller
     end

@@ -21,8 +21,8 @@ end
 class TestInputController < Test::Unit::TestCase
 
   def setup
-    @input_controller = WebConsole::REPL::Coffee::InputController.new
-    @input_controller.view = WebConsole::REPL::Coffee::View.new
+    view = WebConsole::REPL::Coffee::View.new
+    @input_controller = WebConsole::REPL::Coffee::InputController.new(view)
   end
   
   def teardown
