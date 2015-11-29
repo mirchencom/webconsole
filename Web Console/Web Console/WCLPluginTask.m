@@ -93,11 +93,11 @@
                 success = YES;
             }
             @catch (NSException *exception) {
-                error = [NSError launchPathExceptionError:launchPath];
+                error = [NSError commandPathExceptionError:launchPath];
                 completionHandler(NO);
             }
         } else {
-            error = [NSError launchPathUnexecutableError:launchPath];
+            error = [NSError commandPathUnexecutableError:launchPath];
         }
         
         if (success) {
@@ -108,7 +108,7 @@
             }
         } else {
             if (error == nil) {
-                error = [NSError launchPathUnkownError:launchPath];
+                error = [NSError commandPathUnkownError:launchPath];
             }
             
             if ([delegate respondsToSelector:@selector(pluginTask:didFailToRunCommandPath:error:)]) {

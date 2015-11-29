@@ -8,12 +8,14 @@
 
 import Foundation
 
+let errorDomain = NSBundle.mainBundle().bundleIdentifier!
+
 enum FileSystemError: ErrorType {
     case FileExistsForDirectoryError
 }
 
-enum TaskErrorCode: Int {
-    case Unknown = 100, UnexecutableLaunchPath, Exception
+enum RunCommandPathErrorCode: Int {
+    case Unknown = 100, Unexecutable, Exception
 }
 
 extension NSError {
@@ -27,16 +29,16 @@ extension NSError {
 
     // MARK: Running Plugins
 
-    class func launchPathUnkownError(launchPath: String) -> NSError {
-        return errorWithDescription("An unkown error occurred running command path: \(launchPath)", code: TaskErrorCode.Unknown.rawValue)
+    class func commandPathUnkownError(launchPath: String) -> NSError {
+        return errorWithDescription("An unkown error occurred running command path: \(launchPath)", code: RunCommandPathErrorCode.Unknown.rawValue)
     }
     
-    class func launchPathUnexecutableError(launchPath: String) -> NSError {
-        return errorWithDescription("Command path is not executable: \(launchPath)", code: TaskErrorCode.UnexecutableLaunchPath.rawValue)
+    class func commandPathUnexecutableError(launchPath: String) -> NSError {
+        return errorWithDescription("Command path is not executable: \(launchPath)", code: RunCommandPathErrorCode.Unexecutable.rawValue)
     }
     
-    class func launchPathExceptionError(launchPath: String) -> NSError {
-        return errorWithDescription("An exception was thrown running command path: \(launchPath)", code: TaskErrorCode.Exception.rawValue)
+    class func commandPathExceptionError(launchPath: String) -> NSError {
+        return errorWithDescription("An exception was thrown running command path: \(launchPath)", code: RunCommandPathErrorCode.Exception.rawValue)
     }
 
 }

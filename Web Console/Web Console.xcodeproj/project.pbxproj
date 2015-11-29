@@ -137,6 +137,7 @@
 		45DCDD3C1B8D4D5B00EE0C1F /* Log.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DCDD3A1B8D4D5500EE0C1F /* Log.wcplugin */; };
 		45F6F8791C0A616B005A81C9 /* WCLPluginTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6F8781C0A616B005A81C9 /* WCLPluginTaskTests.swift */; };
 		45F6F87E1C0A981D005A81C9 /* NSError+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6F87D1C0A981D005A81C9 /* NSError+Errors.swift */; };
+		45F6F87F1C0B9E60005A81C9 /* NSError+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6F87D1C0A981D005A81C9 /* NSError+Errors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1096,6 +1097,7 @@
 				450CD3161A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m in Sources */,
 				4596ACAE1B80FF0D00AB8963 /* Web_ConsoleTestsConstants.swift in Sources */,
 				45A34E2418726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m in Sources */,
+				45F6F87F1C0B9E60005A81C9 /* NSError+Errors.swift in Sources */,
 				459C46321BBE101D0064BA9E /* XCTestCase+UserDefaults.swift in Sources */,
 				4596ACB21B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m in Sources */,
 				45F6F8791C0A616B005A81C9 /* WCLPluginTaskTests.swift in Sources */,
