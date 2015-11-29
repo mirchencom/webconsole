@@ -10,13 +10,13 @@ import XCTest
 
 class WCLPluginTaskTests: XCTestCase, WCLPluginTaskDelegate {
 
-//    func testExample() {
-//        let expection = expectationWithDescription("Run task")
-//        WCLPluginTask.runTaskWithCommandPath("invalid path", withArguments: nil, inDirectoryPath: nil, delegate: self) { (success) -> Void in
-//            XCTAssertFalse(success)
-//            expection.fulfill()
-//        }
-//        waitForExpectationsWithTimeout(testTimeout, handler: nil)
-//    }
+    func testExample() {
+        let expection = expectationWithDescription("Run task")
+        WCLPluginTask.runTaskWithCommandPath("invalid path", withArguments: nil, inDirectoryPath: nil, delegate: self) { (success) -> Void in
+            XCTAssertFalse(success)
+            expection.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
 
 }

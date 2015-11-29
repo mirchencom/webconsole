@@ -85,14 +85,26 @@
             [task setEnvironment:environmentDictionary];
         }
         
-        [task launch];
-
-        if ([delegate respondsToSelector:@selector(pluginTask:didRunCommandPath:arguments:directoryPath:)]) {
-            [delegate pluginTask:task didRunCommandPath:commandPath arguments:arguments directoryPath:directoryPath];
+        if (![[NSFileManager defaultManager] isExecutableFileAtPath:[task launchPath]]) {
+            completionHandler(NO);
+            return;
         }
-        
-        if (completionHandler) {
-            completionHandler(YES);
+
+        @try {
+            [task launch];
+
+            if ([delegate respondsToSelector:@selector(pluginTask:didRunCommandPath:arguments:directoryPath:)]) {
+                [delegate pluginTask:task didRunCommandPath:commandPath arguments:arguments directoryPath:directoryPath];
+            }
+            
+            if (completionHandler) {
+                completionHandler(YES);
+            }
+        }
+        @catch (NSException *exception) {
+//            NSLog(@"%@", exception);
+//            NSLog(@"%@", exception.reason);
+            completionHandler(NO);
         }
     });
 
