@@ -7,8 +7,7 @@
 //
 
 #import "WCLPluginTask.h"
-
-
+#import "Web_Console-Swift.h"
 
 @implementation WCLPluginTask
 
@@ -85,27 +84,42 @@
             [task setEnvironment:environmentDictionary];
         }
         
-        if (![[NSFileManager defaultManager] isExecutableFileAtPath:[task launchPath]]) {
-            completionHandler(NO);
-            return;
+        BOOL success = NO;
+        NSError *error;
+        NSString *launchPath = [task launchPath];
+        if ([[NSFileManager defaultManager] isExecutableFileAtPath:launchPath]) {
+            @try {
+                [task launch];
+                success = YES;
+            }
+            @catch (NSException *exception) {
+                error = [NSError launchPathExceptionError:launchPath];
+                completionHandler(NO);
+            }
+        } else {
+            error = [NSError launchPathUnexecutableError:launchPath];
         }
-
-        @try {
-            [task launch];
-
+        
+        if (success) {
             if ([delegate respondsToSelector:@selector(pluginTask:didRunCommandPath:arguments:directoryPath:)]) {
-                [delegate pluginTask:task didRunCommandPath:commandPath arguments:arguments directoryPath:directoryPath];
+                [delegate pluginTask:task didRunCommandPath:commandPath
+                           arguments:arguments
+                       directoryPath:directoryPath];
+            }
+        } else {
+            if (error == nil) {
+                error = [NSError launchPathUnkownError:launchPath];
             }
             
-            if (completionHandler) {
-                completionHandler(YES);
+            if ([delegate respondsToSelector:@selector(pluginTask:didFailToRunCommandPath:error:)]) {
+                [delegate pluginTask:task didFailToRunCommandPath:launchPath error:error];
             }
         }
-        @catch (NSException *exception) {
-//            NSLog(@"%@", exception);
-//            NSLog(@"%@", exception.reason);
-            completionHandler(NO);
+    
+        if (completionHandler) {
+            completionHandler(success);
         }
+
     });
 
     return task;

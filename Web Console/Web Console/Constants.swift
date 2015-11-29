@@ -29,10 +29,6 @@ let userDefaultsFileExtension = "plist"
 
 // MARK: File System
 
-enum FileSystemError: ErrorType {
-    case FileExistsForDirectoryError
-}
-
 enum Directory {
     case Caches
     case ApplicationSupport
