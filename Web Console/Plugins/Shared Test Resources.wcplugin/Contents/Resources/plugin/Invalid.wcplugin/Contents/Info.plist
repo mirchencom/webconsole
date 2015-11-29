@@ -8,5 +8,7 @@
 	<string>invalid path</string>
 	<key>WCUUID</key>
 	<string>CB5617FF-F06C-4137-8C3A-8EDC959F3F44</string>
+	<key>WCDebugModeEnabled</key>
+	<integer>1</integer>
 </dict>
 </plist>

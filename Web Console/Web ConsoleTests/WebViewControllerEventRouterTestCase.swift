@@ -161,7 +161,6 @@ class WebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCase 
 
     override func tearDown() {
         UserDefaultsManager.standardUserDefaults().setBool(false, forKey: debugModeEnabledKey)
-        XCTAssertFalse(splitWebViewController.shouldDebugLog)
         
         // `tearDown` must be called after returning off debugging because the superclass disabled
         // the user defaults mock
