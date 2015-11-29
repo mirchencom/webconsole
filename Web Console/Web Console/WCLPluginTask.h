@@ -12,15 +12,18 @@
 
 @protocol WCLPluginTaskDelegate <NSObject>
 @optional
+#pragma mark Starting & Finishing Tasks
 - (void)pluginTaskWillStart:(nonnull NSTask *)task;
 - (void)pluginTaskDidFinish:(nonnull NSTask *)task;
-- (void)pluginTask:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text;
-- (void)pluginTask:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text;
 - (void)pluginTask:(nonnull NSTask *)task didFailToRunCommandPath:(nonnull NSString *)commandPath
              error:(nonnull NSError *)error;
+#pragma mark Events
+- (void)pluginTask:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text;
+- (void)pluginTask:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text;
 - (void)pluginTask:(nonnull NSTask *)task didRunCommandPath:(nonnull NSString *)commandPath
          arguments:(nullable NSArray<NSString *> *)arguments
      directoryPath:(nullable NSString *)directoryPath;
+#pragma mark Data Source
 - (nullable NSDictionary *)environmentDictionaryForPluginTask:(nonnull NSTask *)task;
 @end
 

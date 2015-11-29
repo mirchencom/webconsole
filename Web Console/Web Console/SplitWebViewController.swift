@@ -13,16 +13,24 @@ import AppKit
 let splitWebViewHeight = CGFloat(150)
 
 @objc protocol SplitWebViewControllerDelegate: class {
+    // MARK: Data Source
     func windowIsVisibleForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Bool
     func windowForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSWindow!
     func logPluginForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Plugin?
+    // Mark: Events
     func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
     func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
-    func splitWebViewController(splitWebViewController: SplitWebViewController, willStartTask task: NSTask)
-    func splitWebViewController(splitWebViewController: SplitWebViewController, didFinishTask task: NSTask)
+    // MARK: Starting & Finishing Tasks
+    func splitWebViewController(splitWebViewController: SplitWebViewController,
+        willStartTask task: NSTask)
+    func splitWebViewController(splitWebViewController: SplitWebViewController,
+        didFinishTask task: NSTask)
+    func splitWebViewController(splitWebViewController: SplitWebViewController,
+        didFailToRunTask task: NSTask,
+        error: NSError)
 }
 
-class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegate, SplitControllerDelegate {
+class SplitWebViewController: NSSplitViewController {
 
     // MARK: Properties
     
@@ -274,21 +282,24 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             }
         }
     }
+}
 
-    // MARK: SplitControllerDelegate
-    
+extension SplitWebViewController: SplitControllerDelegate {
     func savedFrameNameForSplitController(splitController: SplitController) -> String? {
         if let pluginName = defaultWebViewController.plugin?.name {
             return self.dynamicType.savedFrameNameForPluginName(pluginName)
         }
         return nil
     }
-
+    
     class func savedFrameNameForPluginName(pluginName: String) -> String {
         return "Log Frame " + pluginName
     }
+}
+
+extension SplitWebViewController: WCLWebViewControllerDelegate {
     
-    // MARK: WCLWebViewControllerDelegate
+    // MARK: Life Cycle
     
     func webViewControllerViewWillDisappear(webViewController: WCLWebViewController) {
         // No-op only tests use this now
@@ -312,39 +323,55 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             }
         }
     }
-
+    
     func windowForWebViewController(webViewController: WCLWebViewController) -> NSWindow {
         // TODO: Fortify this forced unwrap
         return delegate!.windowForSplitWebViewController(self)!
     }
-
+    
     func webViewControllerWillLoadHTML(webViewController: WCLWebViewController) {
         delegate?.splitWebViewControllerWillLoadHTML(self)
     }
-
+    
     func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
         if webViewController == defaultWebViewController {
             // Don't set the title from the log
             delegate?.splitWebViewController(self, didReceiveTitle: title)
         }
     }
+
+    // MARK: Starting & Finishing Tasks
     
     func webViewController(webViewController: WCLWebViewController, willStartTask task: NSTask) {
         delegate?.splitWebViewController(self, willStartTask: task)
     }
-
+    
     func webViewController(webViewController: WCLWebViewController, didFinishTask task: NSTask) {
         delegate?.splitWebViewController(self, didFinishTask: task)
-
+        
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
             return
         }
-
+        
         if let commandName = task.launchPath?.lastPathComponent {
             let text = "Finished running: \(commandName)"
             logDebugMessage(text)
         }
+    }
+    
+    func webViewController(webViewController: WCLWebViewController,
+        didFailToRunTask task: NSTask,
+        commandPath: String, error: NSError)
+    {
+        delegate?.splitWebViewController(self, didFailToRunTask: task, error: error)
+        
+        if webViewController == logWebViewController {
+            // Don't log messages from the log itself
+            return
+        }
+        
+        logDebugError("Failed to run: \(commandPath.lastPathComponent)\nError: \(error.localizedDescription)")
     }
 
     func webViewController(webViewController: WCLWebViewController,
@@ -356,7 +383,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             // Don't log messages from the log itself
             return
         }
-
+        
         var items = [String]()
         let commandName = commandPath.lastPathComponent
         items.append("Running: \(commandName)")
@@ -364,32 +391,34 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
             let item = arguments.joinWithSeparator(", ")
             items.append("With arguments: \(item)")
         }
-
+        
         if let directoryPath = directoryPath {
             items.append("In directory: \(directoryPath)")
         }
-
+        
         let text = items.joinWithSeparator("\n")
-
+        
         logDebugMessage(text)
     }
+    
+    // MARK: Events
     
     func webViewController(webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
             return
         }
-
+        
         let text = "Read from standard input: \(text)"
         logDebugMessage(text)
     }
-
+    
     func webViewController(webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
             return
         }
-
+        
         let text = "Do JavaScript: \(javaScript)"
         logDebugMessage(text)
     }
@@ -402,7 +431,7 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         
         logDebugMessage(text)
     }
-
+    
     func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
@@ -411,4 +440,5 @@ class SplitWebViewController: NSSplitViewController, WCLWebViewControllerDelegat
         
         logDebugError(text)
     }
+
 }

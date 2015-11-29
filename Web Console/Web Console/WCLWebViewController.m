@@ -243,11 +243,20 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     // Remove the task before calling the delegate, so the delegate gets the
     // expected result when inspecting this classes tasks
     // (e.g., `[thisObject hasTasks]` may be false)
-
     [self.mutableTasks removeObject:task];
 
     if ([self.delegate respondsToSelector:@selector(webViewController:didFinishTask:)]) {
         [self.delegate webViewController:self didFinishTask:task];
+    }
+}
+
+- (void)pluginTask:(nonnull NSTask *)task didFailToRunCommandPath:(nonnull NSString *)commandPath
+             error:(nonnull NSError *)error
+{
+    [self.mutableTasks removeObject:task];
+    
+    if ([self.delegate respondsToSelector:@selector(webViewController:didFailToRunTask:commandPath:error:)]) {
+        [self.delegate webViewController:self didFailToRunTask:task commandPath:commandPath error:error];
     }
 }
 

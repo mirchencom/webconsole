@@ -15,29 +15,37 @@
 @class WCLWebViewController;
 
 @protocol WCLWebViewControllerDelegate <NSObject>
+#pragma mark - Data Source
 - (nonnull NSWindow *)windowForWebViewController:(nonnull WCLWebViewController *)webViewController;
 @optional
+#pragma mark - Life Cycle
 - (void)webViewControllerViewWillAppear:(nonnull WCLWebViewController *)webViewController;
 - (void)webViewControllerViewWillDisappear:(nonnull WCLWebViewController *)webViewController;
-- (void)webViewControllerWillLoadHTML:(nonnull WCLWebViewController *)webViewController;
+#pragma mark - Events
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
           didReceiveTitle:(nonnull NSString *)title;
+- (void)webViewControllerWillLoadHTML:(nonnull WCLWebViewController *)webViewController;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
-            willStartTask:(nonnull NSTask *)task;
-- (void)webViewController:(nonnull WCLWebViewController *)webViewController
-            didFinishTask:(nonnull NSTask *)task;
-- (void)webViewController:(nonnull WCLWebViewController *)webViewController
-        didRunCommandPath:(nonnull NSString *)commandPath
-                arguments:(nullable NSArray<NSString *> *)arguments
-            directoryPath:(nullable NSString *)directoryPath;
-- (void)webViewController:(nonnull WCLWebViewController *)webViewController
- willDoJavaScript:(nonnull NSString *)javaScript;
+         willDoJavaScript:(nonnull NSString *)javaScript;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
  didReadFromStandardInput:(nonnull NSString *)text;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
  didReceiveStandardOutput:(nonnull NSString *)text;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
   didReceiveStandardError:(nonnull NSString *)text;
+#pragma mark - Starting & Finishing Tasks
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController
+            willStartTask:(nonnull NSTask *)task;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController
+            didFinishTask:(nonnull NSTask *)task;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController
+         didFailToRunTask:(nonnull NSTask *)task
+              commandPath:(nonnull NSString *)commandPath
+                    error:(nonnull NSError *)error;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController
+        didRunCommandPath:(nonnull NSString *)commandPath
+                arguments:(nullable NSArray<NSString *> *)arguments
+            directoryPath:(nullable NSString *)directoryPath;
 @end
 
 @interface WCLWebViewController : NSViewController <WCLPluginTaskDelegate, WCLPluginView>

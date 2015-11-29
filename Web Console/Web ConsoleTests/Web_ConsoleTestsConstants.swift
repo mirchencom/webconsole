@@ -34,6 +34,7 @@ let testPrintPluginName = "Print"
 let testCatPluginName = "Cat"
 let testHelloWorldPluginName = "HelloWorld"
 let testLogPluginName = "TestLog"
+let testInvalidPluginName = "Invalid"
 let testLogPluginErrorMessage = "Testing log error"
 let testLogPluginInfoMessage = "Testing log message"
 

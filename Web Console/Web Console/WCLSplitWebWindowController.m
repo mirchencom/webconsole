@@ -324,4 +324,13 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     });
 }
 
+- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController
+              didFailToRunTask:(NSTask *)task
+                         error:(NSError *)error
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]]; // Remove edited dot in close button
+    });
+}
+
 @end

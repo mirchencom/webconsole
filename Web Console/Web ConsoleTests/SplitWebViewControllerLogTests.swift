@@ -90,7 +90,6 @@ class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTes
 
 class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
     
-
     override func tearDown() {
         if splitWebViewController.defaultWebViewController.tasks.count > 0 {
             let pluginTask = splitWebViewController.defaultWebViewController.tasks[0]
@@ -98,6 +97,27 @@ class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
         }
 
         super.tearDown()
+    }
+
+    func testInvalidCommandPath() {
+        
+        let logRunExpectation = expectationWithDescription("For running the log plugin")
+        webViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
+            logRunExpectation.fulfill()
+        }
+        
+        let logReadFromStandardInputExpectation = expectationWithDescription("For error message")
+        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+            logReadFromStandardInputExpectation.fulfill()
+        }
+        
+        let pluginRunExpectation = expectationWithDescription("Plugin run")
+        let plugin = PluginsManager.sharedInstance.pluginWithName(testInvalidPluginName)!
+        splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
+            pluginRunExpectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
     }
     
     func testDebugLog() {
