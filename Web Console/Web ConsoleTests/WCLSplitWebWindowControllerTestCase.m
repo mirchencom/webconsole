@@ -114,8 +114,6 @@
     return splitWebWindowController;
 }
 
-
-
 + (Plugin *)defaultPlugin
 {
     return [[PluginsManager sharedInstance] pluginWithName:kTestCatPluginName];

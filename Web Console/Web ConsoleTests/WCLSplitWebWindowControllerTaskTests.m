@@ -37,7 +37,8 @@
     NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
     XCTAssertEqual([splitWebWindowControllers count], (NSUInteger)1, @"The WCLPlugin should have one WebWindowController.");
     XCTAssertEqual(splitWebWindowController.plugin, plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
-    
+    XCTAssertEqual(splitWebWindowController.window.title, plugin.name);
+
     // Clean up
     [WCLSplitWebWindowControllerTestsHelper blockUntilWebWindowControllerTasksRunAndFinish:splitWebWindowController];
 }
