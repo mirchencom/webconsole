@@ -22,7 +22,7 @@ class WCLPluginTaskTests: XCTestCase {
 
     var didFailToRunCommandPathExpectation: XCTestExpectation?
     
-    func testExample() {
+    func testInvalidCommandPath() {
         let expection = expectationWithDescription("Run task")
         didFailToRunCommandPathExpectation = expectationWithDescription("Did fail to run command path")
         

@@ -136,7 +136,8 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
 
     [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
         if (returnCode != NSAlertFirstButtonReturn) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:WCLSplitWebWindowControllerDidCancelCloseWindowNotification object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:WCLSplitWebWindowControllerDidCancelCloseWindowNotification
+                                                                object:self];
             return;
         }
         
@@ -199,7 +200,9 @@ NSString * const WCLSplitWebWindowControllerDidCancelCloseWindowNotification = @
          baseURL:(nullable NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
-    [self.splitWebViewController loadHTML:HTML baseURL:baseURL completionHandler:completionHandler];
+    [self.splitWebViewController loadHTML:HTML
+                                  baseURL:baseURL
+                        completionHandler:completionHandler];
 }
 
 - (void)readFromStandardInput:(nonnull NSString *)text
@@ -212,6 +215,8 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
   inDirectoryPath:(nullable NSString *)directoryPath
 completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
+    [self.window setTitle:plugin.name];
+
     [self.splitWebViewController runPlugin:plugin
                              withArguments:arguments
                            inDirectoryPath:directoryPath
@@ -300,12 +305,14 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
 }
 
-- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController didReceiveTitle:(NSString *)title
+- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController
+               didReceiveTitle:(NSString *)title
 {
     [self.window setTitle:title];
 }
 
-- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController willStartTask:(NSTask *)task
+- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController
+                 willStartTask:(NSTask *)task
 {
     // `willStartTask` is always called on the main queue
     
@@ -314,13 +321,16 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
         [self showWindow:nil];
     }
     
-    [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]]; // Add edited dot in close button
+    // Add edited dot in close button
+    [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]];
 }
 
-- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController didFinishTask:(NSTask *)task
+- (void)splitWebViewController:(SplitWebViewController *)splitWebViewController
+                 didFinishTask:(NSTask *)task
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]]; // Remove edited dot in close button
+        // Remove edited dot in close button
+        [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]];
     });
 }
 
@@ -329,7 +339,8 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
                          error:(NSError *)error
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]]; // Remove edited dot in close button
+        // Remove edited dot in close button
+        [self.window setDocumentEdited:[self hasTasksRequiringConfirmation]];
     });
 }
 
