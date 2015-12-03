@@ -24,7 +24,8 @@
 #pragma mark - Events
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
           didReceiveTitle:(nonnull NSString *)title;
-- (void)webViewControllerWillLoadHTML:(nonnull WCLWebViewController *)webViewController;
+- (void)webViewController:(nonnull WCLWebViewController *)webViewController
+             willLoadHTML:(nonnull NSString *)HTML;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController
          willDoJavaScript:(nonnull NSString *)javaScript;
 - (void)webViewController:(nonnull WCLWebViewController *)webViewController

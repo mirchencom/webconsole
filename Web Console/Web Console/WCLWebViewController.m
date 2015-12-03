@@ -89,10 +89,12 @@
     }
 }
 
-- (void)loadHTML:(NSString *)HTML baseURL:(NSURL *)baseURL completionHandler:(void (^)(BOOL success))completionHandler {
-    
-    if ([self.delegate respondsToSelector:@selector(webViewControllerWillLoadHTML:)]) {
-        [self.delegate webViewControllerWillLoadHTML:self];
+- (void)loadHTML:(nonnull NSString *)HTML
+         baseURL:(nullable NSURL *)baseURL
+completionHandler:(nullable void (^)(BOOL success))completionHandler
+{
+    if ([self.delegate respondsToSelector:@selector(webViewController:willLoadHTML:)]) {
+        [self.delegate webViewController:self willLoadHTML:HTML];
     }
     
     // Store the completion handler in a property just until we can map it to a request.

@@ -329,10 +329,6 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         return delegate!.windowForSplitWebViewController(self)!
     }
     
-    func webViewControllerWillLoadHTML(webViewController: WCLWebViewController) {
-        delegate?.splitWebViewControllerWillLoadHTML(self)
-    }
-    
     func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
         if webViewController == defaultWebViewController {
             // Don't set the title from the log
@@ -420,6 +416,18 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         }
         
         let text = "Do JavaScript: \(javaScript)"
+        logDebugMessage(text)
+    }
+    
+    func webViewController(webViewController: WCLWebViewController, willLoadHTML HTML: String) {
+        delegate?.splitWebViewControllerWillLoadHTML(self)
+
+        if webViewController == logWebViewController {
+            // Don't log messages from the log itself
+            return
+        }
+
+        let text = "Load HTML: \(HTML)"
         logDebugMessage(text)
     }
     
