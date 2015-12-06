@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# require 'profile'
+
 require "test/unit"
 
 require_relative "lib/window"
