@@ -1,5 +1,5 @@
 //
-//  WCLPluginTaskTests.swift
+//  WCLTaskRunnerTests.swift
 //  Web Console
 //
 //  Created by Roben Kleene on 11/28/15.
@@ -8,8 +8,8 @@
 
 import XCTest
 
-extension WCLPluginTaskTests: WCLPluginTaskDelegate {
-    func pluginTask(task: NSTask, didFailToRunCommandPath commandPath: String, error: NSError) {
+extension WCLTaskRunnerTests: WCLTaskRunnerDelegate {
+    func task(task: NSTask, didFailToRunCommandPath commandPath: String, error: NSError) {
         XCTAssertNotNil(error)
         XCTAssert(error.code == RunCommandPathErrorCode.Unexecutable.rawValue)
         if let didFailToRunCommandPathExpectation = didFailToRunCommandPathExpectation {
@@ -18,7 +18,7 @@ extension WCLPluginTaskTests: WCLPluginTaskDelegate {
     }
 }
 
-class WCLPluginTaskTests: XCTestCase {
+class WCLTaskRunnerTests: XCTestCase {
 
     var didFailToRunCommandPathExpectation: XCTestExpectation?
     
@@ -26,7 +26,7 @@ class WCLPluginTaskTests: XCTestCase {
         let expection = expectationWithDescription("Run task")
         didFailToRunCommandPathExpectation = expectationWithDescription("Did fail to run command path")
         
-        WCLPluginTask.runTaskWithCommandPath("invalid path", withArguments: nil, inDirectoryPath: nil, delegate: self) { (success) -> Void in
+        WCLTaskRunner.runTaskWithCommandPath("invalid path", withArguments: nil, inDirectoryPath: nil, delegate: self) { (success) -> Void in
             XCTAssertFalse(success)
             expection.fulfill()
         }

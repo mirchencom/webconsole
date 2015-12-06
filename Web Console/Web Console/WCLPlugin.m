@@ -13,7 +13,7 @@
 
 #import "NSApplication+AppleScript.h"
 
-#import "WCLPluginTask.h"
+#import "WCLTaskRunner.h"
 
 #import "WCLPlugin+Validation.h"
 #import "Web_Console-Swift.h"

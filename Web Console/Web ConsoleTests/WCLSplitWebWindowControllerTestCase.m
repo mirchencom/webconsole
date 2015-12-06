@@ -11,7 +11,7 @@
 #import "WCLSplitWebWindowControllerTestsHelper.h"
 #import "WCLTaskTestsHelper.h"
 #import "Web_Console-Swift.h"
-#import "WCLPluginTask.h"
+#import "WCLTaskRunner.h"
 #import "WCLWebViewController.h"
 #import "XCTestCase+UserDefaults.h"
 
@@ -96,7 +96,7 @@
     NSAssert(splitWebWindowController.plugin == plugin, @"The WCLSplitWebWindowController's WCLPlugin should equal the WCLPlugin.");
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Running task"];
-    NSTask *runningTask = [WCLPluginTask runTaskWithCommandPath:commandPath
+    NSTask *runningTask = [WCLTaskRunner runTaskWithCommandPath:commandPath
                             withArguments:nil
                           inDirectoryPath:nil
                                  delegate:webViewController

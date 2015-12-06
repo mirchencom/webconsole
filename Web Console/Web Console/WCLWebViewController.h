@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "WCLPluginView.h"
-#import "WCLPluginTask.h"
+#import "WCLTaskRunner.h"
 
 @class Plugin;
 @class WCLWebViewController;
@@ -49,7 +49,7 @@
             directoryPath:(nullable NSString *)directoryPath;
 @end
 
-@interface WCLWebViewController : NSViewController <WCLPluginTaskDelegate, WCLPluginView>
+@interface WCLWebViewController : NSViewController <WCLTaskRunnerDelegate, WCLPluginView>
 - (BOOL)hasTasks;
 @property (nonatomic, strong, readonly, nonnull) NSArray<NSTask *> *tasks;
 @property (nonatomic, strong, readonly, nullable) Plugin *plugin;

@@ -10,7 +10,7 @@
 
 #import <WebKit/WebKit.h>
 
-#import "WCLPluginTask.h"
+#import "WCLTaskRunner.h"
 #import "Web_Console-Swift.h"
 
 @interface WCLWebViewController ()
@@ -123,7 +123,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
     self.plugin = plugin;
 
-    (void)[WCLPluginTask runTaskWithCommandPath:plugin.commandPath
+    (void)[WCLTaskRunner runTaskWithCommandPath:plugin.commandPath
                             withArguments:arguments
                           inDirectoryPath:directoryPath
                                  delegate:self
@@ -226,9 +226,9 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
 }
 
-#pragma mark - WCLPluginTaskDelegate
+#pragma mark - WCLTaskRunnerDelegate
 
-- (void)pluginTaskWillStart:(NSTask *)task
+- (void)taskWillStart:(NSTask *)task
 {
     // Add the task before calling the delegate, so the delegate gets the
     // expected result when inspecting this classes tasks
@@ -240,7 +240,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
 }
 
-- (void)pluginTaskDidFinish:(NSTask *)task
+- (void)taskDidFinish:(NSTask *)task
 {
     // Remove the task before calling the delegate, so the delegate gets the
     // expected result when inspecting this classes tasks
@@ -252,7 +252,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
 }
 
-- (void)pluginTask:(nonnull NSTask *)task didFailToRunCommandPath:(nonnull NSString *)commandPath
+- (void)task:(nonnull NSTask *)task didFailToRunCommandPath:(nonnull NSString *)commandPath
              error:(nonnull NSError *)error
 {
     [self.mutableTasks removeObject:task];
@@ -262,7 +262,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
 }
 
-- (void)pluginTask:(NSTask *)task didRunCommandPath:(NSString *)commandPath
+- (void)task:(NSTask *)task didRunCommandPath:(NSString *)commandPath
          arguments:(NSArray *)arguments
      directoryPath:(NSString *)directoryPath
 {
@@ -271,14 +271,14 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
     }
 }
 
-- (void)pluginTask:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text
+- (void)task:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text
 {
     if ([self.delegate respondsToSelector:@selector(webViewController:didReceiveStandardError:)]) {
         [self.delegate webViewController:self didReceiveStandardError:text];
     }
 }
 
-- (void)pluginTask:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text
+- (void)task:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text
 {
     if ([self.delegate respondsToSelector:@selector(webViewController:didReceiveStandardOutput:)]) {
         [self.delegate webViewController:self didReceiveStandardOutput:text];

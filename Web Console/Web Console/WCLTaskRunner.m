@@ -1,20 +1,20 @@
 //
-//  WCLPluginTask.m
+//  WCLTaskRunner.m
 //  Web Console
 //
 //  Created by Roben Kleene on 1/11/14.
 //  Copyright (c) 2014 Roben Kleene. All rights reserved.
 //
 
-#import "WCLPluginTask.h"
+#import "WCLTaskRunner.h"
 #import "Web_Console-Swift.h"
 
-@implementation WCLPluginTask
+@implementation WCLTaskRunner
 
 + (nonnull NSTask *)runTaskWithCommandPath:(NSString *)commandPath
                  withArguments:(NSArray *)arguments
                inDirectoryPath:(NSString *)directoryPath
-                      delegate:(id<WCLPluginTaskDelegate>)delegate
+                      delegate:(id<WCLTaskRunnerDelegate>)delegate
              completionHandler:(void (^)(BOOL success))completionHandler
 {
     NSTask *task = [[NSTask alloc] init];
@@ -56,8 +56,8 @@
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
         [[task.standardError fileHandleForReading] setReadabilityHandler:nil];
         
-        if ([delegate respondsToSelector:@selector(pluginTaskDidFinish:)]) {
-            [delegate pluginTaskDidFinish:task];
+        if ([delegate respondsToSelector:@selector(taskDidFinish:)]) {
+            [delegate taskDidFinish:task];
         }
         
         // As per NSTask.h, NSTaskDidTerminateNotification is not posted if a termination handler is set, so post it here.
@@ -69,11 +69,11 @@
         // Even if it's already on the main queue, it still needs to be
         // dispatched, or the infinite loop results.
         
-        if ([delegate respondsToSelector:@selector(pluginTaskWillStart:)]) {
+        if ([delegate respondsToSelector:@selector(taskWillStart:)]) {
             // The plugin task delegate must be informed before calculating
             // the environment dictionary in order to assure that the
             // correct window number is returned.
-            [delegate pluginTaskWillStart:task];
+            [delegate taskWillStart:task];
         }
         
         NSDictionary *environmentDictionary;
@@ -101,8 +101,8 @@
         }
         
         if (success) {
-            if ([delegate respondsToSelector:@selector(pluginTask:didRunCommandPath:arguments:directoryPath:)]) {
-                [delegate pluginTask:task didRunCommandPath:commandPath
+            if ([delegate respondsToSelector:@selector(task:didRunCommandPath:arguments:directoryPath:)]) {
+                [delegate task:task didRunCommandPath:commandPath
                            arguments:arguments
                        directoryPath:directoryPath];
             }
@@ -111,8 +111,8 @@
                 error = [NSError commandPathUnkownError:launchPath];
             }
             
-            if ([delegate respondsToSelector:@selector(pluginTask:didFailToRunCommandPath:error:)]) {
-                [delegate pluginTask:task didFailToRunCommandPath:launchPath error:error];
+            if ([delegate respondsToSelector:@selector(task:didFailToRunCommandPath:error:)]) {
+                [delegate task:task didFailToRunCommandPath:launchPath error:error];
             }
         }
     
@@ -125,17 +125,17 @@
     return task;
 }
 
-+ (void)processStandardOutput:(NSString *)text task:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate
++ (void)processStandardOutput:(NSString *)text task:(NSTask *)task delegate:(id<WCLTaskRunnerDelegate>)delegate
 {
-    if ([delegate respondsToSelector:@selector(pluginTask:didReadFromStandardOutput:)]) {
-        [delegate pluginTask:task didReadFromStandardOutput:text];
+    if ([delegate respondsToSelector:@selector(task:didReadFromStandardOutput:)]) {
+        [delegate task:task didReadFromStandardOutput:text];
     }
 }
 
-+ (void)processStandardError:(NSString *)text task:(NSTask *)task delegate:(id<WCLPluginTaskDelegate>)delegate
++ (void)processStandardError:(NSString *)text task:(NSTask *)task delegate:(id<WCLTaskRunnerDelegate>)delegate
 {
-    if ([delegate respondsToSelector:@selector(pluginTask:didReadFromStandardError:)]) {
-        [delegate pluginTask:task didReadFromStandardError:text];
+    if ([delegate respondsToSelector:@selector(task:didReadFromStandardError:)]) {
+        [delegate task:task didReadFromStandardError:text];
     }
 }
 
