@@ -12,10 +12,15 @@ class Window
     @window_id ||= Runner::create_window
   end
 
-  LOADHTMLWITHBASEURL_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "load_html_with_base_url.scpt")
-  def load_html(html)
+  LOADHTMLWITHBASEURL_SCRIPT_1 = File.join(APPLESCRIPT_DIRECTORY, "load_html_with_base_url_1.scpt")
+  def load_html_1(html)
     arguments = [html, @base_url]
-    run_script(LOADHTMLWITHBASEURL_SCRIPT, arguments)
+    run_script(LOADHTMLWITHBASEURL_SCRIPT_1, arguments)
+  end
+
+  LOADHTMLWITHBASEURL_SCRIPT_2 = File.join(APPLESCRIPT_DIRECTORY, "load_html_with_base_url_2.scpt")
+  def load_html_2(html)
+    run_script(LOADHTMLWITHBASEURL_SCRIPT_2, [@base_url], html)
   end
 
   DOJAVASCRIPT_SCRIPT = File.join(APPLESCRIPT_DIRECTORY, "do_javascript.scpt")
@@ -30,9 +35,9 @@ class Window
 
   # Private
 
-  def run_script(script, arguments = [])
+  def run_script(script, arguments = [], input = nil)
     arguments = arguments_with_target(arguments)
-    Runner::run_applescript(script, arguments)
+    Runner::run_applescript(script, arguments, input)
   end
 
   def arguments_with_target(arguments)

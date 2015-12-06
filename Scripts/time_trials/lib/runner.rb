@@ -9,14 +9,18 @@ module Runner
 
   # Private
 
-  def self.run_applescript(script, arguments = nil)
-    command = "osascript #{script.shell_escape}"
-
+  def self.run_applescript(script, arguments = nil, input = nil)
+    shell_arguments = ""
     if arguments
-      command += " " + arguments.compact.map(&:to_s).map(&:shell_escape).join(' ')
+      shell_arguments = arguments.compact.map(&:to_s).map(&:shell_escape).join(' ')
     end
 
-    result = `#{command}`
+    if input
+      ENV["WCINPUT"] = input
+      result = `echo $WCINPUT | osascript 3<&0 #{script.shell_escape} #{shell_arguments}`
+    else
+      result = `osascript #{script.shell_escape} #{shell_arguments}`
+    end
 
     result.chomp!
 
