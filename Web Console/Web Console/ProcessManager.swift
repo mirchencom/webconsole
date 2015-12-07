@@ -28,7 +28,7 @@ class ProcessManager {
     }
     
     let processManagerStore: ProcessManagerStore
-    var identifierToProcess = [NSNumber: AnyObject]()
+    var identifierKeyToProcessInfoValue = [NSNumber: AnyObject]()
 
     convenience init() {
         self.init(processManagerStore: NSUserDefaults.standardUserDefaults())
@@ -40,36 +40,69 @@ class ProcessManager {
     
     func addProcessInfo(processInfo: ProcessInfo) {
         let keyValue = self.dynamicType.keyAndValueForProcessInfo(processInfo)
-        identifierToProcess[keyValue.key] = keyValue.value
+        identifierKeyToProcessInfoValue[keyValue.key] = keyValue.value
         save()
     }
 
     func removeProcessWithIdentifier(identifier: Int) -> ProcessInfo? {
-        let key = self.dynamicType.identifierToKey(identifier)
-        guard let processInfo = identifierToProcess[key] as? ProcessInfo else {
-            return nil
-        }
-
-        identifierToProcess.removeValueForKey(key)
-        save()
-        return processInfo
+        return processInfoForIdentifier(identifier, remove: true)
     }
     
     func processInfoWithIdentifier(identifier: Int) -> ProcessInfo? {
-        let key = self.dynamicType.identifierToKey(identifier)
-        return identifierToProcess[key] as? ProcessInfo
+        return processInfoForIdentifier(identifier, remove: false)
     }
 
     // MARK: Private
     
     private func save() {
-        processManagerStore.setObject(identifierToProcess, forKey: runningProcessesKey)
+        processManagerStore.setObject(identifierKeyToProcessInfoValue, forKey: runningProcessesKey)
     }
 
+    private func processInfoForIdentifier(identifier: Int, remove: Bool) -> ProcessInfo? {
+        guard let processInfoValue = processInfoValueForIdentifier(identifier, remove: remove) else {
+            return nil
+        }
+
+        return self.dynamicType.processInfoForValue(processInfoValue)
+    }
+
+    // MARK: Helper
+    
+    private func processInfoValueForIdentifier(identifier: Int, remove: Bool) -> NSDictionary? {
+        let key = self.dynamicType.identifierToKey(identifier)
+        if remove {
+            let processInfoValue = identifierKeyToProcessInfoValue.removeValueForKey(key) as? NSDictionary
+            save()
+            return processInfoValue
+        } else {
+            return identifierKeyToProcessInfoValue[key] as? NSDictionary
+        }
+    }
+    
     private class func keyAndValueForProcessInfo(processInfo: ProcessInfo) -> (key: NSNumber, value: NSDictionary) {
         let key = identifierToKey(processInfo.identifier)
         let value = valueForProcessInfo(processInfo)
         return (key: key, value: value)
+    }
+    
+    private class func processInfoForValue(dictionary: NSDictionary) -> ProcessInfo? {
+        guard
+            let key = dictionary[ProcessInfoKey.Identifier.key()] as? NSNumber,
+            let commandPath = dictionary[ProcessInfoKey.CommandPath.key()] as? String,
+            let arguments = dictionary[ProcessInfoKey.Arguments.key()] as? [String],
+            let directoryPath = dictionary[ProcessInfoKey.DirectoryPath.key()] as? String,
+            let startTime = dictionary[ProcessInfoKey.StartTime.key()] as? NSDate
+        else {
+            return nil
+        }
+
+        let identifier = keyToIdentifier(key)
+        
+        return ProcessInfo(identifier: identifier,
+            commandPath: commandPath,
+            arguments: arguments,
+            directoryPath: directoryPath,
+            startTime: startTime)
     }
     
     private class func valueForProcessInfo(processInfo: ProcessInfo) -> NSDictionary {
@@ -80,6 +113,10 @@ class ProcessManager {
         dictionary[ProcessInfoKey.DirectoryPath.key()] = processInfo.directoryPath
         dictionary[ProcessInfoKey.StartTime.key()] = processInfo.startTime
         return dictionary
+    }
+    
+    private class func keyToIdentifier(key: NSNumber) -> Int {
+        return Int(key.intValue)
     }
     
     private class func identifierToKey(value: Int) -> NSNumber {
