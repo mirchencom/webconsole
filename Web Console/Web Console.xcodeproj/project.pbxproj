@@ -10,6 +10,8 @@
 		450CD3161A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m */; };
 		450CD3181A8C332100D17CF1 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
 		450CD3191A8C337700D17CF1 /* XCTestCase+SharedTestResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 450CD3151A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m */; };
+		4510A43B1C15015E007BAA2E /* ProcessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510A43A1C15015E007BAA2E /* ProcessInfo.swift */; };
+		4510A43D1C15020F007BAA2E /* ProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510A43C1C15020F007BAA2E /* ProcessManager.swift */; };
 		4511EBA41BBCA23400B1023E /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */; };
 		451D5F8C1780B5450051F974 /* XCTestCase+BundleResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 451D5F8B1780B5450051F974 /* XCTestCase+BundleResources.m */; };
 		4521E9D61A89A1780075D330 /* WCLFilesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521E9D11A89A1780075D330 /* WCLFilesViewController.m */; };
@@ -195,6 +197,8 @@
 /* Begin PBXFileReference section */
 		450CD3141A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+SharedTestResources.h"; sourceTree = "<group>"; };
 		450CD3151A8C27DB00D17CF1 /* XCTestCase+SharedTestResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestCase+SharedTestResources.m"; sourceTree = "<group>"; };
+		4510A43A1C15015E007BAA2E /* ProcessInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessInfo.swift; sourceTree = "<group>"; };
+		4510A43C1C15020F007BAA2E /* ProcessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessManager.swift; sourceTree = "<group>"; };
 		4511EBA31BBCA23400B1023E /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		4518E2B81A886244009A6A66 /* Web ConsoleTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Web ConsoleTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		451D5F8A1780B5450051F974 /* XCTestCase+BundleResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+BundleResources.h"; sourceTree = "<group>"; };
@@ -764,6 +768,8 @@
 				45B375C8179B8347002BCEF6 /* WCLTaskHelper.m */,
 				4574725617DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.h */,
 				4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */,
+				4510A43A1C15015E007BAA2E /* ProcessInfo.swift */,
+				4510A43C1C15020F007BAA2E /* ProcessManager.swift */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -1032,6 +1038,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B0FF401B75805A008EC6EC /* SplitWebViewController.swift in Sources */,
+				4510A43B1C15015E007BAA2E /* ProcessInfo.swift in Sources */,
 				45F6F87E1C0A981D005A81C9 /* NSError+Errors.swift in Sources */,
 				4530B0DC1736E2A6000A52E2 /* main.m in Sources */,
 				4530B0E31736E2A6000A52E2 /* WCLAppDelegate.m in Sources */,
@@ -1057,6 +1064,7 @@
 				4521E9D81A89A1780075D330 /* WCLPluginsViewController.m in Sources */,
 				4521E9D61A89A1780075D330 /* WCLFilesViewController.m in Sources */,
 				45914E411A87E4E600E4BEFA /* PluginsDataController+Paths.swift in Sources */,
+				4510A43D1C15020F007BAA2E /* ProcessManager.swift in Sources */,
 				45914E4A1A87E4E600E4BEFA /* WCLPlugin+PluginsManager.swift in Sources */,
 				4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */,
 				45914E471A87E4E600E4BEFA /* WCLFileExtensionsController.m in Sources */,

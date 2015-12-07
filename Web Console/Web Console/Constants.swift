@@ -12,6 +12,7 @@ let applicationName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as 
 let pluginsDirectoryPathComponent = "PlugIns"
 let defaultNewPluginIdentifierKey = "WCLDefaultNewPluginIdentifier"
 let debugModeEnabledKey = "WCLDebugModeEnabled"
+let runningProcessesKey = "WCLRunningProcesses"
 let showLogMenuItemTitle = "Show Log"
 let hideLogMenuItemTitle = "Hide Log"
 
