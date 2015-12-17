@@ -35,7 +35,7 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
         let split = splits[0]
         let HTML = self.dynamicType.wcl_stringWithContentsOfSharedTestResource(testDataHTMLFilename,
             withExtension: testDataHTMLExtension,
-            subdirectory: sharedTestResourcesHTMLSubdirectory)
+            subdirectory: testDataHTMLSubdirectory)
         let baseURL = self.dynamicType.wcl_sharedTestResourcesURL()
         let HTMLLoadExpectation = expectationWithDescription("HTML Load")
         split.loadHTML(HTML, baseURL: baseURL) { success in
@@ -46,7 +46,7 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
         // Test the title
         let titleJavaScript = self.dynamicType.wcl_stringWithContentsOfSharedTestResource(testDataJavaScriptTitleFilename,
             withExtension: testDataJavaScriptExtension,
-            subdirectory: sharedTestResourcesJavaScriptSubdirectory)
+            subdirectory: testDataJavaScriptSubdirectory)
         var title = split.doJavaScript(titleJavaScript)
         XCTAssertEqual(title, testDataHTMLTitle, "The titles should be equal")
         XCTAssertEqual(splitWebWindowController.window!.title, testDataHTMLTitle, "The titles should be equal")
@@ -57,7 +57,7 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
         let splitTwo = splits[1]
         let HTMLTwo = self.dynamicType.wcl_stringWithContentsOfSharedTestResource(testDataHTMLJQUERYFilename,
             withExtension: testDataHTMLExtension,
-            subdirectory: sharedTestResourcesHTMLSubdirectory)
+            subdirectory: testDataHTMLSubdirectory)
         let HTMLTwoLoadExpectation = expectationWithDescription("HTML Load Two")
         splitTwo.loadHTML(HTMLTwo, baseURL: baseURL) { success in
             HTMLTwoLoadExpectation.fulfill()

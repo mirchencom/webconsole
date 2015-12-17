@@ -118,6 +118,7 @@ class SubprocessFileSystemModifier {
     }
 
     // MARK: Helpers
+
     class func runTask(task: NSTask, handler: (Void -> Void)?) {
         task.standardOutput = NSPipe()
         task.standardOutput!.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in

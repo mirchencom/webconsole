@@ -20,13 +20,18 @@ let testDataHTMLJQUERYFilename = "indexjquery"
 let testDataHTMLJQUERYTitle = "Index JQuery"
 let testDataHTMLTitle = "Index"
 let testDataHTMLExtension = "html"
-let sharedTestResourcesHTMLSubdirectory = "html"
+let testDataHTMLSubdirectory = "html"
 
 // MARK: JavaScript Files
 
 let testDataJavaScriptTitleFilename = "title"
 let testDataJavaScriptExtension = "js"
-let sharedTestResourcesJavaScriptSubdirectory = "js"
+let testDataJavaScriptSubdirectory = "js"
+
+// MARK: Ruby Files
+let testDataRubyFileExtension =  kTestDataRubyExtension
+let testDataSleepTwoSeconds = kTestDataSleepTwoSeconds
+let testDataSubdirectory = "Data"
 
 // MARK: Plugins
 

@@ -55,6 +55,8 @@
 		45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
 		45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
+		4578EAF21C224D300033FC86 /* TaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4578EAF11C224D300033FC86 /* TaskRunner.swift */; };
+		4578EAF31C2254890033FC86 /* XCTestCase+BundleResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9401A89981E0098A47B /* XCTestCase+BundleResources.swift */; };
 		457F795518B0062500D705C8 /* Shared Test Resources.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */; };
 		457F795718B0065E00D705C8 /* Coffee.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F795218B005BF00D705C8 /* Coffee.wcplugin */; };
 		45898BB21785325B00AE365A /* Data in Resources */ = {isa = PBXBuildFile; fileRef = 45898BB11785325B00AE365A /* Data */; };
@@ -122,6 +124,7 @@
 		45B0FF3F1B75805A008EC6EC /* SplitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF391B75805A008EC6EC /* SplitController.swift */; };
 		45B0FF401B75805A008EC6EC /* SplitWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF3A1B75805A008EC6EC /* SplitWebViewController.swift */; };
 		45B0FF461B758458008EC6EC /* WCLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B0FF451B758458008EC6EC /* WCLWebViewController.m */; };
+		45B11D481C1914B00000567E /* ProcessFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B11D471C1914B00000567E /* ProcessFilterTests.swift */; };
 		45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */; };
 		45B375C6179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C5179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m */; };
 		45B375C9179B8347002BCEF6 /* WCLTaskHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B375C8179B8347002BCEF6 /* WCLTaskHelper.m */; };
@@ -265,6 +268,7 @@
 		45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPreferencesWindowControllerTests.m; sourceTree = "<group>"; };
 		4574725617DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLApplicationTerminationHelper.h; sourceTree = "<group>"; };
 		4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLApplicationTerminationHelper.m; sourceTree = "<group>"; };
+		4578EAF11C224D300033FC86 /* TaskRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskRunner.swift; sourceTree = "<group>"; };
 		457F794A18B005BE00D705C8 /* Shared Test Resources.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Shared Test Resources.wcplugin"; sourceTree = "<group>"; };
 		457F794B18B005BE00D705C8 /* Shared Resources.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Shared Resources.wcplugin"; sourceTree = "<group>"; };
 		457F794C18B005BE00D705C8 /* Search.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Search.wcplugin; sourceTree = "<group>"; };
@@ -358,6 +362,7 @@
 		45B0FF3A1B75805A008EC6EC /* SplitWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitWebViewController.swift; sourceTree = "<group>"; };
 		45B0FF441B758458008EC6EC /* WCLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLWebViewController.h; sourceTree = "<group>"; };
 		45B0FF451B758458008EC6EC /* WCLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLWebViewController.m; sourceTree = "<group>"; };
+		45B11D471C1914B00000567E /* ProcessFilterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessFilterTests.swift; sourceTree = "<group>"; };
 		45B375C1179B3CA7002BCEF6 /* NSTask+Termination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTask+Termination.h"; sourceTree = "<group>"; };
 		45B375C2179B3CA7002BCEF6 /* NSTask+Termination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Termination.m"; sourceTree = "<group>"; };
 		45B375C4179B7517002BCEF6 /* WCLUserInterfaceTextHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLUserInterfaceTextHelper.h; sourceTree = "<group>"; };
@@ -513,6 +518,7 @@
 			isa = PBXGroup;
 			children = (
 				45297FF41C166F96007EF81C /* ProcessManagerTests.swift */,
+				45B11D471C1914B00000567E /* ProcessFilterTests.swift */,
 				45A38FA81BE1A8DD00C5DFDF /* PluginInitializationTests.swift */,
 				452A0FD11BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift */,
 				45D8F4441BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift */,
@@ -541,6 +547,7 @@
 				459389F418FB2DAB00E0218E /* Web_ConsoleTests.m */,
 				4518E2B81A886244009A6A66 /* Web ConsoleTests-Bridging-Header.h */,
 				45C3E8CA1BEED7B1000EDB16 /* WCLApplicationTerminationHelper+Tests.h */,
+				4578EAF11C224D300033FC86 /* TaskRunner.swift */,
 				450CD3171A8C32ED00D17CF1 /* Shared */,
 				45898BB11785325B00AE365A /* Data */,
 				4530B0F31736E2A6000A52E2 /* Supporting Files */,
@@ -1098,6 +1105,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4578EAF21C224D300033FC86 /* TaskRunner.swift in Sources */,
 				451D5F8C1780B5450051F974 /* XCTestCase+BundleResources.m in Sources */,
 				452A0FD21BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift in Sources */,
 				452A0FD01BD70AAB00CCCCD5 /* WCLPluginViewTests.swift in Sources */,
@@ -1109,11 +1117,13 @@
 				4596ACAE1B80FF0D00AB8963 /* Web_ConsoleTestsConstants.swift in Sources */,
 				45297FF51C166F96007EF81C /* ProcessManagerTests.swift in Sources */,
 				45A34E2418726470005BF628 /* WCLSplitWebWindowControllerHTMLTests.m in Sources */,
+				4578EAF31C2254890033FC86 /* XCTestCase+BundleResources.swift in Sources */,
 				45F6F87F1C0B9E60005A81C9 /* NSError+Errors.swift in Sources */,
 				459C46321BBE101D0064BA9E /* XCTestCase+UserDefaults.swift in Sources */,
 				4596ACB21B81032900AB8963 /* WCLSplitWebWindowControllerTestCase.m in Sources */,
 				45F6F8791C0A616B005A81C9 /* WCLPluginTaskTests.swift in Sources */,
 				454762B61B810F7600030F1F /* SplitWebViewControllerResizingTests.swift in Sources */,
+				45B11D481C1914B00000567E /* ProcessFilterTests.swift in Sources */,
 				45B81480181483400006AA05 /* WCLTestPluginsManagerPluginTests.m in Sources */,
 				45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */,
 				4562410F1A88683C0047F085 /* WCLSplitWebWindowControllerPluginTests.m in Sources */,
