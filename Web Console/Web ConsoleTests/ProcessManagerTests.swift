@@ -54,6 +54,9 @@ class ProcessManagerTests: XCTestCase {
         let returnedProcessInfo = processManager.processInfoWithIdentifier(processInfo.identifier)!
         XCTAssertNotNil(returnedProcessInfo)
         XCTAssertEqual(processInfo, returnedProcessInfo)
+        
+        let invalidProcessInfo = processManager.processInfoWithIdentifier(999)
+        XCTAssertNil(invalidProcessInfo)
     }
 
 }
