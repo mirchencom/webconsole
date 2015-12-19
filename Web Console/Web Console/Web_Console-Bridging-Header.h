@@ -16,6 +16,7 @@
 #import "WCLSplitWebWindowController.h"
 #import "WCLWebViewController.h"
 #import "NSWindow+AppleScript.h"
+#import "NSTask+Termination.h"
 
 // MARK: For tests
 

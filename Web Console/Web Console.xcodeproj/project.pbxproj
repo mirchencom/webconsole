@@ -134,6 +134,8 @@
 		45B8148318161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m */; };
 		45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */; };
 		45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
+		45D150981C26053600E2A6D5 /* NSError+WCLTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */; };
+		45D150991C26231F00E2A6D5 /* NSError+WCLTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */; };
 		45D8F4451BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F4441BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift */; };
 		45DA852C18B0067000A151F3 /* Shared Resources.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794B18B005BE00D705C8 /* Shared Resources.wcplugin */; };
 		45DA852D18B0067300A151F3 /* Search.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794C18B005BE00D705C8 /* Search.wcplugin */; };
@@ -380,6 +382,7 @@
 		45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTestPluginManagerTestCase.m; sourceTree = "<group>"; };
 		45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLTestPluginManagerTestCase.h; sourceTree = "<group>"; };
 		45C3E8CA1BEED7B1000EDB16 /* WCLApplicationTerminationHelper+Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WCLApplicationTerminationHelper+Tests.h"; sourceTree = "<group>"; };
+		45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+WCLTaskRunner.swift"; sourceTree = "<group>"; };
 		45D8F4441BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitWebViewControllerConfirmationTests.swift; sourceTree = "<group>"; };
 		45DAA2271C23979200D3A2C1 /* ProcessFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessFilter.swift; sourceTree = "<group>"; };
 		45DCDD391B8D2B9D00EE0C1F /* WCLPluginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLPluginView.h; sourceTree = "<group>"; };
@@ -763,6 +766,7 @@
 				45914E371A87E4E600E4BEFA /* WCLPlugin+Validation.m */,
 				45898BB3178532EC00AE365A /* WCLPlugin.h */,
 				45898BB4178532EC00AE365A /* WCLPlugin.m */,
+				45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */,
 				453AD8AD188235CC0039A3A9 /* WCLTaskRunner.h */,
 				453AD8AE188235CC0039A3A9 /* WCLTaskRunner.m */,
 				456241101A8991A70047F085 /* WCLAppleScriptPluginWrapper.h */,
@@ -1096,6 +1100,7 @@
 				4511EBA41BBCA23400B1023E /* UserDefaultsManager.swift in Sources */,
 				45914E3E1A87E4E600E4BEFA /* Plugin+Initialization.swift in Sources */,
 				45914E461A87E4E600E4BEFA /* WCLFileExtension.m in Sources */,
+				45D150981C26053600E2A6D5 /* NSError+WCLTaskRunner.swift in Sources */,
 				45914E4B1A87E4E600E4BEFA /* WCLPlugin+Validation.m in Sources */,
 				45914E431A87E4E600E4BEFA /* PluginsDirectoryManager.swift in Sources */,
 				45914E3F1A87E4E600E4BEFA /* Plugin+Validation.swift in Sources */,
@@ -1112,6 +1117,7 @@
 				4578EAF21C224D300033FC86 /* TaskRunner.swift in Sources */,
 				451D5F8C1780B5450051F974 /* XCTestCase+BundleResources.m in Sources */,
 				452A0FD21BD869FB00CCCCD5 /* SplitWebViewControllerLogTests.swift in Sources */,
+				45D150991C26231F00E2A6D5 /* NSError+WCLTaskRunner.swift in Sources */,
 				452A0FD01BD70AAB00CCCCD5 /* WCLPluginViewTests.swift in Sources */,
 				45A38FA91BE1A8DD00C5DFDF /* PluginInitializationTests.swift in Sources */,
 				45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */,
