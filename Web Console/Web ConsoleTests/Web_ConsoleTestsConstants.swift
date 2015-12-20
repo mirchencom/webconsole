@@ -15,29 +15,32 @@ let testFrame = NSMakeRect(200, 200, 500, 600)
 
 // MARK: HTML Files
 
-let testDataHTMLFilename = "index"
-let testDataHTMLJQUERYFilename = "indexjquery"
-let testDataHTMLJQUERYTitle = "Index JQuery"
-let testDataHTMLTitle = "Index"
-let testDataHTMLExtension = "html"
-let testDataHTMLSubdirectory = "html"
+let testDataHTMLFilename = kTestDataHTMLFilename
+let testDataHTMLJQUERYFilename = kTestDataHTMLJQUERYFilename
+let testDataHTMLJQUERYTitle = kTestDataHTMLJQUERYTitle
+let testDataHTMLTitle = kTestDataHTMLTitle
+let testDataHTMLExtension = kTestDataHTMLExtension
+let testDataHTMLSubdirectory = kSharedTestResourcesHTMLSubdirectory
 
 // MARK: JavaScript Files
 
 let testDataJavaScriptTitleFilename = "title"
-let testDataJavaScriptExtension = "js"
-let testDataJavaScriptSubdirectory = "js"
+let testDataJavaScriptExtension = kTestDataJavaScriptExtension
+let testDataJavaScriptSubdirectory = kSharedTestResourcesJavaScriptSubdirectory
 
 // MARK: Ruby Files
+
 let testDataRubyFileExtension =  kTestDataRubyExtension
 let testDataSleepTwoSeconds = kTestDataSleepTwoSeconds
-let testDataSubdirectory = "Data"
+let testDataSubdirectory = kTestDataSubdirectory
+
+// MARK: Shell Scripts
 
 // MARK: Plugins
 
-let testPrintPluginName = "Print"
-let testCatPluginName = "Cat"
-let testHelloWorldPluginName = "HelloWorld"
+let testPrintPluginName = kTestPrintPluginName
+let testCatPluginName = kTestCatPluginName
+let testHelloWorldPluginName = kTestHelloWorldPluginName
 let testLogPluginName = "TestLog"
 let testInvalidPluginName = "Invalid"
 let testLogPluginErrorMessage = "Testing log error"

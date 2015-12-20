@@ -17,6 +17,7 @@
 #import "WCLWebViewController.h"
 #import "NSWindow+AppleScript.h"
 #import "NSTask+Termination.h"
+#import "WebConsoleConstants.h"
 
 // MARK: For tests
 

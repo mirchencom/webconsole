@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Roben Kleene. All rights reserved.
 //
 
-let pluginFileExtension = "wcplugin"
-let pluginNameKey = "name"
+let pluginFileExtension = kPlugInExtension
+let pluginNameKey = kPluginNameKey
 let applicationName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as String] as! String
 let pluginsDirectoryPathComponent = "PlugIns"
-let defaultNewPluginIdentifierKey = "WCLDefaultNewPluginIdentifier"
-let debugModeEnabledKey = "WCLDebugModeEnabled"
+let defaultNewPluginIdentifierKey = kDefaultNewPluginIdentifierKey
+let debugModeEnabledKey = kDebugModeEnabledKey
 let runningProcessesKey = "WCLRunningProcesses"
 let showLogMenuItemTitle = "Show Log"
 let hideLogMenuItemTitle = "Hide Log"
@@ -24,8 +24,8 @@ let logMessagePrefix = "MESSAGE "
 
 // MARK: User Defaults
 
-let userDefaultsFilename = "UserDefaults"
-let userDefaultsFileExtension = "plist"
+let userDefaultsFilename = kUserDefaultsFilename
+let userDefaultsFileExtension = kUserDefaultsFileExtension
 
 // MARK: File System
 
