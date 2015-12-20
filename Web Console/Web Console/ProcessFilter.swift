@@ -14,24 +14,14 @@ class ProcessFilter {
     class func processesWithIdentifiers(identifiers: [String],
         completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
     {
-        let timeout = 20.0
-        processesWithIdentifiers(identifiers,
-            timeout: timeout,
-            completionHandler: completionHandler)
-    }
-
-    class func processesWithIdentifiers(identifiers: [String],
-        timeout: NSTimeInterval,
-        completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
-    {
         let commandPath = "/bin/ps"
-        let taskResultsCollector = TaskResultsCollector { standardOutput, _, error in
 
+        WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath, withArguments: nil, inDirectoryPath: nil)
+        { (standardOutput, standardError, error) -> Void in
             if let error = error {
                 completionHandler(processes: nil, error: error)
                 return
             }
-            
             guard let standardOutput = standardOutput else {
                 completionHandler(processes: [ProcessInfo](), error: nil)
                 return
@@ -40,13 +30,6 @@ class ProcessFilter {
             let processInfos = processesFromOutput(standardOutput)
             completionHandler(processes: processInfos, error: nil)
         }
-        
-        WCLTaskRunner.runTaskWithCommandPath(commandPath,
-            withArguments: nil,
-            inDirectoryPath: nil,
-            timeout: timeout,
-            delegate: taskResultsCollector,
-            completionHandler: nil)
     }
 
     // MARK: Private

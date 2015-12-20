@@ -13,6 +13,10 @@ let testLogViewHeightTwo = CGFloat(200)
 let testTimeout = 2.0
 let testFrame = NSMakeRect(200, 200, 500, 600)
 
+// MARK: Test Data
+
+let testDataSubdirectory = kTestDataSubdirectory
+
 // MARK: HTML Files
 
 let testDataHTMLFilename = kTestDataHTMLFilename
@@ -32,7 +36,7 @@ let testDataJavaScriptSubdirectory = kSharedTestResourcesJavaScriptSubdirectory
 
 let testDataRubyFileExtension =  kTestDataRubyExtension
 let testDataSleepTwoSeconds = kTestDataSleepTwoSeconds
-let testDataSubdirectory = kTestDataSubdirectory
+let testDataHelloWorld = kTestDataRubyHelloWorld
 
 // MARK: Shell Scripts
 

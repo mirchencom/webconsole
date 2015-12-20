@@ -39,6 +39,34 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
         }
         
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
+
     }
     
+
+    func testStandardOutput() {
+        
+        let commandPath = pathForResource(testDataHelloWorld,
+            ofType: testDataRubyFileExtension,
+            inDirectory: testDataSubdirectory)!
+        
+        let expectation = expectationWithDescription("Task finished")
+        
+        WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+            withArguments: nil,
+            inDirectoryPath: nil)
+        { (standardOutput, standardError, error) -> Void in
+                
+                XCTAssertNil(error)
+                guard let standardOutput = standardOutput else {
+                    XCTAssertTrue(false)
+                    return
+                }
+
+                NSLog("standardOutput = \(standardOutput)")
+
+                expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
 }
