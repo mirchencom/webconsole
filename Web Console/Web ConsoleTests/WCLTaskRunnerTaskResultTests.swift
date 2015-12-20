@@ -56,15 +56,14 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
             inDirectoryPath: nil)
         { (standardOutput, standardError, error) -> Void in
                 
-                XCTAssertNil(error)
-                guard let standardOutput = standardOutput else {
-                    XCTAssertTrue(false)
-                    return
-                }
-
-                NSLog("standardOutput = \(standardOutput)")
-
-                expectation.fulfill()
+            XCTAssertNil(error)
+            guard let standardOutput = standardOutput else {
+                XCTAssertTrue(false)
+                return
+            }
+            
+            XCTAssertTrue(standardOutput.hasPrefix("Hello World"))
+            expectation.fulfill()
         }
         
         waitForExpectationsWithTimeout(testTimeout, handler: nil)

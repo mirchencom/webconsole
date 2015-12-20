@@ -68,13 +68,25 @@ class TaskResultsCollector: NSObject {
     
     private func appendToStandardOutput(text: String) {
         if standardOutput == nil {
-            standardOutput = String()
+            standardOutput = String(text)
+        }
+
+        if var standardOutput = standardOutput {
+            standardOutput += text
+        } else {
+            assert(false)
         }
     }
     
     private func appendToStandardError(text: String) {
         if standardError == nil {
             standardError = String()
+        }
+
+        if var standardError = standardError {
+            standardError += text
+        } else {
+            assert(false)
         }
     }
     
