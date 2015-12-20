@@ -10,6 +10,8 @@ import XCTest
 
 @testable import Web_Console
 
+// TODO: Test if no valid process is found, that nil is returned
+
 class ProcessFilterTests: XCTestCase {
     
     func testProcessFilter() {
