@@ -36,6 +36,9 @@ let testDataSubdirectory = kTestDataSubdirectory
 
 // MARK: Shell Scripts
 
+let testDataShellScriptCatName = kTestDataCat
+let testDataShellScriptExtension = kTestDataShellScriptExtension
+
 // MARK: Plugins
 
 let testPrintPluginName = kTestPrintPluginName

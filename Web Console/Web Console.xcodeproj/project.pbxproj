@@ -136,7 +136,7 @@
 		45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
 		45D150981C26053600E2A6D5 /* NSError+WCLTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */; };
 		45D150991C26231F00E2A6D5 /* NSError+WCLTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */; };
-		45D1509B1C27288F00E2A6D5 /* WCLTastRunner+TaskResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1509A1C27288F00E2A6D5 /* WCLTastRunner+TaskResult.swift */; };
+		45D1509B1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1509A1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift */; };
 		45D1509D1C2728C400E2A6D5 /* WCLTaskRunnerTaskResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1509C1C2728C400E2A6D5 /* WCLTaskRunnerTaskResultTests.swift */; };
 		45D8F4451BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8F4441BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift */; };
 		45DA852C18B0067000A151F3 /* Shared Resources.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 457F794B18B005BE00D705C8 /* Shared Resources.wcplugin */; };
@@ -385,7 +385,7 @@
 		45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLTestPluginManagerTestCase.h; sourceTree = "<group>"; };
 		45C3E8CA1BEED7B1000EDB16 /* WCLApplicationTerminationHelper+Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WCLApplicationTerminationHelper+Tests.h"; sourceTree = "<group>"; };
 		45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+WCLTaskRunner.swift"; sourceTree = "<group>"; };
-		45D1509A1C27288F00E2A6D5 /* WCLTastRunner+TaskResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WCLTastRunner+TaskResult.swift"; sourceTree = "<group>"; };
+		45D1509A1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WCLTaskRunner+TaskResult.swift"; sourceTree = "<group>"; };
 		45D1509C1C2728C400E2A6D5 /* WCLTaskRunnerTaskResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCLTaskRunnerTaskResultTests.swift; sourceTree = "<group>"; };
 		45D8F4441BEEBAB9004C0318 /* SplitWebViewControllerConfirmationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitWebViewControllerConfirmationTests.swift; sourceTree = "<group>"; };
 		45DAA2271C23979200D3A2C1 /* ProcessFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessFilter.swift; sourceTree = "<group>"; };
@@ -792,7 +792,7 @@
 				4510A43A1C15015E007BAA2E /* ProcessInfo.swift */,
 				4510A43C1C15020F007BAA2E /* ProcessManager.swift */,
 				45DAA2271C23979200D3A2C1 /* ProcessFilter.swift */,
-				45D1509A1C27288F00E2A6D5 /* WCLTastRunner+TaskResult.swift */,
+				45D1509A1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -1090,7 +1090,7 @@
 				45914E411A87E4E600E4BEFA /* PluginsDataController+Paths.swift in Sources */,
 				4510A43D1C15020F007BAA2E /* ProcessManager.swift in Sources */,
 				45914E4A1A87E4E600E4BEFA /* WCLPlugin+PluginsManager.swift in Sources */,
-				45D1509B1C27288F00E2A6D5 /* WCLTastRunner+TaskResult.swift in Sources */,
+				45D1509B1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift in Sources */,
 				4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */,
 				45914E471A87E4E600E4BEFA /* WCLFileExtensionsController.m in Sources */,
 				45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */,
