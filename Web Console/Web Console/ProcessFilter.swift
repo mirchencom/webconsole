@@ -15,18 +15,25 @@ class ProcessFilter {
         completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
     {
         let commandPath = "/bin/ps"
-
-        WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath, withArguments: nil, inDirectoryPath: nil)
+        let arguments = ["aux"]
+        
+        WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+            withArguments: arguments,
+            inDirectoryPath: nil)
         { (standardOutput, standardError, error) -> Void in
+
             if let error = error {
                 completionHandler(processes: nil, error: error)
                 return
             }
+
             guard let standardOutput = standardOutput else {
                 completionHandler(processes: [ProcessInfo](), error: nil)
                 return
             }
 
+            print("standardOutput = \(standardOutput)")
+            
             let processInfos = processesFromOutput(standardOutput)
             completionHandler(processes: processInfos, error: nil)
         }

@@ -10,23 +10,33 @@ import XCTest
 
 @testable import Web_Console
 
-// TODO: Test if no valid process is found, that nil is returned
+// TODO: Test if no valid process is found, than an empty array is returned
 
 class ProcessFilterTests: XCTestCase {
     
-    func testProcessFilter() {
+//    func testWithProcess() {
+//
+//        let commandPath = pathForResource(testDataSleepTwoSeconds,
+//            ofType: testDataRubyFileExtension,
+//            inDirectory: testDataSubdirectory)!
+//        
+//        let expectation = expectationWithDescription("Task ran")
+//        TaskRunner.runLaunchPath(commandPath) {
+//            NSLog("Done")
+//            expectation.fulfill()
+//        }
+//
+//        waitForExpectationsWithTimeout(5.0, handler: nil)
+//    }
 
-        let commandPath = pathForResource(testDataSleepTwoSeconds,
-            ofType: testDataRubyFileExtension,
-            inDirectory: testDataSubdirectory)!
-        
-        let expectation = expectationWithDescription("Task ran")
-        TaskRunner.runLaunchPath(commandPath) {
-            NSLog("Done")
+    func testWithoutProcess() {
+
+        let expectation = expectationWithDescription("Process filter finished")
+        ProcessFilter.processesWithIdentifiers([String]()) { (processes, error) -> Void in
             expectation.fulfill()
         }
-
-        waitForExpectationsWithTimeout(5.0, handler: nil)
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
     }
 
+    
 }

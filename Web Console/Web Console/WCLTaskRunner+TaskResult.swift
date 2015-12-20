@@ -46,6 +46,11 @@ extension TaskResultsCollector: WCLTaskRunnerDelegate {
         let error = errorForTask(task)
         completionHandler(standardOutput: standardOutput, standardError: standardError, error: error)
     }
+
+    func task(task: NSTask, didFailToRunCommandPath commandPath: String, error: NSError) {
+        assert(!task.running)
+        completionHandler(standardOutput: standardOutput, standardError: standardError, error: error)
+    }
     
     func task(task: NSTask, didReadFromStandardError text: String) {
         appendToStandardError(text)
@@ -67,6 +72,7 @@ class TaskResultsCollector: NSObject {
     }
     
     private func appendToStandardOutput(text: String) {
+        
         if standardOutput == nil {
             standardOutput = String(text)
         }
@@ -134,8 +140,8 @@ extension WCLTaskRunner {
         }
         
         return runTaskWithCommandPath(commandPath,
-            withArguments: nil,
-            inDirectoryPath: nil,
+            withArguments: arguments,
+            inDirectoryPath: directoryPath,
             timeout: timeout,
             delegate: taskResultsCollector,
             completionHandler: nil)
