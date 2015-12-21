@@ -33,6 +33,8 @@ class ProcessFilterTests: XCTestCase {
 
         let expectation = expectationWithDescription("Process filter finished")
         ProcessFilter.processesWithIdentifiers([String]()) { (processes, error) -> Void in
+            XCTAssertNil(error)
+            XCTAssertEqual(processes!.count, 0)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(testTimeout, handler: nil)

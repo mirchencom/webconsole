@@ -30,20 +30,32 @@
         task.currentDirectoryPath = directoryPath;
     }
 
+
+    // File handles and the termination handler callback on different queues
+    // processing those events serial assures that events are processed in the
+    // expected order: File handles are processed before the task finishes.
+    dispatch_queue_t callbackQueue = dispatch_queue_create("com.1percenter.WebConsoleTaskCallbackQueue", DISPATCH_QUEUE_SERIAL);
+    
     // Standard Output
     task.standardOutput = [NSPipe pipe];
     [[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
-        NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        [self processStandardOutput:text task:task delegate:delegate];
+        
+        dispatch_async(callbackQueue, ^{
+            NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [self processStandardOutput:text task:task delegate:delegate];
+        });
     }];
     
     // Standard Error
     task.standardError = [NSPipe pipe];
     [[task.standardError fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
         NSData *data = [file availableData];
-        NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        [self processStandardError:text task:task delegate:delegate];
+        
+        dispatch_async(callbackQueue, ^{
+            NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [self processStandardError:text task:task delegate:delegate];
+        });
     }];
     
     // Standard Input
@@ -51,17 +63,18 @@
     
     // Termination handler
     [task setTerminationHandler:^(NSTask *task) {
-
-        // Standard Input, Output & Error
         [[task.standardOutput fileHandleForReading] setReadabilityHandler:nil];
         [[task.standardError fileHandleForReading] setReadabilityHandler:nil];
         
-        if ([delegate respondsToSelector:@selector(taskDidFinish:)]) {
-            [delegate taskDidFinish:task];
-        }
-        
-        // As per NSTask.h, NSTaskDidTerminateNotification is not posted if a termination handler is set, so post it here.
-        [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
+        dispatch_async(callbackQueue, ^{
+            // Standard Input, Output & Error
+            if ([delegate respondsToSelector:@selector(taskDidFinish:)]) {
+                [delegate taskDidFinish:task];
+            }
+            
+            // As per NSTask.h, NSTaskDidTerminateNotification is not posted if a termination handler is set, so post it here.
+            [[NSNotificationCenter defaultCenter] postNotificationName:NSTaskDidTerminateNotification object:task];
+        });
     }];
 
     dispatch_async(dispatch_get_main_queue(), ^{

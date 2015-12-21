@@ -10,23 +10,48 @@ import Foundation
 
 extension NSError {
     
-    class func taskTerminatedUncaughtSignalError(launchPath: String?, standardError: String?) -> NSError {
+    class func taskTerminatedUncaughtSignalError(launchPath: String?,
+        arguments: [String]?,
+        directoryPath: String?,
+        standardError: String?) -> NSError
+    {
         var description = "An uncaught signal error occurred"
         if let launchPath = launchPath {
             description += " running launch path: \(launchPath)"
+        }
+
+        if let arguments = arguments {
+            description += ", with arguments: \(arguments)"
+        }
+
+        if let directoryPath = directoryPath {
+            description += ", in directory path: \(directoryPath)"
         }
         
         if let standardError = standardError {
             description += ", standardError: \(standardError)"
         }
-        
+
         return errorWithDescription(description)
     }
     
-    class func taskTerminatedNonzeroExitCode(launchPath: String?, exitCode: Int32, standardError: String?) -> NSError {
+    class func taskTerminatedNonzeroExitCode(launchPath: String?,
+        exitCode: Int32,
+        arguments: [String]?,
+        directoryPath: String?,
+        standardError: String?) -> NSError
+    {
         var description = "Terminated with a nonzero exit status \(exitCode)"
         if let launchPath = launchPath {
             description += " running launch path: \(launchPath)"
+        }
+        
+        if let arguments = arguments {
+            description += ", with arguments: \(arguments)"
+        }
+        
+        if let directoryPath = directoryPath {
+            description += ", in directory path: \(directoryPath)"
         }
         
         if let standardError = standardError {
@@ -72,28 +97,19 @@ class TaskResultsCollector: NSObject {
     }
     
     private func appendToStandardOutput(text: String) {
-        
         if standardOutput == nil {
-            standardOutput = String(text)
+            standardOutput = String()
         }
 
-        if var standardOutput = standardOutput {
-            standardOutput += text
-        } else {
-            assert(false)
-        }
+        standardOutput? += text
     }
     
     private func appendToStandardError(text: String) {
         if standardError == nil {
             standardError = String()
         }
-
-        if var standardError = standardError {
-            standardError += text
-        } else {
-            assert(false)
-        }
+        
+        standardError? += text
     }
     
     private func errorForTask(task: NSTask) -> NSError? {
@@ -103,10 +119,17 @@ class TaskResultsCollector: NSObject {
         }
         
         if task.terminationReason == .UncaughtSignal {
-            return NSError.taskTerminatedUncaughtSignalError(task.launchPath, standardError: standardError)
+            return NSError.taskTerminatedUncaughtSignalError(task.launchPath,
+                arguments: task.arguments,
+                directoryPath: task.currentDirectoryPath,
+                standardError: standardError)
         }
         
-        return NSError.taskTerminatedNonzeroExitCode(task.launchPath, exitCode: task.terminationStatus, standardError: standardError)
+        return NSError.taskTerminatedNonzeroExitCode(task.launchPath, exitCode:
+            task.terminationStatus,
+            arguments: task.arguments,
+            directoryPath: task.currentDirectoryPath,
+            standardError: standardError)
     }
     
 }

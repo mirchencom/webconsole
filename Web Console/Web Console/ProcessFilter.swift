@@ -31,8 +31,6 @@ class ProcessFilter {
                 completionHandler(processes: [ProcessInfo](), error: nil)
                 return
             }
-
-            print("standardOutput = \(standardOutput)")
             
             let processInfos = processesFromOutput(standardOutput)
             completionHandler(processes: processInfos, error: nil)
@@ -46,6 +44,17 @@ class ProcessFilter {
         // TODO: Implement
 
         // TODO: Return empty array if output is empty
+
+//        print("output = \(output)")
+
+//        let filePath = NSTemporaryDirectory().stringByAppendingPathComponent("web_console_output.txt")
+//        NSLog("filePath = \(filePath)")
+//        do {
+//            try output.writeToFile(filePath, atomically: true, encoding: NSUTF8StringEncoding)
+//        } catch {
+//            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+//        }
+        
         
         return [ProcessInfo]()
     }

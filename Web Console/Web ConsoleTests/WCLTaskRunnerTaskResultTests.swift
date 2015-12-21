@@ -42,7 +42,6 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
 
     }
     
-
     func testStandardOutput() {
         
         let commandPath = pathForResource(testDataHelloWorld,
@@ -68,4 +67,38 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
         
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
     }
+
+    func testStandardLongFile() {
+        
+        let testDataPath = pathForResource(testDataTextPSOutput,
+            ofType: testDataTextExtension,
+            inDirectory: testDataSubdirectory)!
+        
+        let expectation = expectationWithDescription("Task finished")
+        
+        WCLTaskRunner.runTaskUntilFinishedWithCommandPath("/bin/cat",
+
+            withArguments: [testDataPath],
+            inDirectoryPath: nil)
+            { (standardOutput, standardError, error) -> Void in
+                
+                XCTAssertNil(error)
+                guard let standardOutput = standardOutput else {
+                    XCTAssertTrue(false)
+                    return
+                }
+
+                do {
+                    let testData = try NSString(contentsOfFile: testDataPath, encoding: NSUTF8StringEncoding)
+                    XCTAssertTrue(testData.isEqualToString(standardOutput))
+                } catch let error as NSError {
+                    XCTAssertNil(error)
+                }
+
+                expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
+
 }

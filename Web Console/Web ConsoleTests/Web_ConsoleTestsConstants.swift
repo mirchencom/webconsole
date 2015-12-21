@@ -17,6 +17,11 @@ let testFrame = NSMakeRect(200, 200, 500, 600)
 
 let testDataSubdirectory = kTestDataSubdirectory
 
+// MARK: Text Files
+
+let testDataTextPSOutput = "ps_output"
+let testDataTextExtension = "txt"
+
 // MARK: HTML Files
 
 let testDataHTMLFilename = kTestDataHTMLFilename
