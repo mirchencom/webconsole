@@ -12,6 +12,7 @@
 #import "Web_ConsoleTestsConstants.h"
 #import "XCTestCase+BundleResources.h"
 #import "XCTestCase+SharedTestResources.h"
+#import "XCTestCase+UserDefaults.h"
 #import "Web_Console-Swift.h"
 
 
@@ -22,6 +23,18 @@
 @implementation WCLSplitWebWindowControllerHTMLTests
 
 #pragma mark - HTML & JavaScript
+
+- (void)setUp
+{
+    [super setUp];
+    [self setUpMockUserDefaults];
+}
+
+- (void)tearDown
+{
+    [self tearDownMockUserDefaults];
+    [super tearDown];
+}
 
 - (void)testLoadHTMLWithBaseURL {
     NSURL *fileURL = [[self class] wcl_URLForSharedTestResource:kTestDataHTMLJQUERYFilename
@@ -143,29 +156,23 @@
                                                     withExtension:kTestDataHTMLExtension
                                                      subdirectory:kSharedTestResourcesHTMLSubdirectory];
     
+    XCTestExpectation *expectation1 = [self expectationWithDescription:@"Completion handler 1 ran"];
     WCLSplitWebWindowController *splitWebWindowController1 = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
-    __block BOOL firstCompletionHandlerRan = NO;
     [splitWebWindowController1 loadHTML:HTML baseURL:nil completionHandler:^(BOOL success) {
-        firstCompletionHandlerRan = YES;
+        [expectation1 fulfill];
         XCTAssertTrue(success, @"The first load should have succeeded.");
     }];
     
+
+    XCTestExpectation *expectation2 = [self expectationWithDescription:@"Completion handler 2 ran"];
     WCLSplitWebWindowController *splitWebWindowController2 = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
-    __block BOOL secondCompletionHandlerRan = NO;
     [splitWebWindowController2 loadHTML:HTML baseURL:nil completionHandler:^(BOOL success) {
-        secondCompletionHandlerRan = YES;
+        [expectation2 fulfill];
         XCTAssertTrue(success, @"The second load should have succeeded.");
     }];
     
-    NSDate *loopUntil = [NSDate dateWithTimeIntervalSinceNow:kTestTimeoutInterval];
-    while ([loopUntil timeIntervalSinceNow] > 0) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:loopUntil];
-        if (firstCompletionHandlerRan && secondCompletionHandlerRan) break;
-    }
-	
-    XCTAssertTrue(firstCompletionHandlerRan, @"The first completion handler should have run.");
-    XCTAssertTrue(secondCompletionHandlerRan, @"The second completion handler should have run.");
-    
+    [self waitForExpectationsWithTimeout:kTestTimeoutInterval handler:nil];
+
     NSUInteger splitWebWindowControllersCount = [[[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllers] count];
     XCTAssertTrue(splitWebWindowControllersCount == 2, @"There should be two WCLSplitWebWindowControllers. %lu", splitWebWindowControllersCount);
 }

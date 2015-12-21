@@ -91,21 +91,23 @@ class SplitWebViewController: NSSplitViewController {
     }()
     
     func logDebugError(text: String) {
-        print("Debug Error: \(text)")
-        
         if !shouldDebugLog {
             return
         }
+
+        print("Debug Error: \(text)")
+
         let preparedText = prepareLog(text, prefix: logErrorPrefix)
         logReadFromStandardInput(preparedText)
     }
 
     func logDebugMessage(text: String) {
-        print("Debug Message: \(text)")
-
         if !shouldDebugLog {
             return
         }
+
+        print("Debug Message: \(text)")
+
         let preparedText = prepareLog(text, prefix: logMessagePrefix)
         logReadFromStandardInput(preparedText)
     }
