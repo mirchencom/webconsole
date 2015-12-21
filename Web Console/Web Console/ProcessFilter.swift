@@ -15,8 +15,15 @@ class ProcessFilter {
         completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
     {
         let commandPath = "/bin/ps"
-        let arguments = ["aux"]
-        
+        let arguments = ["-axww", "-o pid=,lstart=,args="]
+        // a: All users
+        // x: Not attached to terminal
+        // ww: Don't truncate command
+        // o: Change format
+        // pid: Process ID
+        // lstart: Start time
+        // args: Command & Arguments
+        // = Means don't display header for this column
         WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
             withArguments: arguments,
             inDirectoryPath: nil)
@@ -45,7 +52,7 @@ class ProcessFilter {
 
         // TODO: Return empty array if output is empty
 
-//        print("output = \(output)")
+        print("output = \(output)")
 
 //        let filePath = NSTemporaryDirectory().stringByAppendingPathComponent("web_console_output.txt")
 //        NSLog("filePath = \(filePath)")
