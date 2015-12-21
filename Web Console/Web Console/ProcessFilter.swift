@@ -61,9 +61,27 @@ class ProcessFilter {
 //        } catch {
 //            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
 //        }
-        
-        
+
+        let lines = output.componentsSeparatedByString("\n")
+        for line in lines {
+            let processInfo = processFromLine(line)
+        }
+                
         return [ProcessInfo]()
     }
 
+    private class func processFromLine(line: String) -> ProcessInfo? {
+//        let PIDStartIndex: String.Index = line.startIndex.advancedBy(5)
+//        let rawPID = line.substringToIndex(PIDStartIndex)
+//        
+//        let dateStartIndex: String.Index = line.startIndex.advancedBy(6)
+//        let dateEndIndex: String.Index = line.startIndex.advancedBy(30)
+//        let rawStartDate = line.substringWithRange(Range(start: dateStartIndex, end: dateEndIndex))
+//        
+//        let commandAndArguementsStartIndex: String.Index = line.startIndex.advancedBy(35)
+//        let rawCommandAndArguements = line.substringFromIndex(commandAndArguementsStartIndex)
+
+        return nil
+    }
+    
 }

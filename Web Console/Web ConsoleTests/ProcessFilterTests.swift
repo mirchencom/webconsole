@@ -13,6 +13,8 @@ import XCTest
 // TODO: Test if no valid process is found, than an empty array is returned
 
 class ProcessFilterTests: XCTestCase {
+
+    // TODO: Start with one process, but we should do a test with several as well
     
 //    func testWithProcess() {
 //
