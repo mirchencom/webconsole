@@ -1,0 +1,317 @@
+USER              PID  %CPU %MEM      VSZ    RSS   TT  STAT STARTED      TIME COMMAND
+robenkleene       614   3.2  0.6  2845704 103536   ??  R    Wed02AM   1:47.64 /Applications/Utilities/Terminal.app/Contents/MacOS/Terminal -psn_0_163880
+_windowserver     197   2.0  1.7  5202812 287060   ??  Ss   Wed02AM 114:04.87 /System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Resources/WindowServer -daemon
+_coreaudiod       162   1.9  0.1  2547296  19952   ??  Ss   Wed02AM   8:03.18 /usr/sbin/coreaudiod
+robenkleene     16438   1.1  4.0  4476212 679476   ??  S     9:35AM   2:19.80 /Applications/iTunes.app/Contents/MacOS/iTunes
+root              103   0.3  0.0  2519332   6124   ??  Ss   Wed02AM  19:54.01 /usr/libexec/hidd
+robenkleene       643   0.3  0.0  2503432   6684 s000  S    Wed02AM   0:06.37 -fish
+robenkleene      2659   0.1  0.1  2548272   8892   ??  S    Fri12AM   0:14.35 /System/Library/PrivateFrameworks/ViewBridge.framework/Versions/A/XPCServices/ViewBridgeAuxiliary.xpc/Contents/MacOS/ViewBridgeAuxiliary
+robenkleene     21040   0.0  0.5  3811596  85508   ??  Ss    1:39PM   0:00.99 /System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.WebContent.xpc/Contents/MacOS/com.apple.WebKit.WebContent
+robenkleene     20931   0.0  2.5  3330072 414228   ??  Ss    1:33PM   0:12.76 /Applications/Xcode.app/Contents/XPCServices/com.apple.dt.Xcode.Playground.xpc/Contents/MacOS/com.apple.dt.Xcode.Playground
+robenkleene     20882   0.0  0.1  2542072   9408   ??  S     1:31PM   0:00.14 /System/Library/PrivateFrameworks/AOSKit.framework/Versions/A/XPCServices/com.apple.iCloudHelper.xpc/Contents/MacOS/com.apple.iCloudHelper
+robenkleene     20879   0.0  0.5  3795500  80840   ??  Ss    1:31PM   0:01.20 /System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.WebContent.xpc/Contents/MacOS/com.apple.WebKit.WebContent
+robenkleene     20875   0.0  0.7  3872756 111460   ??  Ss    1:31PM   0:02.25 /System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.WebContent.xpc/Contents/MacOS/com.apple.WebKit.WebContent
+robenkleene     20817   0.0  0.1  2544856  17444   ??  S     1:15PM   0:00.10 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker-mail -c MDSImporterWorker -m com.apple.mdworker.mail
+robenkleene     20816   0.0  0.1  2544880  18012   ??  S     1:15PM   0:00.12 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker-mail -c MDSImporterWorker -m com.apple.mdworker.mail
+robenkleene     20815   0.0  0.1  2544856  17488   ??  S     1:15PM   0:00.11 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker-mail -c MDSImporterWorker -m com.apple.mdworker.mail
+robenkleene     20772   0.0  0.0  2542308   4300   ??  S     1:04PM   0:00.02 /System/Library/CoreServices/AirPort Base Station Agent.app/Contents/MacOS/AirPort Base Station Agent --launchd
+_netbios        20770   0.0  0.0  2517020   7060   ??  SNs   1:04PM   0:00.04 /usr/sbin/netbiosd
+_spotlight      20749   0.0  0.1  2554596  14800   ??  S    12:42PM   0:10.88 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared
+_spotlight      20675   0.0  0.1  2554596  14656   ??  S    11:48AM   0:21.69 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared
+_spotlight      20655   0.0  0.1  2554596  14284   ??  S    11:45AM   0:01.04 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared
+robenkleene     19919   0.0  0.1  2579332  13320   ??  S    11:28AM   0:00.19 /Users/robenkleene/Library/Developer/Xcode/DerivedData/Web_Console-gyxlttdpyzaetaeqkrrgqrygnbst/Build/Products/Release/Web Console.app/Contents/MacOS/Web Console
+robenkleene     19540   0.0  0.4  3737956  63372   ??  S    11:21AM   0:31.23 /Users/robenkleene/Applications/Kaleidoscope.app/Contents/MacOS/Kaleidoscope
+robenkleene     19514   0.0  0.1  2571212  16512   ??  Us   11:20AM   0:00.16 /System/Library/Frameworks/AppKit.framework/Versions/C/XPCServices/WorkflowServiceRunner.xpc/Contents/MacOS/WorkflowServiceRunner
+robenkleene     19502   0.0  0.0  2542516   5784   ??  Ss   11:20AM   0:00.09 /Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/XPCServices/com.apple.dt.Xcode.AttachToXPCService.xpc/Contents/MacOS/com.apple.dt.Xcode.AttachToXPCService
+robenkleene     19498   0.0  0.1  2553772  22964   ??  S    11:20AM   0:00.80 /Applications/Xcode.app/Contents/Developer/Library/Xcode/Tools/XcodeDeviceMonitor --bonjour 4579393D-6721-4DE5-8E7A-86CD177C91F3
+robenkleene     19413   0.0  0.0  2494320   7936   ??  Ss   11:20AM   0:00.06 /Applications/Xcode.app/Contents/SharedFrameworks/DVTSourceControl.framework/Versions/A/XPCServices/com.apple.dt.Xcode.sourcecontrol.WorkingCopyScanner.xpc/Contents/MacOS/com.apple.dt.Xcode.sourcecontrol.WorkingCopyScanner
+robenkleene     19410   0.0  4.2  3682200 709684   ??  Ss   11:20AM   1:01.08 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/sourcekitd.framework/Versions/A/XPCServices/SourceKitService.xpc/Contents/MacOS/SourceKitService
+robenkleene     19407   0.0  0.1  2611416  10408   ??  S    11:20AM   0:00.04 /Applications/Xcode.app/Contents/SharedFrameworks/GPUTools.framework/Resources/GPUToolsAgent.app/Contents/MacOS/GPUToolsAgent
+robenkleene     19401   0.0  0.1  2543412  10600   ??  Ss   11:20AM   0:00.03 /Applications/Xcode.app/Contents/SharedFrameworks/DVTSourceControl.framework/Versions/A/XPCServices/com.apple.dt.Xcode.sourcecontrol.SSHHelper.xpc/Contents/MacOS/com.apple.dt.Xcode.sourcecontrol.SSHHelper
+robenkleene     19396   0.0  9.5  5583340 1587316   ??  U    11:19AM   4:53.14 /Applications/Xcode.app/Contents/MacOS/Xcode
+robenkleene     19393   0.0  0.0  2525380   6708   ??  S    11:19AM   0:00.02 /System/Library/PrivateFrameworks/HelpData.framework/Versions/A/Resources/helpd
+robenkleene     17752   0.0  0.1  2599924  15864   ??  Ss   10:38AM   0:00.27 /Users/robenkleene/Applications/Dropbox.app/Contents/PlugIns/garcon.appex/Contents/MacOS/garcon
+robenkleene     16396   0.0  0.1  2573192  12668   ??  S     9:32AM   0:00.28 /System/Library/CoreServices/CoreServicesUIAgent.app/Contents/MacOS/CoreServicesUIAgent
+robenkleene     16163   0.0  0.1  2570532  15712   ??  Ss    9:25AM   0:00.19 /System/Library/Frameworks/AppKit.framework/Versions/C/XPCServices/WorkflowServiceRunner.xpc/Contents/MacOS/WorkflowServiceRunner
+robenkleene     15997   0.0  0.2  2563152  30740   ??  S     9:10AM   0:03.54 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared
+root            15988   0.0  0.4  2600264  62988   ??  Ss    9:09AM   0:06.47 /usr/sbin/ocspd
+robenkleene     15211   0.0  0.2  2564164  32388   ??  S     9:51PM   0:04.27 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared
+robenkleene     14928   0.0  0.2  2563544  31440   ??  S     6:00PM   0:04.18 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared
+robenkleene     12052   0.0  0.2  2566424  31072   ??  S     3:38PM   0:08.40 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker -c MDSImporterWorker -m com.apple.mdworker.shared
+robenkleene     11966   0.0  0.1  2574252  17072   ??  S     3:28PM   0:01.82 /System/Library/Image Capture/Support/Image Capture Extension.app/Contents/MacOS/Image Capture Extension
+robenkleene     11730   0.0  0.1  2553480   8520   ??  S     2:06PM   0:00.82 /System/Library/Frameworks/ApplicationServices.framework/Frameworks/SpeechSynthesis.framework/Resources/com.apple.speech.speechsynthesisd
+robenkleene      9050   0.0  0.1  2546172   8876   ??  Ss   Sun12AM   0:00.86 /Users/robenkleene/Applications/OmniFocus.app/Contents/Frameworks/OmniSoftwareUpdate.framework/Versions/A/XPCServices/com.omnigroup.OmniSoftwareUpdate.OSUCheckService.xpc/Contents/MacOS/com.omnigroup.OmniSoftwareUpdate.OSUCheckService
+robenkleene      8388   0.0  0.1  2564432  19088   ??  Ss   Sat06PM   0:04.14 /System/Library/PrivateFrameworks/DiskImages.framework/Resources/diskimages-helper -uuid 2FBB936D-B23F-4D5C-BF3D-9BE544F4B86C -post-exec 4
+robenkleene      7744   0.0  0.1  2563464  16608   ??  Ss   Sat06PM   0:02.22 /System/Library/PrivateFrameworks/DiskImages.framework/Resources/diskimages-helper -uuid 9AC6EDB5-3EF3-4D1D-AC89-597860D653AA -post-exec 4
+robenkleene      7616   0.0  0.1  2550656  12068   ??  S    Sat06PM   0:00.48 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker-sizing -c MDSSizingWorker -m com.apple.mdworker.sizing
+robenkleene      7389   0.0  0.1  2562088  13768   ??  Ss   Sat06PM   0:00.78 /System/Library/PrivateFrameworks/DiskImages.framework/Resources/diskimages-helper -uuid 73C15497-056D-47F2-8B63-B5B783311D89 -post-exec 4
+robenkleene      7369   0.0  0.8  2737312 134128   ??  S    Sat06PM  16:47.26 /System/Library/PrivateFrameworks/PackageKit.framework/Resources/installd
+root             7362   0.0  0.0  2508148   2948   ??  Ss   Sat06PM   0:00.03 /System/Library/PrivateFrameworks/DiskImages.framework/Resources/hdiejectd
+robenkleene      7358   0.0  0.1  2561348   8612   ??  Ss   Sat06PM   0:00.51 /System/Library/PrivateFrameworks/DiskImages.framework/Resources/diskimages-helper -uuid 8FADCB47-2F64-4BC7-AC1A-C4A650E335F0 -post-exec 4
+robenkleene      5320   0.0  0.4  2665300  69916   ??  Ss   Sat03PM   0:02.82 /System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/XPCServices/com.apple.Safari.History.xpc/Contents/MacOS/com.apple.Safari.History
+robenkleene      5234   0.0  0.1  2571504  23456   ??  Ss   Sat03PM   0:01.24 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/XPCServices/com.apple.CommerceKit.TransactionService.xpc/Contents/MacOS/com.apple.CommerceKit.TransactionService
+robenkleene      5233   0.0  0.1  2546532  15180   ??  S    Sat03PM   0:01.77 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storeinappd
+robenkleene      5091   0.0  0.0  2543116   8148   ??  S    Sat03PM   0:00.16 /Applications/Xcode.app/Contents/Developer/Library/PrivateFrameworks/CoreSimulator.framework/Versions/A/XPCServices/com.apple.CoreSimulator.CoreSimulatorService.xpc/Contents/MacOS/com.apple.CoreSimulator.CoreSimulatorService
+robenkleene      4952   0.0  0.1  2572092  17092   ??  Ss   Sat03PM   0:02.08 /System/Library/PrivateFrameworks/RemoteViewServices.framework/XPCServices/com.apple.security.pboxd.xpc/Contents/MacOS/com.apple.security.pboxd
+robenkleene      4948   0.0  0.9  2728600 158876   ??  S    Sat03PM   1:56.36 /Users/robenkleene/Applications/OmniFocus.app/Contents/MacOS/OmniFocus
+robenkleene      4941   0.0  0.1  2552256  12052   ??  Ss   Sat03PM   0:00.05 /System/Library/PrivateFrameworks/SafariServices.framework/Versions/A/XPCServices/com.apple.SafariServices.xpc/Contents/MacOS/com.apple.SafariServices
+robenkleene      4932   0.0  0.0  2523056   7404   ??  S    Sat03PM   0:00.08 /System/Library/Frameworks/ApplicationServices.framework/Frameworks/PrintCore.framework/Versions/A/printtool agent
+robenkleene      4929   0.0  0.4  2689468  73900   ??  S    Sat03PM   0:10.48 /Applications/OmniOutliner Pro.app/Contents/MacOS/OmniOutliner Pro -psn_0_5342488
+robenkleene      4830   0.0  0.0  2520112   5896   ??  S    Sat02PM   0:01.38 /usr/bin/ssh-agent -l
+robenkleene      4824   0.0  0.0  2518508   6060   ??  S    Sat02PM   0:00.04 /usr/libexec/USBAgent
+root             4261   0.0  0.0  2516580   3260   ??  Ss   Sat03AM   0:00.04 /usr/sbin/aslmanager -s /var/log/eventmonitor
+robenkleene      3480   0.0  0.1  2548116  18412   ??  Ss   Fri08PM   0:01.55 /System/Library/PrivateFrameworks/WeatherKit.framework/Versions/A/XPCServices/com.apple.WeatherKitService.xpc/Contents/MacOS/com.apple.WeatherKitService
+root             2488   0.0  0.0  2482544    364   ??  SNs  Thu11PM   0:00.01 /usr/libexec/periodic-wrapper weekly
+robenkleene      2371   0.0  0.0  2544952   6724   ??  Ss   Thu12PM   0:01.71 /System/Library/PrivateFrameworks/IMFoundation.framework/XPCServices/IMRemoteURLConnectionAgent.xpc/Contents/MacOS/IMRemoteURLConnectionAgent
+robenkleene      2235   0.0  0.0  2516532   2888   ??  S    Thu08AM   0:00.03 /System/Library/PrivateFrameworks/StoreXPCServices.framework/Versions/A/XPCServices/com.apple.appstore.PluginXPCService.xpc/Contents/MacOS/com.apple.appstore.PluginXPCService
+robenkleene      2233   0.0  0.1  2574428  13164   ??  S    Thu08AM   0:00.62 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storeuid.app/Contents/MacOS/storeuid
+robenkleene      1849   0.0  0.1  2544036  18288   ??  S    Wed10AM   0:06.30 /System/Library/PrivateFrameworks/CoreRecents.framework/Versions/A/Support/recentsd
+robenkleene      1832   0.0  0.1  2517428   9832   ??  Ss   Wed09AM   0:00.09 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/XPCServices/com.apple.CommerceKit.TransactionService.xpc/Contents/MacOS/com.apple.CommerceKit.TransactionService
+robenkleene      1803   0.0  0.1  2593896  10596   ??  Ss   Wed08AM   0:01.63 /Users/robenkleene/Applications/OmniPresence.app/Contents/Frameworks/OmniSoftwareUpdate.framework/Versions/A/XPCServices/com.omnigroup.OmniSoftwareUpdate.OSUCheckService.xpc/Contents/MacOS/com.omnigroup.OmniSoftwareUpdate.OSUCheckService
+robenkleene      1792   0.0  0.1  2567156   9916   ??  S    Wed08AM   0:00.50 /System/Library/CoreServices/rcd.app/Contents/MacOS/rcd
+root             1721   0.0  0.0  2490736    704   ??  SNs  Wed08AM   0:00.02 /usr/libexec/periodic-wrapper daily
+root             1720   0.0  0.0  2543900   4428   ??  Ss   Wed08AM   0:00.08 /System/Library/PrivateFrameworks/Noticeboard.framework/Versions/A/Resources/nbstated
+robenkleene      1719   0.0  0.1  2574884  16916   ??  S    Wed08AM   0:02.76 /System/Library/PrivateFrameworks/Noticeboard.framework/Versions/A/Resources/nbagent.app/Contents/MacOS/nbagent
+root             1718   0.0  0.0  2516920   3024   ??  Ss   Wed08AM   0:00.13 /usr/libexec/syspolicyd
+robenkleene      1708   0.0  0.1  3603032   9892   ??  Ss   Wed08AM   0:00.69 /System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.Databases.xpc/Contents/MacOS/com.apple.WebKit.Databases
+robenkleene      1701   0.0  0.0  2522956   3772   ??  S    Wed08AM   0:00.04 /usr/libexec/loginitemregisterd
+robenkleene      1631   0.0  0.1  2544064   9992   ??  Ss   Wed07AM   0:00.19 /System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/XPCServices/com.apple.Safari.ImageDecoder.xpc/Contents/MacOS/com.apple.Safari.ImageDecoder
+robenkleene      1514   0.0  0.1  2584484  18032   ??  S    Wed07AM   0:01.11 /System/Library/LoginPlugins/BezelServices.loginPlugin/Contents/Resources/BezelUI/BezelUIServer
+robenkleene      1474   0.0  0.1  2555960   9548   ??  S    Wed07AM   0:30.89 /System/Library/PrivateFrameworks/SafariSafeBrowsing.framework/com.apple.Safari.SafeBrowsing.Service
+robenkleene      1472   0.0  0.1  2546416  14904   ??  Ss   Wed07AM   0:12.52 /System/Library/PrivateFrameworks/SafariShared.framework/Versions/A/XPCServices/com.apple.Safari.SearchHelper.xpc/Contents/MacOS/com.apple.Safari.SearchHelper
+robenkleene      1464   0.0  0.8  3981764 141824   ??  S    Wed07AM   0:10.87 /Users/robenkleene/Applications/FastScripts.app/Contents/MacOS/FastScripts
+root             1459   0.0  0.0  2542912   7668   ??  Ss   Wed07AM   0:03.51 /System/Library/PrivateFrameworks/AmbientDisplay.framework/Versions/A/XPCServices/com.apple.AmbientDisplayAgent.xpc/Contents/MacOS/com.apple.AmbientDisplayAgent
+robenkleene      1454   0.0  0.0  2516528   2816   ??  S    Wed07AM   0:00.03 /System/Library/PrivateFrameworks/KerberosHelper/Helpers/DiskUnmountWatcher
+_mbsetupuser     1419   0.0  0.1  2546568  11224   ??  S    Wed07AM   0:16.93 /System/Library/PrivateFrameworks/GeoServices.framework/Versions/A/XPCServices/com.apple.geod.xpc/Contents/MacOS/com.apple.geod
+root             1366   0.0  0.0  2565140   5752   ??  Ss   Wed04AM   0:01.64 /System/Library/PrivateFrameworks/PackageKit.framework/Resources/system_installd
+_assetcache      1364   0.0  0.0  2518588   2920   ??  S    Wed04AM   0:00.08 /System/Library/PrivateFrameworks/TCC.framework/Resources/tccd
+_assetcache      1362   0.0  0.0  2546432   6804   ??  Ss   Wed04AM   0:07.16 /System/Library/PrivateFrameworks/AssetCacheServices.framework/XPCServices/AssetCacheLocatorService.xpc/Contents/MacOS/AssetCacheLocatorService -d
+_softwareupdate  1361   0.0  0.1  2545548   8648   ??  Ss   Wed04AM   0:07.13 /System/Library/CoreServices/Software Update.app/Contents/Resources/softwareupdate_download_service
+root             1284   0.0  0.0  2517084   5328   ??  Ss   Wed02AM   0:22.11 sysmond
+root             1274   0.0  0.0  2509088    728   ??  S    Wed02AM   0:00.05 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdflagwriter
+robenkleene      1267   0.0  0.1  2599924  13472   ??  Ss   Wed02AM   0:00.90 /Users/robenkleene/Applications/Dropbox.app/Contents/PlugIns/garcon.appex/Contents/MacOS/garcon
+robenkleene      1263   0.0  0.1  2573284  13408   ??  S    Wed02AM   0:00.77 /System/Library/PrivateFrameworks/CommerceKit.framework/Resources/LaterAgent.app/Contents/MacOS/LaterAgent
+robenkleene      1262   0.0  0.1  2543672   9988   ??  S    Wed02AM   0:00.13 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storelegacy
+robenkleene      1252   0.0  0.0   413408    532   ??  S    Wed02AM   3:50.76 /Library/DropboxHelperTools/Dropbox_u501/dbfseventsd
+root             1250   0.0  0.0   412384   4800   ??  S    Wed02AM   5:45.99 /Library/DropboxHelperTools/Dropbox_u501/dbfseventsd
+root             1249   0.0  0.0   397024   1008   ??  S    Wed02AM   1:08.33 /Library/DropboxHelperTools/Dropbox_u501/dbfseventsd
+robenkleene      1235   0.0  0.1  2572456  11824   ??  S    Wed02AM   0:00.63 /System/Library/PrivateFrameworks/UniversalAccess.framework/Versions/A/Resources/universalAccessAuthWarn.app/Contents/MacOS/universalAccessAuthWarn launchd -s
+robenkleene      1230   0.0  0.1  2546748   9804   ??  S    Wed02AM   0:00.48 /System/Library/Frameworks/InputMethodKit.framework/Versions/A/XPCServices/com.apple.InputMethodKit.TextReplacementService.xpc/Contents/MacOS/com.apple.InputMethodKit.TextReplacementService
+robenkleene      1224   0.0  0.2  2699184  31752   ??  S    Wed02AM   0:04.33 /System/Library/Services/AppleSpell.service/Contents/MacOS/AppleSpell -psn_0_290887
+robenkleene      1220   0.0  0.1  2546980  17268   ??  Ss   Wed02AM   0:02.69 /System/Library/PrivateFrameworks/WeatherKit.framework/Versions/A/XPCServices/com.apple.WeatherKitService.xpc/Contents/MacOS/com.apple.WeatherKitService
+robenkleene      1218   0.0  0.1  2541704  11084   ??  Ss   Wed02AM   0:00.11 /System/Library/CoreServices/NotificationCenter.app/Contents/XPCServices/com.apple.notificationcenterui.WeatherSummary.xpc/Contents/MacOS/com.apple.notificationcenterui.WeatherSummary
+robenkleene      1217   0.0  0.3  2589904  50452   ??  S    Wed02AM   1:26.94 /Users/robenkleene/Applications/OmniPresence.app/Contents/MacOS/OmniPresence
+robenkleene      1216   0.0  0.1  2599860  14384   ??  S    Wed02AM   0:08.46 /Library/PreferencePanes/Screens Connect.prefPane/Contents/MacOS/Screens Connect.app/Contents/MacOS/Screens Connect
+robenkleene      1213   0.0  0.5  1150084  79544   ??  S    Wed02AM  23:24.44 /Users/robenkleene/Applications/Dropbox.app/Contents/MacOS/Dropbox
+robenkleene      1207   0.0  0.1  2551368  14264   ??  S    Wed02AM   0:06.20 /System/Library/CoreServices/diagnostics_agent
+robenkleene      1206   0.0  0.1  2571460  14652   ??  S    Wed02AM   0:03.88 /System/Library/CoreServices/WiFiAgent.app/Contents/MacOS/WiFiAgent
+robenkleene      1204   0.0  0.0  2543740   6176   ??  S    Wed02AM   0:08.86 /System/Library/CoreServices/cloudpaird
+robenkleene      1203   0.0  0.1  2570956  10180   ??  S    Wed02AM   0:01.67 /System/Library/CoreServices/AirPlayUIAgent.app/Contents/MacOS/AirPlayUIAgent --launchd
+robenkleene      1198   0.0  0.1  2542320   8444   ??  S    Wed02AM   0:00.24 /System/Library/Image Capture/Support/icdd
+robenkleene      1196   0.0  0.3  2643912  42648   ??  S    Wed02AM   0:27.51 /System/Library/CoreServices/NotificationCenter.app/Contents/MacOS/NotificationCenter
+robenkleene      1194   0.0  0.1  2583428  15500   ??  S    Wed02AM   0:03.49 /Library/Backblaze.bzpkg/bzbmenu.app/Contents/MacOS/bzbmenu
+robenkleene      1192   0.0  0.1  2570180  16324   ??  S    Wed02AM   0:00.60 /System/Library/CoreServices/Keychain Circle Notification.app/Contents/MacOS/Keychain Circle Notification
+robenkleene      1191   0.0  0.2  2596316  37276   ??  S    Wed02AM   0:17.57 2BUA8C4S2C.com.agilebits.onepassword-osx-helper
+robenkleene      1188   0.0  0.0  2548816   4036   ??  S    Wed02AM   0:00.09 /usr/libexec/spindump_agent
+robenkleene      1187   0.0  0.0  2551472   6348   ??  S    Wed02AM   0:00.23 /Applications/iTunes.app/Contents/MacOS/iTunesHelper.app/Contents/MacOS/iTunesHelper
+robenkleene      1184   0.0  0.0  2542468   6764   ??  S    Wed02AM   0:00.08 /System/Library/PrivateFrameworks/CharacterPicker.framework/Versions/A/XPCServices/com.apple.CharacterPicker.FileService.xpc/Contents/MacOS/com.apple.CharacterPicker.FileService
+robenkleene      1176   0.0  0.3  3654040  45516   ??  S    Wed02AM   0:23.28 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storedownloadd
+robenkleene      1131   0.0  0.1  2543260  10268   ??  S    Wed02AM   0:00.18 /System/Library/PrivateFrameworks/BookKit.framework/Versions/A/XPCServices/com.apple.BKAgentService.xpc/Contents/MacOS/com.apple.BKAgentService
+root             1097   0.0  0.0  2498600   5084   ??  Ss   Wed02AM   0:00.02 /System/Library/Frameworks/CoreMediaIO.framework/Versions/A/XPCServices/com.apple.cmio.registerassistantservice.xpc/Contents/MacOS/com.apple.cmio.registerassistantservice
+robenkleene       666   0.0  0.1  2517428   9896   ??  Ss   Wed02AM   0:00.09 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/XPCServices/com.apple.CommerceKit.TransactionService.xpc/Contents/MacOS/com.apple.CommerceKit.TransactionService
+root              642   0.0  0.0  2516548   5792   ??  Ss   Wed02AM   0:00.03 /System/Library/Frameworks/AudioToolbox.framework/XPCServices/com.apple.audio.SandboxHelper.xpc/Contents/MacOS/com.apple.audio.SandboxHelper
+root              641   0.0  0.0  2516060   3064 s000  Ss   Wed02AM   0:00.10 login -pfl robenkleene /bin/bash -c exec -la fish /usr/local/bin/fish
+robenkleene       640   0.0  0.2  2574312  28668   ??  Ss   Wed02AM   0:05.29 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/XPCServices/com.apple.CommerceKit.TransactionService.xpc/Contents/MacOS/com.apple.CommerceKit.TransactionService
+robenkleene       637   0.0  0.3  3625996  46888   ??  Ss   Wed02AM   3:40.28 /System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.Networking.xpc/Contents/MacOS/com.apple.WebKit.Networking
+robenkleene       636   0.0  0.1  2546348  11660   ??  S    Wed02AM   0:00.11 /System/Library/PrivateFrameworks/CallHistory.framework/Support/CallHistoryPluginHelper
+robenkleene       634   0.0  0.1  2594256  24884   ??  S    Wed02AM   0:05.33 /System/Library/PrivateFrameworks/MessagesKit.framework/Resources/soagent.app/Contents/MacOS/soagent
+robenkleene       632   0.0  0.1  2571836  18304   ??  Ss   Wed02AM   0:01.69 /System/Library/CoreServices/Dock.app/Contents/XPCServices/com.apple.dock.extra.xpc/Contents/MacOS/com.apple.dock.extra
+robenkleene       630   0.0  0.2  2702496  32432   ??  S    Wed02AM   0:02.46 /System/Library/CoreServices/iconservicesagent
+robenkleene       629   0.0  0.1  2552700  24912   ??  S    Wed02AM   0:06.57 /System/Library/PrivateFrameworks/ParsecUI.framework/Versions/A/Support/SpotlightNetHelper.app/Contents/MacOS/SpotlightNetHelper
+robenkleene       628   0.0  0.0  2542196   6036   ??  Ss   Wed02AM   0:02.69 /System/Library/PrivateFrameworks/CoreWLANKit.framework/Versions/A/XPCServices/WiFiProxy.xpc/Contents/MacOS/WiFiProxy
+robenkleene       627   0.0  0.2  2564800  40148   ??  S    Wed02AM   1:20.87 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storeassetd
+root              626   0.0  0.0  2517652   3248   ??  Ss   Wed02AM   0:00.49 /System/Library/PrivateFrameworks/PerformanceAnalysis.framework/Versions/A/XPCServices/com.apple.PerformanceAnalysis.animationperfd.xpc/Contents/MacOS/com.apple.PerformanceAnalysis.animationperfd
+robenkleene       625   0.0  0.3  2716104  51312   ??  S    Wed02AM   0:17.87 /System/Library/CoreServices/Spotlight.app/Contents/MacOS/Spotlight
+robenkleene       624   0.0  0.1  2549284  13820   ??  S    Wed02AM   0:30.92 /usr/libexec/pkd
+robenkleene       621   0.0  1.5  3972044 250440   ??  S    Wed02AM   5:58.98 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+robenkleene       620   0.0  0.2  2590664  28464   ??  S    Wed02AM   0:45.36 /System/Library/CoreServices/SystemUIServer.app/Contents/MacOS/SystemUIServer
+robenkleene       618   0.0  0.5  2773468  86380   ??  S    Wed02AM   0:54.77 /System/Library/CoreServices/Dock.app/Contents/MacOS/Dock
+robenkleene       616   0.0  1.1  3871592 179184   ??  S    Wed02AM   4:21.08 /Users/robenkleene/Applications/TextMate.app/Contents/MacOS/TextMate -psn_0_172074
+robenkleene       615   0.0  0.8  2858916 127488   ??  S    Wed02AM   3:28.78 /Users/robenkleene/Applications/LaunchBar.app/Contents/MacOS/LaunchBar -psn_0_167977
+robenkleene       609   0.0  1.9  4423792 322040   ??  U    Wed02AM   9:16.89 /Applications/Safari.app/Contents/MacOS/Safari -psn_0_147492
+root              604   0.0  0.0  2520984   5868   ??  Ss   Wed02AM   0:25.77 /usr/libexec/systemstatsd
+root              603   0.0  0.0  2517004   8112   ??  Us   Wed02AM   0:00.35 /System/Library/CoreServices/SubmitDiagInfo server-init
+root              602   0.0  0.3  2603956  47848   ??  Ss   Wed02AM   0:10.78 /usr/sbin/spindump
+_mbsetupuser      597   0.0  0.1  2550116  15520   ??  S    Wed02AM   0:00.09 /System/Library/PrivateFrameworks/CloudPhotoServices.framework/Versions/A/Frameworks/CloudPhotosConfigurationXPC.framework/Versions/A/XPCServices/com.apple.CloudPhotosConfiguration.xpc/Contents/MacOS/com.apple.CloudPhotosConfiguration
+robenkleene       524   0.0  0.1  2547088  16416   ??  S    Wed02AM   0:00.49 /System/Library/PrivateFrameworks/DataDetectorsCore.framework/Versions/A/XPCServices/DataDetectorsDynamicData.xpc/Contents/MacOS/DataDetectorsDynamicData
+robenkleene       523   0.0  0.1  3599312  24524   ??  U    Wed02AM   0:00.42 /System/Library/PrivateFrameworks/CoreSuggestions.framework/Versions/A/Support/reversetemplated
+robenkleene       518   0.0  0.1  2550420  14544   ??  S    Wed02AM   0:02.52 /System/Library/PrivateFrameworks/CoreSpotlight.framework/Support/com.apple.spotlight.IndexAgent
+_spotlight        512   0.0  0.2  2558536  30832   ??  S    Wed02AM   0:38.33 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdworker -s mdworker-sizing -c MDSSizingWorker -m com.apple.mdworker.sizing
+_spotlight        511   0.0  0.0  2515860   2572   ??  S    Wed02AM   0:01.64 /usr/sbin/distnoted agent
+robenkleene       506   0.0  0.0  2518828   3212   ??  S    Wed02AM   0:01.46 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mdflagwriter
+root              499   0.0  0.1  2550348   9112   ??  Ss   Wed02AM   0:01.09 /System/Library/PrivateFrameworks/SoftwareUpdate.framework/Resources/suhelperd
+_softwareupdate   498   0.0  2.2  4074120 365516   ??  Ss   Wed02AM   2:33.20 /System/Library/CoreServices/Software Update.app/Contents/Resources/softwareupdated
+robenkleene       481   0.0  0.1  2542216  13196   ??  Ss   Wed02AM   0:00.11 /System/Library/Frameworks/AddressBook.framework/Versions/A/XPCServices/com.apple.AddressBook.InternetAccountsBridge.xpc/Contents/MacOS/com.apple.AddressBook.InternetAccountsBridge
+root              479   0.0  0.0  2516020   6596   ??  Ss   Wed02AM   0:00.04 /System/Library/PrivateFrameworks/IASUtilities.framework/Versions/A/XPCServices/com.apple.IASUtilities.IASCloudConfigHelper.xpc/Contents/MacOS/com.apple.IASUtilities.IASCloudConfigHelper
+robenkleene       473   0.0  0.1  2550724  13600   ??  Ss   Wed02AM   0:00.09 /System/Library/PrivateFrameworks/PhotoLibrary.framework/Versions/A/XPCServices/com.apple.PhotoIngestService.xpc/Contents/MacOS/com.apple.PhotoIngestService
+robenkleene       470   0.0  0.0  2528964   5256   ??  S    Wed02AM   0:00.13 /System/Library/PrivateFrameworks/CoreFollowUp.framework/Versions/A/Support/followupd
+robenkleene       469   0.0  0.1  2542112  14180   ??  S    Wed02AM   0:00.33 /System/Library/PrivateFrameworks/CoreCDP.framework/Versions/A/Resources/cdpd
+root              468   0.0  0.0  2545220   6044   ??  Ss   Wed02AM   0:00.87 /usr/libexec/diskmanagementd
+robenkleene       461   0.0  0.2  2552124  25448   ??  Ss   Wed02AM   0:00.64 /System/Library/PrivateFrameworks/PhotoLibraryPrivate.framework/Versions/A/Frameworks/PhotoLibraryServices.framework/Versions/A/XPCServices/com.apple.photomodel.xpc/Contents/MacOS/com.apple.photomodel
+robenkleene       460   0.0  0.2  2560376  28244   ??  Ss   Wed02AM   0:12.31 /System/Library/PrivateFrameworks/PhotoLibraryPrivate.framework/Versions/A/Frameworks/PhotoLibraryServices.framework/Versions/A/XPCServices/com.apple.photomoments.xpc/Contents/MacOS/com.apple.photomoments
+robenkleene       456   0.0  0.1  2546440  10140   ??  S    Wed02AM   0:02.07 /System/Library/PrivateFrameworks/AssetCacheServices.framework/XPCServices/AssetCacheLocatorService.xpc/Contents/MacOS/AssetCacheLocatorService -a
+_mbsetupuser      455   0.0  0.0  2516188   4172   ??  S    Wed02AM   0:00.32 /System/Library/Frameworks/Security.framework/Versions/A/Resources/CloudKeychainProxy.bundle/Contents/MacOS/CloudKeychainProxy
+_mbsetupuser      439   0.0  0.1  2541736  10572   ??  S    Wed02AM   0:00.12 /System/Library/Frameworks/AddressBook.framework/Versions/A/XPCServices/com.apple.AddressBook.ContactsAccountsService.xpc/Contents/MacOS/com.apple.AddressBook.ContactsAccountsService
+_mbsetupuser      438   0.0  0.1  2542468  12340   ??  S    Wed02AM   0:00.11 /System/Library/PrivateFrameworks/IMDPersistence.framework/XPCServices/IMDPersistenceAgent.xpc/Contents/MacOS/IMDPersistenceAgent
+_mbsetupuser      436   0.0  0.0  2554540   7892   ??  S    Wed02AM   0:00.17 /System/Library/PrivateFrameworks/TCC.framework/Resources/tccd
+_mbsetupuser      434   0.0  0.1  2545540  18312   ??  S    Wed02AM   0:00.91 /usr/libexec/secinitd
+_mbsetupuser      429   0.0  0.0  2543448   4188   ??  S    Wed02AM   0:00.09 /usr/libexec/secd
+_mbsetupuser      420   0.0  0.0  2515860   3484   ??  S    Wed02AM   0:03.22 /usr/sbin/distnoted agent
+robenkleene       417   0.0  0.0  2516192   4964   ??  S    Wed02AM   0:00.15 /System/Library/Frameworks/Security.framework/Versions/A/Resources/IDSKeychainSyncingProxy.bundle/Contents/MacOS/IDSKeychainSyncingProxy
+_mbsetupuser      396   0.0  0.0  2516380   3232   ??  S    Wed02AM   0:04.05 /usr/sbin/cfprefsd agent
+robenkleene       393   0.0  0.1  2545316  18720   ??  S    Wed02AM   0:02.81 /System/Library/PrivateFrameworks/CloudServices.framework/Versions/A/Frameworks/EscrowService.framework/Versions/A/XPCServices/com.apple.lakitu.xpc/Contents/MacOS/com.apple.lakitu
+root              391   0.0  0.0  2518956   8012   ??  Ss   Wed02AM   0:00.26 corestoragehelperd
+robenkleene       389   0.0  0.1  2543496  11524   ??  S    Wed02AM   0:01.75 /System/Library/PrivateFrameworks/CloudServices.framework/Versions/A/XPCServices/com.apple.sbd.xpc/Contents/MacOS/com.apple.sbd
+robenkleene       388   0.0  0.1  2554260  21244   ??  Ss   Wed02AM   0:00.36 /System/Library/CoreServices/cloudphotosd.app/Contents/XPCServices/com.apple.ICPPhotoStreamLibraryService.xpc/Contents/MacOS/com.apple.ICPPhotoStreamLibraryService
+_nsurlstoraged    377   0.0  0.0  2542284   5540   ??  Ss   Wed02AM   0:01.06 /usr/libexec/nsurlstoraged
+robenkleene       376   0.0  1.9  2863216 320632   ??  S    Wed02AM   1:00.01 /System/Library/PrivateFrameworks/PhotoLibraryPrivate.framework/Versions/A/Support/photolibraryd
+root              374   0.0  0.0  2517048   4800   ??  Ss   Wed02AM   0:00.04 /System/Library/PrivateFrameworks/SystemAdministration.framework/XPCServices/writeconfig.xpc/Contents/MacOS/writeconfig
+robenkleene       368   0.0  0.1  2570136  17192   ??  S    Wed02AM   0:00.59 /System/Library/CoreServices/EscrowSecurityAlert.app/Contents/MacOS/EscrowSecurityAlert
+robenkleene       367   0.0  0.0  2516124   4428   ??  S    Wed02AM   0:00.33 /System/Library/PrivateFrameworks/CommunicationsFilter.framework/CMFSyncAgent.app/Contents/MacOS/CMFSyncAgent
+robenkleene       365   0.0  0.1  2570136  13484   ??  S    Wed02AM   0:00.60 /System/Library/CoreServices/FolderActionsDispatcher.app/Contents/MacOS/FolderActionsDispatcher
+robenkleene       364   0.0  0.1  2517268   8908   ??  S    Wed02AM   0:00.96 /System/Library/Frameworks/Security.framework/Versions/A/Resources/CloudKeychainProxy.bundle/Contents/MacOS/CloudKeychainProxy
+robenkleene       360   0.0  0.1  2550856  19788   ??  S    Wed02AM   0:02.45 /System/Library/PrivateFrameworks/CloudPhotoServices.framework/Versions/A/Frameworks/CloudPhotosConfigurationXPC.framework/Versions/A/XPCServices/com.apple.CloudPhotosConfiguration.xpc/Contents/MacOS/com.apple.CloudPhotosConfiguration
+robenkleene       357   0.0  0.0  2516036   6476   ??  S    Wed02AM   0:00.14 /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/XPCServices/com.apple.hiservices-xpcservice.xpc/Contents/MacOS/com.apple.hiservices-xpcservice
+robenkleene       355   0.0  0.1  2545484   9024   ??  S    Wed02AM   0:06.38 /System/Library/CoreServices/sharedfilelistd
+root              353   0.0  0.1  2545660  10412   ??  Ss   Wed02AM   0:20.42 /usr/libexec/taskgated -s
+robenkleene       349   0.0  0.1  2580724  21832   ??  S    Wed02AM   1:40.24 /System/Library/Frameworks/ApplicationServices.framework/Frameworks/ATS.framework/Support/fontd
+robenkleene       348   0.0  0.0  2549356   6820   ??  S    Wed02AM   0:01.39 /usr/libexec/swcd
+robenkleene       347   0.0  0.1  2548740   8464   ??  S    Wed02AM   0:00.54 /System/Library/CoreServices/pbs
+robenkleene       345   0.0  0.1  2547484  20272   ??  S    Wed02AM   0:03.83 /System/Library/CoreServices/AppleIDAuthAgent
+root              344   0.0  0.1  2545220   9328   ??  Ss   Wed02AM   0:00.53 /System/Library/PrivateFrameworks/TCC.framework/Resources/tccd system
+root              343   0.0  0.0  2518292   6720   ??  Ss   Wed02AM   0:00.26 /System/Library/CoreServices/sharedfilelistd --enable-legacy-services
+root              342   0.0  0.0  2547060   8008   ??  Ss   Wed02AM   0:01.21 /usr/sbin/systemsoundserverd
+robenkleene       341   0.0  0.2  2562292  27836   ??  S    Wed02AM   0:15.64 /usr/libexec/sharingd
+robenkleene       339   0.0  0.1  2551588  14468   ??  S    Wed02AM   0:17.70 /System/Library/PrivateFrameworks/UserActivity.framework/Agents/useractivityd
+robenkleene       338   0.0  0.2  2551712  25956   ??  S    Wed02AM   0:21.53 /System/Library/PrivateFrameworks/GeoServices.framework/Versions/A/XPCServices/com.apple.geod.xpc/Contents/MacOS/com.apple.geod
+robenkleene       337   0.0  0.0  2547088   7304   ??  S    Wed02AM   0:00.40 /System/Library/CoreServices/ScopedBookmarkAgent
+robenkleene       330   0.0  0.1  2551216  13208   ??  Ss   Wed02AM   0:05.56 /System/Library/PrivateFrameworks/CloudDocsDaemon.framework/XPCServices/ContainerMetadataExtractor.xpc/Contents/MacOS/ContainerMetadataExtractor
+root              329   0.0  0.0  2526644   5684   ??  Ss   Wed02AM   0:04.69 /usr/sbin/filecoordinationd
+robenkleene       326   0.0  0.0  2482876   3380   ??  S    Wed02AM   0:00.03 /usr/sbin/pboard
+root              325   0.0  0.1  2584640  10132   ??  Ss   Wed02AM   0:21.75 /System/Library/PrivateFrameworks/PackageKit.framework/Resources/installd
+root              324   0.0  0.1  2542516  14316   ??  Ss   Wed02AM   0:01.47 /System/Library/CoreServices/backupd.bundle/Contents/Resources/TMCacheDelete
+root              323   0.0  0.0  2520480   8008   ??  Us   Wed02AM   0:20.14 /System/Library/PrivateFrameworks/CacheDelete.framework/deleted
+robenkleene       316   0.0  0.1  2584472  21904   ??  S    Wed02AM   0:00.89 /System/Library/PrivateFrameworks/IMDPersistence.framework/XPCServices/IMDPersistenceAgent.xpc/Contents/MacOS/IMDPersistenceAgent
+robenkleene       315   0.0  0.1  2551212  18020   ??  S    Wed02AM   0:03.84 /System/Library/PrivateFrameworks/IMCore.framework/imagent.app/Contents/MacOS/imagent
+root              314   0.0  0.0  2516868   1344   ??  Ss   Wed02AM   0:02.38 /usr/libexec/watchdogd
+robenkleene       313   0.0  0.2  2553928  39448   ??  S    Wed02AM   0:06.57 /System/Library/PrivateFrameworks/TelephonyUtilities.framework/callservicesd
+robenkleene       312   0.0  0.2  2557276  32780   ??  Ss   Wed02AM   1:27.81 /System/Library/PrivateFrameworks/CalendarAgent.framework/Versions/A/XPCServices/CalNCService.xpc/Contents/MacOS/CalNCService
+robenkleene       311   0.0  0.2  2559584  27152   ??  S    Wed02AM   0:08.10 /System/Library/PrivateFrameworks/CommerceKit.framework/Versions/A/Resources/storeaccountd
+robenkleene       310   0.0  0.2  2565736  31912   ??  S    Wed02AM   2:15.82 /System/Library/PrivateFrameworks/CloudKitDaemon.framework/Support/cloudd
+robenkleene       309   0.0  0.1  2559392  24392   ??  S    Wed02AM   0:56.34 /usr/libexec/nsurlstoraged
+robenkleene       307   0.0  0.2  2555764  32996   ??  S    Wed02AM   0:58.15 /System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/Support/bird
+robenkleene       306   0.0  0.1  2549596  12856   ??  S    Wed02AM   0:09.43 /System/Library/PrivateFrameworks/AuthKit.framework/Versions/A/Support/akd
+robenkleene       305   0.0  0.1  2541824  13864   ??  S    Wed02AM   0:00.19 /System/Library/PrivateFrameworks/AskPermission.framework/Versions/A/Resources/askpermissiond
+robenkleene       303   0.0  0.1  2547256  22448   ??  S    Wed02AM   0:02.52 /usr/libexec/fmfd
+robenkleene       301   0.0  0.1  2545844  15948   ??  S    Wed02AM   0:02.80 /System/Library/CoreServices/mapspushd
+robenkleene       300   0.0  0.1  2542256  13584   ??  S    Wed02AM   0:00.36 /System/Library/PrivateFrameworks/CallHistory.framework/Support/CallHistorySyncHelper
+robenkleene       299   0.0  0.1  2542212   8988   ??  S    Wed02AM   0:59.53 /usr/libexec/SafariCloudHistoryPushAgent
+robenkleene       298   0.0  0.1  2541736  11516   ??  S    Wed02AM   0:03.17 /System/Library/Frameworks/AddressBook.framework/Versions/A/XPCServices/com.apple.AddressBook.ContactsAccountsService.xpc/Contents/MacOS/com.apple.AddressBook.ContactsAccountsService
+robenkleene       297   0.0  0.2  2581120  34260   ??  S    Wed02AM   4:18.00 /System/Library/Frameworks/Accounts.framework/Versions/A/Support/accountsd
+robenkleene       296   0.0  0.1  2551652  11992   ??  S    Wed02AM   0:16.30 /System/Library/PrivateFrameworks/TCC.framework/Resources/tccd
+robenkleene       295   0.0  0.2  2561864  25692   ??  S    Wed02AM   0:16.32 /System/Library/PrivateFrameworks/GameCenterFoundation.framework/Versions/A/gamed
+robenkleene       293   0.0  0.1  2545872  12584   ??  S    Wed02AM   0:02.08 /System/Library/CoreServices/SocialPushAgent.app/Contents/MacOS/SocialPushAgent
+robenkleene       292   0.0  0.4  2634284  73796   ??  S    Wed02AM   0:33.41 /System/Library/PrivateFrameworks/CoreSuggestions.framework/Versions/A/Support/suggestd
+robenkleene       291   0.0  0.2  2602756  36352   ??  S    Wed02AM   0:09.15 /System/Library/CoreServices/cloudphotosd.app/Contents/MacOS/cloudphotosd
+robenkleene       289   0.0  0.1  2548124  24396   ??  S    Wed02AM   0:14.21 /usr/libexec/secinitd
+robenkleene       288   0.0  0.1  2545584   9208   ??  S    Wed02AM   0:27.71 /usr/libexec/secd
+robenkleene       287   0.0  0.1  2551648  16240   ??  S    Wed02AM   0:14.64 /usr/libexec/nsurlsessiond
+robenkleene       286   0.0  0.4  2586972  66828   ??  S    Wed02AM   5:52.37 /System/Library/PrivateFrameworks/CalendarAgent.framework/Executables/CalendarAgent
+robenkleene       285   0.0  0.1  2547480  12188   ??  S    Wed02AM   0:12.14 /usr/sbin/usernoted
+robenkleene       284   0.0  0.1  2551704  18700   ??  S    Wed02AM   0:06.82 /System/Library/PrivateFrameworks/IDS.framework/identityservicesd.app/Contents/MacOS/identityservicesd
+robenkleene       283   0.0  0.2  2555508  33212   ??  S    Wed02AM   2:19.83 /System/Library/PrivateFrameworks/SyncedDefaults.framework/Support/syncdefaultsd
+root              282   0.0  0.0  2542860   6480   ??  Ss   Wed02AM   0:01.35 /usr/sbin/WirelessRadioManagerd
+robenkleene       280   0.0  0.1  2555540  17248   ??  S    Wed02AM   0:14.00 /usr/libexec/lsd
+robenkleene       279   0.0  0.2  2580304  26500   ??  S    Wed02AM   0:18.47 /System/Library/Frameworks/CoreTelephony.framework/Support/CommCenter
+robenkleene       277   0.0  0.2  2535868  26928   ??  U    Wed02AM   0:54.62 /usr/sbin/cfprefsd agent
+robenkleene       275   0.0  0.1  2517432  11756   ??  S    Wed02AM   0:54.98 /usr/sbin/distnoted agent
+robenkleene       273   0.0  0.1  2551348  19840   ??  S    Wed02AM   0:23.77 /usr/libexec/UserEventAgent (Aqua)
+root              272   0.0  0.0  2544792   6424   ??  Ss   Wed02AM   3:01.86 /usr/libexec/securityd_service
+root              268   0.0  0.0  2516576   3692   ??  Ss   Wed02AM   0:00.11 /System/Library/PrivateFrameworks/AccountPolicy.framework/XPCServices/com.apple.AccountPolicyHelper.xpc/Contents/MacOS/com.apple.AccountPolicyHelper
+root              256   0.0  1.5  3833956 250832   ??  Ss   Wed02AM   5:09.04 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Versions/A/Support/mds_stores
+root              243   0.0  0.0  2576200   4152   ??  Ss   Wed02AM   0:01.35 /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/CVMServer
+root              242   0.0  0.0  2544196   7352   ??  Ss   Wed02AM   0:01.60 /System/Library/PrivateFrameworks/AuthKit.framework/Versions/A/Support/akd
+root              219   0.0  0.0  2482544    888   ??  SNs  Wed02AM   0:00.01 /usr/libexec/periodic-wrapper monthly
+_networkd         217   0.0  0.1  2557744  12432   ??  Ss   Wed02AM   1:14.31 /usr/libexec/symptomsd
+root              216   0.0  0.1  2556564   8728   ??  Ss   Wed02AM   0:00.61 /System/Library/Frameworks/CoreMediaIO.framework/Resources/VDC.plugin/Contents/Resources/VDCAssistant
+root              214   0.0  0.0  2499668   3616   ??  Ss   Wed02AM   0:00.03 /System/Library/CryptoTokenKit/com.apple.ifdreader.slotd/Contents/MacOS/com.apple.ifdreader
+root              213   0.0  0.1  2543808  10328   ??  Ss   Wed02AM   0:05.41 /usr/libexec/usbd
+root              211   0.0  0.0  2518512   7696   ??  Ss   Wed02AM   0:00.51 /usr/libexec/corestoraged
+root              210   0.0  0.0  2455332   1136   ??  Ss   Wed02AM   0:00.32 /usr/sbin/cron
+root              209   0.0  0.0  2519240   3768   ??  Ss   Wed02AM   0:07.10 /usr/sbin/ntpd -c /private/etc/ntp-restrict.conf -n -g -p /var/run/ntpd.pid -f /var/db/ntp.drift
+root              208   0.0  0.1  2546136  12136   ??  Ss   Wed02AM   0:01.06 /usr/libexec/nehelper
+_nsurlsessiond    207   0.0  0.1  2554480   9812   ??  Ss   Wed02AM   0:07.43 /usr/libexec/nsurlsessiond --privileged
+root              203   0.0  0.1  2542080  14892   ??  Ss   Wed02AM   0:01.03 /System/Library/CoreServices/backupd.bundle/Contents/Resources/backupd-helper -launchd
+root              199   0.0  0.0  2516564   3716   ??  Ss   Wed02AM   0:00.06 /usr/libexec/smd
+root              195   0.0  0.1  2560760  17840   ??  Ss   Wed02AM   0:10.97 /usr/libexec/lsd runAsRoot
+root              189   0.0  0.1  2554880  13280   ??  Ss   Wed02AM   0:03.13 /usr/libexec/findmydeviced
+root              187   0.0  0.0  2518560   5552   ??  Ss   Wed02AM   0:02.89 /System/Library/Frameworks/Security.framework/Versions/A/XPCServices/com.apple.CodeSigningHelper.xpc/Contents/MacOS/com.apple.CodeSigningHelper
+root              186   0.0  0.0  2516552   3672   ??  Ss   Wed02AM   0:00.19 /usr/libexec/networkd_privileged
+_networkd         184   0.0  0.0  2516596   8300   ??  Ss   Wed02AM   0:24.16 /usr/libexec/networkd
+root              179   0.0  0.0  2516024   4440   ??  Ss   Wed02AM   0:00.67 /System/Library/CoreServices/CrashReporterSupportHelper server-init
+root              177   0.0  0.0  2542548   6912   ??  Ss   Wed02AM   0:01.53 /System/Library/PrivateFrameworks/WirelessDiagnostics.framework/Support/awdd
+_coreaudiod       176   0.0  0.0  2542852   4748   ??  Ss   Wed02AM   0:00.18 /System/Library/Frameworks/CoreAudio.framework/Versions/A/XPCServices/com.apple.audio.DriverHelper.xpc/Contents/MacOS/com.apple.audio.DriverHelper
+root              161   0.0  0.0  2519564   5832   ??  Ss   Wed02AM   0:01.57 /System/Library/PrivateFrameworks/CoreSymbolication.framework/coresymbolicationd
+root              160   0.0  0.1  2544256  11804   ??  Ss   Wed02AM   0:00.26 /usr/libexec/secinitd
+root              157   0.0  0.0  2516556   3596   ??  Ss   Wed02AM   0:00.03 /System/Library/Frameworks/CryptoTokenKit.framework/ctkd -s
+root              151   0.0  0.0  2516572   3548   ??  Ss   Wed02AM   0:00.04 /System/Library/Frameworks/PCSC.framework/Versions/A/XPCServices/com.apple.ctkpcscd.xpc/Contents/MacOS/com.apple.ctkpcscd
+root              123   0.0  0.1  2576948  24352   ??  Ss   Wed02AM   0:05.67 /usr/libexec/sandboxd
+root              117   0.0  0.1  2542664   8768   ??  Ss   Wed02AM   0:02.24 /usr/libexec/diagnosticd
+root              114   0.0  0.1  2551004   9228   ??  Ss   Wed02AM   0:09.37 /System/Library/CoreServices/coreservicesd
+root              111   0.0  0.0  2517944   6248   ??  Ss   Wed02AM   1:04.91 /usr/sbin/cfprefsd daemon
+root              110   0.0  0.0  2516580   5824   ??  Ss   Wed02AM   0:06.66 aslmanager
+root              109   0.0  0.1  2546228  11660   ??  Ss   Wed02AM   0:03.84 /System/Library/Frameworks/Security.framework/Versions/A/XPCServices/authd.xpc/Contents/MacOS/authd
+_distnote         108   0.0  0.0  2515860   5684   ??  Ss   Wed02AM   0:13.26 /usr/sbin/distnoted daemon
+root              106   0.0  0.1  2547336  11964   ??  Ss   Wed02AM   0:08.56 /usr/libexec/amfid
+root              105   0.0  0.0  2516924   2544   ??  Ss   Wed02AM   0:43.10 /usr/sbin/notifyd
+root              104   0.0  0.1  2519608  11200   ??  Ss   Wed02AM   0:16.60 /usr/libexec/AirPlayXPCHelper
+root              100   0.0  0.0  2491788   1928   ??  Ss   Wed02AM   0:00.02 /usr/sbin/KernelEventAgent
+root               99   0.0  0.0  2516048   4224   ??  Ss   Wed02AM   0:00.18 /System/Library/CoreServices/logind
+robenkleene        98   0.0  0.3  2634984  45080   ??  Ss   Wed02AM   1:48.05 /System/Library/CoreServices/loginwindow.app/Contents/MacOS/loginwindow console
+root               97   0.0  0.1  2562372  12404   ??  Ss   Wed02AM   0:08.07 /System/Library/PrivateFrameworks/GenerationalStorage.framework/Versions/A/Support/revisiond
+root               96   0.0  0.0  2545476   7868   ??  Ss   Wed02AM   0:02.29 /Library/PrivilegedHelperTools/screens_connectd
+_mdnsresponder     94   0.0  0.1  2548000  11208   ??  Ss   Wed02AM   0:46.29 /usr/sbin/mDNSResponder
+root               92   0.0  0.0  2542648   5576   ??  Ss   Wed02AM   0:00.18 /System/Library/PrivateFrameworks/Heimdal.framework/Helpers/kdc
+root               88   0.0  0.0  2516532   3840   ??  Ss   Wed02AM   0:00.06 autofsd
+root               87   0.0  0.1  2545100  10468   ??  Ss   Wed02AM   0:44.81 /usr/sbin/blued
+_locationd         84   0.0  0.1  2561652  15616   ??  Ss   Wed02AM   0:41.56 /usr/libexec/locationd
+root               82   0.0  0.1  2546788  10132   ??  Ss   Wed02AM   0:52.46 /usr/sbin/securityd -i
+_usbmuxd           81   0.0  0.0  2519196   4808   ??  Ss   Wed02AM   0:01.18 /System/Library/PrivateFrameworks/MobileDevice.framework/Versions/A/Resources/usbmuxd -launchd
+root               80   0.0  0.1  2550460  15480   ??  Ss   Wed02AM   2:06.05 /System/Library/CoreServices/launchservicesd
+root               79   0.0  0.1  2548396  19272   ??  Ss   Wed02AM   0:24.54 /System/Library/PrivateFrameworks/ApplePushService.framework/apsd
+root               77   0.0  0.0  2518308   7296   ??  Ss   Wed02AM   0:09.90 /usr/sbin/wirelessproxd
+root               76   0.0  0.1  2570100  15352   ??  Ss   Wed02AM   0:41.18 /usr/libexec/opendirectoryd
+root               74   0.0  0.1  2518400   8964   ??  Ss   Wed02AM   0:00.05 /usr/libexec/wdhelper
+root               73   0.0  0.1  2553568  21948   ??  Ss   Wed02AM   0:57.76 /usr/libexec/coreduetd
+root               71   0.0  0.0  2541612   4600   ??  Ss   Wed02AM   0:04.01 /usr/libexec/diskarbitrationd
+root               70   0.0  0.1  2575460  20324   ??  Ss   Wed02AM   0:00.22 /System/Library/CoreServices/iconservicesagent
+_iconservices      69   0.0  0.0  2518492   6360   ??  Ss   Wed02AM   0:00.10 /System/Library/CoreServices/iconservicesd
+root               65   0.0  0.5  2743068  85024   ??  Ss   Wed02AM   9:14.20 /System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Support/mds
+root               64   0.0  0.1  2545804  11648   ??  SNs  Wed02AM   0:02.93 /usr/libexec/warmd
+root               62   0.0  0.1  2551156  22992   ??  Ss   Wed02AM   1:27.42 /usr/libexec/airportd
+root               57   0.0  0.0  2541728   3996   ??  Ss   Wed02AM   0:09.95 /System/Library/CoreServices/powerd.bundle/powerd
+root               56   0.0  0.1  2546696   8924   ??  Ss   Wed02AM   0:33.28 /usr/libexec/configd
+_appleevents       55   0.0  0.1  2545408   8876   ??  Us   Wed02AM   0:02.13 /System/Library/CoreServices/appleeventsd --server
+root               51   0.0  0.1  2670756  13916   ??  Ss   Wed02AM   4:51.66 /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/Support/fseventsd
+root               50   0.0  0.1  2550088  20856   ??  Ss   Wed02AM   0:08.75 /usr/libexec/kextd
+root               48   0.0  0.1  2518632   8428   ??  Ss   Wed02AM   1:46.59 /Library/Backblaze.bzpkg/bzserv
+root               46   0.0  0.0  2518560   2756   ??  Ss   Wed02AM   2:20.05 /usr/sbin/syslogd
+root               45   0.0  0.1  2555892  24460   ??  Ss   Wed02AM   1:11.31 /usr/libexec/UserEventAgent (System)
+robenkleene     21470   0.0  0.0  2423360    208 s000  R+    1:44PM   0:00.00 pbcopy
+root                1   0.0  0.1  2539184  22984   ??  Ss   Wed02AM  11:51.91 /sbin/launchd
+root            21469   0.0  0.0  2436492   1056 s000  R+    1:44PM   0:00.00 ps aux
+robenkleene     21423   0.0  0.1  2534616  21792   ??  Ss    1:44PM   0:00.13 /System/Library/Frameworks/QuickLook.framework/Versions/A/Resources/quicklookd.app/Contents/XPCServices/QuickLookSatellite.xpc/Contents/MacOS/QuickLookSatellite
+robenkleene     21422   0.0  0.1  3064360  19276   ??  S     1:44PM   0:00.25 /System/Library/Frameworks/QuickLook.framework/Resources/quicklookd.app/Contents/MacOS/quicklookd
+robenkleene     21045   0.0  0.4  3877220  75436   ??  Ss    1:39PM   0:01.36 /System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.WebContent.xpc/Contents/MacOS/com.apple.WebKit.WebContent
+robenkleene     21044   0.0  0.4  3766364  70320   ??  Ss    1:39PM   0:00.43 /System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.WebContent.xpc/Contents/MacOS/com.apple.WebKit.WebContent
+robenkleene     21043   0.0  0.5  3792636  82876   ??  Ss    1:39PM   0:00.90 /System/Library/Frameworks/WebKit.framework/Versions/A/XPCServices/com.apple.WebKit.WebContent.xpc/Contents/MacOS/com.apple.WebKit.WebContent
