@@ -64,22 +64,32 @@ class ProcessFilter {
 
         let lines = output.componentsSeparatedByString("\n")
         for line in lines {
-            let processInfo = processFromLine(line)
+//            let processInfo = processFromLine(line)
         }
-                
+        
         return [ProcessInfo]()
     }
 
     private class func processFromLine(line: String) -> ProcessInfo? {
-//        let PIDStartIndex: String.Index = line.startIndex.advancedBy(5)
-//        let rawPID = line.substringToIndex(PIDStartIndex)
-//        
-//        let dateStartIndex: String.Index = line.startIndex.advancedBy(6)
-//        let dateEndIndex: String.Index = line.startIndex.advancedBy(30)
-//        let rawStartDate = line.substringWithRange(Range(start: dateStartIndex, end: dateEndIndex))
-//        
-//        let commandAndArguementsStartIndex: String.Index = line.startIndex.advancedBy(35)
-//        let rawCommandAndArguements = line.substringFromIndex(commandAndArguementsStartIndex)
+        let identifierStartIndex = line.startIndex.advancedBy(5)
+        let rawIdentifier = line.substringToIndex(identifierStartIndex).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        
+        let dateStartIndex = line.startIndex.advancedBy(6)
+        let dateEndIndex = line.startIndex.advancedBy(30)
+        let rawStartDate = line.substringWithRange(Range(start: dateStartIndex, end: dateEndIndex))
+        
+        let commandIndex = line.startIndex.advancedBy(35)
+        let command = line.substringFromIndex(commandIndex)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE MMM d HH:mm:ss yyyy"
+        
+//        var processInfo: ProcessInfo?
+        if let identifier = Int32(rawIdentifier),
+            date = dateFormatter.dateFromString(rawStartDate)
+        {
+//            processInfo = ProcessInfo(identifier: identifier, startTime: date, commandPath: command)
+        }
 
         return nil
     }
