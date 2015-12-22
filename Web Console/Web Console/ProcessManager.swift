@@ -19,8 +19,6 @@ class ProcessManager {
     enum ProcessInfoKey: String {
         case Identifier = "identifier"
         case CommandPath = "commandPath"
-        case Arguments = "arguments"
-        case DirectoryPath = "directoryPath"
         case StartTime = "startTime"
         func key() -> NSString {
             return self.rawValue as NSString
@@ -44,11 +42,11 @@ class ProcessManager {
         save()
     }
 
-    func removeProcessWithIdentifier(identifier: Int) -> ProcessInfo? {
+    func removeProcessWithIdentifier(identifier: Int32) -> ProcessInfo? {
         return processInfoForIdentifier(identifier, remove: true)
     }
     
-    func processInfoWithIdentifier(identifier: Int) -> ProcessInfo? {
+    func processInfoWithIdentifier(identifier: Int32) -> ProcessInfo? {
         return processInfoForIdentifier(identifier, remove: false)
     }
 
@@ -58,7 +56,7 @@ class ProcessManager {
         processManagerStore.setObject(identifierKeyToProcessInfoValue, forKey: runningProcessesKey)
     }
 
-    private func processInfoForIdentifier(identifier: Int, remove: Bool) -> ProcessInfo? {
+    private func processInfoForIdentifier(identifier: Int32, remove: Bool) -> ProcessInfo? {
         guard let processInfoValue = processInfoValueForIdentifier(identifier, remove: remove) else {
             return nil
         }
@@ -68,7 +66,7 @@ class ProcessManager {
 
     // MARK: Helper
     
-    private func processInfoValueForIdentifier(identifier: Int, remove: Bool) -> NSDictionary? {
+    private func processInfoValueForIdentifier(identifier: Int32, remove: Bool) -> NSDictionary? {
         let key = self.dynamicType.identifierToKey(identifier)
         if remove {
             let processInfoValue = identifierKeyToProcessInfoValue.removeValueForKey(key) as? NSDictionary
@@ -89,8 +87,6 @@ class ProcessManager {
         guard
             let key = dictionary[ProcessInfoKey.Identifier.key()] as? NSNumber,
             let commandPath = dictionary[ProcessInfoKey.CommandPath.key()] as? String,
-            let arguments = dictionary[ProcessInfoKey.Arguments.key()] as? [String],
-            let directoryPath = dictionary[ProcessInfoKey.DirectoryPath.key()] as? String,
             let startTime = dictionary[ProcessInfoKey.StartTime.key()] as? NSDate
         else {
             return nil
@@ -99,29 +95,25 @@ class ProcessManager {
         let identifier = keyToIdentifier(key)
         
         return ProcessInfo(identifier: identifier,
-            commandPath: commandPath,
-            arguments: arguments,
-            directoryPath: directoryPath,
-            startTime: startTime)
+            startTime: startTime,
+            commandPath: commandPath)
     }
     
     private class func valueForProcessInfo(processInfo: ProcessInfo) -> NSDictionary {
         let dictionary = NSMutableDictionary()
-        dictionary[ProcessInfoKey.Identifier.key()] = processInfo.identifier
+        let key = identifierToKey(processInfo.identifier)
+        dictionary[ProcessInfoKey.Identifier.key()] = key
         dictionary[ProcessInfoKey.CommandPath.key()] = processInfo.commandPath
-        dictionary[ProcessInfoKey.Arguments.key()] = processInfo.arguments
-        dictionary[ProcessInfoKey.DirectoryPath.key()] = processInfo.directoryPath
         dictionary[ProcessInfoKey.StartTime.key()] = processInfo.startTime
         return dictionary
     }
     
-    private class func keyToIdentifier(key: NSNumber) -> Int {
-        return Int(key.intValue)
+    private class func keyToIdentifier(key: NSNumber) -> Int32 {
+        return Int32(key.intValue)
     }
     
-    private class func identifierToKey(value: Int) -> NSNumber {
-        let valueInt32 = Int32(value)
-        let valueNumber = NSNumber(int: valueInt32)
+    private class func identifierToKey(value: Int32) -> NSNumber {
+        let valueNumber = NSNumber(int: value)
         return valueNumber
     }
 }

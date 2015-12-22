@@ -42,5 +42,13 @@ class ProcessFilterTests: XCTestCase {
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
     }
 
-    
+
+    func testExampleInput() {
+        let testDataPath = pathForResource(testDataTextPSOutputSmall,
+            ofType: testDataTextExtension,
+            inDirectory: testDataSubdirectory)!
+        
+        
+        
+    }
 }

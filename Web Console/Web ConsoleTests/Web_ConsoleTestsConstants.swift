@@ -20,6 +20,7 @@ let testDataSubdirectory = kTestDataSubdirectory
 // MARK: Text Files
 
 let testDataTextPSOutput = "ps_output"
+let testDataTextPSOutputSmall = "ps_output_small"
 let testDataTextExtension = "txt"
 
 // MARK: HTML Files
