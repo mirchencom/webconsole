@@ -46,7 +46,7 @@ class ProcessManagerTests: XCTestCase {
     func testProcessManager() {
         let processInfo = ProcessInfo(identifier: 1,
             startTime: NSDate(),
-            commandPath: "test")
+            commandPath: "test")!
 
         processManager.addProcessInfo(processInfo)
         let returnedProcessInfo = processManager.processInfoWithIdentifier(processInfo.identifier)!

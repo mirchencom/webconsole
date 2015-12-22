@@ -14,6 +14,15 @@ import XCTest
 
 class ProcessFilterTests: XCTestCase {
 
+    lazy var testProcessInfo: ProcessInfo = {
+        let identifier = Int32(74)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE MMM d HH:mm:ss yyyy"
+        let startTime = dateFormatter.dateFromString("Wed Dec 16 02:09:32 2015")!
+        let commandPath = "/usr/libexec/wdhelper"
+        return ProcessInfo(identifier: identifier, startTime: startTime, commandPath: commandPath)!
+    }()
+    
     // TODO: Start with one process, but we should do a test with several as well
     
 //    func testWithProcess() {
@@ -60,15 +69,26 @@ class ProcessFilterTests: XCTestCase {
         XCTAssertEqual(processInfos.count, 3)
         let processInfo = processInfos[0]
 
-        // Test Data
-        let identifier = Int32(74)
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "EEE MMM d HH:mm:ss yyyy"
-        let startTime = dateFormatter.dateFromString("Wed Dec 16 02:09:32 2015")!
-        let commandPath = "/usr/libexec/wdhelper"
-        
-        XCTAssertEqual(processInfo.identifier, identifier)
-        XCTAssertEqual(processInfo.startTime, startTime)
-        XCTAssertEqual(processInfo.commandPath, commandPath)
+        XCTAssertEqual(processInfo.identifier, testProcessInfo.identifier)
+        XCTAssertEqual(processInfo.startTime, testProcessInfo.startTime)
+        XCTAssertEqual(processInfo.commandPath, testProcessInfo.commandPath)
     }
+
+    func testBadExampleInput() {
+        let fileURL = URLForResource(testDataTextPSOutputBad,
+            withExtension: testDataTextExtension,
+            subdirectory: testDataSubdirectory)!
+        
+        let output = stringWithContentsOfFileURL(fileURL)!
+        
+        let processInfos = ProcessFilter.processesFromOutput(output)
+        XCTAssertEqual(processInfos.count, 1)
+        let processInfo = processInfos[0]
+        
+        XCTAssertEqual(processInfo.identifier, testProcessInfo.identifier)
+        XCTAssertEqual(processInfo.startTime, testProcessInfo.startTime)
+        XCTAssertEqual(processInfo.commandPath, testProcessInfo.commandPath)
+    }
+    
+
 }
