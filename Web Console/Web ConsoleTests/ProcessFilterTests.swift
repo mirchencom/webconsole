@@ -50,11 +50,13 @@ class ProcessFilterTests: XCTestCase {
     // TODO: Try a 35 character line
     
     func testExampleInput() {
-        let testDataPath = pathForResource(testDataTextPSOutputSmall,
-            ofType: testDataTextExtension,
-            inDirectory: testDataSubdirectory)!
+        let fileURL = URLForResource(testDataTextPSOutputSmall,
+            withExtension: testDataTextExtension,
+            subdirectory: testDataSubdirectory)!
         
+        let output = stringWithContentsOfFileURL(fileURL)!
         
-        
+        let processInfos = ProcessFilter.processesFromOutput(output)
+        XCTAssertEqual(processInfos.count, 3)
     }
 }

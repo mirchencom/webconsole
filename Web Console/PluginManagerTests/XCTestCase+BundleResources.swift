@@ -21,4 +21,17 @@ extension XCTestCase {
     func URLForResource(name: String, withExtension ext: String?, subdirectory subpath: String?) -> NSURL? {
         return NSBundle(forClass:self.dynamicType).URLForResource(name, withExtension:ext, subdirectory:subpath)
     }
+
+    func stringWithContentsOfFileURL(fileURL: NSURL) -> String? {
+        do {
+            let contents = try NSString(contentsOfURL: fileURL, encoding: NSUTF8StringEncoding)
+            return contents as String
+        } catch let error as NSError {
+            XCTAssertNil(error)
+        } catch {
+            XCTAssertTrue(false)
+        }
+        return nil
+    }
+
 }

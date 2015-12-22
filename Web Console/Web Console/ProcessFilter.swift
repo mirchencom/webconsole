@@ -46,7 +46,7 @@ class ProcessFilter {
 
     // MARK: Private
 
-    private class func processesFromOutput(output: String) -> [ProcessInfo] {
+    class func processesFromOutput(output: String) -> [ProcessInfo] {
 
         var processInfos = [ProcessInfo]()
         let lines = output.componentsSeparatedByString("\n")
