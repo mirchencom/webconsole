@@ -47,30 +47,23 @@ class ProcessFilter {
     // MARK: Private
 
     private class func processesFromOutput(output: String) -> [ProcessInfo] {
-        
-        // TODO: Implement
 
-        // TODO: Return empty array if output is empty
-
-        print("output = \(output)")
-
-//        let filePath = NSTemporaryDirectory().stringByAppendingPathComponent("web_console_output.txt")
-//        NSLog("filePath = \(filePath)")
-//        do {
-//            try output.writeToFile(filePath, atomically: true, encoding: NSUTF8StringEncoding)
-//        } catch {
-//            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-//        }
-
+        var processInfos = [ProcessInfo]()
         let lines = output.componentsSeparatedByString("\n")
         for line in lines {
-//            let processInfo = processFromLine(line)
+            if let processInfo = processFromLine(line) {
+                processInfos.append(processInfo)
+            }
         }
         
-        return [ProcessInfo]()
+        return processInfos
     }
 
     private class func processFromLine(line: String) -> ProcessInfo? {
+        if line.characters.count < 35 {
+            return nil
+        }
+        
         let identifierStartIndex = line.startIndex.advancedBy(5)
         let rawIdentifier = line.substringToIndex(identifierStartIndex).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         
@@ -84,14 +77,11 @@ class ProcessFilter {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEE MMM d HH:mm:ss yyyy"
         
-//        var processInfo: ProcessInfo?
-        if let identifier = Int32(rawIdentifier),
-            date = dateFormatter.dateFromString(rawStartDate)
-        {
-//            processInfo = ProcessInfo(identifier: identifier, startTime: date, commandPath: command)
+        guard let identifier = Int32(rawIdentifier), date = dateFormatter.dateFromString(rawStartDate) else {
+            return nil
         }
-
-        return nil
+        
+        return ProcessInfo(identifier: identifier, startTime: date, commandPath: command)
     }
     
 }

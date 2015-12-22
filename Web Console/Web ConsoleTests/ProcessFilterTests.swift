@@ -31,18 +31,24 @@ class ProcessFilterTests: XCTestCase {
 //        waitForExpectationsWithTimeout(5.0, handler: nil)
 //    }
 
-    func testWithoutProcess() {
+//    func testWithoutProcess() {
+//
+//        let expectation = expectationWithDescription("Process filter finished")
+//        ProcessFilter.processesWithIdentifiers([String]()) { (processes, error) -> Void in
+//            XCTAssertNil(error)
+//            XCTAssertEqual(processes!.count, 0)
+//            expectation.fulfill()
+//        }
+//        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+//    }
 
-        let expectation = expectationWithDescription("Process filter finished")
-        ProcessFilter.processesWithIdentifiers([String]()) { (processes, error) -> Void in
-            XCTAssertNil(error)
-            XCTAssertEqual(processes!.count, 0)
-            expectation.fulfill()
-        }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
-    }
+    // TODO: Test invalid input returns nil from `processFromLine`
+    // * Test short lines, long lines, subtly malformed lines
+    
+    // TODO: Test empty input to `processesFromOutput`
 
-
+    // TODO: Try a 35 character line
+    
     func testExampleInput() {
         let testDataPath = pathForResource(testDataTextPSOutputSmall,
             ofType: testDataTextExtension,
