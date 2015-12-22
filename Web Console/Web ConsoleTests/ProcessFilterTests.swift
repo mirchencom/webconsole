@@ -58,5 +58,17 @@ class ProcessFilterTests: XCTestCase {
         
         let processInfos = ProcessFilter.processesFromOutput(output)
         XCTAssertEqual(processInfos.count, 3)
+        let processInfo = processInfos[0]
+
+        // Test Data
+        let identifier = Int32(74)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE MMM d HH:mm:ss yyyy"
+        let startTime = dateFormatter.dateFromString("Wed Dec 16 02:09:32 2015")!
+        let commandPath = "/usr/libexec/wdhelper"
+        
+        XCTAssertEqual(processInfo.identifier, identifier)
+        XCTAssertEqual(processInfo.startTime, startTime)
+        XCTAssertEqual(processInfo.commandPath, commandPath)
     }
 }
