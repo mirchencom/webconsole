@@ -10,7 +10,10 @@ import XCTest
 
 @testable import Web_Console
 
+// MARK: ProcessFilterTests
+
 class ProcessFilterTests: XCTestCase {
+
     // TODO: Do a test with several processess
     // * Also should do a function like `runningProcessesMatchingProcessInfos`
     
@@ -31,8 +34,18 @@ class ProcessFilterTests: XCTestCase {
         }
         
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
-
-
+        
+        let processFilterExpectation = expectationWithDescription("Filter processes")
+        ProcessFilter.processesWithIdentifiers([task.processIdentifier]) { (processes, error) -> Void in
+            XCTAssertNil(error)
+            XCTAssertNotNil(processes)
+            XCTAssertEqual(processes!.count, 1)
+            let processInfo = processes![0]
+            XCTAssertEqual(processInfo.identifier, task.processIdentifier)
+            processFilterExpectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        
         // Clean up
 
         let interruptExpectation = expectationWithDescription("Interrupt finished")
@@ -40,9 +53,12 @@ class ProcessFilterTests: XCTestCase {
             XCTAssertTrue(success)
             interruptExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5.0, handler: nil)
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
     }
 }
+
+
+// MARK: ProcessFilterNoProcessTests
 
 class ProcessFilterNoProcessTests: XCTestCase {
 

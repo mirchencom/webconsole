@@ -13,23 +13,22 @@ class ProcessFilter {
     class func processesWithIdentifiers(identifiers: [Int32],
         completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
     {
+        if identifiers.isEmpty {
+            let error = NSError.errorWithDescription("No identifiers specified")
+            completionHandler(processes: nil, error: error)
+            return
+        }
+        
         let commandPath = "/bin/ps"
-        let arguments = ["-axww", "-o pid=,lstart=,args="]
-        // a: All users
-        // x: Not attached to terminal
-        // ww: Don't truncate command
+        let identifiersParameter = identifiers.map({ String($0) }).joinWithSeparator(",")
+        let arguments = ["-o pid=,lstart=,args=", "-p \(identifiersParameter)"]
+
         // o: Change format
         // pid: Process ID
         // lstart: Start time
         // args: Command & Arguments
         // = Means don't display header for this column
         
-        if identifiers.isEmpty {
-            let error = NSError.errorWithDescription("No identifiers specified")
-            completionHandler(processes: nil, error: error)
-            return
-        }
-
         WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
             withArguments: arguments,
             inDirectoryPath: nil)
@@ -64,7 +63,7 @@ class ProcessFilter {
         
         return processInfos
     }
-
+    
     private class func processFromLine(line: String) -> ProcessInfo? {
         if line.characters.count < 35 {
             return nil
