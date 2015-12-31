@@ -40,16 +40,15 @@ class ProcessFilterTests: XCTestCase {
 //        waitForExpectationsWithTimeout(5.0, handler: nil)
 //    }
 
-//    func testWithoutProcess() {
-//
-//        let expectation = expectationWithDescription("Process filter finished")
-//        ProcessFilter.processesWithIdentifiers([String]()) { (processes, error) -> Void in
-//            XCTAssertNil(error)
-//            XCTAssertEqual(processes!.count, 0)
-//            expectation.fulfill()
-//        }
-//        waitForExpectationsWithTimeout(testTimeout, handler: nil)
-//    }
+    func testEmptyIdentifiers() {
+        let expectation = expectationWithDescription("Process filter finished")
+        ProcessFilter.processesWithIdentifiers([Int32]()) { (processes, error) -> Void in
+            XCTAssertNotNil(error)
+            XCTAssertNil(processes)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
 
     func testEmptyInput() {
         var processInfos = ProcessFilter.processesFromOutput("")

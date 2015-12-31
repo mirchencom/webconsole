@@ -8,10 +8,9 @@
 
 import Foundation
 
-
 class ProcessFilter {
     
-    class func processesWithIdentifiers(identifiers: [String],
+    class func processesWithIdentifiers(identifiers: [Int32],
         completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
     {
         let commandPath = "/bin/ps"
@@ -24,6 +23,12 @@ class ProcessFilter {
         // lstart: Start time
         // args: Command & Arguments
         // = Means don't display header for this column
+        
+        if identifiers.isEmpty {
+            let error = NSError.errorWithDescription("No identifiers specified")
+            completionHandler(processes: nil, error: error)
+            return
+        }
 
         WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
             withArguments: arguments,
