@@ -56,7 +56,12 @@ class ProcessFilterTests: XCTestCase {
     
     // TODO: Test empty input to `processesFromOutput`
 
-    // TODO: Try a 35 character line
+    func testEmptyInput() {
+        var processInfos = ProcessFilter.processesFromOutput("")
+        XCTAssertEqual(processInfos.count, 0)
+        processInfos = ProcessFilter.processesFromOutput(" ")
+        XCTAssertEqual(processInfos.count, 0)
+    }
     
     func testExampleInput() {
         let fileURL = URLForResource(testDataTextPSOutputSmall,
