@@ -24,6 +24,7 @@ class ProcessFilter {
         // lstart: Start time
         // args: Command & Arguments
         // = Means don't display header for this column
+
         WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
             withArguments: arguments,
             inDirectoryPath: nil)

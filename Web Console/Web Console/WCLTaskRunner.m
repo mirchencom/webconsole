@@ -115,9 +115,10 @@
         
         if (success) {
             if ([delegate respondsToSelector:@selector(task:didRunCommandPath:arguments:directoryPath:)]) {
-                [delegate task:task didRunCommandPath:commandPath
-                           arguments:arguments
-                       directoryPath:directoryPath];
+                [delegate task:task
+             didRunCommandPath:commandPath
+                     arguments:arguments
+                 directoryPath:directoryPath];
             }
         } else {
             if (error == nil) {

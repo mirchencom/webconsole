@@ -51,11 +51,6 @@ class ProcessFilterTests: XCTestCase {
 //        waitForExpectationsWithTimeout(testTimeout, handler: nil)
 //    }
 
-    // TODO: Test invalid input returns nil from `processFromLine`
-    // * Test short lines, long lines, subtly malformed lines
-    
-    // TODO: Test empty input to `processesFromOutput`
-
     func testEmptyInput() {
         var processInfos = ProcessFilter.processesFromOutput("")
         XCTAssertEqual(processInfos.count, 0)
