@@ -10,13 +10,13 @@ import Foundation
 
 class TaskRunner {
 
-    class func runLaunchPath(launchPath: String, handler: (Void -> Void)?) {
+    class func runLaunchPath(launchPath: String, handler: (Void -> Void)?) -> NSTask {
         let task = NSTask()
         task.launchPath = launchPath
-        runTask(task, handler: handler)
+        return runTask(task, handler: handler)
     }
     
-    class func runTask(task: NSTask, handler: (Void -> Void)?) {
+    class func runTask(task: NSTask, handler: (Void -> Void)?) -> NSTask {
         task.standardOutput = NSPipe()
         task.standardOutput!.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
             let data = file.availableData
@@ -41,5 +41,6 @@ class TaskRunner {
         }
         
         task.launch()
+        return task
     }
 }

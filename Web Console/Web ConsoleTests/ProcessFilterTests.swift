@@ -10,9 +10,41 @@ import XCTest
 
 @testable import Web_Console
 
-// TODO: Test if no valid process is found, than an empty array is returned
-
 class ProcessFilterTests: XCTestCase {
+    // TODO: Do a test with several processess
+    // * Also should do a function like `runningProcessesMatchingProcessInfos`
+    
+    func testWithProcess() {
+        
+        let commandPath = pathForResource(testDataShellScriptCatName,
+            ofType: testDataShellScriptExtension,
+            inDirectory: testDataSubdirectory)!
+        
+        let runExpectation = expectationWithDescription("Task ran")
+        let task = WCLTaskRunner.runTaskWithCommandPath(commandPath,
+            withArguments: nil,
+            inDirectoryPath: nil,
+            delegate: nil)
+        { (success) -> Void in
+            XCTAssertTrue(success)
+            runExpectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+
+
+        // Clean up
+
+        let interruptExpectation = expectationWithDescription("Interrupt finished")
+        task.wcl_interruptWithCompletionHandler { (success) -> Void in
+            XCTAssertTrue(success)
+            interruptExpectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(5.0, handler: nil)
+    }
+}
+
+class ProcessFilterNoProcessTests: XCTestCase {
 
     lazy var testProcessInfo: ProcessInfo = {
         let identifier = Int32(74)
@@ -22,23 +54,6 @@ class ProcessFilterTests: XCTestCase {
         let commandPath = "/usr/libexec/wdhelper"
         return ProcessInfo(identifier: identifier, startTime: startTime, commandPath: commandPath)!
     }()
-    
-    // TODO: Start with one process, but we should do a test with several as well
-    
-//    func testWithProcess() {
-//
-//        let commandPath = pathForResource(testDataSleepTwoSeconds,
-//            ofType: testDataRubyFileExtension,
-//            inDirectory: testDataSubdirectory)!
-//        
-//        let expectation = expectationWithDescription("Task ran")
-//        TaskRunner.runLaunchPath(commandPath) {
-//            NSLog("Done")
-//            expectation.fulfill()
-//        }
-//
-//        waitForExpectationsWithTimeout(5.0, handler: nil)
-//    }
 
     func testEmptyIdentifiers() {
         let expectation = expectationWithDescription("Process filter finished")
