@@ -51,10 +51,17 @@ class ProcessManagerTests: ProcessManagerTestCase {
         processManager.addProcessInfo(processInfo)
         let returnedProcessInfo = processManager.processInfoWithIdentifier(processInfo.identifier)!
         XCTAssertNotNil(returnedProcessInfo)
-        XCTAssertEqual(processInfo, returnedProcessInfo)
+        XCTAssertEqual(returnedProcessInfo, processInfo)
+
+        let returnedProcessInfos = processManager.processInfos()
+        XCTAssertEqual(returnedProcessInfos.count, 1)
+        XCTAssertEqual(returnedProcessInfos[0], processInfo)
         
         let invalidProcessInfo = processManager.processInfoWithIdentifier(999)
         XCTAssertNil(invalidProcessInfo)
     }
 
+    // TODO: Write a test where a `ProcessInfo` is added independently to the
+    // `ProcessManagerStore` before initializing the `ProcessManager`, and
+    // assure that `ProcessInfo` is there on startup.
 }
