@@ -13,9 +13,61 @@ import XCTest
 // MARK: ProcessFilterTests
 
 class ProcessFilterTests: XCTestCase {
+    
+    func testWithProcesses() {
 
-    // TODO: Do a test with several processess
-    // * Also should do a function like `runningProcessesMatchingProcessInfos`
+        var tasks = [NSTask]()
+        for _ in 0...2 {
+            let commandPath = pathForResource(testDataShellScriptCatName,
+                ofType: testDataShellScriptExtension,
+                inDirectory: testDataSubdirectory)!
+            
+            let runExpectation = expectationWithDescription("Task ran")
+            let task = WCLTaskRunner.runTaskWithCommandPath(commandPath,
+                withArguments: nil,
+                inDirectoryPath: nil,
+                delegate: nil)
+                { (success) -> Void in
+                    XCTAssertTrue(success)
+                    runExpectation.fulfill()
+            }
+            tasks.append(task)
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        
+        // Clean up
+
+        for task in tasks {
+            let interruptExpectation = expectationWithDescription("Interrupt finished")
+            task.wcl_interruptWithCompletionHandler { (success) -> Void in
+                XCTAssertTrue(success)
+                interruptExpectation.fulfill()
+            }
+        }
+
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        
+//        let processFilterExpectation = expectationWithDescription("Filter processes")
+//        ProcessFilter.processesWithIdentifiers([task.processIdentifier]) { (processes, error) -> Void in
+//            XCTAssertNil(error)
+//            XCTAssertNotNil(processes)
+//            XCTAssertEqual(processes!.count, 1)
+//            let processInfo = processes![0]
+//            XCTAssertEqual(processInfo.identifier, task.processIdentifier)
+//            processFilterExpectation.fulfill()
+//        }
+//        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+//        
+//        // Clean up
+//        
+//        let interruptExpectation = expectationWithDescription("Interrupt finished")
+//        task.wcl_interruptWithCompletionHandler { (success) -> Void in
+//            XCTAssertTrue(success)
+//            interruptExpectation.fulfill()
+//        }
+//        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
+    
     
     func testWithProcess() {
         
