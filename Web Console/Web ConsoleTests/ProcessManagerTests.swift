@@ -10,10 +10,7 @@ import XCTest
 
 @testable import Web_Console
 
-class ProcessManagerTests: XCTestCase {
-
-    // MARK: Properties
-
+class ProcessManagerTestCase: XCTestCase {
     class MockProcessManagerStore: ProcessManagerStore {
         let mutableDictionary = NSMutableDictionary()
         
@@ -26,8 +23,9 @@ class ProcessManagerTests: XCTestCase {
         }
     }
     
-    var processManager: ProcessManager!
+    // MARK: Properties
     
+    var processManager: ProcessManager!
     
     // MARK: Setup & Teardown
 
@@ -41,8 +39,10 @@ class ProcessManagerTests: XCTestCase {
         processManager = ProcessManager(processManagerStore: MockProcessManagerStore())
     }
 
-    // MARK: Tests
-    
+}
+
+class ProcessManagerTests: ProcessManagerTestCase {
+
     func testProcessManager() {
         let processInfo = ProcessInfo(identifier: 1,
             startTime: NSDate(),

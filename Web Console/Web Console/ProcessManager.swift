@@ -50,6 +50,22 @@ class ProcessManager {
         return processInfoForIdentifier(identifier, remove: false)
     }
 
+    func processInfos() -> [ProcessInfo] {
+        let values = identifierKeyToProcessInfoValue.values
+        var processInfos = [ProcessInfo]()
+
+        for value in values {
+            if let
+                value = value as? NSDictionary,
+                processInfo = self.dynamicType.processInfoForValue(value)
+            {
+                processInfos.append(processInfo)
+            }
+        }
+
+        return processInfos
+    }
+    
     // MARK: Private
     
     private func save() {
