@@ -35,6 +35,23 @@ class ProcessFilterTests: XCTestCase {
         }
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
         
+        let taskIdentifiers = tasks.map { $0.processIdentifier }.sort { $0 < $1 }
+        let processFilterExpectation = expectationWithDescription("Filter processes")
+        ProcessFilter.processesWithIdentifiers(taskIdentifiers) { (processes, error) -> Void in
+            guard let processes = processes else {
+                XCTAssertTrue(false)
+                return
+            }
+            XCTAssertNil(error)
+
+            XCTAssertEqual(processes.count, 3)
+ 
+            let processIdentifiers = processes.map({ $0.identifier }).sort { $0 < $1 }
+            XCTAssertEqual(processIdentifiers, taskIdentifiers)
+            processFilterExpectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        
         // Clean up
 
         for task in tasks {
@@ -46,26 +63,6 @@ class ProcessFilterTests: XCTestCase {
         }
 
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
-        
-//        let processFilterExpectation = expectationWithDescription("Filter processes")
-//        ProcessFilter.processesWithIdentifiers([task.processIdentifier]) { (processes, error) -> Void in
-//            XCTAssertNil(error)
-//            XCTAssertNotNil(processes)
-//            XCTAssertEqual(processes!.count, 1)
-//            let processInfo = processes![0]
-//            XCTAssertEqual(processInfo.identifier, task.processIdentifier)
-//            processFilterExpectation.fulfill()
-//        }
-//        waitForExpectationsWithTimeout(testTimeout, handler: nil)
-//        
-//        // Clean up
-//        
-//        let interruptExpectation = expectationWithDescription("Interrupt finished")
-//        task.wcl_interruptWithCompletionHandler { (success) -> Void in
-//            XCTAssertTrue(success)
-//            interruptExpectation.fulfill()
-//        }
-//        waitForExpectationsWithTimeout(testTimeout, handler: nil)
     }
     
     
