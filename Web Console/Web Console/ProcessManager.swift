@@ -25,8 +25,8 @@ class ProcessManager {
         }
     }
     
-    let processManagerStore: ProcessManagerStore
-    var identifierKeyToProcessInfoValue = [NSNumber: AnyObject]()
+    private let processManagerStore: ProcessManagerStore
+    private var identifierKeyToProcessInfoValue = [NSNumber: AnyObject]()
 
     convenience init() {
         self.init(processManagerStore: NSUserDefaults.standardUserDefaults())

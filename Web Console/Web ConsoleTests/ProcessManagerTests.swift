@@ -59,6 +59,13 @@ class ProcessManagerTests: ProcessManagerTestCase {
         
         let invalidProcessInfo = processManager.processInfoWithIdentifier(999)
         XCTAssertNil(invalidProcessInfo)
+
+        // We could do the process info initialization test here by grabbing the
+        // dictionary, initializing a new `ProcessManager` with it, and then 
+        // running the above asserts again
+
+//        let processManagerStore = processManager.processManagerStore
+//        let processManagerTwo = ProcessManager(processManagerStore: processManagerStore)
     }
 
     // TODO: Write a test where a `ProcessInfo` is added independently to the
