@@ -29,7 +29,7 @@ class ProcessManager {
     private var identifierKeyToProcessInfoValue = [NSString: AnyObject]()
 
     convenience init() {
-        self.init(processManagerStore: NSUserDefaults.standardUserDefaults())
+        self.init(processManagerStore: UserDefaultsManager.standardUserDefaults())
     }
     
     init(processManagerStore: ProcessManagerStore) {

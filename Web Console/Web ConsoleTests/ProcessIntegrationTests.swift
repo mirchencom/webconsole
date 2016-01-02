@@ -43,6 +43,22 @@ class ProcessManagerRouter: NSObject, WCLTaskRunnerDelegate {
 
 class ProcessIntegrationTests: ProcessManagerTestCase {
 
+    var processManagerRouter: ProcessManagerRouter!
+    
+    // MARK: setUp & tearDown
+    
+    override func setUp() {
+        super.setUp()
+        processManagerRouter = ProcessManagerRouter(processManager: processManager)
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        processManagerRouter = nil
+    }
+    
+    // MARK: Tests
+    
     func testProcess() {
     
         let commandPath = pathForResource(testDataShellScriptCatName,
@@ -53,7 +69,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         let task = WCLTaskRunner.runTaskWithCommandPath(commandPath,
             withArguments: nil,
             inDirectoryPath: nil,
-            delegate: nil)
+            delegate: processManagerRouter)
         { (success) -> Void in
             
             XCTAssertTrue(success)
@@ -62,10 +78,14 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
 
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
 
-        NSLog("task = \(task)")
-
-    
-        // Clean up
+        let processInfos = processManager.processInfos()
+        XCTAssertEqual(processInfos.count, 1)
+        let processInfo = processInfos[0]
+        let processInfoByIdentifier = processManager.processInfoWithIdentifier(task.processIdentifier)
+        XCTAssertEqual(processInfo, processInfoByIdentifier)
+        XCTAssertEqual(processInfo.identifier, task.processIdentifier)
+        
+        // Interrupt the process
 
         // Note: This is temporary, this will probably be replaced with a 
         // separate cancel function that doesn't rely on having an existing
@@ -78,6 +98,11 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         }
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
 
+        // Confirm the process has been removed
+        
+        let processInfosTwo = processManager.processInfos()
+        XCTAssertEqual(processInfosTwo.count, 0)
+        XCTAssertNil(processManager.processInfoWithIdentifier(task.processIdentifier))
     }
 
 }
