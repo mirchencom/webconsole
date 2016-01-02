@@ -25,18 +25,20 @@ class ProcessManagerTestCase: XCTestCase {
     
     // MARK: Properties
     
+    var processManagerStore: ProcessManagerStore!
     var processManager: ProcessManager!
     
     // MARK: Setup & Teardown
 
     override func setUp() {
         super.setUp()
-        processManager = ProcessManager(processManagerStore: MockProcessManagerStore())
+        processManagerStore = MockProcessManagerStore()
+        processManager = ProcessManager(processManagerStore: processManagerStore)
     }
     
     override func tearDown() {
         super.tearDown()
-        processManager = ProcessManager(processManagerStore: MockProcessManagerStore())
+        processManager = nil
     }
 
 }
@@ -48,27 +50,30 @@ class ProcessManagerTests: ProcessManagerTestCase {
             startTime: NSDate(),
             commandPath: "test")!
 
-        processManager.addProcessInfo(processInfo)
-        let returnedProcessInfo = processManager.processInfoWithIdentifier(processInfo.identifier)!
-        XCTAssertNotNil(returnedProcessInfo)
-        XCTAssertEqual(returnedProcessInfo, processInfo)
-
-        let returnedProcessInfos = processManager.processInfos()
-        XCTAssertEqual(returnedProcessInfos.count, 1)
-        XCTAssertEqual(returnedProcessInfos[0], processInfo)
+        let testProcessManager: (processManager: ProcessManager) -> Bool = { processManager in
+            let returnedProcessInfo = processManager.processInfoWithIdentifier(processInfo.identifier)!
+            XCTAssertNotNil(returnedProcessInfo)
+            XCTAssertEqual(returnedProcessInfo, processInfo)
+            
+            let returnedProcessInfos = processManager.processInfos()
+            XCTAssertEqual(returnedProcessInfos.count, 1)
+            XCTAssertEqual(returnedProcessInfos[0], processInfo)
+            
+            let invalidProcessInfo = processManager.processInfoWithIdentifier(999)
+            XCTAssertNil(invalidProcessInfo)
+            return true
+        }
         
-        let invalidProcessInfo = processManager.processInfoWithIdentifier(999)
-        XCTAssertNil(invalidProcessInfo)
-
-        // We could do the process info initialization test here by grabbing the
-        // dictionary, initializing a new `ProcessManager` with it, and then 
-        // running the above asserts again
-
-//        let processManagerStore = processManager.processManagerStore
+        processManager.addProcessInfo(processInfo)
+        let processManagerResult = testProcessManager(processManager: processManager)
+        XCTAssertTrue(processManagerResult)
+        
+        // Initialize a second `ProcessManager` with the existing `ProcessManagerStore`
+        // this will test that the new `ProcessManager` is initialized with the
+        // `ProcessInfo`s already stored in the `ProcessManagerStore`.
 //        let processManagerTwo = ProcessManager(processManagerStore: processManagerStore)
+//        let processManagerTwoResult = testProcessManager(processManager: processManagerTwo)
+//        XCTAssertTrue(processManagerTwoResult)
     }
 
-    // TODO: Write a test where a `ProcessInfo` is added independently to the
-    // `ProcessManagerStore` before initializing the `ProcessManager`, and
-    // assure that `ProcessInfo` is there on startup.
 }
