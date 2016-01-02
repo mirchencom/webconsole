@@ -71,9 +71,14 @@ class ProcessManagerTests: ProcessManagerTestCase {
         // Initialize a second `ProcessManager` with the existing `ProcessManagerStore`
         // this will test that the new `ProcessManager` is initialized with the
         // `ProcessInfo`s already stored in the `ProcessManagerStore`.
-//        let processManagerTwo = ProcessManager(processManagerStore: processManagerStore)
-//        let processManagerTwoResult = testProcessManager(processManager: processManagerTwo)
-//        XCTAssertTrue(processManagerTwoResult)
+        let processManagerTwo = ProcessManager(processManagerStore: processManagerStore)
+        let processManagerTwoResult = testProcessManager(processManager: processManagerTwo)
+        XCTAssertTrue(processManagerTwoResult)
+        
+        // TODO: Remove the processes, then make sure it returns nil
+        // TODO: Init and make sure it returns nil
+        
+    
     }
 
 }

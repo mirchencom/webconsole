@@ -26,13 +26,16 @@ class ProcessManager {
     }
     
     private let processManagerStore: ProcessManagerStore
-    private var identifierKeyToProcessInfoValue = [NSNumber: AnyObject]()
+    private var identifierKeyToProcessInfoValue = [NSString: AnyObject]()
 
     convenience init() {
         self.init(processManagerStore: NSUserDefaults.standardUserDefaults())
     }
     
     init(processManagerStore: ProcessManagerStore) {
+        if let processInfoDictionary = processManagerStore.dictionaryForKey(runningProcessesKey) {
+            identifierKeyToProcessInfoValue = processInfoDictionary
+        }
         self.processManagerStore = processManagerStore
     }
     
@@ -93,7 +96,7 @@ class ProcessManager {
         }
     }
     
-    private class func keyAndValueForProcessInfo(processInfo: ProcessInfo) -> (key: NSNumber, value: NSDictionary) {
+    private class func keyAndValueForProcessInfo(processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
         let key = identifierToKey(processInfo.identifier)
         let value = valueForProcessInfo(processInfo)
         return (key: key, value: value)
@@ -101,7 +104,7 @@ class ProcessManager {
     
     private class func processInfoForValue(dictionary: NSDictionary) -> ProcessInfo? {
         guard
-            let key = dictionary[ProcessInfoKey.Identifier.key()] as? NSNumber,
+            let key = dictionary[ProcessInfoKey.Identifier.key()] as? NSString,
             let commandPath = dictionary[ProcessInfoKey.CommandPath.key()] as? String,
             let startTime = dictionary[ProcessInfoKey.StartTime.key()] as? NSDate
         else {
@@ -124,12 +127,12 @@ class ProcessManager {
         return dictionary
     }
     
-    private class func keyToIdentifier(key: NSNumber) -> Int32 {
+    private class func keyToIdentifier(key: NSString) -> Int32 {
         return Int32(key.intValue)
     }
     
-    private class func identifierToKey(value: Int32) -> NSNumber {
-        let valueNumber = NSNumber(int: value)
+    private class func identifierToKey(value: Int32) -> NSString {
+        let valueNumber = String(value)
         return valueNumber
     }
 }
