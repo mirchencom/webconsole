@@ -10,12 +10,37 @@ import Foundation
 
 extension ProcessFilter {
     class func runningProcessMatchingProcessInfos(processInfos: [ProcessInfo],
-        completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
+        completionHandler: ((identifierToProcessInfo: [Int32: ProcessInfo]?, error: NSError?) -> Void))
     {
         let identifiers = processInfos.map { $0.identifier }
         runningProcessesWithIdentifiers(identifiers) { (identifierToProcessInfo, error) -> Void in
+            if let error = error {
+                completionHandler(identifierToProcessInfo: nil, error: error)
+                return
+            }
+
+            guard var identifierToProcessInfo = identifierToProcessInfo else {
+                completionHandler(identifierToProcessInfo: [Int32: ProcessInfo](), error: nil)
+                return
+            }
             
+            for processInfo in processInfos {
+                if let runningProcessInfo = identifierToProcessInfo[processInfo.identifier] {
+                    if !processInfoMatchesProcessInfo(processInfo, processInfoTwo: runningProcessInfo) {
+                        identifierToProcessInfo.removeValueForKey(processInfo.identifier)
+                    }
+                }
+            }
+
+            completionHandler(identifierToProcessInfo: identifierToProcessInfo, error: nil)
         }
+    }
+
+    class func processInfoMatchesProcessInfo(processInfoOne: ProcessInfo, processInfoTwo: ProcessInfo) -> Bool {
+        // TODO: Check the dates match
+        // Check the user is not root
+
+        return true
     }
 }
 
