@@ -42,7 +42,6 @@ extension ProcessFilter {
         assert(runningProcessInfo.identifier == processInfo.identifier)
         
         // Make sure the running process started on or before the other `ProcessInfo`'s `startTime`
-
         if runningProcessInfo.startTime.compare(processInfo.startTime) == NSComparisonResult.OrderedDescending {
             return false
         }
