@@ -86,10 +86,21 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         XCTAssertEqual(processInfo, processInfoByIdentifier)
         XCTAssertEqual(processInfo.identifier, task.processIdentifier)
 
-        // TODO: Test that the process filter has the process
-
-//        ProcessFilter.processesWithIdentifiers([], completionHandler: <#T##((processes: [ProcessInfo]?, error: NSError?) -> Void)##((processes: [ProcessInfo]?, error: NSError?) -> Void)##(processes: [ProcessInfo]?, error: NSError?) -> Void#>)
+        // Test that the process filter has the process
+        let filterExpectation = expectationWithDescription("Process filter")
+        ProcessFilter.runningProcessMatchingProcessInfos([processInfo]) { (identifierToProcessInfo, error) -> Void in
+            guard let identifierToProcessInfo = identifierToProcessInfo,
+                runningProcessInfo = identifierToProcessInfo[processInfo.identifier] else
+            {
+                XCTAssertTrue(false)
+                return
+            }
+            
+            XCTAssertEqual(runningProcessInfo.identifier, processInfo.identifier)
+            filterExpectation.fulfill()
+        }
         
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
         
         // Interrupt the process
 
