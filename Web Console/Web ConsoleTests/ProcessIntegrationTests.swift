@@ -173,9 +173,5 @@ class OneProcessIntegrationTests: ProcessManagerTestCase {
         XCTAssertEqual(processInfosTwo.count, 0)
         XCTAssertNil(processManager.processInfoWithIdentifier(task.processIdentifier))
     }
-    
-//    func testProcessInfoWithTooLateDate() {
-//        
-//    }
 
 }
