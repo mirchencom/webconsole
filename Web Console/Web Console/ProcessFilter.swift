@@ -8,14 +8,25 @@
 
 import Foundation
 
+extension ProcessFilter {
+    class func runningProcessMatchingProcessInfos(processInfos: [ProcessInfo],
+        completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
+    {
+        let identifiers = processInfos.map { $0.identifier }
+        runningProcessesWithIdentifiers(identifiers) { (identifierToProcessInfo, error) -> Void in
+            
+        }
+    }
+}
+
 class ProcessFilter {
     
-    class func processesWithIdentifiers(identifiers: [Int32],
-        completionHandler: ((processes: [ProcessInfo]?, error: NSError?) -> Void))
+    class func runningProcessesWithIdentifiers(identifiers: [Int32],
+        completionHandler: ((identifierToProcessInfo: [Int32: ProcessInfo]?, error: NSError?) -> Void))
     {
         if identifiers.isEmpty {
             let error = NSError.errorWithDescription("No identifiers specified")
-            completionHandler(processes: nil, error: error)
+            completionHandler(identifierToProcessInfo: nil, error: error)
             return
         }
         
@@ -35,33 +46,33 @@ class ProcessFilter {
         { (standardOutput, standardError, error) -> Void in
 
             if let error = error {
-                completionHandler(processes: nil, error: error)
+                completionHandler(identifierToProcessInfo: nil, error: error)
                 return
             }
 
             guard let standardOutput = standardOutput else {
-                completionHandler(processes: [ProcessInfo](), error: nil)
+                completionHandler(identifierToProcessInfo: [Int32: ProcessInfo](), error: nil)
                 return
             }
             
             let processInfos = processesFromOutput(standardOutput)
-            completionHandler(processes: processInfos, error: nil)
+            completionHandler(identifierToProcessInfo: processInfos, error: nil)
         }
     }
 
     // MARK: Private
 
-    class func processesFromOutput(output: String) -> [ProcessInfo] {
+    class func processesFromOutput(output: String) -> [Int32: ProcessInfo] {
 
-        var processInfos = [ProcessInfo]()
+        var identifierToProcessInfo = [Int32: ProcessInfo]()
         let lines = output.componentsSeparatedByString("\n")
         for line in lines {
             if let processInfo = processFromLine(line) {
-                processInfos.append(processInfo)
+                identifierToProcessInfo[processInfo.identifier] = processInfo
             }
         }
         
-        return processInfos
+        return identifierToProcessInfo
     }
     
     private class func processFromLine(line: String) -> ProcessInfo? {
