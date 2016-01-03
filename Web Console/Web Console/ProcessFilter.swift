@@ -26,7 +26,7 @@ extension ProcessFilter {
             
             for processInfo in processInfos {
                 if let runningProcessInfo = identifierToProcessInfo[processInfo.identifier] {
-                    if !processInfoMatchesProcessInfo(processInfo, processInfoTwo: runningProcessInfo) {
+                    if !doesRunningProcessInfo(runningProcessInfo, matchProcessInfo: processInfo) {
                         identifierToProcessInfo.removeValueForKey(processInfo.identifier)
                     }
                 }
@@ -36,10 +36,18 @@ extension ProcessFilter {
         }
     }
 
-    class func processInfoMatchesProcessInfo(processInfoOne: ProcessInfo, processInfoTwo: ProcessInfo) -> Bool {
-        // TODO: Check the dates match
-        // Check the user is not root
+    class func doesRunningProcessInfo(runningProcessInfo: ProcessInfo,
+        matchProcessInfo processInfo: ProcessInfo) -> Bool
+    {
+        assert(runningProcessInfo.identifier == processInfo.identifier)
+        
+        // Make sure the running process started on or before the other `ProcessInfo`'s `startTime`
+        if runningProcessInfo.startTime.compare(processInfo.startTime) == NSComparisonResult.OrderedDescending {
+            return false
+        }
 
+        // Check the user is not root, this is a bit of hack to put this here
+        
         return true
     }
 }
