@@ -50,6 +50,8 @@
 		455FD2581A899CB600ACE1D4 /* WCLKeyValueObservingTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 459EC93F1A89981E0098A47B /* WCLKeyValueObservingTestsHelper.m */; };
 		455FD2591A899CB900ACE1D4 /* XCTestCase+BundleResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EC9401A89981E0098A47B /* XCTestCase+BundleResources.swift */; };
 		455FD25A1A899CDE00ACE1D4 /* HTML.wcplugin in Resources */ = {isa = PBXBuildFile; fileRef = 457F795018B005BF00D705C8 /* HTML.wcplugin */; };
+		4562268E1C3C98C90049EDDF /* WCLProcessKiller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4562268D1C3C98C90049EDDF /* WCLProcessKiller.m */; };
+		456226901C3C9CD90049EDDF /* ProcessKiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4562268F1C3C9CD90049EDDF /* ProcessKiller.swift */; };
 		4562410F1A88683C0047F085 /* WCLSplitWebWindowControllerPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4562410E1A88683C0047F085 /* WCLSplitWebWindowControllerPluginTests.m */; };
 		456241121A8991A70047F085 /* WCLAppleScriptPluginWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */; };
 		45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
@@ -265,6 +267,9 @@
 		455FD2491A899C9B00ACE1D4 /* SubprocessFileSystemModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubprocessFileSystemModifier.swift; sourceTree = "<group>"; };
 		455FD24A1A899C9B00ACE1D4 /* WCLDirectoryWatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCLDirectoryWatcherTests.swift; sourceTree = "<group>"; };
 		4561C2271874C01700CF926D /* NSRectHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSRectHelpers.h; sourceTree = "<group>"; };
+		4562268C1C3C98C90049EDDF /* WCLProcessKiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLProcessKiller.h; sourceTree = "<group>"; };
+		4562268D1C3C98C90049EDDF /* WCLProcessKiller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLProcessKiller.m; sourceTree = "<group>"; };
+		4562268F1C3C9CD90049EDDF /* ProcessKiller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessKiller.swift; sourceTree = "<group>"; };
 		4562410E1A88683C0047F085 /* WCLSplitWebWindowControllerPluginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLSplitWebWindowControllerPluginTests.m; sourceTree = "<group>"; };
 		456241101A8991A70047F085 /* WCLAppleScriptPluginWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLAppleScriptPluginWrapper.h; sourceTree = "<group>"; };
 		456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLAppleScriptPluginWrapper.m; sourceTree = "<group>"; };
@@ -796,6 +801,9 @@
 				4510A43C1C15020F007BAA2E /* ProcessManager.swift */,
 				45DAA2271C23979200D3A2C1 /* ProcessFilter.swift */,
 				45D1509A1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift */,
+				4562268C1C3C98C90049EDDF /* WCLProcessKiller.h */,
+				4562268D1C3C98C90049EDDF /* WCLProcessKiller.m */,
+				4562268F1C3C9CD90049EDDF /* ProcessKiller.swift */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -1100,8 +1108,10 @@
 				456241121A8991A70047F085 /* WCLAppleScriptPluginWrapper.m in Sources */,
 				45B4FE471BB233B2007CB801 /* String+Paths.swift in Sources */,
 				45B375C6179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m in Sources */,
+				4562268E1C3C98C90049EDDF /* WCLProcessKiller.m in Sources */,
 				45914E421A87E4E600E4BEFA /* PluginsDirectoryEventHandler.swift in Sources */,
 				45B375C9179B8347002BCEF6 /* WCLTaskHelper.m in Sources */,
+				456226901C3C9CD90049EDDF /* ProcessKiller.swift in Sources */,
 				45B0FF3F1B75805A008EC6EC /* SplitController.swift in Sources */,
 				45914E3A1A87E4E600E4BEFA /* FileExtensionsController.swift in Sources */,
 				459389EF18FB20D900E0218E /* WCLPreferencesWindowController.m in Sources */,

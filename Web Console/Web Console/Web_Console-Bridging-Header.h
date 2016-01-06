@@ -18,6 +18,7 @@
 #import "NSWindow+AppleScript.h"
 #import "NSTask+Termination.h"
 #import "WebConsoleConstants.h"
+#import "WCLProcessKiller.h"
 
 // MARK: For tests
 
