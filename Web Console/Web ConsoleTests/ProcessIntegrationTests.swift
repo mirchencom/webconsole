@@ -140,32 +140,52 @@ class OneProcessIntegrationTests: ProcessManagerTestCase {
             return
         }
         
+        var runningProcessInfo: ProcessInfo!
         ProcessFilter.runningProcessMatchingProcessInfos([inTheFutureProcessInfo]) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNil(error)
             guard let identifierToProcessInfo = identifierToProcessInfo,
-                runningProcessInfo = identifierToProcessInfo[processInfo.identifier] else
+                localRunningProcessInfo = identifierToProcessInfo[processInfo.identifier] else
             {
                 XCTAssertTrue(false)
                 return
             }
             
-            XCTAssertEqual(runningProcessInfo.identifier, processInfo.identifier)
+            XCTAssertEqual(localRunningProcessInfo.identifier, processInfo.identifier)
+            runningProcessInfo = localRunningProcessInfo
             filterExpectationThree.fulfill()
         }
         waitForExpectationsWithTimeout(testTimeout, handler: nil)
 
-        // Clean up
+        // Terminate the process 
         
-        // Note: This is temporary, this will probably be replaced with a
-        // separate cancel function that doesn't rely on having an existing
-        // `NSTask` since we won't have one normally
-        
-        let interruptExpectation = expectationWithDescription("Interrupt finished")
-        task.wcl_interruptWithCompletionHandler { (success) -> Void in
-            XCTAssertTrue(success)
-            interruptExpectation.fulfill()
+        let killProcessExpectation = expectationWithDescription("Kill process")
+        ProcessKiller.killProcessInfo(runningProcessInfo) { success in
+            killProcessExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        
+        // Wait for the process to terminate
+
+        // TODO: Migrate to `killProcessInfo` when a better implementation
+        // of `killProcessInfo` exists. Really the completion handler of 
+        // `killProcessInfo` not fire until the process has been terminated.
+        let taskDidTerminateExpectation = expectationWithDescription("Task did terminate")
+        var observer: NSObjectProtocol?
+        observer = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification,
+            object: task,
+            queue: nil)
+        { notification in
+            if let observer = observer {
+                NSNotificationCenter.defaultCenter().removeObserver(observer)
+            }
+            observer = nil
+            taskDidTerminateExpectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout) { _ in
+            if let observer = observer {
+                NSNotificationCenter.defaultCenter().removeObserver(observer)
+            }
+            observer = nil
+        }
         
         // Confirm the process has been removed
         
