@@ -8,61 +8,6 @@
 
 import Foundation
 
-extension NSError {
-    
-    class func taskTerminatedUncaughtSignalError(launchPath: String?,
-        arguments: [String]?,
-        directoryPath: String?,
-        standardError: String?) -> NSError
-    {
-        var description = "An uncaught signal error occurred"
-        if let launchPath = launchPath {
-            description += " running launch path: \(launchPath)"
-        }
-
-        if let arguments = arguments {
-            description += ", with arguments: \(arguments)"
-        }
-
-        if let directoryPath = directoryPath {
-            description += ", in directory path: \(directoryPath)"
-        }
-        
-        if let standardError = standardError {
-            description += ", standardError: \(standardError)"
-        }
-
-        return errorWithDescription(description)
-    }
-    
-    class func taskTerminatedNonzeroExitCode(launchPath: String?,
-        exitCode: Int32,
-        arguments: [String]?,
-        directoryPath: String?,
-        standardError: String?) -> NSError
-    {
-        var description = "Terminated with a nonzero exit status \(exitCode)"
-        if let launchPath = launchPath {
-            description += " running launch path: \(launchPath)"
-        }
-        
-        if let arguments = arguments {
-            description += ", with arguments: \(arguments)"
-        }
-        
-        if let directoryPath = directoryPath {
-            description += ", in directory path: \(directoryPath)"
-        }
-        
-        if let standardError = standardError {
-            description += ", standardError: \(standardError)"
-        }
-        
-        return errorWithDescription(description)
-    }
-    
-    
-}
 
 extension TaskResultsCollector: WCLTaskRunnerDelegate {
     

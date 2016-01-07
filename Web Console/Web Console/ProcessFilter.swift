@@ -77,6 +77,18 @@ class ProcessFilter {
         { (standardOutput, standardError, error) -> Void in
 
             if let error = error {
+
+                if error.code == NSError.TaskTerminatedErrorCode.NonzeroExitStatus.rawValue {
+                    if let exitStatus = error.userInfo[NSError.TaskTerminatedUserInfoKey.ExitStatus.rawValue] as? NSNumber
+                        where exitStatus.intValue == 1
+                    {
+                        // If the process identifier is not found, `ps` exits with an exit status of 1
+                        // So reinterpret that case as no processes found
+                        completionHandler(identifierToProcessInfo: [Int32: ProcessInfo](), error: nil)
+                        return
+                    }
+                }
+
                 completionHandler(identifierToProcessInfo: nil, error: error)
                 return
             }

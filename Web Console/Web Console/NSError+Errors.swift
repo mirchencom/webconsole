@@ -14,16 +14,22 @@ let errorCode = 100
 // MARK: Generic
 
 extension NSError {
-    
-    // MARK: Generic
-    
+
     class func errorWithDescription(description: String) -> NSError {
-        let userInfo = [NSLocalizedDescriptionKey: description]
-        return NSError(domain: errorDomain, code: errorCode, userInfo: userInfo)
+        return errorWithDescription(description,
+            code: errorCode)
     }
     
-    class func errorWithDescription(description: String, code: Int) -> NSError {
-        let userInfo = [NSLocalizedDescriptionKey: description]
+    class func errorWithDescription(description: String,
+        code: Int) -> NSError
+    {
+        return errorWithUserInfo([NSLocalizedDescriptionKey: description],
+            code: code)
+    }
+
+    class func errorWithUserInfo(userInfo: [NSObject : AnyObject],
+        code: Int) -> NSError
+    {
         return NSError(domain: errorDomain, code: code, userInfo: userInfo)
     }
 

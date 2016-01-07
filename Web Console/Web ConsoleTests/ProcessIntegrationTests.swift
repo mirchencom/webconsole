@@ -61,8 +61,7 @@ class OneProcessIntegrationTests: ProcessManagerTestCase {
     // MARK: Tests
     
     func testProcess() {
-        return
-        
+
         let commandPath = pathForResource(testDataShellScriptCatName,
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
