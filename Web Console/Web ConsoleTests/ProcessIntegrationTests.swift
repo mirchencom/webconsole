@@ -41,10 +41,9 @@ class ProcessManagerRouter: NSObject, WCLTaskRunnerDelegate {
     
 }
 
-class OneProcessIntegrationTests: ProcessManagerTestCase {
+class ProcessIntegrationTests: ProcessManagerTestCase {
 
     var processManagerRouter: ProcessManagerRouter!
-    var task: NSTask!
     
     // MARK: setUp & tearDown
     
@@ -60,14 +59,107 @@ class OneProcessIntegrationTests: ProcessManagerTestCase {
     
     // MARK: Tests
     
-    func testProcess() {
+    func testWithProcesses() {
+        
+        // Start the processes
+        
+        let commandPath = pathForResource(testDataShellScriptCatName,
+            ofType: testDataShellScriptExtension,
+            inDirectory: testDataSubdirectory)!
+
+        let processesToMake = 3
+        var tasks = [NSTask]()
+        for _ in 1...3 {
+            
+            let runExpectation = expectationWithDescription("Task ran")
+            let task = WCLTaskRunner.runTaskWithCommandPath(commandPath,
+                withArguments: nil,
+                inDirectoryPath: nil,
+                delegate: processManagerRouter)
+                { (success) -> Void in
+                    XCTAssertTrue(success)
+                    runExpectation.fulfill()
+            }
+            tasks.append(task)
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+
+        
+        // Confirm the `ProcessManager` has the processes
+        
+        let taskIdentifiers = tasks.map({ $0.processIdentifier })
+        let processInfos = processManager.processInfos()
+        XCTAssertEqual(processInfos.count, processesToMake)
+        
+        for task in tasks {
+            guard let processInfoByIdentifier = processManager.processInfoWithIdentifier(task.processIdentifier) else {
+                XCTAssertTrue(false)
+                break
+            }
+            XCTAssertEqual(processInfoByIdentifier.identifier, task.processIdentifier)
+        }
+        
+        // Confirm the `ProcessFilter` has the processes
+        
+        let processFilterExpectation = expectationWithDescription("Filter processes")
+        ProcessFilter.runningProcessesWithIdentifiers(taskIdentifiers) { (identifierToProcessInfo, error) -> Void in
+            guard let identifierToProcessInfo = identifierToProcessInfo else {
+                XCTAssertTrue(false)
+                return
+            }
+            XCTAssertNil(error)
+            
+            XCTAssertEqual(identifierToProcessInfo.count, processesToMake)
+            
+            let processIdentifiers = identifierToProcessInfo.values.map({ $0.identifier }).sort { $0 < $1 }
+            XCTAssertEqual(processIdentifiers, taskIdentifiers)
+            processFilterExpectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        
+        // Terminate the process
+        
+        let killProcessExpectation = expectationWithDescription("Kill process")
+        ProcessKiller.killProcessInfos(processInfos) { success in
+            killProcessExpectation.fulfill()
+        }
+        
+        // Wait for the process to terminate
+        
+        // TODO: Migrate to `killProcessInfo` when a better implementation
+        // of `killProcessInfo` exists. Really the completion handler of
+        // `killProcessInfo` not fire until the process has been terminated.
+        waitForTasksToTerminate(tasks)
+        
+        // Confirm the processes have been removed from the `ProcessManager`
+        
+        let processInfosTwo = processManager.processInfos()
+        XCTAssertEqual(processInfosTwo.count, 0)
+        
+        // Confirm that the `ProcessFilter` no longer has the process
+        
+        let filterExpectationFour = expectationWithDescription("Process filter")
+        ProcessFilter.runningProcessMatchingProcessInfos(processInfos) { (identifierToProcessInfo, error) -> Void in
+            XCTAssertNil(error)
+            guard let identifierToProcessInfo = identifierToProcessInfo else {
+                XCTAssertTrue(false)
+                return
+            }
+            
+            XCTAssertEqual(identifierToProcessInfo.count, 0)
+            filterExpectationFour.fulfill()
+        }
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+    }
+    
+    func testWithProcess() {
 
         let commandPath = pathForResource(testDataShellScriptCatName,
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
         
         let runExpectation = expectationWithDescription("Task ran")
-        task = WCLTaskRunner.runTaskWithCommandPath(commandPath,
+        let task = WCLTaskRunner.runTaskWithCommandPath(commandPath,
             withArguments: nil,
             inDirectoryPath: nil,
             delegate: processManagerRouter)
@@ -161,7 +253,7 @@ class OneProcessIntegrationTests: ProcessManagerTestCase {
         // Terminate the process 
         
         let killProcessExpectation = expectationWithDescription("Kill process")
-        ProcessKiller.killProcessInfo(runningProcessInfo) { success in
+        ProcessKiller.killProcessInfos([runningProcessInfo]) { success in
             killProcessExpectation.fulfill()
         }
         
@@ -170,27 +262,10 @@ class OneProcessIntegrationTests: ProcessManagerTestCase {
         // TODO: Migrate to `killProcessInfo` when a better implementation
         // of `killProcessInfo` exists. Really the completion handler of 
         // `killProcessInfo` not fire until the process has been terminated.
-        let taskDidTerminateExpectation = expectationWithDescription("Task did terminate")
-        var observer: NSObjectProtocol?
-        observer = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification,
-            object: task,
-            queue: nil)
-        { notification in
-            if let observer = observer {
-                NSNotificationCenter.defaultCenter().removeObserver(observer)
-            }
-            observer = nil
-            taskDidTerminateExpectation.fulfill()
-        }
-        waitForExpectationsWithTimeout(testTimeout) { _ in
-            if let observer = observer {
-                NSNotificationCenter.defaultCenter().removeObserver(observer)
-            }
-            observer = nil
-        }
+        waitForTasksToTerminate([task])
         
-        // Confirm the process has been removed
-        
+        // Confirm the process has been removed from the `ProcessManager`
+
         let processInfosTwo = processManager.processInfos()
         XCTAssertEqual(processInfosTwo.count, 0)
         XCTAssertNil(processManager.processInfoWithIdentifier(task.processIdentifier))
