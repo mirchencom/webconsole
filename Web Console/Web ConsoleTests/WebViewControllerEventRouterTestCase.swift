@@ -106,7 +106,40 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
 
 // MARK: WebViewControllerEventRouterTestCase
 
-//class WebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCase {
-//}
+class WebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCase {
+    var webViewControllerEventRouter: WebViewControllerEventRouter!
+    var splitWebWindowController: WCLSplitWebWindowController!
+    var splitWebViewController: SplitWebViewController!
+    
+    override func setUp() {
+        super.setUp()
+        
+        splitWebWindowController = WCLSplitWebWindowsController
+            .sharedSplitWebWindowsController()
+            .addedSplitWebWindowController()
+        splitWebViewController = splitWebWindowController
+            .contentViewController as! SplitWebViewController
+        
+        // Swap delegates
+        webViewControllerEventRouter = WebViewControllerEventRouter()
+        webViewControllerEventRouter.delegate = splitWebViewController.defaultWebViewController.delegate
+        splitWebViewController.defaultWebViewController.delegate = webViewControllerEventRouter    
+    }
+    
+    override func tearDown() {
+        // Revert the delegates
+        splitWebViewController.defaultWebViewController.delegate = webViewControllerEventRouter.delegate
+        webViewControllerEventRouter.delegate = nil
+        webViewControllerEventRouter = nil
+        
+        splitWebWindowController = nil
+        splitWebViewController = nil
+
+        super.tearDown()
+    }
+
+    
+    
+}
 
     
