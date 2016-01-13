@@ -123,7 +123,7 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
 
 }
 
-// MARK: WebViewControllerEventRouterTestCase
+// MARK: LogWebViewControllerEventRouterTestCase
 
 class LogWebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCase {
 
