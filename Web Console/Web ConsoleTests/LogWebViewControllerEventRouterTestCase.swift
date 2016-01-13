@@ -125,13 +125,13 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
 
 // MARK: WebViewControllerEventRouterTestCase
 
-class WebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCase {
+class LogWebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCase {
 
     var webViewControllerEventRouter: WebViewControllerEventRouter!
     var splitWebWindowControllerEventRouter: SplitWebWindowControllerEventRouter!
     var splitWebWindowController: WCLSplitWebWindowController!
     var splitWebViewController: SplitWebViewController!
-    
+
     override func setUp() {
         super.setUp()
         
@@ -140,8 +140,11 @@ class WebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCase 
         // 2. The `splitWebViewController`'s `logWebViewController` will run the `testCatPluginName`
         // 3. Events for the `logWebViewController` can be managed through the `webViewControllerEventRouter`
         
-        splitWebWindowController = WCLSplitWebWindowsController.sharedSplitWebWindowsController().addedSplitWebWindowController()
-        splitWebViewController = splitWebWindowController.contentViewController as! SplitWebViewController
+        splitWebWindowController = WCLSplitWebWindowsController
+            .sharedSplitWebWindowsController()
+            .addedSplitWebWindowController()
+        splitWebViewController = splitWebWindowController
+            .contentViewController as! SplitWebViewController
         
         // Swap the `splitWebViewControllerEventRouter` for the `splitWebViewController`'s delegate
         splitWebWindowControllerEventRouter = SplitWebWindowControllerEventRouter()

@@ -88,7 +88,7 @@ class SplitWebViewControllerDebugModeToggleTests: WCLSplitWebWindowControllerTes
 }
 
 
-class SplitWebViewControllerLogTests: WebViewControllerEventRouterTestCase {
+class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
     
     override func tearDown() {
         if splitWebViewController.defaultWebViewController.tasks.count > 0 {

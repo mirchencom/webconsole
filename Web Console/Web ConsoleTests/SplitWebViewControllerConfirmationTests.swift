@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import Web_Console
 
-class SplitWebViewControllerConfirmationTests: WebViewControllerEventRouterTestCase {
+class SplitWebViewControllerConfirmationTests: LogWebViewControllerEventRouterTestCase {
 
     func testTasksRequiringConfirmation() {
         XCTAssertEqual(WCLApplicationTerminationHelper.splitWebWindowControllersWithTasks().count, 0)
