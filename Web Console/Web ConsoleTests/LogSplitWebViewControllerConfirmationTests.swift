@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import Web_Console
 
-class SplitWebViewControllerConfirmationTests: LogWebViewControllerEventRouterTestCase {
+class SplitWebViewControllerLogConfirmationTests: LogWebViewControllerEventRouterTestCase {
 
     func testTasksRequiringConfirmation() {
         XCTAssertEqual(WCLApplicationTerminationHelper.splitWebWindowControllersWithTasks().count, 0)
@@ -30,12 +30,12 @@ class SplitWebViewControllerConfirmationTests: LogWebViewControllerEventRouterTe
     
     func startPluginAndLogTasks() {
         let logReadFromStandardInputExpectation = expectationWithDescription("Start running plugin log message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectation.fulfill()
         }
         
         let logRunExpectation = expectationWithDescription("Running log plugin")
-        webViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
+        logWebViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
             logRunExpectation.fulfill()
         }
         
@@ -52,7 +52,7 @@ class SplitWebViewControllerConfirmationTests: LogWebViewControllerEventRouterTe
     
     func terminatePluginTask() {
         let pluginFinishedReadFromStandardInputExpectation = expectationWithDescription("Finished running plugin log message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             pluginFinishedReadFromStandardInputExpectation.fulfill()
         }
 

@@ -102,12 +102,12 @@ class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
     func testInvalidCommandPath() {
         
         let logRunExpectation = expectationWithDescription("For running the log plugin")
-        webViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
+        logWebViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
             logRunExpectation.fulfill()
         }
         
         let logReadFromStandardInputExpectation = expectationWithDescription("For error message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectation.fulfill()
         }
         
@@ -123,22 +123,22 @@ class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
     func testDebugLog() {
 
         let logRunExpectation = expectationWithDescription("For running the log plugin")
-        webViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
+        logWebViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
             logRunExpectation.fulfill()
         }
 
         let logReadFromStandardInputExpectation = expectationWithDescription("For start running log message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectation.fulfill()
         }
 
         let logReadFromStandardInputExpectationTwo = expectationWithDescription("For finished running log message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectationTwo.fulfill()
         }
 
         let logReadFromStandardInputExpectationThree = expectationWithDescription("For the plugins output")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectationThree.fulfill()
         }
 
@@ -153,23 +153,23 @@ class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
 
     func testDebugLogReadFromStandardInput() {
         let logRunExpectation = expectationWithDescription("For running the log plugin")
-        webViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
+        logWebViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
             logRunExpectation.fulfill()
         }
         
         let logReadFromStandardInputExpectation = expectationWithDescription("For start running log message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectation.fulfill()
         }
         
         
         let logReadFromStandardInputExpectationThree = expectationWithDescription("For the plugins output")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectationThree.fulfill()
         }
 
         let logReadFromStandardInputExpectationFour = expectationWithDescription("For logging reading for standard input")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectationFour.fulfill()
         }
         
@@ -185,7 +185,7 @@ class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
         
         // Clean up
         let logReadFromStandardInputExpectationTwo = expectationWithDescription("For finished running log message")
-        webViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
+        logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectationTwo.fulfill()
         }
         
