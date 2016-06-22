@@ -34,7 +34,7 @@ class TaskRunner {
             }
         }
         
-        task.terminationHandler = { (task: NSTask!) -> Void in
+        task.terminationHandler = { (task: NSTask) -> Void in
             handler?()
             task.standardOutput!.fileHandleForReading.readabilityHandler = nil
             task.standardError!.fileHandleForReading.readabilityHandler = nil

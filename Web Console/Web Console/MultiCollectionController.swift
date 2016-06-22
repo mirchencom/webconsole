@@ -70,7 +70,7 @@ import Cocoa
         mutableObjects.insertObjects(objects, atIndexes: indexes)
         if let replacedObjects: NSArray = replacedObjects {
             let indexes = mutableObjects.indexesOfObjectsPassingTest({
-                (object: AnyObject!, index: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Bool in
+                (object: AnyObject, index: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Bool in
                 return replacedObjects.containsObject(object)
             })
             removeObjectsAtIndexes(indexes)
