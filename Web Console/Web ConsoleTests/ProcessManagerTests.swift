@@ -15,6 +15,9 @@ class ProcessManagerTestCase: XCTestCase {
         let mutableDictionary = NSMutableDictionary()
         
         func setObject(value: AnyObject?, forKey defaultName: String) {
+            guard let value = value else {
+                return
+            }
             mutableDictionary[defaultName] = value
         }
         

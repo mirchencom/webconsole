@@ -107,7 +107,9 @@
             }
             @catch (NSException *exception) {
                 error = [NSError commandPathExceptionError:launchPath];
-                completionHandler(NO);
+                if (completionHandler) {
+                    completionHandler(NO);
+                }
             }
         } else {
             error = [NSError commandPathUnexecutableError:launchPath];

@@ -15,7 +15,7 @@ protocol ProcessManagerStore {
     func dictionaryForKey(defaultName: String) -> [String : AnyObject]?
 }
 class ProcessManager {
-
+    
     enum ProcessInfoKey: String {
         case Identifier = "identifier"
         case CommandPath = "commandPath"
@@ -27,7 +27,7 @@ class ProcessManager {
     
     private let processManagerStore: ProcessManagerStore
     private var identifierKeyToProcessInfoValue = [NSString: AnyObject]()
-
+    
     convenience init() {
         self.init(processManagerStore: UserDefaultsManager.standardUserDefaults())
     }
@@ -41,22 +41,28 @@ class ProcessManager {
     
     func addProcessInfo(processInfo: ProcessInfo) {
         let keyValue = self.dynamicType.keyAndValueForProcessInfo(processInfo)
+        objc_sync_enter(self)
         identifierKeyToProcessInfoValue[keyValue.key] = keyValue.value
+        objc_sync_exit(self)
         save()
     }
-
+    
     func removeProcessWithIdentifier(identifier: Int32) -> ProcessInfo? {
-        return processInfoForIdentifier(identifier, remove: true)
+        let processInfo = processInfoForIdentifier(identifier, remove: true)
+        return processInfo
     }
     
     func processInfoWithIdentifier(identifier: Int32) -> ProcessInfo? {
         return processInfoForIdentifier(identifier, remove: false)
     }
-
+    
     func processInfos() -> [ProcessInfo] {
+        objc_sync_enter(self)
         let values = identifierKeyToProcessInfoValue.values
+        objc_sync_exit(self)
+        
         var processInfos = [ProcessInfo]()
-
+        
         for value in values {
             if let
                 value = value as? NSDictionary,
@@ -65,7 +71,7 @@ class ProcessManager {
                 processInfos.append(processInfo)
             }
         }
-
+        
         return processInfos
     }
     
@@ -74,25 +80,30 @@ class ProcessManager {
     private func save() {
         processManagerStore.setObject(identifierKeyToProcessInfoValue, forKey: runningProcessesKey)
     }
-
+    
     private func processInfoForIdentifier(identifier: Int32, remove: Bool) -> ProcessInfo? {
         guard let processInfoValue = processInfoValueForIdentifier(identifier, remove: remove) else {
             return nil
         }
-
+        
         return self.dynamicType.processInfoForValue(processInfoValue)
     }
-
+    
     // MARK: Helper
     
     private func processInfoValueForIdentifier(identifier: Int32, remove: Bool) -> NSDictionary? {
         let key = self.dynamicType.identifierToKey(identifier)
         if remove {
+            objc_sync_enter(self)
             let processInfoValue = identifierKeyToProcessInfoValue.removeValueForKey(key) as? NSDictionary
+            objc_sync_exit(self)
             save()
             return processInfoValue
         } else {
-            return identifierKeyToProcessInfoValue[key] as? NSDictionary
+            objc_sync_enter(self)
+            let value = identifierKeyToProcessInfoValue[key] as? NSDictionary
+            objc_sync_exit(self)
+            return value
         }
     }
     
@@ -110,7 +121,7 @@ class ProcessManager {
         else {
             return nil
         }
-
+        
         let identifier = keyToIdentifier(key)
         
         return ProcessInfo(identifier: identifier,
