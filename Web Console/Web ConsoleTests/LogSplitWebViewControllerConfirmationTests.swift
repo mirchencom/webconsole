@@ -14,17 +14,30 @@ class SplitWebViewControllerLogConfirmationTests: LogWebViewControllerEventRoute
 
     func testTasksRequiringConfirmation() {
         XCTAssertEqual(WCLApplicationTerminationHelper.splitWebWindowControllersWithTasks().count, 0)
+
+        
+        // Start Tasks
         startPluginAndLogTasks()
         XCTAssertEqual(WCLApplicationTerminationHelper.splitWebWindowControllersWithTasks().count, 1)
         XCTAssertTrue(splitWebWindowController.hasTasksRequiringConfirmation())
         XCTAssertEqual(splitWebWindowController.commandsRequiringConfirmation().count, 1)
         XCTAssertEqual(splitWebWindowController.commandsNotRequiringConfirmation().count, 1)
+        // Wait for editing flag
+        let editingPredicate = NSPredicate(format: "documentEdited == true")
+        expectationForPredicate(editingPredicate, evaluatedWithObject: splitWebWindowController.window!, handler: nil)
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
         XCTAssertTrue(splitWebWindowController.window!.documentEdited)
+
+        // Terminate Tasks
         terminatePluginTask()
         XCTAssertEqual(WCLApplicationTerminationHelper.splitWebWindowControllersWithTasks().count, 0)
         XCTAssertFalse(splitWebWindowController.hasTasksRequiringConfirmation())
         XCTAssertEqual(splitWebWindowController.commandsRequiringConfirmation().count, 0)
         XCTAssertEqual(splitWebWindowController.commandsNotRequiringConfirmation().count, 1)
+        // Wait for editing flag
+        let notEditingPredicate = NSPredicate(format: "documentEdited == false")
+        expectationForPredicate(notEditingPredicate, evaluatedWithObject: splitWebWindowController.window!, handler: nil)
+        waitForExpectationsWithTimeout(testTimeout, handler: nil)
         XCTAssertFalse(splitWebWindowController.window!.documentEdited)
     }
     
