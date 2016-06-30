@@ -228,7 +228,7 @@ class SplitWebViewController: NSSplitViewController {
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
-        case Selector("toggleLogShown:"):
+        case #selector(SplitWebViewController.toggleLogShown(_:)):
             if let collapsed = splitController.isCollapsed() {
                 menuItem.title = collapsed ? showLogMenuItemTitle : hideLogMenuItemTitle
                 return true

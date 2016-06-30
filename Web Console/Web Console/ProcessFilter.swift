@@ -128,7 +128,7 @@ class ProcessFilter {
         
         let dateStartIndex = line.startIndex.advancedBy(6)
         let dateEndIndex = line.startIndex.advancedBy(30)
-        let rawStartDate = line.substringWithRange(Range(start: dateStartIndex, end: dateEndIndex))
+        let rawStartDate = line.substringWithRange(dateStartIndex..<dateEndIndex)
         
         let commandIndex = line.startIndex.advancedBy(35)
         let command = line.substringFromIndex(commandIndex)
