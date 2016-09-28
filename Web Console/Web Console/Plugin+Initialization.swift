@@ -9,16 +9,16 @@
 
 extension Plugin {
 
-    enum PluginLoadError: ErrorType {
-        case InvalidBundleError(path: String)
-        case InvalidInfoDictionaryError(URL: NSURL)
-        case InvalidFileExtensionsError(infoDictionary: [NSObject : AnyObject])
-        case InvalidCommandError(infoDictionary: [NSObject : AnyObject])
-        case InvalidNameError(infoDictionary: [NSObject : AnyObject])
-        case InvalidIdentifierError(infoDictionary: [NSObject : AnyObject])
-        case InvalidHiddenError(infoDictionary: [NSObject : AnyObject])
-        case InvalidEditableError(infoDictionary: [NSObject : AnyObject])
-        case InvalidDebugModeEnabledError(infoDictionary: [NSObject : AnyObject])
+    enum PluginLoadError: Error {
+        case invalidBundleError(path: String)
+        case invalidInfoDictionaryError(URL: URL)
+        case invalidFileExtensionsError(infoDictionary: [AnyHashable: Any])
+        case invalidCommandError(infoDictionary: [AnyHashable: Any])
+        case invalidNameError(infoDictionary: [AnyHashable: Any])
+        case invalidIdentifierError(infoDictionary: [AnyHashable: Any])
+        case invalidHiddenError(infoDictionary: [AnyHashable: Any])
+        case invalidEditableError(infoDictionary: [AnyHashable: Any])
+        case invalidDebugModeEnabledError(infoDictionary: [AnyHashable: Any])
         
     }
 
@@ -33,47 +33,47 @@ extension Plugin {
     }
 
     enum PluginType {
-        case BuiltIn, User, Other
+        case builtIn, user, other
         func name() -> String {
             switch self {
-            case .BuiltIn:
+            case .builtIn:
                 return "Built-In"
-            case .User:
+            case .user:
                 return "User"
-            case .Other:
+            case .other:
                 return "Other"
             }
         }
     }
 
-    class func pluginWithURL(url: NSURL) -> Plugin? {
+    class func pluginWithURL(_ url: URL) -> Plugin? {
         if let path = url.path {
             return self.pluginWithPath(path)
         }
         return nil
     }
 
-    class func pluginWithPath(path: String) -> Plugin? {
+    class func pluginWithPath(_ path: String) -> Plugin? {
         do {
             let plugin = try validPluginWithPath(path)
             return plugin
-        } catch PluginLoadError.InvalidBundleError(let path) {
+        } catch PluginLoadError.invalidBundleError(let path) {
             print("Bundle is invalid at path \(path).")
-        } catch PluginLoadError.InvalidInfoDictionaryError(let URL) {
+        } catch PluginLoadError.invalidInfoDictionaryError(let URL) {
             print("Info.plist is invalid at URL \(URL).")
-        } catch PluginLoadError.InvalidFileExtensionsError(let infoDictionary) {
+        } catch PluginLoadError.invalidFileExtensionsError(let infoDictionary) {
             print("Plugin file extensions are invalid \(infoDictionary).")
-        } catch PluginLoadError.InvalidCommandError(let infoDictionary) {
+        } catch PluginLoadError.invalidCommandError(let infoDictionary) {
             print("Plugin command is invalid \(infoDictionary).")
-        } catch PluginLoadError.InvalidNameError(let infoDictionary) {
+        } catch PluginLoadError.invalidNameError(let infoDictionary) {
             print("Plugin name is invalid \(infoDictionary).")
-        } catch PluginLoadError.InvalidIdentifierError(let infoDictionary) {
+        } catch PluginLoadError.invalidIdentifierError(let infoDictionary) {
             print("Plugin UUID is invalid \(infoDictionary).")
-        } catch PluginLoadError.InvalidHiddenError(let infoDictionary) {
+        } catch PluginLoadError.invalidHiddenError(let infoDictionary) {
             print("Plugin hidden is invalid \(infoDictionary).")
-        } catch PluginLoadError.InvalidEditableError(let infoDictionary) {
+        } catch PluginLoadError.invalidEditableError(let infoDictionary) {
             print("Plugin editable is invalid \(infoDictionary).")
-        } catch PluginLoadError.InvalidDebugModeEnabledError(let infoDictionary) {
+        } catch PluginLoadError.invalidDebugModeEnabledError(let infoDictionary) {
             print("Plugin debug mode enabled is invalid \(infoDictionary).")
         } catch {
             print("Failed to load plugin at path \(path).")
@@ -82,7 +82,7 @@ extension Plugin {
         return nil
     }
     
-    class func validPluginWithPath(path: String) throws -> Plugin? {
+    class func validPluginWithPath(_ path: String) throws -> Plugin? {
         do {
             if let bundle = try validBundle(path),
                 let infoDictionary = try validInfoDictionary(bundle),
@@ -120,120 +120,120 @@ extension Plugin {
     
     // MARK: Info Dictionary
     
-    class func validBundle(path: String) throws -> NSBundle? {
-        if let bundle = NSBundle(path: path) as NSBundle? {
+    class func validBundle(_ path: String) throws -> Bundle? {
+        if let bundle = Bundle(path: path) as Bundle? {
             return bundle
         }
 
-        throw PluginLoadError.InvalidBundleError(path: path)
+        throw PluginLoadError.invalidBundleError(path: path)
     }
     
-    class func validInfoDictionary(bundle: NSBundle) throws -> [NSObject : AnyObject]? {
+    class func validInfoDictionary(_ bundle: Bundle) throws -> [AnyHashable: Any]? {
         let URL = self.infoDictionaryURLForPluginURL(bundle.bundleURL)
-        if let infoDictionary = NSDictionary(contentsOfURL: URL) {
-            return infoDictionary as? [NSObject : AnyObject]
+        if let infoDictionary = NSDictionary(contentsOf: URL) {
+            return infoDictionary as? [AnyHashable: Any]
         }
 
-        throw PluginLoadError.InvalidInfoDictionaryError(URL: URL)
+        throw PluginLoadError.invalidInfoDictionaryError(URL: URL)
     }
 
-    class func validSuffixes(infoDictionary: [NSObject : AnyObject]) throws -> [String]? {
+    class func validSuffixes(_ infoDictionary: [AnyHashable: Any]) throws -> [String]? {
         if let suffixes = infoDictionary[InfoDictionaryKeys.Suffixes] as? [String] {
             return suffixes
         }
 
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Suffixes] {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Suffixes] as AnyObject? {
             // A missing suffixes is valid, but an existing malformed one is not
-            throw PluginLoadError.InvalidFileExtensionsError(infoDictionary: infoDictionary)
+            throw PluginLoadError.invalidFileExtensionsError(infoDictionary: infoDictionary)
         }
 
         return nil
     }
 
-    class func validCommand(infoDictionary: [NSObject : AnyObject]) throws -> String? {
+    class func validCommand(_ infoDictionary: [AnyHashable: Any]) throws -> String? {
         if let command = infoDictionary[InfoDictionaryKeys.Command] as? String {
             if command.characters.count > 0 {
                 return command
             }
         }
 
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Command] {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Command] as AnyObject? {
             // A missing command is valid, but an existing malformed one is not
-            throw PluginLoadError.InvalidCommandError(infoDictionary: infoDictionary)
+            throw PluginLoadError.invalidCommandError(infoDictionary: infoDictionary)
         }
 
         return nil
     }
     
-    class func validName(infoDictionary: [NSObject : AnyObject]) throws -> String? {
+    class func validName(_ infoDictionary: [AnyHashable: Any]) throws -> String? {
         if let name = infoDictionary[InfoDictionaryKeys.Name] as? String {
             if name.characters.count > 0 {
                 return name
             }
         }
         
-        throw PluginLoadError.InvalidNameError(infoDictionary: infoDictionary)
+        throw PluginLoadError.invalidNameError(infoDictionary: infoDictionary)
     }
     
-    class func validIdentifier(infoDictionary: [NSObject : AnyObject]) throws -> String? {
+    class func validIdentifier(_ infoDictionary: [AnyHashable: Any]) throws -> String? {
         if let uuidString = infoDictionary[InfoDictionaryKeys.Identifier] as? String {
-            let uuid: NSUUID? = NSUUID(UUIDString: uuidString)
+            let uuid: UUID? = UUID(uuidString: uuidString)
             if uuid != nil {
                 return uuidString
             }
         }
 
-        throw PluginLoadError.InvalidIdentifierError(infoDictionary: infoDictionary)
+        throw PluginLoadError.invalidIdentifierError(infoDictionary: infoDictionary)
     }
 
-    class func validHidden(infoDictionary: [NSObject : AnyObject]) throws -> Bool {
+    class func validHidden(_ infoDictionary: [AnyHashable: Any]) throws -> Bool {
         if let hidden = infoDictionary[InfoDictionaryKeys.Hidden] as? Int {
-            return NSNumber(integer: hidden).boolValue
+            return NSNumber(value: hidden as Int).boolValue
         }
         
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Hidden] {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Hidden] as AnyObject? {
             // A missing hidden is valid, but an existing malformed one is not
-            throw PluginLoadError.InvalidHiddenError(infoDictionary: infoDictionary)
+            throw PluginLoadError.invalidHiddenError(infoDictionary: infoDictionary)
         }
 
         return false
     }
 
-    class func validEditable(infoDictionary: [NSObject : AnyObject]) throws -> Bool {
+    class func validEditable(_ infoDictionary: [AnyHashable: Any]) throws -> Bool {
         if let editable = infoDictionary[InfoDictionaryKeys.Editable] as? Int {
-            return NSNumber(integer: editable).boolValue
+            return NSNumber(value: editable as Int).boolValue
         }
         
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Editable] {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Editable] as AnyObject? {
             // A missing editable is valid, but an existing malformed one is not
-            throw PluginLoadError.InvalidEditableError(infoDictionary: infoDictionary)
+            throw PluginLoadError.invalidEditableError(infoDictionary: infoDictionary)
         }
 
         return true
     }
 
-    class func validDebugModeEnabled(infoDictionary: [NSObject : AnyObject]) throws -> Bool? {
+    class func validDebugModeEnabled(_ infoDictionary: [AnyHashable: Any]) throws -> Bool? {
         if let debugModeEnabled = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] as? Int {
-            return NSNumber(integer: debugModeEnabled).boolValue
+            return NSNumber(value: debugModeEnabled as Int).boolValue
         }
         
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] as AnyObject? {
             // A missing editable is valid, but an existing malformed one is not
-            throw PluginLoadError.InvalidDebugModeEnabledError(infoDictionary: infoDictionary)
+            throw PluginLoadError.invalidDebugModeEnabledError(infoDictionary: infoDictionary)
         }
         
         return nil
     }
     
-    class func validPluginTypeFromPath(path: String) -> PluginType {
+    class func validPluginTypeFromPath(_ path: String) -> PluginType {
         let pluginContainerDirectory = path.stringByDeletingLastPathComponent
         switch pluginContainerDirectory {
-        case Directory.ApplicationSupportPlugins.path():
-            return PluginType.User
-        case Directory.BuiltInPlugins.path():
-            return PluginType.BuiltIn
+        case Directory.applicationSupportPlugins.path():
+            return PluginType.user
+        case Directory.builtInPlugins.path():
+            return PluginType.builtIn
         default:
-            return PluginType.Other
+            return PluginType.other
         }
     }
 }

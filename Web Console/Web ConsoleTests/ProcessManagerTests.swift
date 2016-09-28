@@ -14,14 +14,14 @@ class ProcessManagerTestCase: XCTestCase {
     class MockProcessManagerStore: ProcessManagerStore {
         let mutableDictionary = NSMutableDictionary()
         
-        func setObject(value: AnyObject?, forKey defaultName: String) {
+        func setObject(_ value: AnyObject?, forKey defaultName: String) {
             guard let value = value else {
                 return
             }
             mutableDictionary[defaultName] = value
         }
         
-        func dictionaryForKey(defaultName: String) -> [String : AnyObject]? {
+        func dictionaryForKey(_ defaultName: String) -> [String : AnyObject]? {
             return mutableDictionary[defaultName] as? [String : AnyObject]
         }
     }
@@ -49,11 +49,11 @@ class ProcessManagerTestCase: XCTestCase {
 class ProcessManagerTests: ProcessManagerTestCase {
 
     func testProcessManager() {
-        let processInfo = ProcessInfo(identifier: 1,
-            startTime: NSDate(),
+        let processInfo = Web_Console.ProcessInfo(identifier: 1,
+            startTime: Date(),
             commandPath: "test")!
 
-        let testProcessManagerHasProcessInfo: (processManager: ProcessManager) -> Bool = { processManager in
+        let testProcessManagerHasProcessInfo: (_ processManager: ProcessManager) -> Bool = { processManager in
             let returnedProcessInfo = processManager.processInfoWithIdentifier(processInfo.identifier)!
             XCTAssertNotNil(returnedProcessInfo)
             XCTAssertEqual(returnedProcessInfo, processInfo)
@@ -80,7 +80,7 @@ class ProcessManagerTests: ProcessManagerTestCase {
         // Remove the processes and make sure nil is returned
         processManager.removeProcessWithIdentifier(processInfo.identifier)
 
-        let testProcessManagerHasNoProcessInfo: (processManager: ProcessManager) -> Bool = { processManager in
+        let testProcessManagerHasNoProcessInfo: (_ processManager: ProcessManager) -> Bool = { processManager in
             XCTAssertNil(processManager.processInfoWithIdentifier(processInfo.identifier))
             
             let returnedProcessInfos = processManager.processInfos()

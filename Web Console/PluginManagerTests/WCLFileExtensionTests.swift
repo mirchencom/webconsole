@@ -18,26 +18,26 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
     var fileExtensionPluginDictionary: NSDictionary {
         get {
             var fileExtensionToPluginDictionary = WCLFileExtension.fileExtensionToPluginDictionary()
-            return fileExtensionToPluginDictionary[fileExtension.suffix] as! NSDictionary
+            return fileExtensionToPluginDictionary![fileExtension.suffix] as! NSDictionary
         }
     }
 
     // MARK: Helper
     
-    func matchesPlugin(plugin: Plugin, forFileExtension fileExtension: WCLFileExtension) -> Bool {
+    func matchesPlugin(_ plugin: Plugin, forFileExtension fileExtension: WCLFileExtension) -> Bool {
         let suffix = fileExtension.suffix
         
         let plugins = fileExtension.plugins() as NSArray
-        let containsPlugin = plugins.containsObject(plugin)
+        let containsPlugin = plugins.contains(plugin)
         
         let suffixes = plugin.suffixes as NSArray
-        let containsSuffix = suffixes.containsObject(suffix)
+        let containsSuffix = suffixes.contains(suffix)
         
         return containsPlugin == containsSuffix
     }
     
     func confirmPluginIdentifierInFileExtensionPluginDictionary() {
-        let pluginIdentifierInDictionary = fileExtensionPluginDictionary.valueForKey(testFileExtensionPluginIdentifierKey) as! String
+        let pluginIdentifierInDictionary = fileExtensionPluginDictionary.value(forKey: testFileExtensionPluginIdentifierKey) as! String
         XCTAssertEqual(pluginIdentifierInDictionary, fileExtension.selectedPlugin.identifier, "The WCLPlugin's identifier value in the dictionary should match the WCLFileExtension's selected WCLPlugin's identifier.")
     }
 
@@ -47,7 +47,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         super.setUp()
         plugin.suffixes = testPluginSuffixes
         XCTAssertEqual(FileExtensionsController.sharedInstance.suffixes().count, 1, "The file extensions count should equal one.")
-        fileExtension = FileExtensionsController.sharedInstance.fileExtensionForSuffix(testPluginSuffix)
+        fileExtension = FileExtensionsController.sharedInstance.fileExtension(forSuffix: testPluginSuffix)
         mockUserDefaultsSetUp()
         UserDefaultsManager.standardUserDefaults().setValue(nil, forKey: fileExtensionToPluginKey)
     }
@@ -60,7 +60,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
     
     func testNewFileExtensionProperties() {
         XCTAssertEqual(fileExtension.suffix, testPluginSuffix, "The WCLFileExtension's extension should equal the test extension.")
-        XCTAssertEqual(fileExtension.enabled, defaultFileExtensionEnabled, "The WCLFileExtension's enabled should equal the default enabled.")
+        XCTAssertEqual(fileExtension.isEnabled, defaultFileExtensionEnabled, "The WCLFileExtension's enabled should equal the default enabled.")
         XCTAssertEqual(fileExtension.selectedPlugin, fileExtension.plugins()[0], "The WCLFileExtension's selected WCLPlugin should be the first WCLPlugin.")
 
         let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
@@ -71,49 +71,49 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
     }
     
     func testSettingEnabled() {
-        var isEnabled = fileExtension.enabled
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        var isEnabled = fileExtension.isEnabled
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionEnabledKeyPath,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
             (_) -> Void in
-            isEnabled = self.fileExtension.enabled
+            isEnabled = self.fileExtension.isEnabled
         }
 
-        var inverseEnabled = !fileExtension.enabled
-        fileExtension.enabled = inverseEnabled
+        var inverseEnabled = !fileExtension.isEnabled
+        fileExtension.isEnabled = inverseEnabled
         XCTAssertEqual(isEnabled, inverseEnabled, "The key-value observing change notification for the WCLFileExtensions's enabled property should have occurred.")
-        XCTAssertEqual(fileExtension.enabled, inverseEnabled, "The WCLFileExtension's isEnabled should equal the inverse enabled.")
+        XCTAssertEqual(fileExtension.isEnabled, inverseEnabled, "The WCLFileExtension's isEnabled should equal the inverse enabled.")
 
         // Test UserDefaults
-        var enabledInDictionary = fileExtensionPluginDictionary.valueForKey(testFileExtensionEnabledKeyPath) as! Bool
-        XCTAssertEqual(enabledInDictionary, fileExtension.enabled, "The enabled value in the dictionary should match the WCLFileExtension's enabled property")
+        var enabledInDictionary = fileExtensionPluginDictionary.value(forKey: testFileExtensionEnabledKeyPath) as! Bool
+        XCTAssertEqual(enabledInDictionary, fileExtension.isEnabled, "The enabled value in the dictionary should match the WCLFileExtension's enabled property")
 
         // Test key-value observing for the enabled property
-        isEnabled = fileExtension.enabled
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        isEnabled = fileExtension.isEnabled
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionEnabledKeyPath,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
             (_) -> Void in
-            isEnabled = self.fileExtension.enabled
+            isEnabled = self.fileExtension.isEnabled
         }
 
-        inverseEnabled = !fileExtension.enabled
-        fileExtension.enabled = inverseEnabled
+        inverseEnabled = !fileExtension.isEnabled
+        fileExtension.isEnabled = inverseEnabled
         XCTAssertEqual(isEnabled, inverseEnabled, "The key-value observing change notification for the WCLFileExtensions's enabled property should have occurred.")
-        XCTAssertEqual(fileExtension.enabled, inverseEnabled, "The WCLFileExtension's isEnabled should equal the inverse enabled.")
+        XCTAssertEqual(fileExtension.isEnabled, inverseEnabled, "The WCLFileExtension's isEnabled should equal the inverse enabled.")
 
         // Test UserDefaults
-        enabledInDictionary = fileExtensionPluginDictionary.valueForKey(testFileExtensionEnabledKeyPath) as! Bool
-        XCTAssertEqual(enabledInDictionary, fileExtension.enabled, "The enabled value in the dictionary should match the WCLFileExtension's enabled property")
+        enabledInDictionary = fileExtensionPluginDictionary.value(forKey: testFileExtensionEnabledKeyPath) as! Bool
+        XCTAssertEqual(enabledInDictionary, fileExtension.isEnabled, "The enabled value in the dictionary should match the WCLFileExtension's enabled property")
     }
 
     func testSettingSelectedPlugin() {
         var observedChange = false
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
             (_) -> Void in
             observedChange = true
@@ -131,9 +131,9 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         createdPlugin.suffixes = testPluginSuffixes
 
         observedChange = false
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
                 (_) -> Void in
                 observedChange = true
@@ -147,9 +147,9 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         // Test setting the selected plugin to nil
 
         observedChange = false
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
             (_) -> Void in
             observedChange = true
@@ -168,9 +168,9 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         XCTAssertFalse(fileExtension.plugins().contains(createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
 
         var plugins = fileExtension.plugins()
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionPluginsKey,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
             (_) -> Void in
             plugins = self.fileExtension.plugins()
@@ -185,9 +185,9 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         // Test removing the file extension
 
         // Test key-value observing for the plugins property
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionPluginsKey,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
             (_) -> Void in
             plugins = self.fileExtension.plugins()
@@ -195,9 +195,9 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
 
         // Test key-value observing for the selected plugin property
         var observedChange = false
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
             (_) -> Void in
             observedChange = true
@@ -225,9 +225,9 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
 
         // Test key-value observing for the plugins property
         var plugins = fileExtension.plugins()
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionPluginsKey,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
         {
             (_) -> Void in
             plugins = self.fileExtension.plugins()
@@ -235,9 +235,9 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         
         // Test key-value observing for the selected plugin property
         var observedChange = false
-        WCLKeyValueObservingTestsHelper.observeObject(fileExtension,
+        WCLKeyValueObservingTestsHelper.observe(fileExtension,
             forKeyPath: testFileExtensionSelectedPluginKeyPath,
-            options: NSKeyValueObservingOptions.New)
+            options: NSKeyValueObservingOptions.new)
             {
                 (_) -> Void in
                 observedChange = true

@@ -14,10 +14,10 @@
 
 class WebViewControllerEventRouter: NSObject {
 
-    typealias DidReadFromStandardInputHandler = (text: String) -> Void
-    typealias DidRunCommandPathHandler = (commandPath: String,
-        arguments: [String]?,
-        directoryPath: String?) -> Void
+    typealias DidReadFromStandardInputHandler = (_ text: String) -> Void
+    typealias DidRunCommandPathHandler = (_ commandPath: String,
+        _ arguments: [String]?,
+        _ directoryPath: String?) -> Void
     var didReadFromStandardInputHandlers: [DidReadFromStandardInputHandler]
     var didRunCommandPathHandlers: [DidRunCommandPathHandler]
 
@@ -28,11 +28,11 @@ class WebViewControllerEventRouter: NSObject {
         self.didRunCommandPathHandlers = [DidRunCommandPathHandler]()
     }
     
-    func addDidReadFromStandardInputHandler(handler: DidReadFromStandardInputHandler) {
+    func addDidReadFromStandardInputHandler(_ handler: @escaping DidReadFromStandardInputHandler) {
         didReadFromStandardInputHandlers.append(handler)
     }
 
-    func addDidRunCommandPathHandlers(handler: DidRunCommandPathHandler) {
+    func addDidRunCommandPathHandlers(_ handler: @escaping DidRunCommandPathHandler) {
         didRunCommandPathHandlers.append(handler)
     }
     
@@ -42,7 +42,7 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
     
     // MARK: Handled
     
-    func webViewController(webViewController: WCLWebViewController,
+    func webViewController(_ webViewController: WCLWebViewController,
         didRunCommandPath commandPath: String,
         arguments: [String]?,
         directoryPath: String?)
@@ -56,11 +56,11 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
             XCTAssertTrue(false, "There should be at least one handler")
         }
 
-        let handler = didRunCommandPathHandlers.removeAtIndex(0)
-        handler(commandPath: commandPath, arguments: arguments, directoryPath: directoryPath)
+        let handler = didRunCommandPathHandlers.remove(at: 0)
+        handler(commandPath, arguments, directoryPath)
     }
     
-    func webViewController(webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
+    func webViewController(_ webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
         
         self.delegate.webViewController?(webViewController, didReadFromStandardInput: text)
 
@@ -68,37 +68,37 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
             XCTAssertTrue(false, "There should be at least one handler")
         }
         
-        let handler = didReadFromStandardInputHandlers.removeAtIndex(0)
-        handler(text: text)
+        let handler = didReadFromStandardInputHandlers.remove(at: 0)
+        handler(text)
     }
     
     // MARK: Forwarded
     
-    func windowForWebViewController(webViewController: WCLWebViewController) -> NSWindow {
-        return self.delegate.windowForWebViewController(webViewController)
+    func window(for webViewController: WCLWebViewController) -> NSWindow {
+        return self.delegate.window(for: webViewController)
     }
     
-    func webViewController(webViewController: WCLWebViewController, didFinishTask task: NSTask) {
-        self.delegate.webViewController?(webViewController, didFinishTask: task)
+    func webViewController(_ webViewController: WCLWebViewController, didFinish task: Process) {
+        self.delegate.webViewController?(webViewController, didFinish: task)
     }
     
-    func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
+    func webViewController(_ webViewController: WCLWebViewController, didReceiveStandardError text: String) {
         self.delegate.webViewController?(webViewController, didReceiveStandardError: text)
     }
     
-    func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
+    func webViewController(_ webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
         self.delegate.webViewController?(webViewController, didReceiveStandardOutput: text)
     }
     
-    func webViewController(webViewController: WCLWebViewController, willStartTask task: NSTask) {
-        self.delegate.webViewController?(webViewController, willStartTask: task)
+    func webViewController(_ webViewController: WCLWebViewController, willStart task: Process) {
+        self.delegate.webViewController?(webViewController, willStart: task)
     }
     
-    func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
+    func webViewController(_ webViewController: WCLWebViewController, didReceiveTitle title: String) {
         self.delegate.webViewController?(webViewController, didReceiveTitle: title)
     }
     
-    func webViewController(webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
+    func webViewController(_ webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
         self.delegate.webViewController?(webViewController, willDoJavaScript: javaScript)
     }
 
@@ -115,7 +115,7 @@ class WebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCase 
         super.setUp()
         
         splitWebWindowController = WCLSplitWebWindowsController
-            .sharedSplitWebWindowsController()
+            .shared()
             .addedSplitWebWindowController()
         splitWebViewController = splitWebWindowController
             .contentViewController as! SplitWebViewController

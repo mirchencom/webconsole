@@ -11,7 +11,7 @@ import Foundation
 extension WCLPlugin {
 
     func pluginsManager() -> PluginsManager {
-        return self.dynamicType.pluginsManager()
+        return type(of: self).pluginsManager()
     }
     
     class func pluginsManager() -> PluginsManager {

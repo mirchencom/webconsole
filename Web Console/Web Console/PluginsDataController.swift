@@ -9,8 +9,8 @@
 import Cocoa
 
 protocol PluginsDataControllerDelegate {
-    func pluginsDataController(pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin)
-    func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin)
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin)
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin)
 }
 
 class PluginsDataController: PluginsDirectoryManagerDelegate {
@@ -19,9 +19,9 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     var pluginDirectoryManagers: [PluginsDirectoryManager]!
     var pluginPathToPluginDictionary: [String : Plugin]!
     lazy var duplicatePluginController = DuplicatePluginController()
-    let duplicatePluginDestinationDirectoryURL: NSURL
+    let duplicatePluginDestinationDirectoryURL: URL
     
-    init(_ paths: [String], duplicatePluginDestinationDirectoryURL: NSURL) {
+    init(_ paths: [String], duplicatePluginDestinationDirectoryURL: URL) {
         self.pluginDirectoryManagers = [PluginsDirectoryManager]()
         self.pluginPathToPluginDictionary = [String : Plugin]()
         self.duplicatePluginDestinationDirectoryURL = duplicatePluginDestinationDirectoryURL
@@ -31,7 +31,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
             for plugin in plugins {
                 pluginPathToPluginDictionary[plugin.bundle.bundlePath] = plugin
             }
-            let pluginsDirectoryURL = NSURL(fileURLWithPath: path)
+            let pluginsDirectoryURL = URL(fileURLWithPath: path)
             let pluginDirectoryManager = PluginsDirectoryManager(pluginsDirectoryURL: pluginsDirectoryURL)
             pluginDirectoryManager.delegate = self
             pluginDirectoryManagers.append(pluginDirectoryManager)
@@ -48,7 +48,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
 
     // MARK: PluginsDirectoryManagerDelegate
 
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager,
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = pluginAtPluginPath(pluginPath) {
@@ -67,7 +67,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         }
     }
     
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager,
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
         pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = pluginAtPluginPath(pluginPath) {
@@ -78,46 +78,46 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     
     // MARK: Add & Remove Helpers
     
-    func addPlugin(plugin: Plugin) {
+    func addPlugin(_ plugin: Plugin) {
         let pluginPath = plugin.bundle.bundlePath
         pluginPathToPluginDictionary[pluginPath] = plugin
         delegate?.pluginsDataController(self, didAddPlugin: plugin)
     }
     
-    func removePlugin(plugin: Plugin) {
+    func removePlugin(_ plugin: Plugin) {
         let pluginPath = plugin.bundle.bundlePath
-        pluginPathToPluginDictionary.removeValueForKey(pluginPath)
+        pluginPathToPluginDictionary.removeValue(forKey: pluginPath)
         delegate?.pluginsDataController(self, didRemovePlugin: plugin)
     }
     
-    func pluginAtPluginPath(pluginPath: String) -> Plugin? {
+    func pluginAtPluginPath(_ pluginPath: String) -> Plugin? {
         return pluginPathToPluginDictionary[pluginPath]
     }
 
 
     // MARK: Duplicate and Remove
 
-    func movePluginToTrash(plugin: Plugin) {
+    func movePluginToTrash(_ plugin: Plugin) {
         assert(plugin.editable, "The plugin should be editable")
         removePlugin(plugin)
         let pluginPath = plugin.bundle.bundlePath
         let pluginDirectoryPath = pluginPath.stringByDeletingLastPathComponent
         let pluginDirectoryName = pluginPath.lastPathComponent
-        NSWorkspace.sharedWorkspace().performFileOperation(NSWorkspaceRecycleOperation,
+        NSWorkspace.shared().performFileOperation(NSWorkspaceRecycleOperation,
             source: pluginDirectoryPath,
             destination: "",
             files: [pluginDirectoryName],
             tag: nil)
-        let exists = NSFileManager.defaultManager().fileExistsAtPath(pluginPath)
+        let exists = FileManager.default.fileExists(atPath: pluginPath)
         assert(!exists, "The file should not exist")
     }
     
-    func duplicatePlugin(plugin: Plugin, handler: ((plugin: Plugin?, error: NSError?) -> Void)?) {
+    func duplicatePlugin(_ plugin: Plugin, handler: ((_ plugin: Plugin?, _ error: NSError?) -> Void)?) {
 
         do {
-            try self.dynamicType.createDirectoryIfMissing(duplicatePluginDestinationDirectoryURL)
+            try type(of: self).createDirectoryIfMissing(duplicatePluginDestinationDirectoryURL)
         } catch let error as NSError {
-            handler?(plugin: nil, error: error)
+            handler?(nil, error)
             return
         }
 
@@ -131,19 +131,19 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         }
     }
 
-    class func createDirectoryIfMissing(directoryURL: NSURL) throws {
+    class func createDirectoryIfMissing(_ directoryURL: URL) throws {
         var isDir: ObjCBool = false
-        let exists = NSFileManager.defaultManager().fileExistsAtPath(directoryURL.path!, isDirectory: &isDir)
+        let exists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDir)
         if (exists && isDir) {
             return
         }
         
         if (exists && !isDir) {
-            throw FileSystemError.FileExistsForDirectoryError
+            throw FileSystemError.fileExistsForDirectoryError
         }
 
         do {
-            try NSFileManager.defaultManager().createDirectoryAtURL(directoryURL, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(at: directoryURL, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             throw error
         }

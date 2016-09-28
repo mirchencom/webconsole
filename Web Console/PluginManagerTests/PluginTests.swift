@@ -12,11 +12,11 @@ import XCTest
 
 class PluginTests: PluginsManagerTestCase {
 
-    func infoDictionaryContentsForPluginWithConfirmation(plugin: Plugin) -> String {
+    func infoDictionaryContentsForPluginWithConfirmation(_ plugin: Plugin) -> String {
         let pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPlugin(plugin).path!
         var infoDictionaryContents: String!
         do {
-            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding)
+            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: String.Encoding.utf8)
         } catch {
             XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
         }
@@ -35,8 +35,8 @@ class PluginTests: PluginsManagerTestCase {
         let contentsThree = infoDictionaryContentsForPluginWithConfirmation(plugin)
         XCTAssertNotEqual(contentsTwo, contentsThree, "The contents should not be equal")
 
-        let uuid = NSUUID()
-        let uuidString = uuid.UUIDString
+        let uuid = UUID()
+        let uuidString = uuid.uuidString
         plugin.identifier = uuidString
         let contentsFour = infoDictionaryContentsForPluginWithConfirmation(plugin)
         XCTAssertNotEqual(contentsThree, contentsFour, "The contents should not be equal")
@@ -56,7 +56,7 @@ class PluginTests: PluginsManagerTestCase {
         plugin.name = testPluginName
         
         // Test that the name is valid for this plugin
-        var name: AnyObject? = testPluginName
+        var name: AnyObject? = testPluginName as AnyObject?
         do {
             try plugin.validateName(&name)
         } catch {
@@ -78,7 +78,7 @@ class PluginTests: PluginsManagerTestCase {
 
         // Test that the name is not valid for another plugin
         error = nil
-        name = testPluginName
+        name = testPluginName as AnyObject?
         do {
             try createdPlugin.validateName(&name)
         } catch let nameError as NSError {
@@ -147,7 +147,7 @@ class PluginTests: PluginsManagerTestCase {
 
     func testSuffixValidation() {
         // Test Valid Extensions
-        var suffixes: AnyObject? = testPluginSuffixesTwo
+        var suffixes: AnyObject? = testPluginSuffixesTwo as AnyObject?
         do {
             try plugin.validateExtensions(&suffixes)
         } catch {
@@ -202,9 +202,9 @@ class PluginTests: PluginsManagerTestCase {
         
         // Duplicate the plugins folder, this should not cause a second plugin to be added to the plugin manager since the copy originated from the same process
         let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
-        let destinationPluginURL: NSURL! = pluginURL.URLByDeletingLastPathComponent?.URLByAppendingPathComponent(destinationPluginFilename)
+        let destinationPluginURL: URL! = pluginURL.deletingLastPathComponent()?.appendingPathComponent(destinationPluginFilename)
         do {
-            try NSFileManager.defaultManager().copyItemAtURL(pluginURL, toURL: destinationPluginURL)
+            try FileManager.default.copyItem(at: pluginURL as URL, to: destinationPluginURL)
         } catch {
             XCTAssertTrue(false, "The copy should succeed")
         }
@@ -225,7 +225,7 @@ class DuplicatePluginNameValidationTests: XCTestCase {
     class PluginNameMockPluginsManager: PluginsManager {
         var pluginNames = [testPluginName]
         
-        override func pluginWithName(name: String) -> Plugin? {
+        override func pluginWithName(_ name: String) -> Plugin? {
             if pluginNames.contains(name) {
                 let plugin = super.pluginWithName(testPluginName)
                 assert(plugin != nil, "The plugin should not be nil")
@@ -257,7 +257,7 @@ class DuplicatePluginNameValidationTests: XCTestCase {
         let fromName = testPluginNameTwo
         
         for pluginNamesCount in 0...105 {
-            let name = WCLPlugin.uniquePluginNameFromName(fromName, forPlugin: plugin)
+            let name = WCLPlugin.uniquePluginName(fromName: fromName, for: plugin)
             let suffix = pluginNamesCount + 1
             
             var testName: String!

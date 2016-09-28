@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 protocol SplitControllerDelegate: class {
-    func savedFrameNameForSplitController(splitController: SplitController) -> String?
+    func savedFrameNameForSplitController(_ splitController: SplitController) -> String?
 }
 
 class SplitController {
@@ -18,20 +18,20 @@ class SplitController {
     // MARK: Properties
     
     var splitViewItem: NSSplitViewItem
-    private weak var splitViewController: NSSplitViewController?
+    fileprivate weak var splitViewController: NSSplitViewController?
     weak var delegate: SplitControllerDelegate?
 
     var splitsHeightConstraint: NSLayoutConstraint?
     
     func isCollapsed() -> Bool? {
-        return splitViewItem.collapsed
+        return splitViewItem.isCollapsed
     }
 
-    private var savedFrameName: String? {
+    fileprivate var savedFrameName: String? {
         return delegate?.savedFrameNameForSplitController(self)
     }
     
-    private var splitsViewController: NSViewController? {
+    fileprivate var splitsViewController: NSViewController? {
         return splitViewItem.viewController
     }
     
@@ -41,13 +41,13 @@ class SplitController {
     
     var splitViewItemIndex: Int? {
         if let splitViewItems = splitViewController?.splitViewItems {
-            return splitViewItems.indexOf(splitViewItem)!
+            return splitViewItems.index(of: splitViewItem)!
         }
         return nil
     }
 
     var splitViewsSubview: NSView? {
-        if let index = splitViewItemIndex, subview = splitViewController?.splitView.subviews[index] {
+        if let index = splitViewItemIndex, let subview = splitViewController?.splitView.subviews[index] {
             return subview
         }
         return nil
@@ -64,18 +64,18 @@ class SplitController {
     
     // MARK: Toggle
 
-    func toggleCollapsed(animated: Bool) {
+    func toggleCollapsed(_ animated: Bool) {
         if let collapsed = isCollapsed() {
             setCollapsed(!collapsed, animated: animated)
         }
     }
     
-    func setCollapsed(collapsed: Bool, animated: Bool) {
-        if splitViewItem.collapsed != collapsed {
+    func setCollapsed(_ collapsed: Bool, animated: Bool) {
+        if splitViewItem.isCollapsed != collapsed {
             if animated {
-                splitViewItem.animator().collapsed = collapsed
+                splitViewItem.animator().isCollapsed = collapsed
             } else {
-                splitViewItem.collapsed = collapsed
+                splitViewItem.isCollapsed = collapsed
             }
         }
     }
@@ -89,15 +89,15 @@ class SplitController {
     }
     
     func saveFrame() {
-        if let splitsView = splitsView, key = savedFrameName {
+        if let splitsView = splitsView, let key = savedFrameName {
             let frame = splitsView.frame
             let frameString = NSStringFromRect(frame)
-            UserDefaultsManager.standardUserDefaults().setObject(frameString, forKey:key)
+            UserDefaultsManager.standardUserDefaults().set(frameString, forKey:key)
         }
     }
 
-    class func savedFrameForName(name: String) -> NSRect? {
-        if let frameString = UserDefaultsManager.standardUserDefaults().stringForKey(name) {
+    class func savedFrameForName(_ name: String) -> NSRect? {
+        if let frameString = UserDefaultsManager.standardUserDefaults().string(forKey: name) {
             let frame = NSRectFromString(frameString)
             return frame
         }
@@ -106,7 +106,7 @@ class SplitController {
     
     func savedSplitsViewFrame() -> NSRect? {
         if let savedFrameName = savedFrameName {
-            return self.dynamicType.savedFrameForName(savedFrameName)
+            return type(of: self).savedFrameForName(savedFrameName)
         }
         return nil
     }
@@ -119,8 +119,8 @@ class SplitController {
         }
     }
     
-    func configureHeight(height: CGFloat) {
-        if let splitsView = splitsView, superview = splitsView.superview {
+    func configureHeight(_ height: CGFloat) {
+        if let splitsView = splitsView, let superview = splitsView.superview {
             if let splitsHeightConstraint = splitsHeightConstraint {
                 if splitsHeightConstraint.constant == height {
                     return
@@ -129,10 +129,10 @@ class SplitController {
             }
             
             let heightConstraint =  NSLayoutConstraint(item: splitsView,
-                attribute: NSLayoutAttribute.Height,
-                relatedBy: NSLayoutRelation.Equal,
+                attribute: NSLayoutAttribute.height,
+                relatedBy: NSLayoutRelation.equal,
                 toItem: nil,
-                attribute: NSLayoutAttribute.NotAnAttribute,
+                attribute: NSLayoutAttribute.notAnAttribute,
                 multiplier: 1,
                 constant: height)
             heightConstraint.priority = 300

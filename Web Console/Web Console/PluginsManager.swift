@@ -27,30 +27,30 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         return Singleton.instance
     }
 
-    class func setOverrideSharedInstance(pluginsManager: PluginsManager?) {
+    class func setOverrideSharedInstance(_ pluginsManager: PluginsManager?) {
         Singleton.overrideSharedInstance = pluginsManager
     }
 
     // MARK: Init
     
-    init(_ paths: [String], duplicatePluginDestinationDirectoryURL: NSURL) {
+    init(_ paths: [String], duplicatePluginDestinationDirectoryURL: URL) {
         self.pluginsDataController = PluginsDataController(paths, duplicatePluginDestinationDirectoryURL: duplicatePluginDestinationDirectoryURL)
         super.init(plugins: pluginsDataController.plugins())
         pluginsDataController.delegate = self
     }
     
     convenience override init() {
-        self.init([Directory.BuiltInPlugins.path(), Directory.ApplicationSupportPlugins.path()], duplicatePluginDestinationDirectoryURL: Directory.ApplicationSupportPlugins.URL())
+        self.init([Directory.builtInPlugins.path(), Directory.applicationSupportPlugins.path()], duplicatePluginDestinationDirectoryURL: Directory.applicationSupportPlugins.URL())
     }
 
     
     // MARK: Accessing Plugins
     
-    func pluginWithName(name: String) -> Plugin? {
+    func pluginWithName(_ name: String) -> Plugin? {
         return pluginsController.objectWithKey(name) as? Plugin
     }
     
-    func pluginWithIdentifier(identifier: String) -> Plugin? {
+    func pluginWithIdentifier(_ identifier: String) -> Plugin? {
         let allPlugins = plugins()
         for object: AnyObject in allPlugins {
             if let plugin: Plugin = object as? Plugin {
@@ -65,35 +65,35 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
 
     // MARK: Convenience
     
-    func addUnwatchedPlugin(plugin: Plugin) {
+    func addUnwatchedPlugin(_ plugin: Plugin) {
         // TODO: For now this is a big hack, this adds a plugin that isn't managed by the PluginDataManager.
         // This means if the plugin moves on the file system for example, that the loaded plugin will be out-of-date.
         addPlugin(plugin)
     }
     
-    private func addPlugin(plugin: Plugin) {
-        insertObject(plugin, inPluginsAtIndex: 0)
+    fileprivate func addPlugin(_ plugin: Plugin) {
+        insertObject(plugin, inPluginsAt: 0)
     }
     
-    private func removePlugin(plugin: Plugin) {
+    fileprivate func removePlugin(_ plugin: Plugin) {
         let index = pluginsController.indexOfObject(plugin)
         if index != NSNotFound {
-            removeObjectFromPluginsAtIndex(UInt(index))
+            removeObjectFromPlugins(at: UInt(index))
         }
     }
     
 
     // MARK: Adding and Removing Plugins
     
-    func movePluginToTrash(plugin: Plugin) {
+    func movePluginToTrash(_ plugin: Plugin) {
         pluginsDataController.movePluginToTrash(plugin)
     }
     
-    func duplicatePlugin(plugin: Plugin, handler: ((newPlugin: Plugin?, error: NSError?) -> Void)?) {
+    func duplicatePlugin(_ plugin: Plugin, handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
         pluginsDataController.duplicatePlugin(plugin, handler: handler)
     }
 
-    func newPlugin(handler: ((newPlugin: Plugin?, error: NSError?) -> Void)?) {
+    func newPlugin(_ handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
         // May need to handle the case when no default new plugin is define in the future, but for now the fallback to the initial plugin should always work
 
         if let plugin = defaultNewPlugin {
@@ -101,7 +101,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         }
     }
 
-    func newPluginFromPlugin(plugin: Plugin, handler: ((newPlugin: Plugin?, error: NSError?) -> Void)?) {
+    func newPluginFromPlugin(_ plugin: Plugin, handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
         duplicatePlugin(plugin, handler: handler)
     }
 
@@ -109,12 +109,12 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     
     // MARK: PluginsDataControllerDelegate
 
-    func pluginsDataController(pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
         addPlugin(plugin)
     }
 
 
-    func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
         if let unwrappedDefaultNewPlugin = defaultNewPlugin {
             if unwrappedDefaultNewPlugin == plugin {
                 defaultNewPlugin = nil
@@ -131,8 +131,8 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         return plugin?.resourcePath
     }
 
-    func sharedResourcesURL() -> NSURL? {
+    func sharedResourcesURL() -> URL? {
         let plugin = pluginWithName(sharedResourcesPluginName)
-        return plugin?.resourceURL
+        return plugin?.resourceURL as URL?
     }
 }

@@ -12,79 +12,79 @@ import XCTest
 @testable import Web_Console
 
 protocol FilesAndPluginsDirectoryManagerFileDelegate {
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String)
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String)
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, itemWasRemovedAtPath path: String)
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String)
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String)
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, itemWasRemovedAtPath path: String)
 }
 
 class FilesAndPluginsDirectoryManager: PluginsDirectoryManager {
     var fileDelegate: FilesAndPluginsDirectoryManagerFileDelegate?
     
-    override func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, directoryWasCreatedOrModifiedAtPath path: String!) {
+    override func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher!, directoryWasCreatedOrModifiedAtPath path: String!) {
         fileDelegate?.testPluginsDirectoryManager(self, directoryWasCreatedOrModifiedAtPath: path)
         super.directoryWatcher(directoryWatcher, directoryWasCreatedOrModifiedAtPath: path)
     }
     
-    override func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, fileWasCreatedOrModifiedAtPath path: String!) {
+    override func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher!, fileWasCreatedOrModifiedAtPath path: String!) {
         fileDelegate?.testPluginsDirectoryManager(self, fileWasCreatedOrModifiedAtPath: path)
         super.directoryWatcher(directoryWatcher, fileWasCreatedOrModifiedAtPath: path)
     }
     
-    override func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, itemWasRemovedAtPath path: String!) {
+    override func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher!, itemWasRemovedAtPath path: String!) {
         fileDelegate?.testPluginsDirectoryManager(self, itemWasRemovedAtPath: path)
         super.directoryWatcher(directoryWatcher, itemWasRemovedAtPath: path)
     }
 }
 
 class FilesAndPluginsDirectoryEventManager: PluginsDirectoryEventManager, FilesAndPluginsDirectoryManagerFileDelegate {
-    var fileWasCreatedOrModifiedAtPathHandlers: Array<(path: String) -> Void>
-    var directoryWasCreatedOrModifiedAtPathHandlers: Array<(path: String) -> Void>
-    var itemWasRemovedAtPathHandlers: Array<(path: String) -> Void>
+    var fileWasCreatedOrModifiedAtPathHandlers: Array<(_ path: String) -> Void>
+    var directoryWasCreatedOrModifiedAtPathHandlers: Array<(_ path: String) -> Void>
+    var itemWasRemovedAtPathHandlers: Array<(_ path: String) -> Void>
 
     override init() {
-        self.fileWasCreatedOrModifiedAtPathHandlers = Array<(path: String) -> Void>()
-        self.directoryWasCreatedOrModifiedAtPathHandlers = Array<(path: String) -> Void>()
-        self.itemWasRemovedAtPathHandlers = Array<(path: String) -> Void>()
+        self.fileWasCreatedOrModifiedAtPathHandlers = Array<(_ path: String) -> Void>()
+        self.directoryWasCreatedOrModifiedAtPathHandlers = Array<(_ path: String) -> Void>()
+        self.itemWasRemovedAtPathHandlers = Array<(_ path: String) -> Void>()
         super.init()
     }
 
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String) {
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String) {
         assert(fileWasCreatedOrModifiedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (fileWasCreatedOrModifiedAtPathHandlers.count > 0) {
-            let handler = fileWasCreatedOrModifiedAtPathHandlers.removeAtIndex(0)
-            handler(path: path)
+            let handler = fileWasCreatedOrModifiedAtPathHandlers.remove(at: 0)
+            handler(path)
         }
     }
     
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String) {
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String) {
         assert(directoryWasCreatedOrModifiedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (directoryWasCreatedOrModifiedAtPathHandlers.count > 0) {
-            let handler = directoryWasCreatedOrModifiedAtPathHandlers.removeAtIndex(0)
-            handler(path: path)
+            let handler = directoryWasCreatedOrModifiedAtPathHandlers.remove(at: 0)
+            handler(path)
         }
     }
     
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, itemWasRemovedAtPath path: String) {
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, itemWasRemovedAtPath path: String) {
         assert(itemWasRemovedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (itemWasRemovedAtPathHandlers.count > 0) {
-            let handler = itemWasRemovedAtPathHandlers.removeAtIndex(0)
-            handler(path: path)
+            let handler = itemWasRemovedAtPathHandlers.remove(at: 0)
+            handler(path)
         }
     }
 
 
-    func addFileWasCreatedOrModifiedAtPathHandler(handler: (path: String) -> Void) {
+    func addFileWasCreatedOrModifiedAtPathHandler(_ handler: @escaping (_ path: String) -> Void) {
         fileWasCreatedOrModifiedAtPathHandlers.append(handler)
     }
     
-    func addDirectoryWasCreatedOrModifiedAtPathHandler(handler: (path: String) -> Void) {
+    func addDirectoryWasCreatedOrModifiedAtPathHandler(_ handler: @escaping (_ path: String) -> Void) {
         directoryWasCreatedOrModifiedAtPathHandlers.append(handler)
     }
     
-    func addItemWasRemovedAtPathHandler(handler: (path: String) -> Void) {
+    func addItemWasRemovedAtPathHandler(_ handler: @escaping (_ path: String) -> Void) {
         itemWasRemovedAtPathHandlers.append(handler)
     }
 }
@@ -93,19 +93,19 @@ extension FilesAndPluginsDirectoryManagerTests {
 
     // MARK: Expectation Helpers
     
-    func createExpectationForPluginInfoDictionaryWasRemovedAtPluginPath(path: String) {
-        let pluginInfoDictionaryWasRemovedExpectation = expectationWithDescription("Plugin info dictionary was removed")
+    func createExpectationForPluginInfoDictionaryWasRemovedAtPluginPath(_ path: String) {
+        let pluginInfoDictionaryWasRemovedExpectation = expectation(description: "Plugin info dictionary was removed")
         fileAndPluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
                 pluginInfoDictionaryWasRemovedExpectation.fulfill()
             }
         })
     }
     
-    func createExpectationForPluginInfoDictionaryWasCreatedOrModifiedAtPluginPath(path: String) {
-        let pluginInfoDictionaryWasCreatedOrModifiedExpectation = expectationWithDescription("Plugin info dictionary was created or modified")
+    func createExpectationForPluginInfoDictionaryWasCreatedOrModifiedAtPluginPath(_ path: String) {
+        let pluginInfoDictionaryWasCreatedOrModifiedExpectation = expectation(description: "Plugin info dictionary was created or modified")
         fileAndPluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
                 pluginInfoDictionaryWasCreatedOrModifiedExpectation.fulfill()
             }
         })
@@ -114,116 +114,115 @@ extension FilesAndPluginsDirectoryManagerTests {
     
     // MARK: Create With Confirmation Helpers
     
-    func createFileAtPathWithConfirmation(path: String) {
-        let fileWasCreatedOrModifiedExpectation = expectationWithDescription("File was created")
+    func createFileAtPathWithConfirmation(_ path: String) {
+        let fileWasCreatedOrModifiedExpectation = expectation(description: "File was created")
         fileAndPluginsDirectoryEventManager.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
                 fileWasCreatedOrModifiedExpectation.fulfill()
             }
         })
         SubprocessFileSystemModifier.createFileAtPath(path)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
-    func createDirectoryAtPathWithConfirmation(path: String) {
-        let directoryWasCreatedOrModifiedExpectation = expectationWithDescription("Directory was created")
+    func createDirectoryAtPathWithConfirmation(_ path: String) {
+        let directoryWasCreatedOrModifiedExpectation = expectation(description: "Directory was created")
         fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
                 directoryWasCreatedOrModifiedExpectation.fulfill()
             }
         })
         SubprocessFileSystemModifier.createDirectoryAtPath(path)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
     
     // MARK: Remove With Confirmation Helpers
     
-    func removeFileAtPathWithConfirmation(path: String) {
-        let fileWasRemovedExpectation = expectationWithDescription("File was removed")
+    func removeFileAtPathWithConfirmation(_ path: String) {
+        let fileWasRemovedExpectation = expectation(description: "File was removed")
         fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
                 fileWasRemovedExpectation.fulfill()
             }
         })
         SubprocessFileSystemModifier.removeFileAtPath(path)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
-    func removeDirectoryAtPathWithConfirmation(path: String) {
-        let directoryWasRemovedExpectation = expectationWithDescription("Directory was removed")
+    func removeDirectoryAtPathWithConfirmation(_ path: String) {
+        let directoryWasRemovedExpectation = expectation(description: "Directory was removed")
         fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
         SubprocessFileSystemModifier.removeDirectoryAtPath(path)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
     
     // MARK: Move With Confirmation Helpers
     
-    func moveDirectoryAtPathWithConfirmation(path: String, destinationPath: String) {
+    func moveDirectoryAtPathWithConfirmation(_ path: String, destinationPath: String) {
         // Remove original
-        let directoryWasRemovedExpectation = expectationWithDescription("Directory was removed with move")
+        let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
         fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
         // Create new
-        let directoryWasCreatedExpectation = expectationWithDescription("Directory was created with move")
+        let directoryWasCreatedExpectation = expectation(description: "Directory was created with move")
         fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == destinationPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == destinationPath) {
                 directoryWasCreatedExpectation.fulfill()
             }
         })
         // Move
         SubprocessFileSystemModifier.moveItemAtPath(path, toPath: destinationPath)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
-    func moveDirectoryAtUnwatchedPathWithConfirmation(path: String, destinationPath: String) {
+    func moveDirectoryAtUnwatchedPathWithConfirmation(_ path: String, destinationPath: String) {
         // Create new
-        let directoryWasCreatedExpectation = expectationWithDescription("Directory was created with move")
+        let directoryWasCreatedExpectation = expectation(description: "Directory was created with move")
         fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == destinationPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == destinationPath) {
                 directoryWasCreatedExpectation.fulfill()
             }
         })
         // Move
-        let moveExpectation = expectationWithDescription("Move finished")
+        let moveExpectation = expectation(description: "Move finished")
         SubprocessFileSystemModifier.moveItemAtPath(path, toPath: destinationPath, handler: {
             moveExpectation.fulfill()
         })
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
-    func moveDirectoryAtPathWithConfirmation(path: String, toUnwatchedDestinationPath destinationPath: String) {
+    func moveDirectoryAtPathWithConfirmation(_ path: String, toUnwatchedDestinationPath destinationPath: String) {
         // Remove original
-        let directoryWasRemovedExpectation = expectationWithDescription("Directory was removed with move")
+        let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
         fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
         // Move
-        let moveExpectation = expectationWithDescription("Move finished")
+        let moveExpectation = expectation(description: "Move finished")
         SubprocessFileSystemModifier.moveItemAtPath(path, toPath: destinationPath, handler: {
             moveExpectation.fulfill()
         })
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
 
     // MARK: Plugin File Hierarchy Helpers
 
-    func createDirectoryAtPath(path: String) {
+    func createDirectoryAtPath(_ path: String) {
         do {
-            try NSFileManager
-                .defaultManager()
-                .createDirectoryAtPath(path,
+            try FileManager.default
+                .createDirectory(atPath: path,
                     withIntermediateDirectories: false,
                     attributes: nil)
         } catch let error as NSError {
@@ -231,32 +230,32 @@ extension FilesAndPluginsDirectoryManagerTests {
         }
     }
     
-    func createFileAtPath(path: String) {
-        let success = NSFileManager.defaultManager().createFileAtPath(path,
+    func createFileAtPath(_ path: String) {
+        let success = FileManager.default.createFile(atPath: path,
             contents: nil,
             attributes: nil)
         XCTAssertTrue(success, "Creating the file should succeed.")
     }
     
 
-    func createValidPluginHierarchyAtPath(path: String) {
+    func createValidPluginHierarchyAtPath(_ path: String) {
         validPluginHierarchyOperation(path, isRemove: false, requireConfirmation: false)
     }
 
-    func createValidPluginHierarchyAtPathWithConfirmation(path: String) {
+    func createValidPluginHierarchyAtPathWithConfirmation(_ path: String) {
         validPluginHierarchyOperation(path, isRemove: false, requireConfirmation: true)
     }
     
-    func removeValidPluginHierarchyAtPath(path: String) {
+    func removeValidPluginHierarchyAtPath(_ path: String) {
         validPluginHierarchyOperation(path, isRemove: true, requireConfirmation: false)
     }
 
-    func removeValidPluginHierarchyAtPathWithConfirmation(path: String) {
+    func removeValidPluginHierarchyAtPathWithConfirmation(_ path: String) {
         validPluginHierarchyOperation(path, isRemove: true, requireConfirmation: true)
     }
 
     
-    func validPluginHierarchyOperation(path: String, isRemove: Bool, requireConfirmation: Bool) {
+    func validPluginHierarchyOperation(_ path: String, isRemove: Bool, requireConfirmation: Bool) {
         let testPluginDirectoryPath = path.stringByAppendingPathComponent(testPluginDirectoryName)
         let testPluginContentsDirectoryPath = testPluginDirectoryPath.stringByAppendingPathComponent(testPluginContentsDirectoryName)
         let testPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testPluginResourcesDirectoryName)

@@ -14,19 +14,19 @@ let splitWebViewHeight = CGFloat(150)
 
 @objc protocol SplitWebViewControllerDelegate: class {
     // MARK: Data Source
-    func windowIsVisibleForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Bool
-    func windowForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSWindow!
-    func logPluginForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Plugin?
+    func windowIsVisibleForSplitWebViewController(_ splitWebViewController: SplitWebViewController) -> Bool
+    func windowForSplitWebViewController(_ splitWebViewController: SplitWebViewController) -> NSWindow!
+    func logPluginForSplitWebViewController(_ splitWebViewController: SplitWebViewController) -> Plugin?
     // Mark: Events
-    func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
-    func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
+    func splitWebViewController(_ splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
+    func splitWebViewControllerWillLoadHTML(_ splitWebViewController: SplitWebViewController)
     // MARK: Starting & Finishing Tasks
-    func splitWebViewController(splitWebViewController: SplitWebViewController,
-        willStartTask task: NSTask)
-    func splitWebViewController(splitWebViewController: SplitWebViewController,
-        didFinishTask task: NSTask)
-    func splitWebViewController(splitWebViewController: SplitWebViewController,
-        didFailToRunTask task: NSTask,
+    func splitWebViewController(_ splitWebViewController: SplitWebViewController,
+        willStartTask task: Process)
+    func splitWebViewController(_ splitWebViewController: SplitWebViewController,
+        didFinishTask task: Process)
+    func splitWebViewController(_ splitWebViewController: SplitWebViewController,
+        didFailToRunTask task: Process,
         error: NSError)
 }
 
@@ -71,7 +71,7 @@ class SplitWebViewController: NSSplitViewController {
             return debugModeEnabled
         }
 
-        return UserDefaultsManager.standardUserDefaults().boolForKey(debugModeEnabledKey)
+        return UserDefaultsManager.standardUserDefaults().bool(forKey: debugModeEnabledKey)
     }
     
     var logSplitViewItem: NSSplitViewItem {
@@ -83,14 +83,14 @@ class SplitWebViewController: NSSplitViewController {
         return splitViewItem.viewController as! WCLWebViewController
     }
     
-    lazy var logReadFromStandardInputOperationQueue: NSOperationQueue = {
-        let queue = NSOperationQueue()
+    lazy var logReadFromStandardInputOperationQueue: OperationQueue = {
+        let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
-        queue.suspended = true
+        queue.isSuspended = true
         return queue
     }()
     
-    func logDebugError(text: String) {
+    func logDebugError(_ text: String) {
         if !shouldDebugLog {
             return
         }
@@ -101,7 +101,7 @@ class SplitWebViewController: NSSplitViewController {
         logReadFromStandardInput(preparedText)
     }
 
-    func logDebugMessage(text: String) {
+    func logDebugMessage(_ text: String) {
         if !shouldDebugLog {
             return
         }
@@ -112,28 +112,28 @@ class SplitWebViewController: NSSplitViewController {
         logReadFromStandardInput(preparedText)
     }
     
-    func prepareLog(text: String, prefix: String) -> String {
+    func prepareLog(_ text: String, prefix: String) -> String {
         var prependedText = prefix + text
-        prependedText = prependedText.stringByReplacingOccurrencesOfString("\n", withString: "\n\(prefix)")
+        prependedText = prependedText.replacingOccurrences(of: "\n", with: "\n\(prefix)")
         prependedText += "\n"
         return prependedText
     }
     
-    func logReadFromStandardInput(text: String) {
-        logReadFromStandardInputOperationQueue.addOperationWithBlock { [weak self]() -> Void in
+    func logReadFromStandardInput(_ text: String) {
+        logReadFromStandardInputOperationQueue.addOperation { [weak self]() -> Void in
             if let strongSelf = self {
-                strongSelf.logWebViewController.readFromStandardInput(text)
+                strongSelf.logWebViewController.read(fromStandardInput: text)
             }
         }
         
         if logWebViewController.plugin == nil {
             if let logPlugin = delegate?.logPluginForSplitWebViewController(self) {
-                logWebViewController.runPlugin(logPlugin,
+                logWebViewController.run(logPlugin,
                     withArguments: nil,
                     inDirectoryPath: nil,
                     completionHandler: { [weak self](success) -> Void in
                         if let strongSelf = self {
-                            strongSelf.logReadFromStandardInputOperationQueue.suspended = false
+                            strongSelf.logReadFromStandardInputOperationQueue.isSuspended = false
                         }
                     })
             }
@@ -159,12 +159,12 @@ class SplitWebViewController: NSSplitViewController {
 
     // MARK: AppleScript
     
-    func doJavaScript(javaScript: String) -> String? {
+    func doJavaScript(_ javaScript: String) -> String? {
         return defaultWebViewController.doJavaScript(javaScript)
     }
     
-    func loadHTML(HTML: String,
-        baseURL: NSURL?,
+    func loadHTML(_ HTML: String,
+        baseURL: URL?,
         completionHandler:((Bool) -> Void)?)
     {
         defaultWebViewController.loadHTML(HTML,
@@ -172,16 +172,16 @@ class SplitWebViewController: NSSplitViewController {
             completionHandler: completionHandler)
     }
     
-    func readFromStandardInput(text: String) {
-        defaultWebViewController.readFromStandardInput(text)
+    func readFromStandardInput(_ text: String) {
+        defaultWebViewController.read(fromStandardInput: text)
     }
     
-    func runPlugin(plugin: Plugin,
+    func runPlugin(_ plugin: Plugin,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         completionHandler:((Bool) -> Void)?)
     {
-        defaultWebViewController.runPlugin(plugin,
+        defaultWebViewController.run(plugin,
             withArguments: arguments,
             inDirectoryPath: directoryPath,
             completionHandler: completionHandler)
@@ -193,8 +193,8 @@ class SplitWebViewController: NSSplitViewController {
         return tasks().count > 0
     }
     
-    func tasks() -> [NSTask] {
-        var tasks = [NSTask]()
+    func tasks() -> [Process] {
+        var tasks = [Process]()
         let splitViewItems = self.splitViewItems
         
         for splitViewItem in splitViewItems {
@@ -206,7 +206,7 @@ class SplitWebViewController: NSSplitViewController {
     
     // MARK: Actions
     
-    @IBAction func toggleLogShown(sender: AnyObject?) {
+    @IBAction func toggleLogShown(_ sender: AnyObject?) {
         toggleLog()
     }
 
@@ -226,9 +226,9 @@ class SplitWebViewController: NSSplitViewController {
     
     // MARK: Validation
     
-    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
-        case #selector(SplitWebViewController.toggleLogShown(_:)):
+        case #selector(SplitWebViewController.toggleLogShown(_:)?):
             if let collapsed = splitController.isCollapsed() {
                 menuItem.title = collapsed ? showLogMenuItemTitle : hideLogMenuItemTitle
                 return true
@@ -242,7 +242,7 @@ class SplitWebViewController: NSSplitViewController {
     
     // MARK: NSSplitViewDelegate
     
-    override func splitView(splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
+    override func splitView(_ splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
         if splitView != self.splitView {
             return false
         }
@@ -250,9 +250,9 @@ class SplitWebViewController: NSSplitViewController {
         return subview == splitController.splitViewsSubview
     }
 
-    override func splitView(splitView: NSSplitView,
+    override func splitView(_ splitView: NSSplitView,
         shouldCollapseSubview subview: NSView,
-        forDoubleClickOnDividerAtIndex dividerIndex: Int) -> Bool
+        forDoubleClickOnDividerAt dividerIndex: Int) -> Bool
     {
         if splitView != self.splitView {
             return false
@@ -261,7 +261,7 @@ class SplitWebViewController: NSSplitViewController {
         return subview == splitController.splitViewsSubview
     }
     
-    override func splitView(splitView: NSSplitView, shouldHideDividerAtIndex dividerIndex: Int) -> Bool {
+    override func splitView(_ splitView: NSSplitView, shouldHideDividerAt dividerIndex: Int) -> Bool {
         if dividerIndex == splitViewItemDividerIndex {
             if let collapsed = splitController.isCollapsed() {
                 return collapsed
@@ -270,7 +270,7 @@ class SplitWebViewController: NSSplitViewController {
         return false
     }
 
-    override func splitViewDidResizeSubviews(notification: NSNotification) {
+    override func splitViewDidResizeSubviews(_ notification: Notification) {
         if let isVisible = delegate?.windowIsVisibleForSplitWebViewController(self) {
             if !isVisible {
                 return
@@ -287,14 +287,14 @@ class SplitWebViewController: NSSplitViewController {
 }
 
 extension SplitWebViewController: SplitControllerDelegate {
-    func savedFrameNameForSplitController(splitController: SplitController) -> String? {
+    func savedFrameNameForSplitController(_ splitController: SplitController) -> String? {
         if let pluginName = defaultWebViewController.plugin?.name {
-            return self.dynamicType.savedFrameNameForPluginName(pluginName)
+            return type(of: self).savedFrameNameForPluginName(pluginName)
         }
         return nil
     }
     
-    class func savedFrameNameForPluginName(pluginName: String) -> String {
+    class func savedFrameNameForPluginName(_ pluginName: String) -> String {
         return "Log Frame " + pluginName
     }
 }
@@ -303,19 +303,19 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
     
     // MARK: Life Cycle
     
-    func webViewControllerViewWillDisappear(webViewController: WCLWebViewController) {
+    func webViewControllerViewWillDisappear(_ webViewController: WCLWebViewController) {
         // No-op only tests use this now
     }
     
-    func webViewControllerViewWillAppear(webViewController: WCLWebViewController) {
+    func webViewControllerViewWillAppear(_ webViewController: WCLWebViewController) {
         if let superview = webViewController.view.superview {
             let view = webViewController.view
             
             let minimumHeightConstraint =  NSLayoutConstraint(item: view,
-                attribute: .Height,
-                relatedBy: .GreaterThanOrEqual,
+                attribute: .height,
+                relatedBy: .greaterThanOrEqual,
                 toItem: nil,
-                attribute: .NotAnAttribute,
+                attribute: .notAnAttribute,
                 multiplier: 1,
                 constant: splitWebViewHeight)
             superview.addConstraint(minimumHeightConstraint)
@@ -326,12 +326,12 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         }
     }
     
-    func windowForWebViewController(webViewController: WCLWebViewController) -> NSWindow {
+    func window(for webViewController: WCLWebViewController) -> NSWindow {
         // TODO: Fortify this forced unwrap
         return delegate!.windowForSplitWebViewController(self)!
     }
     
-    func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
+    func webViewController(_ webViewController: WCLWebViewController, didReceiveTitle title: String) {
         if webViewController == defaultWebViewController {
             // Don't set the title from the log
             delegate?.splitWebViewController(self, didReceiveTitle: title)
@@ -340,11 +340,11 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
 
     // MARK: Starting & Finishing Tasks
     
-    func webViewController(webViewController: WCLWebViewController, willStartTask task: NSTask) {
+    func webViewController(_ webViewController: WCLWebViewController, willStart task: Process) {
         delegate?.splitWebViewController(self, willStartTask: task)
     }
     
-    func webViewController(webViewController: WCLWebViewController, didFinishTask task: NSTask) {
+    func webViewController(_ webViewController: WCLWebViewController, didFinish task: Process) {
         delegate?.splitWebViewController(self, didFinishTask: task)
         
         if webViewController == logWebViewController {
@@ -358,8 +358,8 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         }
     }
     
-    func webViewController(webViewController: WCLWebViewController,
-        didFailToRunTask task: NSTask,
+    func webViewController(_ webViewController: WCLWebViewController,
+        didFailToRun task: Process,
         commandPath: String, error: NSError)
     {
         delegate?.splitWebViewController(self, didFailToRunTask: task, error: error)
@@ -372,7 +372,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         logDebugError("Failed to run: \(commandPath.lastPathComponent)\nError: \(error.localizedDescription)")
     }
 
-    func webViewController(webViewController: WCLWebViewController,
+    func webViewController(_ webViewController: WCLWebViewController,
         didRunCommandPath commandPath: String,
         arguments: [String]?,
         directoryPath: String?)
@@ -386,7 +386,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         let commandName = commandPath.lastPathComponent
         items.append("Running: \(commandName)")
         if let arguments = arguments {
-            let item = arguments.joinWithSeparator(", ")
+            let item = arguments.joined(separator: ", ")
             items.append("With arguments: \(item)")
         }
         
@@ -394,14 +394,14 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
             items.append("In directory: \(directoryPath)")
         }
         
-        let text = items.joinWithSeparator("\n")
+        let text = items.joined(separator: "\n")
         
         logDebugMessage(text)
     }
     
     // MARK: Events
     
-    func webViewController(webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
+    func webViewController(_ webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
             return
@@ -411,7 +411,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         logDebugMessage(text)
     }
     
-    func webViewController(webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
+    func webViewController(_ webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
             return
@@ -421,7 +421,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         logDebugMessage(text)
     }
     
-    func webViewController(webViewController: WCLWebViewController, willLoadHTML HTML: String) {
+    func webViewController(_ webViewController: WCLWebViewController, willLoadHTML HTML: String) {
         delegate?.splitWebViewControllerWillLoadHTML(self)
 
         if webViewController == logWebViewController {
@@ -433,7 +433,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         logDebugMessage(text)
     }
     
-    func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
+    func webViewController(_ webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
             return
@@ -442,7 +442,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         logDebugMessage(text)
     }
     
-    func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
+    func webViewController(_ webViewController: WCLWebViewController, didReceiveStandardError text: String) {
         if webViewController == logWebViewController {
             // Don't log messages from the log itself
             return

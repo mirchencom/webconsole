@@ -10,21 +10,21 @@ import Foundation
 import XCTest
 
 extension XCTestCase {
-    func pathForResource(name: String?, ofType ext: String?, inDirectory bundlePath: String) -> String? {
-        return NSBundle(forClass:self.dynamicType).pathForResource(name, ofType:ext, inDirectory:bundlePath)
+    func pathForResource(_ name: String?, ofType ext: String?, inDirectory bundlePath: String) -> String? {
+        return Bundle(for:type(of: self)).path(forResource: name, ofType:ext, inDirectory:bundlePath)
     }
 
-    func URLForResource(name: String, withExtension ext: String?) -> NSURL? {
-        return NSBundle(forClass:self.dynamicType).URLForResource(name, withExtension:ext)
+    func URLForResource(_ name: String, withExtension ext: String?) -> URL? {
+        return Bundle(for:type(of: self)).url(forResource: name, withExtension:ext)
     }
     
-    func URLForResource(name: String, withExtension ext: String?, subdirectory subpath: String?) -> NSURL? {
-        return NSBundle(forClass:self.dynamicType).URLForResource(name, withExtension:ext, subdirectory:subpath)
+    func URLForResource(_ name: String, withExtension ext: String?, subdirectory subpath: String?) -> URL? {
+        return Bundle(for:type(of: self)).url(forResource: name, withExtension:ext, subdirectory:subpath)
     }
 
-    func stringWithContentsOfFileURL(fileURL: NSURL) -> String? {
+    func stringWithContentsOfFileURL(_ fileURL: URL) -> String? {
         do {
-            let contents = try NSString(contentsOfURL: fileURL, encoding: NSUTF8StringEncoding)
+            let contents = try NSString(contentsOf: fileURL, encoding: String.Encoding.utf8.rawValue)
             return contents as String
         } catch let error as NSError {
             XCTAssertNil(error)

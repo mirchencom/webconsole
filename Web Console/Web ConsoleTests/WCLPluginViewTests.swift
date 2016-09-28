@@ -23,7 +23,7 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
     }
     
     override func tearDown() {
-        self.dynamicType.blockUntilAllTasksRunAndFinish()
+        type(of: self).blockUntilAllTasksRunAndFinish()
         splitWebWindowController = nil
         super.tearDown()
     }
@@ -33,18 +33,18 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
     func testLoadHTMLInSplits() {
         // Load the HTML in the first split
         let split = splits[0]
-        let HTML = self.dynamicType.wcl_stringWithContentsOfSharedTestResource(testDataHTMLFilename,
+        let HTML = type(of: self).wcl_string(withContentsOfSharedTestResource: testDataHTMLFilename,
             withExtension: testDataHTMLExtension,
             subdirectory: testDataHTMLSubdirectory)
-        let baseURL = self.dynamicType.wcl_sharedTestResourcesURL()
-        let HTMLLoadExpectation = expectationWithDescription("HTML Load")
+        let baseURL = type(of: self).wcl_sharedTestResourcesURL()
+        let HTMLLoadExpectation = expectation(description: "HTML Load")
         split.loadHTML(HTML, baseURL: baseURL) { success in
             HTMLLoadExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
         
         // Test the title
-        let titleJavaScript = self.dynamicType.wcl_stringWithContentsOfSharedTestResource(testDataJavaScriptTitleFilename,
+        let titleJavaScript = type(of: self).wcl_string(withContentsOfSharedTestResource: testDataJavaScriptTitleFilename,
             withExtension: testDataJavaScriptExtension,
             subdirectory: testDataJavaScriptSubdirectory)
         var title = split.doJavaScript(titleJavaScript)
@@ -55,14 +55,14 @@ class WCLPluginViewTests: WCLSplitWebWindowControllerTestCase {
         
         // Load the HTML in the second split
         let splitTwo = splits[1]
-        let HTMLTwo = self.dynamicType.wcl_stringWithContentsOfSharedTestResource(testDataHTMLJQUERYFilename,
+        let HTMLTwo = type(of: self).wcl_string(withContentsOfSharedTestResource: testDataHTMLJQUERYFilename,
             withExtension: testDataHTMLExtension,
             subdirectory: testDataHTMLSubdirectory)
-        let HTMLTwoLoadExpectation = expectationWithDescription("HTML Load Two")
+        let HTMLTwoLoadExpectation = expectation(description: "HTML Load Two")
         splitTwo.loadHTML(HTMLTwo, baseURL: baseURL) { success in
             HTMLTwoLoadExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
         
         // Test the second title
         let titleTwo = splitTwo.doJavaScript(titleJavaScript)

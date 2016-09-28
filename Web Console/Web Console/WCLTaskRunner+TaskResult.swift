@@ -11,22 +11,22 @@ import Foundation
 
 extension TaskResultsCollector: WCLTaskRunnerDelegate {
     
-    func taskDidFinish(task: NSTask) {
-        assert(!task.running)
+    func taskDidFinish(_ task: Process) {
+        assert(!task.isRunning)
         let error = errorForTask(task)
-        completionHandler(standardOutput: standardOutput, standardError: standardError, error: error)
+        completionHandler(standardOutput, standardError, error)
     }
 
-    func task(task: NSTask, didFailToRunCommandPath commandPath: String, error: NSError) {
-        assert(!task.running)
-        completionHandler(standardOutput: standardOutput, standardError: standardError, error: error)
+    func task(_ task: Process, didFailToRunCommandPath commandPath: String, error: NSError) {
+        assert(!task.isRunning)
+        completionHandler(standardOutput, standardError, error)
     }
     
-    func task(task: NSTask, didReadFromStandardError text: String) {
+    func task(_ task: Process, didReadFromStandardError text: String) {
         appendToStandardError(text)
     }
     
-    func task(task: NSTask, didReadFromStandardOutput text: String) {
+    func task(_ task: Process, didReadFromStandardOutput text: String) {
         appendToStandardOutput(text)
     }
 }
@@ -37,11 +37,11 @@ class TaskResultsCollector: NSObject {
     var error: NSError?
     
     let completionHandler: WCLTaskRunner.TaskResult
-    init(completionHandler: WCLTaskRunner.TaskResult) {
+    init(completionHandler: @escaping WCLTaskRunner.TaskResult) {
         self.completionHandler = completionHandler
     }
     
-    private func appendToStandardOutput(text: String) {
+    fileprivate func appendToStandardOutput(_ text: String) {
         if standardOutput == nil {
             standardOutput = String()
         }
@@ -49,7 +49,7 @@ class TaskResultsCollector: NSObject {
         standardOutput? += text
     }
     
-    private func appendToStandardError(text: String) {
+    fileprivate func appendToStandardError(_ text: String) {
         if standardError == nil {
             standardError = String()
         }
@@ -57,13 +57,13 @@ class TaskResultsCollector: NSObject {
         standardError? += text
     }
     
-    private func errorForTask(task: NSTask) -> NSError? {
-        assert(!task.running)
-        if task.terminationStatus == 0 && task.terminationReason == .Exit {
+    fileprivate func errorForTask(_ task: Process) -> NSError? {
+        assert(!task.isRunning)
+        if task.terminationStatus == 0 && task.terminationReason == .exit {
             return nil
         }
         
-        if task.terminationReason == .UncaughtSignal {
+        if task.terminationReason == .uncaughtSignal {
             return NSError.taskTerminatedUncaughtSignalError(task.launchPath,
                 arguments: task.arguments,
                 directoryPath: task.currentDirectoryPath,
@@ -81,13 +81,13 @@ class TaskResultsCollector: NSObject {
 
 extension WCLTaskRunner {
     
-    typealias TaskResult = (standardOutput: String?, standardError: String?, error: NSError?) -> Void
+    typealias TaskResult = (_ standardOutput: String?, _ standardError: String?, _ error: NSError?) -> Void
     
 
-    class func runTaskUntilFinishedWithCommandPath(commandPath: String,
+    class func runTaskUntilFinishedWithCommandPath(_ commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
-        completionHandler: WCLTaskRunner.TaskResult) -> NSTask
+        completionHandler: @escaping WCLTaskRunner.TaskResult) -> Process
     {
         let timeout = 20.0
         return runTaskUntilFinishedWithCommandPath(commandPath,
@@ -97,14 +97,14 @@ extension WCLTaskRunner {
             completionHandler: completionHandler)
     }
 
-    class func runTaskUntilFinishedWithCommandPath(commandPath: String,
+    class func runTaskUntilFinishedWithCommandPath(_ commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
-        timeout: NSTimeInterval,
-        completionHandler: WCLTaskRunner.TaskResult) -> NSTask
+        timeout: TimeInterval,
+        completionHandler: @escaping WCLTaskRunner.TaskResult) -> Process
     {
         let taskResultsCollector = TaskResultsCollector { standardOutput, standardError, error in
-            completionHandler(standardOutput: standardOutput, standardError: standardError, error: error)
+            completionHandler(standardOutput, standardError, error)
         }
         
         return runTaskWithCommandPath(commandPath,
@@ -116,23 +116,23 @@ extension WCLTaskRunner {
     }
     
     
-    class func runTaskWithCommandPath(commandPath: String,
+    class func runTaskWithCommandPath(_ commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
-        timeout: NSTimeInterval,
+        timeout: TimeInterval,
         delegate: WCLTaskRunnerDelegate?,
-        completionHandler: ((Bool) -> Void)?) -> NSTask
+        completionHandler: ((Bool) -> Void)?) -> Process
     {
-        let task = runTaskWithCommandPath(commandPath,
+        let task = runTask(withCommandPath: commandPath,
             withArguments: arguments,
             inDirectoryPath: directoryPath,
             delegate: delegate,
             completionHandler: completionHandler)
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
-            if task.running {
-                task.wcl_interruptWithCompletionHandler({ (success) -> Void in
+        let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            if task.isRunning {
+                task.wcl_interrupt(completionHandler: { (success) -> Void in
                     assert(success)
                 })
             }

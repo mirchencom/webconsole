@@ -12,47 +12,47 @@ import XCTest
 @testable import Web_Console
 
 class PluginDataEventManager: PluginsDataControllerDelegate {
-    var pluginWasAddedHandlers: Array<(plugin: Plugin) -> Void>
-    var pluginWasRemovedHandlers: Array<(plugin: Plugin) -> Void>
+    var pluginWasAddedHandlers: Array<(_ plugin: Plugin) -> Void>
+    var pluginWasRemovedHandlers: Array<(_ plugin: Plugin) -> Void>
     var delegate: PluginsDataControllerDelegate?
     
     init () {
-        self.pluginWasAddedHandlers = Array<(plugin: Plugin) -> Void>()
-        self.pluginWasRemovedHandlers = Array<(plugin: Plugin) -> Void>()
+        self.pluginWasAddedHandlers = Array<(_ plugin: Plugin) -> Void>()
+        self.pluginWasRemovedHandlers = Array<(_ plugin: Plugin) -> Void>()
     }
     
     
     // MARK: PluginsDataControllerDelegate
     
-    func pluginsDataController(pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
         delegate?.pluginsDataController(pluginsDataController, didAddPlugin: plugin)
         
         assert(pluginWasAddedHandlers.count > 0, "There should be at least one handler")
         
         if (pluginWasAddedHandlers.count > 0) {
-            let handler = pluginWasAddedHandlers.removeAtIndex(0)
+            let handler = pluginWasAddedHandlers.remove(at: 0)
             handler(plugin: plugin)
         }
     }
     
-    func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
         delegate?.pluginsDataController(pluginsDataController, didRemovePlugin: plugin)
         
         assert(pluginWasRemovedHandlers.count > 0, "There should be at least one handler")
         
         if (pluginWasRemovedHandlers.count > 0) {
-            let handler = pluginWasRemovedHandlers.removeAtIndex(0)
+            let handler = pluginWasRemovedHandlers.remove(at: 0)
             handler(plugin: plugin)
         }
     }
     
     // MARK: Handlers
     
-    func addPluginWasAddedHandler(handler: (plugin: Plugin) -> Void) {
+    func addPluginWasAddedHandler(_ handler: (_ plugin: Plugin) -> Void) {
         pluginWasAddedHandlers.append(handler)
     }
     
-    func addPluginWasRemovedHandler(handler: (plugin: Plugin) -> Void) {
+    func addPluginWasRemovedHandler(_ handler: (_ plugin: Plugin) -> Void) {
         pluginWasRemovedHandlers.append(handler)
     }
     

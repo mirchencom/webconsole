@@ -14,34 +14,34 @@ import XCTest
 class DirectoryTests: XCTestCase {
 
     func testBuiltInPluginsPath() {
-        XCTAssert(Directory.BuiltInPlugins.path() == NSBundle.mainBundle().builtInPlugInsPath!, "The paths should match")
+        XCTAssert(Directory.builtInPlugins.path() == Bundle.main.builtInPlugInsPath!, "The paths should match")
     }
     
     func testApplicationSupport() {
-        let applicationSupportDirectoryPath = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
+        let applicationSupportDirectoryPath = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]
         let nameKey = kCFBundleNameKey
-        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey as String] as! String
+        let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
         let applicationSupportPath = applicationSupportDirectoryPath
             .stringByAppendingPathComponent(applicationName)
-        XCTAssert(applicationSupportPath == Directory.ApplicationSupport.path(), "The paths should match")
+        XCTAssert(applicationSupportPath == Directory.applicationSupport.path(), "The paths should match")
     }
     
     func testApplicationSupportPluginsPath() {
-        let applicationSupportPath = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
+        let applicationSupportPath = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]
         let nameKey = kCFBundleNameKey
-        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey as String] as! String
+        let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
         let applicationSupportPluginsPath = applicationSupportPath
             .stringByAppendingPathComponent(applicationName)
             .stringByAppendingPathComponent(pluginsDirectoryPathComponent)
-        XCTAssert(applicationSupportPluginsPath == Directory.ApplicationSupportPlugins.path(), "The paths should match")
+        XCTAssert(applicationSupportPluginsPath == Directory.applicationSupportPlugins.path(), "The paths should match")
     }
 
     func testCachesPath() {
-        let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+        let cachesDirectory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
         let nameKey = kCFBundleNameKey
-        let applicationName = NSBundle.mainBundle().infoDictionary![nameKey as String] as! String
+        let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
         let cachesPath = cachesDirectory
             .stringByAppendingPathComponent(applicationName)
-        XCTAssert(cachesPath == Directory.Caches.path(), "The paths should match")
+        XCTAssert(cachesPath == Directory.caches.path(), "The paths should match")
     }
 }

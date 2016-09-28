@@ -12,24 +12,24 @@ import AppKit
 @objc class UserDefaultsManager: NSObject {
 
     struct Singleton {
-        static var overrideStandardUserDefaults: NSUserDefaults?
+        static var overrideStandardUserDefaults: UserDefaults?
         static var overrideSharedUserDefaultsController: NSUserDefaultsController?
     }
     
-    class func setOverrideStandardUserDefaults(userDefaults: NSUserDefaults?) {
+    class func setOverrideStandardUserDefaults(_ userDefaults: UserDefaults?) {
         Singleton.overrideStandardUserDefaults = userDefaults
     }
 
-    class func setOverrideSharedUserDefaultsController(userDefaultsController: NSUserDefaultsController?) {
+    class func setOverrideSharedUserDefaultsController(_ userDefaultsController: NSUserDefaultsController?) {
         Singleton.overrideSharedUserDefaultsController = userDefaultsController
     }
 
-    class func standardUserDefaults() -> NSUserDefaults {
+    class func standardUserDefaults() -> UserDefaults {
         if let overrideStandardUserDefaults = Singleton.overrideStandardUserDefaults {
             return overrideStandardUserDefaults
         }
 
-        return NSUserDefaults.standardUserDefaults()
+        return UserDefaults.standard
     }
 
     class func sharedUserDefaultsController() -> NSUserDefaultsController {
@@ -37,6 +37,6 @@ import AppKit
             return overrideSharedUserDefaultsController
         }
         
-        return NSUserDefaultsController.sharedUserDefaultsController()
+        return NSUserDefaultsController.shared()
     }
 }

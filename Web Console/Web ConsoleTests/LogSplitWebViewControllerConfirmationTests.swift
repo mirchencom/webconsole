@@ -24,9 +24,9 @@ class SplitWebViewControllerLogConfirmationTests: LogWebViewControllerEventRoute
         XCTAssertEqual(splitWebWindowController.commandsNotRequiringConfirmation().count, 1)
         // Wait for editing flag
         let editingPredicate = NSPredicate(format: "documentEdited == true")
-        expectationForPredicate(editingPredicate, evaluatedWithObject: splitWebWindowController.window!, handler: nil)
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
-        XCTAssertTrue(splitWebWindowController.window!.documentEdited)
+        expectation(for: editingPredicate, evaluatedWith: splitWebWindowController.window!, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
+        XCTAssertTrue(splitWebWindowController.window!.isDocumentEdited)
 
         // Terminate Tasks
         terminatePluginTask()
@@ -36,47 +36,47 @@ class SplitWebViewControllerLogConfirmationTests: LogWebViewControllerEventRoute
         XCTAssertEqual(splitWebWindowController.commandsNotRequiringConfirmation().count, 1)
         // Wait for editing flag
         let notEditingPredicate = NSPredicate(format: "documentEdited == false")
-        expectationForPredicate(notEditingPredicate, evaluatedWithObject: splitWebWindowController.window!, handler: nil)
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
-        XCTAssertFalse(splitWebWindowController.window!.documentEdited)
+        expectation(for: notEditingPredicate, evaluatedWith: splitWebWindowController.window!, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
+        XCTAssertFalse(splitWebWindowController.window!.isDocumentEdited)
     }
     
     func startPluginAndLogTasks() {
-        let logReadFromStandardInputExpectation = expectationWithDescription("Start running plugin log message")
+        let logReadFromStandardInputExpectation = expectation(description: "Start running plugin log message")
         logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             logReadFromStandardInputExpectation.fulfill()
         }
         
-        let logRunExpectation = expectationWithDescription("Running log plugin")
+        let logRunExpectation = expectation(description: "Running log plugin")
         logWebViewControllerEventRouter.addDidRunCommandPathHandlers { (commandPath, arguments, directoryPath) -> Void in
             logRunExpectation.fulfill()
         }
         
-        let pluginRunExpectation = expectationWithDescription("Plugin run")
+        let pluginRunExpectation = expectation(description: "Plugin run")
         let plugin = PluginsManager.sharedInstance.pluginWithName(testCatPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             pluginRunExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
         XCTAssertEqual(splitWebWindowController.tasks().count, 2)
         XCTAssertTrue(splitWebViewController.defaultWebViewController.tasks.count > 0)
     }
     
     func terminatePluginTask() {
-        let pluginFinishedReadFromStandardInputExpectation = expectationWithDescription("Finished running plugin log message")
+        let pluginFinishedReadFromStandardInputExpectation = expectation(description: "Finished running plugin log message")
         logWebViewControllerEventRouter.addDidReadFromStandardInputHandler { (text) -> Void in
             pluginFinishedReadFromStandardInputExpectation.fulfill()
         }
 
         let pluginTask = splitWebViewController.defaultWebViewController.tasks[0]
-        let terminatePluginTaskExpectation = expectationWithDescription("Terminate plugin task")
+        let terminatePluginTaskExpectation = expectation(description: "Terminate plugin task")
         WCLTaskHelper.terminateTask(pluginTask) { (success) -> Void in
             XCTAssertTrue(success)
             terminatePluginTaskExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
         
         XCTAssertEqual(splitWebWindowController.tasks().count, 1)
         XCTAssertTrue(splitWebViewController.defaultWebViewController.tasks.count == 0)

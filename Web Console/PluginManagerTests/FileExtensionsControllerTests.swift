@@ -13,9 +13,9 @@ import XCTest
 
 class FileExtensionsControllerTests: FileExtensionsTestCase {
 
-    func extensionsTest(extensions1: [String], matchExtensions extensions2: [String]) -> Bool {
-        let sortedExtensions1: NSArray = extensions1.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-        let sortedExtensions2: NSArray = extensions2.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+    func extensionsTest(_ extensions1: [String], matchExtensions extensions2: [String]) -> Bool {
+        let sortedExtensions1: NSArray = extensions1.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+        let sortedExtensions2: NSArray = extensions2.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         return sortedExtensions1 == sortedExtensions2
     }
 
@@ -41,8 +41,8 @@ class FileExtensionsControllerTests: FileExtensionsTestCase {
 class FileExtensionsControllerBuiltInPluginsTests: XCTestCase {
     override func setUp() {
         super.setUp()
-        let pluginsManager = PluginsManager([Directory.BuiltInPlugins.path()],
-            duplicatePluginDestinationDirectoryURL: Directory.Trash.URL())
+        let pluginsManager = PluginsManager([Directory.builtInPlugins.path()],
+            duplicatePluginDestinationDirectoryURL: Directory.trash.URL())
         PluginsManager.setOverrideSharedInstance(pluginsManager)
         let fileExtensionsController = FileExtensionsController(pluginsManager: PluginsManager.sharedInstance)
         FileExtensionsController.setOverrideSharedInstance(fileExtensionsController)
@@ -61,11 +61,11 @@ class FileExtensionsControllerBuiltInPluginsTests: XCTestCase {
         let plugins = PluginsManager.sharedInstance.plugins()
         let pluginsSet = NSMutableSet()
         for plugin in plugins {
-            pluginsSet.addObjectsFromArray(plugin.suffixes)
+            pluginsSet.addObjects(from: plugin.suffixes)
         }
 
         XCTAssertTrue(pluginsSet.count > 0, "The cound should be greater than zero")
-        XCTAssertTrue(pluginsSet.isEqualToSet(controllerSet), "The sets should be equal")
+        XCTAssertTrue(pluginsSet.isEqual(to: controllerSet), "The sets should be equal")
     }
 
 }

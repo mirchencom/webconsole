@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension NSUserDefaults: ProcessManagerStore { }
+extension UserDefaults: ProcessManagerStore { }
 
 protocol ProcessManagerStore {
-    func setObject(value: AnyObject?, forKey defaultName: String)
-    func dictionaryForKey(defaultName: String) -> [String : AnyObject]?
+    func setObject(_ value: AnyObject?, forKey defaultName: String)
+    func dictionaryForKey(_ defaultName: String) -> [String : AnyObject]?
 }
 class ProcessManager {
     
@@ -25,8 +25,8 @@ class ProcessManager {
         }
     }
     
-    private let processManagerStore: ProcessManagerStore
-    private var identifierKeyToProcessInfoValue = [NSString: AnyObject]()
+    fileprivate let processManagerStore: ProcessManagerStore
+    fileprivate var identifierKeyToProcessInfoValue = [NSString: AnyObject]()
     
     convenience init() {
         self.init(processManagerStore: UserDefaultsManager.standardUserDefaults())
@@ -34,25 +34,25 @@ class ProcessManager {
     
     init(processManagerStore: ProcessManagerStore) {
         if let processInfoDictionary = processManagerStore.dictionaryForKey(runningProcessesKey) {
-            identifierKeyToProcessInfoValue = processInfoDictionary
+            identifierKeyToProcessInfoValue = processInfoDictionary as [NSString : AnyObject]
         }
         self.processManagerStore = processManagerStore
     }
     
-    func addProcessInfo(processInfo: ProcessInfo) {
-        let keyValue = self.dynamicType.keyAndValueForProcessInfo(processInfo)
+    func addProcessInfo(_ processInfo: ProcessInfo) {
+        let keyValue = type(of: self).keyAndValueForProcessInfo(processInfo)
         objc_sync_enter(self)
         identifierKeyToProcessInfoValue[keyValue.key] = keyValue.value
         objc_sync_exit(self)
         save()
     }
     
-    func removeProcessWithIdentifier(identifier: Int32) -> ProcessInfo? {
+    func removeProcessWithIdentifier(_ identifier: Int32) -> ProcessInfo? {
         let processInfo = processInfoForIdentifier(identifier, remove: true)
         return processInfo
     }
     
-    func processInfoWithIdentifier(identifier: Int32) -> ProcessInfo? {
+    func processInfoWithIdentifier(_ identifier: Int32) -> ProcessInfo? {
         return processInfoForIdentifier(identifier, remove: false)
     }
     
@@ -66,7 +66,7 @@ class ProcessManager {
         for value in values {
             if let
                 value = value as? NSDictionary,
-                processInfo = self.dynamicType.processInfoForValue(value)
+                let processInfo = type(of: self).processInfoForValue(value)
             {
                 processInfos.append(processInfo)
             }
@@ -77,25 +77,25 @@ class ProcessManager {
     
     // MARK: Private
     
-    private func save() {
-        processManagerStore.setObject(identifierKeyToProcessInfoValue, forKey: runningProcessesKey)
+    fileprivate func save() {
+        processManagerStore.setObject(identifierKeyToProcessInfoValue as AnyObject?, forKey: runningProcessesKey)
     }
     
-    private func processInfoForIdentifier(identifier: Int32, remove: Bool) -> ProcessInfo? {
+    fileprivate func processInfoForIdentifier(_ identifier: Int32, remove: Bool) -> ProcessInfo? {
         guard let processInfoValue = processInfoValueForIdentifier(identifier, remove: remove) else {
             return nil
         }
         
-        return self.dynamicType.processInfoForValue(processInfoValue)
+        return type(of: self).processInfoForValue(processInfoValue)
     }
     
     // MARK: Helper
     
-    private func processInfoValueForIdentifier(identifier: Int32, remove: Bool) -> NSDictionary? {
-        let key = self.dynamicType.identifierToKey(identifier)
+    fileprivate func processInfoValueForIdentifier(_ identifier: Int32, remove: Bool) -> NSDictionary? {
+        let key = type(of: self).identifierToKey(identifier)
         if remove {
             objc_sync_enter(self)
-            let processInfoValue = identifierKeyToProcessInfoValue.removeValueForKey(key) as? NSDictionary
+            let processInfoValue = identifierKeyToProcessInfoValue.removeValue(forKey: key) as? NSDictionary
             objc_sync_exit(self)
             save()
             return processInfoValue
@@ -107,17 +107,17 @@ class ProcessManager {
         }
     }
     
-    private class func keyAndValueForProcessInfo(processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
+    fileprivate class func keyAndValueForProcessInfo(_ processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
         let key = identifierToKey(processInfo.identifier)
         let value = valueForProcessInfo(processInfo)
         return (key: key, value: value)
     }
     
-    private class func processInfoForValue(dictionary: NSDictionary) -> ProcessInfo? {
+    fileprivate class func processInfoForValue(_ dictionary: NSDictionary) -> ProcessInfo? {
         guard
             let key = dictionary[ProcessInfoKey.Identifier.key()] as? NSString,
             let commandPath = dictionary[ProcessInfoKey.CommandPath.key()] as? String,
-            let startTime = dictionary[ProcessInfoKey.StartTime.key()] as? NSDate
+            let startTime = dictionary[ProcessInfoKey.StartTime.key()] as? Date
         else {
             return nil
         }
@@ -129,7 +129,7 @@ class ProcessManager {
             commandPath: commandPath)
     }
     
-    private class func valueForProcessInfo(processInfo: ProcessInfo) -> NSDictionary {
+    fileprivate class func valueForProcessInfo(_ processInfo: ProcessInfo) -> NSDictionary {
         let dictionary = NSMutableDictionary()
         let key = identifierToKey(processInfo.identifier)
         dictionary[ProcessInfoKey.Identifier.key()] = key
@@ -138,12 +138,12 @@ class ProcessManager {
         return dictionary
     }
     
-    private class func keyToIdentifier(key: NSString) -> Int32 {
+    fileprivate class func keyToIdentifier(_ key: NSString) -> Int32 {
         return Int32(key.intValue)
     }
     
-    private class func identifierToKey(value: Int32) -> NSString {
+    fileprivate class func identifierToKey(_ value: Int32) -> NSString {
         let valueNumber = String(value)
-        return valueNumber
+        return valueNumber as NSString
     }
 }

@@ -8,28 +8,28 @@
 
 import Foundation
 
-enum FileSystemError: ErrorType {
-    case FileExistsForDirectoryError
+enum FileSystemError: Error {
+    case fileExistsForDirectoryError
 }
 
 enum RunCommandPathErrorCode: Int {
-    case Unknown = 100, Unexecutable, Exception
+    case unknown = 100, unexecutable, exception
 }
 
 // MARK: WCLTaskRunner
 
 extension NSError {
     
-    class func commandPathUnkownError(launchPath: String) -> NSError {
-        return errorWithDescription("An unkown error occurred running command path: \(launchPath)", code: RunCommandPathErrorCode.Unknown.rawValue)
+    class func commandPathUnkownError(_ launchPath: String) -> NSError {
+        return errorWithDescription("An unkown error occurred running command path: \(launchPath)", code: RunCommandPathErrorCode.unknown.rawValue)
     }
     
-    class func commandPathUnexecutableError(launchPath: String) -> NSError {
-        return errorWithDescription("Command path is not executable: \(launchPath)", code: RunCommandPathErrorCode.Unexecutable.rawValue)
+    class func commandPathUnexecutableError(_ launchPath: String) -> NSError {
+        return errorWithDescription("Command path is not executable: \(launchPath)", code: RunCommandPathErrorCode.unexecutable.rawValue)
     }
     
-    class func commandPathExceptionError(launchPath: String) -> NSError {
-        return errorWithDescription("An exception was thrown running command path: \(launchPath)", code: RunCommandPathErrorCode.Exception.rawValue)
+    class func commandPathExceptionError(_ launchPath: String) -> NSError {
+        return errorWithDescription("An exception was thrown running command path: \(launchPath)", code: RunCommandPathErrorCode.exception.rawValue)
     }
     
 }

@@ -16,14 +16,14 @@ class ProcessFilterTests: XCTestCase {
     
     func testWithProcesses() {
 
-        var tasks = [NSTask]()
+        var tasks = [Process]()
         for _ in 0...2 {
             let commandPath = pathForResource(testDataShellScriptCatName,
                 ofType: testDataShellScriptExtension,
                 inDirectory: testDataSubdirectory)!
             
-            let runExpectation = expectationWithDescription("Task ran")
-            let task = WCLTaskRunner.runTaskWithCommandPath(commandPath,
+            let runExpectation = expectation(description: "Task ran")
+            let task = WCLTaskRunner.runTask(withCommandPath: commandPath,
                 withArguments: nil,
                 inDirectoryPath: nil,
                 delegate: nil)
@@ -33,10 +33,10 @@ class ProcessFilterTests: XCTestCase {
             }
             tasks.append(task)
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
         
-        let taskIdentifiers = tasks.map { $0.processIdentifier }.sort { $0 < $1 }
-        let processFilterExpectation = expectationWithDescription("Filter processes")
+        let taskIdentifiers = tasks.map { $0.processIdentifier }.sorted { $0 < $1 }
+        let processFilterExpectation = expectation(description: "Filter processes")
         ProcessFilter.runningProcessesWithIdentifiers(taskIdentifiers) { (identifierToProcessInfo, error) -> Void in
             guard let identifierToProcessInfo = identifierToProcessInfo else {
                 XCTAssertTrue(false)
@@ -46,23 +46,23 @@ class ProcessFilterTests: XCTestCase {
 
             XCTAssertEqual(identifierToProcessInfo.count, 3)
  
-            let processIdentifiers = identifierToProcessInfo.values.map({ $0.identifier }).sort { $0 < $1 }
+            let processIdentifiers = identifierToProcessInfo.values.map({ $0.identifier }).sorted { $0 < $1 }
             XCTAssertEqual(processIdentifiers, taskIdentifiers)
             processFilterExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
         
         // Clean up
 
         for task in tasks {
-            let interruptExpectation = expectationWithDescription("Interrupt finished")
-            task.wcl_interruptWithCompletionHandler { (success) -> Void in
+            let interruptExpectation = expectation(description: "Interrupt finished")
+            task.wcl_interrupt { (success) -> Void in
                 XCTAssertTrue(success)
                 interruptExpectation.fulfill()
             }
         }
 
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
     }
     
     
@@ -72,8 +72,8 @@ class ProcessFilterTests: XCTestCase {
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
         
-        let runExpectation = expectationWithDescription("Task ran")
-        let task = WCLTaskRunner.runTaskWithCommandPath(commandPath,
+        let runExpectation = expectation(description: "Task ran")
+        let task = WCLTaskRunner.runTask(withCommandPath: commandPath,
             withArguments: nil,
             inDirectoryPath: nil,
             delegate: nil)
@@ -82,9 +82,9 @@ class ProcessFilterTests: XCTestCase {
             runExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
         
-        let processFilterExpectation = expectationWithDescription("Filter processes")
+        let processFilterExpectation = expectation(description: "Filter processes")
         ProcessFilter.runningProcessesWithIdentifiers([task.processIdentifier]) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNil(error)
             XCTAssertNotNil(identifierToProcessInfo)
@@ -101,16 +101,16 @@ class ProcessFilterTests: XCTestCase {
             XCTAssertEqual(processInfo.identifier, task.processIdentifier)
             processFilterExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
         
         // Clean up
 
-        let interruptExpectation = expectationWithDescription("Interrupt finished")
-        task.wcl_interruptWithCompletionHandler { (success) -> Void in
+        let interruptExpectation = expectation(description: "Interrupt finished")
+        task.wcl_interrupt { (success) -> Void in
             XCTAssertTrue(success)
             interruptExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
     }
 }
 
@@ -119,23 +119,23 @@ class ProcessFilterTests: XCTestCase {
 
 class ProcessFilterNoProcessTests: XCTestCase {
 
-    lazy var testProcessInfo: ProcessInfo = {
+    lazy var testProcessInfo: Web_Console.ProcessInfo = {
         let identifier = Int32(74)
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE MMM d HH:mm:ss yyyy"
-        let startTime = dateFormatter.dateFromString("Wed Dec 16 02:09:32 2015")!
+        let startTime = dateFormatter.date(from: "Wed Dec 16 02:09:32 2015")!
         let commandPath = "/usr/libexec/wdhelper"
-        return ProcessInfo(identifier: identifier, startTime: startTime, commandPath: commandPath)!
+        return Web_Console.ProcessInfo(identifier: identifier, startTime: startTime, commandPath: commandPath)!
     }()
 
     func testEmptyIdentifiers() {
-        let expectation = expectationWithDescription("Process filter finished")
+        let expectation = self.expectation(description: "Process filter finished")
         ProcessFilter.runningProcessesWithIdentifiers([Int32]()) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNotNil(error)
             XCTAssertNil(identifierToProcessInfo)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
     }
 
     func testEmptyInput() {

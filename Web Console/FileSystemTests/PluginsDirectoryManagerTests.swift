@@ -12,44 +12,44 @@ import XCTest
 @testable import Web_Console
 
 class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
-    var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(path: String) -> Void>
-    var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(path: String) -> Void>
+    var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(_ path: String) -> Void>
+    var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(_ path: String) -> Void>
     
     
     init () {
-        self.pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers = Array<(path: String) -> Void>()
-        self.pluginInfoDictionaryWasRemovedAtPluginPathHandlers = Array<(path: String) -> Void>()
+        self.pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers = Array<(_ path: String) -> Void>()
+        self.pluginInfoDictionaryWasRemovedAtPluginPathHandlers = Array<(_ path: String) -> Void>()
     }
     
 
     // MARK: PluginsDirectoryManagerDelegate
     
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String) {
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String) {
         assert(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.count > 0, "There should be at least one handler")
         
         if (pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.count > 0) {
-            let handler = pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.removeAtIndex(0)
-            handler(path: pluginPath)
+            let handler = pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.remove(at: 0)
+            handler(pluginPath)
         }
     }
     
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String) {
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String) {
         assert(pluginInfoDictionaryWasRemovedAtPluginPathHandlers.count > 0, "There should be at least one handler")
         
         if (pluginInfoDictionaryWasRemovedAtPluginPathHandlers.count > 0) {
-            let handler = pluginInfoDictionaryWasRemovedAtPluginPathHandlers.removeAtIndex(0)
-            handler(path: pluginPath)
+            let handler = pluginInfoDictionaryWasRemovedAtPluginPathHandlers.remove(at: 0)
+            handler(pluginPath)
         }
     }
 
     
     // MARK: Handlers
     
-    func addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler(handler: (path: String) -> Void) {
+    func addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler(_ handler: @escaping (_ path: String) -> Void) {
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.append(handler)
     }
     
-    func addPluginInfoDictionaryWasRemovedAtPluginPathHandler(handler: (path: String) -> Void) {
+    func addPluginInfoDictionaryWasRemovedAtPluginPathHandler(_ handler: @escaping (_ path: String) -> Void) {
         pluginInfoDictionaryWasRemovedAtPluginPathHandlers.append(handler)
     }
     
@@ -59,17 +59,17 @@ extension PluginsDirectoryManagerTests {
     
     // MARK: Move Helpers
     
-    func movePluginAtPathWithConfirmation(pluginPath: String, destinationPluginPath: String) {
-        let removeExpectation = expectationWithDescription("Info dictionary was removed")
+    func movePluginAtPathWithConfirmation(_ pluginPath: String, destinationPluginPath: String) {
+        let removeExpectation = expectation(description: "Info dictionary was removed")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == pluginPath) {
                 removeExpectation.fulfill()
             }
         })
         
-        let createExpectation = expectationWithDescription("Info dictionary was created")
+        let createExpectation = expectation(description: "Info dictionary was created")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == destinationPluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == destinationPluginPath) {
                 createExpectation.fulfill()
             }
         })
@@ -77,70 +77,70 @@ extension PluginsDirectoryManagerTests {
         SubprocessFileSystemModifier.moveItemAtPath(pluginPath, toPath: destinationPluginPath)
         
         // Wait for expectations
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
-    func movePluginAtPathWithConfirmation(pluginPath: String, toUnwatchedDestinationPluginPath destinationPluginPath: String) {
-        let removeExpectation = expectationWithDescription("Info dictionary was removed")
+    func movePluginAtPathWithConfirmation(_ pluginPath: String, toUnwatchedDestinationPluginPath destinationPluginPath: String) {
+        let removeExpectation = expectation(description: "Info dictionary was removed")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == pluginPath) {
                 removeExpectation.fulfill()
             }
         })
         
-        let moveExpectation = expectationWithDescription("Move finished")
+        let moveExpectation = expectation(description: "Move finished")
         SubprocessFileSystemModifier.moveItemAtPath(pluginPath, toPath: destinationPluginPath, handler: {
             moveExpectation.fulfill()
         })
         
         // Wait for expectations
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
     
 
     // MARK: Copy Helpers
     
-    func copyPluginAtPathWithConfirmation(pluginPath: String, destinationPluginPath: String) {
-        let createExpectation = expectationWithDescription("Info dictionary was created or modified")
+    func copyPluginAtPathWithConfirmation(_ pluginPath: String, destinationPluginPath: String) {
+        let createExpectation = expectation(description: "Info dictionary was created or modified")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == destinationPluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == destinationPluginPath) {
                 createExpectation.fulfill()
             }
         })
 
-        let copyExpectation = expectationWithDescription("Copy finished")
+        let copyExpectation = expectation(description: "Copy finished")
         SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
         })
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func copyPluginAtPath(pluginPath: String, destinationPluginPath: String) {
-        let copyExpectation = expectationWithDescription("Copy finished")
+    func copyPluginAtPath(_ pluginPath: String, destinationPluginPath: String) {
+        let copyExpectation = expectation(description: "Copy finished")
         SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
         })
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
     
 
     // MARK: Remove Helpers
     
-    func removePluginAtPathWithConfirmation(pluginPath: String) {
-        let removeExpectation = expectationWithDescription("Info dictionary was removed")
+    func removePluginAtPathWithConfirmation(_ pluginPath: String) {
+        let removeExpectation = expectation(description: "Info dictionary was removed")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
             self.pluginsDirectoryManager.delegate = nil // Ignore subsequent remove events
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == pluginPath) {
                 removeExpectation.fulfill()
             }
         })
 
-        let deleteExpectation = expectationWithDescription("Delete finished")
+        let deleteExpectation = expectation(description: "Delete finished")
         SubprocessFileSystemModifier.removeDirectoryAtPath(pluginPath, handler: {
             deleteExpectation.fulfill()
         })
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 }
 
@@ -226,24 +226,24 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         let renamedInfoDictionaryPath = infoDictionaryDirectory.stringByAppendingPathComponent(renamedInfoDictionaryFilename)
         
         // Move
-        let expectation = expectationWithDescription("Info dictionary was removed")
+        let expectation = self.expectation(description: "Info dictionary was removed")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == self.pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == self.pluginPath) {
                 expectation.fulfill()
             }
         })
         SubprocessFileSystemModifier.moveItemAtPath(pluginInfoDictionaryPath, toPath: renamedInfoDictionaryPath)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
         
         // Move back
-        let expectationTwo = expectationWithDescription("Info dictionary was created or modified")
+        let expectationTwo = self.expectation(description: "Info dictionary was created or modified")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == self.pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == self.pluginPath) {
                 expectationTwo.fulfill()
             }
         })
         SubprocessFileSystemModifier.moveItemAtPath(renamedInfoDictionaryPath, toPath: pluginInfoDictionaryPath)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
     func testRemoveAndAddInfoDictionary() {
@@ -251,37 +251,37 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
         var infoDictionaryContents: String!
         do {
-            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding)
+            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: String.Encoding.utf8)
         } catch {
             XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
         }
         
         // Remove the info dictionary
-        let expectation = expectationWithDescription("Info dictionary was removed")
+        let expectation = self.expectation(description: "Info dictionary was removed")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == self.pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == self.pluginPath) {
                 expectation.fulfill()
             }
         })
         SubprocessFileSystemModifier.removeFileAtPath(pluginInfoDictionaryPath)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
 
         // Add back the info dictionary
-        let expectationTwo = expectationWithDescription("Info dictionary was created or modified")
+        let expectationTwo = self.expectation(description: "Info dictionary was created or modified")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == self.pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == self.pluginPath) {
                 expectationTwo.fulfill()
             }
         })
         SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: infoDictionaryContents)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
     func testModifyInfoDictionary() {
         // Read in the contents of the info dictionary
         var infoDictionaryContents: String!
         do {
-            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: NSUTF8StringEncoding)
+            infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: String.Encoding.utf8)
         } catch {
             XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
         }
@@ -289,23 +289,23 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     
         
         // Remove the info dictionary
-        let expectation = expectationWithDescription("Info dictionary was created or modified")
+        let expectation = self.expectation(description: "Info dictionary was created or modified")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == self.pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == self.pluginPath) {
                 expectation.fulfill()
             }
         })
         SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: testFileContents)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
         
         // Remove the info dictionary
-        let expectationTwo = expectationWithDescription("Info dictionary was created or modified")
+        let expectationTwo = self.expectation(description: "Info dictionary was created or modified")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (self.dynamicType.resolveTemporaryDirectoryPath(path) == self.pluginPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path) == self.pluginPath) {
                 expectationTwo.fulfill()
             }
         })
         SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: infoDictionaryContents)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 }

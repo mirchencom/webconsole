@@ -14,10 +14,10 @@ class DuplicatePluginController {
     struct ClassConstants {
         static let tempDirectoryName = "Duplicate Plugin"
     }
-    class func pluginFilenameFromName(name: String) -> String {
+    class func pluginFilenameFromName(_ name: String) -> String {
         return name.stringByAppendingPathExtension(pluginFileExtension)!
     }
-    func duplicatePlugin(plugin: Plugin, toDirectoryAtURL destinationDirectoryURL: NSURL, completionHandler handler: (plugin: Plugin?, error: NSError?) -> Void) {
+    func duplicatePlugin(_ plugin: Plugin, toDirectoryAtURL destinationDirectoryURL: URL, completionHandler handler: @escaping (_ plugin: Plugin?, _ error: NSError?) -> Void) {
         let pluginFileURL = plugin.bundle.bundleURL
         copyDirectoryController.copyItemAtURL(pluginFileURL, completionHandler: { (URL, error) -> Void in
             
@@ -28,12 +28,12 @@ class DuplicatePluginController {
             
             var plugin: Plugin?
             if let URL = URL {
-                let UUID = NSUUID()
-                let movedFilename = self.dynamicType.pluginFilenameFromName(UUID.UUIDString)
-                let movedDestinationURL = destinationDirectoryURL.URLByAppendingPathComponent(movedFilename)
+                let UUID = Foundation.UUID()
+                let movedFilename = type(of: self).pluginFilenameFromName(UUID.uuidString)
+                let movedDestinationURL = destinationDirectoryURL.appendingPathComponent(movedFilename)
 
                 do {
-                    try NSFileManager.defaultManager().moveItemAtURL(URL, toURL: movedDestinationURL)
+                    try FileManager.default.moveItem(at: URL, to: movedDestinationURL)
                 } catch let error as NSError {
                     handler(plugin: nil, error: error)
                     return
@@ -42,14 +42,14 @@ class DuplicatePluginController {
                 if let movedPlugin = Plugin.pluginWithURL(movedDestinationURL) {
                     movedPlugin.editable = true
                     movedPlugin.renameWithUniqueName()
-                    movedPlugin.identifier = UUID.UUIDString
+                    movedPlugin.identifier = UUID.uuidString
                     plugin = movedPlugin
                     
                     // Attempt to move the plugin to a directory based on its name (this can safely fail)
-                    let renamedPluginFilename = self.dynamicType.pluginFilenameFromName(movedPlugin.name)
-                    let renamedDestinationURL = movedDestinationURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(renamedPluginFilename)
+                    let renamedPluginFilename = type(of: self).pluginFilenameFromName(movedPlugin.name)
+                    let renamedDestinationURL = movedDestinationURL.deletingLastPathComponent()!.appendingPathComponent(renamedPluginFilename)
                     do {
-                        try NSFileManager.defaultManager().moveItemAtURL(movedDestinationURL, toURL: renamedDestinationURL)
+                        try FileManager.default.moveItem(at: movedDestinationURL, to: renamedDestinationURL)
                         if let renamedPlugin = Plugin.pluginWithURL(renamedDestinationURL) {
                             plugin = renamedPlugin
                         }

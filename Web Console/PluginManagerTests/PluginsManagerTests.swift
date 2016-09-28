@@ -16,8 +16,8 @@ class PluginsManagerTests: PluginsManagerTestCase {
     func testTestPlugins() {
         let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
         for plugin in plugins {
-            XCTAssertEqual(plugin.pluginType, Plugin.PluginType.Other, "The plugin type should be built-in")
-            XCTAssertEqual(plugin.type, Plugin.PluginType.Other.name(), "The type should equal the name")
+            XCTAssertEqual(plugin.pluginType, Plugin.PluginType.other, "The plugin type should be built-in")
+            XCTAssertEqual(plugin.type, Plugin.PluginType.other.name(), "The type should equal the name")
         }
     }
     
@@ -26,7 +26,7 @@ class PluginsManagerTests: PluginsManagerTestCase {
         
         XCTAssertEqual(PluginsManager.sharedInstance.plugins().count, 2, "The plugins count should be two")
         let plugins = PluginsManager.sharedInstance.plugins() as NSArray
-        XCTAssertTrue(plugins.containsObject(newPlugin), "The plugins should contain the plugin")
+        XCTAssertTrue(plugins.contains(newPlugin), "The plugins should contain the plugin")
 
         // Edit the new plugin
         newPlugin.command = testPluginCommandTwo
@@ -56,8 +56,8 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let pluginsManager = PluginsManager([Directory.BuiltInPlugins.path()],
-            duplicatePluginDestinationDirectoryURL: Directory.Trash.URL())
+        let pluginsManager = PluginsManager([Directory.builtInPlugins.path()],
+            duplicatePluginDestinationDirectoryURL: Directory.trash.URL())
         PluginsManager.setOverrideSharedInstance(pluginsManager)
     }
     
@@ -70,23 +70,23 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
         let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
 
         for plugin in plugins {
-            XCTAssertEqual(plugin.pluginType, Plugin.PluginType.BuiltIn, "The plugin type should be built-in")
-            XCTAssertEqual(plugin.type, Plugin.PluginType.BuiltIn.name(), "The type should equal the name")
+            XCTAssertEqual(plugin.pluginType, Plugin.PluginType.builtIn, "The plugin type should be built-in")
+            XCTAssertEqual(plugin.type, Plugin.PluginType.builtIn.name(), "The type should equal the name")
         }
 
         let count = PluginsManager.sharedInstance.plugins().count
         var pluginsPathsCount = 0
 
-        let pluginsPaths = [Directory.BuiltInPlugins.path()]
+        let pluginsPaths = [Directory.builtInPlugins.path()]
         for pluginsPath in pluginsPaths {
 
             do {
-                let contents: [AnyObject]! = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(pluginsPath)
+                let contents: [AnyObject]! = try FileManager.default.contentsOfDirectory(atPath: pluginsPath)
                 let paths = contents as! [String]
                 let pluginFileExtensionMatch = ".\(pluginFileExtension)"
                 let pluginFileExtensionPredicate: NSPredicate! = NSPredicate(format: "self ENDSWITH %@", pluginFileExtensionMatch)
                 let pluginPaths = paths.filter {
-                    pluginFileExtensionPredicate.evaluateWithObject($0)
+                    pluginFileExtensionPredicate.evaluate(with: $0)
 
                 }
                 pluginsPathsCount += pluginPaths.count

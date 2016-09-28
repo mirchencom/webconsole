@@ -11,7 +11,7 @@ import Foundation
 import Cocoa
 
 class CopyDirectoryController {
-    let copyTempDirectoryURL: NSURL
+    let copyTempDirectoryURL: URL
     let tempDirectoryName: String
     var trashDirectoryName: String {
         get {
@@ -21,7 +21,7 @@ class CopyDirectoryController {
     
     init(tempDirectoryName: String) {
         self.tempDirectoryName = tempDirectoryName
-        self.copyTempDirectoryURL = Directory.Caches.URL().URLByAppendingPathComponent(tempDirectoryName)
+        self.copyTempDirectoryURL = Directory.caches.URL().appendingPathComponent(tempDirectoryName)
         do {
             try self.cleanUp()
         } catch let error as NSError {
@@ -34,27 +34,27 @@ class CopyDirectoryController {
     
     func cleanUp() throws {
         do {
-            try self.dynamicType.moveContentsOfURL(copyTempDirectoryURL, toDirectoryInTrashWithName: trashDirectoryName)
+            try type(of: self).moveContentsOfURL(copyTempDirectoryURL, toDirectoryInTrashWithName: trashDirectoryName)
         } catch let error as NSError {
             throw error
         }
     }
     
-    func copyItemAtURL(URL: NSURL, completionHandler handler: (URL: NSURL?, error: NSError?) -> Void) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    func copyItemAtURL(_ URL: Foundation.URL, completionHandler handler: @escaping (_ URL: Foundation.URL?, _ error: NSError?) -> Void) {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
             do {
-                let copiedURL = try self.dynamicType.URLOfItemCopiedFromURL(URL, toDirectoryURL: self.copyTempDirectoryURL)
-                dispatch_async(dispatch_get_main_queue()) {
-                    handler(URL: copiedURL, error: nil)
+                let copiedURL = try type(of: self).URLOfItemCopiedFromURL(URL, toDirectoryURL: self.copyTempDirectoryURL)
+                DispatchQueue.main.async {
+                    handler(copiedURL, nil)
                     if let path = copiedURL?.path {
-                        let fileExists = NSFileManager.defaultManager().fileExistsAtPath(path)
+                        let fileExists = FileManager.default.fileExists(atPath: path)
                         assert(!fileExists, "The file should not exist")
                     } else {
                         assert(false, "Getting the path should succeed")
                     }
                 }
             } catch let error as NSError {
-                handler(URL: nil, error: error)
+                handler(nil, error)
             }
         }
     }
@@ -62,10 +62,10 @@ class CopyDirectoryController {
 
     // MARK: Private Clean Up Helpers
 
-    class func moveContentsOfURL(URL: NSURL, toDirectoryInTrashWithName trashDirectoryName: String) throws {
+    class func moveContentsOfURL(_ URL: Foundation.URL, toDirectoryInTrashWithName trashDirectoryName: String) throws {
         var validCachesURL = false
         if let path = URL.path {
-            let hasPrefix = path.hasPrefix(Directory.Caches.path())
+            let hasPrefix = path.hasPrefix(Directory.caches.path())
             validCachesURL = hasPrefix
         }
         if !validCachesURL {
@@ -74,16 +74,16 @@ class CopyDirectoryController {
         }
 
         var foundFilesToRecover = false
-        if let enumerator = NSFileManager.defaultManager().enumeratorAtURL(URL,
-            includingPropertiesForKeys: [NSURLNameKey],
-            options: [.SkipsHiddenFiles, .SkipsSubdirectoryDescendants],
+        if let enumerator = FileManager.default.enumerator(at: URL,
+            includingPropertiesForKeys: [URLResourceKey.nameKey],
+            options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants],
             errorHandler: nil)
         {
-            while let fileURL = enumerator.nextObject() as? NSURL {
+            while let fileURL = enumerator.nextObject() as? Foundation.URL {
                 
                 var filename: AnyObject?
                 do {
-                    try fileURL.getResourceValue(&filename, forKey: NSURLNameKey)
+                    try (fileURL as NSURL).getResourceValue(&filename, forKey: URLResourceKey.nameKey)
                 } catch let error as NSError {
                     throw error
                 }
@@ -93,7 +93,7 @@ class CopyDirectoryController {
                         continue
                     }
 
-                    let trashDirectoryURL = URL.URLByAppendingPathComponent(trashDirectoryName)
+                    let trashDirectoryURL = URL.appendingPathComponent(trashDirectoryName)
                     if !foundFilesToRecover {
                         do {
                             try createDirectoryIfMissingAtURL(trashDirectoryURL)
@@ -104,11 +104,11 @@ class CopyDirectoryController {
                         foundFilesToRecover = true
                     }
                     
-                    let UUID = NSUUID()
-                    let UUIDString = UUID.UUIDString
-                    let destinationFileURL = trashDirectoryURL.URLByAppendingPathComponent(UUIDString)
+                    let UUID = Foundation.UUID()
+                    let UUIDString = UUID.uuidString
+                    let destinationFileURL = trashDirectoryURL.appendingPathComponent(UUIDString)
                     do {
-                        try NSFileManager.defaultManager().moveItemAtURL(fileURL, toURL: destinationFileURL)
+                        try FileManager.default.moveItem(at: fileURL, to: destinationFileURL)
                     } catch let error as NSError {
                         throw error
                     }
@@ -121,7 +121,7 @@ class CopyDirectoryController {
         }
 
         if let path = URL.path {
-            NSWorkspace.sharedWorkspace().performFileOperation(NSWorkspaceRecycleOperation,
+            NSWorkspace.shared().performFileOperation(NSWorkspaceRecycleOperation,
                 source: path,
                 destination: "",
                 files: [trashDirectoryName],
@@ -134,7 +134,7 @@ class CopyDirectoryController {
 
     // MARK: Private Duplicate Helpers
     
-    private class func URLOfItemCopiedFromURL(URL: NSURL, toDirectoryURL directoryURL: NSURL) throws -> NSURL? {
+    fileprivate class func URLOfItemCopiedFromURL(_ URL: Foundation.URL, toDirectoryURL directoryURL: Foundation.URL) throws -> Foundation.URL? {
         do {
             // Setup the destination directory
             try createDirectoryIfMissingAtURL(directoryURL)
@@ -142,12 +142,12 @@ class CopyDirectoryController {
             throw error
         }
         
-        let uuid = NSUUID()
-        let uuidString = uuid.UUIDString
-        let destinationURL = directoryURL.URLByAppendingPathComponent(uuidString)
+        let uuid = UUID()
+        let uuidString = uuid.uuidString
+        let destinationURL = directoryURL.appendingPathComponent(uuidString)
 
         do {
-            try NSFileManager.defaultManager().copyItemAtURL(URL, toURL: destinationURL)
+            try FileManager.default.copyItem(at: URL, to: destinationURL)
             return destinationURL
         } catch let error as NSError {
             throw error
@@ -157,26 +157,26 @@ class CopyDirectoryController {
 
     // MARK: Private Create Directory Helpers
     
-    private class func createDirectoryIfMissingAtPath(path: String) throws {
+    fileprivate class func createDirectoryIfMissingAtPath(_ path: String) throws {
         // TODO: Should set error instead of assert
         var isDir: ObjCBool = false
-        let exists = NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDir)
+        let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
 
         if exists {
             if !isDir {
-                throw FileSystemError.FileExistsForDirectoryError
+                throw FileSystemError.fileExistsForDirectoryError
             }
             return
         }
         
         do {
-            try NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
             throw error
         }
     }
     
-    private class func createDirectoryIfMissingAtURL(URL: NSURL) throws {
+    fileprivate class func createDirectoryIfMissingAtURL(_ URL: Foundation.URL) throws {
         if let path = URL.path {
             do {
                 try createDirectoryIfMissingAtPath(path)

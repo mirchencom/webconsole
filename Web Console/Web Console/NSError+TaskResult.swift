@@ -11,14 +11,14 @@ import Foundation
 extension NSError {
     
     enum TaskTerminatedUserInfoKey: NSString {
-        case ExitStatus = "ExitStatus"
+        case exitStatus = "ExitStatus"
     }
     
     enum TaskTerminatedErrorCode: Int {
-        case UncaughtSignal = 100, NonzeroExitStatus
+        case uncaughtSignal = 100, nonzeroExitStatus
     }
     
-    class func taskTerminatedUncaughtSignalError(launchPath: String?,
+    class func taskTerminatedUncaughtSignalError(_ launchPath: String?,
         arguments: [String]?,
         directoryPath: String?,
         standardError: String?) -> NSError
@@ -40,10 +40,10 @@ extension NSError {
             description += ", standardError: \(standardError)"
         }
         
-        return errorWithDescription(description, code: TaskTerminatedErrorCode.UncaughtSignal.rawValue)
+        return errorWithDescription(description, code: TaskTerminatedErrorCode.uncaughtSignal.rawValue)
     }
     
-    class func taskTerminatedNonzeroExitCode(launchPath: String?,
+    class func taskTerminatedNonzeroExitCode(_ launchPath: String?,
         exitCode: Int32,
         arguments: [String]?,
         directoryPath: String?,
@@ -66,10 +66,10 @@ extension NSError {
             description += ", standardError: \(standardError)"
         }
         
-        let userInfo: [NSObject : AnyObject] = [NSLocalizedDescriptionKey: description,
-            TaskTerminatedUserInfoKey.ExitStatus.rawValue: NSNumber(int: exitCode)]
+        let userInfo: [AnyHashable: Any] = [NSLocalizedDescriptionKey: description,
+            TaskTerminatedUserInfoKey.exitStatus.rawValue: NSNumber(value: exitCode as Int32)]
         
-        return errorWithUserInfo(userInfo, code: TaskTerminatedErrorCode.NonzeroExitStatus.rawValue)
+        return errorWithUserInfo(userInfo, code: TaskTerminatedErrorCode.nonzeroExitStatus.rawValue)
     }
     
     

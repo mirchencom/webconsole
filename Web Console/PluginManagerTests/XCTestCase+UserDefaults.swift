@@ -15,10 +15,10 @@ let testMockUserDefaultsSuiteName = "com.1percenter.WebConsoleTests"
 extension XCTestCase {
     
     func mockUserDefaultsSetUp() {
-        let userDefaultsURL = NSBundle.mainBundle().URLForResource(userDefaultsFilename, withExtension: userDefaultsFileExtension)!
-        let userDefaultsDictionary = NSDictionary(contentsOfURL: userDefaultsURL) as! [String: AnyObject]
-        let userDefaults = NSUserDefaults(suiteName: testMockUserDefaultsSuiteName)!
-        userDefaults.registerDefaults(userDefaultsDictionary)
+        let userDefaultsURL = Bundle.main.url(forResource: userDefaultsFilename, withExtension: userDefaultsFileExtension)!
+        let userDefaultsDictionary = NSDictionary(contentsOf: userDefaultsURL) as! [String: AnyObject]
+        let userDefaults = UserDefaults(suiteName: testMockUserDefaultsSuiteName)!
+        userDefaults.register(defaults: userDefaultsDictionary)
         let userDefaultsController = NSUserDefaultsController(defaults: userDefaults, initialValues: userDefaultsDictionary)
         UserDefaultsManager.setOverrideStandardUserDefaults(userDefaults)
         UserDefaultsManager.setOverrideSharedUserDefaultsController(userDefaultsController)

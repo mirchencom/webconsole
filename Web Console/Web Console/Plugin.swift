@@ -15,27 +15,27 @@ extension Plugin {
             return
         }
         if let resourcePath = resourcePath {
-            NSWorkspace.sharedWorkspace().openFile(resourcePath)
+            NSWorkspace.shared().openFile(resourcePath)
         }
     }
 }
 
 
 class Plugin: WCLPlugin {
-    enum PluginWriteError: ErrorType {
-        case FailToWriteDictionaryError(URL: NSURL)
+    enum PluginWriteError: Error {
+        case failToWriteDictionaryError(URL: URL)
     }
     
     struct ClassConstants {
         static let infoDictionaryPathComponent = "Contents".stringByAppendingPathComponent("Info.plist")
     }
-    internal let bundle: NSBundle
+    internal let bundle: Bundle
     let hidden: Bool
     let debugModeEnabled: Bool?
     let pluginType: PluginType
     
-    init(bundle: NSBundle,
-        infoDictionary: [NSObject : AnyObject],
+    init(bundle: Bundle,
+        infoDictionary: [AnyHashable: Any],
         pluginType: PluginType,
         identifier: String,
         name: String,
@@ -67,25 +67,25 @@ class Plugin: WCLPlugin {
     var resourcePath: String? {
         return bundle.resourcePath
     }
-    var resourceURL: NSURL? {
+    var resourceURL: URL? {
         if let path = resourcePath {
-            return NSURL.fileURLWithPath(path)
+            return URL(fileURLWithPath: path)
         }
         return nil
     }
-    internal var infoDictionary: [NSObject : AnyObject]
-    internal var infoDictionaryURL: NSURL {
+    internal var infoDictionary: [AnyHashable: Any]
+    internal var infoDictionaryURL: URL {
         get {
-            return self.dynamicType.infoDictionaryURLForPluginURL(bundle.bundleURL)
+            return type(of: self).infoDictionaryURLForPluginURL(bundle.bundleURL)
         }
     }
 
-    class func infoDictionaryURLForPlugin(plugin: Plugin) -> NSURL {
+    class func infoDictionaryURLForPlugin(_ plugin: Plugin) -> URL {
         return infoDictionaryURLForPluginURL(plugin.bundle.bundleURL)
     }
 
-    class func infoDictionaryURLForPluginURL(pluginURL: NSURL) -> NSURL {
-        return pluginURL.URLByAppendingPathComponent(ClassConstants.infoDictionaryPathComponent)
+    class func infoDictionaryURLForPluginURL(_ pluginURL: URL) -> URL {
+        return pluginURL.appendingPathComponent(ClassConstants.infoDictionaryPathComponent)
     }
     
     
@@ -153,11 +153,11 @@ class Plugin: WCLPlugin {
     
     // MARK: Save
     
-    private func save() {
+    fileprivate func save() {
         let infoDictionaryURL = self.infoDictionaryURL
         do {
-            try self.dynamicType.writeDictionary(infoDictionary, toURL: infoDictionaryURL)
-        } catch PluginWriteError.FailToWriteDictionaryError(let URL) {
+            try type(of: self).writeDictionary(infoDictionary, toURL: infoDictionaryURL)
+        } catch PluginWriteError.failToWriteDictionaryError(let URL) {
             print("Failed to write an info dictionary at URL \(URL)")
         } catch let error as NSError {
             print("Failed to write an info dictionary \(error)")
@@ -165,11 +165,11 @@ class Plugin: WCLPlugin {
 
     }
 
-    class func writeDictionary(dictionary: [NSObject : AnyObject], toURL URL: NSURL) throws {
+    class func writeDictionary(_ dictionary: [AnyHashable: Any], toURL URL: Foundation.URL) throws {
         let writableDictionary = NSDictionary(dictionary: dictionary)
-        let success = writableDictionary.writeToURL(URL, atomically: true)
+        let success = writableDictionary.write(to: URL, atomically: true)
         if !success {
-            throw PluginWriteError.FailToWriteDictionaryError(URL: URL)
+            throw PluginWriteError.failToWriteDictionaryError(URL: URL)
         }
     }
 
@@ -177,13 +177,13 @@ class Plugin: WCLPlugin {
     
     override var description : String {
         let description = super.description
-        return "\(description), Plugin name = \(name),  identifier = \(identifier), defaultNewPlugin = \(defaultNewPlugin), hidden = \(hidden), editable = \(editable), debugModeEnabled = \(debugModeEnabled)"
+        return "\(description), Plugin name = \(name),  identifier = \(identifier), defaultNewPlugin = \(isDefaultNewPlugin), hidden = \(hidden), editable = \(editable), debugModeEnabled = \(debugModeEnabled)"
     }
     
     // MARK: Windows
 
     func orderedWindows() -> [AnyObject]! {
-        return WCLSplitWebWindowsController.sharedSplitWebWindowsController().windowsForPlugin(self)
+        return WCLSplitWebWindowsController.shared().windows(for: self) as [AnyObject]!
     }
 
 }

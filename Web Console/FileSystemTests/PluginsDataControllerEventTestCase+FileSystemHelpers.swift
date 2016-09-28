@@ -14,8 +14,8 @@ import XCTest
 extension PluginsDataControllerEventTestCase {
     // MARK: Move Helpers
     
-    func movePluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: (plugin: Plugin?) -> Void) {
-        let removeExpectation = expectationWithDescription("Plugin was removed")
+    func movePluginWithConfirmation(_ plugin: Plugin, destinationPluginPath: String, handler: (_ plugin: Plugin?) -> Void) {
+        let removeExpectation = expectation(description: "Plugin was removed")
         pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
                 removeExpectation.fulfill()
@@ -23,7 +23,7 @@ extension PluginsDataControllerEventTestCase {
         })
         
         var newPlugin: Plugin?
-        let createExpectation = expectationWithDescription("Plugin was added")
+        let createExpectation = expectation(description: "Plugin was added")
         pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
             let path = addedPlugin.bundle.bundlePath
             if (path == destinationPluginPath) {
@@ -36,15 +36,15 @@ extension PluginsDataControllerEventTestCase {
         let pluginPath = plugin.bundle.bundlePath
         SubprocessFileSystemModifier.moveItemAtPath(pluginPath, toPath: destinationPluginPath)
         
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
     
     // MARK: Copy Helpers
     
-    func copyPluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: (plugin: Plugin?) -> Void) {
+    func copyPluginWithConfirmation(_ plugin: Plugin, destinationPluginPath: String, handler: (_ plugin: Plugin?) -> Void) {
         var newPlugin: Plugin?
-        let createExpectation = expectationWithDescription("Plugin was added")
+        let createExpectation = expectation(description: "Plugin was added")
         pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
             let path = addedPlugin.bundle.bundlePath
             if (path == destinationPluginPath) {
@@ -56,21 +56,21 @@ extension PluginsDataControllerEventTestCase {
         
         
         let pluginPath = plugin.bundle.bundlePath
-        let copyExpectation = expectationWithDescription("Copy finished")
+        let copyExpectation = expectation(description: "Copy finished")
         SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
         })
         
         // TODO: Once the requirement that no two plugins have the same identifier is enforced, we'll also have to change the new plugins identifier here
         
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
     
     // MARK: Remove Helpers
     
-    func removePluginWithConfirmation(plugin: Plugin) {
-        let removeExpectation = expectationWithDescription("Plugin was removed")
+    func removePluginWithConfirmation(_ plugin: Plugin) {
+        let removeExpectation = expectation(description: "Plugin was removed")
         pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
                 removeExpectation.fulfill()
@@ -78,40 +78,40 @@ extension PluginsDataControllerEventTestCase {
         })
         
         let pluginPath = plugin.bundle.bundlePath
-        let deleteExpectation = expectationWithDescription("Remove finished")
+        let deleteExpectation = expectation(description: "Remove finished")
         SubprocessFileSystemModifier.removeDirectoryAtPath(pluginPath, handler: {
             deleteExpectation.fulfill()
         })
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
     
     // MARK: Modify Helpers
     
-    func modifyPluginWithConfirmation(plugin: Plugin, handler: (plugin: Plugin?) -> Void) {
+    func modifyPluginWithConfirmation(_ plugin: Plugin, handler: (_ plugin: Plugin?) -> Void) {
 
         // Get the old identifier
-        let infoDictionary = NSDictionary(contentsOfURL: plugin.infoDictionaryURL)! as Dictionary
+        let infoDictionary = NSDictionary(contentsOf: plugin.infoDictionaryURL)! as Dictionary
         let identifier = infoDictionary[Plugin.InfoDictionaryKeys.Identifier] as! String
 
         // Make a new identifier
-        let UUID = NSUUID()
-        let newIdentifier = UUID.UUIDString
+        let UUID = Foundation.UUID()
+        let newIdentifier = UUID.uuidString
 
         // Get the info dictionary contents
         let infoDictionaryPath = plugin.infoDictionaryURL.path!
 
         var infoDictionaryContents: String!
         do {
-            infoDictionaryContents = try String(contentsOfFile: infoDictionaryPath, encoding: NSUTF8StringEncoding)
+            infoDictionaryContents = try String(contentsOfFile: infoDictionaryPath, encoding: String.Encoding.utf8)
         } catch {
             XCTAssertNil(false, "Getting the info dictionary contents shoudld succeed.")
         }
         
         // Replace the old identifier with the new identifier
-        let newInfoDictionaryContents = infoDictionaryContents.stringByReplacingOccurrencesOfString(identifier, withString: newIdentifier)
+        let newInfoDictionaryContents = infoDictionaryContents.replacingOccurrences(of: identifier, with: newIdentifier)
 
-        let removeExpectation = expectationWithDescription("Plugin was removed")
+        let removeExpectation = expectation(description: "Plugin was removed")
         pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
                 removeExpectation.fulfill()
@@ -120,7 +120,7 @@ extension PluginsDataControllerEventTestCase {
         
         let pluginPath = plugin.bundle.bundlePath
         var newPlugin: Plugin?
-        let createExpectation = expectationWithDescription("Plugin was added")
+        let createExpectation = expectation(description: "Plugin was added")
         pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
             let path = addedPlugin.bundle.bundlePath
             if (path == pluginPath) {
@@ -131,6 +131,6 @@ extension PluginsDataControllerEventTestCase {
         })
         
         SubprocessFileSystemModifier.writeToFileAtPath(infoDictionaryPath, contents: newInfoDictionaryContents)
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 }

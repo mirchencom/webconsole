@@ -9,9 +9,9 @@
 import XCTest
 
 extension WCLTaskRunnerTests: WCLTaskRunnerDelegate {
-    func task(task: NSTask, didFailToRunCommandPath commandPath: String, error: NSError) {
+    func task(_ task: Process, didFailToRunCommandPath commandPath: String, error: NSError) {
         XCTAssertNotNil(error)
-        XCTAssert(error.code == RunCommandPathErrorCode.Unexecutable.rawValue)
+        XCTAssert(error.code == RunCommandPathErrorCode.unexecutable.rawValue)
         if let didFailToRunCommandPathExpectation = didFailToRunCommandPathExpectation {
             didFailToRunCommandPathExpectation.fulfill()
         }
@@ -23,14 +23,14 @@ class WCLTaskRunnerTests: XCTestCase {
     var didFailToRunCommandPathExpectation: XCTestExpectation?
     
     func testInvalidCommandPath() {
-        let expection = expectationWithDescription("Run task")
-        didFailToRunCommandPathExpectation = expectationWithDescription("Did fail to run command path")
+        let expection = expectation(description: "Run task")
+        didFailToRunCommandPathExpectation = expectation(description: "Did fail to run command path")
         
-        WCLTaskRunner.runTaskWithCommandPath("invalid path", withArguments: nil, inDirectoryPath: nil, delegate: self) { (success) -> Void in
+        WCLTaskRunner.runTask(withCommandPath: "invalid path", withArguments: nil, inDirectoryPath: nil, delegate: self) { (success) -> Void in
             XCTAssertFalse(success)
             expection.fulfill()
         }
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
     }
 
 }

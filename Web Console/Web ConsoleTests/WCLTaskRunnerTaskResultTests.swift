@@ -18,7 +18,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
         
-        let expectation = expectationWithDescription("Task finished")
+        let expectation = self.expectation(description: "Task finished")
 
         WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
             withArguments: nil,
@@ -38,7 +38,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
 
     }
     
@@ -48,7 +48,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
             ofType: testDataRubyFileExtension,
             inDirectory: testDataSubdirectory)!
         
-        let expectation = expectationWithDescription("Task finished")
+        let expectation = self.expectation(description: "Task finished")
         
         WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
             withArguments: nil,
@@ -65,7 +65,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
     }
 
     func testStandardLongFile() {
@@ -74,7 +74,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
             ofType: testDataTextExtension,
             inDirectory: testDataSubdirectory)!
         
-        let expectation = expectationWithDescription("Task finished")
+        let expectation = self.expectation(description: "Task finished")
         
         WCLTaskRunner.runTaskUntilFinishedWithCommandPath("/bin/cat",
 
@@ -89,8 +89,8 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
                 }
 
                 do {
-                    let testData = try NSString(contentsOfFile: testDataPath, encoding: NSUTF8StringEncoding)
-                    XCTAssertTrue(testData.isEqualToString(standardOutput))
+                    let testData = try NSString(contentsOfFile: testDataPath, encoding: String.Encoding.utf8)
+                    XCTAssertTrue(testData.isEqual(to: standardOutput))
                 } catch let error as NSError {
                     XCTAssertNil(error)
                 }
@@ -98,7 +98,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
                 expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(testTimeout, handler: nil)
+        waitForExpectations(timeout: testTimeout, handler: nil)
     }
 
 }

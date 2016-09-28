@@ -10,34 +10,34 @@ import Foundation
 
 class TaskRunner {
 
-    class func runLaunchPath(launchPath: String, handler: (Void -> Void)?) -> NSTask {
-        let task = NSTask()
+    class func runLaunchPath(_ launchPath: String, handler: ((Void) -> Void)?) -> Process {
+        let task = Process()
         task.launchPath = launchPath
         return runTask(task, handler: handler)
     }
     
-    class func runTask(task: NSTask, handler: (Void -> Void)?) -> NSTask {
-        task.standardOutput = NSPipe()
-        task.standardOutput!.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
+    class func runTask(_ task: Process, handler: ((Void) -> Void)?) -> Process {
+        task.standardOutput = Pipe()
+        (task.standardOutput! as AnyObject).fileHandleForReading.readabilityHandler = { (file: FileHandle!) -> Void in
             let data = file.availableData
-            if let output = NSString(data: data, encoding: NSUTF8StringEncoding) {
+            if let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
                 print("standardOutput \(output)")
             }
         }
         
-        task.standardError = NSPipe()
-        task.standardError!.fileHandleForReading.readabilityHandler = { (file: NSFileHandle!) -> Void in
+        task.standardError = Pipe()
+        (task.standardError! as AnyObject).fileHandleForReading.readabilityHandler = { (file: FileHandle!) -> Void in
             let data = file.availableData
-            if let output = NSString(data: data, encoding: NSUTF8StringEncoding) {
+            if let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
                 print("standardError \(output)")
                 assert(false, "There should not be output to standard error")
             }
         }
         
-        task.terminationHandler = { (task: NSTask) -> Void in
+        task.terminationHandler = { (task: Process) -> Void in
             handler?()
-            task.standardOutput!.fileHandleForReading.readabilityHandler = nil
-            task.standardError!.fileHandleForReading.readabilityHandler = nil
+            (task.standardOutput! as AnyObject).fileHandleForReading.readabilityHandler = nil
+            (task.standardError! as AnyObject).fileHandleForReading.readabilityHandler = nil
         }
         
         task.launch()

@@ -10,12 +10,12 @@ import Foundation
 
 struct ProcessInfo: Equatable {
     let identifier: Int32
-    let startTime: NSDate
+    let startTime: Date
     let commandPath: String
-    init?(identifier: Int32, startTime: NSDate, commandPath: String) {
+    init?(identifier: Int32, startTime: Date, commandPath: String) {
         // An all whitespace `commandPath` is not allowed
         let trimmedCommandPathCharacterCount = commandPath
-            .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            .trimmingCharacters(in: CharacterSet.whitespaces)
             .characters
             .count
         if !(trimmedCommandPathCharacterCount > 0) {

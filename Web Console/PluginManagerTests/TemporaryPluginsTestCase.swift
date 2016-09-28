@@ -12,13 +12,13 @@ import XCTest
 @testable import Web_Console
 
 class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
-    var pluginsDirectoryURL: NSURL!
+    var pluginsDirectoryURL: URL!
     var pluginsDirectoryPath: String! {
         get {
             return pluginsDirectoryURL.path
         }
     }
-    var pluginURL: NSURL!
+    var pluginURL: URL!
     var pluginPath: String! {
         get {
             return pluginURL.path
@@ -30,12 +30,11 @@ class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
         
         // Create the plugins directory
         pluginsDirectoryURL = temporaryDirectoryURL
-            .URLByAppendingPathComponent(pluginsDirectoryPathComponent)
+            .appendingPathComponent(pluginsDirectoryPathComponent)
 
         do {
-            try NSFileManager
-                .defaultManager()
-                .createDirectoryAtURL(pluginsDirectoryURL,
+            try FileManager.default
+                .createDirectory(at: pluginsDirectoryURL,
                     withIntermediateDirectories: false,
                     attributes: nil)
         } catch let error as NSError {
@@ -43,15 +42,14 @@ class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
         }
        
         // Copy the bundle resources plugin to the plugins directory
-        let bundleResourcesPluginURL: NSURL! = URLForResource(testPluginName, withExtension:pluginFileExtension)
+        let bundleResourcesPluginURL: URL! = URLForResource(testPluginName, withExtension:pluginFileExtension)
         let filename = testPluginName.stringByAppendingPathExtension(pluginFileExtension)!
         
-        pluginURL = pluginsDirectoryURL.URLByAppendingPathComponent(filename)
+        pluginURL = pluginsDirectoryURL.appendingPathComponent(filename)
         do {
-            try NSFileManager
-                .defaultManager()
-                .copyItemAtURL(bundleResourcesPluginURL,
-                    toURL: pluginURL)
+            try FileManager.default
+                .copyItem(at: bundleResourcesPluginURL,
+                    to: pluginURL)
         } catch let error as NSError {
             XCTAssertTrue(false, "Moving the directory should succeed \(error)")
         }

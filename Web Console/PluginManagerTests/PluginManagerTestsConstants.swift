@@ -12,7 +12,7 @@ let defaultTimeout = 20.0
 
 // MARK: Plugin
 
-let testPluginsPaths = [Directory.BuiltInPlugins.path()]
+let testPluginsPaths = [Directory.builtInPlugins.path()]
 let testPluginName = "HTML"
 let testPluginNameTwo = "IRB"
 let testPluginNameNoPlugin = "Not a Plugin Name"

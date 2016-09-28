@@ -25,7 +25,7 @@ class FileExtensionsController: WCLFileExtensionsController {
         return Singleton.instance
     }
     
-    class func setOverrideSharedInstance(fileExtensionsController: FileExtensionsController?) {
+    class func setOverrideSharedInstance(_ fileExtensionsController: FileExtensionsController?) {
         Singleton.overrideSharedInstance = fileExtensionsController
     }
 

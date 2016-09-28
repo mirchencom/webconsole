@@ -991,11 +991,16 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Roben Kleene";
 				TargetAttributes = {
+					4530B0CB1736E2A6000A52E2 = {
+						LastSwiftMigration = 0800;
+					};
 					4530B0EB1736E2A6000A52E2 = {
+						LastSwiftMigration = 0800;
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
 					};
 					455FD2371A899C7600ACE1D4 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
 					};
 					45729EB71A89A270001ECC4C = {
@@ -1004,6 +1009,7 @@
 					};
 					459EC91F1A8997C10098A47B = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
 					};
 				};
@@ -1362,6 +1368,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1percenter.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1376,6 +1383,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1percenter.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1396,6 +1404,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Web ConsoleTests/Web ConsoleTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -1415,6 +1424,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1percenter.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Web ConsoleTests/Web ConsoleTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -1448,6 +1458,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1percenter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
 			};
 			name = Debug;
@@ -1477,6 +1488,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1percenter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
 			};
 			name = Release;
@@ -1585,6 +1597,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PluginManagerTests/PluginManagerTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
 			};
 			name = Debug;
@@ -1615,6 +1628,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1percenter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PluginManagerTests/PluginManagerTests-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Web Console.app/Contents/MacOS/Web Console";
 			};
 			name = Release;

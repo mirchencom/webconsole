@@ -11,16 +11,16 @@ import Foundation
 // TODO: Refactor this when Swift has native support for paths
 
 extension String {
-    func stringByAppendingPathComponent(path: String) -> String {
-        return (self as NSString).stringByAppendingPathComponent(path)
+    func stringByAppendingPathComponent(_ path: String) -> String {
+        return (self as NSString).appendingPathComponent(path)
     }
 
-    func stringByAppendingPathExtension(ext: String) -> String? {
-        return (self as NSString).stringByAppendingPathExtension(ext)
+    func stringByAppendingPathExtension(_ ext: String) -> String? {
+        return (self as NSString).appendingPathExtension(ext)
     }
 
     var stringByDeletingLastPathComponent: String {
-        return (self as NSString).stringByDeletingLastPathComponent
+        return (self as NSString).deletingLastPathComponent
     }
 
     var lastPathComponent: String {
@@ -28,7 +28,7 @@ extension String {
     }
 
     var stringByStandardizingPath: String {
-        return (self as NSString).stringByStandardizingPath
+        return (self as NSString).standardizingPath
     }
     
     var pathComponents: [String] {
@@ -40,6 +40,6 @@ extension String {
     }
 
     var stringByDeletingPathExtension: String {
-        return (self as NSString).stringByDeletingPathExtension
+        return (self as NSString).deletingPathExtension
     }
 }

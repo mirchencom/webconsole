@@ -9,29 +9,29 @@
 import Foundation
 
 extension XCTestCase {
-    func waitForTasksToTerminate(tasks: [NSTask]) {
+    func waitForTasksToTerminate(_ tasks: [Process]) {
         var expectation: XCTestExpectation?
         let observers = NSMutableArray()
         
         for task in tasks {
-            if !task.running {
+            if !task.isRunning {
                 continue
             }
 
             if expectation == nil {
-                expectation = expectationWithDescription("Tasks terminated")
+                expectation = self.expectation(description: "Tasks terminated")
             }
 
             let clearObserver: (NSObjectProtocol) -> () = { observer in
-                NSNotificationCenter.defaultCenter().removeObserver(observer)
-                observers.removeObject(observer)
-                if let expectation = expectation where observers.count == 0 {
+                NotificationCenter.default.removeObserver(observer)
+                observers.remove(observer)
+                if let expectation = expectation , observers.count == 0 {
                     expectation.fulfill()
                 }
             }
         
             var observer: NSObjectProtocol?
-            observer = NSNotificationCenter.defaultCenter().addObserverForName(NSTaskDidTerminateNotification,
+            observer = NotificationCenter.default.addObserver(forName: Process.didTerminateNotification,
                 object: task,
                 queue: nil)
                 { notification in
@@ -41,19 +41,19 @@ extension XCTestCase {
             }
             
             if let observer = observer {
-                observers.addObject(observer)
-                if !task.running {
+                observers.add(observer)
+                if !task.isRunning {
                     clearObserver(observer)
                 }
             }
 
         }
 
-        waitForExpectationsWithTimeout(testTimeout) { _ in
+        waitForExpectations(timeout: testTimeout) { _ in
             let allObservers = Array(observers)
             for observer in allObservers {
-                observers.removeObject(observer)
-                NSNotificationCenter.defaultCenter().removeObserver(observer)
+                observers.remove(observer)
+                NotificationCenter.default.removeObserver(observer)
             }
         }
 

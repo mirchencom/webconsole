@@ -8,7 +8,7 @@
 
 let pluginFileExtension = kPlugInExtension
 let pluginNameKey = kPluginNameKey
-let applicationName = NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as String] as! String
+let applicationName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
 let pluginsDirectoryPathComponent = "PlugIns"
 let defaultNewPluginIdentifierKey = kDefaultNewPluginIdentifierKey
 let debugModeEnabledKey = kDebugModeEnabledKey
@@ -30,28 +30,28 @@ let userDefaultsFileExtension = kUserDefaultsFileExtension
 // MARK: File System
 
 enum Directory {
-    case Caches
-    case ApplicationSupport
-    case ApplicationSupportPlugins
-    case BuiltInPlugins
-    case Trash
+    case caches
+    case applicationSupport
+    case applicationSupportPlugins
+    case builtInPlugins
+    case trash
     func path() -> String {
         switch self {
-        case .Caches:
-            let cachesDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+        case .caches:
+            let cachesDirectory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
             return cachesDirectory.stringByAppendingPathComponent(applicationName)
-        case .ApplicationSupport:
-            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
+        case .applicationSupport:
+            let applicationSupportDirectory = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]
             return applicationSupportDirectory.stringByAppendingPathComponent(applicationName)
-        case .ApplicationSupportPlugins:
-            return Directory.ApplicationSupport.path().stringByAppendingPathComponent(pluginsDirectoryPathComponent)
-        case .BuiltInPlugins:
-            return NSBundle.mainBundle().builtInPlugInsPath!
-        case .Trash:
-            return NSSearchPathForDirectoriesInDomains(.TrashDirectory, .UserDomainMask, true)[0]
+        case .applicationSupportPlugins:
+            return Directory.applicationSupport.path().stringByAppendingPathComponent(pluginsDirectoryPathComponent)
+        case .builtInPlugins:
+            return Bundle.main.builtInPlugInsPath!
+        case .trash:
+            return NSSearchPathForDirectoriesInDomains(.trashDirectory, .userDomainMask, true)[0]
         }
     }
-    func URL() -> NSURL {
-        return NSURL(fileURLWithPath: self.path())
+    func URL() -> Foundation.URL {
+        return Foundation.URL(fileURLWithPath: self.path())
     }
 }

@@ -18,13 +18,13 @@ extension LogSplitWebWindowControllerEventRouter: WCLSplitWebWindowControllerDel
     
     // MARK: Handled
     
-    func logPluginForSplitWebWindowController(splitWebViewController: WCLSplitWebWindowController) -> Plugin? {
+    func logPlugin(for splitWebViewController: WCLSplitWebWindowController) -> Plugin? {
         return PluginsManager.sharedInstance.pluginWithName(testPrintPluginName)!
     }
     
     // MARK: Forwarded
     
-    func splitWebWindowControllerWindowWillClose(splitWebWindowController: WCLSplitWebWindowController) {
+    func splitWebWindowControllerWindowWillClose(_ splitWebWindowController: WCLSplitWebWindowController) {
         self.delegate.splitWebWindowControllerWindowWillClose?(splitWebWindowController)
     }
 }
@@ -47,7 +47,7 @@ class LogWebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCa
         // 3. Events for the `logWebViewController` can be managed through the `webViewControllerEventRouter`
         
         splitWebWindowController = WCLSplitWebWindowsController
-            .sharedSplitWebWindowsController()
+            .shared()
             .addedSplitWebWindowController()
         splitWebViewController = splitWebWindowController
             .contentViewController as! SplitWebViewController
@@ -64,12 +64,12 @@ class LogWebViewControllerEventRouterTestCase: WCLSplitWebWindowControllerTestCa
         
         // Turn on debug mode
         XCTAssertFalse(splitWebViewController.shouldDebugLog)
-        UserDefaultsManager.standardUserDefaults().setBool(true, forKey: debugModeEnabledKey)
+        UserDefaultsManager.standardUserDefaults().set(true, forKey: debugModeEnabledKey)
         XCTAssertTrue(splitWebViewController.shouldDebugLog)
     }
     
     override func tearDown() {
-        UserDefaultsManager.standardUserDefaults().setBool(false, forKey: debugModeEnabledKey)
+        UserDefaultsManager.standardUserDefaults().set(false, forKey: debugModeEnabledKey)
         
         // `tearDown` must be called after returning off debugging because the superclass disabled
         // the user defaults mock

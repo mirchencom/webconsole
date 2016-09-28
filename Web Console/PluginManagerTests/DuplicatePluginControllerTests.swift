@@ -32,30 +32,30 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         var pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(pluginURL)
         var pluginInfoDictionaryContents: String!
         do {
-            pluginInfoDictionaryContents = try String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding)
+            pluginInfoDictionaryContents = try String(contentsOf: pluginInfoDictionaryURL, encoding: String.Encoding.utf8)
         } catch {
             XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
         }
 
-        var pluginInfoDictionaryContentsAsNSString: NSString = pluginInfoDictionaryContents
-        var range = pluginInfoDictionaryContentsAsNSString.rangeOfString(Plugin.InfoDictionaryKeys.Editable)
+        var pluginInfoDictionaryContentsAsNSString: NSString = pluginInfoDictionaryContents as NSString
+        var range = pluginInfoDictionaryContentsAsNSString.range(of: Plugin.InfoDictionaryKeys.Editable)
         XCTAssertFalse(range.location == NSNotFound, "The string should have been found")
 
         // Duplicate the plugin
         var duplicatePlugin: Plugin!
-        let duplicateExpectation = expectationWithDescription("Duplicate")
+        let duplicateExpectation = expectation(description: "Duplicate")
         duplicatePluginController.duplicatePlugin(plugin, toDirectoryAtURL: pluginsDirectoryURL) { (plugin, error) -> Void in
             XCTAssertNil(error, "The error should be nil")
             XCTAssertNotNil(plugin, "The plugin should not be nil")
             duplicatePlugin = plugin
             duplicateExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
 
         // Test the plugin's directory exists
         let duplicatePluginURL = duplicatePlugin.bundle.bundleURL
         var isDir: ObjCBool = false
-        let exists = NSFileManager.defaultManager().fileExistsAtPath(duplicatePluginURL.path!,
+        let exists = FileManager.default.fileExists(atPath: duplicatePluginURL.path!,
             isDirectory: &isDir)
         XCTAssertTrue(exists, "The item should exist")
         XCTAssertTrue(isDir, "The item should be a directory")
@@ -65,13 +65,13 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(duplicatePlugin.bundle.bundleURL)
 
         do {
-            pluginInfoDictionaryContents = try String(contentsOfURL: pluginInfoDictionaryURL, encoding: NSUTF8StringEncoding)
+            pluginInfoDictionaryContents = try String(contentsOf: pluginInfoDictionaryURL, encoding: String.Encoding.utf8)
         } catch {
             XCTAssertTrue(false, "Getting the info dictionary contents should succeed")
         }
 
-        pluginInfoDictionaryContentsAsNSString = pluginInfoDictionaryContents
-        range = pluginInfoDictionaryContentsAsNSString.rangeOfString(Plugin.InfoDictionaryKeys.Editable)
+        pluginInfoDictionaryContentsAsNSString = pluginInfoDictionaryContents as NSString
+        range = pluginInfoDictionaryContentsAsNSString.range(of: Plugin.InfoDictionaryKeys.Editable)
         XCTAssertTrue(range.location == NSNotFound, "The string should not have been found")
 
         // Test the plugins properties are accurate
@@ -96,16 +96,15 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
     
     func testDuplicatePluginWithFolderNameBlocked() {
         // Get the destination plugin name
-        let uniqueName = WCLPlugin.uniquePluginNameFromName(plugin.name)
+        let uniqueName = WCLPlugin.uniquePluginName(fromName: plugin.name)
         let destinationName = DuplicatePluginController.pluginFilenameFromName(uniqueName)
         
         // Create a folder at the destination URL
-        let destinationFolderURL = pluginsDirectoryURL.URLByAppendingPathComponent(destinationName)
+        let destinationFolderURL = pluginsDirectoryURL.appendingPathComponent(destinationName)
 
         do {
-            try NSFileManager
-                .defaultManager()
-                .createDirectoryAtURL(destinationFolderURL,
+            try FileManager.default
+                .createDirectory(at: destinationFolderURL,
                     withIntermediateDirectories: false,
                     attributes: nil)
         } catch {
@@ -114,20 +113,20 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
 
         // Test that the folder exists
         var isDir: ObjCBool = false
-        var exists = NSFileManager.defaultManager().fileExistsAtPath(destinationFolderURL.path!, isDirectory: &isDir)
+        var exists = FileManager.default.fileExists(atPath: destinationFolderURL.path!, isDirectory: &isDir)
         XCTAssertTrue(exists, "The file should exist")
         XCTAssertTrue(isDir, "The file should be a directory")
     
         // Duplicate the plugin
         var duplicatePlugin: Plugin!
-        let duplicateExpectation = expectationWithDescription("Duplicate")
+        let duplicateExpectation = expectation(description: "Duplicate")
         duplicatePluginController.duplicatePlugin(plugin, toDirectoryAtURL: pluginsDirectoryURL) { (plugin, error) -> Void in
             XCTAssertNil(error, "The error should be nil")
             XCTAssertNotNil(plugin, "The plugin should not be nil")
             duplicatePlugin = plugin
             duplicateExpectation.fulfill()
         }
-        waitForExpectationsWithTimeout(defaultTimeout, handler: nil)
+        waitForExpectations(timeout: defaultTimeout, handler: nil)
 
         // Assert the folder name equals the plugin's identifier
         let duplicatePluginFolderName = duplicatePlugin.bundle.bundlePath.lastPathComponent
@@ -135,7 +134,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
 
         // Test that the folder exists
         isDir = false
-        exists = NSFileManager.defaultManager().fileExistsAtPath(destinationFolderURL.path!, isDirectory: &isDir)
+        exists = FileManager.default.fileExists(atPath: destinationFolderURL.path!, isDirectory: &isDir)
         XCTAssertTrue(exists, "The file should exist")
         XCTAssertTrue(isDir, "The file should be a directory")
     }

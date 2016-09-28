@@ -10,42 +10,42 @@ import Foundation
 import Cocoa
 
 @objc class MultiCollectionController: NSObject {
-    private let nameToObjectController: WCLKeyToObjectController
-    private var mutableObjects = NSMutableArray()
+    fileprivate let nameToObjectController: WCLKeyToObjectController
+    fileprivate var mutableObjects = NSMutableArray()
     
     init(_ objects: [AnyObject], key: String) {
         self.nameToObjectController = WCLKeyToObjectController(key: key, objects: objects)
-        self.mutableObjects.addObjectsFromArray(self.nameToObjectController.allObjects())
+        self.mutableObjects.addObjects(from: self.nameToObjectController.allObjects())
         super.init()
     }
     
     // MARK: Accessing Plugins
     
-    func objectWithKey(key: String) -> AnyObject? {
-        return nameToObjectController.objectWithKey(key)
+    func objectWithKey(_ key: String) -> AnyObject? {
+        return nameToObjectController.object(withKey: key) as AnyObject?
     }
 
     // MARK: Convenience
     
-    func addObject(object: AnyObject) {
+    func addObject(_ object: AnyObject) {
         insertObject(object, inObjectsAtIndex: 0)
     }
     
-    func addObjects(objects: [AnyObject]) {
+    func addObjects(_ objects: [AnyObject]) {
         let range = NSMakeRange(0, objects.count)
-        let indexes = NSIndexSet(indexesInRange: range)
+        let indexes = IndexSet(integersIn: range.toRange() ?? 0..<0)
         insertObjects(objects, atIndexes: indexes)
     }
     
-    func removeObject(object: AnyObject) {
+    func removeObject(_ object: AnyObject) {
         let index = indexOfObject(object)
         if index != NSNotFound {
             removeObjectFromObjectsAtIndex(index)
         }
     }
     
-    func indexOfObject(object: AnyObject) -> Int {
-         return mutableObjects.indexOfObject(object)
+    func indexOfObject(_ object: AnyObject) -> Int {
+         return mutableObjects.index(of: object)
     }
     
     // MARK: Required Key-Value Coding To-Many Relationship Compliance
@@ -54,39 +54,39 @@ import Cocoa
         return NSArray(array: mutableObjects)
     }
     
-    func insertObject(object: AnyObject, inObjectsAtIndex index: Int) {
-        let replacedObject: AnyObject? = nameToObjectController.addObject(object)
-        mutableObjects.insertObject(object, atIndex: index)
+    func insertObject(_ object: AnyObject, inObjectsAtIndex index: Int) {
+        let replacedObject: AnyObject? = nameToObjectController.add(object) as AnyObject?
+        mutableObjects.insert(object, at: index)
         if let replacedObject: AnyObject = replacedObject {
-            let index = mutableObjects.indexOfObject(replacedObject)
+            let index = mutableObjects.index(of: replacedObject)
             if index != NSNotFound {
                 removeObjectFromObjectsAtIndex(index)
             }
         }
     }
     
-    func insertObjects(objects: [AnyObject], atIndexes indexes: NSIndexSet) {
-        let replacedObjects: NSArray? = nameToObjectController.addObjectsFromArray(objects)
-        mutableObjects.insertObjects(objects, atIndexes: indexes)
+    func insertObjects(_ objects: [AnyObject], atIndexes indexes: IndexSet) {
+        let replacedObjects: NSArray? = nameToObjectController.addObjects(from: objects) as NSArray?
+        mutableObjects.insert(objects, at: indexes)
         if let replacedObjects: NSArray = replacedObjects {
-            let indexes = mutableObjects.indexesOfObjectsPassingTest({
+            let indexes = mutableObjects.indexesOfObjects(passingTest: {
                 (object: AnyObject, index: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Bool in
-                return replacedObjects.containsObject(object)
-            })
+                return replacedObjects.contains(object)
+            } as! (Any, Int, UnsafeMutablePointer<ObjCBool>) -> Bool)
             removeObjectsAtIndexes(indexes)
         }
     }
 
-    func removeObjectFromObjectsAtIndex(index: Int) {
-        let object: AnyObject = mutableObjects.objectAtIndex(index)
-        nameToObjectController.removeObject(object)
-        mutableObjects.removeObjectAtIndex(index)
+    func removeObjectFromObjectsAtIndex(_ index: Int) {
+        let object: AnyObject = mutableObjects.object(at: index) as AnyObject
+        nameToObjectController.remove(object)
+        mutableObjects.removeObject(at: index)
     }
     
-    func removeObjectsAtIndexes(indexes: NSIndexSet) {
-        let objects = mutableObjects.objectsAtIndexes(indexes)
-        nameToObjectController.removeObjectsFromArray(objects)
-        mutableObjects.removeObjectsAtIndexes(indexes)
+    func removeObjectsAtIndexes(_ indexes: IndexSet) {
+        let objects = mutableObjects.objects(at: indexes)
+        nameToObjectController.removeObjects(from: objects)
+        mutableObjects.removeObjects(at: indexes)
     }
 
 }
