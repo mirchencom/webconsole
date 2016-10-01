@@ -46,7 +46,7 @@ class MultiCollectionControllerInitTests: PluginsManagerTestCase {
         let newPluginChangedNameTwo = Plugin.pluginWithURL(newPluginURL)!
         newPluginChangedNameTwo.name = changedName
         
-        let plugins = [plugin, newPlugin, newPluginTwo, newPluginChangedName, newPluginChangedNameTwo]
+        let plugins = [plugin!, newPlugin, newPluginTwo, newPluginChangedName, newPluginChangedNameTwo]
         let newPluginURLs = [newPluginURL, newPluginTwoURL, newPluginChangedNameURL, newPluginChangedNameTwoURL]
         
         let pluginsController = MultiCollectionController(plugins, key: pluginNameKey)

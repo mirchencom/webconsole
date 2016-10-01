@@ -60,6 +60,7 @@ class FileExtensionsControllerBuiltInPluginsTests: XCTestCase {
         // Get the plugins set
         guard let plugins = PluginsManager.sharedInstance.plugins() as? [Plugin] else {
             XCTAssertTrue(false)
+            return
         }
 
         let pluginsSet = NSMutableSet()
