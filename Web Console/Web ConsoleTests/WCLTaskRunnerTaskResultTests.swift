@@ -20,7 +20,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
         
         let expectation = self.expectation(description: "Task finished")
 
-        WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
             withArguments: nil,
             inDirectoryPath: nil,
             timeout: 0.0)
@@ -32,7 +32,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
                 return
             }
             
-            let description = error.userInfo[NSLocalizedDescriptionKey]!
+            let description = error.userInfo[NSLocalizedDescriptionKey] as! NSString
             XCTAssertTrue(description.hasPrefix("An uncaught signal error occurred"))
 
             expectation.fulfill()
@@ -50,7 +50,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
         
         let expectation = self.expectation(description: "Task finished")
         
-        WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
             withArguments: nil,
             inDirectoryPath: nil)
         { (standardOutput, standardError, error) -> Void in
@@ -76,9 +76,8 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
         
         let expectation = self.expectation(description: "Task finished")
         
-        WCLTaskRunner.runTaskUntilFinishedWithCommandPath("/bin/cat",
-
-            withArguments: [testDataPath],
+        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath("/bin/cat",
+            withArguments: [testDataPath as AnyObject],
             inDirectoryPath: nil)
             { (standardOutput, standardError, error) -> Void in
                 
@@ -89,8 +88,8 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
                 }
 
                 do {
-                    let testData = try NSString(contentsOfFile: testDataPath, encoding: String.Encoding.utf8)
-                    XCTAssertTrue(testData.isEqual(to: standardOutput))
+                    let testData = try String(contentsOfFile: testDataPath, encoding: String.Encoding.utf8)
+                    XCTAssertTrue(testData.isEqual(standardOutput))
                 } catch let error as NSError {
                     XCTAssertNil(error)
                 }

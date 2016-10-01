@@ -13,15 +13,15 @@ import XCTest
 class ProcessManagerTestCase: XCTestCase {
     class MockProcessManagerStore: ProcessManagerStore {
         let mutableDictionary = NSMutableDictionary()
-        
-        func setObject(_ value: AnyObject?, forKey defaultName: String) {
+
+        func set(_ value: Any?, forKey defaultName: String) {
             guard let value = value else {
                 return
             }
             mutableDictionary[defaultName] = value
         }
-        
-        func dictionaryForKey(_ defaultName: String) -> [String : AnyObject]? {
+
+        func dictionary(forKey defaultName: String) -> [String : Any]? {
             return mutableDictionary[defaultName] as? [String : AnyObject]
         }
     }
@@ -67,18 +67,18 @@ class ProcessManagerTests: ProcessManagerTestCase {
         }
         
         processManager.addProcessInfo(processInfo)
-        let processManagerHasProcessInfoResult = testProcessManagerHasProcessInfo(processManager: processManager)
+        let processManagerHasProcessInfoResult = testProcessManagerHasProcessInfo(processManager)
         XCTAssertTrue(processManagerHasProcessInfoResult)
         
         // Initialize a second `ProcessManager` with the existing `ProcessManagerStore`
         // this will test that the new `ProcessManager` is initialized with the
         // `ProcessInfo`s already stored in the `ProcessManagerStore`.
         let processManagerTwo = ProcessManager(processManagerStore: processManagerStore)
-        let processManagerHasProcessInfoResultTwo = testProcessManagerHasProcessInfo(processManager: processManagerTwo)
+        let processManagerHasProcessInfoResultTwo = testProcessManagerHasProcessInfo(processManagerTwo)
         XCTAssertTrue(processManagerHasProcessInfoResultTwo)
         
         // Remove the processes and make sure nil is returned
-        processManager.removeProcessWithIdentifier(processInfo.identifier)
+        _ = processManager.removeProcessWithIdentifier(processInfo.identifier)
 
         let testProcessManagerHasNoProcessInfo: (_ processManager: ProcessManager) -> Bool = { processManager in
             XCTAssertNil(processManager.processInfoWithIdentifier(processInfo.identifier))
@@ -90,10 +90,10 @@ class ProcessManagerTests: ProcessManagerTestCase {
             return true
         }
         
-        let processManagerHasNoProcessInfoResult = testProcessManagerHasNoProcessInfo(processManager: processManager)
+        let processManagerHasNoProcessInfoResult = testProcessManagerHasNoProcessInfo(processManager)
         XCTAssertTrue(processManagerHasNoProcessInfoResult)
         let processManagerThree = ProcessManager(processManagerStore: processManagerStore)
-        let processManagerHasNoProcessInfoResultTwo = testProcessManagerHasNoProcessInfo(processManager: processManagerThree)
+        let processManagerHasNoProcessInfoResultTwo = testProcessManagerHasNoProcessInfo(processManagerThree)
         XCTAssertTrue(processManagerHasNoProcessInfoResultTwo)    
     }
 

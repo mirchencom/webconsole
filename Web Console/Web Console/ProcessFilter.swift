@@ -71,7 +71,7 @@ class ProcessFilter {
         // args: Command & Arguments
         // = Means don't display header for this column
         
-        let _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
                                                                   withArguments: arguments as [NSString],
                                                                   inDirectoryPath: nil)
         { (standardOutput, standardError, error) -> Void in

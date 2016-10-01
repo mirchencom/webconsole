@@ -275,7 +275,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     func makeLogViewWillAppearExpectationForSplitWebViewController(_ splitWebViewController: SplitWebViewController) {
         let webViewController = splitWebViewController.splitController.splitViewItem.viewController as! WCLWebViewController
         let viewWillAppearExpectation = expectation(description: "WebViewController will appear")
-        let _ = WebViewControllerLifeCycleEventRouter(webViewController: webViewController, viewWillAppearBlock: { _ in
+        _ = WebViewControllerLifeCycleEventRouter(webViewController: webViewController, viewWillAppearBlock: { _ in
             viewWillAppearExpectation.fulfill()
         }, viewWillDisappearBlock: nil)
     }
@@ -283,7 +283,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     func makeLogViewWillDisappearExpectationForSplitWebViewController(_ splitWebViewController: SplitWebViewController) {
         let webViewController = splitWebViewController.splitController.splitViewItem.viewController as! WCLWebViewController
         let viewWillDisappearExpectation = expectation(description: "WebViewController will appear")
-        let _ = WebViewControllerLifeCycleEventRouter(webViewController: webViewController, viewWillAppearBlock: nil) { _ in
+        _ = WebViewControllerLifeCycleEventRouter(webViewController: webViewController, viewWillAppearBlock: nil) { _ in
             viewWillDisappearExpectation.fulfill()
         }
     }
