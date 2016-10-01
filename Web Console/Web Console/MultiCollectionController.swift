@@ -69,7 +69,7 @@ import Cocoa
         let replacedObjects: NSArray? = nameToObjectController.addObjects(from: objects) as NSArray?
         mutableObjects.insert(objects, at: indexes)
         if let replacedObjects: NSArray = replacedObjects {
-            let indexes = mutableObjects.indexesOfObjects(passingTest: {
+            let indexes = mutableObjects.indexesOfObjects(options: [], passingTest: {
                 (object: AnyObject, index: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Bool in
                 return replacedObjects.contains(object)
             } as! (Any, Int, UnsafeMutablePointer<ObjCBool>) -> Bool)

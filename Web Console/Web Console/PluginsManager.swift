@@ -51,12 +51,13 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     }
     
     func pluginWithIdentifier(_ identifier: String) -> Plugin? {
-        let allPlugins = plugins()
-        for object: AnyObject in allPlugins {
-            if let plugin: Plugin = object as? Plugin {
-                if plugin.identifier == identifier {
-                    return plugin
-                }
+        guard let allPlugins = plugins() as? [Plugin] else {
+            return nil
+        }
+        
+        for plugin in allPlugins {
+            if plugin.identifier == identifier {
+                return plugin
             }
         }
         return nil

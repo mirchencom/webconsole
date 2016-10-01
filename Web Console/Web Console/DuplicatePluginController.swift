@@ -22,7 +22,7 @@ class DuplicatePluginController {
         copyDirectoryController.copyItemAtURL(pluginFileURL, completionHandler: { (URL, error) -> Void in
             
             guard error == nil else {
-                handler(plugin: nil, error: error)
+                handler(nil, error)
                 return
             }
             
@@ -35,7 +35,7 @@ class DuplicatePluginController {
                 do {
                     try FileManager.default.moveItem(at: URL, to: movedDestinationURL)
                 } catch let error as NSError {
-                    handler(plugin: nil, error: error)
+                    handler(nil, error)
                     return
                 }
                 
@@ -47,7 +47,7 @@ class DuplicatePluginController {
                     
                     // Attempt to move the plugin to a directory based on its name (this can safely fail)
                     let renamedPluginFilename = type(of: self).pluginFilenameFromName(movedPlugin.name)
-                    let renamedDestinationURL = movedDestinationURL.deletingLastPathComponent()!.appendingPathComponent(renamedPluginFilename)
+                    let renamedDestinationURL = movedDestinationURL.deletingLastPathComponent().appendingPathComponent(renamedPluginFilename)
                     do {
                         try FileManager.default.moveItem(at: movedDestinationURL, to: renamedDestinationURL)
                         if let renamedPlugin = Plugin.pluginWithURL(renamedDestinationURL) {
@@ -59,7 +59,7 @@ class DuplicatePluginController {
                 }
             }
 
-            handler(plugin: plugin, error: error)
+            handler(plugin, error)
         })
     }
 }

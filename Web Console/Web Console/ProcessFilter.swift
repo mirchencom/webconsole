@@ -57,7 +57,7 @@ class ProcessFilter {
     {
         if identifiers.isEmpty {
             let error = NSError.errorWithDescription("No identifiers specified")
-            completionHandler(identifierToProcessInfo: nil, error: error)
+            completionHandler(nil, error)
             return
         }
         
@@ -71,9 +71,9 @@ class ProcessFilter {
         // args: Command & Arguments
         // = Means don't display header for this column
         
-        WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
-            withArguments: arguments,
-            inDirectoryPath: nil)
+        let _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+                                                                  withArguments: arguments as [NSString],
+                                                                  inDirectoryPath: nil)
         { (standardOutput, standardError, error) -> Void in
 
             if let error = error {

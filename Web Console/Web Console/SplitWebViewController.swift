@@ -228,7 +228,7 @@ class SplitWebViewController: NSSplitViewController {
     
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
-        case #selector(SplitWebViewController.toggleLogShown(_:)?):
+        case #selector(SplitWebViewController.toggleLogShown(_:)):
             if let collapsed = splitController.isCollapsed() {
                 menuItem.title = collapsed ? showLogMenuItemTitle : hideLogMenuItemTitle
                 return true
@@ -359,8 +359,9 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
     }
     
     func webViewController(_ webViewController: WCLWebViewController,
-        didFailToRun task: Process,
-        commandPath: String, error: NSError)
+                           didFailToRun task: Process,
+                           commandPath: String,
+                           error: Error)
     {
         delegate?.splitWebViewController(self, didFailToRunTask: task, error: error)
         
@@ -370,6 +371,12 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
         }
         
         logDebugError("Failed to run: \(commandPath.lastPathComponent)\nError: \(error.localizedDescription)")
+    }
+    
+    func webViewController(_ webViewController: WCLWebViewController,
+        didFailToRun task: Process,
+        commandPath: String, error: NSError)
+    {
     }
 
     func webViewController(_ webViewController: WCLWebViewController,
