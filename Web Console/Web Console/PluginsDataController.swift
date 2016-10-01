@@ -127,18 +127,18 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
             if let plugin = plugin {
                 self.addPlugin(plugin)
             }
-            handler?(plugin: plugin, error: error)
+            handler?(plugin, error)
         }
     }
 
     class func createDirectoryIfMissing(_ directoryURL: URL) throws {
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDir)
-        if (exists && isDir) {
+        if (exists && isDir.boolValue) {
             return
         }
         
-        if (exists && !isDir) {
+        if (exists && !isDir.boolValue) {
             throw FileSystemError.fileExistsForDirectoryError
         }
 

@@ -227,7 +227,11 @@ class SplitWebViewController: NSSplitViewController {
     // MARK: Validation
     
     override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        switch menuItem.action {
+        guard let action = menuItem.action else {
+            return super.validateMenuItem(menuItem)
+        }
+        
+        switch action {
         case #selector(SplitWebViewController.toggleLogShown(_:)):
             if let collapsed = splitController.isCollapsed() {
                 menuItem.title = collapsed ? showLogMenuItemTitle : hideLogMenuItemTitle
@@ -363,7 +367,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
                            commandPath: String,
                            error: Error)
     {
-        delegate?.splitWebViewController(self, didFailToRunTask: task, error: error)
+        delegate?.splitWebViewController(self, didFailToRunTask: task, error: error as NSError)
         
         if webViewController == logWebViewController {
             // Don't log messages from the log itself

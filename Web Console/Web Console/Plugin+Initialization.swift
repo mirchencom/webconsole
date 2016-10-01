@@ -47,10 +47,7 @@ extension Plugin {
     }
 
     class func pluginWithURL(_ url: URL) -> Plugin? {
-        if let path = url.path {
-            return self.pluginWithPath(path)
-        }
-        return nil
+        return self.pluginWithPath(url.path)
     }
 
     class func pluginWithPath(_ path: String) -> Plugin? {

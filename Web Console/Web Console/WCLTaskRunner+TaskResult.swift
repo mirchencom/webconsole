@@ -17,9 +17,9 @@ extension TaskResultsCollector: WCLTaskRunnerDelegate {
         completionHandler(standardOutput, standardError, error)
     }
 
-    func task(_ task: Process, didFailToRunCommandPath commandPath: String, error: NSError) {
+    func task(_ task: Process, didFailToRunCommandPath commandPath: String, error: Error) {
         assert(!task.isRunning)
-        completionHandler(standardOutput, standardError, error)
+        completionHandler(standardOutput, standardError, error as NSError?)
     }
     
     func task(_ task: Process, didReadFromStandardError text: String) {

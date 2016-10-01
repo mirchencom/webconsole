@@ -11,8 +11,8 @@ import Foundation
 extension UserDefaults: ProcessManagerStore { }
 
 protocol ProcessManagerStore {
-    func setObject(_ value: AnyObject?, forKey defaultName: String)
-    func dictionaryForKey(_ defaultName: String) -> [String : AnyObject]?
+    func set(_ value: Any?, forKey defaultName: String)
+    func dictionary(forKey defaultName: String) -> [String : Any]?
 }
 class ProcessManager {
     
@@ -33,7 +33,7 @@ class ProcessManager {
     }
     
     init(processManagerStore: ProcessManagerStore) {
-        if let processInfoDictionary = processManagerStore.dictionaryForKey(runningProcessesKey) {
+        if let processInfoDictionary = processManagerStore.dictionary(forKey: runningProcessesKey) {
             identifierKeyToProcessInfoValue = processInfoDictionary as [NSString : AnyObject]
         }
         self.processManagerStore = processManagerStore
@@ -78,7 +78,7 @@ class ProcessManager {
     // MARK: Private
     
     fileprivate func save() {
-        processManagerStore.setObject(identifierKeyToProcessInfoValue as AnyObject?, forKey: runningProcessesKey)
+        processManagerStore.set(identifierKeyToProcessInfoValue as AnyObject?, forKey: runningProcessesKey)
     }
     
     fileprivate func processInfoForIdentifier(_ identifier: Int32, remove: Bool) -> ProcessInfo? {

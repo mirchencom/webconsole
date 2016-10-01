@@ -265,7 +265,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         let infoDictionaryPath = pluginPath.stringByAppendingPathComponent(ClassConstants.infoDictionaryPathComponent)
         var isDir: ObjCBool = false
         let fileExists = FileManager.default.fileExists(atPath: infoDictionaryPath, isDirectory: &isDir)
-        return fileExists && !isDir
+        return fileExists && !isDir.boolValue
     }
     
     func infoDictionaryIsSubdirectoryOfPath(_ path: String) -> Bool {
@@ -274,40 +274,30 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
 
     func pluginPathFromPath(_ path: String) -> String? {
         if let pluginPathComponent = pluginPathComponentFromPath(path) {
-            if let subpath = pluginsDirectoryURL.path {
-                let pluginPath = subpath.stringByAppendingPathComponent(pluginPathComponent)
-                return pluginPath
-            }
+            let pluginPath = pluginsDirectoryURL.path.stringByAppendingPathComponent(pluginPathComponent)
+            return pluginPath
         }
         return nil
     }
     
     func pluginPathComponentFromPath(_ path: String) -> String? {
-        if let subpath = pluginsDirectoryURL.path {
-            if let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: subpath) {
-                if (pathComponents.count > 0) {
-                    var pluginSubpathComponents = pathComponents as Array
-                    let pathComponent = pluginSubpathComponents[0]
-                    return pathComponent
-                }
+        if let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: pluginsDirectoryURL.path) {
+            if (pathComponents.count > 0) {
+                var pluginSubpathComponents = pathComponents as Array
+                let pathComponent = pluginSubpathComponents[0]
+                return pathComponent
             }
         }
         return nil
     }
 
     func pluginPathComponentsFromPath(_ path: String) -> NSArray? {
-        if let subpath = pluginsDirectoryURL.path {
-            let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: subpath)
-            return pathComponents
-        }
-        return nil
+            let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: pluginsDirectoryURL.path)
+            return pathComponents as NSArray?
     }
     
     func pathIsSubpathOfPluginsDirectory(_ path: String) -> Bool {
-        if let subpath = pluginsDirectoryURL.path {
-            return PluginsPathHelper.path(path, containsSubpath: subpath)
-        }
-        return false
+        return PluginsPathHelper.path(path, containsSubpath: pluginsDirectoryURL.path)
     }
     
 }

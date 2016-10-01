@@ -84,22 +84,22 @@ class ProcessFilter {
                     {
                         // If the process identifier is not found, `ps` exits with an exit status of 1
                         // So reinterpret that case as no processes found
-                        completionHandler(identifierToProcessInfo: [Int32: ProcessInfo](), error: nil)
+                        completionHandler([Int32: ProcessInfo](), nil)
                         return
                     }
                 }
 
-                completionHandler(identifierToProcessInfo: nil, error: error)
+                completionHandler(nil, error)
                 return
             }
 
             guard let standardOutput = standardOutput else {
-                completionHandler(identifierToProcessInfo: [Int32: ProcessInfo](), error: nil)
+                completionHandler([Int32: ProcessInfo](), nil)
                 return
             }
             
             let processInfos = processesFromOutput(standardOutput)
-            completionHandler(identifierToProcessInfo: processInfos, error: nil)
+            completionHandler(processInfos, nil)
         }
     }
 
