@@ -55,10 +55,10 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         // Test the plugin's directory exists
         let duplicatePluginURL = duplicatePlugin.bundle.bundleURL
         var isDir: ObjCBool = false
-        let exists = FileManager.default.fileExists(atPath: duplicatePluginURL.path!,
+        let exists = FileManager.default.fileExists(atPath: duplicatePluginURL.path,
             isDirectory: &isDir)
         XCTAssertTrue(exists, "The item should exist")
-        XCTAssertTrue(isDir, "The item should be a directory")
+        XCTAssertTrue(isDir.boolValue, "The item should be a directory")
 
         // Test that the new plugin is editable
         XCTAssertTrue(duplicatePlugin.editable, "The duplicated plugin should be editable")
@@ -96,7 +96,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
     
     func testDuplicatePluginWithFolderNameBlocked() {
         // Get the destination plugin name
-        let uniqueName = WCLPlugin.uniquePluginName(fromName: plugin.name)
+        let uniqueName = WCLPlugin.uniquePluginName(fromName: plugin.name)!
         let destinationName = DuplicatePluginController.pluginFilenameFromName(uniqueName)
         
         // Create a folder at the destination URL
@@ -113,9 +113,9 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
 
         // Test that the folder exists
         var isDir: ObjCBool = false
-        var exists = FileManager.default.fileExists(atPath: destinationFolderURL.path!, isDirectory: &isDir)
+        var exists = FileManager.default.fileExists(atPath: destinationFolderURL.path, isDirectory: &isDir)
         XCTAssertTrue(exists, "The file should exist")
-        XCTAssertTrue(isDir, "The file should be a directory")
+        XCTAssertTrue(isDir.boolValue, "The file should be a directory")
     
         // Duplicate the plugin
         var duplicatePlugin: Plugin!
@@ -134,9 +134,9 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
 
         // Test that the folder exists
         isDir = false
-        exists = FileManager.default.fileExists(atPath: destinationFolderURL.path!, isDirectory: &isDir)
+        exists = FileManager.default.fileExists(atPath: destinationFolderURL.path, isDirectory: &isDir)
         XCTAssertTrue(exists, "The file should exist")
-        XCTAssertTrue(isDir, "The file should be a directory")
+        XCTAssertTrue(isDir.boolValue, "The file should be a directory")
     }
 
 }

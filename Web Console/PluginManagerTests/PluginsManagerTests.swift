@@ -81,8 +81,8 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
         for pluginsPath in pluginsPaths {
 
             do {
-                let contents: [AnyObject]! = try FileManager.default.contentsOfDirectory(atPath: pluginsPath)
-                let paths = contents as! [String]
+                let contents = try FileManager.default.contentsOfDirectory(atPath: pluginsPath)
+                let paths = contents
                 let pluginFileExtensionMatch = ".\(pluginFileExtension)"
                 let pluginFileExtensionPredicate: NSPredicate! = NSPredicate(format: "self ENDSWITH %@", pluginFileExtensionMatch)
                 let pluginPaths = paths.filter {

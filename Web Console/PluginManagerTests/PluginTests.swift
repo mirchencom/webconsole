@@ -13,7 +13,7 @@ import XCTest
 class PluginTests: PluginsManagerTestCase {
 
     func infoDictionaryContentsForPluginWithConfirmation(_ plugin: Plugin) -> String {
-        let pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPlugin(plugin).path!
+        let pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPlugin(plugin).path
         var infoDictionaryContents: String!
         do {
             infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: String.Encoding.utf8)
@@ -64,7 +64,7 @@ class PluginTests: PluginsManagerTestCase {
         }
 
         // Test an invalid object
-        name = []
+        name = NSDictionary()
         var error: NSError?
         do {
             try plugin.validateName(&name)
@@ -88,7 +88,7 @@ class PluginTests: PluginsManagerTestCase {
 
         // Test that the new plugins name is invalid
         error = nil
-        name = createdPlugin.name
+        name = createdPlugin.name as AnyObject?
         do {
             try plugin.validateName(&name)
         } catch let nameError as NSError {
@@ -97,7 +97,7 @@ class PluginTests: PluginsManagerTestCase {
         XCTAssertNotNil(error, "The error should not be nil.")
         // Inverse
         error = nil
-        name = plugin.name
+        name = plugin.name as AnyObject?
         do {
             try createdPlugin.validateName(&name)
         } catch let nameError as NSError {
@@ -106,7 +106,7 @@ class PluginTests: PluginsManagerTestCase {
         XCTAssertNotNil(error, "The error should not be nil.")
         
         // Test that the name is now valid for the second plugin
-        name = plugin.name
+        name = plugin.name as AnyObject?
         plugin.name = testPluginNameNoPlugin
         error = nil
         do {
@@ -117,7 +117,7 @@ class PluginTests: PluginsManagerTestCase {
 
         // Test that the new name is now invalid
         error = nil
-        name = plugin.name
+        name = plugin.name as AnyObject?
         do {
             try createdPlugin.validateName(&name)
         } catch let nameError as NSError {
@@ -127,7 +127,7 @@ class PluginTests: PluginsManagerTestCase {
 
         // Test that the created plugins name is valid after deleting
         error = nil
-        name = createdPlugin.name
+        name = createdPlugin.name as AnyObject?
         do {
             try plugin.validateName(&name)
         } catch let nameError as NSError {
@@ -156,7 +156,7 @@ class PluginTests: PluginsManagerTestCase {
 
         // Test Invalid Duplicate Extensions
         var error: NSError?
-        suffixes = [testPluginSuffix, testPluginSuffix]
+        suffixes = [testPluginSuffix, testPluginSuffix] as AnyObject?
         do {
             try plugin.validateExtensions(&suffixes)
         } catch let nameError as NSError {
@@ -166,7 +166,7 @@ class PluginTests: PluginsManagerTestCase {
 
         // Test Invalid Length Extensions
         error = nil
-        suffixes = [testPluginSuffix, ""]
+        suffixes = [testPluginSuffix, ""] as AnyObject?
         do {
             try plugin.validateExtensions(&suffixes)
         } catch let validationError as NSError {
@@ -176,7 +176,7 @@ class PluginTests: PluginsManagerTestCase {
 
         // Test Invalid Object Extensions
         error = nil
-        suffixes = [testPluginSuffix, []]
+        suffixes = [testPluginSuffix, []] as AnyObject?
         do {
             try plugin.validateExtensions(&suffixes)
         } catch let validationError as NSError {
@@ -186,7 +186,7 @@ class PluginTests: PluginsManagerTestCase {
 
         // Test Invalid Character Extensions
         error = nil
-        suffixes = [testPluginSuffix, "jkl;"]
+        suffixes = [testPluginSuffix, "jkl;"] as AnyObject?
         do {
             try plugin.validateExtensions(&suffixes)
         } catch let validationError as NSError {
@@ -202,7 +202,7 @@ class PluginTests: PluginsManagerTestCase {
         
         // Duplicate the plugins folder, this should not cause a second plugin to be added to the plugin manager since the copy originated from the same process
         let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
-        let destinationPluginURL: URL! = pluginURL.deletingLastPathComponent()?.appendingPathComponent(destinationPluginFilename)
+        let destinationPluginURL: URL! = pluginURL.deletingLastPathComponent().appendingPathComponent(destinationPluginFilename)
         do {
             try FileManager.default.copyItem(at: pluginURL as URL, to: destinationPluginURL)
         } catch {

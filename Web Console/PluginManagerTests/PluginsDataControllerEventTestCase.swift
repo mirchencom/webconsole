@@ -31,7 +31,7 @@ class PluginDataEventManager: PluginsDataControllerDelegate {
         
         if (pluginWasAddedHandlers.count > 0) {
             let handler = pluginWasAddedHandlers.remove(at: 0)
-            handler(plugin: plugin)
+            handler(plugin)
         }
     }
     
@@ -42,17 +42,17 @@ class PluginDataEventManager: PluginsDataControllerDelegate {
         
         if (pluginWasRemovedHandlers.count > 0) {
             let handler = pluginWasRemovedHandlers.remove(at: 0)
-            handler(plugin: plugin)
+            handler(plugin)
         }
     }
     
     // MARK: Handlers
     
-    func addPluginWasAddedHandler(_ handler: (_ plugin: Plugin) -> Void) {
+    func addPluginWasAddedHandler(_ handler: @escaping (_ plugin: Plugin) -> Void) {
         pluginWasAddedHandlers.append(handler)
     }
     
-    func addPluginWasRemovedHandler(_ handler: (_ plugin: Plugin) -> Void) {
+    func addPluginWasRemovedHandler(_ handler: @escaping (_ plugin: Plugin) -> Void) {
         pluginWasRemovedHandlers.append(handler)
     }
     

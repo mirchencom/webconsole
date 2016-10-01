@@ -79,7 +79,7 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         var isDir: ObjCBool = false
         let afterExists = FileManager.default.fileExists(atPath: trashedPluginPath, isDirectory: &isDir)
         XCTAssertTrue(afterExists, "The item should exist")
-        XCTAssertTrue(isDir, "The item should be a directory")
+        XCTAssertTrue(isDir.boolValue, "The item should be a directory")
         
         // Clean up trash
         do {
