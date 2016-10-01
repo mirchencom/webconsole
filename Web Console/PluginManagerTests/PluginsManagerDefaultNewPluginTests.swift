@@ -110,7 +110,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
             forKeyPath: testPluginDefaultNewPluginKeyPath,
             options: NSKeyValueObservingOptions.new )
         {
-            (change: [AnyHashable: Any]!) -> Void in
+            (change: [AnyHashable: Any]?) -> Void in
             isDefaultNewPlugin = createdPlugin.isDefaultNewPlugin
         }
         PluginsManager.sharedInstance.defaultNewPlugin = createdPlugin
@@ -126,7 +126,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
             forKeyPath: testPluginDefaultNewPluginKeyPath,
             options: NSKeyValueObservingOptions.new )
             {
-                (change: [AnyHashable: Any]!) -> Void in
+                (change: [AnyHashable: Any]?) -> Void in
                 isDefaultNewPlugin = createdPlugin.isDefaultNewPlugin
         }
         var isDefaultNewPluginTwo = createdPlugin.isDefaultNewPlugin
@@ -134,7 +134,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
             forKeyPath: testPluginDefaultNewPluginKeyPath,
             options: NSKeyValueObservingOptions.new )
             {
-                (change: [AnyHashable: Any]!) -> Void in
+                (change: [AnyHashable: Any]?) -> Void in
                 isDefaultNewPluginTwo = createdPluginTwo.isDefaultNewPlugin
         }
         PluginsManager.sharedInstance.defaultNewPlugin = createdPluginTwo
@@ -148,7 +148,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
             forKeyPath: testPluginDefaultNewPluginKeyPath,
             options: NSKeyValueObservingOptions.new )
             {
-                (change: [AnyHashable: Any]!) -> Void in
+                (change: [AnyHashable: Any]?) -> Void in
                 isDefaultNewPluginTwo = createdPluginTwo.isDefaultNewPlugin
         }
         PluginsManager.sharedInstance.defaultNewPlugin = nil

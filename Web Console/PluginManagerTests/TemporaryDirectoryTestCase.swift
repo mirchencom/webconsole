@@ -46,7 +46,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
     class func isValidTemporaryDirectoryPath(_ path: String) -> Bool {
         var isDir: ObjCBool = false
 
-        return FileManager.default.fileExists(atPath: path, isDirectory: &isDir) && isDir
+        return FileManager.default.fileExists(atPath: path, isDirectory: &isDir) && isDir.boolValue
     }
     
     func removeTemporaryItemAtPathComponent(_ pathComponent: String) throws {
@@ -59,14 +59,10 @@ class TemporaryDirectoryTestCase: XCTestCase {
     }
 
     func removeTemporaryItemAtURL(_ URL: Foundation.URL) throws {
-        if let path = URL.path {
-            do {
-                try removeTemporaryItemAtPath(path)
-            } catch let error as NSError {
-                throw error
-            }
-        } else {
-            throw TemporaryDirectoryError.invalidURLError(URL: URL)
+        do {
+            try removeTemporaryItemAtPath(URL.path)
+        } catch let error as NSError {
+            throw error
         }
     }
     

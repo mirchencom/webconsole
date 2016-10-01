@@ -14,8 +14,8 @@ import XCTest
 class FileExtensionsControllerTests: FileExtensionsTestCase {
 
     func extensionsTest(_ extensions1: [String], matchExtensions extensions2: [String]) -> Bool {
-        let sortedExtensions1: NSArray = extensions1.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
-        let sortedExtensions2: NSArray = extensions2.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+        let sortedExtensions1 = extensions1.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
+        let sortedExtensions2 = extensions2.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         return sortedExtensions1 == sortedExtensions2
     }
 
@@ -58,7 +58,10 @@ class FileExtensionsControllerBuiltInPluginsTests: XCTestCase {
         let controllerSet = NSSet(array: FileExtensionsController.sharedInstance.suffixes()) as Set
         
         // Get the plugins set
-        let plugins = PluginsManager.sharedInstance.plugins()
+        guard let plugins = PluginsManager.sharedInstance.plugins() as? [Plugin] else {
+            XCTAssertTrue(false)
+        }
+
         let pluginsSet = NSMutableSet()
         for plugin in plugins {
             pluginsSet.addObjects(from: plugin.suffixes)

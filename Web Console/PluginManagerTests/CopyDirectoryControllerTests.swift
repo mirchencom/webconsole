@@ -57,7 +57,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         let exists = FileManager.default.fileExists(atPath: copiedPluginURL.path,
             isDirectory: &isDir)
         XCTAssertTrue(exists, "The item should exist")
-        XCTAssertTrue(isDir, "The item should be a directory")
+        XCTAssertTrue(isDir.boolValue, "The item should be a directory")
 
         let pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(pluginURL)
         let copiedPluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(copiedPluginURL)
@@ -130,7 +130,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: recoveredFilesPath, isDirectory: &isDir)
         XCTAssertTrue(exists, "The item should exist")
-        XCTAssertTrue(isDir, "The item should be a directory")
+        XCTAssertTrue(isDir.boolValue, "The item should be a directory")
 
         // Clean up trash
         do {
