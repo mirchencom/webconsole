@@ -84,7 +84,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     func createFileAtPathWithConfirmation(_ path: String) {
         let fileWasCreatedOrModifiedExpectation = expectation(description: "File was created")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 fileWasCreatedOrModifiedExpectation.fulfill()
             }
         })
@@ -94,7 +94,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     func createDirectoryAtPathWithConfirmation(_ path: String) {
         let directoryWasCreatedOrModifiedExpectation = expectation(description: "Directory was created")
         directoryWatcherEventManager?.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasCreatedOrModifiedExpectation.fulfill()
             }
         })
@@ -106,7 +106,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     func modifyFileAtPathWithConfirmation(_ path: String) {
         let fileWasModifiedExpectation = expectation(description: "File was modified")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 fileWasModifiedExpectation.fulfill()
             }
         })
@@ -118,7 +118,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     func removeFileAtPathWithConfirmation(_ path: String) {
         let fileWasRemovedExpectation = expectation(description: "File was removed")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 fileWasRemovedExpectation.fulfill()
             }
         })
@@ -128,7 +128,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     func removeDirectoryAtPathWithConfirmation(_ path: String) {
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
@@ -141,14 +141,14 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
         // Remove original
         let fileWasRemovedExpectation = expectation(description: "File was removed with move")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 fileWasRemovedExpectation.fulfill()
             }
         })
         // Create new
         let fileWasCreatedExpectation = expectation(description: "File was created with move")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == destinationPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == destinationPath) {
                 fileWasCreatedExpectation.fulfill()
             }
         })
@@ -160,14 +160,14 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
         // Remove original
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
         // Create new
         let directoryWasCreatedExpectation = expectation(description: "Directory was created with move")
         directoryWatcherEventManager?.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == destinationPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == destinationPath) {
                 directoryWasCreatedExpectation.fulfill()
             }
         })
@@ -180,7 +180,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
 class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
 
     func testCreateWriteAndRemoveDirectory() {
-        let testDirectoryPath = temporaryDirectoryURL.path!.stringByAppendingPathComponent(testDirectoryName)
+        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
         let testFilePath = testDirectoryPath.stringByAppendingPathComponent(testFilename)
 
         // Test Create Directory
@@ -208,7 +208,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
     }
 
     func testMoveDirectory() {
-        let testDirectoryPath = temporaryDirectoryURL.path!.stringByAppendingPathComponent(testDirectoryName)
+        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
             
         // Test Create
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
@@ -227,7 +227,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
     }
 
     func testMoveDirectoryContainingFile() {
-        let testDirectoryPath = temporaryDirectoryURL.path!.stringByAppendingPathComponent(testDirectoryName)
+        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
         let testFilePath = testDirectoryPath.stringByAppendingPathComponent(testFilename)
 
         // Test Create Directory
@@ -257,7 +257,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
     }
 
     func testReplaceDirectoryWithFile() {
-        let testDirectoryPath = temporaryDirectoryURL.path!.stringByAppendingPathComponent(testDirectoryName)
+        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
             
         // Test Create Directory
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
@@ -273,7 +273,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
     }
 
     func testReplaceFileWithDirectory() {
-        let testDirectoryPath = temporaryDirectoryURL.path!.stringByAppendingPathComponent(testDirectoryName)
+        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
         
         // Test Create File
         createFileAtPathWithConfirmation(testDirectoryPath)
@@ -296,7 +296,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
     
     override func setUp() {
         super.setUp()
-        testFilePath = temporaryDirectoryURL.path!.stringByAppendingPathComponent(testFilename)
+        testFilePath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testFilename)
     }
 
     override func tearDown() {
@@ -351,7 +351,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         // Create expectation
         let fileWasCreatedOrModifiedExpectation = expectation(description: "File was created at \(testFilePath)")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ path -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path) ==  self.testFilePath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) ==  self.testFilePath) {
                 fileWasCreatedOrModifiedExpectation.fulfill()
             }
         })
@@ -373,7 +373,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         // Remove Expectation
         let fileWasRemovedExpectation = expectation(description: "File was removed")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ path -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path) ==  self.testFilePath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) ==  self.testFilePath) {
                 fileWasRemovedExpectation.fulfill()
             }
         })
@@ -401,7 +401,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         // Create expectation
         let fileWasCreatedOrModifiedExpectation = expectation(description: "File was created")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ path -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path) == self.testFilePath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.testFilePath) {
                 fileWasCreatedOrModifiedExpectation.fulfill()
             }
         })
@@ -409,7 +409,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         // Test create a second file with NSFileManager
         let testFilePathTwo = testFilePath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(testFilenameTwo)
         let fileManagerCreateExpectation = expectation(description: "File manager created file")
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             let contentsData = testFileContents.data(using: String.Encoding.utf8)
             FileManager.default.createFile(atPath: testFilePathTwo, contents: contentsData, attributes: nil)
             fileManagerCreateExpectation.fulfill()
@@ -427,14 +427,14 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         // Remove Expectation
         let fileWasRemovedExpectation = expectation(description: "File was removed")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ path -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path) ==  self.testFilePath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) ==  self.testFilePath) {
                 fileWasRemovedExpectation.fulfill()
             }
         })
         
         // Test remove the second file with NSFileManager
         let fileManagerRemoveExpectation = expectation(description: "File manager created file")
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             do {
                 try FileManager.default.removeItem(atPath: testFilePathTwo)
             } catch {

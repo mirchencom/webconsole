@@ -14,7 +14,7 @@ import XCTest
 extension PluginsDataControllerEventTestCase {
     // MARK: Move Helpers
     
-    func movePluginWithConfirmation(_ plugin: Plugin, destinationPluginPath: String, handler: (_ plugin: Plugin?) -> Void) {
+    func movePluginWithConfirmation(_ plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         let removeExpectation = expectation(description: "Plugin was removed")
         pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
@@ -28,7 +28,7 @@ extension PluginsDataControllerEventTestCase {
             let path = addedPlugin.bundle.bundlePath
             if (path == destinationPluginPath) {
                 newPlugin = addedPlugin
-                handler(plugin: newPlugin)
+                handler(newPlugin)
                 createExpectation.fulfill()
             }
         })
@@ -42,14 +42,14 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Copy Helpers
     
-    func copyPluginWithConfirmation(_ plugin: Plugin, destinationPluginPath: String, handler: (_ plugin: Plugin?) -> Void) {
+    func copyPluginWithConfirmation(_ plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         var newPlugin: Plugin?
         let createExpectation = expectation(description: "Plugin was added")
         pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
             let path = addedPlugin.bundle.bundlePath
             if (path == destinationPluginPath) {
                 newPlugin = addedPlugin
-                handler(plugin: newPlugin)
+                handler(newPlugin)
                 createExpectation.fulfill()
             }
         })
@@ -88,18 +88,18 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Modify Helpers
     
-    func modifyPluginWithConfirmation(_ plugin: Plugin, handler: (_ plugin: Plugin?) -> Void) {
+    func modifyPluginWithConfirmation(_ plugin: Plugin, handler: @escaping (_ plugin: Plugin?) -> Void) {
 
         // Get the old identifier
         let infoDictionary = NSDictionary(contentsOf: plugin.infoDictionaryURL)! as Dictionary
-        let identifier = infoDictionary[Plugin.InfoDictionaryKeys.Identifier] as! String
+        let identifier: String = infoDictionary[Plugin.InfoDictionaryKeys.Identifier as NSString] as! String
 
         // Make a new identifier
         let UUID = Foundation.UUID()
         let newIdentifier = UUID.uuidString
 
         // Get the info dictionary contents
-        let infoDictionaryPath = plugin.infoDictionaryURL.path!
+        let infoDictionaryPath = plugin.infoDictionaryURL.path
 
         var infoDictionaryContents: String!
         do {
@@ -125,7 +125,7 @@ extension PluginsDataControllerEventTestCase {
             let path = addedPlugin.bundle.bundlePath
             if (path == pluginPath) {
                 newPlugin = addedPlugin
-                handler(plugin: newPlugin)
+                handler(newPlugin)
                 createExpectation.fulfill()
             }
         })

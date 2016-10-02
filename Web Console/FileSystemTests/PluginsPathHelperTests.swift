@@ -88,7 +88,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     
     func testMissingSubpath() {
         
-        let testPath = pluginPath
+        let testPath = pluginPath!
         let testSubpath = testMissingFilePathComponent
         
         let range = PluginsPathHelper.rangeInPath(testPath, untilSubpath: testSubpath)
@@ -105,7 +105,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     
     func testMissingSubpathComponent() {
         
-        let testPath = pluginPath
+        let testPath = pluginPath!
         let testSubpath = (pluginsDirectoryPath as NSString).appendingPathComponent(testMissingFilePathComponent)
         
         let range = PluginsPathHelper.rangeInPath(testPath, untilSubpath: testSubpath)
@@ -144,7 +144,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     
     func testEmptySubpathComponent() {
         
-        let testPath = pluginPath
+        let testPath = pluginPath!
         let testSubpath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginPathComponent)
         let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
         let pathComponent = NSString.path(withComponents: pathComponents)

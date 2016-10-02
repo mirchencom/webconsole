@@ -96,7 +96,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     func createExpectationForPluginInfoDictionaryWasRemovedAtPluginPath(_ path: String) {
         let pluginInfoDictionaryWasRemovedExpectation = expectation(description: "Plugin info dictionary was removed")
         fileAndPluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 pluginInfoDictionaryWasRemovedExpectation.fulfill()
             }
         })
@@ -105,7 +105,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     func createExpectationForPluginInfoDictionaryWasCreatedOrModifiedAtPluginPath(_ path: String) {
         let pluginInfoDictionaryWasCreatedOrModifiedExpectation = expectation(description: "Plugin info dictionary was created or modified")
         fileAndPluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 pluginInfoDictionaryWasCreatedOrModifiedExpectation.fulfill()
             }
         })
@@ -117,7 +117,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     func createFileAtPathWithConfirmation(_ path: String) {
         let fileWasCreatedOrModifiedExpectation = expectation(description: "File was created")
         fileAndPluginsDirectoryEventManager.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 fileWasCreatedOrModifiedExpectation.fulfill()
             }
         })
@@ -128,7 +128,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     func createDirectoryAtPathWithConfirmation(_ path: String) {
         let directoryWasCreatedOrModifiedExpectation = expectation(description: "Directory was created")
         fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasCreatedOrModifiedExpectation.fulfill()
             }
         })
@@ -142,7 +142,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     func removeFileAtPathWithConfirmation(_ path: String) {
         let fileWasRemovedExpectation = expectation(description: "File was removed")
         fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 fileWasRemovedExpectation.fulfill()
             }
         })
@@ -153,7 +153,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     func removeDirectoryAtPathWithConfirmation(_ path: String) {
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed")
         fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
@@ -168,14 +168,14 @@ extension FilesAndPluginsDirectoryManagerTests {
         // Remove original
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
         fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
         // Create new
         let directoryWasCreatedExpectation = expectation(description: "Directory was created with move")
         fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == destinationPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == destinationPath) {
                 directoryWasCreatedExpectation.fulfill()
             }
         })
@@ -188,7 +188,7 @@ extension FilesAndPluginsDirectoryManagerTests {
         // Create new
         let directoryWasCreatedExpectation = expectation(description: "Directory was created with move")
         fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == destinationPath) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == destinationPath) {
                 directoryWasCreatedExpectation.fulfill()
             }
         })
@@ -204,7 +204,7 @@ extension FilesAndPluginsDirectoryManagerTests {
         // Remove original
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
         fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath) == path) {
+            if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
