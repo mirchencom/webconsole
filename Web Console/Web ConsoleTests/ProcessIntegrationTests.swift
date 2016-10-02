@@ -136,7 +136,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         let processInfosTwo = processManager.processInfos()
         XCTAssertEqual(processInfosTwo.count, 0)
         
-      j  // Confirm that the `ProcessFilter` no longer has the process
+        // Confirm that the `ProcessFilter` no longer has the process
         
         let filterExpectationFour = expectation(description: "Process filter")
         ProcessFilter.runningProcessMatchingProcessInfos(processInfos) { (identifierToProcessInfo, error) -> Void in
