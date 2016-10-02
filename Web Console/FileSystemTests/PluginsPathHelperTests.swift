@@ -19,11 +19,11 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     // Tests normal paths, that paths with stray slashes behave identical
     func testPathsAndPathsWithSlashes() {
         
-        let testPaths = [pluginPath, pluginPath + testSlashPathComponent]
-        let testSubpaths = [pluginsDirectoryPath, pluginsDirectoryPath + testSlashPathComponent]
+        let testPaths = [pluginPath!, pluginPath! + testSlashPathComponent]
+        let testSubpaths = [pluginsDirectoryPath!, pluginsDirectoryPath + testSlashPathComponent]
         
         let testRange = PluginsPathHelper.rangeInPath(testPaths[0], untilSubpath: testSubpaths[0])
-        let testPathComponents = PluginsPathHelper.pathComponentsOfPath(testPaths[0], afterSubpath: testSubpaths[0]) as NSArray!
+        let testPathComponents = PluginsPathHelper.pathComponentsOfPath(testPaths[0], afterSubpath: testSubpaths[0])!
         
         XCTAssertEqual(testPathComponents.count, 1, "The path components count should equal one")
         for testPath: String in testPaths {
@@ -31,7 +31,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
                 
                 let range = PluginsPathHelper.rangeInPath(testPath, untilSubpath: testSubpath)
                 XCTAssertTrue(range.location != NSNotFound, "The range should have been found")
-                let testPathAsNSString: NSString = testPath
+                let testPathAsNSString: NSString = testPath as NSString
                 let subpathFromRange = testPathAsNSString.substring(with: range)
                 XCTAssertEqual(subpathFromRange.stringByStandardizingPath,  testSubpath.stringByStandardizingPath, "The standardized paths should be equal")
                 
@@ -41,9 +41,9 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
                 XCTAssertEqual(subpath.stringByStandardizingPath, testSubpath.stringByStandardizingPath, "The subpaths should be equal")
                 XCTAssertTrue(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should contain the subpath")
                 
-                let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath) as NSArray!
+                let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
                 XCTAssertEqual(pathComponents, testPathComponents, "The path components should equal the test path components")
-                XCTAssertEqual(pathComponents[0] as? String, testPluginPathComponent, "The path component should equal the temporary plugin path component")
+                XCTAssertEqual(pathComponents[0], testPluginPathComponent, "The path component should equal the temporary plugin path component")
             }
         }
     }
@@ -68,7 +68,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     func testMissingPathComponent() {
         
         let testPath = (pluginPath as NSString).appendingPathComponent(testMissingFilePathComponent)
-        let testSubpath = pluginsDirectoryPath
+        let testSubpath = pluginsDirectoryPath!
         
         let range = PluginsPathHelper.rangeInPath(testPath, untilSubpath: testSubpath)
         XCTAssertTrue(range.location != NSNotFound, "The range should have been found")
@@ -81,7 +81,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
         XCTAssertEqual(subpath.stringByStandardizingPath, testSubpath.stringByStandardizingPath, "The subpaths should be equal")
         XCTAssertTrue(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should contain the subpath")
         
-        let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath) as NSArray!
+        let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
         let testPathComponents = [testPluginPathComponent, testMissingFilePathComponent]
         XCTAssertEqual(pathComponents, testPathComponents, "The path component should equal the temporary plugin path component")
     }
