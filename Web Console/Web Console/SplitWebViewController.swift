@@ -246,7 +246,10 @@ class SplitWebViewController: NSSplitViewController {
     
     // MARK: NSSplitViewDelegate
     
-    override func splitView(_ splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
+    override func splitView(_ splitView: NSSplitView,
+        shouldCollapseSubview subview: NSView,
+        forDoubleClickOnDividerAt dividerIndex: Int) -> Bool
+    {
         if splitView != self.splitView {
             return false
         }
@@ -254,10 +257,19 @@ class SplitWebViewController: NSSplitViewController {
         return subview == splitController.splitViewsSubview
     }
 
-    override func splitView(_ splitView: NSSplitView,
-        shouldCollapseSubview subview: NSView,
-        forDoubleClickOnDividerAt dividerIndex: Int) -> Bool
-    {
+    // If `splitView(_:shouldHideDividerAt:)` and 
+    // `splitView(_:canCollapseSubview:)` both return `true`, and the divider
+    // is attempted to be hidden then the following warning fires in the 
+    // console:
+    // "[Layout] Detected missing constraints for <private>.  It cannot be placed
+    // because there are not enough constraints to fully define the size and
+    // origin. Add the missing constraints, or set 
+    // `translatesAutoresizingMaskIntoConstraints=YES` and constraints will be 
+    // generated for you. If this view is laid out manually on macOS 10.12 and 
+    // later, you may choose to not call [super layout] from your override.
+    // Set a breakpoint on DETECTED_MISSING_CONSTRAINTS to debug.
+    // This error will only be logged once."
+    override func splitView(_ splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
         if splitView != self.splitView {
             return false
         }
