@@ -27,11 +27,11 @@ class SplitController {
         return splitViewItem.isCollapsed
     }
 
-    fileprivate var savedFrameName: String? {
+    private var savedFrameName: String? {
         return delegate?.savedFrameNameForSplitController(self)
     }
     
-    fileprivate var splitsViewController: NSViewController? {
+    private var splitsViewController: NSViewController? {
         return splitViewItem.viewController
     }
     
@@ -89,10 +89,8 @@ class SplitController {
     }
     
     func saveFrame() {
-        if let splitsView = splitsView, let key = savedFrameName {
-            let frame = splitsView.frame
-            let frameString = NSStringFromRect(frame)
-            UserDefaultsManager.standardUserDefaults().set(frameString, forKey:key)
+        guard let splitsView = splitsView, let key = savedFrameName else {
+            return
         }
     }
 

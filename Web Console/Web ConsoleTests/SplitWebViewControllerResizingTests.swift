@@ -214,7 +214,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
 
         // Test the height & saved frame
         XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), logHeight, "The heights should be equal")
-        let frame: NSRect! = splitWebViewController.splitController.savedSplitsViewFrame()
+        let frame = splitWebViewController.splitController.savedSplitsViewFrame()!
         XCTAssertEqual(frame.size.height, logHeight, "The heights should be equal")
     }
     

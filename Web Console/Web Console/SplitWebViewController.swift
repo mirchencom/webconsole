@@ -287,10 +287,8 @@ class SplitWebViewController: NSSplitViewController {
     }
 
     override func splitViewDidResizeSubviews(_ notification: Notification) {
-        if let isVisible = delegate?.windowIsVisibleForSplitWebViewController(self) {
-            if !isVisible {
-                return
-            }
+        guard let isVisible = delegate?.windowIsVisibleForSplitWebViewController(self), isVisible == true else {
+            return
         }
         
         if let collapsed = splitController.isCollapsed() {
