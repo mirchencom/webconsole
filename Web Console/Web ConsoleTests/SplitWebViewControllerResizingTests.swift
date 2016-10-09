@@ -210,6 +210,15 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         let name = splitWebViewController.savedFrameNameForSplitController(splitWebViewController.splitController)!
         makeFrameSaveExpectationForHeight(logHeight, name: name)
         splitWebViewController.splitController.configureHeight(logHeight)
+        
+        // Simple hack to get the divider notification to fire
+        // As of iOS 10, just setting the dividers position via a constraint 
+        // doesn't cause the `splitViewDidResizeSubviews(_:)` delegate message 
+        // to fire which triggers saving the frame. Just calling 
+        // `setPosition(_:ofDividerAt:)` with any position causes this delegate
+        // message to fire.
+        splitWebViewController.splitView.setPosition(0, ofDividerAt: 0)
+        
         waitForExpectations(timeout: testTimeout, handler: nil)
 
         // Test the height & saved frame
