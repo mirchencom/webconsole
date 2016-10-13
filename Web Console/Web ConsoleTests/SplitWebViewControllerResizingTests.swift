@@ -144,7 +144,8 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         makeLogDisappearForSplitWebViewController(splitWebViewController)
         XCTAssertEqual(logMenuItem().title, hideLogMenuItemTitle, "The titles should be equal") // Should still be "Hide Log" because the other window is in front
         
-        // Switch the order of the windows and make sure the menu item text updates
+        // Bring the first window to the front and make sure the menu item text 
+        // updates
         let windows = NSApplication.shared().windows.filter { $0.windowController?.contentViewController == splitWebViewController }
         windows[0].makeKeyAndOrderFront(nil)
         updateViewMenuItem()
@@ -217,8 +218,10 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         // to fire which triggers saving the frame. Just calling 
         // `setPosition(_:ofDividerAt:)` with any position causes this delegate
         // message to fire.
-        splitWebViewController.splitView.setPosition(0, ofDividerAt: 0)
-        
+        let height = splitWebViewController.view.frame.size.height
+        let position = height - logHeight
+        splitWebViewController.splitView.setPosition(position, ofDividerAt: 0)
+
         waitForExpectations(timeout: testTimeout, handler: nil)
 
         // Test the height & saved frame
