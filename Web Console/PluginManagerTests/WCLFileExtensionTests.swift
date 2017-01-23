@@ -38,7 +38,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
     
     func confirmPluginIdentifierInFileExtensionPluginDictionary() {
         let pluginIdentifierInDictionary = fileExtensionPluginDictionary.value(forKey: testFileExtensionPluginIdentifierKey) as! String
-        XCTAssertEqual(pluginIdentifierInDictionary, fileExtension.selectedPlugin.identifier, "The WCLPlugin's identifier value in the dictionary should match the WCLFileExtension's selected WCLPlugin's identifier.")
+        XCTAssertEqual(pluginIdentifierInDictionary, fileExtension.selectedPlugin?.identifier, "The WCLPlugin's identifier value in the dictionary should match the WCLFileExtension's selected WCLPlugin's identifier.")
     }
 
     // MARK: Tests
@@ -175,9 +175,9 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
             (_) -> Void in
             plugins = self.fileExtension.plugins()
         }
-        XCTAssertFalse(plugins!.contains(createdPlugin), "The WCLPlugins should not contain the new WCLPlugin.")
+        XCTAssertFalse(plugins.contains(createdPlugin), "The WCLPlugins should not contain the new WCLPlugin.")
         createdPlugin.suffixes = testPluginSuffixes
-        XCTAssertTrue(plugins!.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
+        XCTAssertTrue(plugins.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
         XCTAssertTrue(fileExtension.plugins().contains(createdPlugin), "The WCLFileExtension's WCLPlugins should contain the new WCLPlugin.")
 
         fileExtension.selectedPlugin = createdPlugin
@@ -207,7 +207,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         createdPlugin.suffixes = testPluginSuffixesEmpty
 
         // Test the file extensions plugins property changed
-        XCTAssertFalse(plugins!.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
+        XCTAssertFalse(plugins.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
         XCTAssertFalse(fileExtension.plugins().contains(createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
 
         // Test the file extensions selected plugin property changed
@@ -248,7 +248,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
 
         // Test the file extensions plugins property changed
-        XCTAssertFalse(plugins!.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
+        XCTAssertFalse(plugins.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")
         XCTAssertFalse(fileExtension.plugins().contains(createdPlugin), "The WCLFileExtension's WCLPlugins should not contain the new WCLPlugin.")
 
         // Test the file extensions selected plugin property changed

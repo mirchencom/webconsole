@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString * const WCLFileExtensionPluginsKey;
 extern NSString * const WCLFileExtensionSuffixKey;
 
@@ -18,7 +20,7 @@ extern NSString * const WCLFileExtensionSuffixKey;
 - (id)initWithSuffix:(NSString *)extension;
 @property (nonatomic, strong, readonly) NSString *suffix;
 @property (nonatomic, assign, getter = isEnabled) BOOL enabled;
-@property (nonatomic, strong) Plugin *selectedPlugin;
+@property (nonatomic, strong, nullable) Plugin *selectedPlugin;
 @property (nonatomic, strong) NSArrayController *pluginsArrayController;
 
 #pragma mark Required Key-Value Coding To-Many Relationship Compliance
@@ -28,3 +30,5 @@ extern NSString * const WCLFileExtensionSuffixKey;
 - (void)removeObjectFromPluginsAtIndex:(NSUInteger)index;
 - (void)removePluginsAtIndexes:(NSIndexSet *)indexes;
 @end
+
+NS_ASSUME_NONNULL_END
