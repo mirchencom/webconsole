@@ -66,15 +66,16 @@ import Cocoa
     }
     
     func insertObjects(_ objects: [AnyObject], atIndexes indexes: IndexSet) {
-        let replacedObjects: NSArray? = nameToObjectController.addObjects(from: objects) as NSArray?
+
+        let replacedObjects = nameToObjectController.addObjects(from: objects)
         mutableObjects.insert(objects, at: indexes)
-        if let replacedObjects: NSArray = replacedObjects {
-            let indexes = mutableObjects.indexesOfObjects(options: [], passingTest: {
-                (object: AnyObject, index: Int, stop: UnsafeMutablePointer<ObjCBool>) -> Bool in
-                return replacedObjects.contains(object)
-            } as! (Any, Int, UnsafeMutablePointer<ObjCBool>) -> Bool)
-            removeObjectsAtIndexes(indexes)
-        }
+
+        let indexes = mutableObjects.indexesOfObjects(options: [], passingTest: {
+            (object, index, stop) -> Bool in
+            return (replacedObjects as NSArray).contains(object)
+        })
+        
+        removeObjectsAtIndexes(indexes)
     }
 
     func removeObjectFromObjectsAtIndex(_ index: Int) {
