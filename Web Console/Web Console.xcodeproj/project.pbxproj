@@ -1009,7 +1009,7 @@
 					};
 					459EC91F1A8997C10098A47B = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
 					};
 				};
