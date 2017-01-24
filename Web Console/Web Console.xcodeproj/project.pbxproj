@@ -992,7 +992,7 @@
 				ORGANIZATIONNAME = "Roben Kleene";
 				TargetAttributes = {
 					4530B0CB1736E2A6000A52E2 = {
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 					4530B0EB1736E2A6000A52E2 = {
 						LastSwiftMigration = 0800;
