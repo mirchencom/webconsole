@@ -19,7 +19,6 @@ extension Plugin {
         case invalidHiddenError(infoDictionary: [AnyHashable: Any])
         case invalidEditableError(infoDictionary: [AnyHashable: Any])
         case invalidDebugModeEnabledError(infoDictionary: [AnyHashable: Any])
-        
     }
 
     struct InfoDictionaryKeys {
@@ -197,8 +196,8 @@ extension Plugin {
     }
 
     class func validEditable(_ infoDictionary: [AnyHashable: Any]) throws -> Bool {
-        if let editable = infoDictionary[InfoDictionaryKeys.Editable] as? Int {
-            return NSNumber(value: editable as Int).boolValue
+        if let editable = infoDictionary[InfoDictionaryKeys.Editable] as? NSNumber {
+            return editable.boolValue
         }
         
         if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Editable] as AnyObject? {
