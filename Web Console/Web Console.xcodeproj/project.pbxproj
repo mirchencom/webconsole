@@ -1000,7 +1000,7 @@
 					};
 					455FD2371A899C7600ACE1D4 = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						TestTargetID = 4530B0CB1736E2A6000A52E2;
 					};
 					45729EB71A89A270001ECC4C = {
