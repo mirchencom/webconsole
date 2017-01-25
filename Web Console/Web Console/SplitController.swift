@@ -18,7 +18,7 @@ class SplitController {
     // MARK: Properties
     
     var splitViewItem: NSSplitViewItem
-    fileprivate weak var splitViewController: NSSplitViewController?
+    private weak var splitViewController: NSSplitViewController?
     weak var delegate: SplitControllerDelegate?
 
     var splitsHeightConstraint: NSLayoutConstraint?

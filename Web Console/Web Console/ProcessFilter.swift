@@ -118,7 +118,7 @@ class ProcessFilter {
         return identifierToProcessInfo
     }
     
-    fileprivate class func processFromLine(_ line: String) -> ProcessInfo? {
+    private class func processFromLine(_ line: String) -> ProcessInfo? {
         if line.characters.count < 35 {
             return nil
         }

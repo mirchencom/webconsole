@@ -129,7 +129,7 @@ class CopyDirectoryController {
 
     // MARK: Private Duplicate Helpers
     
-    fileprivate class func URLOfItemCopiedFromURL(_ URL: Foundation.URL, toDirectoryURL directoryURL: Foundation.URL) throws -> Foundation.URL? {
+    private class func URLOfItemCopiedFromURL(_ URL: Foundation.URL, toDirectoryURL directoryURL: Foundation.URL) throws -> Foundation.URL? {
         do {
             // Setup the destination directory
             try createDirectoryIfMissingAtURL(directoryURL)
@@ -152,7 +152,7 @@ class CopyDirectoryController {
 
     // MARK: Private Create Directory Helpers
     
-    fileprivate class func createDirectoryIfMissingAtPath(_ path: String) throws {
+    private class func createDirectoryIfMissingAtPath(_ path: String) throws {
         // TODO: Should set error instead of assert
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
@@ -171,7 +171,7 @@ class CopyDirectoryController {
         }
     }
     
-    fileprivate class func createDirectoryIfMissingAtURL(_ URL: Foundation.URL) throws {
+    private class func createDirectoryIfMissingAtURL(_ URL: Foundation.URL) throws {
         do {
             try createDirectoryIfMissingAtPath(URL.path)
         } catch let error as NSError {

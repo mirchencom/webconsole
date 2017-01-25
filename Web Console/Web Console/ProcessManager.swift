@@ -25,8 +25,8 @@ class ProcessManager {
         }
     }
     
-    fileprivate let processManagerStore: ProcessManagerStore
-    fileprivate var identifierKeyToProcessInfoValue = [NSString: AnyObject]()
+    private let processManagerStore: ProcessManagerStore
+    private var identifierKeyToProcessInfoValue = [NSString: AnyObject]()
     
     convenience init() {
         self.init(processManagerStore: UserDefaultsManager.standardUserDefaults())
@@ -77,11 +77,11 @@ class ProcessManager {
     
     // MARK: Private
     
-    fileprivate func save() {
+    private func save() {
         processManagerStore.set(identifierKeyToProcessInfoValue as AnyObject?, forKey: runningProcessesKey)
     }
     
-    fileprivate func processInfoForIdentifier(_ identifier: Int32, remove: Bool) -> ProcessInfo? {
+    private func processInfoForIdentifier(_ identifier: Int32, remove: Bool) -> ProcessInfo? {
         guard let processInfoValue = processInfoValueForIdentifier(identifier, remove: remove) else {
             return nil
         }
@@ -91,7 +91,7 @@ class ProcessManager {
     
     // MARK: Helper
     
-    fileprivate func processInfoValueForIdentifier(_ identifier: Int32, remove: Bool) -> NSDictionary? {
+    private func processInfoValueForIdentifier(_ identifier: Int32, remove: Bool) -> NSDictionary? {
         let key = type(of: self).identifierToKey(identifier)
         if remove {
             objc_sync_enter(self)
@@ -107,13 +107,13 @@ class ProcessManager {
         }
     }
     
-    fileprivate class func keyAndValueForProcessInfo(_ processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
+    private class func keyAndValueForProcessInfo(_ processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
         let key = identifierToKey(processInfo.identifier)
         let value = valueForProcessInfo(processInfo)
         return (key: key, value: value)
     }
     
-    fileprivate class func processInfoForValue(_ dictionary: NSDictionary) -> ProcessInfo? {
+    private class func processInfoForValue(_ dictionary: NSDictionary) -> ProcessInfo? {
         guard
             let key = dictionary[ProcessInfoKey.Identifier.key()] as? NSString,
             let commandPath = dictionary[ProcessInfoKey.CommandPath.key()] as? String,
@@ -129,7 +129,7 @@ class ProcessManager {
             commandPath: commandPath)
     }
     
-    fileprivate class func valueForProcessInfo(_ processInfo: ProcessInfo) -> NSDictionary {
+    private class func valueForProcessInfo(_ processInfo: ProcessInfo) -> NSDictionary {
         let dictionary = NSMutableDictionary()
         let key = identifierToKey(processInfo.identifier)
         dictionary[ProcessInfoKey.Identifier.key()] = key
@@ -138,11 +138,11 @@ class ProcessManager {
         return dictionary
     }
     
-    fileprivate class func keyToIdentifier(_ key: NSString) -> Int32 {
+    private class func keyToIdentifier(_ key: NSString) -> Int32 {
         return Int32(key.intValue)
     }
     
-    fileprivate class func identifierToKey(_ value: Int32) -> NSString {
+    private class func identifierToKey(_ value: Int32) -> NSString {
         let valueNumber = String(value)
         return valueNumber as NSString
     }

@@ -72,11 +72,11 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         addPlugin(plugin)
     }
     
-    fileprivate func addPlugin(_ plugin: Plugin) {
+    private func addPlugin(_ plugin: Plugin) {
         insertObject(plugin, inPluginsAt: 0)
     }
     
-    fileprivate func removePlugin(_ plugin: Plugin) {
+    private func removePlugin(_ plugin: Plugin) {
         let index = pluginsController.indexOfObject(plugin)
         if index != NSNotFound {
             removeObjectFromPlugins(at: UInt(index))

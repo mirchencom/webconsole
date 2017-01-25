@@ -153,7 +153,7 @@ class Plugin: WCLPlugin {
     
     // MARK: Save
     
-    fileprivate func save() {
+    private func save() {
         let infoDictionaryURL = self.infoDictionaryURL
         do {
             try type(of: self).writeDictionary(infoDictionary, toURL: infoDictionaryURL)

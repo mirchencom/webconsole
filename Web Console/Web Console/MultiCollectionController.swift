@@ -10,8 +10,8 @@ import Foundation
 import Cocoa
 
 @objc class MultiCollectionController: NSObject {
-    fileprivate let nameToObjectController: WCLKeyToObjectController
-    fileprivate var mutableObjects = NSMutableArray()
+    private let nameToObjectController: WCLKeyToObjectController
+    private var mutableObjects = NSMutableArray()
     
     init(_ objects: [AnyObject], key: String) {
         self.nameToObjectController = WCLKeyToObjectController(key: key, objects: objects)
