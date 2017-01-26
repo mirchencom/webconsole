@@ -11,22 +11,22 @@ import Foundation
 
 extension TaskResultsCollector: WCLTaskRunnerDelegate {
     
-    func taskDidFinish(_ task: Process) {
+    func taskDidFinish(task: Process) {
         assert(!task.isRunning)
         let error = errorForTask(task)
         completionHandler(standardOutput, standardError, error)
     }
 
-    func task(_ task: Process, didFailToRunCommandPath commandPath: String, error: Error) {
+    func task(task: Process, didFailToRunCommandPath commandPath: String, error: Error) {
         assert(!task.isRunning)
         completionHandler(standardOutput, standardError, error as NSError?)
     }
     
-    func task(_ task: Process, didReadFromStandardError text: String) {
+    func task(task: Process, didReadFromStandardError text: String) {
         appendToStandardError(text)
     }
     
-    func task(_ task: Process, didReadFromStandardOutput text: String) {
+    func task(task: Process, didReadFromStandardOutput text: String) {
         appendToStandardOutput(text)
     }
 }
@@ -41,7 +41,7 @@ class TaskResultsCollector: NSObject {
         self.completionHandler = completionHandler
     }
     
-    fileprivate func appendToStandardOutput(_ text: String) {
+    fileprivate func appendToStandardOutput(text: String) {
         if standardOutput == nil {
             standardOutput = String()
         }
@@ -49,7 +49,7 @@ class TaskResultsCollector: NSObject {
         standardOutput? += text
     }
     
-    fileprivate func appendToStandardError(_ text: String) {
+    fileprivate func appendToStandardError(text: String) {
         if standardError == nil {
             standardError = String()
         }
@@ -57,7 +57,7 @@ class TaskResultsCollector: NSObject {
         standardError? += text
     }
     
-    fileprivate func errorForTask(_ task: Process) -> NSError? {
+    fileprivate func errorForTask(task: Process) -> NSError? {
         assert(!task.isRunning)
         if task.terminationStatus == 0 && task.terminationReason == .exit {
             return nil
@@ -81,10 +81,10 @@ class TaskResultsCollector: NSObject {
 
 extension WCLTaskRunner {
     
-    typealias TaskResult = (_ standardOutput: String?, _ standardError: String?, _ error: NSError?) -> Void
+    typealias TaskResult = (standardOutput: String?, standardError: String?, error: NSError?) -> Void
     
 
-    class func runTaskUntilFinishedWithCommandPath(_ commandPath: String,
+    class func runTaskUntilFinishedWithCommandPath(commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         completionHandler: @escaping WCLTaskRunner.TaskResult) -> Process
@@ -97,7 +97,7 @@ extension WCLTaskRunner {
             completionHandler: completionHandler)
     }
 
-    class func runTaskUntilFinishedWithCommandPath(_ commandPath: String,
+    class func runTaskUntilFinishedWithCommandPath(commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         timeout: TimeInterval,
@@ -116,7 +116,7 @@ extension WCLTaskRunner {
     }
     
     
-    class func runTaskWithCommandPath(_ commandPath: String,
+    class func runTaskWithCommandPath(commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         timeout: TimeInterval,

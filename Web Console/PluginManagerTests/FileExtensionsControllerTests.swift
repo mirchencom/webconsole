@@ -13,7 +13,7 @@ import XCTest
 
 class FileExtensionsControllerTests: FileExtensionsTestCase {
 
-    func extensionsTest(_ extensions1: [String], matchExtensions extensions2: [String]) -> Bool {
+    func extensionsTest(extensions1: [String], matchExtensions extensions2: [String]) -> Bool {
         let sortedExtensions1 = extensions1.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         let sortedExtensions2 = extensions2.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         return sortedExtensions1 == sortedExtensions2

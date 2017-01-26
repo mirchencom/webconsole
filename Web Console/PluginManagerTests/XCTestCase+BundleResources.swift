@@ -10,19 +10,19 @@ import Foundation
 import XCTest
 
 extension XCTestCase {
-    func pathForResource(_ name: String?, ofType ext: String?, inDirectory bundlePath: String) -> String? {
+    func pathForResource(name: String?, ofType ext: String?, inDirectory bundlePath: String) -> String? {
         return Bundle(for:type(of: self)).path(forResource: name, ofType:ext, inDirectory:bundlePath)
     }
 
-    func URLForResource(_ name: String, withExtension ext: String?) -> URL? {
+    func URLForResource(name: String, withExtension ext: String?) -> URL? {
         return Bundle(for:type(of: self)).url(forResource: name, withExtension:ext)
     }
     
-    func URLForResource(_ name: String, withExtension ext: String?, subdirectory subpath: String?) -> URL? {
+    func URLForResource(name: String, withExtension ext: String?, subdirectory subpath: String?) -> URL? {
         return Bundle(for:type(of: self)).url(forResource: name, withExtension:ext, subdirectory:subpath)
     }
 
-    func stringWithContentsOfFileURL(_ fileURL: URL) -> String? {
+    func stringWithContentsOfFileURL(fileURL: URL) -> String? {
         do {
             let contents = try NSString(contentsOf: fileURL, encoding: String.Encoding.utf8.rawValue)
             return contents as String

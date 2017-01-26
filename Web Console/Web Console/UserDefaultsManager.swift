@@ -16,11 +16,11 @@ import AppKit
         static var overrideSharedUserDefaultsController: NSUserDefaultsController?
     }
     
-    class func setOverrideStandardUserDefaults(_ userDefaults: UserDefaults?) {
+    class func setOverrideStandardUserDefaults(userDefaults: UserDefaults?) {
         Singleton.overrideStandardUserDefaults = userDefaults
     }
 
-    class func setOverrideSharedUserDefaultsController(_ userDefaultsController: NSUserDefaultsController?) {
+    class func setOverrideSharedUserDefaultsController(userDefaultsController: NSUserDefaultsController?) {
         Singleton.overrideSharedUserDefaultsController = userDefaultsController
     }
 

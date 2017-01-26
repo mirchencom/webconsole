@@ -24,7 +24,7 @@ extension LogSplitWebWindowControllerEventRouter: WCLSplitWebWindowControllerDel
     
     // MARK: Forwarded
     
-    func splitWebWindowControllerWindowWillClose(_ splitWebWindowController: WCLSplitWebWindowController) {
+    func splitWebWindowControllerWindowWillClose(splitWebWindowController: WCLSplitWebWindowController) {
         self.delegate.splitWebWindowControllerWindowWillClose?(splitWebWindowController)
     }
 }

@@ -9,8 +9,8 @@
 import Foundation
 
 extension ProcessFilter {
-    class func runningProcessMatchingProcessInfos(_ processInfos: [ProcessInfo],
-        completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
+    class func runningProcessMatchingProcessInfos(processInfos: [ProcessInfo],
+        completionHandler: @escaping ((identifierToProcessInfo: [Int32: ProcessInfo]?, error: NSError?) -> Void))
     {
         let identifiers = processInfos.map { $0.identifier }
         runningProcessesWithIdentifiers(identifiers) { (identifierToProcessInfo, error) -> Void in
@@ -36,7 +36,7 @@ extension ProcessFilter {
         }
     }
 
-    class func doesRunningProcessInfo(_ runningProcessInfo: ProcessInfo,
+    class func doesRunningProcessInfo(runningProcessInfo: ProcessInfo,
         matchProcessInfo processInfo: ProcessInfo) -> Bool
     {
         assert(runningProcessInfo.identifier == processInfo.identifier)
@@ -52,8 +52,8 @@ extension ProcessFilter {
 
 class ProcessFilter {
     
-    class func runningProcessesWithIdentifiers(_ identifiers: [Int32],
-        completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
+    class func runningProcessesWithIdentifiers(identifiers: [Int32],
+        completionHandler: @escaping ((identifierToProcessInfo: [Int32: ProcessInfo]?, error: NSError?) -> Void))
     {
         if identifiers.isEmpty {
             let error = NSError.errorWithDescription("No identifiers specified")
@@ -105,7 +105,7 @@ class ProcessFilter {
 
     // MARK: Private
 
-    class func processesFromOutput(_ output: String) -> [Int32: ProcessInfo] {
+    class func processesFromOutput(output: String) -> [Int32: ProcessInfo] {
 
         var identifierToProcessInfo = [Int32: ProcessInfo]()
         let lines = output.components(separatedBy: "\n")
@@ -118,7 +118,7 @@ class ProcessFilter {
         return identifierToProcessInfo
     }
     
-    private class func processFromLine(_ line: String) -> ProcessInfo? {
+    private class func processFromLine(line: String) -> ProcessInfo? {
         if line.characters.count < 35 {
             return nil
         }

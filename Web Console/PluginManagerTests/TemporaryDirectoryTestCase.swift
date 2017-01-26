@@ -32,7 +32,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         static let temporaryDirectoryPathPrefix = "/var/folders"
     }
     
-    class func resolveTemporaryDirectoryPath(_ path: NSString) -> String {
+    class func resolveTemporaryDirectoryPath(path: NSString) -> String {
         // Remove the "/private" path component because FSEvents returns paths iwth this prefix
         let testPathPrefix = "/private".stringByAppendingPathComponent(ClassConstants.temporaryDirectoryPathPrefix)
         let pathPrefixRange = path.range(of: testPathPrefix)
@@ -43,13 +43,13 @@ class TemporaryDirectoryTestCase: XCTestCase {
         return path as String
     }
     
-    class func isValidTemporaryDirectoryPath(_ path: String) -> Bool {
+    class func isValidTemporaryDirectoryPath(path: String) -> Bool {
         var isDir: ObjCBool = false
 
         return FileManager.default.fileExists(atPath: path, isDirectory: &isDir) && isDir.boolValue
     }
     
-    func removeTemporaryItemAtPathComponent(_ pathComponent: String) throws {
+    func removeTemporaryItemAtPathComponent(pathComponent: String) throws {
         let path = temporaryDirectoryPath.stringByAppendingPathComponent(pathComponent)
         do {
             try type(of: self).safelyRemoveTemporaryItemAtPath(path)
@@ -58,7 +58,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         }
     }
 
-    func removeTemporaryItemAtURL(_ URL: Foundation.URL) throws {
+    func removeTemporaryItemAtURL(URL: Foundation.URL) throws {
         do {
             try removeTemporaryItemAtPath(URL.path)
         } catch let error as NSError {
@@ -66,7 +66,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         }
     }
     
-    func removeTemporaryItemAtPath(_ path: String) throws {
+    func removeTemporaryItemAtPath(path: String) throws {
         if !path.hasPrefix(temporaryDirectoryPath) {
             throw TemporaryDirectoryError.notInTemporaryDirectoryError(path: path)
         }
@@ -77,7 +77,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         }
     }
     
-    fileprivate class func safelyRemoveTemporaryItemAtPath(_ path: String) throws {
+    fileprivate class func safelyRemoveTemporaryItemAtPath(path: String) throws {
         if !path.hasPrefix(ClassConstants.temporaryDirectoryPathPrefix) {
             throw TemporaryDirectoryError.notInTemporaryDirectoryError(path: path)
         }

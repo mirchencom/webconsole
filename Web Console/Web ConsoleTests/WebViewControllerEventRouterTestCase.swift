@@ -14,8 +14,8 @@
 
 class WebViewControllerEventRouter: NSObject {
 
-    typealias DidReadFromStandardInputHandler = (_ text: String) -> Void
-    typealias DidRunCommandPathHandler = (_ commandPath: String,
+    typealias DidReadFromStandardInputHandler = (text: String) -> Void
+    typealias DidRunCommandPathHandler = (commandPath: String,
         _ arguments: [String]?,
         _ directoryPath: String?) -> Void
     var didReadFromStandardInputHandlers: [DidReadFromStandardInputHandler]
@@ -28,11 +28,11 @@ class WebViewControllerEventRouter: NSObject {
         self.didRunCommandPathHandlers = [DidRunCommandPathHandler]()
     }
     
-    func addDidReadFromStandardInputHandler(_ handler: @escaping DidReadFromStandardInputHandler) {
+    func addDidReadFromStandardInputHandler(handler: @escaping DidReadFromStandardInputHandler) {
         didReadFromStandardInputHandlers.append(handler)
     }
 
-    func addDidRunCommandPathHandlers(_ handler: @escaping DidRunCommandPathHandler) {
+    func addDidRunCommandPathHandlers(handler: @escaping DidRunCommandPathHandler) {
         didRunCommandPathHandlers.append(handler)
     }
     
@@ -42,7 +42,7 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
     
     // MARK: Handled
     
-    func webViewController(_ webViewController: WCLWebViewController,
+    func webViewController(webViewController: WCLWebViewController,
         didRunCommandPath commandPath: String,
         arguments: [String]?,
         directoryPath: String?)
@@ -60,7 +60,7 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
         handler(commandPath, arguments, directoryPath)
     }
     
-    func webViewController(_ webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
+    func webViewController(webViewController: WCLWebViewController, didReadFromStandardInput text: String) {
         
         self.delegate.webViewController?(webViewController, didReadFromStandardInput: text)
 
@@ -78,27 +78,27 @@ extension WebViewControllerEventRouter: WCLWebViewControllerDelegate {
         return self.delegate.window(for: webViewController)
     }
     
-    func webViewController(_ webViewController: WCLWebViewController, didFinish task: Process) {
+    func webViewController(webViewController: WCLWebViewController, didFinish task: Process) {
         self.delegate.webViewController?(webViewController, didFinish: task)
     }
     
-    func webViewController(_ webViewController: WCLWebViewController, didReceiveStandardError text: String) {
+    func webViewController(webViewController: WCLWebViewController, didReceiveStandardError text: String) {
         self.delegate.webViewController?(webViewController, didReceiveStandardError: text)
     }
     
-    func webViewController(_ webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
+    func webViewController(webViewController: WCLWebViewController, didReceiveStandardOutput text: String) {
         self.delegate.webViewController?(webViewController, didReceiveStandardOutput: text)
     }
     
-    func webViewController(_ webViewController: WCLWebViewController, willStart task: Process) {
+    func webViewController(webViewController: WCLWebViewController, willStart task: Process) {
         self.delegate.webViewController?(webViewController, willStart: task)
     }
     
-    func webViewController(_ webViewController: WCLWebViewController, didReceiveTitle title: String) {
+    func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
         self.delegate.webViewController?(webViewController, didReceiveTitle: title)
     }
     
-    func webViewController(_ webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
+    func webViewController(webViewController: WCLWebViewController, willDoJavaScript javaScript: String) {
         self.delegate.webViewController?(webViewController, willDoJavaScript: javaScript)
     }
 

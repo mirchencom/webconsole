@@ -15,19 +15,19 @@ let errorCode = 100
 
 extension NSError {
 
-    class func errorWithDescription(_ description: String) -> NSError {
+    class func errorWithDescription(description: String) -> NSError {
         return errorWithDescription(description,
             code: errorCode)
     }
     
-    class func errorWithDescription(_ description: String,
+    class func errorWithDescription(description: String,
         code: Int) -> NSError
     {
         return errorWithUserInfo([NSLocalizedDescriptionKey: description],
             code: code)
     }
 
-    class func errorWithUserInfo(_ userInfo: [AnyHashable: Any],
+    class func errorWithUserInfo(userInfo: [AnyHashable: Any],
         code: Int) -> NSError
     {
         return NSError(domain: errorDomain, code: code, userInfo: userInfo)

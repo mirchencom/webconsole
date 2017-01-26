@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 protocol SplitControllerDelegate: class {
-    func savedFrameNameForSplitController(_ splitController: SplitController) -> String?
+    func savedFrameNameForSplitController(splitController: SplitController) -> String?
 }
 
 class SplitController {
@@ -64,13 +64,13 @@ class SplitController {
     
     // MARK: Toggle
 
-    func toggleCollapsed(_ animated: Bool) {
+    func toggleCollapsed(animated: Bool) {
         if let collapsed = isCollapsed() {
             setCollapsed(!collapsed, animated: animated)
         }
     }
     
-    func setCollapsed(_ collapsed: Bool, animated: Bool) {
+    func setCollapsed(collapsed: Bool, animated: Bool) {
         if splitViewItem.isCollapsed != collapsed {
             if animated {
                 splitViewItem.animator().isCollapsed = collapsed
@@ -98,7 +98,7 @@ class SplitController {
         UserDefaultsManager.standardUserDefaults().set(frameString, forKey:key)
     }
 
-    class func savedFrameForName(_ name: String) -> NSRect? {
+    class func savedFrameForName(name: String) -> NSRect? {
         if let frameString = UserDefaultsManager.standardUserDefaults().string(forKey: name) {
             let frame = NSRectFromString(frameString)
             return frame
@@ -121,7 +121,7 @@ class SplitController {
         }
     }
     
-    func configureHeight(_ height: CGFloat) {
+    func configureHeight(height: CGFloat) {
         if let splitsView = splitsView, let superview = splitsView.superview {
             if let splitsHeightConstraint = splitsHeightConstraint {
                 if splitsHeightConstraint.constant == height {

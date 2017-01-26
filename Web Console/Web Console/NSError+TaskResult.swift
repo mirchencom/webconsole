@@ -18,7 +18,7 @@ extension NSError {
         case uncaughtSignal = 100, nonzeroExitStatus
     }
     
-    class func taskTerminatedUncaughtSignalError(_ launchPath: String?,
+    class func taskTerminatedUncaughtSignalError(launchPath: String?,
         arguments: [String]?,
         directoryPath: String?,
         standardError: String?) -> NSError
@@ -43,7 +43,7 @@ extension NSError {
         return errorWithDescription(description, code: TaskTerminatedErrorCode.uncaughtSignal.rawValue)
     }
     
-    class func taskTerminatedNonzeroExitCode(_ launchPath: String?,
+    class func taskTerminatedNonzeroExitCode(launchPath: String?,
         exitCode: Int32,
         arguments: [String]?,
         directoryPath: String?,

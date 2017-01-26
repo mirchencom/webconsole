@@ -80,11 +80,11 @@ class Plugin: WCLPlugin {
         }
     }
 
-    class func infoDictionaryURLForPlugin(_ plugin: Plugin) -> URL {
+    class func infoDictionaryURLForPlugin(plugin: Plugin) -> URL {
         return infoDictionaryURLForPluginURL(plugin.bundle.bundleURL)
     }
 
-    class func infoDictionaryURLForPluginURL(_ pluginURL: URL) -> URL {
+    class func infoDictionaryURLForPluginURL(pluginURL: URL) -> URL {
         return pluginURL.appendingPathComponent(ClassConstants.infoDictionaryPathComponent)
     }
     
@@ -165,7 +165,7 @@ class Plugin: WCLPlugin {
 
     }
 
-    class func writeDictionary(_ dictionary: [AnyHashable: Any], toURL URL: Foundation.URL) throws {
+    class func writeDictionary(dictionary: [AnyHashable: Any], toURL URL: Foundation.URL) throws {
         let writableDictionary = NSDictionary(dictionary: dictionary)
         let success = writableDictionary.write(to: URL, atomically: true)
         if !success {

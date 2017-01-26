@@ -12,19 +12,19 @@ import XCTest
 @testable import Web_Console
 
 class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
-    var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(_ path: String) -> Void>
-    var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(_ path: String) -> Void>
+    var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(path: String) -> Void>
+    var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(path: String) -> Void>
     
     
     init () {
-        self.pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers = Array<(_ path: String) -> Void>()
-        self.pluginInfoDictionaryWasRemovedAtPluginPathHandlers = Array<(_ path: String) -> Void>()
+        self.pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers = Array<(path: String) -> Void>()
+        self.pluginInfoDictionaryWasRemovedAtPluginPathHandlers = Array<(path: String) -> Void>()
     }
     
 
     // MARK: PluginsDirectoryManagerDelegate
     
-    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String) {
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String) {
         assert(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.count > 0, "There should be at least one handler")
         
         if (pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.count > 0) {
@@ -33,7 +33,7 @@ class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
         }
     }
     
-    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String) {
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String) {
         assert(pluginInfoDictionaryWasRemovedAtPluginPathHandlers.count > 0, "There should be at least one handler")
         
         if (pluginInfoDictionaryWasRemovedAtPluginPathHandlers.count > 0) {
@@ -45,11 +45,11 @@ class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
     
     // MARK: Handlers
     
-    func addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler(_ handler: @escaping (_ path: String) -> Void) {
+    func addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler(handler: @escaping (path: String) -> Void) {
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.append(handler)
     }
     
-    func addPluginInfoDictionaryWasRemovedAtPluginPathHandler(_ handler: @escaping (_ path: String) -> Void) {
+    func addPluginInfoDictionaryWasRemovedAtPluginPathHandler(handler: @escaping (path: String) -> Void) {
         pluginInfoDictionaryWasRemovedAtPluginPathHandlers.append(handler)
     }
     
@@ -59,7 +59,7 @@ extension PluginsDirectoryManagerTests {
     
     // MARK: Move Helpers
     
-    func movePluginAtPathWithConfirmation(_ pluginPath: String, destinationPluginPath: String) {
+    func movePluginAtPathWithConfirmation(pluginPath: String, destinationPluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == pluginPath) {
@@ -80,7 +80,7 @@ extension PluginsDirectoryManagerTests {
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
-    func movePluginAtPathWithConfirmation(_ pluginPath: String, toUnwatchedDestinationPluginPath destinationPluginPath: String) {
+    func movePluginAtPathWithConfirmation(pluginPath: String, toUnwatchedDestinationPluginPath destinationPluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == pluginPath) {
@@ -101,7 +101,7 @@ extension PluginsDirectoryManagerTests {
 
     // MARK: Copy Helpers
     
-    func copyPluginAtPathWithConfirmation(_ pluginPath: String, destinationPluginPath: String) {
+    func copyPluginAtPathWithConfirmation(pluginPath: String, destinationPluginPath: String) {
         let createExpectation = expectation(description: "Info dictionary was created or modified")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == destinationPluginPath) {
@@ -115,7 +115,7 @@ extension PluginsDirectoryManagerTests {
         })
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func copyPluginAtPath(_ pluginPath: String, destinationPluginPath: String) {
+    func copyPluginAtPath(pluginPath: String, destinationPluginPath: String) {
         let copyExpectation = expectation(description: "Copy finished")
         SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
@@ -127,7 +127,7 @@ extension PluginsDirectoryManagerTests {
 
     // MARK: Remove Helpers
     
-    func removePluginAtPathWithConfirmation(_ pluginPath: String) {
+    func removePluginAtPathWithConfirmation(pluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
         pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
             self.pluginsDirectoryManager.delegate = nil // Ignore subsequent remove events

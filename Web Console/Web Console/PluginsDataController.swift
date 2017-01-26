@@ -9,8 +9,8 @@
 import Cocoa
 
 protocol PluginsDataControllerDelegate {
-    func pluginsDataController(_ pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin)
-    func pluginsDataController(_ pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin)
+    func pluginsDataController(pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin)
+    func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin)
 }
 
 class PluginsDataController: PluginsDirectoryManagerDelegate {
@@ -21,7 +21,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     lazy var duplicatePluginController = DuplicatePluginController()
     let duplicatePluginDestinationDirectoryURL: URL
     
-    init(_ paths: [String], duplicatePluginDestinationDirectoryURL: URL) {
+    init(paths: [String], duplicatePluginDestinationDirectoryURL: URL) {
         self.pluginDirectoryManagers = [PluginsDirectoryManager]()
         self.pluginPathToPluginDictionary = [String : Plugin]()
         self.duplicatePluginDestinationDirectoryURL = duplicatePluginDestinationDirectoryURL
@@ -48,7 +48,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
 
     // MARK: PluginsDirectoryManagerDelegate
 
-    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager,
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = pluginAtPluginPath(pluginPath) {
@@ -67,7 +67,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         }
     }
     
-    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager,
         pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = pluginAtPluginPath(pluginPath) {
@@ -78,26 +78,26 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     
     // MARK: Add & Remove Helpers
     
-    func addPlugin(_ plugin: Plugin) {
+    func addPlugin(plugin: Plugin) {
         let pluginPath = plugin.bundle.bundlePath
         pluginPathToPluginDictionary[pluginPath] = plugin
         delegate?.pluginsDataController(self, didAddPlugin: plugin)
     }
     
-    func removePlugin(_ plugin: Plugin) {
+    func removePlugin(plugin: Plugin) {
         let pluginPath = plugin.bundle.bundlePath
         pluginPathToPluginDictionary.removeValue(forKey: pluginPath)
         delegate?.pluginsDataController(self, didRemovePlugin: plugin)
     }
     
-    func pluginAtPluginPath(_ pluginPath: String) -> Plugin? {
+    func pluginAtPluginPath(pluginPath: String) -> Plugin? {
         return pluginPathToPluginDictionary[pluginPath]
     }
 
 
     // MARK: Duplicate and Remove
 
-    func movePluginToTrash(_ plugin: Plugin) {
+    func movePluginToTrash(plugin: Plugin) {
         assert(plugin.editable, "The plugin should be editable")
         removePlugin(plugin)
         let pluginPath = plugin.bundle.bundlePath
@@ -112,7 +112,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         assert(!exists, "The file should not exist")
     }
     
-    func duplicatePlugin(_ plugin: Plugin, handler: ((_ plugin: Plugin?, _ error: NSError?) -> Void)?) {
+    func duplicatePlugin(plugin: Plugin, handler: ((plugin: Plugin?, error: NSError?) -> Void)?) {
 
         do {
             try type(of: self).createDirectoryIfMissing(duplicatePluginDestinationDirectoryURL)
@@ -131,7 +131,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         }
     }
 
-    class func createDirectoryIfMissing(_ directoryURL: URL) throws {
+    class func createDirectoryIfMissing(directoryURL: URL) throws {
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDir)
         if (exists && isDir.boolValue) {

@@ -20,11 +20,11 @@ class ProcessManagerRouter: NSObject, WCLTaskRunnerDelegate {
     
     // MARK: WCLTaskRunnerDelegate
     
-    func taskDidFinish(_ task: Process) {
+    func taskDidFinish(task: Process) {
         _ = processManager.removeProcessWithIdentifier(task.processIdentifier)
     }
     
-    func task(_ task: Process,
+    func task(task: Process,
         didRunCommandPath commandPath: String,
         arguments: [String]?,
         directoryPath: String?)

@@ -60,7 +60,7 @@ class PluginsDataControllerClassTests: XCTestCase {
 extension TemporaryDirectoryTestCase {
     // MARK: Helpers
     
-    func createFileWithConfirmationAtURL(_ URL: Foundation.URL, contents: String) {
+    func createFileWithConfirmationAtURL(URL: Foundation.URL, contents: String) {
         let path = URL.path
         let createSuccess = FileManager.default.createFile(atPath: path,
             contents: testFileContents.data(using: String.Encoding.utf8),
@@ -68,7 +68,7 @@ extension TemporaryDirectoryTestCase {
         XCTAssertTrue(createSuccess, "Creating the file should succeed.")
     }
     
-    func contentsOfFileAtURLWithConfirmation(_ URL: Foundation.URL) throws -> String {
+    func contentsOfFileAtURLWithConfirmation(URL: Foundation.URL) throws -> String {
         do {
             let contents = try String(contentsOf: URL,
                 encoding: String.Encoding.utf8)
@@ -78,7 +78,7 @@ extension TemporaryDirectoryTestCase {
         }
     }
     
-    func confirmFileExistsAtURL(_ URL: Foundation.URL) {
+    func confirmFileExistsAtURL(URL: Foundation.URL) {
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: URL.path, isDirectory: &isDir)
         XCTAssertTrue(exists, "The file should exist")

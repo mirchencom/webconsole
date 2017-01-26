@@ -53,7 +53,7 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         return createdPlugin
     }
  
-    func newPluginFromPluginWithConfirmation(_ plugin: Plugin) -> Plugin {
+    func newPluginFromPluginWithConfirmation(plugin: Plugin) -> Plugin {
         var createdPlugin: Plugin!
         let createdPluginExpectation = expectation(description: "Create new plugin")
         PluginsManager.sharedInstance.newPluginFromPlugin(plugin) { (newPlugin, error) -> Void in
@@ -65,7 +65,7 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         return createdPlugin
     }
     
-    func movePluginToTrashAndCleanUpWithConfirmation(_ plugin: Plugin) {
+    func movePluginToTrashAndCleanUpWithConfirmation(plugin: Plugin) {
         // Confirm that a matching directory does not exist in the trash
         let trashedPluginDirectoryName = plugin.bundle.bundlePath.lastPathComponent
         let trashedPluginPath = Directory.trash.path().stringByAppendingPathComponent(trashedPluginDirectoryName)

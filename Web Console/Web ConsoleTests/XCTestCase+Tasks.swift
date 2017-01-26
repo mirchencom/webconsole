@@ -9,7 +9,7 @@
 import Foundation
 
 extension XCTestCase {
-    func waitForTasksToTerminate(_ tasks: [Process]) {
+    func waitForTasksToTerminate(tasks: [Process]) {
         var expectation: XCTestExpectation?
         let observers = NSMutableArray()
         

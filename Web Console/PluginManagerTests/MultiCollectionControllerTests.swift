@@ -12,7 +12,7 @@ import XCTest
 @testable import Web_Console
 
 extension TemporaryPluginsTestCase {
-    func fileURLOfDuplicatedItemAtURL(_ fileURL: URL, withFilename filename: String) -> URL {
+    func fileURLOfDuplicatedItemAtURL(fileURL: URL, withFilename filename: String) -> URL {
         let destinationFileURL = fileURL.deletingLastPathComponent().appendingPathComponent(filename)
         do {
             try FileManager.default.copyItem(at: fileURL, to: destinationFileURL)

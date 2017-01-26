@@ -12,7 +12,7 @@ import XCTest
 
 class PluginTests: PluginsManagerTestCase {
 
-    func infoDictionaryContentsForPluginWithConfirmation(_ plugin: Plugin) -> String {
+    func infoDictionaryContentsForPluginWithConfirmation(plugin: Plugin) -> String {
         let pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPlugin(plugin).path
         var infoDictionaryContents: String!
         do {
@@ -225,7 +225,7 @@ class DuplicatePluginNameValidationTests: XCTestCase {
     class PluginNameMockPluginsManager: PluginsManager {
         var pluginNames = [testPluginName]
         
-        override func pluginWithName(_ name: String) -> Plugin? {
+        override func pluginWithName(name: String) -> Plugin? {
             if pluginNames.contains(name) {
                 let plugin = super.pluginWithName(testPluginName)
                 assert(plugin != nil, "The plugin should not be nil")

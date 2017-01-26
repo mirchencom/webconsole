@@ -24,7 +24,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
 
     // MARK: Helper
     
-    func matchesPlugin(_ plugin: Plugin, forFileExtension fileExtension: WCLFileExtension) -> Bool {
+    func matchesPlugin(plugin: Plugin, forFileExtension fileExtension: WCLFileExtension) -> Bool {
         let suffix = fileExtension.suffix
         
         let plugins = fileExtension.plugins() as NSArray

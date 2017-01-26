@@ -11,11 +11,11 @@ import Foundation
 // TODO: Refactor this when Swift has native support for paths
 
 extension String {
-    func stringByAppendingPathComponent(_ path: String) -> String {
+    func stringByAppendingPathComponent(path: String) -> String {
         return (self as NSString).appendingPathComponent(path)
     }
 
-    func stringByAppendingPathExtension(_ ext: String) -> String? {
+    func stringByAppendingPathExtension(ext: String) -> String? {
         return (self as NSString).appendingPathExtension(ext)
     }
 

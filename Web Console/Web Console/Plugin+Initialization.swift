@@ -45,11 +45,11 @@ extension Plugin {
         }
     }
 
-    class func pluginWithURL(_ url: URL) -> Plugin? {
+    class func pluginWithURL(url: URL) -> Plugin? {
         return self.pluginWithPath(url.path)
     }
 
-    class func pluginWithPath(_ path: String) -> Plugin? {
+    class func pluginWithPath(path: String) -> Plugin? {
         do {
             let plugin = try validPluginWithPath(path)
             return plugin
@@ -78,7 +78,7 @@ extension Plugin {
         return nil
     }
     
-    class func validPluginWithPath(_ path: String) throws -> Plugin? {
+    class func validPluginWithPath(path: String) throws -> Plugin? {
         do {
             if let bundle = try validBundle(path),
                 let infoDictionary = try validInfoDictionary(bundle),
@@ -116,7 +116,7 @@ extension Plugin {
     
     // MARK: Info Dictionary
     
-    class func validBundle(_ path: String) throws -> Bundle? {
+    class func validBundle(path: String) throws -> Bundle? {
         if let bundle = Bundle(path: path) as Bundle? {
             return bundle
         }
@@ -124,7 +124,7 @@ extension Plugin {
         throw PluginLoadError.invalidBundleError(path: path)
     }
     
-    class func validInfoDictionary(_ bundle: Bundle) throws -> [AnyHashable: Any]? {
+    class func validInfoDictionary(bundle: Bundle) throws -> [AnyHashable: Any]? {
         let URL = self.infoDictionaryURLForPluginURL(bundle.bundleURL)
         if let infoDictionary = NSDictionary(contentsOf: URL) {
             return infoDictionary as? [AnyHashable: Any]
@@ -133,7 +133,7 @@ extension Plugin {
         throw PluginLoadError.invalidInfoDictionaryError(URL: URL)
     }
 
-    class func validSuffixes(_ infoDictionary: [AnyHashable: Any]) throws -> [String]? {
+    class func validSuffixes(infoDictionary: [AnyHashable: Any]) throws -> [String]? {
         if let suffixes = infoDictionary[InfoDictionaryKeys.Suffixes] as? [String] {
             return suffixes
         }
@@ -146,7 +146,7 @@ extension Plugin {
         return nil
     }
 
-    class func validCommand(_ infoDictionary: [AnyHashable: Any]) throws -> String? {
+    class func validCommand(infoDictionary: [AnyHashable: Any]) throws -> String? {
         if let command = infoDictionary[InfoDictionaryKeys.Command] as? String {
             if command.characters.count > 0 {
                 return command
@@ -161,7 +161,7 @@ extension Plugin {
         return nil
     }
     
-    class func validName(_ infoDictionary: [AnyHashable: Any]) throws -> String? {
+    class func validName(infoDictionary: [AnyHashable: Any]) throws -> String? {
         if let name = infoDictionary[InfoDictionaryKeys.Name] as? String {
             if name.characters.count > 0 {
                 return name
@@ -171,7 +171,7 @@ extension Plugin {
         throw PluginLoadError.invalidNameError(infoDictionary: infoDictionary)
     }
     
-    class func validIdentifier(_ infoDictionary: [AnyHashable: Any]) throws -> String? {
+    class func validIdentifier(infoDictionary: [AnyHashable: Any]) throws -> String? {
         if let uuidString = infoDictionary[InfoDictionaryKeys.Identifier] as? String {
             let uuid: UUID? = UUID(uuidString: uuidString)
             if uuid != nil {
@@ -182,7 +182,7 @@ extension Plugin {
         throw PluginLoadError.invalidIdentifierError(infoDictionary: infoDictionary)
     }
 
-    class func validHidden(_ infoDictionary: [AnyHashable: Any]) throws -> Bool {
+    class func validHidden(infoDictionary: [AnyHashable: Any]) throws -> Bool {
         if let hidden = infoDictionary[InfoDictionaryKeys.Hidden] as? Int {
             return NSNumber(value: hidden as Int).boolValue
         }
@@ -195,7 +195,7 @@ extension Plugin {
         return false
     }
 
-    class func validEditable(_ infoDictionary: [AnyHashable: Any]) throws -> Bool {
+    class func validEditable(infoDictionary: [AnyHashable: Any]) throws -> Bool {
         if let editable = infoDictionary[InfoDictionaryKeys.Editable] as? NSNumber {
             return editable.boolValue
         }
@@ -208,7 +208,7 @@ extension Plugin {
         return true
     }
 
-    class func validDebugModeEnabled(_ infoDictionary: [AnyHashable: Any]) throws -> Bool? {
+    class func validDebugModeEnabled(infoDictionary: [AnyHashable: Any]) throws -> Bool? {
         if let debugModeEnabled = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] as? Int {
             return NSNumber(value: debugModeEnabled as Int).boolValue
         }
@@ -221,7 +221,7 @@ extension Plugin {
         return nil
     }
     
-    class func validPluginTypeFromPath(_ path: String) -> PluginType {
+    class func validPluginTypeFromPath(path: String) -> PluginType {
         let pluginContainerDirectory = path.stringByDeletingLastPathComponent
         switch pluginContainerDirectory {
         case Directory.applicationSupportPlugins.path():

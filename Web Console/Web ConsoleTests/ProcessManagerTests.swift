@@ -14,7 +14,7 @@ class ProcessManagerTestCase: XCTestCase {
     class MockProcessManagerStore: ProcessManagerStore {
         let mutableDictionary = NSMutableDictionary()
 
-        func set(_ value: Any?, forKey defaultName: String) {
+        func set(value: Any?, forKey defaultName: String) {
             guard let value = value else {
                 return
             }
@@ -53,7 +53,7 @@ class ProcessManagerTests: ProcessManagerTestCase {
             startTime: Date(),
             commandPath: "test")!
 
-        let testProcessManagerHasProcessInfo: (_ processManager: ProcessManager) -> Bool = { processManager in
+        let testProcessManagerHasProcessInfo: (processManager: ProcessManager) -> Bool = { processManager in
             let returnedProcessInfo = processManager.processInfoWithIdentifier(processInfo.identifier)!
             XCTAssertNotNil(returnedProcessInfo)
             XCTAssertEqual(returnedProcessInfo, processInfo)
@@ -80,7 +80,7 @@ class ProcessManagerTests: ProcessManagerTestCase {
         // Remove the processes and make sure nil is returned
         _ = processManager.removeProcessWithIdentifier(processInfo.identifier)
 
-        let testProcessManagerHasNoProcessInfo: (_ processManager: ProcessManager) -> Bool = { processManager in
+        let testProcessManagerHasNoProcessInfo: (processManager: ProcessManager) -> Bool = { processManager in
             XCTAssertNil(processManager.processInfoWithIdentifier(processInfo.identifier))
             
             let returnedProcessInfos = processManager.processInfos()

@@ -12,7 +12,7 @@ import XCTest
 @testable import Web_Console
 
 class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
-    func isRange(_ range: NSRange, equalToRange comparisonRange: NSRange) -> Bool {
+    func isRange(range: NSRange, equalToRange comparisonRange: NSRange) -> Bool {
         return range.location == comparisonRange.location && range.length == comparisonRange.length
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 class ProcessKiller {
 
-    class func killProcessInfos(_ processInfos: [ProcessInfo],
+    class func killProcessInfos(processInfos: [ProcessInfo],
         completion: ((Bool) -> Void)?)
     {
         var result = true
@@ -34,7 +34,7 @@ class ProcessKiller {
     
     // MARK: Private
     
-    private class func killProcessInfo(_ processInfo: ProcessInfo) -> Bool {
+    private class func killProcessInfo(processInfo: ProcessInfo) -> Bool {
         return WCLProcessKiller.killProcess(withIdentifier: processInfo.identifier)
     }
 }

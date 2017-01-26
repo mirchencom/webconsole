@@ -10,13 +10,13 @@ import Foundation
 
 class TaskRunner {
 
-    class func runLaunchPath(_ launchPath: String, handler: ((Void) -> Void)?) -> Process {
+    class func runLaunchPath(launchPath: String, handler: ((Void) -> Void)?) -> Process {
         let task = Process()
         task.launchPath = launchPath
         return runTask(task, handler: handler)
     }
     
-    class func runTask(_ task: Process, handler: ((Void) -> Void)?) -> Process {
+    class func runTask(task: Process, handler: ((Void) -> Void)?) -> Process {
         task.standardOutput = Pipe()
         (task.standardOutput! as AnyObject).fileHandleForReading.readabilityHandler = { (file: FileHandle!) -> Void in
             let data = file.availableData
