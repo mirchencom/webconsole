@@ -40,7 +40,7 @@ class CopyDirectoryController {
         }
     }
     
-    func copyItemAtURL(URL: Foundation.URL, completionHandler handler: @escaping (URL: Foundation.URL?, error: NSError?) -> Void) {
+    func copyItemAtURL(URL: Foundation.URL, completionHandler handler: @escaping (_ URL: Foundation.URL?, _ error: NSError?) -> Void) {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             do {
                 let copiedURL = try type(of: self).URLOfItemCopiedFromURL(URL, toDirectoryURL: self.copyTempDirectoryURL)

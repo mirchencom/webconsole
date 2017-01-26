@@ -14,7 +14,7 @@ import XCTest
 extension PluginsDataControllerEventTestCase {
     // MARK: Move Helpers
     
-    func movePluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: @escaping (plugin: Plugin?) -> Void) {
+    func movePluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         let removeExpectation = expectation(description: "Plugin was removed")
         pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
@@ -42,7 +42,7 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Copy Helpers
     
-    func copyPluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: @escaping (plugin: Plugin?) -> Void) {
+    func copyPluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         var newPlugin: Plugin?
         let createExpectation = expectation(description: "Plugin was added")
         pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
@@ -88,7 +88,7 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Modify Helpers
     
-    func modifyPluginWithConfirmation(plugin: Plugin, handler: @escaping (plugin: Plugin?) -> Void) {
+    func modifyPluginWithConfirmation(plugin: Plugin, handler: @escaping (_ plugin: Plugin?) -> Void) {
 
         // Get the old identifier
         let infoDictionary = NSDictionary(contentsOf: plugin.infoDictionaryURL)! as Dictionary

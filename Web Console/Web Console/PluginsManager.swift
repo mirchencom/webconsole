@@ -90,11 +90,11 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         pluginsDataController.movePluginToTrash(plugin)
     }
     
-    func duplicatePlugin(plugin: Plugin, handler: ((newPlugin: Plugin?, error: NSError?) -> Void)?) {
+    func duplicatePlugin(plugin: Plugin, handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
         pluginsDataController.duplicatePlugin(plugin, handler: handler)
     }
 
-    func newPlugin(handler: ((newPlugin: Plugin?, error: NSError?) -> Void)?) {
+    func newPlugin(handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
         // May need to handle the case when no default new plugin is define in the future, but for now the fallback to the initial plugin should always work
 
         if let plugin = defaultNewPlugin {
@@ -102,7 +102,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         }
     }
 
-    func newPluginFromPlugin(plugin: Plugin, handler: ((newPlugin: Plugin?, error: NSError?) -> Void)?) {
+    func newPluginFromPlugin(plugin: Plugin, handler: ((_ newPlugin: Plugin?, error: NSError?) -> Void)?) {
         duplicatePlugin(plugin, handler: handler)
     }
 

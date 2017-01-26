@@ -10,7 +10,7 @@ import Foundation
 
 extension ProcessFilter {
     class func runningProcessMatchingProcessInfos(processInfos: [ProcessInfo],
-        completionHandler: @escaping ((identifierToProcessInfo: [Int32: ProcessInfo]?, error: NSError?) -> Void))
+        completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
     {
         let identifiers = processInfos.map { $0.identifier }
         runningProcessesWithIdentifiers(identifiers) { (identifierToProcessInfo, error) -> Void in
@@ -53,7 +53,7 @@ extension ProcessFilter {
 class ProcessFilter {
     
     class func runningProcessesWithIdentifiers(identifiers: [Int32],
-        completionHandler: @escaping ((identifierToProcessInfo: [Int32: ProcessInfo]?, error: NSError?) -> Void))
+        completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
     {
         if identifiers.isEmpty {
             let error = NSError.errorWithDescription("No identifiers specified")

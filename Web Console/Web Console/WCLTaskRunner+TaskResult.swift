@@ -81,7 +81,7 @@ class TaskResultsCollector: NSObject {
 
 extension WCLTaskRunner {
     
-    typealias TaskResult = (standardOutput: String?, standardError: String?, error: NSError?) -> Void
+    typealias TaskResult = (_ standardOutput: String?, _ standardError: String?, _ error: NSError?) -> Void
     
 
     class func runTaskUntilFinishedWithCommandPath(commandPath: String,
