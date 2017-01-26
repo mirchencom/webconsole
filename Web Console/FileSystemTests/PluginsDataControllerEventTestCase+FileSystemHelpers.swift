@@ -16,7 +16,7 @@ extension PluginsDataControllerEventTestCase {
     
     func movePluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         let removeExpectation = expectation(description: "Plugin was removed")
-        pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasRemovedHandler: { (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
                 removeExpectation.fulfill()
             }
@@ -71,7 +71,7 @@ extension PluginsDataControllerEventTestCase {
     
     func removePluginWithConfirmation(plugin: Plugin) {
         let removeExpectation = expectation(description: "Plugin was removed")
-        pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasRemovedHandler: { (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
                 removeExpectation.fulfill()
             }
@@ -112,7 +112,7 @@ extension PluginsDataControllerEventTestCase {
         let newInfoDictionaryContents = infoDictionaryContents.replacingOccurrences(of: identifier, with: newIdentifier)
 
         let removeExpectation = expectation(description: "Plugin was removed")
-        pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasRemovedHandler: { (removedPlugin) -> Void in
             if (plugin == removedPlugin) {
                 removeExpectation.fulfill()
             }

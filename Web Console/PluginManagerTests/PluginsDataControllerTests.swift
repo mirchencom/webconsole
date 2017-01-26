@@ -278,7 +278,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         
         // Trash the duplicated plugin
         let removeExpectation = expectation(description: "Plugin was removed")
-        pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasRemovedHandler: { (removedPlugin) -> Void in
             XCTAssertEqual(newPlugin!, removedPlugin, "The plugins should be equal")
             removeExpectation.fulfill()
         })

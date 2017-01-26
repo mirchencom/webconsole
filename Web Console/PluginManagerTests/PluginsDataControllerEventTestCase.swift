@@ -12,13 +12,13 @@ import XCTest
 @testable import Web_Console
 
 class PluginDataEventManager: PluginsDataControllerDelegate {
-    var pluginWasAddedHandlers: Array<(plugin: Plugin) -> Void>
-    var pluginWasRemovedHandlers: Array<(plugin: Plugin) -> Void>
+    var pluginWasAddedHandlers: Array<(_ plugin: Plugin) -> Void>
+    var pluginWasRemovedHandlers: Array<(_ plugin: Plugin) -> Void>
     var delegate: PluginsDataControllerDelegate?
     
     init () {
-        self.pluginWasAddedHandlers = Array<(plugin: Plugin) -> Void>()
-        self.pluginWasRemovedHandlers = Array<(plugin: Plugin) -> Void>()
+        self.pluginWasAddedHandlers = Array<(_ plugin: Plugin) -> Void>()
+        self.pluginWasRemovedHandlers = Array<(_ plugin: Plugin) -> Void>()
     }
     
     
@@ -48,11 +48,11 @@ class PluginDataEventManager: PluginsDataControllerDelegate {
     
     // MARK: Handlers
     
-    func addPluginWasAddedHandler(handler: @escaping (plugin: Plugin) -> Void) {
+    func addPluginWasAddedHandler(handler: @escaping (_ plugin: Plugin) -> Void) {
         pluginWasAddedHandlers.append(handler)
     }
     
-    func addPluginWasRemovedHandler(handler: @escaping (plugin: Plugin) -> Void) {
+    func add(pluginWasRemovedHandler: @escaping (_ plugin: Plugin) -> Void) {
         pluginWasRemovedHandlers.append(handler)
     }
     
