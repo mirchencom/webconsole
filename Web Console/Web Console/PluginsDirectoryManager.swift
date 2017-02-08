@@ -17,7 +17,7 @@ class PluginsPathHelper {
 
     class func rangeInPath(path: String, untilSubpath subpath: String) -> NSRange {
         // Normalize the subpath so the same range is always returned regardless of the format of the subpath (e.g., number of slashes)
-        let normalizedSubpath = subpath.stringByStandardizingPath
+        let normalizedSubpath = subpath.standardizingPath
         
 
         let pathAsNSString: NSString = path as NSString
@@ -41,7 +41,7 @@ class PluginsPathHelper {
     }
     
     class func pathComponentsOfPath(path: String, afterSubpath subpath: String) -> [String]? {
-        let normalizedPath = path.stringByStandardizingPath
+        let normalizedPath = path.standardizingPath
         let range = rangeInPath(normalizedPath, untilSubpath: subpath)
         if range.location == NSNotFound {
             return nil
@@ -92,7 +92,7 @@ class PluginsPathHelper {
     
     class func path(path: String, containsSubpath subpath: String) -> Bool {
         if let pathUntilSubpath = subpathFromPath(path, untilSubpath: subpath) {
-            return pathUntilSubpath.stringByStandardizingPath == subpath.stringByStandardizingPath
+            return pathUntilSubpath.standardizingPath == subpath.standardizingPath
         }
         return false
     }
@@ -262,7 +262,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
 
     func infoDictionaryExistsAtPluginPath(pluginPath: String) -> Bool {
-        let infoDictionaryPath = pluginPath.stringByAppendingPathComponent(ClassConstants.infoDictionaryPathComponent)
+        let infoDictionaryPath = pluginPath.appendingPathComponent(ClassConstants.infoDictionaryPathComponent)
         var isDir: ObjCBool = false
         let fileExists = FileManager.default.fileExists(atPath: infoDictionaryPath, isDirectory: &isDir)
         return fileExists && !isDir.boolValue
@@ -274,7 +274,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
 
     func pluginPathFromPath(path: String) -> String? {
         if let pluginPathComponent = pluginPathComponentFromPath(path) {
-            let pluginPath = pluginsDirectoryURL.path.stringByAppendingPathComponent(pluginPathComponent)
+            let pluginPath = pluginsDirectoryURL.path.appendingPathComponent(pluginPathComponent)
             return pluginPath
         }
         return nil

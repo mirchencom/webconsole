@@ -256,12 +256,12 @@ extension FilesAndPluginsDirectoryManagerTests {
 
     
     func validPluginHierarchyOperation(path: String, isRemove: Bool, requireConfirmation: Bool) {
-        let testPluginDirectoryPath = path.stringByAppendingPathComponent(testPluginDirectoryName)
-        let testPluginContentsDirectoryPath = testPluginDirectoryPath.stringByAppendingPathComponent(testPluginContentsDirectoryName)
-        let testPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testPluginResourcesDirectoryName)
-        let testPluginResourcesFilePath = testPluginResourcesDirectoryPath.stringByAppendingPathComponent(testFilename)
-        let testPluginContentsFilePath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testFilename)
-        let testInfoDictionaryFilePath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testPluginInfoDictionaryFilename)
+        let testPluginDirectoryPath = path.appendingPathComponent(testPluginDirectoryName)
+        let testPluginContentsDirectoryPath = testPluginDirectoryPath.appendingPathComponent(testPluginContentsDirectoryName)
+        let testPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.appendingPathComponent(testPluginResourcesDirectoryName)
+        let testPluginResourcesFilePath = testPluginResourcesDirectoryPath.appendingPathComponent(testFilename)
+        let testPluginContentsFilePath = testPluginContentsDirectoryPath.appendingPathComponent(testFilename)
+        let testInfoDictionaryFilePath = testPluginContentsDirectoryPath.appendingPathComponent(testPluginInfoDictionaryFilename)
 
         
         if !isRemove {
@@ -283,7 +283,7 @@ extension FilesAndPluginsDirectoryManagerTests {
             }
         } else {
             if !requireConfirmation {
-                let testPluginDirectoryPath = path.stringByAppendingPathComponent(testPluginDirectoryName)
+                let testPluginDirectoryPath = path.appendingPathComponent(testPluginDirectoryName)
                 do {
                     try removeTemporaryItemAtPath(testPluginDirectoryPath)
                 } catch let error as NSError {
@@ -333,31 +333,31 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testValidPluginFileHierarchy() {
 
         // Create a directory in the plugins directory, this should not cause a callback
-        let testPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
+        let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         createDirectoryAtPathWithConfirmation(testPluginDirectoryPath)
         
         // Create a file in the plugins directory, this should not cause a callback
-        let testFilePath = pluginsDirectoryPath.stringByAppendingPathComponent(testFilename)
+        let testFilePath = pluginsDirectoryPath.appendingPathComponent(testFilename)
         createFileAtPathWithConfirmation(testFilePath)
         
         // Create the contents directory, this should not cause a callback
-        let testPluginContentsDirectoryPath = testPluginDirectoryPath.stringByAppendingPathComponent(testPluginContentsDirectoryName)
+        let testPluginContentsDirectoryPath = testPluginDirectoryPath.appendingPathComponent(testPluginContentsDirectoryName)
         createDirectoryAtPathWithConfirmation(testPluginContentsDirectoryPath)
         
         // Create a file in the contents directory, this should not cause a callback
-        let testPluginContentsFilePath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testFilename)
+        let testPluginContentsFilePath = testPluginContentsDirectoryPath.appendingPathComponent(testFilename)
         createFileAtPathWithConfirmation(testPluginContentsFilePath)
         
         // Create the resource directory, this should not cause a callback
-        let testPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testPluginResourcesDirectoryName)
+        let testPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.appendingPathComponent(testPluginResourcesDirectoryName)
         createDirectoryAtPathWithConfirmation(testPluginResourcesDirectoryPath)
         
         // Create a file in the resource directory, this should not cause a callback
-        let testPluginResourcesFilePath = testPluginResourcesDirectoryPath.stringByAppendingPathComponent(testFilename)
+        let testPluginResourcesFilePath = testPluginResourcesDirectoryPath.appendingPathComponent(testFilename)
         createFileAtPathWithConfirmation(testPluginResourcesFilePath)
 
         // Create an info dictionary in the contents directory, this should cause a callback
-        let testInfoDictionaryFilePath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testPluginInfoDictionaryFilename)
+        let testInfoDictionaryFilePath = testPluginContentsDirectoryPath.appendingPathComponent(testPluginInfoDictionaryFilename)
         createExpectationForPluginInfoDictionaryWasCreatedOrModifiedAtPluginPath(testPluginDirectoryPath)
         createFileAtPathWithConfirmation(testInfoDictionaryFilePath)
         
@@ -393,11 +393,11 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
     func testInvalidPluginFileHierarchy() {
         // Create an invalid contents directory in the plugins path, this should not cause a callback
-        let testInvalidPluginContentsDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
+        let testInvalidPluginContentsDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         createDirectoryAtPathWithConfirmation(testInvalidPluginContentsDirectoryPath)
 
         // Create a info dictionary in the invalid contents directory, this should not cause a callback
-        let testInvalidInfoDictionaryPath = testInvalidPluginContentsDirectoryPath.stringByAppendingPathComponent(testPluginInfoDictionaryFilename)
+        let testInvalidInfoDictionaryPath = testInvalidPluginContentsDirectoryPath.appendingPathComponent(testPluginInfoDictionaryFilename)
         createFileAtPathWithConfirmation(testInvalidInfoDictionaryPath)
         
 
@@ -414,11 +414,11 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
     func testFileForContentsDirectory() {
         // Create a directory in the plugins directory, this should not cause a callback
-        let testPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
+        let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         createDirectoryAtPathWithConfirmation(testPluginDirectoryPath)
 
         // Create the contents directory, this should not cause a callback
-        let testPluginContentsFilePath = testPluginDirectoryPath.stringByAppendingPathComponent(testPluginContentsDirectoryName)
+        let testPluginContentsFilePath = testPluginDirectoryPath.appendingPathComponent(testPluginContentsDirectoryName)
         createFileAtPathWithConfirmation(testPluginContentsFilePath)
 
 
@@ -437,15 +437,15 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
     func testDirectoryForInfoDictionary() {
         // Create a directory in the plugins directory, this should not cause a callback
-        let testPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
+        let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         createDirectoryAtPathWithConfirmation(testPluginDirectoryPath)
         
         // Create the contents directory, this should not cause a callback
-        let testPluginContentsDirectoryPath = testPluginDirectoryPath.stringByAppendingPathComponent(testPluginContentsDirectoryName)
+        let testPluginContentsDirectoryPath = testPluginDirectoryPath.appendingPathComponent(testPluginContentsDirectoryName)
         createDirectoryAtPathWithConfirmation(testPluginContentsDirectoryPath)
         
         // Create a directory for the info dictionary, this should not cause a callback
-        let testPluginInfoDictionaryDirectoryPath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testPluginInfoDictionaryFilename)
+        let testPluginInfoDictionaryDirectoryPath = testPluginContentsDirectoryPath.appendingPathComponent(testPluginInfoDictionaryFilename)
         createDirectoryAtPathWithConfirmation(testPluginInfoDictionaryDirectoryPath)
         
         // Clean up
@@ -468,10 +468,10 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testMoveResourcesDirectory() {
         createValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
 
-        let testPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
-        let testPluginContentsDirectoryPath = testPluginDirectoryPath.stringByAppendingPathComponent(testPluginContentsDirectoryName)
-        let testPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testPluginResourcesDirectoryName)
-        let testRenamedPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.stringByAppendingPathComponent(testDirectoryName)
+        let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
+        let testPluginContentsDirectoryPath = testPluginDirectoryPath.appendingPathComponent(testPluginContentsDirectoryName)
+        let testPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.appendingPathComponent(testPluginResourcesDirectoryName)
+        let testRenamedPluginResourcesDirectoryPath = testPluginContentsDirectoryPath.appendingPathComponent(testDirectoryName)
         moveDirectoryAtPathWithConfirmation(testPluginResourcesDirectoryPath, destinationPath: testRenamedPluginResourcesDirectoryPath)
 
         // Clean up
@@ -483,9 +483,9 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testMoveContentsDirectory() {
         createValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
 
-        let testPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
-        let testPluginContentsDirectoryPath = testPluginDirectoryPath.stringByAppendingPathComponent(testPluginContentsDirectoryName)
-        let testRenamedPluginContentsDirectoryPath = testPluginDirectoryPath.stringByAppendingPathComponent(testDirectoryName)
+        let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
+        let testPluginContentsDirectoryPath = testPluginDirectoryPath.appendingPathComponent(testPluginContentsDirectoryName)
+        let testRenamedPluginContentsDirectoryPath = testPluginDirectoryPath.appendingPathComponent(testDirectoryName)
         createExpectationForPluginInfoDictionaryWasRemovedAtPluginPath(testPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testPluginContentsDirectoryPath, destinationPath: testRenamedPluginContentsDirectoryPath)
         
@@ -499,8 +499,8 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testMovePluginDirectory() {
         createValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
 
-        let testPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
-        let testRenamedPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryNameTwo)
+        let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
+        let testRenamedPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryNameTwo)
         createExpectationForPluginInfoDictionaryWasRemovedAtPluginPath(testPluginDirectoryPath)
         createExpectationForPluginInfoDictionaryWasCreatedOrModifiedAtPluginPath(testRenamedPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testPluginDirectoryPath, destinationPath: testRenamedPluginDirectoryPath)
@@ -517,8 +517,8 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         createValidPluginHierarchyAtPath(temporaryDirectoryPath)
         
         // Move from unwatched directory
-        let testPluginDirectoryPath = temporaryDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
-        let testMovedPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
+        let testPluginDirectoryPath = temporaryDirectoryPath.appendingPathComponent(testPluginDirectoryName)
+        let testMovedPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         createExpectationForPluginInfoDictionaryWasCreatedOrModifiedAtPluginPath(testMovedPluginDirectoryPath)
         moveDirectoryAtUnwatchedPathWithConfirmation(testPluginDirectoryPath, destinationPath: testMovedPluginDirectoryPath)
 
@@ -534,7 +534,7 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         createValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
         
         // Create a file named with just the file extension
-        let testFilePath = pluginsDirectoryPath.stringByAppendingPathComponent(pluginFileExtension)
+        let testFilePath = pluginsDirectoryPath.appendingPathComponent(pluginFileExtension)
         createFileAtPathWithConfirmation(testFilePath)
         removeFileAtPathWithConfirmation(testFilePath)
 
@@ -546,7 +546,7 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         createValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
         
         // Create a file named with just the file extension
-        let testFilePath = pluginsDirectoryPath.stringByAppendingPathComponent(".\(pluginFileExtension)")
+        let testFilePath = pluginsDirectoryPath.appendingPathComponent(".\(pluginFileExtension)")
         createFileAtPathWithConfirmation(testFilePath)
         removeFileAtPathWithConfirmation(testFilePath)
         
@@ -559,7 +559,7 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         createValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
         
         // Create a hidden file
-        let testFilePath = pluginsDirectoryPath.stringByAppendingPathComponent(testHiddenDirectoryName)
+        let testFilePath = pluginsDirectoryPath.appendingPathComponent(testHiddenDirectoryName)
         createFileAtPathWithConfirmation(testFilePath)
         removeFileAtPathWithConfirmation(testFilePath)
 
@@ -570,8 +570,8 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testHiddenFileInPluginDirectory() {
         createValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
         // Create a hidden file
-        let testPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
-        let testFilePath = testPluginDirectoryPath.stringByAppendingPathComponent(testHiddenDirectoryName)
+        let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
+        let testFilePath = testPluginDirectoryPath.appendingPathComponent(testHiddenDirectoryName)
         createFileAtPathWithConfirmation(testFilePath)
         removeFileAtPathWithConfirmation(testFilePath)
 
@@ -583,9 +583,9 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         createValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
 
         // Move the directory, removing the plugin extension, this should cause a callback
-        let testPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginDirectoryName)
-        let movedPluginDirectoryFilename = testPluginDirectoryName.stringByDeletingPathExtension
-        let movedPluginDirectoryPath = pluginsDirectoryPath.stringByAppendingPathComponent(movedPluginDirectoryFilename)
+        let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
+        let movedPluginDirectoryFilename = testPluginDirectoryName.deletingPathExtension
+        let movedPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(movedPluginDirectoryFilename)
         createExpectationForPluginInfoDictionaryWasRemovedAtPluginPath(testPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testPluginDirectoryPath, destinationPath: movedPluginDirectoryPath)
 

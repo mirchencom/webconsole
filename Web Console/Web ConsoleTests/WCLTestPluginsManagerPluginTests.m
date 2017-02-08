@@ -19,7 +19,7 @@
 
 - (void)testSharedResources
 {
-    NSString *testSharedResourcePath = [[[PluginsManager sharedInstance] sharedResourcesPath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
+    NSString *testSharedResourcePath = [[[PluginsManager sharedInstance] sharedResourcesPath] appendingPathComponent:kTestSharedResourcePathComponent];
     BOOL isDir;
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:testSharedResourcePath isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's path.");

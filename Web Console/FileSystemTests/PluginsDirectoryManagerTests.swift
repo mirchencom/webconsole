@@ -170,7 +170,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testMovePlugin() {
         // Move the plugin
         let movedPluginFilename = testPluginDirectoryName
-        let movedPluginPath = pluginPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(movedPluginFilename)
+        let movedPluginPath = pluginPath.deletingLastPathComponent.appendingPathComponent(movedPluginFilename)
         movePluginAtPathWithConfirmation(pluginPath, destinationPluginPath: movedPluginPath)
         
         // Clean up
@@ -180,7 +180,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     
     func testCopyAndRemovePlugin() {
         let copiedPluginFilename = testPluginDirectoryName
-        let copiedPluginPath = pluginPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(copiedPluginFilename)
+        let copiedPluginPath = pluginPath.deletingLastPathComponent.appendingPathComponent(copiedPluginFilename)
         copyPluginAtPathWithConfirmation(pluginPath, destinationPluginPath: copiedPluginPath)
         
         // Clean up
@@ -189,7 +189,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
     func testCopyToUnwatchedDirectory() {
         let pluginFilename = pluginPath.lastPathComponent
-        let copiedPluginPath = temporaryDirectoryPath.stringByAppendingPathComponent(pluginFilename)
+        let copiedPluginPath = temporaryDirectoryPath.appendingPathComponent(pluginFilename)
         copyPluginAtPath(pluginPath, destinationPluginPath: copiedPluginPath)
         
         do {
@@ -202,7 +202,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testCopyFromUnwatchedDirectory() {
         // Move the plugin to unwatched directory
         let pluginFilename = pluginPath.lastPathComponent
-        let movedPluginPath = temporaryDirectoryPath.stringByAppendingPathComponent(pluginFilename)
+        let movedPluginPath = temporaryDirectoryPath.appendingPathComponent(pluginFilename)
         movePluginAtPathWithConfirmation(pluginPath, toUnwatchedDestinationPluginPath: movedPluginPath)
 
         // Copy back to original location
@@ -221,9 +221,9 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     
     func testMoveInfoDictionary() {
 
-        let infoDictionaryDirectory: String! = pluginInfoDictionaryPath.stringByDeletingLastPathComponent
+        let infoDictionaryDirectory: String! = pluginInfoDictionaryPath.deletingLastPathComponent
         let renamedInfoDictionaryFilename = testDirectoryName
-        let renamedInfoDictionaryPath = infoDictionaryDirectory.stringByAppendingPathComponent(renamedInfoDictionaryFilename)
+        let renamedInfoDictionaryPath = infoDictionaryDirectory.appendingPathComponent(renamedInfoDictionaryFilename)
         
         // Move
         let expectation = self.expectation(description: "Info dictionary was removed")

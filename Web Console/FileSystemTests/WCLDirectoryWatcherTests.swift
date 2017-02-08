@@ -180,8 +180,8 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
 class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
 
     func testCreateWriteAndRemoveDirectory() {
-        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
-        let testFilePath = testDirectoryPath.stringByAppendingPathComponent(testFilename)
+        let testDirectoryPath = temporaryDirectoryURL.path.appendingPathComponent(testDirectoryName)
+        let testFilePath = testDirectoryPath.appendingPathComponent(testFilename)
 
         // Test Create Directory
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
@@ -208,13 +208,13 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
     }
 
     func testMoveDirectory() {
-        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
+        let testDirectoryPath = temporaryDirectoryURL.path.appendingPathComponent(testDirectoryName)
             
         // Test Create
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
 
         // Test Move
-        let testDirectoryPathTwo = testDirectoryPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(testDirectoryNameTwo)
+        let testDirectoryPathTwo = testDirectoryPath.deletingLastPathComponent.appendingPathComponent(testDirectoryNameTwo)
         moveDirectoryAtPathWithConfirmation(testDirectoryPath, destinationPath: testDirectoryPathTwo)
         
         // Test Move Again
@@ -227,8 +227,8 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
     }
 
     func testMoveDirectoryContainingFile() {
-        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
-        let testFilePath = testDirectoryPath.stringByAppendingPathComponent(testFilename)
+        let testDirectoryPath = temporaryDirectoryURL.path.appendingPathComponent(testDirectoryName)
+        let testFilePath = testDirectoryPath.appendingPathComponent(testFilename)
 
         // Test Create Directory
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
@@ -237,11 +237,11 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         createFileAtPathWithConfirmation(testFilePath)
         
         // Test Move
-        let testDirectoryPathTwo = testDirectoryPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(testDirectoryNameTwo)
+        let testDirectoryPathTwo = testDirectoryPath.deletingLastPathComponent.appendingPathComponent(testDirectoryNameTwo)
         moveDirectoryAtPathWithConfirmation(testDirectoryPath, destinationPath: testDirectoryPathTwo)
         
         // Test Modify File
-        let testFilePathTwo = testDirectoryPathTwo.stringByAppendingPathComponent(testFilename)
+        let testFilePathTwo = testDirectoryPathTwo.appendingPathComponent(testFilename)
         modifyFileAtPathWithConfirmation(testFilePathTwo)
         
         // Test Move Again
@@ -257,7 +257,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
     }
 
     func testReplaceDirectoryWithFile() {
-        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
+        let testDirectoryPath = temporaryDirectoryURL.path.appendingPathComponent(testDirectoryName)
             
         // Test Create Directory
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
@@ -273,7 +273,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
     }
 
     func testReplaceFileWithDirectory() {
-        let testDirectoryPath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testDirectoryName)
+        let testDirectoryPath = temporaryDirectoryURL.path.appendingPathComponent(testDirectoryName)
         
         // Test Create File
         createFileAtPathWithConfirmation(testDirectoryPath)
@@ -296,7 +296,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
     
     override func setUp() {
         super.setUp()
-        testFilePath = temporaryDirectoryURL.path.stringByAppendingPathComponent(testFilename)
+        testFilePath = temporaryDirectoryURL.path.appendingPathComponent(testFilename)
     }
 
     override func tearDown() {
@@ -327,7 +327,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         modifyFileAtPathWithConfirmation(testFilePath)
 
         // Test Move
-        let testFilePathTwo = testFilePath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(testFilenameTwo)
+        let testFilePathTwo = testFilePath.deletingLastPathComponent.appendingPathComponent(testFilenameTwo)
         moveFileAtPathWithConfirmation(testFilePath, destinationPath: testFilePathTwo)
         
         // Test Modify
@@ -357,7 +357,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         })
         
         // Test create a second file with NSFileManager
-        let testFilePathTwo = testFilePath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(testFilenameTwo)
+        let testFilePathTwo = testFilePath.deletingLastPathComponent.appendingPathComponent(testFilenameTwo)
         let contentsData = testFileContents.data(using: String.Encoding.utf8)
         FileManager.default.createFile(atPath: testFilePathTwo, contents: contentsData, attributes: nil)
         
@@ -407,7 +407,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         })
             
         // Test create a second file with NSFileManager
-        let testFilePathTwo = testFilePath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(testFilenameTwo)
+        let testFilePathTwo = testFilePath.deletingLastPathComponent.appendingPathComponent(testFilenameTwo)
         let fileManagerCreateExpectation = expectation(description: "File manager created file")
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             let contentsData = testFileContents.data(using: String.Encoding.utf8)

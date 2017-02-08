@@ -222,7 +222,7 @@ extension Plugin {
     }
     
     class func validPluginTypeFromPath(path: String) -> PluginType {
-        let pluginContainerDirectory = path.stringByDeletingLastPathComponent
+        let pluginContainerDirectory = path.deletingLastPathComponent
         switch pluginContainerDirectory {
         case Directory.applicationSupportPlugins.path():
             return PluginType.user

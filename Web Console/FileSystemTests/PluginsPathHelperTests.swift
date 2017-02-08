@@ -33,12 +33,12 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
                 XCTAssertTrue(range.location != NSNotFound, "The range should have been found")
                 let testPathAsNSString: NSString = testPath as NSString
                 let subpathFromRange = testPathAsNSString.substring(with: range)
-                XCTAssertEqual(subpathFromRange.stringByStandardizingPath,  testSubpath.stringByStandardizingPath, "The standardized paths should be equal")
+                XCTAssertEqual(subpathFromRange.standardizingPath,  testSubpath.standardizingPath, "The standardized paths should be equal")
                 
                 XCTAssertTrue(isRange(range, equalToRange: testRange), "The ranges should be equal")
                 
                 let subpath = PluginsPathHelper.subpathFromPath(testPath, untilSubpath: testSubpath)!
-                XCTAssertEqual(subpath.stringByStandardizingPath, testSubpath.stringByStandardizingPath, "The subpaths should be equal")
+                XCTAssertEqual(subpath.standardizingPath, testSubpath.standardizingPath, "The subpaths should be equal")
                 XCTAssertTrue(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should contain the subpath")
                 
                 let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
@@ -75,10 +75,10 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
         
         let testPathAsNSString: NSString = testPath as NSString
         let subpathFromRange = testPathAsNSString.substring(with: range)
-        XCTAssertEqual(subpathFromRange.stringByStandardizingPath, testSubpath.stringByStandardizingPath, "The standardized paths should be equal")
+        XCTAssertEqual(subpathFromRange.standardizingPath, testSubpath.standardizingPath, "The standardized paths should be equal")
         
         let subpath = PluginsPathHelper.subpathFromPath(testPath, untilSubpath: testSubpath)!
-        XCTAssertEqual(subpath.stringByStandardizingPath, testSubpath.stringByStandardizingPath, "The subpaths should be equal")
+        XCTAssertEqual(subpath.standardizingPath, testSubpath.standardizingPath, "The subpaths should be equal")
         XCTAssertTrue(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should contain the subpath")
         
         let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
@@ -123,7 +123,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     func testFullSubpathComponent() {
         
         let testPath = (pluginPath as NSString).appendingPathComponent(testPluginInfoDictionaryPathComponent)
-        let testSubpath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginPathComponent)
+        let testSubpath = pluginsDirectoryPath.appendingPathComponent(testPluginPathComponent)
         let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
         let pathComponent = NSString.path(withComponents: pathComponents)
         XCTAssertTrue(PluginsPathHelper.pathComponent(testPluginInfoDictionaryPathComponent, containsSubpathComponent: pathComponent), "The path component should contain the subpath component")
@@ -135,7 +135,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     
     func testPartialSubpathComponent() {
         let testPath = (pluginPath as NSString).appendingPathComponent("Contents")
-        let testSubpath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginPathComponent)
+        let testSubpath = pluginsDirectoryPath.appendingPathComponent(testPluginPathComponent)
         let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
         let pathComponent = NSString.path(withComponents: pathComponents)
         XCTAssertTrue(PluginsPathHelper.pathComponent(testPluginInfoDictionaryPathComponent, containsSubpathComponent: pathComponent), "The path component should contain the subpath component")
@@ -145,7 +145,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     func testEmptySubpathComponent() {
         
         let testPath = pluginPath!
-        let testSubpath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginPathComponent)
+        let testSubpath = pluginsDirectoryPath.appendingPathComponent(testPluginPathComponent)
         let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
         let pathComponent = NSString.path(withComponents: pathComponents)
         XCTAssertTrue(PluginsPathHelper.pathComponent(testPluginInfoDictionaryPathComponent, containsSubpathComponent: pathComponent), "The path component should contain the subpath component")
@@ -155,7 +155,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     func testFailingFullSubpathComponent() {
         
         let testPath = (pluginPath as NSString).appendingPathComponent("Contents/Resources")
-        let testSubpath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginPathComponent)
+        let testSubpath = pluginsDirectoryPath.appendingPathComponent(testPluginPathComponent)
         let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
         let pathComponent = NSString.path(withComponents: pathComponents)
         XCTAssertFalse(PluginsPathHelper.pathComponent(testPluginInfoDictionaryPathComponent, containsSubpathComponent: pathComponent), "The path component should contain the subpath component")
@@ -165,7 +165,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
     func testFailingPartialSubpathComponent() {
         
         let testPath = (pluginPath as NSString).appendingPathComponent("Resources")
-        let testSubpath = pluginsDirectoryPath.stringByAppendingPathComponent(testPluginPathComponent)
+        let testSubpath = pluginsDirectoryPath.appendingPathComponent(testPluginPathComponent)
         let pathComponents = PluginsPathHelper.pathComponentsOfPath(testPath, afterSubpath: testSubpath)!
         let pathComponent = NSString.path(withComponents: pathComponents)
         XCTAssertFalse(PluginsPathHelper.pathComponent(testPluginInfoDictionaryPathComponent, containsSubpathComponent: pathComponent), "The path component should contain the subpath component")

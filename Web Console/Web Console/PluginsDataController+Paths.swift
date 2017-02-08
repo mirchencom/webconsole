@@ -16,7 +16,7 @@ extension PluginsDataController {
                 pluginPredicate.evaluate(with: $0)
             }
             for pluginPathComponent in pluginPathComponents {
-                let pluginPath = path.stringByAppendingPathComponent(pluginPathComponent)
+                let pluginPath = path.appendingPathComponent(pluginPathComponent)
                 pluginPaths.append(pluginPath)
             }
         }

@@ -27,7 +27,7 @@ class Plugin: WCLPlugin {
     }
     
     struct ClassConstants {
-        static let infoDictionaryPathComponent = "Contents".stringByAppendingPathComponent("Info.plist")
+        static let infoDictionaryPathComponent = "Contents".appendingPathComponent("Info.plist")
     }
     internal let bundle: Bundle
     let hidden: Bool
@@ -122,7 +122,7 @@ class Plugin: WCLPlugin {
         get {
             if let resourcePath = resourcePath {
                 if let command = command {
-                    return resourcePath.stringByAppendingPathComponent(command)
+                    return resourcePath.appendingPathComponent(command)
                 }
             }
             return nil

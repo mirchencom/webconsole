@@ -17,7 +17,7 @@ class PluginsDataControllerFileSystemTests: PluginsDataControllerEventTestCase {
 
     func testAddAndDeletePlugin() {
         let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
-        let destinationPluginPath = pluginPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(destinationPluginFilename)
+        let destinationPluginPath = pluginPath.deletingLastPathComponent.appendingPathComponent(destinationPluginFilename)
 
         var newPlugin: Plugin!
         copyPluginWithConfirmation(plugin, destinationPluginPath: destinationPluginPath, handler: { (copiedPlugin) -> Void in
@@ -31,7 +31,7 @@ class PluginsDataControllerFileSystemTests: PluginsDataControllerEventTestCase {
     
     func testMovePlugin() {
         let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
-        let destinationPluginPath = pluginPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(destinationPluginFilename)
+        let destinationPluginPath = pluginPath.deletingLastPathComponent.appendingPathComponent(destinationPluginFilename)
         
         // Move the plugin
         var newPlugin: Plugin!

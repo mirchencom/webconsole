@@ -22,7 +22,7 @@ class DirectoryTests: XCTestCase {
         let nameKey = kCFBundleNameKey
         let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
         let applicationSupportPath = applicationSupportDirectoryPath
-            .stringByAppendingPathComponent(applicationName)
+            .appendingPathComponent(applicationName)
         XCTAssert(applicationSupportPath == Directory.applicationSupport.path(), "The paths should match")
     }
     
@@ -31,8 +31,8 @@ class DirectoryTests: XCTestCase {
         let nameKey = kCFBundleNameKey
         let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
         let applicationSupportPluginsPath = applicationSupportPath
-            .stringByAppendingPathComponent(applicationName)
-            .stringByAppendingPathComponent(pluginsDirectoryPathComponent)
+            .appendingPathComponent(applicationName)
+            .appendingPathComponent(pluginsDirectoryPathComponent)
         XCTAssert(applicationSupportPluginsPath == Directory.applicationSupportPlugins.path(), "The paths should match")
     }
 
@@ -41,7 +41,7 @@ class DirectoryTests: XCTestCase {
         let nameKey = kCFBundleNameKey
         let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
         let cachesPath = cachesDirectory
-            .stringByAppendingPathComponent(applicationName)
+            .appendingPathComponent(applicationName)
         XCTAssert(cachesPath == Directory.caches.path(), "The paths should match")
     }
 }
