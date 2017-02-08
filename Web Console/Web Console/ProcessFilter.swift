@@ -56,7 +56,7 @@ class ProcessFilter {
         completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
     {
         if identifiers.isEmpty {
-            let error = NSError.errorWithDescription("No identifiers specified")
+            let error = NSError.error(description: "No identifiers specified")
             completionHandler(nil, error)
             return
         }

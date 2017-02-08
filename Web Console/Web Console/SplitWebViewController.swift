@@ -206,7 +206,7 @@ class SplitWebViewController: NSSplitViewController {
     
     // MARK: Actions
     
-    @IBAction func toggleLogShown(sender: AnyObject?) {
+    @IBAction func toggleLogShown(_ sender: AnyObject?) {
         toggleLog()
     }
 
@@ -221,12 +221,12 @@ class SplitWebViewController: NSSplitViewController {
     }
 
     func toggleLog() {
-        splitController.toggleCollapsed(true)
+        splitController.toggleCollapsed(animated: true)
     }
     
     // MARK: Validation
     
-    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         guard let action = menuItem.action else {
             return super.validateMenuItem(menuItem)
         }

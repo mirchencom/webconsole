@@ -40,7 +40,7 @@ extension NSError {
             description += ", standardError: \(standardError)"
         }
         
-        return errorWithDescription(description, code: TaskTerminatedErrorCode.uncaughtSignal.rawValue)
+        return error(description: description, code: TaskTerminatedErrorCode.uncaughtSignal.rawValue)
     }
     
     class func taskTerminatedNonzeroExitCode(launchPath: String?,

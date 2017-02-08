@@ -102,7 +102,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         }
     }
 
-    func newPluginFromPlugin(plugin: Plugin, handler: ((_ newPlugin: Plugin?, error: NSError?) -> Void)?) {
+    func newPluginFromPlugin(plugin: Plugin, handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
         duplicatePlugin(plugin, handler: handler)
     }
 

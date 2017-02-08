@@ -70,7 +70,7 @@ class SplitController {
         }
     }
     
-    func setCollapsed(collapsed: Bool, animated: Bool) {
+    func setCollapsed(_ collapsed: Bool, animated: Bool) {
         if splitViewItem.isCollapsed != collapsed {
             if animated {
                 splitViewItem.animator().isCollapsed = collapsed
