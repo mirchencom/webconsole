@@ -27,24 +27,24 @@ import Cocoa
 
     // MARK: Convenience
     
-    func addObject(object: AnyObject) {
+    func addObject(_ object: AnyObject) {
         insertObject(object, inObjectsAtIndex: 0)
     }
     
-    func addObjects(objects: [AnyObject]) {
+    func addObjects(_ objects: [AnyObject]) {
         let range = NSMakeRange(0, objects.count)
         let indexes = IndexSet(integersIn: range.toRange() ?? 0..<0)
         insertObjects(objects, atIndexes: indexes)
     }
     
-    func removeObject(object: AnyObject) {
+    func removeObject(_ object: AnyObject) {
         let index = indexOfObject(object)
         if index != NSNotFound {
             removeObjectFromObjectsAtIndex(index)
         }
     }
     
-    func indexOfObject(object: AnyObject) -> Int {
+    func indexOfObject(_ object: AnyObject) -> Int {
          return mutableObjects.index(of: object)
     }
     
@@ -54,7 +54,7 @@ import Cocoa
         return NSArray(array: mutableObjects)
     }
     
-    func insertObject(object: AnyObject, inObjectsAtIndex index: Int) {
+    func insertObject(_ object: AnyObject, inObjectsAtIndex index: Int) {
         let replacedObject: AnyObject? = nameToObjectController.add(object) as AnyObject?
         mutableObjects.insert(object, at: index)
         if let replacedObject: AnyObject = replacedObject {
@@ -65,7 +65,7 @@ import Cocoa
         }
     }
     
-    func insertObjects(objects: [AnyObject], atIndexes indexes: IndexSet) {
+    func insertObjects(_ objects: [AnyObject], atIndexes indexes: IndexSet) {
 
         let replacedObjects = nameToObjectController.addObjects(from: objects)
         mutableObjects.insert(objects, at: indexes)
