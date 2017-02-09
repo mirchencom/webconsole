@@ -14,7 +14,7 @@ class DuplicatePluginController {
     struct ClassConstants {
         static let tempDirectoryName = "Duplicate Plugin"
     }
-    class func pluginFilenameFromName(name: String) -> String {
+    class func pluginFilename(fromName: String) -> String {
         return name.appendingPathExtension(pluginFileExtension)!
     }
     func duplicatePlugin(plugin: Plugin, toDirectoryAtURL destinationDirectoryURL: URL, completionHandler handler: @escaping (_ plugin: Plugin?, _ error: NSError?) -> Void) {
@@ -29,7 +29,7 @@ class DuplicatePluginController {
             var plugin: Plugin?
             if let URL = URL {
                 let UUID = Foundation.UUID()
-                let movedFilename = type(of: self).pluginFilenameFromName(UUID.uuidString)
+                let movedFilename = type(of: self).pluginFilename(fromName: UUID.uuidString)
                 let movedDestinationURL = destinationDirectoryURL.appendingPathComponent(movedFilename)
 
                 do {
@@ -46,7 +46,7 @@ class DuplicatePluginController {
                     plugin = movedPlugin
                     
                     // Attempt to move the plugin to a directory based on its name (this can safely fail)
-                    let renamedPluginFilename = type(of: self).pluginFilenameFromName(movedPlugin.name)
+                    let renamedPluginFilename = type(of: self).pluginFilename(fromName: movedPlugin.name)
                     let renamedDestinationURL = movedDestinationURL.deletingLastPathComponent().appendingPathComponent(renamedPluginFilename)
                     do {
                         try FileManager.default.moveItem(at: movedDestinationURL, to: renamedDestinationURL)

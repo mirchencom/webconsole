@@ -201,7 +201,7 @@ class PluginTests: PluginsManagerTestCase {
         XCTAssertTrue(plugin.isEqualToPlugin(samePlugin), "The plugins should be equal")
         
         // Duplicate the plugins folder, this should not cause a second plugin to be added to the plugin manager since the copy originated from the same process
-        let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
+        let destinationPluginFilename = DuplicatePluginController.pluginFilename(fromName: plugin.identifier)
         let destinationPluginURL: URL! = pluginURL.deletingLastPathComponent().appendingPathComponent(destinationPluginFilename)
         do {
             try FileManager.default.copyItem(at: pluginURL as URL, to: destinationPluginURL)

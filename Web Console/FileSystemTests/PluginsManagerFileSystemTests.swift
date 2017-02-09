@@ -20,7 +20,7 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
     // MARK: File System Tests
     
     func testAddAndDeletePlugin() {
-        let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
+        let destinationPluginFilename = DuplicatePluginController.pluginFilename(fromName: plugin.identifier)
         let destinationPluginParentPath = pluginPath!
         let destinationPluginPath = destinationPluginParentPath.deletingLastPathComponent.appendingPathComponent(destinationPluginFilename)
         
@@ -57,7 +57,7 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
     
     func testMovePlugin() {
         let pluginPath = plugin.bundle.bundlePath
-        let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
+        let destinationPluginFilename = DuplicatePluginController.pluginFilename(fromName: plugin.identifier)
         let pluginParentDirectory = pluginPath.deletingLastPathComponent
         let destinationPluginPath =  pluginParentDirectory.appendingPathComponent(destinationPluginFilename)
         
