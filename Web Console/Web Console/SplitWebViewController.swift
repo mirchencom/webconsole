@@ -14,18 +14,18 @@ let splitWebViewHeight = CGFloat(150)
 
 @objc protocol SplitWebViewControllerDelegate: class {
     // MARK: Data Source
-    func windowIsVisibleForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Bool
-    func windowForSplitWebViewController(splitWebViewController: SplitWebViewController) -> NSWindow!
-    func logPluginForSplitWebViewController(splitWebViewController: SplitWebViewController) -> Plugin?
+    func windowIsVisible(for splitWebViewController: SplitWebViewController) -> Bool
+    func window(for splitWebViewController: SplitWebViewController) -> NSWindow!
+    func logPlugin(for splitWebViewController: SplitWebViewController) -> Plugin?
     // Mark: Events
-    func splitWebViewController(splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
-    func splitWebViewControllerWillLoadHTML(splitWebViewController: SplitWebViewController)
+    func splitWebViewController(_ splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
+    func splitWebViewControllerWillLoadHTML(_ splitWebViewController: SplitWebViewController)
     // MARK: Starting & Finishing Tasks
-    func splitWebViewController(splitWebViewController: SplitWebViewController,
+    func splitWebViewController(_ splitWebViewController: SplitWebViewController,
         willStartTask task: Process)
-    func splitWebViewController(splitWebViewController: SplitWebViewController,
+    func splitWebViewController(_ splitWebViewController: SplitWebViewController,
         didFinishTask task: Process)
-    func splitWebViewController(splitWebViewController: SplitWebViewController,
+    func splitWebViewController(_ splitWebViewController: SplitWebViewController,
         didFailToRunTask task: Process,
         error: NSError)
 }
@@ -127,7 +127,7 @@ class SplitWebViewController: NSSplitViewController {
         }
         
         if logWebViewController.plugin == nil {
-            if let logPlugin = delegate?.logPluginForSplitWebViewController(self) {
+            if let logPlugin = delegate?.logPlugin(for: self) {
                 logWebViewController.run(logPlugin,
                     withArguments: nil,
                     inDirectoryPath: nil,
@@ -246,7 +246,7 @@ class SplitWebViewController: NSSplitViewController {
     
     // MARK: NSSplitViewDelegate
     
-    override func splitView(splitView: NSSplitView,
+    override func splitView(_ splitView: NSSplitView,
         shouldCollapseSubview subview: NSView,
         forDoubleClickOnDividerAt dividerIndex: Int) -> Bool
     {
@@ -269,7 +269,7 @@ class SplitWebViewController: NSSplitViewController {
     // later, you may choose to not call [super layout] from your override.
     // Set a breakpoint on DETECTED_MISSING_CONSTRAINTS to debug.
     // This error will only be logged once."
-    override func splitView(splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
+    override func splitView(_ splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
         if splitView != self.splitView {
             return false
         }
@@ -277,7 +277,7 @@ class SplitWebViewController: NSSplitViewController {
         return subview == splitController.splitViewsSubview
     }
     
-    override func splitView(splitView: NSSplitView, shouldHideDividerAt dividerIndex: Int) -> Bool {
+    override func splitView(_ splitView: NSSplitView, shouldHideDividerAt dividerIndex: Int) -> Bool {
         if dividerIndex == splitViewItemDividerIndex {
             if let collapsed = splitController.isCollapsed() {
                 return collapsed
@@ -286,8 +286,8 @@ class SplitWebViewController: NSSplitViewController {
         return false
     }
 
-    override func splitViewDidResizeSubviews(notification: Notification) {
-        guard let isVisible = delegate?.windowIsVisibleForSplitWebViewController(self), isVisible == true else {
+    override func splitViewDidResizeSubviews(_ notification: Notification) {
+        guard let isVisible = delegate?.windowIsVisible(for: self), isVisible == true else {
             return
         }
         
@@ -342,7 +342,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
     
     func window(for webViewController: WCLWebViewController) -> NSWindow {
         // TODO: Fortify this forced unwrap
-        return delegate!.windowForSplitWebViewController(self)!
+        return delegate!.window(for: self)!
     }
     
     func webViewController(webViewController: WCLWebViewController, didReceiveTitle title: String) {
