@@ -32,7 +32,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         let copyExpectation = expectation(description: "Copy")
         
         var copiedPluginURL: URL!
-        copyDirectoryController.copyItemAtURL(pluginURL, completionHandler: { (URL, error) -> Void in
+        copyDirectoryController.copyItem(at: pluginURL, completionHandler: { (URL, error) -> Void in
             XCTAssertNotNil(URL, "The URL should not be nil")
             XCTAssertNil(error, "The error should be nil")
             
@@ -80,7 +80,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
 
     func testCleanUpOnInit() {
         let copyExpectation = expectation(description: "Copy")
-        copyDirectoryController.copyItemAtURL(pluginURL, completionHandler: { (URL, error) -> Void in
+        copyDirectoryController.copyItem(at: pluginURL, completionHandler: { (URL, error) -> Void in
             XCTAssertNotNil(URL, "The URL should not be nil")
             XCTAssertNil(error, "The error should be nil")
 
