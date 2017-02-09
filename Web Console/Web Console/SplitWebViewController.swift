@@ -98,7 +98,7 @@ class SplitWebViewController: NSSplitViewController {
         print("Debug Error: \(text)")
 
         let preparedText = prepareLog(text: text, prefix: logErrorPrefix)
-        logReadFromStandardInput(preparedText)
+        logReadFromStandardInput(text: preparedText)
     }
 
     func logDebugMessage(text: String) {
@@ -109,7 +109,7 @@ class SplitWebViewController: NSSplitViewController {
         print("Debug Message: \(text)")
 
         let preparedText = prepareLog(text: text, prefix: logMessagePrefix)
-        logReadFromStandardInput(preparedText)
+        logReadFromStandardInput(text: preparedText)
     }
     
     func prepareLog(text: String, prefix: String) -> String {
