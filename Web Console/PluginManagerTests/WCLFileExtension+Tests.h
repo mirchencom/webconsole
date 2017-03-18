@@ -8,5 +8,5 @@
 
 @interface WCLFileExtension (Test)
 + (NSDictionary *)fileExtensionToPluginDictionary;
-+ (void)setfileExtensionToPluginDictionary:(NSDictionary *)fileExtensionToPluginDictionary;
++ (void)setFileExtensionToPluginDictionary:(NSDictionary *)fileExtensionToPluginDictionary;
 @end
