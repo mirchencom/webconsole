@@ -55,7 +55,7 @@ class PluginsDirectoryEventHandler {
         } else {
             pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] = [path]
 
-            fireCreatedOrModifiedEventsAfterDelayForPluginPath(pluginPath)
+            fireCreatedOrModifiedEventsAfterDelay(forPluginPath: pluginPath)
         }
     }
 
@@ -66,7 +66,7 @@ class PluginsDirectoryEventHandler {
         } else {
             pluginPathToCreatedOrModifiedFilePaths[pluginPath] = [path]
 
-            fireCreatedOrModifiedEventsAfterDelayForPluginPath(pluginPath)
+            fireCreatedOrModifiedEventsAfterDelay(forPluginPath: pluginPath)
         }
     }
 
@@ -81,7 +81,7 @@ class PluginsDirectoryEventHandler {
         }
     }
 
-    func fireCreatedOrModifiedEventsAfterDelayForPluginPath(pluginPath: String) {
+    func fireCreatedOrModifiedEventsAfterDelay(forPluginPath pluginPath: String) {
         let delay = ClassConstants.fileEventDelay * Double(NSEC_PER_SEC)
         let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: time, execute: {
