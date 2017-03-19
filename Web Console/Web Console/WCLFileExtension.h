@@ -11,11 +11,10 @@
 
 @class Plugin;
 
+extern NSString * __nonnull const WCLFileExtensionPluginsKey;
+extern NSString * __nonnull const WCLFileExtensionSuffixKey;
+
 NS_ASSUME_NONNULL_BEGIN
-
-extern NSString * const WCLFileExtensionPluginsKey;
-extern NSString * const WCLFileExtensionSuffixKey;
-
 @interface WCLFileExtension : NSObject
 - (id)initWithSuffix:(NSString *)extension;
 @property (nonatomic, strong, readonly) NSString *suffix;
@@ -29,5 +28,4 @@ extern NSString * const WCLFileExtensionSuffixKey;
 - (void)removeObjectFromPluginsAtIndex:(NSUInteger)index;
 - (void)removePluginsAtIndexes:(NSIndexSet *)indexes;
 @end
-
 NS_ASSUME_NONNULL_END

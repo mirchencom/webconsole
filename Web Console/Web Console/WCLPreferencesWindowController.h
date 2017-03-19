@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, WCLPreferencePane) {
 
 #define kPreferencesWindowControllerNibName @"WCLPreferencesWindowController"
 
-extern NSString * const WCLPreferencesWindowFrameName;
+extern NSString * __nonnull const WCLPreferencesWindowFrameName;
 
 @interface WCLPreferencesWindowController : NSWindowController
 @end

@@ -10,27 +10,31 @@
 
 @class WCLTaskRunner;
 
+NS_ASSUME_NONNULL_BEGIN
 @protocol WCLTaskRunnerDelegate <NSObject>
 @optional
 #pragma mark Starting & Finishing Tasks
-- (void)taskWillStart:(nonnull NSTask *)task;
-- (void)taskDidFinish:(nonnull NSTask *)task;
-- (void)task:(nonnull NSTask *)task didFailToRunCommandPath:(nonnull NSString *)commandPath
-             error:(nonnull NSError *)error;
+- (void)taskWillStart:(NSTask *)task;
+- (void)taskDidFinish:(NSTask *)task;
+- (void)task:(NSTask *)task didFailToRunCommandPath:(NSString *)commandPath
+             error:(NSError *)error;
 #pragma mark Events
-- (void)task:(nonnull NSTask *)task didReadFromStandardError:(nonnull NSString *)text;
-- (void)task:(nonnull NSTask *)task didReadFromStandardOutput:(nonnull NSString *)text;
-- (void)task:(nonnull NSTask *)task didRunCommandPath:(nonnull NSString *)commandPath
+- (void)task:(NSTask *)task didReadFromStandardError:(NSString *)text;
+- (void)task:(NSTask *)task didReadFromStandardOutput:(NSString *)text;
+- (void)task:(NSTask *)task didRunCommandPath:(NSString *)commandPath
          arguments:(nullable NSArray<NSString *> *)arguments
      directoryPath:(nullable NSString *)directoryPath;
 #pragma mark Data Source
-- (nullable NSDictionary *)environmentDictionaryForPluginTask:(nonnull NSTask *)task;
+- (nullable NSDictionary *)environmentDictionaryForPluginTask:(NSTask *)task;
 @end
+NS_ASSUME_NONNULL_END
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLTaskRunner : NSObject
-+ (nonnull NSTask *)runTaskWithCommandPath:(nonnull NSString *)commandPath
-                 withArguments:(nullable NSArray *)arguments
-               inDirectoryPath:(nullable NSString *)directoryPath
-                      delegate:(nullable id<WCLTaskRunnerDelegate>)delegate
-             completionHandler:(nullable void (^)(BOOL success))completionHandler;
++ (NSTask *)runTaskWithCommandPath:(NSString *)commandPath
+                     withArguments:(nullable NSArray *)arguments
+                   inDirectoryPath:(nullable NSString *)directoryPath
+                          delegate:(nullable id<WCLTaskRunnerDelegate>)delegate
+                 completionHandler:(nullable void (^)(BOOL success))completionHandler;
 @end
+NS_ASSUME_NONNULL_END
