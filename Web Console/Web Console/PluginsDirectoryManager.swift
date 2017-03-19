@@ -15,7 +15,7 @@ protocol PluginsDirectoryManagerDelegate {
 
 class PluginsPathHelper {
 
-    class func range(inPath path: String, untilSubpath subpath: String) -> NSRange {
+    class func subpathRange(inPath path: String, untilSubpath subpath: String) -> NSRange {
         // Normalize the subpath so the same range is always returned regardless of the format of the subpath (e.g., number of slashes)
         let normalizedSubpath = subpath.standardizingPath
         
@@ -31,7 +31,7 @@ class PluginsPathHelper {
     }
     
     class func subpathFromPath(path: String, untilSubpath subpath: String) -> String? {
-        let range = range(inPath:path, untilSubpath: subpath)
+        let range = subpathRange(inPath:path, untilSubpath: subpath)
         if (range.location == NSNotFound) {
             return nil
         }
@@ -42,7 +42,7 @@ class PluginsPathHelper {
     
     class func pathComponentsOfPath(path: String, afterSubpath subpath: String) -> [String]? {
         let normalizedPath = path.standardizingPath
-        let range = range(inPath:normalizedPath, untilSubpath: subpath)
+        let range = subpathRange(inPath:normalizedPath, untilSubpath: subpath)
         if range.location == NSNotFound {
             return nil
         }
