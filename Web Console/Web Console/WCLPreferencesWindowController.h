@@ -19,5 +19,4 @@ typedef NS_ENUM(NSInteger, WCLPreferencePane) {
 extern NSString * const WCLPreferencesWindowFrameName;
 
 @interface WCLPreferencesWindowController : NSWindowController
-
 @end

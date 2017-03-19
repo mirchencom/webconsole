@@ -8,14 +8,16 @@
 
 @class Plugin;
 
+NS_ASSUME_NONNULL_BEGIN
 @protocol WCLPluginView <NSObject>
-- (void)loadHTML:(nonnull NSString *)HTML
-         baseURL:(nullable NSURL *)baseURL
+- (void)loadHTML:(NSString *)HTML
+         baseURL:(NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
-- (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
-- (void)readFromStandardInput:(nonnull NSString *)text;
-- (void)runPlugin:(nonnull Plugin *)plugin
+- (nullable NSString *)doJavaScript:(NSString *)javaScript;
+- (void)readFromStandardInput:(NSString *)text;
+- (void)runPlugin:(Plugin *)plugin
     withArguments:(nullable NSArray *)arguments
   inDirectoryPath:(nullable NSString *)directoryPath
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
 @end
+NS_ASSUME_NONNULL_END
