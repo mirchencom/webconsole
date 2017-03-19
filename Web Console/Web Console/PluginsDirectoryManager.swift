@@ -118,26 +118,26 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
 
     // MARK: WCLDirectoryWatcherDelegate
     
-    func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, directoryWasCreatedOrModifiedAtPath path: String!) {
-        assert(pathIsSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
+    func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, directoryWasCreatedOrModifiedAtPath path: String) {
+        assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
 
-        if let pluginPath = pluginPathFromPath(path) {
-            pluginsDirectoryEventHandler.addDirectoryWasCreatedOrModifiedEventAtPluginPath(pluginPath, path: path)
+        if let pluginPath = pluginPath(fromPath: path) {
+            pluginsDirectoryEventHandler.addDirectoryWasCreatedOrModifiedEvent(atPluginPath: pluginPath, path: path)
         }
     }
 
-    func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, fileWasCreatedOrModifiedAtPath path: String!) {
-        assert(pathIsSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
+    func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, fileWasCreatedOrModifiedAtPath path: String) {
+        assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
     
-        if let pluginPath = pluginPathFromPath(path) {
+        if let pluginPath = pluginPath(fromPath: path) {
             pluginsDirectoryEventHandler.addFileWasCreatedOrModifiedEventAtPluginPath(pluginPath, path: path)
         }
     }
 
-    func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, itemWasRemovedAtPath path: String!) {
-        assert(pathIsSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
+    func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, itemWasRemovedAtPath path: String) {
+        assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
         
-        if let pluginPath = pluginPathFromPath(path) {
+        if let pluginPath = pluginPath(fromPath: path) {
             pluginsDirectoryEventHandler.addItemWasRemovedAtPluginPath(pluginPath, path: path)
         }
     }
@@ -272,7 +272,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func pluginPathFromPath(path: String) -> String? {
+    func pluginPath(fromPath path: String) -> String? {
         if let pluginPathComponent = pluginPathComponentFromPath(path) {
             let pluginPath = pluginsDirectoryURL.path.appendingPathComponent(pluginPathComponent)
             return pluginPath
@@ -296,7 +296,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
             return pathComponents as NSArray?
     }
     
-    func pathIsSubpathOfPluginsDirectory(path: String) -> Bool {
+    func isSubpathOfPluginsDirectory(path: String) -> Bool {
         return PluginsPathHelper.path(path, containsSubpath: pluginsDirectoryURL.path)
     }
     
