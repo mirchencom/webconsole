@@ -15,7 +15,7 @@ protocol PluginsDirectoryManagerDelegate {
 
 class PluginsPathHelper {
 
-    class func range(inPath:path: String, untilSubpath subpath: String) -> NSRange {
+    class func range(inPath path: String, untilSubpath subpath: String) -> NSRange {
         // Normalize the subpath so the same range is always returned regardless of the format of the subpath (e.g., number of slashes)
         let normalizedSubpath = subpath.standardizingPath
         
