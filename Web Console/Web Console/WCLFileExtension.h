@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
+@class Plugin;
+
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * const WCLFileExtensionPluginsKey;
 extern NSString * const WCLFileExtensionSuffixKey;
-
-@class Plugin;
 
 @interface WCLFileExtension : NSObject
 - (id)initWithSuffix:(NSString *)extension;
@@ -22,7 +22,6 @@ extern NSString * const WCLFileExtensionSuffixKey;
 @property (nonatomic, assign, getter = isEnabled) BOOL enabled;
 @property (nonatomic, strong, nullable) Plugin *selectedPlugin;
 @property (nonatomic, strong) NSArrayController *pluginsArrayController;
-
 #pragma mark Required Key-Value Coding To-Many Relationship Compliance
 - (NSArray<Plugin *> *)plugins;
 - (void)insertObject:(Plugin *)plugin inPluginsAtIndex:(NSUInteger)index;

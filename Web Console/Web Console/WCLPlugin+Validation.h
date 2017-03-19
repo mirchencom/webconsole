@@ -8,6 +8,7 @@
 
 #import "WCLPlugin.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLPlugin (Validation)
 #pragma mark Name
 + (BOOL)nameContainsOnlyValidCharacters:(NSString *)name;
@@ -18,3 +19,4 @@
 - (BOOL)extensionsAreValid:(NSArray *)extensions;
 + (NSArray *)validExtensionsFromExtensions:(NSArray *)extensions;
 @end
+NS_ASSUME_NONNULL_END

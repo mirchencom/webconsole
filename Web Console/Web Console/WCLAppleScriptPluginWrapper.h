@@ -10,10 +10,12 @@
 
 @class Plugin;
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLAppleScriptPluginWrapper : NSObject
 - (instancetype)initWithPlugin:(Plugin *)plugin;
 - (NSString *)name;
-- (NSString *)resourcePath;
-- (NSString *)resourceURLString;
+- (nullable NSString *)resourcePath;
+- (nullable NSString *)resourceURLString;
 - (NSArray *)orderedWindows;
 @end
+NS_ASSUME_NONNULL_END

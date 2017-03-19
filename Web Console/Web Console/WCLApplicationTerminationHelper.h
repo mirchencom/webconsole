@@ -9,10 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface WCLApplicationTerminationHelper : NSObject
-
 /*! Returns whether the application should terminate, and manages replyToApplicationShouldTerminate:.
  * \return YES if the application should terminate, otherwise NO.
  */
 + (BOOL)applicationShouldTerminateAndManageWebWindowControllersWithTasks;
-
 @end

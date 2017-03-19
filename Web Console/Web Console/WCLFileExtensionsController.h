@@ -11,12 +11,12 @@
 @class WCLFileExtension;
 @class PluginsManager;
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLFileExtensionsController : NSObject
 @property (nonatomic, strong, readonly) PluginsManager *pluginsManager;
 - (instancetype)initWithPluginsManager:(PluginsManager *)pluginsManager;
 - (NSArray *)suffixes;
-- (WCLFileExtension *)fileExtensionForSuffix:(NSString *)extension;
-
+- (nullable WCLFileExtension *)fileExtensionForSuffix:(NSString *)extension;
 #pragma mark Required Key-Value Coding To-Many Relationship Compliance
 - (NSArray *)fileExtensions;
 - (void)insertObject:(WCLFileExtension *)fileExtension inFileExtensionsAtIndex:(NSUInteger)index;
@@ -24,3 +24,4 @@
 - (void)removeObjectFromFileExtensionsAtIndex:(NSUInteger)index;
 - (void)removeFileExtensionsAtIndexes:(NSIndexSet *)indexes;
 @end
+NS_ASSUME_NONNULL_END

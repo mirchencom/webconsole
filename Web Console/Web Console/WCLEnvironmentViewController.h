@@ -9,5 +9,4 @@
 #import <Cocoa/Cocoa.h>
 
 @interface WCLEnvironmentViewController : NSViewController
-
 @end
