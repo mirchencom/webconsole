@@ -19,6 +19,7 @@
 
 @class SplitWebViewController;
 
+
 NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowController (Tests)
 - (void)terminateTasksAndCloseWindow;
@@ -28,11 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 NS_ASSUME_NONNULL_END
 
+
 NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowController (DefaultWebView)
 @property (nonatomic, readonly) WebView *defaultWebView;
 @end
 NS_ASSUME_NONNULL_END
+
 
 NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase

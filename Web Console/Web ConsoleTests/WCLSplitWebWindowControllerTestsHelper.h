@@ -10,6 +10,7 @@
 
 @class WCLSplitWebWindowController;
 
+
 NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowControllerTestsHelper : NSObject
 + (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLSplitWebWindowController *)splitWebWindowController;
