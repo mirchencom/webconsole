@@ -8,7 +8,9 @@
 
 #import <XCTest/XCTest.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface XCTestCase (UserDefaults)
 - (void)setUpMockUserDefaults;
 - (void)tearDownMockUserDefaults;
 @end
+NS_ASSUME_NONNULL_END

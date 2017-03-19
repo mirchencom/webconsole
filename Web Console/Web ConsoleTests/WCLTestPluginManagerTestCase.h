@@ -7,5 +7,4 @@
 //
 
 @interface WCLTestPluginManagerTestCase : XCTestCase
-
 @end
