@@ -29,7 +29,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         // Test that the plugin starts not editable
         XCTAssertFalse(plugin.editable, "The plugin should not be editable")
 
-        var pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(pluginURL)
+        var pluginInfoDictionaryURL = Plugin.infoDictionaryURL(forPluginURL: pluginURL)
         var pluginInfoDictionaryContents: String!
         do {
             pluginInfoDictionaryContents = try String(contentsOf: pluginInfoDictionaryURL, encoding: String.Encoding.utf8)
@@ -62,7 +62,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
 
         // Test that the new plugin is editable
         XCTAssertTrue(duplicatePlugin.editable, "The duplicated plugin should be editable")
-        pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(duplicatePlugin.bundle.bundleURL)
+        pluginInfoDictionaryURL = Plugin.infoDictionaryURL(forPluginURL: duplicatePlugin.bundle.bundleURL)
 
         do {
             pluginInfoDictionaryContents = try String(contentsOf: pluginInfoDictionaryURL, encoding: String.Encoding.utf8)

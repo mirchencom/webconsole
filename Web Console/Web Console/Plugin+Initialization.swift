@@ -125,7 +125,7 @@ extension Plugin {
     }
     
     class func validInfoDictionary(bundle: Bundle) throws -> [AnyHashable: Any]? {
-        let URL = self.infoDictionaryURLForPluginURL(bundle.bundleURL)
+        let URL = self.infoDictionaryURL(forPluginURL: bundle.bundleURL)
         if let infoDictionary = NSDictionary(contentsOf: URL) {
             return infoDictionary as? [AnyHashable: Any]
         }
