@@ -40,7 +40,7 @@ class PluginsPathHelper {
         return pathUntilSubpath
     }
     
-    class func pathComponentsOfPath(path: String, afterSubpath subpath: String) -> [String]? {
+    class func pathComponents(ofPath path: String, afterSubpath subpath: String) -> [String]? {
         let normalizedPath = path.standardizingPath
         let range = subpathRange(inPath:normalizedPath, untilSubpath: subpath)
         if range.location == NSNotFound {
@@ -281,7 +281,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
     
     func pluginPathComponentFromPath(path: String) -> String? {
-        if let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: pluginsDirectoryURL.path) {
+        if let pathComponents = PluginsPathHelper.pathComponents(ofPath: path, afterSubpath: pluginsDirectoryURL.path) {
             if (pathComponents.count > 0) {
                 var pluginSubpathComponents = pathComponents as Array
                 let pathComponent = pluginSubpathComponents[0]
@@ -292,7 +292,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
 
     func pluginPathComponentsFromPath(path: String) -> NSArray? {
-            let pathComponents = PluginsPathHelper.pathComponentsOfPath(path, afterSubpath: pluginsDirectoryURL.path)
+            let pathComponents = PluginsPathHelper.pathComponents(ofPath: path, afterSubpath: pluginsDirectoryURL.path)
             return pathComponents as NSArray?
     }
     
