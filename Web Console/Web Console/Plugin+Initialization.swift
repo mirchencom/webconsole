@@ -80,18 +80,18 @@ extension Plugin {
     
     class func validPlugin(path: String) throws -> Plugin? {
         do {
-            if let bundle = try validBundle(path),
-                let infoDictionary = try validInfoDictionary(bundle),
-                let identifier = try validIdentifier(infoDictionary),
-                let name = try validName(infoDictionary)
+            if let bundle = try validBundle(path: path),
+                let infoDictionary = try validInfoDictionary(bundle: bundle),
+                let identifier = try validIdentifier(infoDictionary: infoDictionary),
+                let name = try validName(infoDictionary: infoDictionary)
             {
                 // Optional Keys
-                let pluginType = validPluginTypeFromPath(path)
-                let command = try validCommand(infoDictionary)
-                let suffixes = try validSuffixes(infoDictionary)
-                let hidden = try validHidden(infoDictionary)
-                let editable = try validEditable(infoDictionary)
-                let debugModeEnabled = try validDebugModeEnabled(infoDictionary)
+                let pluginType = validPluginType(path: path)
+                let command = try validCommand(infoDictionary: infoDictionary)
+                let suffixes = try validSuffixes(infoDictionary: infoDictionary)
+                let hidden = try validHidden(infoDictionary: infoDictionary)
+                let editable = try validEditable(infoDictionary: infoDictionary)
+                let debugModeEnabled = try validDebugModeEnabled(infoDictionary: infoDictionary)
                 
 
                 // Plugin
@@ -221,7 +221,7 @@ extension Plugin {
         return nil
     }
     
-    class func validPluginTypeFromPath(path: String) -> PluginType {
+    class func validPluginType(path: String) -> PluginType {
         let pluginContainerDirectory = path.deletingLastPathComponent
         switch pluginContainerDirectory {
         case Directory.applicationSupportPlugins.path():
