@@ -90,7 +90,7 @@ class SplitWebViewController: NSSplitViewController {
         return queue
     }()
     
-    func logDebugError(text: String) {
+    func logDebugError(_ text: String) {
         if !shouldDebugLog {
             return
         }
@@ -101,7 +101,7 @@ class SplitWebViewController: NSSplitViewController {
         logReadFromStandardInput(text: preparedText)
     }
 
-    func logDebugMessage(text: String) {
+    func logDebugMessage(_ text: String) {
         if !shouldDebugLog {
             return
         }
