@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol WCLPluginView <NSObject>
 - (void)loadHTML:(NSString *)HTML
-         baseURL:(NSURL *)baseURL
+         baseURL:(nullable NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
 - (nullable NSString *)doJavaScript:(NSString *)javaScript;
 - (void)readFromStandardInput:(NSString *)text;
