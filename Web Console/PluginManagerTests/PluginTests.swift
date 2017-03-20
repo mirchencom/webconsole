@@ -44,7 +44,7 @@ class PluginTests: PluginsManagerTestCase {
         plugin.suffixes = testPluginSuffixesTwo
         let contentsFive = infoDictionaryContentsForPluginWithConfirmation(plugin)
         XCTAssertNotEqual(contentsFour, contentsFive, "The contents should not be equal")
-        let newPlugin: Plugin! = Plugin.pluginWithURL(pluginURL)
+        let newPlugin: Plugin! = Plugin.makePlugin(url: pluginURL)
 
         XCTAssertEqual(plugin.name, newPlugin.name, "The names should be equal")
         XCTAssertEqual(plugin.command!, newPlugin.command!, "The commands should be equal")
@@ -196,7 +196,7 @@ class PluginTests: PluginsManagerTestCase {
     }
 
     func testEquality() {
-        let samePlugin: Plugin! = Plugin.pluginWithURL(pluginURL)
+        let samePlugin: Plugin! = Plugin.makePlugin(url: pluginURL)
         XCTAssertNotEqual(plugin, samePlugin, "The plugins should not be equal")
         XCTAssertTrue(plugin.isEqualToPlugin(samePlugin), "The plugins should be equal")
         
@@ -209,7 +209,7 @@ class PluginTests: PluginsManagerTestCase {
             XCTAssertTrue(false, "The copy should succeed")
         }
 
-        let newPlugin: Plugin! = Plugin.pluginWithURL(destinationPluginURL)
+        let newPlugin: Plugin! = Plugin.makePlugin(url: destinationPluginURL)
         XCTAssertNotEqual(plugin, newPlugin, "The plugins should not be equal")
         // This fails because the bundle URL and commandPath are different
         XCTAssertFalse(plugin.isEqualToPlugin(newPlugin), "The plugins should be equal")

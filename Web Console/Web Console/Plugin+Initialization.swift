@@ -45,7 +45,7 @@ extension Plugin {
         }
     }
 
-    class func pluginWithURL(url: URL) -> Plugin? {
+    class func makePlugin(url: URL) -> Plugin? {
         return self.pluginWithPath(url.path)
     }
 
