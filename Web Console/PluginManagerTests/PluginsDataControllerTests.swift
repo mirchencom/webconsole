@@ -30,7 +30,7 @@ class PluginsDataControllerClassTests: XCTestCase {
         // Test plugins can be created from all paths
         var plugins = [Plugin]()
         for pluginPath in pluginPaths {
-            if let plugin = Plugin.pluginWithPath(pluginPath) {
+            if let plugin = Plugin.makePlugin(path: pluginPath) {
                 plugins.append(plugin)
             } else {
                 XCTAssert(false, "The plugin should exist")

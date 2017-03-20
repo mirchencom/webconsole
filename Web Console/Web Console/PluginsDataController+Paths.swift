@@ -27,7 +27,7 @@ extension PluginsDataController {
     class func pluginsAtPluginPaths(pluginPaths: [String]) -> [Plugin] {
         var plugins = [Plugin]()
         for pluginPath in pluginPaths {
-            if let plugin = Plugin.pluginWithPath(pluginPath) {
+            if let plugin = Plugin.makePlugin(path: pluginPath) {
                 plugins.append(plugin)
             }
         }

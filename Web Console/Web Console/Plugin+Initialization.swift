@@ -46,12 +46,12 @@ extension Plugin {
     }
 
     class func makePlugin(url: URL) -> Plugin? {
-        return self.pluginWithPath(url.path)
+        return self.makePlugin(path: url.path)
     }
 
-    class func pluginWithPath(path: String) -> Plugin? {
+    class func makePlugin(path: String) -> Plugin? {
         do {
-            let plugin = try validPluginWithPath(path)
+            let plugin = try makeValidPlugin(path: path)
             return plugin
         } catch PluginLoadError.invalidBundleError(let path) {
             print("Bundle is invalid at path \(path).")
@@ -78,7 +78,7 @@ extension Plugin {
         return nil
     }
     
-    class func validPluginWithPath(path: String) throws -> Plugin? {
+    class func makeValidPlugin(path: String) throws -> Plugin? {
         do {
             if let bundle = try validBundle(path),
                 let infoDictionary = try validInfoDictionary(bundle),
