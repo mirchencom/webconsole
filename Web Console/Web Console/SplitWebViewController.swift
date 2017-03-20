@@ -342,7 +342,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
     
     func window(for webViewController: WCLWebViewController) -> NSWindow {
         // TODO: Fortify this forced unwrap
-        return delegate!.window(for: self)!
+        return delegate!.window(for: self)
     }
     
     func webViewController(_ webViewController: WCLWebViewController, didReceiveTitle title: String) {
