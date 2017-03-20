@@ -80,12 +80,12 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     
     var defaultPluginSavedFrameName: String {
         let plugin = type(of: self).defaultPlugin()
-        return SplitWebViewController.savedFrameNameForPluginName(plugin.name)
+        return SplitWebViewController.savedFrameName(forPluginName: plugin.name)
     }
 
     var otherPluginSavedFrameName: String {
         let plugin = type(of: self).defaultPlugin()
-        return SplitWebViewController.savedFrameNameForPluginName(plugin.name)
+        return SplitWebViewController.savedFrameName(forPluginName: plugin.name)
     }
 
     
