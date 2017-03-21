@@ -20,7 +20,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
         
         let expectation = self.expectation(description: "Task finished")
 
-        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+        _ = WCLTaskRunner.runTaskUntilFinished(withCommandPath: commandPath,
             withArguments: nil,
             inDirectoryPath: nil,
             timeout: 0.0)
@@ -50,7 +50,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
         
         let expectation = self.expectation(description: "Task finished")
         
-        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+        _ = WCLTaskRunner.runTaskUntilFinished(withCommandPath: commandPath,
             withArguments: nil,
             inDirectoryPath: nil)
         { (standardOutput, standardError, error) -> Void in
@@ -76,7 +76,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
         
         let expectation = self.expectation(description: "Task finished")
         
-        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath("/bin/cat",
+        _ = WCLTaskRunner.runTaskUntilFinished(withCommandPath: "/bin/cat",
             withArguments: [testDataPath as AnyObject],
             inDirectoryPath: nil)
             { (standardOutput, standardError, error) -> Void in

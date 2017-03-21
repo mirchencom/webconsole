@@ -84,20 +84,20 @@ extension WCLTaskRunner {
     typealias TaskResult = (_ standardOutput: String?, _ standardError: String?, _ error: NSError?) -> Void
     
 
-    class func runTaskUntilFinishedWithCommandPath(commandPath: String,
+    class func runTaskUntilFinished(withCommandPath commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         completionHandler: @escaping WCLTaskRunner.TaskResult) -> Process
     {
         let timeout = 20.0
-        return runTaskUntilFinishedWithCommandPath(commandPath,
+        return runTaskUntilFinished(withCommandPath: commandPath,
             withArguments: arguments,
             inDirectoryPath: directoryPath,
             timeout: timeout,
             completionHandler: completionHandler)
     }
 
-    class func runTaskUntilFinishedWithCommandPath(commandPath: String,
+    class func runTaskUntilFinished(withCommandPath commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         timeout: TimeInterval,
