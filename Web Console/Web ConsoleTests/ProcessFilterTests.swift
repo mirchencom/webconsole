@@ -37,7 +37,7 @@ class ProcessFilterTests: XCTestCase {
         
         let taskIdentifiers = tasks.map { $0.processIdentifier }.sorted { $0 < $1 }
         let processFilterExpectation = expectation(description: "Filter processes")
-        ProcessFilter.runningProcessesWithIdentifiers(taskIdentifiers) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcesses(withIdentifiers: taskIdentifiers) { (identifierToProcessInfo, error) -> Void in
             guard let identifierToProcessInfo = identifierToProcessInfo else {
                 XCTAssertTrue(false)
                 return
@@ -85,7 +85,7 @@ class ProcessFilterTests: XCTestCase {
         waitForExpectations(timeout: testTimeout, handler: nil)
         
         let processFilterExpectation = expectation(description: "Filter processes")
-        ProcessFilter.runningProcessesWithIdentifiers([task.processIdentifier]) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcesses(withIdentifiers: [task.processIdentifier]) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNil(error)
             XCTAssertNotNil(identifierToProcessInfo)
             guard let identifierToProcessInfo = identifierToProcessInfo else {
@@ -130,7 +130,7 @@ class ProcessFilterNoProcessTests: XCTestCase {
 
     func testEmptyIdentifiers() {
         let expectation = self.expectation(description: "Process filter finished")
-        ProcessFilter.runningProcessesWithIdentifiers([Int32]()) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcesses(withIdentifiers: [Int32]()) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNotNil(error)
             XCTAssertNil(identifierToProcessInfo)
             expectation.fulfill()

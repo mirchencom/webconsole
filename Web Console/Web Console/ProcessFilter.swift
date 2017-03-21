@@ -13,7 +13,7 @@ extension ProcessFilter {
         completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
     {
         let identifiers = processInfos.map { $0.identifier }
-        runningProcessesWithIdentifiers(identifiers) { (identifierToProcessInfo, error) -> Void in
+        runningProcesses(withIdentifiers: identifiers) { (identifierToProcessInfo, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
                 return
@@ -52,7 +52,7 @@ extension ProcessFilter {
 
 class ProcessFilter {
     
-    class func runningProcessesWithIdentifiers(identifiers: [Int32],
+    class func runningProcesses(withIdentifiers identifiers: [Int32],
         completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
     {
         if identifiers.isEmpty {

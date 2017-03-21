@@ -102,7 +102,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // Confirm the `ProcessFilter` has the processes
         
         let processFilterExpectation = expectation(description: "Filter processes")
-        ProcessFilter.runningProcessesWithIdentifiers(taskIdentifiers) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcesses(withIdentifiers: taskIdentifiers) { (identifierToProcessInfo, error) -> Void in
             guard let identifierToProcessInfo = identifierToProcessInfo else {
                 XCTAssertTrue(false)
                 return
