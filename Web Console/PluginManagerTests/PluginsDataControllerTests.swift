@@ -42,7 +42,7 @@ class PluginsDataControllerClassTests: XCTestCase {
     }
 
     func testExistingPlugins() {
-        let pluginsDataController = PluginsDataController(testPluginsPaths, duplicatePluginDestinationDirectoryURL: Directory.trash.URL())
+        let pluginsDataController = PluginsDataController(paths: testPluginsPaths, duplicatePluginDestinationDirectoryURL: Directory.trash.URL())
         let plugins = pluginsDataController.plugins()
         
         var pluginPaths = [String]()

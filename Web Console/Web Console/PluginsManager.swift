@@ -34,7 +34,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     // MARK: Init
     
     init(paths: [String], duplicatePluginDestinationDirectoryURL: URL) {
-        self.pluginsDataController = PluginsDataController(paths, duplicatePluginDestinationDirectoryURL: duplicatePluginDestinationDirectoryURL)
+        self.pluginsDataController = PluginsDataController(paths: paths, duplicatePluginDestinationDirectoryURL: duplicatePluginDestinationDirectoryURL)
         super.init(plugins: pluginsDataController.plugins())
         pluginsDataController.delegate = self
     }
