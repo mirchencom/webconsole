@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeObject:(id)object;
 - (NSArray *)addObjectsFromArray:(NSArray *)plugins;
 - (void)removeObjectsFromArray:(NSArray *)plugins;
-- (id)objectWithKey:(NSString *)key;
+- (id)objectForKey:(NSString *)key;
 - (NSArray *)allObjects;
 @end
 NS_ASSUME_NONNULL_END

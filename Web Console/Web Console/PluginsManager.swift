@@ -47,7 +47,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     // MARK: Accessing Plugins
     
     func pluginWithName(name: String) -> Plugin? {
-        return pluginsController.objectWithKey(name) as? Plugin
+        return pluginsController.objectForKey(name) as? Plugin
     }
     
     func pluginWithIdentifier(identifier: String) -> Plugin? {
