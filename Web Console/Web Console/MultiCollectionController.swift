@@ -84,7 +84,7 @@ import Cocoa
         mutableObjects.removeObject(at: index)
     }
     
-    func removeObjectsAtIndexes(indexes: IndexSet) {
+    func removeObjectsAtIndexes(_ indexes: IndexSet) {
         let objects = mutableObjects.objects(at: indexes)
         nameToObjectController.removeObjects(from: objects)
         mutableObjects.removeObjects(at: indexes)
