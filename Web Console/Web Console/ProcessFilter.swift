@@ -36,7 +36,7 @@ extension ProcessFilter {
         }
     }
 
-    class func doesRunningProcessInfo(runningProcessInfo: ProcessInfo,
+    class func doesRunningProcessInfo(_ runningProcessInfo: ProcessInfo,
         matchProcessInfo processInfo: ProcessInfo) -> Bool
     {
         assert(runningProcessInfo.identifier == processInfo.identifier)
