@@ -40,7 +40,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     }
     
     convenience override init() {
-        self.init([Directory.builtInPlugins.path(), Directory.applicationSupportPlugins.path()], duplicatePluginDestinationDirectoryURL: Directory.applicationSupportPlugins.URL())
+        self.init(paths: [Directory.builtInPlugins.path(), Directory.applicationSupportPlugins.path()], duplicatePluginDestinationDirectoryURL: Directory.applicationSupportPlugins.URL())
     }
 
     
