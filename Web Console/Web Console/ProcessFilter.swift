@@ -98,14 +98,14 @@ class ProcessFilter {
                 return
             }
             
-            let processInfos = processesFromOutput(standardOutput)
+            let processInfos = makeProcessInfos(output: standardOutput)
             completionHandler(processInfos, nil)
         }
     }
 
     // MARK: Private
 
-    class func processesFromOutput(output: String) -> [Int32: ProcessInfo] {
+    class func makeProcessesInfos(output: String) -> [Int32: ProcessInfo] {
 
         var identifierToProcessInfo = [Int32: ProcessInfo]()
         let lines = output.components(separatedBy: "\n")

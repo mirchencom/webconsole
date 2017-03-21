@@ -139,9 +139,9 @@ class ProcessFilterNoProcessTests: XCTestCase {
     }
 
     func testEmptyInput() {
-        var processInfos = ProcessFilter.processesFromOutput("")
+        var processInfos = ProcessFilter.makeProcessInfos(output: "")
         XCTAssertEqual(processInfos.count, 0)
-        processInfos = ProcessFilter.processesFromOutput(" ")
+        processInfos = ProcessFilter.makeProcessInfos(output: " ")
         XCTAssertEqual(processInfos.count, 0)
     }
     
@@ -152,7 +152,7 @@ class ProcessFilterNoProcessTests: XCTestCase {
         
         let output = stringWithContentsOfFileURL(fileURL)!
         
-        let identifierToProcessInfo = ProcessFilter.processesFromOutput(output)
+        let identifierToProcessInfo = ProcessFilter.makeProcessInfos(output: output)
         XCTAssertEqual(identifierToProcessInfo.count, 3)
         guard let processInfo = identifierToProcessInfo[testProcessInfo.identifier] else {
             XCTAssertTrue(false)
@@ -171,7 +171,7 @@ class ProcessFilterNoProcessTests: XCTestCase {
         
         let output = stringWithContentsOfFileURL(fileURL)!
         
-        let identifierToProcessInfo = ProcessFilter.processesFromOutput(output)
+        let identifierToProcessInfo = ProcessFilter.makeProcessInfos(output: output)
         XCTAssertEqual(identifierToProcessInfo.count, 1)
         guard let processInfo = identifierToProcessInfo[testProcessInfo.identifier] else {
             XCTAssertTrue(false)
