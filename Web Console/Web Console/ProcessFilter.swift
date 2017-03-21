@@ -110,7 +110,7 @@ class ProcessFilter {
         var identifierToProcessInfo = [Int32: ProcessInfo]()
         let lines = output.components(separatedBy: "\n")
         for line in lines {
-            if let processInfo = processFromLine(line) {
+            if let processInfo = makeProcessInfo(line: line) {
                 identifierToProcessInfo[processInfo.identifier] = processInfo
             }
         }
@@ -118,7 +118,7 @@ class ProcessFilter {
         return identifierToProcessInfo
     }
     
-    private class func processFromLine(line: String) -> ProcessInfo? {
+    private class func makeProcessInfo(line: String) -> ProcessInfo? {
         if line.characters.count < 35 {
             return nil
         }
