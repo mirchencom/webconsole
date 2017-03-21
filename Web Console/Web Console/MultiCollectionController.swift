@@ -22,7 +22,7 @@ import Cocoa
     // MARK: Accessing Plugins
     
     func object(forKey key: String) -> AnyObject? {
-        return nameToObjectController.object(withKey: key) as AnyObject?
+        return nameToObjectController.object(forKey: key) as AnyObject?
     }
 
     // MARK: Convenience
