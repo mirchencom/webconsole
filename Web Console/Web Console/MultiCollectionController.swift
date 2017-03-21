@@ -21,7 +21,7 @@ import Cocoa
     
     // MARK: Accessing Plugins
     
-    func objectForKey(key: String) -> AnyObject? {
+    func object(forKey key: String) -> AnyObject? {
         return nameToObjectController.object(withKey: key) as AnyObject?
     }
 
