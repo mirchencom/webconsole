@@ -44,7 +44,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         // Duplicate the plugin
         var duplicatePlugin: Plugin!
         let duplicateExpectation = expectation(description: "Duplicate")
-        duplicatePluginController.duplicatePlugin(plugin, toDirectoryAtURL: pluginsDirectoryURL) { (plugin, error) -> Void in
+        duplicatePluginController.duplicate(plugin, to: pluginsDirectoryURL) { (plugin, error) -> Void in
             XCTAssertNil(error, "The error should be nil")
             XCTAssertNotNil(plugin, "The plugin should not be nil")
             duplicatePlugin = plugin
@@ -120,7 +120,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         // Duplicate the plugin
         var duplicatePlugin: Plugin!
         let duplicateExpectation = expectation(description: "Duplicate")
-        duplicatePluginController.duplicatePlugin(plugin, toDirectoryAtURL: pluginsDirectoryURL) { (plugin, error) -> Void in
+        duplicatePluginController.duplicate(plugin, to: pluginsDirectoryURL) { (plugin, error) -> Void in
             XCTAssertNil(error, "The error should be nil")
             XCTAssertNotNil(plugin, "The plugin should not be nil")
             duplicatePlugin = plugin

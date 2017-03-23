@@ -112,7 +112,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         assert(!exists, "The file should not exist")
     }
     
-    func duplicatePlugin(plugin: Plugin, handler: ((_ plugin: Plugin?, _ error: NSError?) -> Void)?) {
+    func duplicate(_ plugin: Plugin, handler: ((_ plugin: Plugin?, _ error: NSError?) -> Void)?) {
 
         do {
             try type(of: self).createDirectoryIfMissing(duplicatePluginDestinationDirectoryURL)
@@ -121,8 +121,8 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
             return
         }
 
-        duplicatePluginController.duplicatePlugin(plugin,
-            toDirectoryAtURL: duplicatePluginDestinationDirectoryURL)
+        duplicatePluginController.duplicate(plugin,
+            to: duplicatePluginDestinationDirectoryURL)
         { (plugin, error) -> Void in
             if let plugin = plugin {
                 self.addPlugin(plugin)

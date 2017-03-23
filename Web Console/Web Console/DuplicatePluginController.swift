@@ -17,7 +17,7 @@ class DuplicatePluginController {
     class func pluginFilename(fromName name: String) -> String {
         return name.appendingPathExtension(pluginFileExtension)!
     }
-    func duplicatePlugin(plugin: Plugin, toDirectoryAtURL destinationDirectoryURL: URL, completionHandler handler: @escaping (_ plugin: Plugin?, _ error: NSError?) -> Void) {
+    func duplicate(_ plugin: Plugin, to destinationDirectoryURL: URL, completionHandler handler: @escaping (_ plugin: Plugin?, _ error: NSError?) -> Void) {
         let pluginFileURL = plugin.bundle.bundleURL
         copyDirectoryController.copyItem(at: pluginFileURL, completionHandler: { (URL, error) -> Void in
             

@@ -90,8 +90,8 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         pluginsDataController.moveToTrash(plugin)
     }
     
-    func duplicatePlugin(plugin: Plugin, handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
-        pluginsDataController.duplicatePlugin(plugin, handler: handler)
+    func duplicate(plugin: Plugin, handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
+        pluginsDataController.duplicate(plugin, handler: handler)
     }
 
     func newPlugin(handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
@@ -103,7 +103,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     }
 
     func newPluginFromPlugin(plugin: Plugin, handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
-        duplicatePlugin(plugin, handler: handler)
+        duplicate(plugin, handler: handler)
     }
 
 
