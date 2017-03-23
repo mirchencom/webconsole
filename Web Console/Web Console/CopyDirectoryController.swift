@@ -34,7 +34,7 @@ class CopyDirectoryController {
     
     func cleanUp() throws {
         do {
-            try type(of: self).moveContentsOfURL(copyTempDirectoryURL, toDirectoryInTrashWithName: trashDirectoryName)
+            try type(of: self).move(contentsOf: copyTempDirectoryURL, toDirectoryInTrashWithName: trashDirectoryName)
         } catch let error as NSError {
             throw error
         }
@@ -62,7 +62,7 @@ class CopyDirectoryController {
 
     // MARK: Private Clean Up Helpers
 
-    class func moveContentsOfURL(URL: Foundation.URL, toDirectoryInTrashWithName trashDirectoryName: String) throws {
+    class func move(contentsOf URL: Foundation.URL, toDirectoryInTrashWithName trashDirectoryName: String) throws {
         var validCachesURL = false
         let hasPrefix = URL.path.hasPrefix(Directory.caches.path())
         validCachesURL = hasPrefix
