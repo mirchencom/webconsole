@@ -55,7 +55,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
             if let newPlugin = Plugin.makePlugin(path: pluginPath) {
                 // If there is an existing plugin and a new plugin, remove the old plugin and add the new plugin
                 if !oldPlugin.isEqualToPlugin(newPlugin) {
-                    removePlugin(oldPlugin)
+                    remove(oldPlugin)
                     add(newPlugin)
                 }
             }
@@ -71,7 +71,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = pluginAtPluginPath(pluginPath) {
-            removePlugin(oldPlugin)
+            remove(oldPlugin)
         }
     }
 
@@ -84,7 +84,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         delegate?.pluginsDataController(self, didAddPlugin: plugin)
     }
     
-    func removePlugin(plugin: Plugin) {
+    func remove(_ plugin: Plugin) {
         let pluginPath = plugin.bundle.bundlePath
         pluginPathToPluginDictionary.removeValue(forKey: pluginPath)
         delegate?.pluginsDataController(self, didRemovePlugin: plugin)
@@ -99,7 +99,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
 
     func moveToTrash(_ plugin: Plugin) {
         assert(plugin.editable, "The plugin should be editable")
-        removePlugin(plugin)
+        remove(plugin)
         let pluginPath = plugin.bundle.bundlePath
         let pluginDirectoryPath = pluginPath.deletingLastPathComponent
         let pluginDirectoryName = pluginPath.lastPathComponent
