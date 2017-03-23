@@ -105,7 +105,7 @@ class ProcessFilter {
 
     // MARK: Private
 
-    class func makeProcessesInfos(output: String) -> [Int32: ProcessInfo] {
+    class func makeProcessInfos(output: String) -> [Int32: ProcessInfo] {
 
         var identifierToProcessInfo = [Int32: ProcessInfo]()
         let lines = output.components(separatedBy: "\n")
