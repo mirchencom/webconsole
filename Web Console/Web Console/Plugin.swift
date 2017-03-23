@@ -156,7 +156,7 @@ class Plugin: WCLPlugin {
     private func save() {
         let infoDictionaryURL = self.infoDictionaryURL
         do {
-            try type(of: self).writeDictionary(infoDictionary, toURL: infoDictionaryURL)
+            try type(of: self).write(infoDictionary, toURL: infoDictionaryURL)
         } catch PluginWriteError.failToWriteDictionaryError(let URL) {
             print("Failed to write an info dictionary at URL \(URL)")
         } catch let error as NSError {
@@ -165,7 +165,7 @@ class Plugin: WCLPlugin {
 
     }
 
-    class func writeDictionary(dictionary: [AnyHashable: Any], toURL URL: Foundation.URL) throws {
+    class func write(_ dictionary: [AnyHashable: Any], toURL URL: Foundation.URL) throws {
         let writableDictionary = NSDictionary(dictionary: dictionary)
         let success = writableDictionary.write(to: URL, atomically: true)
         if !success {
