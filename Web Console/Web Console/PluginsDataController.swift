@@ -56,13 +56,13 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
                 // If there is an existing plugin and a new plugin, remove the old plugin and add the new plugin
                 if !oldPlugin.isEqualToPlugin(newPlugin) {
                     removePlugin(oldPlugin)
-                    addPlugin(newPlugin)
+                    add(newPlugin)
                 }
             }
         } else {
             // If there is only a new plugin, add it
             if let newPlugin = Plugin.makePlugin(path: pluginPath) {
-                addPlugin(newPlugin)
+                add(newPlugin)
             }
         }
     }
@@ -78,7 +78,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     
     // MARK: Add & Remove Helpers
     
-    func addPlugin(plugin: Plugin) {
+    func add(_ plugin: Plugin) {
         let pluginPath = plugin.bundle.bundlePath
         pluginPathToPluginDictionary[pluginPath] = plugin
         delegate?.pluginsDataController(self, didAddPlugin: plugin)
@@ -125,7 +125,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
             to: duplicatePluginDestinationDirectoryURL)
         { (plugin, error) -> Void in
             if let plugin = plugin {
-                self.addPlugin(plugin)
+                self.add(plugin)
             }
             handler?(plugin, error)
         }

@@ -69,10 +69,10 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     func addUnwatchedPlugin(plugin: Plugin) {
         // TODO: For now this is a big hack, this adds a plugin that isn't managed by the PluginDataManager.
         // This means if the plugin moves on the file system for example, that the loaded plugin will be out-of-date.
-        addPlugin(plugin)
+        add(plugin)
     }
     
-    private func addPlugin(_ plugin: Plugin) {
+    private func add(_ plugin: Plugin) {
         insertObject(plugin, inPluginsAt: 0)
     }
     
@@ -105,7 +105,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     // MARK: PluginsDataControllerDelegate
 
     func pluginsDataController(pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
-        addPlugin(plugin)
+        add(plugin)
     }
 
 
