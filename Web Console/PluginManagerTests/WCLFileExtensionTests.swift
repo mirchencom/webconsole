@@ -245,7 +245,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         XCTAssertFalse(observedChange, "The change should not have been observed.")
 
         // Move plugin to trash
-        movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
+        moveToTrashAndCleanUpWithConfirmation(createdPlugin)
 
         // Test the file extensions plugins property changed
         XCTAssertFalse(plugins.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")

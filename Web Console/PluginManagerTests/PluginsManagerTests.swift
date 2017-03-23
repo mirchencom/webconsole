@@ -40,8 +40,8 @@ class PluginsManagerTests: PluginsManagerTestCase {
         XCTAssertNotEqual(plugin.command!, newPlugin.command!, "The names should not be equal")
         
         // Trash the duplicated plugin
-        movePluginToTrashAndCleanUpWithConfirmation(newPlugin)
-        movePluginToTrashAndCleanUpWithConfirmation(newPluginTwo)
+        moveToTrashAndCleanUpWithConfirmation(newPlugin)
+        moveToTrashAndCleanUpWithConfirmation(newPluginTwo)
     }
 
     func testRenamePlugin() {

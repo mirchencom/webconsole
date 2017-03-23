@@ -135,7 +135,7 @@ class PluginTests: PluginsManagerTestCase {
         }
         XCTAssertNotNil(error, "The error should not be nil.")
         // Delete
-        movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
+        moveToTrashAndCleanUpWithConfirmation(createdPlugin)
         // Test that the new name is now valid
         error = nil;
         do {

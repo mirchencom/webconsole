@@ -97,7 +97,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
 
     // MARK: Duplicate and Remove
 
-    func movePluginToTrash(plugin: Plugin) {
+    func moveToTrash(_ plugin: Plugin) {
         assert(plugin.editable, "The plugin should be editable")
         removePlugin(plugin)
         let pluginPath = plugin.bundle.bundlePath

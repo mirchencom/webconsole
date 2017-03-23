@@ -52,7 +52,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         let defaultNewPlugin = PluginsManager.sharedInstance.defaultNewPlugin
         XCTAssertEqual(defaultNewPlugin, createdPlugin, "The default new WCLPlugin should be the WCLPlugin.")
         
-        movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
+        moveToTrashAndCleanUpWithConfirmation(createdPlugin)
         
         let defaultNewPluginTwo = PluginsManager.sharedInstance.defaultNewPlugin
         let initialDefaultNewPlugin: Plugin! = PluginsManager.sharedInstance.pluginWithName(initialDefaultNewPluginName)

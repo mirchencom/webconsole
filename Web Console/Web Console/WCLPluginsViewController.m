@@ -153,7 +153,7 @@
         NSArray *plugins = [self.pluginsArrayController selectedObjects];
         
         for (Plugin *plugin in plugins) {
-            [[PluginsManager sharedInstance] movePluginToTrash:plugin];
+            [[PluginsManager sharedInstance] moveToTrash:plugin];
         }
     }];
 }

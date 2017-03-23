@@ -283,7 +283,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
             removeExpectation.fulfill()
         })
 
-        movePluginToTrashAndCleanUpWithConfirmation(newPlugin!)
+        moveToTrashAndCleanUpWithConfirmation(newPlugin!)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
         cleanUpDuplicatedPlugins()
     }

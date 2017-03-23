@@ -86,8 +86,8 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
 
     // MARK: Adding and Removing Plugins
     
-    func movePluginToTrash(plugin: Plugin) {
-        pluginsDataController.movePluginToTrash(plugin)
+    func moveToTrash(_ plugin: Plugin) {
+        pluginsDataController.moveToTrash(plugin)
     }
     
     func duplicatePlugin(plugin: Plugin, handler: ((_ newPlugin: Plugin?, _ error: NSError?) -> Void)?) {
