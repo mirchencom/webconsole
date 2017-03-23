@@ -46,7 +46,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     
     // MARK: Accessing Plugins
     
-    func pluginWithName(name: String) -> Plugin? {
+    func plugin(forName name: String) -> Plugin? {
         return pluginsController.object(forKey: name) as? Plugin
     }
     
@@ -122,12 +122,12 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     // MARK: Shared Resources
 
     func sharedResourcesPath() -> String? {
-        let plugin = pluginWithName(sharedResourcesPluginName)
+        let plugin = plugin(forName: sharedResourcesPluginName)
         return plugin?.resourcePath
     }
 
     func sharedResourcesURL() -> URL? {
-        let plugin = pluginWithName(sharedResourcesPluginName)
+        let plugin = plugin(forName: sharedResourcesPluginName)
         return plugin?.resourceURL as URL?
     }
 }
