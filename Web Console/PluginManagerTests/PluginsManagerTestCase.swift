@@ -53,10 +53,10 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         return createdPlugin
     }
  
-    func newPluginFromPluginWithConfirmation(plugin: Plugin) -> Plugin {
+    func duplicateWithConfirmation(_ plugin: Plugin) -> Plugin {
         var createdPlugin: Plugin!
         let createdPluginExpectation = expectation(description: "Create new plugin")
-        PluginsManager.sharedInstance.newPluginFromPlugin(plugin) { (newPlugin, error) -> Void in
+        PluginsManager.sharedInstance.duplicate(plugin) { (newPlugin, error) -> Void in
             XCTAssertNil(error, "The error should be nil")
             createdPlugin = newPlugin
             createdPluginExpectation.fulfill()

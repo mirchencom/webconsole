@@ -32,7 +32,7 @@ class PluginsManagerTests: PluginsManagerTestCase {
         newPlugin.command = testPluginCommandTwo
 
         // Create another plugin from this plugin
-        let newPluginTwo = newPluginFromPluginWithConfirmation(newPlugin)
+        let newPluginTwo = duplicateWithConfirmation(newPlugin)
         
         // Test Properties
 

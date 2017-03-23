@@ -122,7 +122,7 @@
     NSArray *plugins = [self.pluginsArrayController selectedObjects];
 
     for (Plugin *plugin in plugins) {
-        [[PluginsManager sharedInstance] newPluginFromPlugin:plugin handler:nil];
+        [[PluginsManager sharedInstance] duplicate:plugin handler:nil];
     }
 
     [self.tableView editColumn:0 row:[self.tableView selectedRow] withEvent:nil select:YES];
