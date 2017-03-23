@@ -72,7 +72,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         addPlugin(plugin)
     }
     
-    private func addPlugin(plugin: Plugin) {
+    private func addPlugin(_ plugin: Plugin) {
         insertObject(plugin, inPluginsAt: 0)
     }
     
