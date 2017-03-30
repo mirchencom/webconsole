@@ -43,7 +43,7 @@ class CopyDirectoryController {
     func copyItem(at URL: Foundation.URL, completionHandler handler: @escaping (_ URL: Foundation.URL?, _ error: NSError?) -> Void) {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             do {
-                let copiedURL = try type(of: self).URLOfItemCopiedFromURL(URL, toDirectoryURL: self.copyTempDirectoryURL)
+                let copiedURL = try type(of: self).copyItem(at: URL, to: self.copyTempDirectoryURL)
                 DispatchQueue.main.async {
                     handler(copiedURL, nil)
                     if let path = copiedURL?.path {
@@ -129,7 +129,7 @@ class CopyDirectoryController {
 
     // MARK: Private Duplicate Helpers
     
-    private class func URLOfItemCopiedFromURL(URL: Foundation.URL, toDirectoryURL directoryURL: Foundation.URL) throws -> Foundation.URL? {
+    private class func copyItem(at URL: URL, to directoryURL: URL) throws -> Foundation.URL? {
         do {
             // Setup the destination directory
             try createDirectoryIfMissingAtURL(directoryURL)
