@@ -95,7 +95,7 @@ class CopyDirectoryController {
                     let trashDirectoryURL = URL.appendingPathComponent(trashDirectoryName)
                     if !foundFilesToRecover {
                         do {
-                            try createDirectoryIfMissingAtURL(trashDirectoryURL)
+                            try createDirectoryIfMissing(at: trashDirectoryURL)
                         } catch let error as NSError {
                             throw error
                         }
@@ -132,7 +132,7 @@ class CopyDirectoryController {
     private class func copyItem(at URL: URL, to directoryURL: URL) throws -> Foundation.URL? {
         do {
             // Setup the destination directory
-            try createDirectoryIfMissingAtURL(directoryURL)
+            try createDirectoryIfMissing(at: directoryURL)
         } catch let error as NSError {
             throw error
         }
@@ -152,7 +152,7 @@ class CopyDirectoryController {
 
     // MARK: Private Create Directory Helpers
     
-    private class func createDirectoryIfMissingAtPath(path: String) throws {
+    private class func createDirectoryIfMissing(at path: String) throws {
         // TODO: Should set error instead of assert
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
@@ -171,9 +171,9 @@ class CopyDirectoryController {
         }
     }
     
-    private class func createDirectoryIfMissingAtURL(URL: Foundation.URL) throws {
+    private class func createDirectoryIfMissing(at URL: URL) throws {
         do {
-            try createDirectoryIfMissingAtPath(URL.path)
+            try createDirectoryIfMissing(at: URL.path)
         } catch let error as NSError {
             throw error
         }

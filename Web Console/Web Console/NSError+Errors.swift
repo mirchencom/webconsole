@@ -15,17 +15,17 @@ let errorCode = 100
 
 extension NSError {
 
-    class func error(description: String) -> NSError {
-        return error(description: description, code: errorCode)
+    class func makeError(description: String) -> NSError {
+        return makeError(description: description, code: errorCode)
     }
     
-    class func error(description: String, code: Int) -> NSError
+    class func makeError(description: String, code: Int) -> NSError
     {
-        return error(userInfo: [NSLocalizedDescriptionKey: description],
+        return makeError(userInfo: [NSLocalizedDescriptionKey: description],
             code: code)
     }
 
-    class func error(userInfo: [AnyHashable: Any],
+    class func makeError(userInfo: [AnyHashable: Any],
         code: Int) -> NSError
     {
         return NSError(domain: errorDomain, code: code, userInfo: userInfo)
