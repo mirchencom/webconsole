@@ -15,7 +15,7 @@ class PluginsDataControllerClassTests: XCTestCase {
     
     func testPluginPaths() {
         let pluginsPath = Bundle.main.builtInPlugInsPath!
-        let pluginPaths = PluginsDataController.pathsForPluginsAtPath(pluginsPath)
+        let pluginPaths = PluginsDataController.pathsForPlugins(at: pluginsPath)
 
         // Test plugin path counts
         do {
@@ -47,7 +47,7 @@ class PluginsDataControllerClassTests: XCTestCase {
         
         var pluginPaths = [String]()
         for pluginsPath in testPluginsPaths {
-            let paths = PluginsDataController.pathsForPluginsAtPath(pluginsPath)
+            let paths = PluginsDataController.pathsForPlugins(at: pluginsPath)
             pluginPaths += paths
         }
         
