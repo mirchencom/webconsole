@@ -37,7 +37,7 @@ class PluginsDataControllerClassTests: XCTestCase {
             }
         }
 
-        let testPluginsCount = PluginsDataController.pluginsAtPluginPaths(pluginPaths).count
+        let testPluginsCount = PluginsDataController.plugins(at: pluginPaths).count
         XCTAssert(plugins.count == testPluginsCount, "The plugins count should equal the test plugins count")
     }
 

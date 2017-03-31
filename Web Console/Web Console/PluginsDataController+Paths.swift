@@ -24,7 +24,7 @@ extension PluginsDataController {
         return pluginPaths
     }
     
-    class func pluginsAtPluginPaths(pluginPaths: [String]) -> [Plugin] {
+    class func plugins(at pluginPaths: [String]) -> [Plugin] {
         var plugins = [Plugin]()
         for pluginPath in pluginPaths {
             if let plugin = Plugin.makePlugin(path: pluginPath) {
@@ -36,7 +36,7 @@ extension PluginsDataController {
     
     func pluginsAtPluginsPath(path: String) -> [Plugin] {
         let pluginPaths = type(of: self).pathsForPlugins(at: path)
-        let plugins = type(of: self).pluginsAtPluginPaths(pluginPaths)
+        let plugins = type(of: self).plugins(at: pluginPaths)
         return plugins
     }
 
