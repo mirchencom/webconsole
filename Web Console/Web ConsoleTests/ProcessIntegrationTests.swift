@@ -35,7 +35,7 @@ class ProcessManagerRouter: NSObject, WCLTaskRunnerDelegate {
                 startTime: Date(),
                 commandPath: commandPath)
         {
-            processManager.addProcessInfo(processInfo)
+            processManager.add(processInfo)
         }
     }
     

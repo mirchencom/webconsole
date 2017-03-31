@@ -39,7 +39,7 @@ class ProcessManager {
         self.processManagerStore = processManagerStore
     }
     
-    func addProcessInfo(processInfo: ProcessInfo) {
+    func add(_ processInfo: ProcessInfo) {
         let keyValue = type(of: self).keyAndValueForProcessInfo(processInfo)
         objc_sync_enter(self)
         identifierKeyToProcessInfoValue[keyValue.key] = keyValue.value

@@ -66,7 +66,7 @@ class ProcessManagerTests: ProcessManagerTestCase {
             return true
         }
         
-        processManager.addProcessInfo(processInfo)
+        processManager.add(processInfo)
         let processManagerHasProcessInfoResult = testProcessManagerHasProcessInfo(processManager)
         XCTAssertTrue(processManagerHasProcessInfoResult)
         
