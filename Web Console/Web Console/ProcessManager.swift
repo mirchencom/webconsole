@@ -78,11 +78,11 @@ class ProcessManager {
     // MARK: Private
     
     private func save() {
-        processManagerStore.set(identifierKeyToProcessInfoValue as AnyObject?, forKey: runningProcessesKey)
+        processManagerStore.set(value: identifierKeyToProcessInfoValue as AnyObject?, forKey: runningProcessesKey)
     }
     
     private func processInfo(with identifier: Int32, remove: Bool) -> ProcessInfo? {
-        guard let processInfoValue = processInfoValueForIdentifier(identifier, remove: remove) else {
+        guard let processInfoValue = processInfoValue(with: identifier, remove: remove) else {
             return nil
         }
         
@@ -91,7 +91,7 @@ class ProcessManager {
     
     // MARK: Helper
     
-    private func processInfoValueForIdentifier(identifier: Int32, remove: Bool) -> NSDictionary? {
+    private func processInfoValue(with identifier: Int32, remove: Bool) -> NSDictionary? {
         let key = type(of: self).identifierToKey(identifier)
         if remove {
             objc_sync_enter(self)
