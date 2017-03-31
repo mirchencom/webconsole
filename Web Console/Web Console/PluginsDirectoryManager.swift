@@ -145,7 +145,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     
     // MARK: PluginsDirectoryEventHandlerDelegate
 
-    func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
+    func pluginsDirectoryEventHandler(_ pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
         handleCreatedOrModifiedEventsAtPluginPath pluginPath: String,
         createdOrModifiedDirectoryPaths directoryPaths: [String]?,
         createdOrModifiedFilePaths filePaths: [String]?)
@@ -175,7 +175,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         }
     }
 
-    func pluginsDirectoryEventHandler(pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
+    func pluginsDirectoryEventHandler(_ pluginsDirectoryEventHandler: PluginsDirectoryEventHandler,
         handleRemovedEventsAtPluginPath pluginPath: String,
         removedItemPaths itemPaths: [String]?)
     {

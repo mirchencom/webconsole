@@ -64,7 +64,7 @@ class TaskResultsCollector: NSObject {
         }
         
         if task.terminationReason == .uncaughtSignal {
-            return NSError.taskTerminatedUncaughtSignalError(task.launchPath,
+            return NSError.taskTerminatedUncaughtSignalError(launchPath: task.launchPath,
                 arguments: task.arguments,
                 directoryPath: task.currentDirectoryPath,
                 standardError: standardError)
@@ -116,7 +116,7 @@ extension WCLTaskRunner {
     }
     
     
-    class func runTaskWithCommandPath(commandPath: String,
+    class func runTaskWithCommandPath(_ commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         timeout: TimeInterval,

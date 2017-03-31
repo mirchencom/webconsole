@@ -18,7 +18,7 @@ extension NSError {
         case uncaughtSignal = 100, nonzeroExitStatus
     }
     
-    class func taskTerminatedUncaughtSignalError(launchPath: String?,
+    class func makeTaskTerminatedUncaughtSignalError(launchPath: String?,
         arguments: [String]?,
         directoryPath: String?,
         standardError: String?) -> NSError
