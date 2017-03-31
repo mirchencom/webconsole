@@ -13,7 +13,7 @@ extension TaskResultsCollector: WCLTaskRunnerDelegate {
     
     func taskDidFinish(task: Process) {
         assert(!task.isRunning)
-        let error = errorForTask(task)
+        let error = makeError(for: task)
         completionHandler(standardOutput, standardError, error)
     }
 
@@ -49,7 +49,7 @@ class TaskResultsCollector: NSObject {
         standardOutput? += text
     }
     
-    fileprivate func appendToStandardError(text: String) {
+    fileprivate func appendToStandardError(_ text: String) {
         if standardError == nil {
             standardError = String()
         }
@@ -57,7 +57,7 @@ class TaskResultsCollector: NSObject {
         standardError? += text
     }
     
-    fileprivate func errorForTask(task: Process) -> NSError? {
+    fileprivate func makeError(for task: Process) -> NSError? {
         assert(!task.isRunning)
         if task.terminationStatus == 0 && task.terminationReason == .exit {
             return nil

@@ -109,7 +109,7 @@ class ProcessManager {
     
     private class func keyAndValueForProcessInfo(processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
         let key = key(from: processInfo.identifier)
-        let value = valueForProcessInfo(processInfo)
+        let value = value(with: processInfo)
         return (key: key, value: value)
     }
     
@@ -129,7 +129,7 @@ class ProcessManager {
             commandPath: commandPath)
     }
     
-    private class func valueForProcessInfo(processInfo: ProcessInfo) -> NSDictionary {
+    private class func value(with processInfo: ProcessInfo) -> NSDictionary {
         let dictionary = NSMutableDictionary()
         let key = key(from: processInfo.identifier)
         dictionary[ProcessInfoKey.Identifier.key()] = key
