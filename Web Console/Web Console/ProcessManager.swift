@@ -48,12 +48,12 @@ class ProcessManager {
     }
     
     func removeProcessWithIdentifier(identifier: Int32) -> ProcessInfo? {
-        let processInfo = processInfoForIdentifier(identifier, remove: true)
+        let processInfo = processInfo(with: identifier, remove: true)
         return processInfo
     }
     
     func processInfoWithIdentifier(identifier: Int32) -> ProcessInfo? {
-        return processInfoForIdentifier(identifier, remove: false)
+        return processInfo(with: identifier, remove: false)
     }
     
     func processInfos() -> [ProcessInfo] {
@@ -81,7 +81,7 @@ class ProcessManager {
         processManagerStore.set(identifierKeyToProcessInfoValue as AnyObject?, forKey: runningProcessesKey)
     }
     
-    private func processInfoForIdentifier(identifier: Int32, remove: Bool) -> ProcessInfo? {
+    private func processInfo(with identifier: Int32, remove: Bool) -> ProcessInfo? {
         guard let processInfoValue = processInfoValueForIdentifier(identifier, remove: remove) else {
             return nil
         }
