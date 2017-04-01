@@ -80,12 +80,12 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     
     var defaultPluginSavedFrameName: String {
         let plugin = type(of: self).defaultPlugin()
-        return SplitWebViewController.savedFrameName(forPluginName: plugin.name)
+        return SplitWebViewController.savedFrameName(for: plugin.name)
     }
 
     var otherPluginSavedFrameName: String {
         let plugin = type(of: self).defaultPlugin()
-        return SplitWebViewController.savedFrameName(forPluginName: plugin.name)
+        return SplitWebViewController.savedFrameName(for: plugin.name)
     }
 
     
@@ -210,7 +210,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
 
         let name = splitWebViewController.savedFrameName(for: splitWebViewController.splitController)!
         makeFrameSaveExpectationForHeight(logHeight, name: name)
-        splitWebViewController.splitController.configure(forHeight: logHeight)
+        splitWebViewController.splitController.configure(for: logHeight)
         
         // Simple hack to get the divider notification to fire
         // As of iOS 10, just setting the dividers position via a constraint 

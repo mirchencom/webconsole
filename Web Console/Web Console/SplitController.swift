@@ -84,7 +84,7 @@ class SplitController {
     
     func restoreFrame() {
         if let frame = savedSplitsViewFrame() {
-            configure(forHeight: frame.size.height)
+            configure(for: frame.size.height)
         }
     }
     
@@ -117,11 +117,11 @@ class SplitController {
     
     func configureForFrameHeight() {
         if let frame = splitsView?.frame {
-            configure(forHeight: frame.size.height)
+            configure(for: frame.size.height)
         }
     }
     
-    func configure(forHeight height: CGFloat) {
+    func configure(for height: CGFloat) {
         if let splitsView = splitsView, let superview = splitsView.superview {
             if let splitsHeightConstraint = splitsHeightConstraint {
                 if splitsHeightConstraint.constant == height {

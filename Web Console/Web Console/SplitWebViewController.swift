@@ -303,12 +303,12 @@ class SplitWebViewController: NSSplitViewController {
 extension SplitWebViewController: SplitControllerDelegate {
     func savedFrameName(for splitController: SplitController) -> String? {
         if let pluginName = defaultWebViewController.plugin?.name {
-            return type(of: self).savedFrameName(forPluginName: pluginName)
+            return type(of: self).savedFrameName(for: pluginName)
         }
         return nil
     }
     
-    class func savedFrameName(forPluginName pluginName: String) -> String {
+    class func savedFrameName(for pluginName: String) -> String {
         return "Log Frame " + pluginName
     }
 }
