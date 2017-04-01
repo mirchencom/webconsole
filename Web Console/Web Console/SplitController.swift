@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 protocol SplitControllerDelegate: class {
-    func savedFrameNameForSplitController(splitController: SplitController) -> String?
+    func savedFrameName(for splitController: SplitController) -> String?
 }
 
 class SplitController {
@@ -28,7 +28,7 @@ class SplitController {
     }
 
     private var savedFrameName: String? {
-        return delegate?.savedFrameNameForSplitController(self)
+        return delegate?.savedFrameName(for: self)
     }
     
     private var splitsViewController: NSViewController? {
@@ -84,7 +84,7 @@ class SplitController {
     
     func restoreFrame() {
         if let frame = savedSplitsViewFrame() {
-            configureHeight(frame.size.height)
+            configure(forHeight: frame.size.height)
         }
     }
     
@@ -115,13 +115,13 @@ class SplitController {
 
     // MARK: Constraints
     
-    func configureHeight() {
+    func configureForFrameHeight() {
         if let frame = splitsView?.frame {
-            configureHeight(frame.size.height)
+            configure(forHeight: frame.size.height)
         }
     }
     
-    func configureHeight(height: CGFloat) {
+    func configure(forHeight height: CGFloat) {
         if let splitsView = splitsView, let superview = splitsView.superview {
             if let splitsHeightConstraint = splitsHeightConstraint {
                 if splitsHeightConstraint.constant == height {

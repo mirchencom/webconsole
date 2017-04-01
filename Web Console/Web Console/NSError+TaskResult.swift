@@ -43,7 +43,7 @@ extension NSError {
         return makeError(description: description, code: TaskTerminatedErrorCode.uncaughtSignal.rawValue)
     }
     
-    class func taskTerminatedNonzeroExitCode(launchPath: String?,
+    class func makeTaskTerminatedNonzeroExitCodeError(launchPath: String?,
         exitCode: Int32,
         arguments: [String]?,
         directoryPath: String?,

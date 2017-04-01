@@ -93,7 +93,7 @@ class PluginsDirectoryEventHandler {
         let delay = ClassConstants.fileEventDelay * Double(NSEC_PER_SEC)
         let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: time, execute: {
-            self.fireRemovedEvents(at pluginPath)
+            self.fireRemovedEvents(for: pluginPath)
         })
     }
     
@@ -116,7 +116,7 @@ class PluginsDirectoryEventHandler {
         pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] = nil
     }
 
-    func fireRemovedEvents(at pluginPath: String) {
+    func fireRemovedEvents(for pluginPath: String) {
         if let itemPaths = pluginPathToRemovedItemPaths[pluginPath] {
             delegate?.pluginsDirectoryEventHandler(self,
                 handleRemovedEventsAtPluginPath: pluginPath,

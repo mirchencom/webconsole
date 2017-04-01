@@ -41,7 +41,7 @@ class TaskResultsCollector: NSObject {
         self.completionHandler = completionHandler
     }
     
-    fileprivate func appendToStandardOutput(text: String) {
+    fileprivate func appendToStandardOutput(_ text: String) {
         if standardOutput == nil {
             standardOutput = String()
         }
@@ -64,13 +64,13 @@ class TaskResultsCollector: NSObject {
         }
         
         if task.terminationReason == .uncaughtSignal {
-            return NSError.taskTerminatedUncaughtSignalError(launchPath: task.launchPath,
+            return NSError.makeTaskTerminatedUncaughtSignalError(launchPath: task.launchPath,
                 arguments: task.arguments,
                 directoryPath: task.currentDirectoryPath,
                 standardError: standardError)
         }
         
-        return NSError.taskTerminatedNonzeroExitCode(task.launchPath, exitCode:
+        return NSError.makeTaskTerminatedNonzeroExitCodeError(launchPath: task.launchPath, exitCode:
             task.terminationStatus,
             arguments: task.arguments,
             directoryPath: task.currentDirectoryPath,

@@ -294,14 +294,14 @@ class SplitWebViewController: NSSplitViewController {
         if let collapsed = splitController.isCollapsed() {
             if !collapsed {
                 splitController.saveFrame()
-                splitController.configureHeight()
+                splitController.configureForFrameHeight()
             }
         }
     }
 }
 
 extension SplitWebViewController: SplitControllerDelegate {
-    func savedFrameNameForSplitController(splitController: SplitController) -> String? {
+    func savedFrameName(for splitController: SplitController) -> String? {
         if let pluginName = defaultWebViewController.plugin?.name {
             return type(of: self).savedFrameName(forPluginName: pluginName)
         }

@@ -34,7 +34,7 @@ class ProcessKiller {
     
     // MARK: Private
     
-    private class func killProcessInfo(processInfo: ProcessInfo) -> Bool {
+    private class func killProcessInfo(_ processInfo: ProcessInfo) -> Bool {
         return WCLProcessKiller.killProcess(withIdentifier: processInfo.identifier)
     }
 }

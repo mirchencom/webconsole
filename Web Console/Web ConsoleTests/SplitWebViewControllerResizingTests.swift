@@ -208,9 +208,9 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     func resizeLogForSplitWebViewController(splitWebViewController: SplitWebViewController, logHeight: CGFloat) {
         // Resize & Wait for Save
 
-        let name = splitWebViewController.savedFrameNameForSplitController(splitWebViewController.splitController)!
+        let name = splitWebViewController.savedFrameName(for: splitWebViewController.splitController)!
         makeFrameSaveExpectationForHeight(logHeight, name: name)
-        splitWebViewController.splitController.configureHeight(logHeight)
+        splitWebViewController.splitController.configure(forHeight: logHeight)
         
         // Simple hack to get the divider notification to fire
         // As of iOS 10, just setting the dividers position via a constraint 
