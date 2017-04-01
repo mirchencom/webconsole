@@ -76,15 +76,15 @@ class Plugin: WCLPlugin {
     internal var infoDictionary: [AnyHashable: Any]
     internal var infoDictionaryURL: URL {
         get {
-            return type(of: self).infoDictionaryURL(forPluginURL: bundle.bundleURL)
+            return type(of: self).infoDictionaryURL(for: bundle.bundleURL)
         }
     }
 
     class func infoDictionaryURLForPlugin(plugin: Plugin) -> URL {
-        return infoDictionaryURL(forPluginURL: plugin.bundle.bundleURL)
+        return infoDictionaryURL(for: plugin.bundle.bundleURL)
     }
 
-    class func infoDictionaryURL(forPluginURL pluginURL: URL) -> URL {
+    class func infoDictionaryURL(for pluginURL: URL) -> URL {
         return pluginURL.appendingPathComponent(ClassConstants.infoDictionaryPathComponent)
     }
     
