@@ -307,7 +307,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
             object: nil,
             queue: nil)
         { _ in
-            if let frame = SplitController.savedFrameForName(name) {
+            if let frame = SplitController.savedFrame(for: name) {
                 if frame.size.height == height {
                     expectation.fulfill()
                     if let observer = observer {

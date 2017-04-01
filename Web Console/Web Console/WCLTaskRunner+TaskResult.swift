@@ -11,22 +11,22 @@ import Foundation
 
 extension TaskResultsCollector: WCLTaskRunnerDelegate {
     
-    func taskDidFinish(task: Process) {
+    func taskDidFinish(_ task: Process) {
         assert(!task.isRunning)
         let error = makeError(for: task)
         completionHandler(standardOutput, standardError, error)
     }
 
-    func task(task: Process, didFailToRunCommandPath commandPath: String, error: Error) {
+    func task(_ task: Process, didFailToRunCommandPath commandPath: String, error: Error) {
         assert(!task.isRunning)
         completionHandler(standardOutput, standardError, error as NSError?)
     }
     
-    func task(task: Process, didReadFromStandardError text: String) {
+    func task(_ task: Process, didReadFromStandardError text: String) {
         appendToStandardError(text)
     }
     
-    func task(task: Process, didReadFromStandardOutput text: String) {
+    func task(_ task: Process, didReadFromStandardOutput text: String) {
         appendToStandardOutput(text)
     }
 }

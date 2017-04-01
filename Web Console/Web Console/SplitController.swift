@@ -98,7 +98,7 @@ class SplitController {
         UserDefaultsManager.standardUserDefaults().set(frameString, forKey:key)
     }
 
-    class func savedFrameForName(name: String) -> NSRect? {
+    class func savedFrame(for name: String) -> NSRect? {
         if let frameString = UserDefaultsManager.standardUserDefaults().string(forKey: name) {
             let frame = NSRectFromString(frameString)
             return frame
@@ -108,7 +108,7 @@ class SplitController {
     
     func savedSplitsViewFrame() -> NSRect? {
         if let savedFrameName = savedFrameName {
-            return type(of: self).savedFrameForName(savedFrameName)
+            return type(of: self).savedFrame(for: savedFrameName)
         }
         return nil
     }

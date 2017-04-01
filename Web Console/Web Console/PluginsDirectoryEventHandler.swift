@@ -59,7 +59,7 @@ class PluginsDirectoryEventHandler {
         }
     }
 
-    func addFileWasCreatedOrModifiedEventAtPluginPath(pluginPath: String, path: String) {
+    func addFileWasCreatedOrModifiedEvent(at pluginPath: String, path: String) {
         if var paths = pluginPathToCreatedOrModifiedFilePaths[pluginPath] {
             paths.append(path)
             pluginPathToCreatedOrModifiedFilePaths[pluginPath] = paths

@@ -9,8 +9,8 @@
 import Foundation
 
 protocol PluginsDirectoryManagerDelegate {
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAt pluginPath: String)
+    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAt pluginPath: String)
 }
 
 class PluginsPathHelper {
@@ -30,7 +30,7 @@ class PluginsPathHelper {
         return untilSubpathRange
     }
     
-    class func subpathFromPath(path: String, untilSubpath subpath: String) -> String? {
+    class func subpath(from path: String, until subpath: String) -> String? {
         let range = subpathRange(inPath:path, untilSubpath: subpath)
         if (range.location == NSNotFound) {
             return nil
@@ -91,7 +91,7 @@ class PluginsPathHelper {
     }
     
     class func path(path: String, containsSubpath subpath: String) -> Bool {
-        if let pathUntilSubpath = subpathFromPath(path, untilSubpath: subpath) {
+        if let pathUntilSubpath = subpath(from: path, until: subpath) {
             return pathUntilSubpath.standardizingPath == subpath.standardizingPath
         }
         return false
@@ -130,7 +130,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
     
         if let pluginPath = pluginPath(fromPath: path) {
-            pluginsDirectoryEventHandler.addFileWasCreatedOrModifiedEventAtPluginPath(pluginPath, path: path)
+            pluginsDirectoryEventHandler.addFileWasCreatedOrModifiedEvent(at pluginPath, path: path)
         }
     }
 
@@ -153,10 +153,10 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         if let filePaths = filePaths {
             for path in filePaths {
 
-                if shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath,
+                if shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath,
                     forFileCreatedOrModifiedAtPath: path)
                 {
-                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAt: pluginPath)
                     return
                 }
                 
@@ -165,10 +165,10 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
 
         if let directoryPaths = directoryPaths {
             for path in directoryPaths {
-                if shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath,
+                if shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath,
                     forDirectoryCreatedOrModifiedAtPath: path)
                 {
-                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAt: pluginPath)
                     return
                 }
             }
@@ -181,8 +181,8 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     {
         if let itemPaths = itemPaths {
             for path in itemPaths {
-                if shouldFireInfoDictionaryWasRemovedAtPluginPath(pluginPath,
-                    forItemRemovedAtPath: path)
+                if shouldFireInfoDictionaryWasRemoved(at: pluginPath,
+                    forItemRemovedAt: path)
                 {
                     delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasRemovedAtPluginPath: pluginPath)
                     return
@@ -194,7 +194,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     
     // MARK: Evaluating Events
 
-    func shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath: String,
+    func shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath: String,
         forDirectoryCreatedOrModifiedAtPath path: String) -> Bool
     {
         if pathContainsValidInfoDictionarySubpath(path) {
@@ -205,10 +205,10 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func shouldFireInfoDictionaryWasCreatedOrModifiedAtPluginPath(pluginPath: String,
+    func shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath: String,
         forFileCreatedOrModifiedAtPath path: String) -> Bool
     {
-        if pathIsValidInfoDictionaryPath(path) {
+        if isValidInfoDictionary(at: path) {
             if infoDictionaryExistsAtPluginPath(pluginPath) {
                 return true
             }
@@ -216,8 +216,8 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func shouldFireInfoDictionaryWasRemovedAtPluginPath(pluginPath: String,
-        forItemRemovedAtPath path: String) -> Bool
+    func shouldFireInfoDictionaryWasRemoved(at pluginPath: String,
+        forItemRemovedAt path: String) -> Bool
     {
         if pathContainsValidInfoDictionarySubpath(path) {
             if !infoDictionaryExistsAtPluginPath(pluginPath) {
@@ -230,7 +230,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     
     // MARK: Helpers
 
-    func pathIsValidInfoDictionaryPath(path: String) -> Bool {
+    func isValidInfoDictionary(at path: String) -> Bool {
         return pathHasValidInfoDictionarySubpath(path, requireExactInfoDictionaryMatch: true)
     }
 

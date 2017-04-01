@@ -37,7 +37,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
                 
                 XCTAssertTrue(isRange(range, equalToRange: testRange), "The ranges should be equal")
                 
-                let subpath = PluginsPathHelper.subpathFromPath(testPath, untilSubpath: testSubpath)!
+                let subpath = PluginsPathHelper.subpath(from: testPath, until: testSubpath)!
                 XCTAssertEqual(subpath.standardizingPath, testSubpath.standardizingPath, "The subpaths should be equal")
                 XCTAssertTrue(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should contain the subpath")
                 
@@ -55,7 +55,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
         let range = PluginsPathHelper.subpathRange(inPath:testPath, untilSubpath: testSubpath)
         XCTAssertTrue(range.location == NSNotFound, "The range should have been found")
         
-        let subpath = PluginsPathHelper.subpathFromPath(testPath, untilSubpath: testSubpath)
+        let subpath = PluginsPathHelper.subpath(from: testPath, until: testSubpath)
         XCTAssertNil(subpath, "The subpath should be nil")
         
         XCTAssertFalse(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should not contain the subpath")
@@ -77,7 +77,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
         let subpathFromRange = testPathAsNSString.substring(with: range)
         XCTAssertEqual(subpathFromRange.standardizingPath, testSubpath.standardizingPath, "The standardized paths should be equal")
         
-        let subpath = PluginsPathHelper.subpathFromPath(testPath, untilSubpath: testSubpath)!
+        let subpath = PluginsPathHelper.subpath(from: testPath, until: testSubpath)!
         XCTAssertEqual(subpath.standardizingPath, testSubpath.standardizingPath, "The subpaths should be equal")
         XCTAssertTrue(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should contain the subpath")
         
@@ -94,7 +94,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
         let range = PluginsPathHelper.subpathRange(inPath:testPath, untilSubpath: testSubpath)
         XCTAssertTrue(range.location == NSNotFound, "The range should have been found")
         
-        let subpath = PluginsPathHelper.subpathFromPath(testPath, untilSubpath: testSubpath)
+        let subpath = PluginsPathHelper.subpath(from: testPath, until: testSubpath)
         XCTAssertNil(subpath, "The subpath should be nil")
         
         XCTAssertFalse(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should not contain the subpath")
@@ -111,7 +111,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
         let range = PluginsPathHelper.subpathRange(inPath:testPath, untilSubpath: testSubpath)
         XCTAssertTrue(range.location == NSNotFound, "The range should have been found")
         
-        let subpath = PluginsPathHelper.subpathFromPath(testPath, untilSubpath: testSubpath)
+        let subpath = PluginsPathHelper.subpath(from: testPath, until: testSubpath)
         XCTAssertNil(subpath, "The subpath should be nil")
         
         XCTAssertFalse(PluginsPathHelper.path(testPath, containsSubpath: testSubpath), "The path should not contain the subpath")

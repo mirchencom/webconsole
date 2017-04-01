@@ -104,12 +104,12 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
 
     // MARK: PluginsDataControllerDelegate
 
-    func pluginsDataController(pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
         add(plugin)
     }
 
 
-    func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
         if let unwrappedDefaultNewPlugin = defaultNewPlugin {
             if unwrappedDefaultNewPlugin == plugin {
                 defaultNewPlugin = nil

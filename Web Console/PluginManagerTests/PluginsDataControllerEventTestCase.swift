@@ -24,7 +24,7 @@ class PluginDataEventManager: PluginsDataControllerDelegate {
     
     // MARK: PluginsDataControllerDelegate
     
-    func pluginsDataController(pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didAddPlugin plugin: Plugin) {
         delegate?.pluginsDataController(pluginsDataController, didAddPlugin: plugin)
         
         assert(pluginWasAddedHandlers.count > 0, "There should be at least one handler")
@@ -35,7 +35,7 @@ class PluginDataEventManager: PluginsDataControllerDelegate {
         }
     }
     
-    func pluginsDataController(pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
+    func pluginsDataController(_ pluginsDataController: PluginsDataController, didRemovePlugin plugin: Plugin) {
         delegate?.pluginsDataController(pluginsDataController, didRemovePlugin: plugin)
         
         assert(pluginWasRemovedHandlers.count > 0, "There should be at least one handler")
