@@ -23,7 +23,7 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         PluginsManager.setOverrideSharedInstance(pluginsManager)
 
         // Set the plugin
-        plugin = pluginsManager.plugin(forName: testPluginName)
+        plugin = pluginsManager.plugin(for: testPluginName)
         plugin.editable = true
         XCTAssertNotNil(plugin, "The temporary plugin should not be nil")
 

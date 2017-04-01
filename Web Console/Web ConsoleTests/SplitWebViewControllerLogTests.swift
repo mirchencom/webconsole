@@ -12,7 +12,7 @@ import XCTest
 class SplitWebViewControllerPluginDebugModeEnabledTests: WCLSplitWebWindowControllerTestCase {
 
     func testPluginDebugModeEnabled() {
-        guard let logPlugin = PluginsManager.sharedInstance.plugin(forName: testLogPluginName) else {
+        guard let logPlugin = PluginsManager.sharedInstance.plugin(for: testLogPluginName) else {
             XCTAssertTrue(false)
             return
         }
@@ -35,7 +35,7 @@ class SplitWebViewControllerPluginDebugModeEnabledTests: WCLSplitWebWindowContro
     }
 
     func testPluginDebugModeEnabledFalse() {
-        guard let printPlugin = PluginsManager.sharedInstance.plugin(forName: testPrintPluginName) else {
+        guard let printPlugin = PluginsManager.sharedInstance.plugin(for: testPrintPluginName) else {
             XCTAssertTrue(false)
             return
         }
@@ -112,7 +112,7 @@ class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
         }
         
         let pluginRunExpectation = expectation(description: "Plugin run")
-        let plugin = PluginsManager.sharedInstance.plugin(forName: testInvalidPluginName)!
+        let plugin = PluginsManager.sharedInstance.plugin(for: testInvalidPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             pluginRunExpectation.fulfill()
         }
@@ -143,7 +143,7 @@ class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
         }
 
         let pluginRunExpectation = expectation(description: "Plugin run")
-        let plugin = PluginsManager.sharedInstance.plugin(forName: testHelloWorldPluginName)!
+        let plugin = PluginsManager.sharedInstance.plugin(for: testHelloWorldPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             pluginRunExpectation.fulfill()
         }
@@ -174,7 +174,7 @@ class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
         }
         
         let pluginRunExpectation = expectation(description: "Plugin run")
-        let plugin = PluginsManager.sharedInstance.plugin(forName: testCatPluginName)!
+        let plugin = PluginsManager.sharedInstance.plugin(for: testCatPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             self.splitWebWindowController.read(fromStandardInput: "Testing read from standard input")
             pluginRunExpectation.fulfill()
@@ -205,7 +205,7 @@ class SplitWebViewControllerLogTests: LogWebViewControllerEventRouterTestCase {
         XCTAssertFalse(splitWebViewController.shouldDebugLog)
 
         let pluginRunExpectation = expectation(description: "Plugin run")
-        let plugin = PluginsManager.sharedInstance.plugin(forName: testHelloWorldPluginName)!
+        let plugin = PluginsManager.sharedInstance.plugin(for: testHelloWorldPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             pluginRunExpectation.fulfill()
         }

@@ -53,7 +53,7 @@ class SplitWebViewControllerLogConfirmationTests: LogWebViewControllerEventRoute
         }
         
         let pluginRunExpectation = expectation(description: "Plugin run")
-        let plugin = PluginsManager.sharedInstance.plugin(forName: testCatPluginName)!
+        let plugin = PluginsManager.sharedInstance.plugin(for: testCatPluginName)!
         splitWebWindowController.runPlugin(plugin, withArguments: nil, inDirectoryPath: nil) { (success) -> Void in
             pluginRunExpectation.fulfill()
         }
