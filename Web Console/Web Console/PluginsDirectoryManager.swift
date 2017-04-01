@@ -122,7 +122,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
 
         if let pluginPath = pluginPath(fromPath: path) {
-            pluginsDirectoryEventHandler.addDirectoryWasCreatedOrModifiedEvent(atPluginPath: pluginPath, path: path)
+            pluginsDirectoryEventHandler.addDirectoryWasCreatedOrModifiedEvent(at: pluginPath, path: path)
         }
     }
 
