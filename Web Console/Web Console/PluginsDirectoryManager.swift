@@ -9,8 +9,8 @@
 import Foundation
 
 protocol PluginsDirectoryManagerDelegate {
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAt pluginPath: String)
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAt pluginPath: String)
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAt pluginPath: String)
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAt pluginPath: String)
 }
 
 class PluginsPathHelper {

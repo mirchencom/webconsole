@@ -48,7 +48,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
 
     // MARK: PluginsDirectoryManagerDelegate
 
-    func pluginsDirectoryManager(pluginsDirectoryManager: PluginsDirectoryManager,
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = plugin(at: pluginPath) {
