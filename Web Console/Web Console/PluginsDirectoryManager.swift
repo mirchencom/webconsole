@@ -61,7 +61,7 @@ class PluginsPathHelper {
         return mutablePathComponents as NSArray as? [String]
     }
 
-    class func pathComponent(pathComponent: String, containsSubpathComponent subpathComponent: String) -> Bool {
+    class func contains(pathComponent: String, subpath subpathComponent: String) -> Bool {
         let pathComponents = pathComponent.pathComponents
         let subpathComponents = subpathComponent.pathComponents
         for index in 0..<subpathComponents.count {
@@ -252,7 +252,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                     if requireExactInfoDictionaryMatch {
                         return PluginsPathHelper.pathComponent(ClassConstants.infoDictionaryPathComponent, isPathComponent: pluginSubpath)
                     } else {
-                        return PluginsPathHelper.pathComponent(ClassConstants.infoDictionaryPathComponent, containsSubpathComponent: pluginSubpath)
+                        return PluginsPathHelper.contains(ClassConstants.infoDictionaryPathComponent, subpath: pluginSubpath)
                     }
                 }
             }
