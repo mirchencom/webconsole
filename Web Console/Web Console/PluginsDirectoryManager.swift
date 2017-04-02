@@ -90,7 +90,7 @@ class PluginsPathHelper {
         return true
     }
     
-    class func path(path: String, containsSubpath subpathComponent: String) -> Bool {
+    class func contains(_ path: String, subpath: String) -> Bool {
         if let pathUntilSubpath = subpath(from: path, until: subpath) {
             return pathUntilSubpath.standardizingPath == subpath.standardizingPath
         }
@@ -297,7 +297,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
     
     func isSubpathOfPluginsDirectory(path: String) -> Bool {
-        return PluginsPathHelper.path(path, containsSubpath: pluginsDirectoryURL.path)
+        return PluginsPathHelper.contains(path, subpath: pluginsDirectoryURL.path)
     }
     
 }
