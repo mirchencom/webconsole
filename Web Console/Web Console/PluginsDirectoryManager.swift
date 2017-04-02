@@ -61,7 +61,7 @@ class PluginsPathHelper {
         return mutablePathComponents as NSArray as? [String]
     }
 
-    class func contains(pathComponent: String, subpath subpathComponent: String) -> Bool {
+    class func contains(_ pathComponent: String, subpathComponent: String) -> Bool {
         let pathComponents = pathComponent.pathComponents
         let subpathComponents = subpathComponent.pathComponents
         for index in 0..<subpathComponents.count {
