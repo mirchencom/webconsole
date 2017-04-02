@@ -66,7 +66,7 @@ class ProcessManager {
         for value in values {
             if let
                 value = value as? NSDictionary,
-                let processInfo = type(of: self).processInfo(with: value)
+                let processInfo = type(of: self).processInfo(for: value)
             {
                 processInfos.append(processInfo)
             }
@@ -113,7 +113,7 @@ class ProcessManager {
         return (key: key, value: value)
     }
     
-    private class func processInfo(with dictionary: NSDictionary) -> ProcessInfo? {
+    private class func processInfo(for dictionary: NSDictionary) -> ProcessInfo? {
         guard
             let key = dictionary[ProcessInfoKey.Identifier.key()] as? NSString,
             let commandPath = dictionary[ProcessInfoKey.CommandPath.key()] as? String,
