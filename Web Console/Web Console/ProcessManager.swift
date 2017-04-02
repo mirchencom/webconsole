@@ -48,12 +48,12 @@ class ProcessManager {
     }
     
     func removeProcessWithIdentifier(identifier: Int32) -> ProcessInfo? {
-        let processInfo = processInfo(with: identifier, remove: true)
+        let processInfo = self.processInfo(forIdentifier: identifier, remove: true)
         return processInfo
     }
     
     func processInfoWithIdentifier(identifier: Int32) -> ProcessInfo? {
-        return processInfo(with: identifier, remove: false)
+        return processInfo(forIdentifier: identifier, remove: false)
     }
     
     func processInfos() -> [ProcessInfo] {
@@ -81,17 +81,17 @@ class ProcessManager {
         processManagerStore.set(value: identifierKeyToProcessInfoValue as AnyObject?, forKey: runningProcessesKey)
     }
     
-    private func processInfo(with identifier: Int32, remove: Bool) -> ProcessInfo? {
-        guard let processInfoValue = processInfoValue(with: identifier, remove: remove) else {
+    private func processInfo(forIdentifier: Int32, remove: Bool) -> ProcessInfo? {
+        guard let processInfoValue = processInfoValue(forIdentifier: identifier, remove: remove) else {
             return nil
         }
         
-        return type(of: self).processInfo(with: processInfoValue)
+        return type(of: self).processInfo(for: processInfoValue)
     }
     
     // MARK: Helper
     
-    private func processInfoValue(with identifier: Int32, remove: Bool) -> NSDictionary? {
+    private func processInfoValue(for identifier: Int32, remove: Bool) -> NSDictionary? {
         let key = type(of: self).key(from: identifier)
         if remove {
             objc_sync_enter(self)
@@ -108,8 +108,8 @@ class ProcessManager {
     }
     
     private class func keyAndValue(for processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
-        let key = key(from: processInfo.identifier)
-        let value = value(with: processInfo)
+        let key = self.key(from: processInfo.identifier)
+        let value = self.value(forIdentifier: processInfo)
         return (key: key, value: value)
     }
     
@@ -122,7 +122,7 @@ class ProcessManager {
             return nil
         }
         
-        let identifier = identifier(for: key)
+        let identifier = self.identifier(for: key)
         
         return ProcessInfo(identifier: identifier,
             startTime: startTime,
@@ -131,7 +131,7 @@ class ProcessManager {
     
     private class func value(with processInfo: ProcessInfo) -> NSDictionary {
         let dictionary = NSMutableDictionary()
-        let key = key(from: processInfo.identifier)
+        let key = self.key(from: processInfo.identifier)
         dictionary[ProcessInfoKey.Identifier.key()] = key
         dictionary[ProcessInfoKey.CommandPath.key()] = processInfo.commandPath
         dictionary[ProcessInfoKey.StartTime.key()] = processInfo.startTime
