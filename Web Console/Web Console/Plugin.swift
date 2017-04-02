@@ -175,9 +175,9 @@ class Plugin: WCLPlugin {
 
     // MARK: Description
     
-    override var description : String {
+    override var description: String {
         let description = super.description
-        return "\(description), Plugin name = \(name),  identifier = \(identifier), defaultNewPlugin = \(isDefaultNewPlugin), hidden = \(hidden), editable = \(editable), debugModeEnabled = \(debugModeEnabled)"
+        return "\(description), Plugin name = \(name),  identifier = \(identifier), defaultNewPlugin = \(isDefaultNewPlugin), hidden = \(hidden), editable = \(editable), debugModeEnabled = \(String(describing: debugModeEnabled))"
     }
     
     // MARK: Windows
