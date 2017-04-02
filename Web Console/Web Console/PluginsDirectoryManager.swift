@@ -90,7 +90,7 @@ class PluginsPathHelper {
         return true
     }
     
-    class func path(path: String, containsSubpath subpath: String) -> Bool {
+    class func path(path: String, containsSubpath subpathComponent: String) -> Bool {
         if let pathUntilSubpath = subpath(from: path, until: subpath) {
             return pathUntilSubpath.standardizingPath == subpath.standardizingPath
         }
@@ -252,7 +252,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                     if requireExactInfoDictionaryMatch {
                         return PluginsPathHelper.pathComponent(ClassConstants.infoDictionaryPathComponent, isPathComponent: pluginSubpath)
                     } else {
-                        return PluginsPathHelper.contains(ClassConstants.infoDictionaryPathComponent, subpath: pluginSubpath)
+                        return PluginsPathHelper.contains(ClassConstants.infoDictionaryPathComponent, subpathComponent: pluginSubpath)
                     }
                 }
             }
