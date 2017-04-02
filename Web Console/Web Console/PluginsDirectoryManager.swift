@@ -30,7 +30,7 @@ class PluginsPathHelper {
         return untilSubpathRange
     }
     
-    class func subpath(from path: String, until subpath: String) -> String? {
+    class func subpath(fromPath path: String, until subpath: String) -> String? {
         let range = subpathRange(inPath:path, untilSubpath: subpath)
         if (range.location == NSNotFound) {
             return nil
@@ -91,7 +91,7 @@ class PluginsPathHelper {
     }
     
     class func contains(_ path: String, subpath: String) -> Bool {
-        if let pathUntilSubpath = subpath(from: path, until: subpath) {
+        if let pathUntilSubpath = subpath(fromPath: path, until: subpath) {
             return pathUntilSubpath.standardizingPath == subpath.standardizingPath
         }
         return false
@@ -250,7 +250,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                     let pluginSubpath = NSString.path(withComponents: pluginSubpathComponents)
                     
                     if requireExactInfoDictionaryMatch {
-                        return PluginsPathHelper.does(ClassConstants.infoDictionaryPathComponent, match: pluginSubpath)
+                        return PluginsPathHelper.does(pathComponent: ClassConstants.infoDictionaryPathComponent, matchPathComponent: pluginSubpath)
                     } else {
                         return PluginsPathHelper.contains(ClassConstants.infoDictionaryPathComponent, subpathComponent: pluginSubpath)
                     }
