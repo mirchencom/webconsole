@@ -74,7 +74,7 @@ class PluginsPathHelper {
         return true
     }
     
-    class func pathComponent(pathComponent: String, isPathComponent matchPathComponent: String) -> Bool {
+    class func does(pathComponent: String, match matchPathComponent: String) -> Bool {
         let pathComponents = pathComponent.pathComponents
         let matchPathComponents = matchPathComponent.pathComponents
         if pathComponents.count != matchPathComponents.count {
@@ -250,7 +250,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                     let pluginSubpath = NSString.path(withComponents: pluginSubpathComponents)
                     
                     if requireExactInfoDictionaryMatch {
-                        return PluginsPathHelper.pathComponent(ClassConstants.infoDictionaryPathComponent, isPathComponent: pluginSubpath)
+                        return PluginsPathHelper.does(ClassConstants.infoDictionaryPathComponent, match: pluginSubpath)
                     } else {
                         return PluginsPathHelper.contains(ClassConstants.infoDictionaryPathComponent, subpathComponent: pluginSubpath)
                     }
