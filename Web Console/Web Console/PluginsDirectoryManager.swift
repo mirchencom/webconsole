@@ -138,7 +138,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
         
         if let pluginPath = pluginPath(fromPath: path) {
-            pluginsDirectoryEventHandler.addItemWasRemovedAtPluginPath(pluginPath, path: path)
+            pluginsDirectoryEventHandler.addItemWasRemovedEvent(at: pluginPath, path: path)
         }
     }
 
@@ -153,7 +153,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         if let filePaths = filePaths {
             for path in filePaths {
 
-                if shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath,
+                if shouldFireInfoDictionaryWasCreatedOrModified(at: pluginPath,
                     forFileCreatedOrModifiedAtPath: path)
                 {
                     delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAt: pluginPath)
@@ -165,7 +165,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
 
         if let directoryPaths = directoryPaths {
             for path in directoryPaths {
-                if shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath,
+                if shouldFireInfoDictionaryWasCreatedOrModified(at: pluginPath,
                     forDirectoryCreatedOrModifiedAtPath: path)
                 {
                     delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAt: pluginPath)
@@ -197,8 +197,8 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     func shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath: String,
         forDirectoryCreatedOrModifiedAtPath path: String) -> Bool
     {
-        if pathContainsValidInfoDictionarySubpath(path) {
-            if infoDictionaryExistsAtPluginPath(pluginPath) {
+        if containsValidInfoDictionarySubpath(path) {
+            if doesInfoDictionaryExist(at: pluginPath) {
                 return true
             }
         }
@@ -209,7 +209,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         forFileCreatedOrModifiedAtPath path: String) -> Bool
     {
         if isValidInfoDictionary(at: path) {
-            if infoDictionaryExistsAtPluginPath(pluginPath) {
+            if doesInfoDictionaryExist(at: pluginPath) {
                 return true
             }
         }
@@ -219,8 +219,8 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     func shouldFireInfoDictionaryWasRemoved(at pluginPath: String,
         forItemRemovedAt path: String) -> Bool
     {
-        if pathContainsValidInfoDictionarySubpath(path) {
-            if !infoDictionaryExistsAtPluginPath(pluginPath) {
+        if containsValidInfoDictionarySubpath(path) {
+            if !doesInfoDictionaryExist(at: pluginPath) {
                 return true
             }
         }
@@ -231,15 +231,15 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     // MARK: Helpers
 
     func isValidInfoDictionary(at path: String) -> Bool {
-        return pathHasValidInfoDictionarySubpath(path, requireExactInfoDictionaryMatch: true)
+        return hasValidInfoDictionarySubpath(path, requireExactInfoDictionaryMatch: true)
     }
 
-    func pathContainsValidInfoDictionarySubpath(path: String) -> Bool {
-        return pathHasValidInfoDictionarySubpath(path, requireExactInfoDictionaryMatch: false)
+    func containsValidInfoDictionarySubpath(_ path: String) -> Bool {
+        return hasValidInfoDictionarySubpath(path, requireExactInfoDictionaryMatch: false)
     }
     
-    func pathHasValidInfoDictionarySubpath(path: String, requireExactInfoDictionaryMatch: Bool) -> Bool {
-        if let pluginPathComponents = pluginPathComponentsFromPath(path) {
+    func hasValidInfoDictionarySubpath(_ path: String, requireExactInfoDictionaryMatch: Bool) -> Bool {
+        if let pluginPathComponents = pluginPathComponents(from: path) {
             var pluginSubpathComponents = pluginPathComponents as? [String]
             if let firstPathComponent = pluginSubpathComponents?.remove(at: 0) {
                 if firstPathComponent.pathExtension != pluginFileExtension {
@@ -261,7 +261,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func infoDictionaryExistsAtPluginPath(pluginPath: String) -> Bool {
+    func doesInfoDictionaryExist(at pluginPath: String) -> Bool {
         let infoDictionaryPath = pluginPath.appendingPathComponent(ClassConstants.infoDictionaryPathComponent)
         var isDir: ObjCBool = false
         let fileExists = FileManager.default.fileExists(atPath: infoDictionaryPath, isDirectory: &isDir)
@@ -273,14 +273,14 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
 
     func pluginPath(fromPath path: String) -> String? {
-        if let pluginPathComponent = pluginPathComponentFromPath(path) {
+        if let pluginPathComponent = pluginPathComponent(from: path) {
             let pluginPath = pluginsDirectoryURL.path.appendingPathComponent(pluginPathComponent)
             return pluginPath
         }
         return nil
     }
     
-    func pluginPathComponentFromPath(path: String) -> String? {
+    func pluginPathComponent(from path: String) -> String? {
         if let pathComponents = PluginsPathHelper.pathComponents(ofPath: path, afterSubpath: pluginsDirectoryURL.path) {
             if (pathComponents.count > 0) {
                 var pluginSubpathComponents = pathComponents as Array
@@ -291,7 +291,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return nil
     }
 
-    func pluginPathComponentsFromPath(path: String) -> NSArray? {
+    func pluginPathComponents(from path: String) -> NSArray? {
             let pathComponents = PluginsPathHelper.pathComponents(ofPath: path, afterSubpath: pluginsDirectoryURL.path)
             return pathComponents as NSArray?
     }

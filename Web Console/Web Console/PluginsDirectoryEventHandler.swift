@@ -70,7 +70,7 @@ class PluginsDirectoryEventHandler {
         }
     }
 
-    func addItemWasRemovedAtPluginPath(pluginPath: String, path: String) {
+    func addItemWasRemovedEvent(at pluginPath: String, path: String) {
         if var paths = pluginPathToRemovedItemPaths[pluginPath] {
             paths.append(path)
             pluginPathToRemovedItemPaths[pluginPath] = paths
