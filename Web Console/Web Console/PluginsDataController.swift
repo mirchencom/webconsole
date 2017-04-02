@@ -54,7 +54,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         if let oldPlugin = plugin(at: pluginPath) {
             if let newPlugin = Plugin.makePlugin(path: pluginPath) {
                 // If there is an existing plugin and a new plugin, remove the old plugin and add the new plugin
-                if !oldPlugin.isEqualToPlugin(newPlugin) {
+                if !oldPlugin.isEqual(to: newPlugin) {
                     remove(oldPlugin)
                     add(newPlugin)
                 }

@@ -198,7 +198,7 @@ class PluginTests: PluginsManagerTestCase {
     func testEquality() {
         let samePlugin: Plugin! = Plugin.makePlugin(url: pluginURL)
         XCTAssertNotEqual(plugin, samePlugin, "The plugins should not be equal")
-        XCTAssertTrue(plugin.isEqualToPlugin(samePlugin), "The plugins should be equal")
+        XCTAssertTrue(plugin.isEqual(to: samePlugin), "The plugins should be equal")
         
         // Duplicate the plugins folder, this should not cause a second plugin to be added to the plugin manager since the copy originated from the same process
         let destinationPluginFilename = DuplicatePluginController.pluginFilename(fromName: plugin.identifier)
@@ -212,7 +212,7 @@ class PluginTests: PluginsManagerTestCase {
         let newPlugin: Plugin! = Plugin.makePlugin(url: destinationPluginURL)
         XCTAssertNotEqual(plugin, newPlugin, "The plugins should not be equal")
         // This fails because the bundle URL and commandPath are different
-        XCTAssertFalse(plugin.isEqualToPlugin(newPlugin), "The plugins should be equal")
+        XCTAssertFalse(plugin.isEqual(to: newPlugin), "The plugins should be equal")
 
         // TODO: It would be nice to test modifying properties, but there isn't a way to do that because with two separate plugin directories the command paths and info dictionary URLs will be different
     }
