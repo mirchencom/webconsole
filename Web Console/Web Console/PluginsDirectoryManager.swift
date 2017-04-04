@@ -74,7 +74,7 @@ class PluginsPathHelper {
         return true
     }
     
-    class func does(pathComponent: String, match matchPathComponent: String) -> Bool {
+    class func does(pathComponent: String, matchPathComponent: String) -> Bool {
         let pathComponents = pathComponent.pathComponents
         let matchPathComponents = matchPathComponent.pathComponents
         if pathComponents.count != matchPathComponents.count {
@@ -91,7 +91,7 @@ class PluginsPathHelper {
     }
     
     class func contains(_ path: String, subpath: String) -> Bool {
-        if let pathUntilSubpath = subpath(fromPath: path, untilSubpath: subpath) {
+        if let pathUntilSubpath = self.subpath(fromPath: path, untilSubpath: subpath) {
             return pathUntilSubpath.standardizingPath == subpath.standardizingPath
         }
         return false
@@ -119,7 +119,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     // MARK: WCLDirectoryWatcherDelegate
     
     func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, directoryWasCreatedOrModifiedAtPath path: String) {
-        assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
+        assert(isSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
 
         if let pluginPath = pluginPath(fromPath: path) {
             pluginsDirectoryEventHandler.addDirectoryWasCreatedOrModifiedEvent(at: pluginPath, path: path)
@@ -127,7 +127,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
 
     func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, fileWasCreatedOrModifiedAtPath path: String) {
-        assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
+        assert(isSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
     
         if let pluginPath = pluginPath(fromPath: path) {
             pluginsDirectoryEventHandler.addFileWasCreatedOrModifiedEvent(at: pluginPath, path: path)
@@ -135,7 +135,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
 
     func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, itemWasRemovedAtPath path: String) {
-        assert(isSubpathOfPluginsDirectory(path: path), "The path should be a subpath of the plugins directory")
+        assert(isSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
         
         if let pluginPath = pluginPath(fromPath: path) {
             pluginsDirectoryEventHandler.addItemWasRemovedEvent(at: pluginPath, path: path)
