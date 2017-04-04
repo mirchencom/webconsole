@@ -29,9 +29,9 @@
 {
     NSURL *pluginFileURL = [command directParameter];
 
-    Plugin *plugin = [Plugin pluginWithURL:pluginFileURL];
+    Plugin *plugin = [Plugin makePluginWithURL:pluginFileURL];
     
-    [[PluginsManager sharedInstance] addUnwatchedPlugin:plugin];
+    [[PluginsManager sharedInstance] addUnwatched:plugin];
     
     return [[WCLAppleScriptPluginWrapper alloc] initWithPlugin:plugin];
 }
