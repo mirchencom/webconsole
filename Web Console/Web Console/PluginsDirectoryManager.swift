@@ -184,7 +184,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                 if shouldFireInfoDictionaryWasRemoved(at: pluginPath,
                     forItemRemovedAt: path)
                 {
-                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasRemovedAtPluginPath: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasRemovedAt: pluginPath)
                     return
                 }
             }
