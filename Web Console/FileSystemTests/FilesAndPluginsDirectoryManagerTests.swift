@@ -37,9 +37,9 @@ class FilesAndPluginsDirectoryManager: PluginsDirectoryManager {
 }
 
 class FilesAndPluginsDirectoryEventManager: PluginsDirectoryEventManager, FilesAndPluginsDirectoryManagerFileDelegate {
-    var fileWasCreatedOrModifiedAtPathHandlers: Array<(path: String) -> Void>
-    var directoryWasCreatedOrModifiedAtPathHandlers: Array<(path: String) -> Void>
-    var itemWasRemovedAtPathHandlers: Array<(path: String) -> Void>
+    var fileWasCreatedOrModifiedAtPathHandlers: Array<(_ path: String) -> Void>
+    var directoryWasCreatedOrModifiedAtPathHandlers: Array<(_ path: String) -> Void>
+    var itemWasRemovedAtPathHandlers: Array<(_ path: String) -> Void>
 
     override init() {
         self.fileWasCreatedOrModifiedAtPathHandlers = Array<(path: String) -> Void>()
