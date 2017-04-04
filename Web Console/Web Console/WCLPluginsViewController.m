@@ -110,7 +110,7 @@
 
 - (IBAction)addPlugin:(id)sender
 {
-    [[PluginsManager sharedInstance] newPlugin:nil];
+    [[PluginsManager sharedInstance] newPluginWithHandler:nil];
     
     // TODO: Select the added plugin?
     // Simple re-implement of NSDictionaryController add because using the add: method waits for the next run loop before updating the table view.

@@ -106,13 +106,13 @@
                 success = YES;
             }
             @catch (NSException *exception) {
-                error = [NSError commandPathExceptionError:launchPath];
+                error = [NSError commandPathExceptionErrorWithLaunchPath:launchPath];
                 if (completionHandler) {
                     completionHandler(NO);
                 }
             }
         } else {
-            error = [NSError commandPathUnexecutableError:launchPath];
+            error = [NSError commandPathUnexecutableErrorWithLaunchPath:launchPath];
         }
         
         if (success) {
@@ -124,7 +124,7 @@
             }
         } else {
             if (error == nil) {
-                error = [NSError commandPathUnkownError:launchPath];
+                error = [NSError commandPathUnkownErrorWithLaunchPath:launchPath];
             }
             
             if ([delegate respondsToSelector:@selector(task:didFailToRunCommandPath:error:)]) {

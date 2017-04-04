@@ -112,7 +112,7 @@
 
 - (nullable Plugin *)logPluginForSplitWebWindowController:(nonnull WCLSplitWebWindowController *)splitWebViewController
 {
-    return [[PluginsManager sharedInstance] pluginWithName:kLogPluginName];
+    return [[PluginsManager sharedInstance] pluginFor:kLogPluginName];
 }
 
 @end

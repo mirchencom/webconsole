@@ -159,11 +159,11 @@ class SplitWebViewController: NSSplitViewController {
 
     // MARK: AppleScript
     
-    func doJavaScript(javaScript: String) -> String? {
+    func doJavaScript(_ javaScript: String) -> String? {
         return defaultWebViewController.doJavaScript(javaScript)
     }
     
-    func loadHTML(HTML: String,
+    func loadHTML(_ HTML: String,
         baseURL: URL?,
         completionHandler:((Bool) -> Void)?)
     {
@@ -176,7 +176,7 @@ class SplitWebViewController: NSSplitViewController {
         defaultWebViewController.read(fromStandardInput: text)
     }
     
-    func runPlugin(plugin: Plugin,
+    func run(plugin: Plugin,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         completionHandler:((Bool) -> Void)?)

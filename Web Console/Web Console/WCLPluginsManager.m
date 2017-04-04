@@ -17,7 +17,7 @@
 {
     self = [super init];
     if (self) {
-        _pluginsController = [[MultiCollectionController alloc] init:plugins key:kPluginNameKey];
+        _pluginsController = [[MultiCollectionController alloc] initWithObjects:plugins key:kPluginNameKey];
     }
     return self;
 }

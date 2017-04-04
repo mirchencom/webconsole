@@ -207,7 +207,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 - (void)readFromStandardInput:(nonnull NSString *)text
 {
-    return [self.splitWebViewController readFromStandardInput:text];
+    return [self.splitWebViewController readFromStandardInputWithText:text];
 }
 
 - (void)runPlugin:(nonnull Plugin *)plugin
@@ -217,7 +217,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
     [self.window setTitle:plugin.name];
 
-    [self.splitWebViewController runPlugin:plugin
+    [self.splitWebViewController runWithPlugin:plugin
                              withArguments:arguments
                            inDirectoryPath:directoryPath
                          completionHandler:completionHandler];
