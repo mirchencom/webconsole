@@ -9,7 +9,7 @@
 #import "WCLFileExtensionsController.h"
 
 #import "WCLFileExtension.h"
-#import "Web_console-Swift.h"
+#import "Web_Console-Swift.h"
 
 
 #define kPluginSuffixesKey @"suffixes"

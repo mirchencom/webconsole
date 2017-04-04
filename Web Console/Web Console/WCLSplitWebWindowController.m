@@ -280,17 +280,17 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 #pragma mark - SplitWebViewControllerDelegate
 
-- (NSWindow *)windowForSplitWebViewController:(SplitWebViewController *)splitWebViewController
+- (NSWindow *)windowFor:(SplitWebViewController *)splitWebViewController
 {
     return self.window;
 }
 
-- (BOOL)windowIsVisibleForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController
+- (BOOL)windowIsVisibleFor:(SplitWebViewController * __nonnull)splitWebViewController
 {
     return self.window.isVisible;
 }
 
-- (Plugin * __nullable)logPluginForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController
+- (Plugin * __nullable)logPluginFor:(SplitWebViewController * __nonnull)splitWebViewController
 {
     return self.logPlugin;
 }
