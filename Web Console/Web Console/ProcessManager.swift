@@ -52,7 +52,7 @@ class ProcessManager {
         return processInfo
     }
     
-    func processInfoWithIdentifier(identifier: Int32) -> ProcessInfo? {
+    func makeProcessInfo(identifier: Int32) -> ProcessInfo? {
         return processInfo(forIdentifier: identifier, remove: false)
     }
     
