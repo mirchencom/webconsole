@@ -209,7 +209,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         // Resize & Wait for Save
 
         let name = splitWebViewController.savedFrameName(for: splitWebViewController.splitController)!
-        makeFrameSaveExpectationForHeight(logHeight, name: name)
+        makeFrameSaveExpectation(for: logHeight, name: name)
         splitWebViewController.splitController.configure(for: logHeight)
         
         // Simple hack to get the divider notification to fire
@@ -300,7 +300,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         }
     }
     
-    func makeFrameSaveExpectationForHeight(height: CGFloat, name: String) {
+    func makeFrameSaveExpectation(for height: CGFloat, name: String) {
         let expectation = self.expectation(description: "UserDefaults did change")
         var observer: NSObjectProtocol?
         observer = NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification,
