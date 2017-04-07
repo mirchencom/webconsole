@@ -113,7 +113,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         
         // Show the log
         makeLogAppear(in: splitWebViewController)
-        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeight(for: splitWebViewController), splitWebViewHeight, "The heights should be equal")
         
         // Resize the log
         resizeLogForSplitWebViewController(splitWebViewController, logHeight: testLogViewHeight)
@@ -126,7 +126,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         XCTAssertEqual(logMenuItem().title, hideLogMenuItemTitle, "The titles should be equal")
         
         // Test that the frame height was restored
-        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), testLogViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeight(for: splitWebViewController), testLogViewHeight, "The heights should be equal")
         
         // Second Window
         
@@ -138,7 +138,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         // Confirm it uses the saved height
         makeLogAppear(in: secondSplitWebViewController)
         XCTAssertEqual(logMenuItem().title, hideLogMenuItemTitle, "The titles should be equal")
-        XCTAssertEqual(logHeightForSplitWebViewController(secondSplitWebViewController), testLogViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeight(for: secondSplitWebViewController), testLogViewHeight, "The heights should be equal")
         
         // Close the log in the first window
         makeLogDisappearForSplitWebViewController(splitWebViewController)
@@ -156,7 +156,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         
         // Re-open the log in the first window and confirm it has the right height
         makeLogAppear(in: splitWebViewController)
-        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), splitWebViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeight(for: splitWebViewController), splitWebViewHeight, "The heights should be equal")
         XCTAssertEqual(logMenuItem().title, hideLogMenuItemTitle, "The titles should be equal")
         
         // Clean up
@@ -178,7 +178,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         // Make a window with the first plugin again and confirm the size matches
         let splitWebViewControllerThree = makeNewSplitWebViewController()
         makeLogAppear(in: splitWebViewControllerThree)
-        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewControllerThree), testLogViewHeight, "The heights should be equal")
+        XCTAssertEqual(logHeight(for: splitWebViewControllerThree), testLogViewHeight, "The heights should be equal")
 
         // Clean up
         // Closing logs increases test reliability because it assures all animation blocks have finished
@@ -225,7 +225,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         waitForExpectations(timeout: testTimeout, handler: nil)
 
         // Test the height & saved frame
-        XCTAssertEqual(logHeightForSplitWebViewController(splitWebViewController), logHeight, "The heights should be equal")
+        XCTAssertEqual(logHeight(for: splitWebViewController), logHeight, "The heights should be equal")
         let frame = splitWebViewController.splitController.savedSplitsViewFrame()!
         XCTAssertEqual(frame.size.height, logHeight, "The heights should be equal")
     }
@@ -266,7 +266,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         XCTAssertFalse(result, "The divider should never be hidden for the NSView")
     }
     
-    func logHeightForSplitWebViewController(splitWebViewController: SplitWebViewController) -> CGFloat {
+    func logHeight(for splitWebViewController: SplitWebViewController) -> CGFloat {
         return splitWebViewController.splitController.splitsView!.frame.size.height
     }
 
