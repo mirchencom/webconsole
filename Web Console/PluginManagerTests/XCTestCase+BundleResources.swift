@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 
 extension XCTestCase {
-    func pathForResource(name: String?, ofType ext: String?, inDirectory bundlePath: String) -> String? {
+    func pathForResource(withName: String?, ofType ext: String?, inDirectory bundlePath: String) -> String? {
         return Bundle(for: type(of: self)).path(forResource: name, ofType:ext, inDirectory:bundlePath)
     }
 

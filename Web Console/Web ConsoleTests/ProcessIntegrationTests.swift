@@ -63,7 +63,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         
         // Start the processes
         
-        let commandPath = pathForResource(testDataShellScriptCatName,
+        let commandPath = pathForResource(withName: testDataShellScriptCatName,
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
 
@@ -154,7 +154,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
     
     func testWithProcess() {
 
-        let commandPath = pathForResource(testDataShellScriptCatName,
+        let commandPath = pathForResource(withName: testDataShellScriptCatName,
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
         

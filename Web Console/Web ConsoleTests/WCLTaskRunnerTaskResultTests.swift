@@ -14,7 +14,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
     
     func testInterruptTask() {
         
-        let commandPath = pathForResource(testDataShellScriptCatName,
+        let commandPath = pathForResource(withName: testDataShellScriptCatName,
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
         
@@ -44,7 +44,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
     
     func testStandardOutput() {
         
-        let commandPath = pathForResource(testDataHelloWorld,
+        let commandPath = pathForResource(withName: testDataHelloWorld,
             ofType: testDataRubyFileExtension,
             inDirectory: testDataSubdirectory)!
         
@@ -70,7 +70,7 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
 
     func testStandardLongFile() {
         
-        let testDataPath = pathForResource(testDataTextPSOutput,
+        let testDataPath = pathForResource(withName: testDataTextPSOutput,
             ofType: testDataTextExtension,
             inDirectory: testDataSubdirectory)!
         
