@@ -18,7 +18,7 @@ class ProcessFilterTests: XCTestCase {
 
         var tasks = [Process]()
         for _ in 0...2 {
-            let commandPath = pathForResource(withName: testDataShellScriptCatName,
+            let commandPath = path(forResource: testDataShellScriptCatName,
                 ofType: testDataShellScriptExtension,
                 inDirectory: testDataSubdirectory)!
             
@@ -68,7 +68,7 @@ class ProcessFilterTests: XCTestCase {
     
     func testWithProcess() {
         
-        let commandPath = pathForResource(withName: testDataShellScriptCatName,
+        let commandPath = path(forResource: testDataShellScriptCatName,
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
         
