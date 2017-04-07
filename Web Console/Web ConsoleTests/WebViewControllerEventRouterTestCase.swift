@@ -14,8 +14,8 @@
 
 class WebViewControllerEventRouter: NSObject {
 
-    typealias DidReadFromStandardInputHandler = (text: String) -> Void
-    typealias DidRunCommandPathHandler = (commandPath: String,
+    typealias DidReadFromStandardInputHandler = (_ text: String) -> Void
+    typealias DidRunCommandPathHandler = (_ commandPath: String,
         _ arguments: [String]?,
         _ directoryPath: String?) -> Void
     var didReadFromStandardInputHandlers: [DidReadFromStandardInputHandler]

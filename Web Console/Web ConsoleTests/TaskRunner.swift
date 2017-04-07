@@ -13,7 +13,7 @@ class TaskRunner {
     class func runLaunchPath(launchPath: String, handler: ((Void) -> Void)?) -> Process {
         let task = Process()
         task.launchPath = launchPath
-        return runTask(task, handler: handler)
+        return runTask(_ task, _ handler: handler)
     }
     
     class func runTask(task: Process, handler: ((Void) -> Void)?) -> Process {
