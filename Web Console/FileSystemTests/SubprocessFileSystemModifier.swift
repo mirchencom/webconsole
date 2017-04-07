@@ -18,7 +18,7 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/usr/bin/touch"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
     // MARK: createDirectoryAtPath
@@ -29,7 +29,7 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/bin/mkdir"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
     // MARK: removeFileAtPath
@@ -45,7 +45,7 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/bin/rm"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
     
     // MARK: removeDirectoryAtPath
@@ -65,7 +65,7 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/bin/rm"
         task.arguments = ["-r", path]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
     // MARK: copyDirectoryAtPath
@@ -103,7 +103,7 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/bin/cp"
         task.arguments = ["-R", path, destinationPath]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
     
     // MARK: moveItemAtPath
@@ -114,12 +114,12 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/bin/mv"
         task.arguments = [path, destinationPath]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
     // MARK: Helpers
 
-    class func runTask(task: Process, handler: ((Void) -> Void)?) {
+    class func run(task: Process, handler: ((Void) -> Void)?) {
         task.standardOutput = Pipe()
         (task.standardOutput! as AnyObject).fileHandleForReading.readabilityHandler = { (file: FileHandle!) -> Void in
             let data = file.availableData
