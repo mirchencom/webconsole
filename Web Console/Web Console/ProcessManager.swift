@@ -47,7 +47,7 @@ class ProcessManager {
         save()
     }
     
-    func removeProcessWithIdentifier(identifier: Int32) -> ProcessInfo? {
+    func removeProcess(withIdentifier identifier: Int32) -> ProcessInfo? {
         let processInfo = self.processInfo(forIdentifier: identifier, remove: true)
         return processInfo
     }
