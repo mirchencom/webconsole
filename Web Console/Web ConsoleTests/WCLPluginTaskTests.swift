@@ -9,7 +9,7 @@
 import XCTest
 
 extension WCLTaskRunnerTests: WCLTaskRunnerDelegate {
-    func task(task: Process, didFailToRunCommandPath commandPath: String, error: Error) {
+    func task(_ task: Process, didFailToRunCommandPath commandPath: String, error: Error) {
         XCTAssertNotNil(error)
         XCTAssert((error as NSError).code == RunCommandPathErrorCode.unexecutable.rawValue)
         if let didFailToRunCommandPathExpectation = didFailToRunCommandPathExpectation {
