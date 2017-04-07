@@ -14,7 +14,7 @@ class ProcessManagerTestCase: XCTestCase {
     class MockProcessManagerStore: ProcessManagerStore {
         let mutableDictionary = NSMutableDictionary()
 
-        func set(value: Any?, forKey defaultName: String) {
+        func set(_ value: Any?, forKey defaultName: String) {
             guard let value = value else {
                 return
             }
