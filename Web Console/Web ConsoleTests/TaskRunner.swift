@@ -16,7 +16,7 @@ class TaskRunner {
         return run(task, handler: handler)
     }
     
-    class func run(task: Process, handler: ((Void) -> Void)?) -> Process {
+    class func run(_ task: Process, handler: ((Void) -> Void)?) -> Process {
         task.standardOutput = Pipe()
         (task.standardOutput! as AnyObject).fileHandleForReading.readabilityHandler = { (file: FileHandle!) -> Void in
             let data = file.availableData
