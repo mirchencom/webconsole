@@ -146,7 +146,7 @@ class ProcessFilterNoProcessTests: XCTestCase {
     }
     
     func testExampleInput() {
-        let fileURL = URLForResource(testDataTextPSOutputSmall,
+        let fileURL = url(forResource: testDataTextPSOutputSmall,
             withExtension: testDataTextExtension,
             subdirectory: testDataSubdirectory)!
         
@@ -165,7 +165,7 @@ class ProcessFilterNoProcessTests: XCTestCase {
     }
 
     func testBadExampleInput() {
-        let fileURL = URLForResource(testDataTextPSOutputBad,
+        let fileURL = url(forResource: testDataTextPSOutputBad,
             withExtension: testDataTextExtension,
             subdirectory: testDataSubdirectory)!
         

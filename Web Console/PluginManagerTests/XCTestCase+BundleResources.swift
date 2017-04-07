@@ -14,11 +14,11 @@ extension XCTestCase {
         return Bundle(for: type(of: self)).path(forResource: name, ofType:ext, inDirectory:bundlePath)
     }
 
-    func URLForResource(name: String, withExtension ext: String?) -> URL? {
+    func url(forResource name: String, withExtension ext: String?) -> URL? {
         return Bundle(for: type(of: self)).url(forResource: name, withExtension:ext)
     }
     
-    func URLForResource(name: String, withExtension ext: String?, subdirectory subpath: String?) -> URL? {
+    func url(forResource name: String, withExtension ext: String?, subdirectory subpath: String?) -> URL? {
         return Bundle(for: type(of: self)).url(forResource: name, withExtension:ext, subdirectory:subpath)
     }
 

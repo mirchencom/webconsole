@@ -235,7 +235,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         splitWebViewController.toggleLogShown(nil)
         waitForExpectations(timeout: testTimeout, handler: nil)
         XCTAssertFalse(splitWebViewController.splitController.splitViewItem.isCollapsed, "The  NSSplitViewItem should not be collapsed")
-        confirmValuesForSplitWebViewController(splitWebViewController, collapsed: false)
+        confirmValues(for: splitWebViewController, collapsed: false)
         updateViewMenuItem()
     }
     
@@ -244,11 +244,11 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         splitWebViewController.toggleLogShown(nil)
         waitForExpectations(timeout: testTimeout, handler: nil)
         XCTAssertTrue(splitWebViewController.splitController.splitViewItem.isCollapsed, "The  NSSplitViewItem should be collapsed")
-        confirmValuesForSplitWebViewController(splitWebViewController, collapsed: true)
+        confirmValues(for: splitWebViewController, collapsed: true)
         updateViewMenuItem()
     }
 
-    func confirmValuesForSplitWebViewController(splitWebViewController: SplitWebViewController, collapsed: Bool) {
+    func confirmValues(for splitWebViewController: SplitWebViewController, collapsed: Bool) {
         let logIndex: Int! = splitWebViewController.splitViewItems.index(of: splitWebViewController.splitController.splitViewItem)
         XCTAssertNotNil(logIndex, "The index should not be nil")
         
