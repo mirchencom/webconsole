@@ -92,7 +92,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         XCTAssertEqual(processInfos.count, processesToMake)
         
         for task in tasks {
-            guard let processInfoByIdentifier = processManager.makeProcessInfo(idenfier: task.processIdentifier) else {
+            guard let processInfoByIdentifier = processManager.makeProcessInfo(identifier: task.processIdentifier) else {
                 XCTAssertTrue(false)
                 break
             }
@@ -175,7 +175,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         let processInfos = processManager.processInfos()
         XCTAssertEqual(processInfos.count, 1)
         let processInfo = processInfos[0]
-        let processInfoByIdentifier = processManager.makeProcessInfo(idenfier: task.processIdentifier)
+        let processInfoByIdentifier = processManager.makeProcessInfo(identifier: task.processIdentifier)
         XCTAssertEqual(processInfo, processInfoByIdentifier)
         XCTAssertEqual(processInfo.identifier, task.processIdentifier)
 
@@ -268,7 +268,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
 
         let processInfosTwo = processManager.processInfos()
         XCTAssertEqual(processInfosTwo.count, 0)
-        XCTAssertNil(processManager.makeProcessInfo(idenfier: task.processIdentifier))
+        XCTAssertNil(processManager.makeProcessInfo(identifier: task.processIdentifier))
 
         // Confirm that the `ProcessFilter` no longer has the process
         

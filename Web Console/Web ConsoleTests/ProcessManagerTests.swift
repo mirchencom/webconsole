@@ -54,7 +54,7 @@ class ProcessManagerTests: ProcessManagerTestCase {
             commandPath: "test")!
 
         let testProcessManagerHasProcessInfo: (_ processManager: ProcessManager) -> Bool = { processManager in
-            let returnedProcessInfo = processManager.makeProcessInfo(idenfier: processInfo.identifier)!
+            let returnedProcessInfo = processManager.makeProcessInfo(identifier: processInfo.identifier)!
             XCTAssertNotNil(returnedProcessInfo)
             XCTAssertEqual(returnedProcessInfo, processInfo)
             
@@ -62,7 +62,7 @@ class ProcessManagerTests: ProcessManagerTestCase {
             XCTAssertEqual(returnedProcessInfos.count, 1)
             XCTAssertEqual(returnedProcessInfos[0], processInfo)
 
-            XCTAssertNil(processManager.makeProcessInfo(idenfier: 999))
+            XCTAssertNil(processManager.makeProcessInfo(identifier: 999))
             return true
         }
         
@@ -81,12 +81,12 @@ class ProcessManagerTests: ProcessManagerTestCase {
         _ = processManager.removeProcessWithIdentifier(processInfo.identifier)
 
         let testProcessManagerHasNoProcessInfo: (_ processManager: ProcessManager) -> Bool = { processManager in
-            XCTAssertNil(processManager.makeProcessInfo(idenfier: processInfo.identifier))
+            XCTAssertNil(processManager.makeProcessInfo(identifier: processInfo.identifier))
             
             let returnedProcessInfos = processManager.processInfos()
             XCTAssertEqual(returnedProcessInfos.count, 0)
 
-            XCTAssertNil(processManager.makeProcessInfo(idenfier: 999))
+            XCTAssertNil(processManager.makeProcessInfo(identifier: 999))
             return true
         }
         
