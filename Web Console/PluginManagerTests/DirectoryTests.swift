@@ -19,8 +19,8 @@ class DirectoryTests: XCTestCase {
     
     func testApplicationSupport() {
         let applicationSupportDirectoryPath = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]
-        let nameKey = kCFBundleNameKey
-        let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
+        let nameKey = kCFBundleNameKey! as String
+        let applicationName = Bundle.main.infoDictionary![nameKey] as! String
         let applicationSupportPath = applicationSupportDirectoryPath
             .appendingPathComponent(applicationName)
         XCTAssert(applicationSupportPath == Directory.applicationSupport.path(), "The paths should match")
@@ -28,8 +28,8 @@ class DirectoryTests: XCTestCase {
     
     func testApplicationSupportPluginsPath() {
         let applicationSupportPath = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0]
-        let nameKey = kCFBundleNameKey
-        let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
+        let nameKey = kCFBundleNameKey! as String
+        let applicationName = Bundle.main.infoDictionary![nameKey] as! String
         let applicationSupportPluginsPath = applicationSupportPath
             .appendingPathComponent(applicationName)
             .appendingPathComponent(pluginsDirectoryPathComponent)
@@ -38,8 +38,8 @@ class DirectoryTests: XCTestCase {
 
     func testCachesPath() {
         let cachesDirectory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        let nameKey = kCFBundleNameKey
-        let applicationName = Bundle.main.infoDictionary![nameKey as! String] as! String
+        let nameKey = kCFBundleNameKey! as String
+        let applicationName = Bundle.main.infoDictionary![nameKey] as! String
         let cachesPath = cachesDirectory
             .appendingPathComponent(applicationName)
         XCTAssert(cachesPath == Directory.caches.path(), "The paths should match")
