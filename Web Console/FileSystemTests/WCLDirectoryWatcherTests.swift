@@ -12,14 +12,14 @@ import XCTest
 @testable import Web_Console
 
 class WCLDirectoryWatcherEventManager: NSObject, WCLDirectoryWatcherDelegate {
-    var fileWasCreatedOrModifiedAtPathHandlers: Array<((path: String) -> Void)>
-    var directoryWasCreatedOrModifiedAtPathHandlers: Array<((path: String) -> Void)>
-    var itemWasRemovedAtPathHandlers: Array<((path: String) -> Void)>
+    var fileWasCreatedOrModifiedAtPathHandlers: Array<((_ path: String) -> Void)>
+    var directoryWasCreatedOrModifiedAtPathHandlers: Array<((_ path: String) -> Void)>
+    var itemWasRemovedAtPathHandlers: Array<((_ path: String) -> Void)>
 
     override init() {
-        self.fileWasCreatedOrModifiedAtPathHandlers = Array<((path: String) -> Void)>()
-        self.directoryWasCreatedOrModifiedAtPathHandlers = Array<((path: String) -> Void)>()
-        self.itemWasRemovedAtPathHandlers = Array<((path: String) -> Void)>()
+        self.fileWasCreatedOrModifiedAtPathHandlers = Array<((_ path: String) -> Void)>()
+        self.directoryWasCreatedOrModifiedAtPathHandlers = Array<((_ path: String) -> Void)>()
+        self.itemWasRemovedAtPathHandlers = Array<((_ path: String) -> Void)>()
     }
 
     func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, fileWasCreatedOrModifiedAtPath path: String!) {

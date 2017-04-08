@@ -12,13 +12,13 @@ import XCTest
 @testable import Web_Console
 
 class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
-    var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(path: String) -> Void>
-    var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(path: String) -> Void>
+    var pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers: Array<(_ path: String) -> Void>
+    var pluginInfoDictionaryWasRemovedAtPluginPathHandlers: Array<(_ path: String) -> Void>
     
     
     init () {
-        self.pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers = Array<(path: String) -> Void>()
-        self.pluginInfoDictionaryWasRemovedAtPluginPathHandlers = Array<(path: String) -> Void>()
+        self.pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers = Array<(_ path: String) -> Void>()
+        self.pluginInfoDictionaryWasRemovedAtPluginPathHandlers = Array<(_ path: String) -> Void>()
     }
     
 

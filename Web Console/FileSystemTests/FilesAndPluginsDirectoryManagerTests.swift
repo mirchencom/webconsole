@@ -42,9 +42,9 @@ class FilesAndPluginsDirectoryEventManager: PluginsDirectoryEventManager, FilesA
     var itemWasRemovedAtPathHandlers: Array<(_ path: String) -> Void>
 
     override init() {
-        self.fileWasCreatedOrModifiedAtPathHandlers = Array<(path: String) -> Void>()
-        self.directoryWasCreatedOrModifiedAtPathHandlers = Array<(path: String) -> Void>()
-        self.itemWasRemovedAtPathHandlers = Array<(path: String) -> Void>()
+        self.fileWasCreatedOrModifiedAtPathHandlers = Array<(_ path: String) -> Void>()
+        self.directoryWasCreatedOrModifiedAtPathHandlers = Array<(_ path: String) -> Void>()
+        self.itemWasRemovedAtPathHandlers = Array<(_ path: String) -> Void>()
         super.init()
     }
 
