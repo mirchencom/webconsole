@@ -29,7 +29,7 @@
 {
     NSURL *pluginFileURL = [command directParameter];
 
-    Plugin *plugin = [Plugin makePluginWithURL:pluginFileURL];
+    Plugin *plugin = [Plugin makePluginWithUrl:pluginFileURL];
     
     [[PluginsManager sharedInstance] addUnwatched:plugin];
     

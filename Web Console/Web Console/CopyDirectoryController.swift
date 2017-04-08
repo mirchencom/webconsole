@@ -152,7 +152,7 @@ class CopyDirectoryController {
 
     // MARK: Private Create Directory Helpers
     
-    private class func createDirectoryIfMissing(at path: String) throws {
+    private class func createDirectoryIfMissing(atPath path: String) throws {
         // TODO: Should set error instead of assert
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)

@@ -94,7 +94,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
             .appendingPathComponent(testDirectoryNameTwo)
 
         do {
-            try PluginsDataController.createDirectoryIfMissing(directoryURL)
+            try PluginsDataController.createDirectoryIfMissing(at: directoryURL)
         } catch {
             XCTAssert(false, "Creating the directory should succeed")
         }

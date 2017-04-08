@@ -66,7 +66,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         }
     }
     
-    func removeTemporaryItem(at path: String) throws {
+    func removeTemporaryItem(atPath path: String) throws {
         if !path.hasPrefix(temporaryDirectoryPath) {
             throw TemporaryDirectoryError.notInTemporaryDirectoryError(path: path)
         }
@@ -77,7 +77,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         }
     }
     
-    fileprivate class func safelyRemoveTemporaryItem(at path: String) throws {
+    fileprivate class func safelyRemoveTemporaryItem(atPath path: String) throws {
         if !path.hasPrefix(ClassConstants.temporaryDirectoryPathPrefix) {
             throw TemporaryDirectoryError.notInTemporaryDirectoryError(path: path)
         }

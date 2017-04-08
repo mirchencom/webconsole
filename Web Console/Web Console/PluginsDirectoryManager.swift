@@ -217,7 +217,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     }
 
     func shouldFireInfoDictionaryWasRemoved(at pluginPath: String,
-        forItemRemovedAt path: String) -> Bool
+        forItemRemovedAtPath path: String) -> Bool
     {
         if containsValidInfoDictionarySubpath(path) {
             if !doesInfoDictionaryExist(at: pluginPath) {
@@ -230,7 +230,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     
     // MARK: Helpers
 
-    func isValidInfoDictionary(at path: String) -> Bool {
+    func isValidInfoDictionary(atPath path: String) -> Bool {
         return hasValidInfoDictionarySubpath(path, requireExactInfoDictionaryMatch: true)
     }
 

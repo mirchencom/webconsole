@@ -7,7 +7,7 @@
 //
 
 extension PluginsDataController {
-    class func pathsForPlugins(at path: String) -> [String] {
+    class func pathsForPlugins(atPath path: String) -> [String] {
         var pluginPaths = [String]()
         if let pathContents = try? FileManager.default.contentsOfDirectory(atPath: path) {
             let fileExtension = ".\(pluginFileExtension)"
@@ -34,7 +34,7 @@ extension PluginsDataController {
         return plugins
     }
     
-    func plugins(at path: String) -> [Plugin] {
+    func plugins(atPath path: String) -> [Plugin] {
         let pluginPaths = type(of: self).pathsForPlugins(at: path)
         let plugins = type(of: self).plugins(at: pluginPaths)
         return plugins

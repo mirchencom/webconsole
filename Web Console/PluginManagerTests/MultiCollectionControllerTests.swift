@@ -49,7 +49,7 @@ class MultiCollectionControllerInitTests: PluginsManagerTestCase {
         let plugins = [plugin!, newPlugin, newPluginTwo, newPluginChangedName, newPluginChangedNameTwo]
         let newPluginURLs = [newPluginURL, newPluginTwoURL, newPluginChangedNameURL, newPluginChangedNameTwoURL]
         
-        let pluginsController = MultiCollectionController(plugins, key: pluginNameKey)
+        let pluginsController = MultiCollectionController(objects: plugins, key: pluginNameKey)
         
         XCTAssertEqual(pluginsController.objects().count, 2, "The plugins count should be one")
         
