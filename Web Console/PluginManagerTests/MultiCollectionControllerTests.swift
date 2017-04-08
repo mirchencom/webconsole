@@ -12,7 +12,7 @@ import XCTest
 @testable import Web_Console
 
 extension TemporaryPluginsTestCase {
-    func fileURLOfDuplicatedItemAtURL(fileURL: URL, withFilename filename: String) -> URL {
+    func urlByDuplicatingItem(at fileURL: URL, withFilenameForDuplicate filename: String) -> URL {
         let destinationFileURL = fileURL.deletingLastPathComponent().appendingPathComponent(filename)
         do {
             try FileManager.default.copyItem(at: fileURL, to: destinationFileURL)
@@ -28,21 +28,21 @@ class MultiCollectionControllerInitTests: PluginsManagerTestCase {
 
     func testInitPlugins() {
         let newPluginFilename = testDirectoryName
-        let newPluginURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: newPluginFilename)
+        let newPluginURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: newPluginFilename)
         let newPlugin = Plugin.makePlugin(url: newPluginURL)!
         
         let newPluginTwoFilename = testDirectoryNameTwo
-        let newPluginTwoURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: newPluginTwoFilename)
+        let newPluginTwoURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: newPluginTwoFilename)
         let newPluginTwo = Plugin.makePlugin(url: newPluginURL)!
         
         let newPluginChangedNameFilename = testDirectoryNameThree
-        let newPluginChangedNameURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: newPluginChangedNameFilename)
+        let newPluginChangedNameURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: newPluginChangedNameFilename)
         let newPluginChangedName = Plugin.makePlugin(url: newPluginURL)!
         let changedName = testDirectoryName
         newPluginChangedName.name = changedName
         
         let newPluginChangedNameTwoFilename = testDirectoryNameFour
-        let newPluginChangedNameTwoURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: newPluginChangedNameTwoFilename)
+        let newPluginChangedNameTwoURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: newPluginChangedNameTwoFilename)
         let newPluginChangedNameTwo = Plugin.makePlugin(url: newPluginURL)!
         newPluginChangedNameTwo.name = changedName
         
@@ -91,7 +91,7 @@ class MultiCollectionControllerTests: PluginsManagerTestCase {
     }
     
     func testAddPlugin() {
-        let destinationPluginURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: plugin.identifier)
+        let destinationPluginURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: plugin.identifier)
         let newPlugin = Plugin.makePlugin(url: destinationPluginURL)!
         pluginsController.addObject(newPlugin)
         XCTAssertEqual(pluginsController.objects().count, 1, "The plugins count should be one")
@@ -110,21 +110,21 @@ class MultiCollectionControllerTests: PluginsManagerTestCase {
     func testAddPlugins() {
 
         let newPluginFilename = testDirectoryName
-        let newPluginURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: newPluginFilename)
+        let newPluginURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: newPluginFilename)
         let newPlugin = Plugin.makePlugin(url: newPluginURL)!
 
         let newPluginTwoFilename = testDirectoryNameTwo
-        let newPluginTwoURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: newPluginTwoFilename)
+        let newPluginTwoURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: newPluginTwoFilename)
         let newPluginTwo = Plugin.makePlugin(url: newPluginURL)!
 
         let newPluginChangedNameFilename = testDirectoryNameThree
-        let newPluginChangedNameURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: newPluginChangedNameFilename)
+        let newPluginChangedNameURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: newPluginChangedNameFilename)
         let newPluginChangedName = Plugin.makePlugin(url: newPluginURL)!
         let changedName = testDirectoryName
         newPluginChangedName.name = changedName
 
         let newPluginChangedNameTwoFilename = testDirectoryNameFour
-        let newPluginChangedNameTwoURL = fileURLOfDuplicatedItemAtURL(plugin.bundle.bundleURL, withFilename: newPluginChangedNameTwoFilename)
+        let newPluginChangedNameTwoURL = urlByDuplicatingItem(at:plugin.bundle.bundleURL, withFilenameForDuplicate: newPluginChangedNameTwoFilename)
         let newPluginChangedNameTwo = Plugin.makePlugin(url: newPluginURL)!
         newPluginChangedNameTwo.name = changedName
         

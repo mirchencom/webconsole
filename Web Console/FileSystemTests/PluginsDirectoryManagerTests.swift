@@ -193,7 +193,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         copyPluginAtPath(pluginPath, destinationPluginPath: copiedPluginPath)
         
         do {
-            try removeTemporaryItemAtPath(copiedPluginPath)
+            try removeTemporaryItem(at: copiedPluginPath)
         } catch {
             XCTAssertTrue(false, "The remove should suceed")
         }
@@ -210,7 +210,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
         // Cleanup
         do {
-            try removeTemporaryItemAtPath(movedPluginPath)
+            try removeTemporaryItem(at: movedPluginPath)
         } catch {
             XCTAssertTrue(false, "The remove should suceed")
         }

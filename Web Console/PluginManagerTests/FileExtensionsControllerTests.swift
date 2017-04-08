@@ -13,7 +13,7 @@ import XCTest
 
 class FileExtensionsControllerTests: FileExtensionsTestCase {
 
-    func extensionsTest(extensions1: [String], matchExtensions extensions2: [String]) -> Bool {
+    func doMatch(_ extensions1: [String], _ extensions2: [String]) -> Bool {
         let sortedExtensions1 = extensions1.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         let sortedExtensions2 = extensions2.sorted { $0.localizedCaseInsensitiveCompare($1) == ComparisonResult.orderedAscending }
         return sortedExtensions1 == sortedExtensions2
@@ -25,14 +25,14 @@ class FileExtensionsControllerTests: FileExtensionsTestCase {
         
         createdPlugin.suffixes = testPluginSuffixesTwo
         let extensions: [String] = FileExtensionsController.sharedInstance.suffixes() as! [String]
-        let extensionsMatch = extensionsTest(extensions, matchExtensions: testPluginSuffixesTwo)
+        let extensionsMatch = doMatch(extensions, testPluginSuffixesTwo)
         XCTAssertTrue(extensionsMatch, "The file extensions should match the test file extensions.")
 
         // Set file extensions to empty array
         createdPlugin.suffixes = testPluginSuffixesEmpty
  
         let extensionsTwo: [String] = FileExtensionsController.sharedInstance.suffixes() as! [String]
-        let extensionsTwoMatch = extensionsTest(extensionsTwo, matchExtensions: testPluginSuffixesEmpty)
+        let extensionsTwoMatch = doMatch(extensionsTwo, testPluginSuffixesEmpty)
         XCTAssertTrue(extensionsTwoMatch, "The file extensions should match the empty test file extensions.")
     }
 
@@ -41,7 +41,7 @@ class FileExtensionsControllerTests: FileExtensionsTestCase {
 class FileExtensionsControllerBuiltInPluginsTests: XCTestCase {
     override func setUp() {
         super.setUp()
-        let pluginsManager = PluginsManager([Directory.builtInPlugins.path()],
+        let pluginsManager = PluginsManager(paths: [Directory.builtInPlugins.path()],
             duplicatePluginDestinationDirectoryURL: Directory.trash.URL())
         PluginsManager.setOverrideSharedInstance(pluginsManager)
         let fileExtensionsController = FileExtensionsController(pluginsManager: PluginsManager.sharedInstance)
