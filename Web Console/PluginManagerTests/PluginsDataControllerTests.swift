@@ -15,7 +15,7 @@ class PluginsDataControllerClassTests: XCTestCase {
     
     func testPluginPaths() {
         let pluginsPath = Bundle.main.builtInPlugInsPath!
-        let pluginPaths = PluginsDataController.pathsForPlugins(at: pluginsPath)
+        let pluginPaths = PluginsDataController.pathsForPlugins(atPath: pluginsPath)
 
         // Test plugin path counts
         do {
@@ -47,7 +47,7 @@ class PluginsDataControllerClassTests: XCTestCase {
         
         var pluginPaths = [String]()
         for pluginsPath in testPluginsPaths {
-            let paths = PluginsDataController.pathsForPlugins(at: pluginsPath)
+            let paths = PluginsDataController.pathsForPlugins(atPath: pluginsPath)
             pluginPaths += paths
         }
         
@@ -107,7 +107,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         // Clean Up
         let rootDirectoryURL: URL = directoryURL.deletingLastPathComponent()
         do {
-            try removeTemporaryItem(atPath: rootDirectoryURL)
+            try removeTemporaryItem(at: rootDirectoryURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -143,7 +143,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         
         // Clean Up
         do {
-            try removeTemporaryItem(atPath: directoryURL)
+            try removeTemporaryItem(at: directoryURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -180,7 +180,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
 
         // Clean Up
         do {
-            try removeTemporaryItem(atPath: blockingFileURL)
+            try removeTemporaryItem(at: blockingFileURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -224,7 +224,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         
         // Clean Up
         do {
-            try removeTemporaryItem(atPath: containerDirectoryURL)
+            try removeTemporaryItem(at: containerDirectoryURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -248,7 +248,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
 
     func cleanUpDuplicatedPlugins() {
         do {
-            try removeTemporaryItem(atPath: duplicatePluginRootDirectoryURL)
+            try removeTemporaryItem(at: duplicatePluginRootDirectoryURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }        

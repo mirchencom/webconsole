@@ -72,7 +72,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         
         // Cleanup
         do {
-            try removeTemporaryItem(atPath: copiedPluginURL)
+            try removeTemporaryItem(at: copiedPluginURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
