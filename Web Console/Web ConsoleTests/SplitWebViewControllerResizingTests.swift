@@ -55,7 +55,7 @@ class WebViewControllerLifeCycleEventRouter: NSObject, WCLWebViewControllerDeleg
     
     // MARK: WCLWebViewControllerDelegate
     
-    @objc func webViewControllerViewWillAppear(webViewController: WCLWebViewController) {
+    @objc func webViewControllerViewWillAppear(_ webViewController: WCLWebViewController) {
         if let viewWillAppearBlock = viewWillAppearBlock {
             viewWillAppearBlock(webViewController)
         } else {
@@ -63,7 +63,7 @@ class WebViewControllerLifeCycleEventRouter: NSObject, WCLWebViewControllerDeleg
         }
     }
     
-    @objc func webViewControllerViewWillDisappear(webViewController: WCLWebViewController) {
+    @objc func webViewControllerViewWillDisappear(_ webViewController: WCLWebViewController) {
         if let viewWillDisappearBlock = viewWillDisappearBlock {
             viewWillDisappearBlock(webViewController)
         } else {
@@ -205,12 +205,12 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
     
     // MARK: Resize Helpers
 
-    func resizeLog(for splitWebViewController: SplitWebViewController, logHeight: CGFloat) {
+    func resizeLog(for splitWebViewController: SplitWebViewController, withHeight height: CGFloat) {
         // Resize & Wait for Save
 
         let name = splitWebViewController.savedFrameName(for: splitWebViewController.splitController)!
-        makeFrameSaveExpectation(for: logHeight, name: name)
-        splitWebViewController.splitController.configure(for: logHeight)
+        makeFrameSaveExpectation(for: height, name: name)
+        splitWebViewController.splitController.configure(for: height)
         
         // Simple hack to get the divider notification to fire
         // As of iOS 10, just setting the dividers position via a constraint 
@@ -219,15 +219,15 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         // `setPosition(_:ofDividerAt:)` with any position causes this delegate
         // message to fire.
         let height = splitWebViewController.view.frame.size.height
-        let position = height - logHeight
+        let position = height - height
         splitWebViewController.splitView.setPosition(position, ofDividerAt: 0)
 
         waitForExpectations(timeout: testTimeout, handler: nil)
 
         // Test the height & saved frame
-        XCTAssertEqual(logHeight(for: splitWebViewController), logHeight, "The heights should be equal")
+        XCTAssertEqual(height(for: splitWebViewController), height, "The heights should be equal")
         let frame = splitWebViewController.splitController.savedSplitsViewFrame()!
-        XCTAssertEqual(frame.size.height, logHeight, "The heights should be equal")
+        XCTAssertEqual(frame.size.height, height, "The heights should be equal")
     }
     
     func makeLogAppear(in splitWebViewController: SplitWebViewController) {
