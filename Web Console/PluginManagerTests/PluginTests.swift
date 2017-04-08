@@ -13,7 +13,7 @@ import XCTest
 class PluginTests: PluginsManagerTestCase {
 
     func infoDictionaryContentsForPluginWithConfirmation(plugin: Plugin) -> String {
-        let pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPlugin(plugin).path
+        let pluginInfoDictionaryPath = Plugin.infoDictionaryURL(for plugin).path
         var infoDictionaryContents: String!
         do {
             infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: String.Encoding.utf8)

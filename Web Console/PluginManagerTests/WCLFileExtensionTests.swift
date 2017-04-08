@@ -24,7 +24,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
 
     // MARK: Helper
     
-    func matchesPlugin(plugin: Plugin, forFileExtension fileExtension: WCLFileExtension) -> Bool {
+    func matches(_ plugin: Plugin, for fileExtension: WCLFileExtension) -> Bool {
         let suffix = fileExtension.suffix
         
         let plugins = fileExtension.plugins() as NSArray
@@ -65,7 +65,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
 
         let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
         for plugin in plugins {
-            let matches = matchesPlugin(plugin, forFileExtension: fileExtension)
+            let matches = matches(plugin, for: fileExtension)
             XCTAssertTrue(matches, "The WCLPlugin should match the WCLFileExtension.")
         }
     }

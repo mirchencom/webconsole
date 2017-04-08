@@ -80,7 +80,7 @@ class Plugin: WCLPlugin {
         }
     }
 
-    class func infoDictionaryURLForPlugin(plugin: Plugin) -> URL {
+    class func infoDictionaryURL(for plugin: Plugin) -> URL {
         return infoDictionaryURL(for: plugin.bundle.bundleURL)
     }
 
