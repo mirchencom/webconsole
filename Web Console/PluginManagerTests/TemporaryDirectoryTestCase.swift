@@ -49,7 +49,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         return FileManager.default.fileExists(atPath: path, isDirectory: &isDir) && isDir.boolValue
     }
     
-    func removeTemporaryItemAtPathComponent(pathComponent: String) throws {
+    func removeTemporaryItem(atPathComponent pathComponent: String) throws {
         let path = temporaryDirectoryPath.appendingPathComponent(pathComponent)
         do {
             try type(of: self).safelyRemoveTemporaryItem(atPath: path)
