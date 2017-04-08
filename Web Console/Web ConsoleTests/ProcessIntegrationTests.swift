@@ -24,7 +24,7 @@ class ProcessManagerRouter: NSObject, WCLTaskRunnerDelegate {
         _ = processManager.removeProcess(withIdentifier: task.processIdentifier)
     }
     
-    func task(task: Process,
+    func task(_ task: Process,
         didRunCommandPath commandPath: String,
         arguments: [String]?,
         directoryPath: String?)
@@ -120,7 +120,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // Terminate the process
         
         let killProcessExpectation = expectation(description: "Kill process")
-        ProcessKiller.killProcessInfos(processInfos) { success in
+        ProcessKiller.kill(processInfos) { success in
             killProcessExpectation.fulfill()
         }
         
@@ -139,7 +139,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // Confirm that the `ProcessFilter` no longer has the process
         
         let filterExpectationFour = expectation(description: "Process filter")
-        ProcessFilter.runningProcessMatchingProcessInfos(processInfos) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcessMap(matching: processInfos) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNil(error)
             guard let identifierToProcessInfo = identifierToProcessInfo else {
                 XCTAssertTrue(false)
@@ -182,7 +182,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // Test that the `ProcessFilter` has the process
 
         let filterExpectation = expectation(description: "Process filter")
-        ProcessFilter.runningProcessMatchingProcessInfos([processInfo]) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcessMap(matching: [processInfo]) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNil(error)
             guard let identifierToProcessInfo = identifierToProcessInfo,
                 let runningProcessInfo = identifierToProcessInfo[processInfo.identifier] else
@@ -209,7 +209,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
             return
         }
 
-        ProcessFilter.runningProcessMatchingProcessInfos([inThePastProcessInfo]) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcessMap(matching: [inThePastProcessInfo]) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNil(error)
             guard let identifierToProcessInfo = identifierToProcessInfo else {
                 XCTAssertTrue(false)
@@ -235,7 +235,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         }
         
         var runningProcessInfo: Web_Console.ProcessInfo!
-        ProcessFilter.runningProcessMatchingProcessInfos([inTheFutureProcessInfo]) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcessMap(matching: [inTheFutureProcessInfo]) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNil(error)
             guard let identifierToProcessInfo = identifierToProcessInfo,
                 let localRunningProcessInfo = identifierToProcessInfo[processInfo.identifier] else
@@ -253,7 +253,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // Terminate the process 
         
         let killProcessExpectation = expectation(description: "Kill process")
-        ProcessKiller.killProcessInfos([runningProcessInfo]) { success in
+        ProcessKiller.kill([runningProcessInfo]) { success in
             killProcessExpectation.fulfill()
         }
         
@@ -273,7 +273,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // Confirm that the `ProcessFilter` no longer has the process
         
         let filterExpectationFour = expectation(description: "Process filter")
-        ProcessFilter.runningProcessMatchingProcessInfos([processInfo]) { (identifierToProcessInfo, error) -> Void in
+        ProcessFilter.runningProcessMap(matching: [processInfo]) { (identifierToProcessInfo, error) -> Void in
             XCTAssertNil(error)
             guard let identifierToProcessInfo = identifierToProcessInfo else {
                 XCTAssertTrue(false)

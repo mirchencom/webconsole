@@ -10,7 +10,7 @@ import Foundation
 
 class ProcessKiller {
 
-    class func killProcessInfos(processInfos: [ProcessInfo],
+    class func kill(_ processInfos: [ProcessInfo],
         completion: ((Bool) -> Void)?)
     {
         var result = true

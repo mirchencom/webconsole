@@ -9,7 +9,7 @@
 import Foundation
 
 extension ProcessFilter {
-    class func runningProcessMatchingProcessInfos(processInfos: [ProcessInfo],
+    class func runningProcessMap(matching processInfos: [ProcessInfo],
         completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
     {
         let identifiers = processInfos.map { $0.identifier }
