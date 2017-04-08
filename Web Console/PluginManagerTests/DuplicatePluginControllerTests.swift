@@ -88,7 +88,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         
         // Clean Up
         do {
-            try removeTemporaryItemAtURL(duplicatePluginURL)
+            try removeTemporaryItem(at: duplicatePluginURL)
         } catch {
             XCTAssertTrue(false, "The remove should suceed")
         }
