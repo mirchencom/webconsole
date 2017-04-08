@@ -150,7 +150,7 @@ class ProcessFilterNoProcessTests: XCTestCase {
             withExtension: testDataTextExtension,
             subdirectory: testDataSubdirectory)!
         
-        let output = stringWithContentsOfFileURL(fileURL)!
+        let output = makeString(contentsOf: fileURL)!
         
         let identifierToProcessInfo = ProcessFilter.makeProcessInfos(output: output)
         XCTAssertEqual(identifierToProcessInfo.count, 3)
@@ -169,7 +169,7 @@ class ProcessFilterNoProcessTests: XCTestCase {
             withExtension: testDataTextExtension,
             subdirectory: testDataSubdirectory)!
         
-        let output = stringWithContentsOfFileURL(fileURL)!
+        let output = makeString(contentsOf: fileURL)!
         
         let identifierToProcessInfo = ProcessFilter.makeProcessInfos(output: output)
         XCTAssertEqual(identifierToProcessInfo.count, 1)

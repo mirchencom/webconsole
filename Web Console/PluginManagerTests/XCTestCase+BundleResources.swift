@@ -22,7 +22,7 @@ extension XCTestCase {
         return Bundle(for: type(of: self)).url(forResource: name, withExtension:ext, subdirectory:subpath)
     }
 
-    func stringWithContentsOfFileURL(fileURL: URL) -> String? {
+    func makeString(contentsOf fileURL: URL) -> String? {
         do {
             let contents = try NSString(contentsOf: fileURL, encoding: String.Encoding.utf8.rawValue)
             return contents as String
