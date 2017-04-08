@@ -43,7 +43,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         return path as String
     }
     
-    class func isValidTemporaryDirectory(path: String) -> Bool {
+    class func isValidTemporaryDirectory(_ path: String) -> Bool {
         var isDir: ObjCBool = false
 
         return FileManager.default.fileExists(atPath: path, isDirectory: &isDir) && isDir.boolValue
@@ -66,7 +66,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         }
     }
     
-    func removeTemporaryItem(at: path: String) throws {
+    func removeTemporaryItem(at path: String) throws {
         if !path.hasPrefix(temporaryDirectoryPath) {
             throw TemporaryDirectoryError.notInTemporaryDirectoryError(path: path)
         }

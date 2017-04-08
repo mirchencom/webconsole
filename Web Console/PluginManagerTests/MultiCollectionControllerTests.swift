@@ -82,7 +82,7 @@ class MultiCollectionControllerTests: PluginsManagerTestCase {
     
     override func setUp() {
         super.setUp()
-        pluginsController = MultiCollectionController([plugin], key: pluginNameKey)
+        pluginsController = MultiCollectionController(objects: [plugin], key: pluginNameKey)
     }
     
     override func tearDown() {

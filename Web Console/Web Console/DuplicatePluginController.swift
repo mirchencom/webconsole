@@ -50,7 +50,7 @@ class DuplicatePluginController {
                     let renamedDestinationURL = movedDestinationURL.deletingLastPathComponent().appendingPathComponent(renamedPluginFilename)
                     do {
                         try FileManager.default.moveItem(at: movedDestinationURL, to: renamedDestinationURL)
-                        if let renamedPlugin = Plugin.makePlugin(URL: renamedDestinationURL) {
+                        if let renamedPlugin = Plugin.makePlugin(url: renamedDestinationURL) {
                             plugin = renamedPlugin
                         }
                     } catch let error as NSError {
