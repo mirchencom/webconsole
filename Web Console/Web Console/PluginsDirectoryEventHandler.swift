@@ -48,7 +48,7 @@ class PluginsDirectoryEventHandler {
     
     // MARK: Collecting Handlers
     
-    func addDirectoryWasCreatedOrModifiedEvent(atPluginPaths pluginPath: String, path: String) {
+    func addDirectoryWasCreatedOrModifiedEvent(atPluginPaths pluginPath: String, forPath path: String) {
         if var paths = pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] {
             paths.append(path)
             pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] = paths
