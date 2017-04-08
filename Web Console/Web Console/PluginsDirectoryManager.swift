@@ -122,7 +122,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         assert(isSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
 
         if let pluginPath = pluginPath(fromPath: path) {
-            pluginsDirectoryEventHandler.addDirectoryWasCreatedOrModifiedEvent(at: pluginPath, path: path)
+            pluginsDirectoryEventHandler.addDirectoryWasCreatedOrModifiedEvent(atPluginPath: pluginPath, path: path)
         }
     }
 
@@ -130,7 +130,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         assert(isSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
     
         if let pluginPath = pluginPath(fromPath: path) {
-            pluginsDirectoryEventHandler.addFileWasCreatedOrModifiedEvent(at: pluginPath, path: path)
+            pluginsDirectoryEventHandler.addFileWasCreatedOrModifiedEvent(atPluginPath: pluginPath, path: path)
         }
     }
 
@@ -138,7 +138,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         assert(isSubpathOfPluginsDirectory(path), "The path should be a subpath of the plugins directory")
         
         if let pluginPath = pluginPath(fromPath: path) {
-            pluginsDirectoryEventHandler.addItemWasRemovedEvent(at: pluginPath, path: path)
+            pluginsDirectoryEventHandler.addItemWasRemovedEvent(atPluginPath: pluginPath, path: path)
         }
     }
 
@@ -153,7 +153,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         if let filePaths = filePaths {
             for path in filePaths {
 
-                if shouldFireInfoDictionaryWasCreatedOrModified(at: pluginPath,
+                if shouldFireInfoDictionaryWasCreatedOrModified(atPluginPath: pluginPath,
                     forFileCreatedOrModifiedAtPath: path)
                 {
                     delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAt: pluginPath)
@@ -165,7 +165,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
 
         if let directoryPaths = directoryPaths {
             for path in directoryPaths {
-                if shouldFireInfoDictionaryWasCreatedOrModified(at: pluginPath,
+                if shouldFireInfoDictionaryWasCreatedOrModified(atPluginPath: pluginPath,
                     forDirectoryCreatedOrModifiedAtPath: path)
                 {
                     delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAt: pluginPath)
@@ -182,7 +182,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         if let itemPaths = itemPaths {
             for path in itemPaths {
                 if shouldFireInfoDictionaryWasRemoved(atPluginPath: pluginPath,
-                    forItemRemovedAt: path)
+                    forItemRemovedAtPath: path)
                 {
                     delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasRemovedAt: pluginPath)
                     return
@@ -198,7 +198,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         forDirectoryCreatedOrModifiedAtPath path: String) -> Bool
     {
         if containsValidInfoDictionarySubpath(path) {
-            if doesInfoDictionaryExist(at: pluginPath) {
+            if doesInfoDictionaryExist(atPluginPath: pluginPath) {
                 return true
             }
         }
@@ -209,7 +209,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         forFileCreatedOrModifiedAtPath path: String) -> Bool
     {
         if isValidInfoDictionary(atPath: path) {
-            if doesInfoDictionaryExist(at: pluginPath) {
+            if doesInfoDictionaryExist(atPluginPath: pluginPath) {
                 return true
             }
         }
@@ -220,7 +220,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         forItemRemovedAtPath path: String) -> Bool
     {
         if containsValidInfoDictionarySubpath(path) {
-            if !doesInfoDictionaryExist(at: pluginPath) {
+            if !doesInfoDictionaryExist(atPluginPath: pluginPath) {
                 return true
             }
         }

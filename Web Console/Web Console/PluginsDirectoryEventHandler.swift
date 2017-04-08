@@ -85,7 +85,7 @@ class PluginsDirectoryEventHandler {
         let delay = ClassConstants.fileEventDelay * Double(NSEC_PER_SEC)
         let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: time, execute: {
-            self.fireCreatedOrModifiedEvents(at: pluginPath)
+            self.fireCreatedOrModifiedEvents(atPluginPath: pluginPath)
         })
     }
     
