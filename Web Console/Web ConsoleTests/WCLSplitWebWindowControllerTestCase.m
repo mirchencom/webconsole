@@ -116,12 +116,12 @@
 
 + (Plugin *)defaultPlugin
 {
-    return [[PluginsManager sharedInstance] pluginWithName:kTestCatPluginName];
+    return [[PluginsManager sharedInstance] pluginFor:kTestCatPluginName];
 }
 
 + (Plugin *)otherPlugin
 {
-    return [[PluginsManager sharedInstance] pluginWithName:kTestHelloWorldPluginName];
+    return [[PluginsManager sharedInstance] pluginFor:kTestHelloWorldPluginName];
 }
 
 - (WCLSplitWebWindowController *)makeSplitWebWindowController

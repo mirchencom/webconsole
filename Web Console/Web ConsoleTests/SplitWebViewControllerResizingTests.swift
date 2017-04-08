@@ -218,14 +218,14 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         // to fire which triggers saving the frame. Just calling 
         // `setPosition(_:ofDividerAt:)` with any position causes this delegate
         // message to fire.
-        let height = splitWebViewController.view.frame.size.height
-        let position = height - height
+        let spliteWebViewControllerHeight = splitWebViewController.view.frame.size.height
+        let position = spliteWebViewControllerHeight - height
         splitWebViewController.splitView.setPosition(position, ofDividerAt: 0)
 
         waitForExpectations(timeout: testTimeout, handler: nil)
 
         // Test the height & saved frame
-        XCTAssertEqual(height(for: splitWebViewController), height, "The heights should be equal")
+        XCTAssertEqual(logHeight(for: splitWebViewController), height, "The heights should be equal")
         let frame = splitWebViewController.splitController.savedSplitsViewFrame()!
         XCTAssertEqual(frame.size.height, height, "The heights should be equal")
     }

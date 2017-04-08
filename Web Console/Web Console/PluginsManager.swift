@@ -27,7 +27,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         return Singleton.instance
     }
 
-    class func setOverrideSharedInstance(pluginsManager: PluginsManager?) {
+    class func setOverrideSharedInstance(_ pluginsManager: PluginsManager?) {
         Singleton.overrideSharedInstance = pluginsManager
     }
 

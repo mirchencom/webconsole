@@ -19,7 +19,7 @@
 
 - (void)testSharedResources
 {
-    NSString *testSharedResourcePath = [[[PluginsManager sharedInstance] sharedResourcesPath] appendingPathComponent:kTestSharedResourcePathComponent];
+    NSString *testSharedResourcePath = [[[PluginsManager sharedInstance] sharedResourcesPath] stringByAppendingPathComponent:kTestSharedResourcePathComponent];
     BOOL isDir;
     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:testSharedResourcePath isDirectory:&isDir];
     XCTAssertTrue(fileExists, @"A file should exist at the test shared resource's path.");
@@ -33,7 +33,7 @@
 
 - (void)testPlugin
 {
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginFor:kTestPrintPluginName];
     
     XCTAssertNotNil(plugin, @"The WCLPlugin should not be nil.");
     

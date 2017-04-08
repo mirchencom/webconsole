@@ -38,7 +38,7 @@
     XCTAssertNil(error, @"The error should be nil");
 
     
-    PluginsManager *pluginsManager = [[PluginsManager alloc] init:@[builtInPluginsPath, testPluginsPath]
+    PluginsManager *pluginsManager = [[PluginsManager alloc] initWithPaths:@[builtInPluginsPath, testPluginsPath]
                            duplicatePluginDestinationDirectoryURL:trashURL];
     
     [PluginsManager setOverrideSharedInstance:pluginsManager];

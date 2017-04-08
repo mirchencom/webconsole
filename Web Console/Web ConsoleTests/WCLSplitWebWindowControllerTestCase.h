@@ -48,10 +48,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath;
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
-                                                                       task:(nullable NSTask *)task;
+                                                                       task:(NSTask * _Nullable * _Nullable)task;
 - (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
                                                                      plugin:(nullable Plugin *)plugin
-                                                                       task:(nullable NSTask *)task;
+                                                                       task:(NSTask * _Nullable * _Nullable)task;
 + (void)blockUntilAllTasksRunAndFinish;
 @end
 NS_ASSUME_NONNULL_END
