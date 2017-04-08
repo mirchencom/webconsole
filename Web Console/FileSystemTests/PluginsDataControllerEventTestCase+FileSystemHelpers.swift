@@ -24,7 +24,7 @@ extension PluginsDataControllerEventTestCase {
         
         var newPlugin: Plugin?
         let createExpectation = expectation(description: "Plugin was added")
-        pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasAddedHandler: { (addedPlugin) -> Void in
             let path = addedPlugin.bundle.bundlePath
             if (path == destinationPluginPath) {
                 newPlugin = addedPlugin
@@ -45,7 +45,7 @@ extension PluginsDataControllerEventTestCase {
     func copyPluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         var newPlugin: Plugin?
         let createExpectation = expectation(description: "Plugin was added")
-        pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasAddedHandler: { (addedPlugin) -> Void in
             let path = addedPlugin.bundle.bundlePath
             if (path == destinationPluginPath) {
                 newPlugin = addedPlugin
@@ -121,7 +121,7 @@ extension PluginsDataControllerEventTestCase {
         let pluginPath = plugin.bundle.bundlePath
         var newPlugin: Plugin?
         let createExpectation = expectation(description: "Plugin was added")
-        pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasAddedHandler: { (addedPlugin) -> Void in
             let path = addedPlugin.bundle.bundlePath
             if (path == pluginPath) {
                 newPlugin = addedPlugin

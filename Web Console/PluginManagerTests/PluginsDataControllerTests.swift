@@ -37,7 +37,7 @@ class PluginsDataControllerClassTests: XCTestCase {
             }
         }
 
-        let testPluginsCount = PluginsDataController.plugins(at: pluginPaths).count
+        let testPluginsCount = PluginsDataController.plugins(atPluginPaths: pluginPaths).count
         XCTAssert(plugins.count == testPluginsCount, "The plugins count should equal the test plugins count")
     }
 
@@ -260,7 +260,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         var newPlugin: Plugin!
         
         let addedExpectation = expectation(description: "Plugin was added")
-        pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasAddedHandler: { (addedPlugin) -> Void in
             addedExpectation.fulfill()
         })
 

@@ -18,7 +18,7 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         super.setUp()
         
         // Create the plugin manager
-        let pluginsManager = PluginsManager([pluginsDirectoryPath],
+        let pluginsManager = PluginsManager(paths: [pluginsDirectoryPath],
             duplicatePluginDestinationDirectoryURL: duplicatePluginDestinationDirectoryURL)
         PluginsManager.setOverrideSharedInstance(pluginsManager)
 

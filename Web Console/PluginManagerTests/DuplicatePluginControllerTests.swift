@@ -96,7 +96,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
     
     func testDuplicatePluginWithFolderNameBlocked() {
         // Get the destination plugin name
-        let uniqueName = WCLPlugin.uniquePluginName(fromName: plugin.name)!
+        let uniqueName = WCLPlugin.uniquePluginName(fromName: plugin.name)
         let destinationName = DuplicatePluginController.pluginFilename(fromName: uniqueName)
         
         // Create a folder at the destination URL
