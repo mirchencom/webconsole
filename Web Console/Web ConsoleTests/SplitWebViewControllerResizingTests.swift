@@ -116,7 +116,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         XCTAssertEqual(logHeight(for: splitWebViewController), splitWebViewHeight, "The heights should be equal")
         
         // Resize the log
-        resizeLog(for: splitWebViewController, logHeight: testLogViewHeight)
+        resizeLog(for: splitWebViewController, withHeight: testLogViewHeight)
         
         // Close and re-show the log
         makeLogDisappear(for: splitWebViewController)
@@ -152,7 +152,7 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         XCTAssertEqual(logMenuItem().title, showLogMenuItemTitle, "The titles should be equal")
 
         // Wait for the new frame to be saved
-        resizeLog(for: secondSplitWebViewController, logHeight: splitWebViewHeight)
+        resizeLog(for: secondSplitWebViewController, withHeight: splitWebViewHeight)
         
         // Re-open the log in the first window and confirm it has the right height
         makeLogAppear(in: splitWebViewController)
@@ -168,12 +168,12 @@ class SplitWebViewControllerResizingTests: WCLSplitWebWindowControllerTestCase {
         // Make a window with the first plugin and resize the log
         let splitWebViewController = makeNewSplitWebViewController()
         makeLogAppear(in: splitWebViewController)
-        resizeLog(for: splitWebViewController, logHeight: testLogViewHeight)
+        resizeLog(for: splitWebViewController, withHeight: testLogViewHeight)
 
         // Make a window with the second plugin and resize the log
         let splitWebViewControllerTwo = makeNewSplitWebViewControllerForOtherPugin()
         makeLogAppear(in: splitWebViewControllerTwo)
-        resizeLog(for: splitWebViewControllerTwo, logHeight: testLogViewHeightTwo)
+        resizeLog(for: splitWebViewControllerTwo, withHeight: testLogViewHeightTwo)
 
         // Make a window with the first plugin again and confirm the size matches
         let splitWebViewControllerThree = makeNewSplitWebViewController()
