@@ -59,8 +59,8 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         XCTAssertTrue(exists, "The item should exist")
         XCTAssertTrue(isDir.boolValue, "The item should be a directory")
 
-        let pluginInfoDictionaryURL = Plugin.infoDictionaryURL(for: pluginURL)
-        let copiedPluginInfoDictionaryURL = Plugin.infoDictionaryURL(for: copiedPluginURL)
+        let pluginInfoDictionaryURL = Plugin.urlForInfoDictionary(forPluginAt: pluginURL)
+        let copiedPluginInfoDictionaryURL = Plugin.urlForInfoDictionary(forPluginAt: copiedPluginURL)
         
         do {
             let pluginInfoDictionaryContents: String! = try String(contentsOf: pluginInfoDictionaryURL, encoding: String.Encoding.utf8)

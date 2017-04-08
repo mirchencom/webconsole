@@ -12,8 +12,8 @@ import XCTest
 
 class PluginTests: PluginsManagerTestCase {
 
-    func infoDictionaryContentsForPluginWithConfirmation(plugin: Plugin) -> String {
-        let pluginInfoDictionaryPath = Plugin.infoDictionaryURL(for plugin).path
+    func contentsOfInfoDictionaryWithConfirmation(for plugin: Plugin) -> String {
+        let pluginInfoDictionaryPath = Plugin.urlForInfoDictionary(for: plugin).path
         var infoDictionaryContents: String!
         do {
             infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: String.Encoding.utf8)
@@ -25,24 +25,24 @@ class PluginTests: PluginsManagerTestCase {
     }
     
     func testEditPluginProperties() {
-        let contents = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contents = contentsOfInfoDictionaryWithConfirmation(for: plugin)
 
         plugin.name = testPluginNameTwo
-        let contentsTwo = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contentsTwo = contentsOfInfoDictionaryWithConfirmation(for: plugin)
         XCTAssertNotEqual(contents, contentsTwo, "The contents should not be equal")
 
         plugin.command = testPluginCommandTwo
-        let contentsThree = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contentsThree = contentsOfInfoDictionaryWithConfirmation(for: plugin)
         XCTAssertNotEqual(contentsTwo, contentsThree, "The contents should not be equal")
 
         let uuid = UUID()
         let uuidString = uuid.uuidString
         plugin.identifier = uuidString
-        let contentsFour = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contentsFour = contentsOfInfoDictionaryWithConfirmation(for: plugin)
         XCTAssertNotEqual(contentsThree, contentsFour, "The contents should not be equal")
 
         plugin.suffixes = testPluginSuffixesTwo
-        let contentsFive = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contentsFive = contentsOfInfoDictionaryWithConfirmation(for: plugin)
         XCTAssertNotEqual(contentsFour, contentsFive, "The contents should not be equal")
         let newPlugin: Plugin! = Plugin.makePlugin(url: pluginURL)
 

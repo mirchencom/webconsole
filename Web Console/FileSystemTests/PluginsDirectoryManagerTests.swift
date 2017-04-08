@@ -154,7 +154,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         pluginsDirectoryManager = PluginsDirectoryManager(pluginsDirectoryURL: pluginsDirectoryURL)
         pluginsDirectoryEventManager = PluginsDirectoryEventManager()
         pluginsDirectoryManager.delegate = pluginsDirectoryEventManager
-        pluginInfoDictionaryPath = Plugin.infoDictionaryURL(for: pluginURL).path
+        pluginInfoDictionaryPath = Plugin.urlForInfoDictionary(forPluginAt: pluginURL).path
     }
     
     override func tearDown() {

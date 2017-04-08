@@ -65,7 +65,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
 
         let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
         for plugin in plugins {
-            let matches = matches(plugin, for: fileExtension)
+            let matches = self.matches(plugin, for: fileExtension)
             XCTAssertTrue(matches, "The WCLPlugin should match the WCLFileExtension.")
         }
     }
