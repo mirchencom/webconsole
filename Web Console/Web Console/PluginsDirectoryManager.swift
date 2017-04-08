@@ -181,7 +181,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     {
         if let itemPaths = itemPaths {
             for path in itemPaths {
-                if shouldFireInfoDictionaryWasRemoved(at: pluginPath,
+                if shouldFireInfoDictionaryWasRemoved(atPluginPath: pluginPath,
                     forItemRemovedAt: path)
                 {
                     delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasRemovedAt: pluginPath)
@@ -194,7 +194,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
     
     // MARK: Evaluating Events
 
-    func shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath: String,
+    func shouldFireInfoDictionaryWasCreatedOrModified(atPluginPath pluginPath: String,
         forDirectoryCreatedOrModifiedAtPath path: String) -> Bool
     {
         if containsValidInfoDictionarySubpath(path) {
@@ -205,10 +205,10 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func shouldFireInfoDictionaryWasCreatedOrModified(at pluginPath: String,
+    func shouldFireInfoDictionaryWasCreatedOrModified(atPluginPath pluginPath: String,
         forFileCreatedOrModifiedAtPath path: String) -> Bool
     {
-        if isValidInfoDictionary(at: path) {
+        if isValidInfoDictionary(atPath: path) {
             if doesInfoDictionaryExist(at: pluginPath) {
                 return true
             }
@@ -216,7 +216,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func shouldFireInfoDictionaryWasRemoved(at pluginPath: String,
+    func shouldFireInfoDictionaryWasRemoved(atPluginPath pluginPath: String,
         forItemRemovedAtPath path: String) -> Bool
     {
         if containsValidInfoDictionarySubpath(path) {
@@ -261,7 +261,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
         return false
     }
 
-    func doesInfoDictionaryExist(at pluginPath: String) -> Bool {
+    func doesInfoDictionaryExist(atPluginPath pluginPath: String) -> Bool {
         let infoDictionaryPath = pluginPath.appendingPathComponent(ClassConstants.infoDictionaryPathComponent)
         var isDir: ObjCBool = false
         let fileExists = FileManager.default.fileExists(atPath: infoDictionaryPath, isDirectory: &isDir)

@@ -48,7 +48,7 @@ class PluginsDirectoryEventHandler {
     
     // MARK: Collecting Handlers
     
-    func addDirectoryWasCreatedOrModifiedEvent(at pluginPath: String, path: String) {
+    func addDirectoryWasCreatedOrModifiedEvent(atPluginPaths pluginPath: String, path: String) {
         if var paths = pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] {
             paths.append(path)
             pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath] = paths
@@ -59,7 +59,7 @@ class PluginsDirectoryEventHandler {
         }
     }
 
-    func addFileWasCreatedOrModifiedEvent(at pluginPath: String, path: String) {
+    func addFileWasCreatedOrModifiedEvent(atPluginPath pluginPath: String, path: String) {
         if var paths = pluginPathToCreatedOrModifiedFilePaths[pluginPath] {
             paths.append(path)
             pluginPathToCreatedOrModifiedFilePaths[pluginPath] = paths
@@ -70,7 +70,7 @@ class PluginsDirectoryEventHandler {
         }
     }
 
-    func addItemWasRemovedEvent(at pluginPath: String, path: String) {
+    func addItemWasRemovedEvent(atPluginPath pluginPath: String, path: String) {
         if var paths = pluginPathToRemovedItemPaths[pluginPath] {
             paths.append(path)
             pluginPathToRemovedItemPaths[pluginPath] = paths
@@ -99,7 +99,7 @@ class PluginsDirectoryEventHandler {
     
     // MARK: Firing Handlers
     
-    func fireCreatedOrModifiedEvents(at pluginPath: String) {
+    func fireCreatedOrModifiedEvents(atPluginPath pluginPath: String) {
         let filePaths = pluginPathToCreatedOrModifiedFilePaths[pluginPath]
         let directoryPaths = pluginPathToCreatedOrModifiedDirectoryPaths[pluginPath]
         

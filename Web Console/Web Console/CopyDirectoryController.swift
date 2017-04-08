@@ -173,7 +173,7 @@ class CopyDirectoryController {
     
     private class func createDirectoryIfMissing(at URL: URL) throws {
         do {
-            try createDirectoryIfMissing(at: URL.path)
+            try createDirectoryIfMissing(atPath: URL.path)
         } catch let error as NSError {
             throw error
         }

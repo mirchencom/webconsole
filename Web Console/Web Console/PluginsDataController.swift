@@ -27,7 +27,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         self.duplicatePluginDestinationDirectoryURL = duplicatePluginDestinationDirectoryURL
         
         for path in paths {
-            let plugins = self.plugins(at: path)
+            let plugins = self.plugins(atPath: path)
             for plugin in plugins {
                 pluginPathToPluginDictionary[plugin.bundle.bundlePath] = plugin
             }
@@ -90,7 +90,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         delegate?.pluginsDataController(self, didRemovePlugin: plugin)
     }
     
-    func plugin(at pluginPath: String) -> Plugin? {
+    func plugin(atPluginPath pluginPath: String) -> Plugin? {
         return pluginPathToPluginDictionary[pluginPath]
     }
 
