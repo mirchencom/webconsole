@@ -52,7 +52,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
     func removeTemporaryItemAtPathComponent(pathComponent: String) throws {
         let path = temporaryDirectoryPath.appendingPathComponent(pathComponent)
         do {
-            try type(of: self).safelyRemoveTemporaryItem(at: path)
+            try type(of: self).safelyRemoveTemporaryItem(atPath: path)
         } catch let error as NSError {
             throw error
         }
@@ -60,7 +60,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
 
     func removeTemporaryItem(at URL: Foundation.URL) throws {
         do {
-            try removeTemporaryItem(at: URL.path)
+            try removeTemporaryItem(atPath: URL.path)
         } catch let error as NSError {
             throw error
         }
@@ -71,7 +71,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
             throw TemporaryDirectoryError.notInTemporaryDirectoryError(path: path)
         }
         do {
-            try type(of: self).safelyRemoveTemporaryItem(at: path)
+            try type(of: self).safelyRemoveTemporaryItem(atPath: path)
         } catch let error as NSError {
             throw error
         }
@@ -97,7 +97,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
             let path = identifierDirectoryPath.appendingPathComponent(className)
             if FileManager.default.fileExists(atPath: path) {
                 do {
-                    try type(of: self).safelyRemoveTemporaryItem(at: path)
+                    try type(of: self).safelyRemoveTemporaryItem(atPath: path)
                 } catch let error as NSError {
                     XCTAssertTrue(false, "Removing the temporary directory should have succeeded \(error)")
                 }
@@ -136,7 +136,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
             XCTAssert(contents.isEmpty, "The contents should be empty")
 
             // Remove the temporary directory
-            try type(of: self).safelyRemoveTemporaryItem(at: temporaryDirectoryPath)
+            try type(of: self).safelyRemoveTemporaryItem(atPath: temporaryDirectoryPath)
         } catch let error as NSError {
             XCTAssertTrue(false, "Failed to clean up a temporary directory \(error)")
         }

@@ -285,7 +285,7 @@ extension FilesAndPluginsDirectoryManagerTests {
             if !requireConfirmation {
                 let testPluginDirectoryPath = path.appendingPathComponent(testPluginDirectoryName)
                 do {
-                    try removeTemporaryItem(at: testPluginDirectoryPath)
+                    try removeTemporaryItem(atPath: testPluginDirectoryPath)
                 } catch let error as NSError {
                     XCTAssertTrue(false, "Removing the directory should succeed. \(error)")
                 }
