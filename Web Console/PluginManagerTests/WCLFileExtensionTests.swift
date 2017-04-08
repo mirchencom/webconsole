@@ -18,7 +18,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
     var fileExtensionPluginDictionary: NSDictionary {
         get {
             var fileExtensionToPluginDictionary = WCLFileExtension.fileExtensionToPluginDictionary()
-            return fileExtensionToPluginDictionary![fileExtension.suffix] as! NSDictionary
+            return fileExtensionToPluginDictionary[fileExtension.suffix] as! NSDictionary
         }
     }
 
