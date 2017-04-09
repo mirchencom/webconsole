@@ -49,7 +49,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     // MARK: PluginsDirectoryManagerDelegate
 
     func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
-        pluginInfoDictionaryWasCreatedOrModifiedAt pluginPath: String)
+        pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = plugin(atPluginPath: pluginPath) {
             if let newPlugin = Plugin.makePlugin(path: pluginPath) {
@@ -68,7 +68,7 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     }
     
     func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
-        pluginInfoDictionaryWasRemovedAt pluginPath: String)
+        pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
     {
         if let oldPlugin = plugin(atPluginPath: pluginPath) {
             remove(oldPlugin)

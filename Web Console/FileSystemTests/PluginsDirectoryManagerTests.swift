@@ -101,7 +101,7 @@ extension PluginsDirectoryManagerTests {
 
     // MARK: Copy Helpers
     
-    func copyPluginAtPathWithConfirmation(pluginPath: String, destinationPluginPath: String) {
+    func copyPluginWithConfirmation(atPluginPath pluginPath: String, destinationPluginPath: String) {
         let createExpectation = expectation(description: "Info dictionary was created or modified")
         pluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { (path) -> Void in
             if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == destinationPluginPath) {
@@ -115,7 +115,7 @@ extension PluginsDirectoryManagerTests {
         })
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func copyPluginAtPath(pluginPath: String, destinationPluginPath: String) {
+    func copyPlugin(atPluginPath pluginPath: String, toPluginPath destinationPluginPath: String) {
         let copyExpectation = expectation(description: "Copy finished")
         SubprocessFileSystemModifier.copyDirectory(atPath: pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
@@ -181,7 +181,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testCopyAndRemovePlugin() {
         let copiedPluginFilename = testPluginDirectoryName
         let copiedPluginPath = pluginPath.deletingLastPathComponent.appendingPathComponent(copiedPluginFilename)
-        copyPluginAtPathWithConfirmation(pluginPath, destinationPluginPath: copiedPluginPath)
+        copyPluginWithConfirmation(atPluginPath: pluginPath, destinationPluginPath: copiedPluginPath)
         
         // Clean up
         removePluginWithConfirmation(atPluginPath: copiedPluginPath)
@@ -190,7 +190,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testCopyToUnwatchedDirectory() {
         let pluginFilename = pluginPath.lastPathComponent
         let copiedPluginPath = temporaryDirectoryPath.appendingPathComponent(pluginFilename)
-        copyPluginAtPath(pluginPath, destinationPluginPath: copiedPluginPath)
+        copyPlugin(atPluginPath: pluginPath, toPluginPath: copiedPluginPath)
         
         do {
             try removeTemporaryItem(atPath: copiedPluginPath)
@@ -206,7 +206,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         movePluginWithConfirmation(atPluginPath: pluginPath, toUnwatchedDestinationPluginPath: movedPluginPath)
 
         // Copy back to original location
-        copyPluginAtPathWithConfirmation(movedPluginPath, destinationPluginPath: pluginPath)
+        copyPluginWithConfirmation(atPluginPath: movedPluginPath, destinationPluginPath: pluginPath)
 
         // Cleanup
         do {

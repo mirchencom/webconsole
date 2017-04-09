@@ -9,8 +9,8 @@
 import Foundation
 
 protocol PluginsDirectoryManagerDelegate {
-    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAt pluginPath: String)
-    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAt pluginPath: String)
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
+    func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager, pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
 }
 
 class PluginsPathHelper {
@@ -156,7 +156,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                 if shouldFireInfoDictionaryWasCreatedOrModified(atPluginPath: pluginPath,
                     forFileCreatedOrModifiedAtPath: path)
                 {
-                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAt: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath: pluginPath)
                     return
                 }
                 
@@ -168,7 +168,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                 if shouldFireInfoDictionaryWasCreatedOrModified(atPluginPath: pluginPath,
                     forDirectoryCreatedOrModifiedAtPath: path)
                 {
-                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAt: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath: pluginPath)
                     return
                 }
             }
@@ -184,7 +184,7 @@ class PluginsDirectoryManager: NSObject, WCLDirectoryWatcherDelegate, PluginsDir
                 if shouldFireInfoDictionaryWasRemoved(atPluginPath: pluginPath,
                     forItemRemovedAtPath: path)
                 {
-                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasRemovedAt: pluginPath)
+                    delegate?.pluginsDirectoryManager(self, pluginInfoDictionaryWasRemovedAtPluginPath: pluginPath)
                     return
                 }
             }
