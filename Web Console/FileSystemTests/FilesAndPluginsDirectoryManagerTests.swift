@@ -76,15 +76,15 @@ class FilesAndPluginsDirectoryEventManager: PluginsDirectoryEventManager, FilesA
     }
 
 
-    func addFileWasCreatedOrModifiedAtPathHandler(handler: @escaping (_ path: String) -> Void) {
+    func add(fileWasCreatedOrModifiedAtPathHandler handler: @escaping (_ path: String) -> Void) {
         fileWasCreatedOrModifiedAtPathHandlers.append(handler)
     }
     
-    func addDirectoryWasCreatedOrModifiedAtPathHandler(handler: @escaping (_ path: String) -> Void) {
+    func add(directoryWasCreatedOrModifiedAtPathHandler handler: @escaping (_ path: String) -> Void) {
         directoryWasCreatedOrModifiedAtPathHandlers.append(handler)
     }
     
-    func addItemWasRemovedAtPathHandler(handler: @escaping (_ path: String) -> Void) {
+    func add(itemWasRemovedAtPathHandler handler: @escaping (_ path: String) -> Void) {
         itemWasRemovedAtPathHandlers.append(handler)
     }
 }
@@ -104,7 +104,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     
     func createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath path: String) {
         let pluginInfoDictionaryWasCreatedOrModifiedExpectation = expectation(description: "Plugin info dictionary was created or modified")
-        fileAndPluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 pluginInfoDictionaryWasCreatedOrModifiedExpectation.fulfill()
             }
@@ -116,7 +116,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     
     func createFileWithConfirmation(atPath path: String) {
         let fileWasCreatedOrModifiedExpectation = expectation(description: "File was created")
-        fileAndPluginsDirectoryEventManager.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(fileWasCreatedOrModifiedAtPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 fileWasCreatedOrModifiedExpectation.fulfill()
             }
@@ -127,7 +127,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     
     func createDirectoryWithConfirmation(atPath path: String) {
         let directoryWasCreatedOrModifiedExpectation = expectation(description: "Directory was created")
-        fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(directoryWasCreatedOrModifiedAtPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasCreatedOrModifiedExpectation.fulfill()
             }
@@ -141,7 +141,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     
     func removeFileWithConfirmation(atPath path: String) {
         let fileWasRemovedExpectation = expectation(description: "File was removed")
-        fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(itemWasRemovedAtPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 fileWasRemovedExpectation.fulfill()
             }
@@ -152,7 +152,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     
     func removeDirectoryWithConfirmation(atPath path: String) {
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed")
-        fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(itemWasRemovedAtPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
@@ -167,14 +167,14 @@ extension FilesAndPluginsDirectoryManagerTests {
     func moveDirectoryAtPathWithConfirmation(path: String, destinationPath: String) {
         // Remove original
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
-        fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(itemWasRemovedAtPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
         // Create new
         let directoryWasCreatedExpectation = expectation(description: "Directory was created with move")
-        fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(directoryWasCreatedOrModifiedAtPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == destinationPath) {
                 directoryWasCreatedExpectation.fulfill()
             }
@@ -187,7 +187,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     func moveDirectoryAtUnwatchedPathWithConfirmation(path: String, destinationPath: String) {
         // Create new
         let directoryWasCreatedExpectation = expectation(description: "Directory was created with move")
-        fileAndPluginsDirectoryEventManager.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(directoryWasCreatedOrModifiedAtPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == destinationPath) {
                 directoryWasCreatedExpectation.fulfill()
             }
@@ -203,7 +203,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     func moveDirectoryAtPathWithConfirmation(path: String, toUnwatchedDestinationPath destinationPath: String) {
         // Remove original
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
-        fileAndPluginsDirectoryEventManager.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(itemWasRemovedAtPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
