@@ -21,7 +21,7 @@ class ProcessManagerRouter: NSObject, WCLTaskRunnerDelegate {
     // MARK: WCLTaskRunnerDelegate
     
     func taskDidFinish(task: Process) {
-        _ = processManager.removeProcess(withIdentifier: task.processIdentifier)
+        _ = processManager.removeProcess(forIdentifier: task.processIdentifier)
     }
     
     func task(_ task: Process,
@@ -92,7 +92,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         XCTAssertEqual(processInfos.count, processesToMake)
         
         for task in tasks {
-            guard let processInfoByIdentifier = processManager.makeProcessInfo(identifier: task.processIdentifier) else {
+            guard let processInfoByIdentifier = processManager.processInfo(forIdentifier: task.processIdentifier) else {
                 XCTAssertTrue(false)
                 break
             }
@@ -175,7 +175,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         let processInfos = processManager.processInfos()
         XCTAssertEqual(processInfos.count, 1)
         let processInfo = processInfos[0]
-        let processInfoByIdentifier = processManager.makeProcessInfo(identifier: task.processIdentifier)
+        let processInfoByIdentifier = processManager.processInfo(forIdentifier: task.processIdentifier)
         XCTAssertEqual(processInfo, processInfoByIdentifier)
         XCTAssertEqual(processInfo.identifier, task.processIdentifier)
 
@@ -254,6 +254,9 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         
         let killProcessExpectation = expectation(description: "Kill process")
         ProcessKiller.kill([runningProcessInfo]) { success in
+            NSLog("runningProcessInfo = \(runningProcessInfo)")
+            
+            XCTAssertTrue(success)
             killProcessExpectation.fulfill()
         }
         
@@ -267,8 +270,10 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // Confirm the process has been removed from the `ProcessManager`
 
         let processInfosTwo = processManager.processInfos()
+        NSLog("processInfosTwo = \(processInfosTwo)")
+        
         XCTAssertEqual(processInfosTwo.count, 0)
-        XCTAssertNil(processManager.makeProcessInfo(identifier: task.processIdentifier))
+        XCTAssertNil(processManager.processInfo(forIdentifier: task.processIdentifier))
 
         // Confirm that the `ProcessFilter` no longer has the process
         

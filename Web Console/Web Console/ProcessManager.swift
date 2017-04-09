@@ -40,19 +40,19 @@ class ProcessManager {
     }
     
     func add(_ processInfo: ProcessInfo) {
-        let keyValue = type(of: self).keyAndValue(for: processInfo)
+        let keyValue = type(of: self).keyAndValue(from: processInfo)
         objc_sync_enter(self)
         identifierKeyToProcessInfoValue[keyValue.key] = keyValue.value
         objc_sync_exit(self)
         save()
     }
     
-    func removeProcess(withIdentifier identifier: Int32) -> ProcessInfo? {
+    func removeProcess(forIdentifier identifier: Int32) -> ProcessInfo? {
         let processInfo = self.processInfo(forIdentifier: identifier, remove: true)
         return processInfo
     }
     
-    func makeProcessInfo(identifier: Int32) -> ProcessInfo? {
+    func processInfo(forIdentifier identifier: Int32) -> ProcessInfo? {
         return processInfo(forIdentifier: identifier, remove: false)
     }
     
@@ -107,7 +107,7 @@ class ProcessManager {
         }
     }
     
-    private class func keyAndValue(for processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
+    private class func keyAndValue(from processInfo: ProcessInfo) -> (key: NSString, value: NSDictionary) {
         let key = self.key(from: processInfo.identifier)
         let value = self.value(for: processInfo)
         return (key: key, value: value)
@@ -122,7 +122,7 @@ class ProcessManager {
             return nil
         }
         
-        let identifier = self.identifier(for: key)
+        let identifier = self.identifier(from: key)
         
         return ProcessInfo(identifier: identifier,
             startTime: startTime,
@@ -138,7 +138,7 @@ class ProcessManager {
         return dictionary
     }
     
-    private class func identifier(for key: NSString) -> Int32 {
+    private class func identifier(from key: NSString) -> Int32 {
         return Int32(key.intValue)
     }
     
