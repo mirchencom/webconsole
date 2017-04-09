@@ -81,7 +81,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     }
 
     // MARK: Create
-    func createFileAtPathWithConfirmation(path: String) {
+    func createFileWithConfirmation(atPath: path: String) {
         let fileWasCreatedOrModifiedExpectation = expectation(description: "File was created")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
@@ -115,7 +115,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     }
     
     // MARK: Remove
-    func removeFileAtPathWithConfirmation(path: String) {
+    func removeFileWithConfirmation(atPath path: String) {
         let fileWasRemovedExpectation = expectation(description: "File was removed")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
@@ -125,7 +125,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
         SubprocessFileSystemModifier.removeFileAtPath(path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func removeDirectoryAtPathWithConfirmation(path: String) {
+    func removeDirectoryWithConfirmation(atPath: path: String) {
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
@@ -187,16 +187,16 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
         
         // Test Create File
-        createFileAtPathWithConfirmation(testFilePath)
+        createFileWithConfirmation(atPath: testFilePath)
 
         // Test Modify File
         modifyFileAtPathWithConfirmation(testFilePath)
 
         // Test Remove File
-        removeFileAtPathWithConfirmation(testFilePath)
+        removeFileWithConfirmation(atPath: testFilePath)
         
         // Test Remove Directory
-        removeDirectoryAtPathWithConfirmation(testDirectoryPath)
+        removeDirectoryWithConfirmation(atPath: testDirectoryPath)
 
         // Test Create Directory Again
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
@@ -204,7 +204,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         // Clean up
 
         // Test Remove Directory Again
-        removeDirectoryAtPathWithConfirmation(testDirectoryPath)
+        removeDirectoryWithConfirmation(atPath: testDirectoryPath)
     }
 
     func testMoveDirectory() {
@@ -223,7 +223,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         // Clean up
             
         // Test Remove
-        removeDirectoryAtPathWithConfirmation(testDirectoryPath)
+        removeDirectoryWithConfirmation(atPath: testDirectoryPath)
     }
 
     func testMoveDirectoryContainingFile() {
@@ -234,7 +234,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
         
         // Test Create File
-        createFileAtPathWithConfirmation(testFilePath)
+        createFileWithConfirmation(atPath: testFilePath)
         
         // Test Move
         let testDirectoryPathTwo = testDirectoryPath.deletingLastPathComponent.appendingPathComponent(testDirectoryNameTwo)
@@ -250,10 +250,10 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         // Clean up
 
         // Test Remove File
-        removeFileAtPathWithConfirmation(testFilePath)
+        removeFileWithConfirmation(atPath: testFilePath)
 
         // Test Remove
-        removeDirectoryAtPathWithConfirmation(testDirectoryPath)
+        removeDirectoryWithConfirmation(atPath: testDirectoryPath)
     }
 
     func testReplaceDirectoryWithFile() {
@@ -263,29 +263,29 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
 
         // Remove Directory
-        removeDirectoryAtPathWithConfirmation(testDirectoryPath)
+        removeDirectoryWithConfirmation(atPath: testDirectoryPath)
         
         // Test Create File
-        createFileAtPathWithConfirmation(testDirectoryPath)
+        createFileWithConfirmation(atPath: testDirectoryPath)
 
         // Remove File
-        removeFileAtPathWithConfirmation(testDirectoryPath)
+        removeFileWithConfirmation(atPath: testDirectoryPath)
     }
 
     func testReplaceFileWithDirectory() {
         let testDirectoryPath = temporaryDirectoryURL.path.appendingPathComponent(testDirectoryName)
         
         // Test Create File
-        createFileAtPathWithConfirmation(testDirectoryPath)
+        createFileWithConfirmation(atPath: testDirectoryPath)
         
         // Remove File
-        removeFileAtPathWithConfirmation(testDirectoryPath)
+        removeFileWithConfirmation(atPath: testDirectoryPath)
         
         // Test Create Directory
         createDirectoryAtPathWithConfirmation(testDirectoryPath)
         
         // Remove Directory
-        removeDirectoryAtPathWithConfirmation(testDirectoryPath)
+        removeDirectoryWithConfirmation(atPath: testDirectoryPath)
     }
 
 }
@@ -305,21 +305,21 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
     
     func testCreateWriteAndRemoveFile() {
         // Test Create
-        createFileAtPathWithConfirmation(testFilePath)
+        createFileWithConfirmation(atPath: testFilePath)
         
         // Test Modify
         modifyFileAtPathWithConfirmation(testFilePath)
         
         // Test Remove
-        removeFileAtPathWithConfirmation(testFilePath)
+        removeFileWithConfirmation(atPath: testFilePath)
 
         // Test Create again
-        createFileAtPathWithConfirmation(testFilePath)
+        createFileWithConfirmation(atPath: testFilePath)
         
         // Clean up
 
         // Test Remove again
-        removeFileAtPathWithConfirmation(testFilePath)
+        removeFileWithConfirmation(atPath: testFilePath)
     }
 
     func testMoveFile() {
@@ -342,7 +342,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         // Clean up
             
         // Test Remove
-        removeFileAtPathWithConfirmation(testFilePath)
+        removeFileWithConfirmation(atPath: testFilePath)
     }
     
     func testFileManager() {
