@@ -32,7 +32,7 @@ class TemporaryDirectoryTestCase: XCTestCase {
         static let temporaryDirectoryPathPrefix = "/var/folders"
     }
     
-    class func resolveTemporaryDirectoryPath(path: NSString) -> String {
+    class func resolve(temporaryDirectoryPath path: NSString) -> String {
         // Remove the "/private" path component because FSEvents returns paths iwth this prefix
         let testPathPrefix = "/private".appendingPathComponent(ClassConstants.temporaryDirectoryPathPrefix)
         let pathPrefixRange = path.range(of: testPathPrefix)
