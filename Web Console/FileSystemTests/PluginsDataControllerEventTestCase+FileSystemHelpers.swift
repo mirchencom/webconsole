@@ -92,7 +92,7 @@ extension PluginsDataControllerEventTestCase {
 
         // Get the old identifier
         let infoDictionary = NSDictionary(contentsOf: plugin.infoDictionaryURL)! as Dictionary
-        let identifier: String = infoDictionary[Plugin.InfoDictionaryKeys.Identifier as NSString] as! String
+        let identifier: String = infoDictionary[Plugin.InfoDictionaryKeys.identifier as NSString] as! String
 
         // Make a new identifier
         let UUID = Foundation.UUID()

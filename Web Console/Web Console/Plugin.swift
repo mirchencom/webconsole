@@ -96,7 +96,7 @@ class Plugin: WCLPlugin {
             assert(editable, "The plugin should be editable")
         }
         didSet {
-            infoDictionary[InfoDictionaryKeys.Name] = name
+            infoDictionary[InfoDictionaryKeys.name] = name
             save()
         }
     }
@@ -105,7 +105,7 @@ class Plugin: WCLPlugin {
             assert(editable, "The plugin should be editable")
         }
         didSet {
-            infoDictionary[InfoDictionaryKeys.Identifier] = identifier
+            infoDictionary[InfoDictionaryKeys.identifier] = identifier
             save()
         }
     }
@@ -114,7 +114,7 @@ class Plugin: WCLPlugin {
             assert(editable, "The plugin should be editable")
         }
         didSet {
-            infoDictionary[InfoDictionaryKeys.Command] = command
+            infoDictionary[InfoDictionaryKeys.command] = command
             save()
         }
     }
@@ -133,7 +133,7 @@ class Plugin: WCLPlugin {
             assert(editable, "The plugin should be editable")
         }
         didSet {
-            infoDictionary[InfoDictionaryKeys.Suffixes] = suffixes
+            infoDictionary[InfoDictionaryKeys.suffixes] = suffixes
             save()
         }
     }
@@ -143,9 +143,9 @@ class Plugin: WCLPlugin {
     dynamic var editable: Bool {
         didSet {
             if (!editable) {
-                infoDictionary[InfoDictionaryKeys.Editable] = editable
+                infoDictionary[InfoDictionaryKeys.editable] = editable
             } else {
-                infoDictionary[InfoDictionaryKeys.Editable] = nil
+                infoDictionary[InfoDictionaryKeys.editable] = nil
             }
             save()
         }

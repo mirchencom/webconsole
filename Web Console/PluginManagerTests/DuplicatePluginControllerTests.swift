@@ -38,7 +38,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         }
 
         var pluginInfoDictionaryContentsAsNSString: NSString = pluginInfoDictionaryContents as NSString
-        var range = pluginInfoDictionaryContentsAsNSString.range(of: Plugin.InfoDictionaryKeys.Editable)
+        var range = pluginInfoDictionaryContentsAsNSString.range(of: Plugin.InfoDictionaryKeys.editable)
         XCTAssertFalse(range.location == NSNotFound, "The string should have been found")
 
         // Duplicate the plugin
@@ -71,7 +71,7 @@ class DuplicatePluginControllerTests: PluginsManagerTestCase {
         }
 
         pluginInfoDictionaryContentsAsNSString = pluginInfoDictionaryContents as NSString
-        range = pluginInfoDictionaryContentsAsNSString.range(of: Plugin.InfoDictionaryKeys.Editable)
+        range = pluginInfoDictionaryContentsAsNSString.range(of: Plugin.InfoDictionaryKeys.editable)
         XCTAssertTrue(range.location == NSNotFound, "The string should not have been found")
 
         // Test the plugins properties are accurate

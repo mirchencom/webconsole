@@ -22,13 +22,13 @@ extension Plugin {
     }
 
     struct InfoDictionaryKeys {
-        static let Name = "WCName"
-        static let Identifier = "WCUUID"
-        static let Command = "WCCommand"
-        static let Suffixes = "WCFileExtensions"
-        static let Hidden = "WCHidden"
-        static let Editable = "WCEditable"
-        static let DebugModeEnabled = "WCDebugModeEnabled"
+        static let name = "WCName"
+        static let identifier = "WCUUID"
+        static let command = "WCCommand"
+        static let suffixes = "WCFileExtensions"
+        static let hidden = "WCHidden"
+        static let editable = "WCEditable"
+        static let debugModeEnabled = "WCDebugModeEnabled"
     }
 
     enum PluginType {
@@ -134,11 +134,11 @@ extension Plugin {
     }
 
     class func validSuffixes(infoDictionary: [AnyHashable: Any]) throws -> [String]? {
-        if let suffixes = infoDictionary[InfoDictionaryKeys.Suffixes] as? [String] {
+        if let suffixes = infoDictionary[InfoDictionaryKeys.suffixes] as? [String] {
             return suffixes
         }
 
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Suffixes] as AnyObject? {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.suffixes] as AnyObject? {
             // A missing suffixes is valid, but an existing malformed one is not
             throw PluginLoadError.invalidFileExtensionsError(infoDictionary: infoDictionary)
         }
@@ -147,13 +147,13 @@ extension Plugin {
     }
 
     class func validCommand(infoDictionary: [AnyHashable: Any]) throws -> String? {
-        if let command = infoDictionary[InfoDictionaryKeys.Command] as? String {
+        if let command = infoDictionary[InfoDictionaryKeys.command] as? String {
             if command.characters.count > 0 {
                 return command
             }
         }
 
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Command] as AnyObject? {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.command] as AnyObject? {
             // A missing command is valid, but an existing malformed one is not
             throw PluginLoadError.invalidCommandError(infoDictionary: infoDictionary)
         }
@@ -162,7 +162,7 @@ extension Plugin {
     }
     
     class func validName(infoDictionary: [AnyHashable: Any]) throws -> String? {
-        if let name = infoDictionary[InfoDictionaryKeys.Name] as? String {
+        if let name = infoDictionary[InfoDictionaryKeys.name] as? String {
             if name.characters.count > 0 {
                 return name
             }
@@ -172,7 +172,7 @@ extension Plugin {
     }
     
     class func validIdentifier(infoDictionary: [AnyHashable: Any]) throws -> String? {
-        if let uuidString = infoDictionary[InfoDictionaryKeys.Identifier] as? String {
+        if let uuidString = infoDictionary[InfoDictionaryKeys.identifier] as? String {
             let uuid: UUID? = UUID(uuidString: uuidString)
             if uuid != nil {
                 return uuidString
@@ -183,11 +183,11 @@ extension Plugin {
     }
 
     class func validHidden(infoDictionary: [AnyHashable: Any]) throws -> Bool {
-        if let hidden = infoDictionary[InfoDictionaryKeys.Hidden] as? Int {
+        if let hidden = infoDictionary[InfoDictionaryKeys.hidden] as? Int {
             return NSNumber(value: hidden as Int).boolValue
         }
         
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Hidden] as AnyObject? {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.hidden] as AnyObject? {
             // A missing hidden is valid, but an existing malformed one is not
             throw PluginLoadError.invalidHiddenError(infoDictionary: infoDictionary)
         }
@@ -196,11 +196,11 @@ extension Plugin {
     }
 
     class func validEditable(infoDictionary: [AnyHashable: Any]) throws -> Bool {
-        if let editable = infoDictionary[InfoDictionaryKeys.Editable] as? NSNumber {
+        if let editable = infoDictionary[InfoDictionaryKeys.editable] as? NSNumber {
             return editable.boolValue
         }
         
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.Editable] as AnyObject? {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.editable] as AnyObject? {
             // A missing editable is valid, but an existing malformed one is not
             throw PluginLoadError.invalidEditableError(infoDictionary: infoDictionary)
         }
@@ -209,11 +209,11 @@ extension Plugin {
     }
 
     class func validDebugModeEnabled(infoDictionary: [AnyHashable: Any]) throws -> Bool? {
-        if let debugModeEnabled = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] as? Int {
+        if let debugModeEnabled = infoDictionary[InfoDictionaryKeys.debugModeEnabled] as? Int {
             return NSNumber(value: debugModeEnabled as Int).boolValue
         }
         
-        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.DebugModeEnabled] as AnyObject? {
+        if let _: AnyObject = infoDictionary[InfoDictionaryKeys.debugModeEnabled] as AnyObject? {
             // A missing editable is valid, but an existing malformed one is not
             throw PluginLoadError.invalidDebugModeEnabledError(infoDictionary: infoDictionary)
         }
