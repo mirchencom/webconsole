@@ -74,7 +74,7 @@ extension PluginsDirectoryManagerTests {
             }
         })
         
-        SubprocessFileSystemModifier.moveItemAtPath(pluginPath, toPath: destinationPluginPath)
+        SubprocessFileSystemModifier.moveItem(atPath: pluginPath, toPath: destinationPluginPath)
         
         // Wait for expectations
         waitForExpectations(timeout: defaultTimeout, handler: nil)
@@ -89,7 +89,7 @@ extension PluginsDirectoryManagerTests {
         })
         
         let moveExpectation = expectation(description: "Move finished")
-        SubprocessFileSystemModifier.moveItemAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+        SubprocessFileSystemModifier.moveItem(atPath: pluginPath, toPath: destinationPluginPath, handler: {
             moveExpectation.fulfill()
         })
         
@@ -232,7 +232,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
                 expectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.moveItemAtPath(pluginInfoDictionaryPath, toPath: renamedInfoDictionaryPath)
+        SubprocessFileSystemModifier.moveItem(atPath: pluginInfoDictionaryPath, toPath: renamedInfoDictionaryPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
         
         // Move back
@@ -242,7 +242,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
                 expectationTwo.fulfill()
             }
         })
-        SubprocessFileSystemModifier.moveItemAtPath(renamedInfoDictionaryPath, toPath: pluginInfoDictionaryPath)
+        SubprocessFileSystemModifier.moveItem(atPath: renamedInfoDictionaryPath, toPath: pluginInfoDictionaryPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     

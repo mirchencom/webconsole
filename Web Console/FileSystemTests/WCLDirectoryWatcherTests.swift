@@ -153,7 +153,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
             }
         })
         // Move
-        SubprocessFileSystemModifier.moveItemAtPath(path, toPath: destinationPath)
+        SubprocessFileSystemModifier.moveItem(atPath: path, toPath: destinationPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     func moveDirectoryAtPathWithConfirmation(path: String, destinationPath: String) {
@@ -172,7 +172,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
             }
         })
         // Move
-        SubprocessFileSystemModifier.moveItemAtPath(path, toPath: destinationPath)
+        SubprocessFileSystemModifier.moveItem(atPath: path, toPath: destinationPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 }

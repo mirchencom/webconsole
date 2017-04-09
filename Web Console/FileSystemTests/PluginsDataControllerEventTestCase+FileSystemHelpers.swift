@@ -34,7 +34,7 @@ extension PluginsDataControllerEventTestCase {
         })
         
         let pluginPath = plugin.bundle.bundlePath
-        SubprocessFileSystemModifier.moveItemAtPath(pluginPath, toPath: destinationPluginPath)
+        SubprocessFileSystemModifier.moveItem(atPath: pluginPath, toPath: destinationPluginPath)
         
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }

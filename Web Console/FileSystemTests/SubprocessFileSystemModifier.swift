@@ -10,7 +10,7 @@ import Cocoa
 
 class SubprocessFileSystemModifier {
 
-    // MARK: createFileAtPath
+    // MARK: createFile
     class func createFileAtPath(path: String) {
         createFileAtPath(path, handler: nil)
     }
@@ -21,7 +21,7 @@ class SubprocessFileSystemModifier {
         SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
-    // MARK: createDirectoryAtPath
+    // MARK: createDirectory
     class func createDirectoryAtPath(path: String) {
         createDirectoryAtPath(path, handler: nil)
     }
@@ -32,7 +32,7 @@ class SubprocessFileSystemModifier {
         SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
-    // MARK: removeFileAtPath
+    // MARK: removeFile
     class func removeFileAtPath(path: String) {
         removeFileAtPath(path, handler: nil)
     }
@@ -48,7 +48,7 @@ class SubprocessFileSystemModifier {
         SubprocessFileSystemModifier.run(task, handler: handler)
     }
     
-    // MARK: removeDirectoryAtPath
+    // MARK: removeDirectory
     class func removeDirectoryAtPath(path: String) {
         removeDirectoryAtPath(path, handler: nil)
     }
@@ -68,7 +68,7 @@ class SubprocessFileSystemModifier {
         SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
-    // MARK: copyDirectoryAtPath
+    // MARK: copyDirectory
     class func copyDirectoryAtPath(path: String, toPath destinationPath: String) {
         copyDirectoryAtPath(path, toPath: destinationPath, handler: nil)
     }
@@ -106,11 +106,11 @@ class SubprocessFileSystemModifier {
         SubprocessFileSystemModifier.run(task, handler: handler)
     }
     
-    // MARK: moveItemAtPath
-    class func moveItemAtPath(path: String, toPath destinationPath: String) {
-        moveItemAtPath(path, toPath: destinationPath, handler: nil)
+    // MARK: moveItem
+    class func moveItem(atPath path: String, toPath destinationPath: String) {
+        moveItem(atPath: path, toPath: destinationPath, handler: nil)
     }
-    class func moveItemAtPath(path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
+    class func moveItem(atPath path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
         let task = Process()
         task.launchPath = "/bin/mv"
         task.arguments = [path, destinationPath]

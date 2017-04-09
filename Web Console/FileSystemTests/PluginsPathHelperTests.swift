@@ -12,7 +12,7 @@ import XCTest
 @testable import Web_Console
 
 class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
-    func isRange(range: NSRange, equalToRange comparisonRange: NSRange) -> Bool {
+    func areEqual(_ range: NSRange, _ comparisonRange: NSRange) -> Bool {
         return range.location == comparisonRange.location && range.length == comparisonRange.length
     }
     
@@ -35,7 +35,7 @@ class PluginsPathHelperTestCase: TemporaryPluginsTestCase {
                 let subpathFromRange = testPathAsNSString.substring(with: range)
                 XCTAssertEqual(subpathFromRange.standardizingPath,  testSubpath.standardizingPath, "The standardized paths should be equal")
                 
-                XCTAssertTrue(isRange(range, equalToRange: testRange), "The ranges should be equal")
+                XCTAssertTrue(areEqual(range, testRange), "The ranges should be equal")
                 
                 let subpath = PluginsPathHelper.subpath(fromPath: testPath, untilSubpath: testSubpath)!
                 XCTAssertEqual(subpath.standardizingPath, testSubpath.standardizingPath, "The subpaths should be equal")
