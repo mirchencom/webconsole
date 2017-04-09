@@ -146,7 +146,7 @@ extension FilesAndPluginsDirectoryManagerTests {
                 fileWasRemovedExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.removeFileAtPath(path)
+        SubprocessFileSystemModifier.removeFile(atPath: path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
@@ -219,7 +219,7 @@ extension FilesAndPluginsDirectoryManagerTests {
 
     // MARK: Plugin File Hierarchy Helpers
 
-    func createDirectory(atPath: path: String) {
+    func createDirectory(atPath path: String) {
         do {
             try FileManager.default
                 .createDirectory(atPath: path,
@@ -230,14 +230,13 @@ extension FilesAndPluginsDirectoryManagerTests {
         }
     }
     
-    func createFile(atPath: path: String) {
+    func createFile(atPath path: String) {
         let success = FileManager.default.createFile(atPath: path,
             contents: nil,
             attributes: nil)
         XCTAssertTrue(success, "Creating the file should succeed.")
     }
     
-
     func createValidPluginHierarchyAtPath(path: String) {
         validPluginHierarchyOperation(path, isRemove: false, requireConfirmation: false)
     }

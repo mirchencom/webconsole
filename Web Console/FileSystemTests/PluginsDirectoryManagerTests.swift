@@ -263,7 +263,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
                 expectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.removeFileAtPath(pluginInfoDictionaryPath)
+        SubprocessFileSystemModifier.removeFile(atPath: pluginInfoDictionaryPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
 
         // Add back the info dictionary

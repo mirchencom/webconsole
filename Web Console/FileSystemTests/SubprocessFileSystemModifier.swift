@@ -34,7 +34,7 @@ class SubprocessFileSystemModifier {
 
     // MARK: removeFile
     class func removeFile(atPath path: String) {
-        removeFileAtPath(path, handler: nil)
+        removeFile(atPath: path, handler: nil)
     }
     class func removeFile(atPath path: String, handler: ((Void) -> Void)?) {
         let pathAsNSString: NSString = path as NSString

@@ -91,7 +91,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
         SubprocessFileSystemModifier.createFile(atPath: path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func createDirectoryWithConfirmation(atPath: path: String) {
+    func createDirectoryWithConfirmation(atPath path: String) {
         let directoryWasCreatedOrModifiedExpectation = expectation(description: "Directory was created")
         directoryWatcherEventManager?.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
@@ -103,7 +103,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     }
     
     // MARK: Modify
-    func modifyFileAtPathWithConfirmation(path: String) {
+    func modifyFileWithConfirmation(atPath path: String) {
         let fileWasModifiedExpectation = expectation(description: "File was modified")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
@@ -122,7 +122,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
                 fileWasRemovedExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.removeFileAtPath(path)
+        SubprocessFileSystemModifier.removeFile(atPath: path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     func removeDirectoryWithConfirmation(atPath path: String) {
@@ -190,7 +190,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         createFileWithConfirmation(atPath: testFilePath)
 
         // Test Modify File
-        modifyFileAtPathWithConfirmation(testFilePath)
+        modifyFileWithConfirmation(atPath: testFilePath)
 
         // Test Remove File
         removeFileWithConfirmation(atPath: testFilePath)
@@ -242,7 +242,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         
         // Test Modify File
         let testFilePathTwo = testDirectoryPathTwo.appendingPathComponent(testFilename)
-        modifyFileAtPathWithConfirmation(testFilePathTwo)
+        modifyFileWithConfirmation(atPath: testFilePathTwo)
         
         // Test Move Again
         moveDirectoryAtPathWithConfirmation(testDirectoryPathTwo, destinationPath: testDirectoryPath)
@@ -308,7 +308,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         createFileWithConfirmation(atPath: testFilePath)
         
         // Test Modify
-        modifyFileAtPathWithConfirmation(testFilePath)
+        modifyFileWithConfirmation(atPath: testFilePath)
         
         // Test Remove
         removeFileWithConfirmation(atPath: testFilePath)
@@ -324,20 +324,20 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
 
     func testMoveFile() {
         // Test Create With Write
-        modifyFileAtPathWithConfirmation(testFilePath)
+        modifyFileWithConfirmation(atPath: testFilePath)
 
         // Test Move
         let testFilePathTwo = testFilePath.deletingLastPathComponent.appendingPathComponent(testFilenameTwo)
         moveFileAtPathWithConfirmation(testFilePath, destinationPath: testFilePathTwo)
         
         // Test Modify
-        modifyFileAtPathWithConfirmation(testFilePathTwo)
+        modifyFileWithConfirmation(atPath: testFilePathTwo)
         
         // Test Move Again
         moveFileAtPathWithConfirmation(testFilePathTwo, destinationPath: testFilePath)
 
         // Modify Again
-        modifyFileAtPathWithConfirmation(testFilePath)
+        modifyFileWithConfirmation(atPath: testFilePath)
         
         // Clean up
             
@@ -386,7 +386,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         }
         
         // Remove file
-        SubprocessFileSystemModifier.removeFileAtPath(testFilePath)
+        SubprocessFileSystemModifier.removeFile(atPath: testFilePath)
         
         // Wait for expectation
         waitForExpectations(timeout: defaultTimeout, handler: nil)
@@ -445,7 +445,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         }
         
         // Remove file
-        SubprocessFileSystemModifier.removeFileAtPath(testFilePath)
+        SubprocessFileSystemModifier.removeFile(atPath: testFilePath)
         
         // Wait for expectation
         waitForExpectations(timeout: defaultTimeout, handler: nil)
