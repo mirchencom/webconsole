@@ -25,7 +25,7 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
         let destinationPluginPath = destinationPluginParentPath.deletingLastPathComponent.appendingPathComponent(destinationPluginFilename)
         
         var newPlugin: Plugin!
-        copyWithConfirmation(of: plugin, destinationPluginPath: destinationPluginPath, handler: { (plugin) -> Void in
+        copyWithConfirmation(plugin, destinationPluginPath: destinationPluginPath, handler: { (plugin) -> Void in
             newPlugin = plugin
         })
         XCTAssertNotNil(newPlugin, "The plugin should not be nil")
@@ -46,7 +46,7 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
         
         // Test that the original plugin can be reloaded by modifying it
         var originalPlugin: Plugin!
-        modifyPluginWithConfirmation(plugin, handler: { (plugin) -> Void in
+        modifyWithConfirmation(plugin, handler: { (plugin) -> Void in
             originalPlugin = plugin
         })
         XCTAssertNotNil(originalPlugin, "The plugin should not be nil")
@@ -85,7 +85,7 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
     func testEditPlugin() {        
         // Move the plugin
         var newPlugin: Plugin!
-        modifyPluginWithConfirmation(plugin, handler: { (plugin) -> Void in
+        modifyWithConfirmation(plugin, handler: { (plugin) -> Void in
             newPlugin = plugin
         })
         XCTAssertNotNil(newPlugin, "The plugin should not be nil")

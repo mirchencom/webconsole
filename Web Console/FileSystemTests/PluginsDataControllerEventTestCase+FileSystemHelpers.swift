@@ -42,7 +42,7 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Copy Helpers
     
-    func copyWithConfirmation(of plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
+    func copyWithConfirmation(_ plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         var newPlugin: Plugin?
         let createExpectation = expectation(description: "Plugin was added")
         pluginDataEventManager.add(pluginWasAddedHandler: { (addedPlugin) -> Void in
@@ -88,7 +88,7 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Modify Helpers
     
-    func modifyPluginWithConfirmation(plugin: Plugin, handler: @escaping (_ plugin: Plugin?) -> Void) {
+    func modifyWithConfirmation(_ plugin: Plugin, handler: @escaping (_ plugin: Plugin?) -> Void) {
 
         // Get the old identifier
         let infoDictionary = NSDictionary(contentsOf: plugin.infoDictionaryURL)! as Dictionary
