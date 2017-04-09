@@ -196,9 +196,9 @@ class PluginTests: PluginsManagerTestCase {
     }
 
     func testEquality() {
-        let samePlugin: Plugin! = Plugin.makePlugin(url: pluginURL)
+        let samePlugin: Plugin = Plugin.makePlugin(url: pluginURL)!
         XCTAssertNotEqual(plugin, samePlugin, "The plugins should not be equal")
-        XCTAssertTrue(plugin.isEqual(to: samePlugin), "The plugins should be equal")
+        XCTAssertTrue(plugin.isEqual(toOther: samePlugin), "The plugins should be equal")
         
         // Duplicate the plugins folder, this should not cause a second plugin to be added to the plugin manager since the copy originated from the same process
         let destinationPluginFilename = DuplicatePluginController.pluginFilename(fromName: plugin.identifier)
