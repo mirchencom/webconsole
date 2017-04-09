@@ -49,15 +49,15 @@ class WCLDirectoryWatcherEventManager: NSObject, WCLDirectoryWatcherDelegate {
         }
     }
 
-    func addFileWasCreatedOrModifiedAtPathHandler(handler: @escaping (path: String) -> Void) {
+    func addFileWasCreatedOrModifiedAtPathHandler(handler: @escaping (_ path: String) -> Void) {
         fileWasCreatedOrModifiedAtPathHandlers.append(handler)
     }
 
-    func addDirectoryWasCreatedOrModifiedAtPathHandler(handler: @escaping (path: String) -> Void) {
+    func addDirectoryWasCreatedOrModifiedAtPathHandler(handler: @escaping (_ path: String) -> Void) {
         directoryWasCreatedOrModifiedAtPathHandlers.append(handler)
     }
 
-    func addItemWasRemovedAtPathHandler(handler: @escaping (path: String) -> Void) {
+    func addItemWasRemovedAtPathHandler(handler: @escaping (_ path: String) -> Void) {
         itemWasRemovedAtPathHandlers.append(handler)
     }
 }

@@ -45,11 +45,11 @@ class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
     
     // MARK: Handlers
     
-    func addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler(handler: @escaping (path: String) -> Void) {
+    func addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler(handler: @escaping (_ path: String) -> Void) {
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.append(handler)
     }
     
-    func addPluginInfoDictionaryWasRemovedAtPluginPathHandler(handler: @escaping (path: String) -> Void) {
+    func addPluginInfoDictionaryWasRemovedAtPluginPathHandler(handler: @escaping (_ path: String) -> Void) {
         pluginInfoDictionaryWasRemovedAtPluginPathHandlers.append(handler)
     }
     
