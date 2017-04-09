@@ -57,7 +57,7 @@ extension PluginsDataControllerEventTestCase {
         
         let pluginPath = plugin.bundle.bundlePath
         let copyExpectation = expectation(description: "Copy finished")
-        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+        SubprocessFileSystemModifier.copyDirectory(atPath: pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
         })
         

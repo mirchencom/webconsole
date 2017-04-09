@@ -69,10 +69,10 @@ class SubprocessFileSystemModifier {
     }
 
     // MARK: copyDirectory
-    class func copyDirectoryAtPath(path: String, toPath destinationPath: String) {
+    class func copyDirectory(atPath path: String, toPath destinationPath: String) {
         copyDirectoryAtPath(path, toPath: destinationPath, handler: nil)
     }
-    class func copyDirectoryAtPath(path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
+    class func copyDirectory(atPath path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
         let pathAsNSString: NSString = path as NSString
         if pathAsNSString.range(of: "*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")

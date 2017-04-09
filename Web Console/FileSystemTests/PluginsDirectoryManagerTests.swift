@@ -110,14 +110,14 @@ extension PluginsDirectoryManagerTests {
         })
 
         let copyExpectation = expectation(description: "Copy finished")
-        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+        SubprocessFileSystemModifier.copyDirectory(atPath: pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
         })
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     func copyPluginAtPath(pluginPath: String, destinationPluginPath: String) {
         let copyExpectation = expectation(description: "Copy finished")
-        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+        SubprocessFileSystemModifier.copyDirectory(atPath: pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
         })
         waitForExpectations(timeout: defaultTimeout, handler: nil)
