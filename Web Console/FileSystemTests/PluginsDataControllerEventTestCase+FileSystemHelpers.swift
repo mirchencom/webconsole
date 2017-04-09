@@ -14,7 +14,7 @@ import XCTest
 extension PluginsDataControllerEventTestCase {
     // MARK: Move Helpers
     
-    func movePluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
+    func moveWithConfirmation(_ plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         let removeExpectation = expectation(description: "Plugin was removed")
         pluginDataEventManager.add(pluginWasRemovedHandler: { (removedPlugin) -> Void in
             if (plugin == removedPlugin) {

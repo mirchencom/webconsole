@@ -35,7 +35,7 @@ class PluginsDataControllerFileSystemTests: PluginsDataControllerEventTestCase {
         
         // Move the plugin
         var newPlugin: Plugin!
-        movePluginWithConfirmation(plugin, destinationPluginPath: destinationPluginPath, handler: { (plugin) -> Void in
+        moveWithConfirmation(plugin, destinationPluginPath: destinationPluginPath, handler: { (plugin) -> Void in
             newPlugin = plugin
         })
         XCTAssertNotNil(newPlugin, "The plugin should not be nil")
@@ -44,7 +44,7 @@ class PluginsDataControllerFileSystemTests: PluginsDataControllerEventTestCase {
         
         // Move the plugin back
         var newPluginTwo: Plugin!
-        movePluginWithConfirmation(newPlugin, destinationPluginPath: pluginPath, handler: { (movedPlugin) -> Void in
+        moveWithConfirmation(newPlugin, destinationPluginPath: pluginPath, handler: { (movedPlugin) -> Void in
             newPluginTwo = movedPlugin
         })
         XCTAssertNotNil(newPluginTwo, "The plugin should not be nil")
