@@ -215,10 +215,10 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
 
         // Test Move
         let testDirectoryPathTwo = testDirectoryPath.deletingLastPathComponent.appendingPathComponent(testDirectoryNameTwo)
-        moveDirectoryAtPathWithConfirmation(testDirectoryPath, destinationPath: testDirectoryPathTwo)
+        moveDirectoryWithConfirmation(atPath: testDirectoryPath, destinationPath: testDirectoryPathTwo)
         
         // Test Move Again
-        moveDirectoryAtPathWithConfirmation(testDirectoryPathTwo, destinationPath: testDirectoryPath)
+        moveDirectoryWithConfirmation(atPath: testDirectoryPathTwo, destinationPath: testDirectoryPath)
 
         // Clean up
             
@@ -238,14 +238,14 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         
         // Test Move
         let testDirectoryPathTwo = testDirectoryPath.deletingLastPathComponent.appendingPathComponent(testDirectoryNameTwo)
-        moveDirectoryAtPathWithConfirmation(testDirectoryPath, destinationPath: testDirectoryPathTwo)
+        moveDirectoryWithConfirmation(atPath: testDirectoryPath, destinationPath: testDirectoryPathTwo)
         
         // Test Modify File
         let testFilePathTwo = testDirectoryPathTwo.appendingPathComponent(testFilename)
         modifyFileWithConfirmation(atPath: testFilePathTwo)
         
         // Test Move Again
-        moveDirectoryAtPathWithConfirmation(testDirectoryPathTwo, destinationPath: testDirectoryPath)
+        moveDirectoryWithConfirmation(atPath: testDirectoryPathTwo, destinationPath: testDirectoryPath)
         
         // Clean up
 
