@@ -137,7 +137,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     }
     
     // MARK: Move
-    func moveFileAtPathWithConfirmation(path: String, destinationPath: String) {
+    func moveFileWithConfirmation(atPath path: String, destinationPath: String) {
         // Remove original
         let fileWasRemovedExpectation = expectation(description: "File was removed with move")
         directoryWatcherEventManager?.add(itemWasRemovedAtPathHandler: { returnedPath -> Void in
@@ -156,7 +156,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
         SubprocessFileSystemModifier.moveItem(atPath: path, toPath: destinationPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func moveDirectoryAtPathWithConfirmation(path: String, destinationPath: String) {
+    func moveDirectoryWithConfirmation(atPath path: String, destinationPath: String) {
         // Remove original
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
         directoryWatcherEventManager?.add(itemWasRemovedAtPathHandler: { returnedPath -> Void in
@@ -328,13 +328,13 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
 
         // Test Move
         let testFilePathTwo = testFilePath.deletingLastPathComponent.appendingPathComponent(testFilenameTwo)
-        moveFileAtPathWithConfirmation(testFilePath, destinationPath: testFilePathTwo)
+        moveFileWithConfirmation(atPath: testFilePath, destinationPath: testFilePathTwo)
         
         // Test Modify
         modifyFileWithConfirmation(atPath: testFilePathTwo)
         
         // Test Move Again
-        moveFileAtPathWithConfirmation(testFilePathTwo, destinationPath: testFilePath)
+        moveFileWithConfirmation(atPath: testFilePathTwo, destinationPath: testFilePath)
 
         // Modify Again
         modifyFileWithConfirmation(atPath: testFilePath)

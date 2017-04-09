@@ -164,7 +164,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     
     // MARK: Move With Confirmation Helpers
     
-    func moveDirectoryAtPathWithConfirmation(path: String, destinationPath: String) {
+    func moveDirectoryWithConfirmation(atPath path: String, destinationPath: String) {
         // Remove original
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
         fileAndPluginsDirectoryEventManager.add(itemWasRemovedAtPathHandler: { returnedPath -> Void in
@@ -200,7 +200,7 @@ extension FilesAndPluginsDirectoryManagerTests {
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
-    func moveDirectoryAtPathWithConfirmation(path: String, toUnwatchedDestinationPath destinationPath: String) {
+    func moveDirectoryWithConfirmation(atPath path: String, toUnwatchedDestinationPath destinationPath: String) {
         // Remove original
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed with move")
         fileAndPluginsDirectoryEventManager.add(itemWasRemovedAtPathHandler: { returnedPath -> Void in
