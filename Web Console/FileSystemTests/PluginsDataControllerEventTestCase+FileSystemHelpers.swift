@@ -42,7 +42,7 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Copy Helpers
     
-    func copyPluginWithConfirmation(plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
+    func copyWithConfirmation(of plugin: Plugin, destinationPluginPath: String, handler: @escaping (_ plugin: Plugin?) -> Void) {
         var newPlugin: Plugin?
         let createExpectation = expectation(description: "Plugin was added")
         pluginDataEventManager.add(pluginWasAddedHandler: { (addedPlugin) -> Void in
@@ -69,7 +69,7 @@ extension PluginsDataControllerEventTestCase {
     
     // MARK: Remove Helpers
     
-    func removePluginWithConfirmation(plugin: Plugin) {
+    func removeWithConfirmation(_ plugin: Plugin) {
         let removeExpectation = expectation(description: "Plugin was removed")
         pluginDataEventManager.add(pluginWasRemovedHandler: { (removedPlugin) -> Void in
             if (plugin == removedPlugin) {

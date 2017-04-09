@@ -25,7 +25,7 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
         let destinationPluginPath = destinationPluginParentPath.deletingLastPathComponent.appendingPathComponent(destinationPluginFilename)
         
         var newPlugin: Plugin!
-        copyPluginWithConfirmation(plugin, destinationPluginPath: destinationPluginPath, handler: { (plugin) -> Void in
+        copyWithConfirmation(of: plugin, destinationPluginPath: destinationPluginPath, handler: { (plugin) -> Void in
             newPlugin = plugin
         })
         XCTAssertNotNil(newPlugin, "The plugin should not be nil")
@@ -37,7 +37,7 @@ class PluginsManagerFileSystemTests: PluginsDataControllerEventTestCase {
         XCTAssertEqual(PluginsManager.sharedInstance.plugins().count, 1, "The plugins count should be one")
         
         // Clean Up
-        removePluginWithConfirmation(newPlugin)
+        removeWithConfirmation(newPlugin)
         XCTAssertFalse(plugins().contains(newPlugin), "The plugins should not contain the plugin")
         XCTAssertEqual(PluginsManager.sharedInstance.plugins().count, 0, "The plugins count should be zero")
         
