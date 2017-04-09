@@ -22,7 +22,7 @@ class WCLDirectoryWatcherEventManager: NSObject, WCLDirectoryWatcherDelegate {
         self.itemWasRemovedAtPathHandlers = Array<((_ path: String) -> Void)>()
     }
 
-    func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, fileWasCreatedOrModifiedAtPath path: String!) {
+    func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, fileWasCreatedOrModifiedAtPath path: String) {
         assert(fileWasCreatedOrModifiedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (fileWasCreatedOrModifiedAtPathHandlers.count > 0) {
@@ -31,7 +31,7 @@ class WCLDirectoryWatcherEventManager: NSObject, WCLDirectoryWatcherDelegate {
         }
     }
     
-    func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, directoryWasCreatedOrModifiedAtPath path: String!) {
+    func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, directoryWasCreatedOrModifiedAtPath path: String) {
         assert(directoryWasCreatedOrModifiedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (directoryWasCreatedOrModifiedAtPathHandlers.count > 0) {
@@ -40,7 +40,7 @@ class WCLDirectoryWatcherEventManager: NSObject, WCLDirectoryWatcherDelegate {
         }
     }
     
-    func directoryWatcher(directoryWatcher: WCLDirectoryWatcher!, itemWasRemovedAtPath path: String!) {
+    func directoryWatcher(_ directoryWatcher: WCLDirectoryWatcher, itemWasRemovedAtPath path: String) {
         assert(itemWasRemovedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (itemWasRemovedAtPathHandlers.count > 0) {
