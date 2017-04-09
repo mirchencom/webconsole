@@ -17,9 +17,9 @@ protocol ProcessManagerStore {
 class ProcessManager {
     
     enum ProcessInfoKey: String {
-        case Identifier = "identifier"
-        case CommandPath = "commandPath"
-        case StartTime = "startTime"
+        case identifier = "identifier"
+        case commandPath = "commandPath"
+        case startTime = "startTime"
         func key() -> NSString {
             return self.rawValue as NSString
         }
@@ -115,9 +115,9 @@ class ProcessManager {
     
     private class func processInfo(for dictionary: NSDictionary) -> ProcessInfo? {
         guard
-            let key = dictionary[ProcessInfoKey.Identifier.key()] as? NSString,
-            let commandPath = dictionary[ProcessInfoKey.CommandPath.key()] as? String,
-            let startTime = dictionary[ProcessInfoKey.StartTime.key()] as? Date
+            let key = dictionary[ProcessInfoKey.identifier.key()] as? NSString,
+            let commandPath = dictionary[ProcessInfoKey.commandPath.key()] as? String,
+            let startTime = dictionary[ProcessInfoKey.startTime.key()] as? Date
         else {
             return nil
         }
@@ -132,9 +132,9 @@ class ProcessManager {
     private class func value(for processInfo: ProcessInfo) -> NSDictionary {
         let dictionary = NSMutableDictionary()
         let key = self.key(from: processInfo.identifier)
-        dictionary[ProcessInfoKey.Identifier.key()] = key
-        dictionary[ProcessInfoKey.CommandPath.key()] = processInfo.commandPath
-        dictionary[ProcessInfoKey.StartTime.key()] = processInfo.startTime
+        dictionary[ProcessInfoKey.identifier.key()] = key
+        dictionary[ProcessInfoKey.commandPath.key()] = processInfo.commandPath
+        dictionary[ProcessInfoKey.startTime.key()] = processInfo.startTime
         return dictionary
     }
     
