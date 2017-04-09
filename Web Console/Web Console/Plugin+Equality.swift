@@ -9,7 +9,7 @@
 import Foundation
 
 extension Plugin {
-    func isEqualToPlugin(_ plugin: Plugin) -> Bool {
+    func isEqual(toOther plugin: Plugin) -> Bool {
 
         if self.name != plugin.name {
             return false

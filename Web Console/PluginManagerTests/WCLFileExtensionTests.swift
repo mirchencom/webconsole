@@ -18,13 +18,13 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
     var fileExtensionPluginDictionary: NSDictionary {
         get {
             var fileExtensionToPluginDictionary = WCLFileExtension.fileExtensionToPluginDictionary()
-            return fileExtensionToPluginDictionary![fileExtension.suffix] as! NSDictionary
+            return fileExtensionToPluginDictionary[fileExtension.suffix] as! NSDictionary
         }
     }
 
     // MARK: Helper
     
-    func matchesPlugin(_ plugin: Plugin, forFileExtension fileExtension: WCLFileExtension) -> Bool {
+    func matches(_ plugin: Plugin, for fileExtension: WCLFileExtension) -> Bool {
         let suffix = fileExtension.suffix
         
         let plugins = fileExtension.plugins() as NSArray
@@ -65,7 +65,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
 
         let plugins = PluginsManager.sharedInstance.plugins() as! [Plugin]
         for plugin in plugins {
-            let matches = matchesPlugin(plugin, forFileExtension: fileExtension)
+            let matches = self.matches(plugin, for: fileExtension)
             XCTAssertTrue(matches, "The WCLPlugin should match the WCLFileExtension.")
         }
     }
@@ -245,7 +245,7 @@ class WCLFileExtensionTests: FileExtensionsTestCase {
         XCTAssertFalse(observedChange, "The change should not have been observed.")
 
         // Move plugin to trash
-        movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
+        moveToTrashAndCleanUpWithConfirmation(createdPlugin)
 
         // Test the file extensions plugins property changed
         XCTAssertFalse(plugins.contains(createdPlugin), "The key-value observing change notification for the WCLFileExtensions's WCLPlugins property should have occurred.")

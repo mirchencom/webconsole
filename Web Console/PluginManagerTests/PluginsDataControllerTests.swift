@@ -15,7 +15,7 @@ class PluginsDataControllerClassTests: XCTestCase {
     
     func testPluginPaths() {
         let pluginsPath = Bundle.main.builtInPlugInsPath!
-        let pluginPaths = PluginsDataController.pathsForPluginsAtPath(pluginsPath)
+        let pluginPaths = PluginsDataController.pathsForPlugins(atPath: pluginsPath)
 
         // Test plugin path counts
         do {
@@ -30,24 +30,24 @@ class PluginsDataControllerClassTests: XCTestCase {
         // Test plugins can be created from all paths
         var plugins = [Plugin]()
         for pluginPath in pluginPaths {
-            if let plugin = Plugin.pluginWithPath(pluginPath) {
+            if let plugin = Plugin.makePlugin(path: pluginPath) {
                 plugins.append(plugin)
             } else {
                 XCTAssert(false, "The plugin should exist")
             }
         }
 
-        let testPluginsCount = PluginsDataController.pluginsAtPluginPaths(pluginPaths).count
+        let testPluginsCount = PluginsDataController.plugins(atPluginPaths: pluginPaths).count
         XCTAssert(plugins.count == testPluginsCount, "The plugins count should equal the test plugins count")
     }
 
     func testExistingPlugins() {
-        let pluginsDataController = PluginsDataController(testPluginsPaths, duplicatePluginDestinationDirectoryURL: Directory.trash.URL())
+        let pluginsDataController = PluginsDataController(paths: testPluginsPaths, duplicatePluginDestinationDirectoryURL: Directory.trash.URL())
         let plugins = pluginsDataController.plugins()
         
         var pluginPaths = [String]()
         for pluginsPath in testPluginsPaths {
-            let paths = PluginsDataController.pathsForPluginsAtPath(pluginsPath)
+            let paths = PluginsDataController.pathsForPlugins(atPath: pluginsPath)
             pluginPaths += paths
         }
         
@@ -60,7 +60,7 @@ class PluginsDataControllerClassTests: XCTestCase {
 extension TemporaryDirectoryTestCase {
     // MARK: Helpers
     
-    func createFileWithConfirmationAtURL(_ URL: Foundation.URL, contents: String) {
+    func createFileWithConfirmation(at URL: Foundation.URL, withContents: String) {
         let path = URL.path
         let createSuccess = FileManager.default.createFile(atPath: path,
             contents: testFileContents.data(using: String.Encoding.utf8),
@@ -68,7 +68,7 @@ extension TemporaryDirectoryTestCase {
         XCTAssertTrue(createSuccess, "Creating the file should succeed.")
     }
     
-    func contentsOfFileAtURLWithConfirmation(_ URL: Foundation.URL) throws -> String {
+    func contentsOfFileWithConfirmation(at URL: Foundation.URL) throws -> String {
         do {
             let contents = try String(contentsOf: URL,
                 encoding: String.Encoding.utf8)
@@ -78,7 +78,7 @@ extension TemporaryDirectoryTestCase {
         }
     }
     
-    func confirmFileExistsAtURL(_ URL: Foundation.URL) {
+    func confirmFileExists(at URL: Foundation.URL) {
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: URL.path, isDirectory: &isDir)
         XCTAssertTrue(exists, "The file should exist")
@@ -94,7 +94,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
             .appendingPathComponent(testDirectoryNameTwo)
 
         do {
-            try PluginsDataController.createDirectoryIfMissing(directoryURL)
+            try PluginsDataController.createDirectoryIfMissing(at: directoryURL)
         } catch {
             XCTAssert(false, "Creating the directory should succeed")
         }
@@ -107,7 +107,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         // Clean Up
         let rootDirectoryURL: URL = directoryURL.deletingLastPathComponent()
         do {
-            try removeTemporaryItemAtURL(rootDirectoryURL)
+            try removeTemporaryItem(at: rootDirectoryURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -118,24 +118,24 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
             .appendingPathComponent(testDirectoryName)
 
         // Create the blocking file
-        createFileWithConfirmationAtURL(directoryURL, contents: testFileContents)
+        createFileWithConfirmation(at: directoryURL, withContents: testFileContents)
         
         // Attempt
         var error: NSError?
         do {
-            try PluginsDataController.createDirectoryIfMissing(directoryURL)
+            try PluginsDataController.createDirectoryIfMissing(at: directoryURL)
         } catch let createError as NSError {
             error = createError
         }
         XCTAssertNotNil(error, "The error should not be nil")
         
         // Confirm the File Still Exists
-        confirmFileExistsAtURL(directoryURL)
+        confirmFileExists(at: directoryURL)
         
         // Confirm the Contents
 
         do {
-            let contents = try contentsOfFileAtURLWithConfirmation(directoryURL)
+            let contents = try contentsOfFileWithConfirmation(at: directoryURL)
             XCTAssertEqual(testFileContents, contents, "The contents should be equal")
         } catch {
             XCTAssertTrue(false, "Getting the contents should succeed")
@@ -143,7 +143,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         
         // Clean Up
         do {
-            try removeTemporaryItemAtURL(directoryURL)
+            try removeTemporaryItem(at: directoryURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -156,23 +156,23 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         let blockingFileURL = directoryURL.deletingLastPathComponent()
         
         // Create the blocking file
-        createFileWithConfirmationAtURL(blockingFileURL, contents: testFileContents)
+        createFileWithConfirmation(at: blockingFileURL, withContents: testFileContents)
         
         // Attempt
         var didThrow = false
         do {
-            try PluginsDataController.createDirectoryIfMissing(directoryURL)
+            try PluginsDataController.createDirectoryIfMissing(at: directoryURL)
         } catch {
             didThrow = true
         }
         XCTAssertTrue(didThrow, "The error should have been thrown")
         
         // Confirm the File Still Exists
-        confirmFileExistsAtURL(blockingFileURL)
+        confirmFileExists(at: blockingFileURL)
         
         // Confirm the Contents
         do {
-            let contents = try contentsOfFileAtURLWithConfirmation(blockingFileURL)
+            let contents = try contentsOfFileWithConfirmation(at: blockingFileURL)
             XCTAssertEqual(testFileContents, contents, "The contents should be equal")
         } catch {
             XCTAssertTrue(false, "Getting the contents should succeed")
@@ -180,7 +180,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
 
         // Clean Up
         do {
-            try removeTemporaryItemAtURL(blockingFileURL)
+            try removeTemporaryItem(at: blockingFileURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -194,29 +194,29 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         // Create the first path so creating the blocking file doesn't fail
         let containerDirectoryURL = directoryURL.deletingLastPathComponent()
         do {
-            try PluginsDataController.createDirectoryIfMissing(containerDirectoryURL)
+            try PluginsDataController.createDirectoryIfMissing(at: containerDirectoryURL)
         } catch {
             XCTAssertTrue(false, "Creating the directory should succeed")
         }
         
         // Create the blocking file
-        createFileWithConfirmationAtURL(directoryURL, contents: testFileContents)
+        createFileWithConfirmation(at: directoryURL, withContents: testFileContents)
         
         // Attempt
         var didThrow = false
         do {
-            try PluginsDataController.createDirectoryIfMissing(directoryURL)
+            try PluginsDataController.createDirectoryIfMissing(at: directoryURL)
         } catch {
             didThrow = true
         }
         XCTAssertTrue(didThrow, "The error should have been thrown")
         
         // Confirm the File Still Exists
-        confirmFileExistsAtURL(directoryURL)
+        confirmFileExists(at: directoryURL)
         
         // Confirm the Contents
         do {
-            let contents = try contentsOfFileAtURLWithConfirmation(directoryURL)
+            let contents = try contentsOfFileWithConfirmation(at: directoryURL)
             XCTAssertEqual(testFileContents, contents, "The contents should be equal")
         } catch {
             XCTAssertTrue(false, "Getting the contents should succeed")
@@ -224,7 +224,7 @@ class PluginsDataControllerTemporaryDirectoryTests: TemporaryDirectoryTestCase {
         
         // Clean Up
         do {
-            try removeTemporaryItemAtURL(containerDirectoryURL)
+            try removeTemporaryItem(at: containerDirectoryURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -248,7 +248,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
 
     func cleanUpDuplicatedPlugins() {
         do {
-            try removeTemporaryItemAtURL(duplicatePluginRootDirectoryURL)
+            try removeTemporaryItem(at: duplicatePluginRootDirectoryURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }        
@@ -260,12 +260,12 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         var newPlugin: Plugin!
         
         let addedExpectation = expectation(description: "Plugin was added")
-        pluginDataEventManager.addPluginWasAddedHandler({ (addedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasAddedHandler: { (addedPlugin) -> Void in
             addedExpectation.fulfill()
         })
 
         let duplicateExpectation = expectation(description: "Plugin was duplicated")
-        PluginsManager.sharedInstance.pluginsDataController.duplicatePlugin(plugin, handler: { (duplicatePlugin, error) -> Void in
+        PluginsManager.sharedInstance.pluginsDataController.duplicate(plugin, handler: { (duplicatePlugin, error) -> Void in
             XCTAssertNil(error, "The error should be nil")
             newPlugin = duplicatePlugin
             duplicateExpectation.fulfill()
@@ -278,12 +278,12 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         
         // Trash the duplicated plugin
         let removeExpectation = expectation(description: "Plugin was removed")
-        pluginDataEventManager.addPluginWasRemovedHandler({ (removedPlugin) -> Void in
+        pluginDataEventManager.add(pluginWasRemovedHandler: { (removedPlugin) -> Void in
             XCTAssertEqual(newPlugin!, removedPlugin, "The plugins should be equal")
             removeExpectation.fulfill()
         })
 
-        movePluginToTrashAndCleanUpWithConfirmation(newPlugin!)
+        moveToTrashAndCleanUpWithConfirmation(newPlugin!)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
         cleanUpDuplicatedPlugins()
     }
@@ -295,7 +295,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         XCTAssertTrue(createSuccess, "Creating the file should succeed.")
         
         let duplicateExpectation = expectation(description: "Plugin was duplicated")
-        PluginsManager.sharedInstance.pluginsDataController.duplicatePlugin(plugin, handler: { (duplicatePlugin, error) -> Void in
+        PluginsManager.sharedInstance.pluginsDataController.duplicate(plugin, handler: { (duplicatePlugin, error) -> Void in
             XCTAssertNil(duplicatePlugin, "The duplicate plugin should be nil")
             XCTAssertNotNil(error, "The error should not be nil")
             duplicateExpectation.fulfill()
@@ -307,7 +307,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
 
     func testDuplicatePluginWithEarlyBlockingFile() {
         do {
-            try PluginsDataController.createDirectoryIfMissing(duplicatePluginRootDirectoryURL.deletingLastPathComponent())
+            try PluginsDataController.createDirectoryIfMissing(at: duplicatePluginRootDirectoryURL.deletingLastPathComponent())
 
         } catch {
             XCTAssertTrue(false, "Creating the directory should succeed")
@@ -320,7 +320,7 @@ class PluginsDataControllerTests: PluginsDataControllerEventTestCase {
         XCTAssertTrue(createSuccess, "Creating the file should succeed.")
         
         let duplicateExpectation = expectation(description: "Plugin was duplicated")
-        PluginsManager.sharedInstance.pluginsDataController.duplicatePlugin(plugin, handler: { (duplicatePlugin, error) -> Void in
+        PluginsManager.sharedInstance.pluginsDataController.duplicate(plugin, handler: { (duplicatePlugin, error) -> Void in
             XCTAssertNil(duplicatePlugin, "The duplicate plugin should be nil")
             XCTAssertNotNil(error, "The error should not be nil")
             duplicateExpectation.fulfill()

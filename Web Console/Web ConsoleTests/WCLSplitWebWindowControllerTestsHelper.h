@@ -10,6 +10,8 @@
 
 @class WCLSplitWebWindowController;
 
+
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowControllerTestsHelper : NSObject
 + (void)blockUntilWebWindowControllerTasksRunAndFinish:(WCLSplitWebWindowController *)splitWebWindowController;
 + (void)blockUntilWindowHasAttachedSheet:(NSWindow *)window;
@@ -17,3 +19,4 @@
 + (BOOL)windowWillCloseBeforeTimeout:(NSWindow *)window;
 + (void)closeWindowsAndBlockUntilFinished;
 @end
+NS_ASSUME_NONNULL_END

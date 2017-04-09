@@ -42,8 +42,8 @@ class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
         }
        
         // Copy the bundle resources plugin to the plugins directory
-        let bundleResourcesPluginURL: URL! = URLForResource(testPluginName, withExtension:pluginFileExtension)
-        let filename = testPluginName.stringByAppendingPathExtension(pluginFileExtension)!
+        let bundleResourcesPluginURL: URL! = url(forResource: testPluginName, withExtension:pluginFileExtension)
+        let filename = testPluginName.appendingPathExtension(pluginFileExtension)!
         
         pluginURL = pluginsDirectoryURL.appendingPathComponent(filename)
         do {
@@ -61,7 +61,7 @@ class TemporaryPluginsTestCase: TemporaryDirectoryTestCase {
         
         // Remove the plugins directory (containing the plugin)
         do {
-            try removeTemporaryItemAtPathComponent(pluginsDirectoryPathComponent)
+            try removeTemporaryItem(atPathComponent: pluginsDirectoryPathComponent)
         } catch let error as NSError {
             XCTAssertTrue(false, "Removing the plugins directory should have succeeded \(error)")
         }

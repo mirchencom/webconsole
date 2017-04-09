@@ -32,7 +32,7 @@ class PluginsManagerTests: PluginsManagerTestCase {
         newPlugin.command = testPluginCommandTwo
 
         // Create another plugin from this plugin
-        let newPluginTwo = newPluginFromPluginWithConfirmation(newPlugin)
+        let newPluginTwo = duplicateWithConfirmation(newPlugin)
         
         // Test Properties
 
@@ -40,15 +40,15 @@ class PluginsManagerTests: PluginsManagerTestCase {
         XCTAssertNotEqual(plugin.command!, newPlugin.command!, "The names should not be equal")
         
         // Trash the duplicated plugin
-        movePluginToTrashAndCleanUpWithConfirmation(newPlugin)
-        movePluginToTrashAndCleanUpWithConfirmation(newPluginTwo)
+        moveToTrashAndCleanUpWithConfirmation(newPlugin)
+        moveToTrashAndCleanUpWithConfirmation(newPluginTwo)
     }
 
     func testRenamePlugin() {
         let newPluginName = plugin.identifier
         plugin.name = newPluginName
-        XCTAssertNotNil(PluginsManager.sharedInstance.pluginWithName(newPluginName), "The plugin should not be nil")
-        XCTAssertNil(PluginsManager.sharedInstance.pluginWithName(testPluginName), "The plugin should be nil")
+        XCTAssertNotNil(PluginsManager.sharedInstance.plugin(forName: newPluginName), "The plugin should not be nil")
+        XCTAssertNil(PluginsManager.sharedInstance.plugin(forName: testPluginName), "The plugin should be nil")
     }
 }
 
@@ -56,7 +56,7 @@ class PluginsManagerBuiltInPluginsTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let pluginsManager = PluginsManager([Directory.builtInPlugins.path()],
+        let pluginsManager = PluginsManager(paths: [Directory.builtInPlugins.path()],
             duplicatePluginDestinationDirectoryURL: Directory.trash.URL())
         PluginsManager.setOverrideSharedInstance(pluginsManager)
     }

@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 protocol SplitControllerDelegate: class {
-    func savedFrameNameForSplitController(_ splitController: SplitController) -> String?
+    func savedFrameName(for splitController: SplitController) -> String?
 }
 
 class SplitController {
@@ -28,7 +28,7 @@ class SplitController {
     }
 
     private var savedFrameName: String? {
-        return delegate?.savedFrameNameForSplitController(self)
+        return delegate?.savedFrameName(for: self)
     }
     
     private var splitsViewController: NSViewController? {
@@ -64,7 +64,7 @@ class SplitController {
     
     // MARK: Toggle
 
-    func toggleCollapsed(_ animated: Bool) {
+    func toggleCollapsed(animated: Bool) {
         if let collapsed = isCollapsed() {
             setCollapsed(!collapsed, animated: animated)
         }
@@ -84,7 +84,7 @@ class SplitController {
     
     func restoreFrame() {
         if let frame = savedSplitsViewFrame() {
-            configureHeight(frame.size.height)
+            configure(for: frame.size.height)
         }
     }
     
@@ -98,7 +98,7 @@ class SplitController {
         UserDefaultsManager.standardUserDefaults().set(frameString, forKey:key)
     }
 
-    class func savedFrameForName(_ name: String) -> NSRect? {
+    class func savedFrame(for name: String) -> NSRect? {
         if let frameString = UserDefaultsManager.standardUserDefaults().string(forKey: name) {
             let frame = NSRectFromString(frameString)
             return frame
@@ -108,20 +108,20 @@ class SplitController {
     
     func savedSplitsViewFrame() -> NSRect? {
         if let savedFrameName = savedFrameName {
-            return type(of: self).savedFrameForName(savedFrameName)
+            return type(of: self).savedFrame(for: savedFrameName)
         }
         return nil
     }
 
     // MARK: Constraints
     
-    func configureHeight() {
+    func configureForFrameHeight() {
         if let frame = splitsView?.frame {
-            configureHeight(frame.size.height)
+            configure(for: frame.size.height)
         }
     }
     
-    func configureHeight(_ height: CGFloat) {
+    func configure(for height: CGFloat) {
         if let splitsView = splitsView, let superview = splitsView.superview {
             if let splitsHeightConstraint = splitsHeightConstraint {
                 if splitsHeightConstraint.constant == height {

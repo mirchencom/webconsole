@@ -14,9 +14,9 @@ let splitWebViewHeight = CGFloat(150)
 
 @objc protocol SplitWebViewControllerDelegate: class {
     // MARK: Data Source
-    func windowIsVisibleForSplitWebViewController(_ splitWebViewController: SplitWebViewController) -> Bool
-    func windowForSplitWebViewController(_ splitWebViewController: SplitWebViewController) -> NSWindow!
-    func logPluginForSplitWebViewController(_ splitWebViewController: SplitWebViewController) -> Plugin?
+    func windowIsVisible(for splitWebViewController: SplitWebViewController) -> Bool
+    func window(for splitWebViewController: SplitWebViewController) -> NSWindow
+    func logPlugin(for splitWebViewController: SplitWebViewController) -> Plugin?
     // Mark: Events
     func splitWebViewController(_ splitWebViewController: SplitWebViewController, didReceiveTitle title: String)
     func splitWebViewControllerWillLoadHTML(_ splitWebViewController: SplitWebViewController)
@@ -49,7 +49,7 @@ class SplitWebViewController: NSSplitViewController {
     }
     
     var defaultWebViewController: WCLWebViewController {
-        let splitViewItem: NSSplitViewItem! = splitViewItems.first
+        let splitViewItem = splitViewItems.first!
         return splitViewItem.viewController as! WCLWebViewController
     }
     
@@ -97,8 +97,8 @@ class SplitWebViewController: NSSplitViewController {
 
         print("Debug Error: \(text)")
 
-        let preparedText = prepareLog(text, prefix: logErrorPrefix)
-        logReadFromStandardInput(preparedText)
+        let preparedText = prepareLog(text: text, prefix: logErrorPrefix)
+        logReadFromStandardInput(text: preparedText)
     }
 
     func logDebugMessage(_ text: String) {
@@ -108,18 +108,18 @@ class SplitWebViewController: NSSplitViewController {
 
         print("Debug Message: \(text)")
 
-        let preparedText = prepareLog(text, prefix: logMessagePrefix)
-        logReadFromStandardInput(preparedText)
+        let preparedText = prepareLog(text: text, prefix: logMessagePrefix)
+        logReadFromStandardInput(text: preparedText)
     }
     
-    func prepareLog(_ text: String, prefix: String) -> String {
+    func prepareLog(text: String, prefix: String) -> String {
         var prependedText = prefix + text
         prependedText = prependedText.replacingOccurrences(of: "\n", with: "\n\(prefix)")
         prependedText += "\n"
         return prependedText
     }
     
-    func logReadFromStandardInput(_ text: String) {
+    func logReadFromStandardInput(text: String) {
         logReadFromStandardInputOperationQueue.addOperation { [weak self]() -> Void in
             if let strongSelf = self {
                 strongSelf.logWebViewController.read(fromStandardInput: text)
@@ -127,7 +127,7 @@ class SplitWebViewController: NSSplitViewController {
         }
         
         if logWebViewController.plugin == nil {
-            if let logPlugin = delegate?.logPluginForSplitWebViewController(self) {
+            if let logPlugin = delegate?.logPlugin(for: self) {
                 logWebViewController.run(logPlugin,
                     withArguments: nil,
                     inDirectoryPath: nil,
@@ -172,11 +172,11 @@ class SplitWebViewController: NSSplitViewController {
             completionHandler: completionHandler)
     }
     
-    func readFromStandardInput(_ text: String) {
+    func readFromStandardInput(text: String) {
         defaultWebViewController.read(fromStandardInput: text)
     }
     
-    func runPlugin(_ plugin: Plugin,
+    func run(plugin: Plugin,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         completionHandler:((Bool) -> Void)?)
@@ -221,7 +221,7 @@ class SplitWebViewController: NSSplitViewController {
     }
 
     func toggleLog() {
-        splitController.toggleCollapsed(true)
+        splitController.toggleCollapsed(animated: true)
     }
     
     // MARK: Validation
@@ -287,28 +287,28 @@ class SplitWebViewController: NSSplitViewController {
     }
 
     override func splitViewDidResizeSubviews(_ notification: Notification) {
-        guard let isVisible = delegate?.windowIsVisibleForSplitWebViewController(self), isVisible == true else {
+        guard let isVisible = delegate?.windowIsVisible(for: self), isVisible == true else {
             return
         }
         
         if let collapsed = splitController.isCollapsed() {
             if !collapsed {
                 splitController.saveFrame()
-                splitController.configureHeight()
+                splitController.configureForFrameHeight()
             }
         }
     }
 }
 
 extension SplitWebViewController: SplitControllerDelegate {
-    func savedFrameNameForSplitController(_ splitController: SplitController) -> String? {
+    func savedFrameName(for splitController: SplitController) -> String? {
         if let pluginName = defaultWebViewController.plugin?.name {
-            return type(of: self).savedFrameNameForPluginName(pluginName)
+            return type(of: self).savedFrameName(for: pluginName)
         }
         return nil
     }
     
-    class func savedFrameNameForPluginName(_ pluginName: String) -> String {
+    class func savedFrameName(for pluginName: String) -> String {
         return "Log Frame " + pluginName
     }
 }
@@ -342,7 +342,7 @@ extension SplitWebViewController: WCLWebViewControllerDelegate {
     
     func window(for webViewController: WCLWebViewController) -> NSWindow {
         // TODO: Fortify this forced unwrap
-        return delegate!.windowForSplitWebViewController(self)!
+        return delegate!.window(for: self)
     }
     
     func webViewController(_ webViewController: WCLWebViewController, didReceiveTitle title: String) {

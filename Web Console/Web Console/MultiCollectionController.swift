@@ -13,7 +13,7 @@ import Cocoa
     private let nameToObjectController: WCLKeyToObjectController
     private var mutableObjects = NSMutableArray()
     
-    init(_ objects: [AnyObject], key: String) {
+    init(objects: [AnyObject], key: String) {
         self.nameToObjectController = WCLKeyToObjectController(key: key, objects: objects)
         self.mutableObjects.addObjects(from: self.nameToObjectController.allObjects())
         super.init()
@@ -21,8 +21,8 @@ import Cocoa
     
     // MARK: Accessing Plugins
     
-    func objectWithKey(_ key: String) -> AnyObject? {
-        return nameToObjectController.object(withKey: key) as AnyObject?
+    func object(forKey key: String) -> AnyObject? {
+        return nameToObjectController.object(forKey: key) as AnyObject?
     }
 
     // MARK: Convenience

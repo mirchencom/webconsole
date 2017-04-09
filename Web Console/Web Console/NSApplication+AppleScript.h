@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface NSApplication (AppleScript)
-
 #pragma mark - AppleScript
 // This property should be called wcl_plugins, based on Apple's recommendation
 // that methods in categories on framework classes should use a prefix, but the
@@ -20,3 +20,4 @@
 - (NSArray *)plugins;
 - (id)handleLoadPluginScriptCommand:(NSScriptCommand *)command;
 @end
+NS_ASSUME_NONNULL_END

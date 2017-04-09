@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLFileSystemEvent : NSObject
 + (instancetype)fileSystemEventWithPath:(NSString *)path
                              eventFlags:(FSEventStreamEventFlags)eventFlags
@@ -20,3 +21,4 @@
 - (BOOL)itemIsFile;
 - (BOOL)itemIsDirectory;
 @end
+NS_ASSUME_NONNULL_END

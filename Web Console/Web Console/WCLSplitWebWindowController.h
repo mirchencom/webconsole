@@ -15,31 +15,35 @@
 
 extern NSString * __nonnull const WCLSplitWebWindowControllerDidCancelCloseWindowNotification;
 
+NS_ASSUME_NONNULL_BEGIN
 @protocol WCLSplitWebWindowControllerDelegate <NSObject>
 @optional
-- (void)splitWebWindowControllerWindowWillClose:(nonnull WCLSplitWebWindowController *)splitWebWindowController;
-- (nullable Plugin *)logPluginForSplitWebWindowController:(nonnull WCLSplitWebWindowController *)splitWebViewController;
+- (void)splitWebWindowControllerWindowWillClose:(WCLSplitWebWindowController *)splitWebWindowController;
+- (nullable Plugin *)logPluginForSplitWebWindowController:(WCLSplitWebWindowController *)splitWebViewController;
 @end
+NS_ASSUME_NONNULL_END
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowController : NSWindowController
 @property (nonatomic, weak, nullable) id<WCLSplitWebWindowControllerDelegate> delegate;
 @property (nonatomic, strong, readonly, nullable) Plugin *plugin;
 #pragma mark - AppleScript
-- (void)loadHTML:(nonnull NSString *)HTML
+- (void)loadHTML:(NSString *)HTML
          baseURL:(nullable NSURL *)baseURL
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
-- (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript;
-- (void)readFromStandardInput:(nonnull NSString *)text;
-- (void)runPlugin:(nonnull Plugin *)plugin
+- (nullable NSString *)doJavaScript:(NSString *)javaScript;
+- (void)readFromStandardInput:(NSString *)text;
+- (void)runPlugin:(Plugin *)plugin
     withArguments:(nullable NSArray *)arguments
   inDirectoryPath:(nullable NSString *)directoryPath
 completionHandler:(nullable void (^)(BOOL success))completionHandler;
-- (nonnull NSArray<WCLWebViewController *> *)webViewControllers;
+- (NSArray<WCLWebViewController *> *)webViewControllers;
 - (void)showLog;
 - (void)hideLog;
 - (void)toggleLog;
 #pragma mark - Tasks
 - (BOOL)hasTasks;
 - (BOOL)hasTasksRequiringConfirmation;
-- (nonnull NSArray<NSTask *> *)tasks;
+- (NSArray<NSTask *> *)tasks;
 @end
+NS_ASSUME_NONNULL_END

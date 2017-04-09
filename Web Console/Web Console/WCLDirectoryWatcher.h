@@ -10,14 +10,18 @@
 
 @class WCLDirectoryWatcher;
 
+NS_ASSUME_NONNULL_BEGIN
 @protocol WCLDirectoryWatcherDelegate <NSObject>
 @optional
 - (void)directoryWatcher:(WCLDirectoryWatcher *)directoryWatcher directoryWasCreatedOrModifiedAtPath:(NSString *)path;
 - (void)directoryWatcher:(WCLDirectoryWatcher *)directoryWatcher fileWasCreatedOrModifiedAtPath:(NSString *)path;
 - (void)directoryWatcher:(WCLDirectoryWatcher *)directoryWatcher itemWasRemovedAtPath:(NSString *)path;
 @end
+NS_ASSUME_NONNULL_END
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLDirectoryWatcher : NSObject
 - (id)initWithURL:(NSURL *)url;
-@property (nonatomic, weak) id<WCLDirectoryWatcherDelegate> delegate;
+@property (nonatomic, weak, nullable) id<WCLDirectoryWatcherDelegate> delegate;
 @end
+NS_ASSUME_NONNULL_END

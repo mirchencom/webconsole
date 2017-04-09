@@ -8,8 +8,10 @@
 
 #import <XCTest/XCTest.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface XCTestCase (BundleResources)
-- (NSString *)wcl_pathForResource:(NSString *)name ofType:(NSString *)extension subdirectory:(NSString *)subdirectory;
-- (NSURL *)wcl_URLForResource:(NSString *)name withExtension:(NSString *)ext subdirectory:(NSString *)subdirectory;
-+ (NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL;
+- (nullable NSString *)wcl_pathForResource:(nullable NSString *)name ofType:(nullable NSString *)extension subdirectory:(nullable NSString *)subdirectory;
+- (nullable NSURL *)wcl_URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subdirectory;
++ (nullable NSString *)wcl_stringWithContentsOfFileURL:(NSURL *)fileURL;
 @end
+NS_ASSUME_NONNULL_END

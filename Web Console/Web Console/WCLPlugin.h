@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLPlugin : NSObject
 @property (nonatomic, assign, getter = isDefaultNewPlugin) BOOL defaultNewPlugin;
 #pragma mark Validation
-- (BOOL)validateExtensions:(id *)ioValue error:(NSError * __autoreleasing *)outError;
-- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError;
+- (BOOL)validateExtensions:(_Nullable id * _Nullable)ioValue error:(NSError * __autoreleasing *)outError;
+- (BOOL)validateName:(_Nullable id * _Nullable)ioValue error:(NSError * __autoreleasing *)outError;
 @end
+NS_ASSUME_NONNULL_END

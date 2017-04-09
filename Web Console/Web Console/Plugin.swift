@@ -27,7 +27,7 @@ class Plugin: WCLPlugin {
     }
     
     struct ClassConstants {
-        static let infoDictionaryPathComponent = "Contents".stringByAppendingPathComponent("Info.plist")
+        static let infoDictionaryPathComponent = "Contents".appendingPathComponent("Info.plist")
     }
     internal let bundle: Bundle
     let hidden: Bool
@@ -76,15 +76,15 @@ class Plugin: WCLPlugin {
     internal var infoDictionary: [AnyHashable: Any]
     internal var infoDictionaryURL: URL {
         get {
-            return type(of: self).infoDictionaryURLForPluginURL(bundle.bundleURL)
+            return type(of: self).urlForInfoDictionary(forPluginAt: bundle.bundleURL)
         }
     }
 
-    class func infoDictionaryURLForPlugin(_ plugin: Plugin) -> URL {
-        return infoDictionaryURLForPluginURL(plugin.bundle.bundleURL)
+    class func urlForInfoDictionary(for plugin: Plugin) -> URL {
+        return urlForInfoDictionary(forPluginAt: plugin.bundle.bundleURL)
     }
 
-    class func infoDictionaryURLForPluginURL(_ pluginURL: URL) -> URL {
+    class func urlForInfoDictionary(forPluginAt pluginURL: URL) -> URL {
         return pluginURL.appendingPathComponent(ClassConstants.infoDictionaryPathComponent)
     }
     
@@ -122,7 +122,7 @@ class Plugin: WCLPlugin {
         get {
             if let resourcePath = resourcePath {
                 if let command = command {
-                    return resourcePath.stringByAppendingPathComponent(command)
+                    return resourcePath.appendingPathComponent(command)
                 }
             }
             return nil
@@ -156,7 +156,7 @@ class Plugin: WCLPlugin {
     private func save() {
         let infoDictionaryURL = self.infoDictionaryURL
         do {
-            try type(of: self).writeDictionary(infoDictionary, toURL: infoDictionaryURL)
+            try type(of: self).write(infoDictionary, toURL: infoDictionaryURL)
         } catch PluginWriteError.failToWriteDictionaryError(let URL) {
             print("Failed to write an info dictionary at URL \(URL)")
         } catch let error as NSError {
@@ -165,7 +165,7 @@ class Plugin: WCLPlugin {
 
     }
 
-    class func writeDictionary(_ dictionary: [AnyHashable: Any], toURL URL: Foundation.URL) throws {
+    class func write(_ dictionary: [AnyHashable: Any], toURL URL: Foundation.URL) throws {
         let writableDictionary = NSDictionary(dictionary: dictionary)
         let success = writableDictionary.write(to: URL, atomically: true)
         if !success {
@@ -175,9 +175,9 @@ class Plugin: WCLPlugin {
 
     // MARK: Description
     
-    override var description : String {
+    override var description: String {
         let description = super.description
-        return "\(description), Plugin name = \(name),  identifier = \(identifier), defaultNewPlugin = \(isDefaultNewPlugin), hidden = \(hidden), editable = \(editable), debugModeEnabled = \(debugModeEnabled)"
+        return "\(description), Plugin name = \(name),  identifier = \(identifier), defaultNewPlugin = \(isDefaultNewPlugin), hidden = \(hidden), editable = \(editable), debugModeEnabled = \(String(describing: debugModeEnabled))"
     }
     
     // MARK: Windows

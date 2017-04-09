@@ -9,11 +9,11 @@
 import Foundation
 
 extension ProcessFilter {
-    class func runningProcessMatchingProcessInfos(_ processInfos: [ProcessInfo],
+    class func runningProcessMap(matching processInfos: [ProcessInfo],
         completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
     {
         let identifiers = processInfos.map { $0.identifier }
-        runningProcessesWithIdentifiers(identifiers) { (identifierToProcessInfo, error) -> Void in
+        runningProcesses(withIdentifiers: identifiers) { (identifierToProcessInfo, error) -> Void in
             if let error = error {
                 completionHandler(nil, error)
                 return
@@ -52,11 +52,11 @@ extension ProcessFilter {
 
 class ProcessFilter {
     
-    class func runningProcessesWithIdentifiers(_ identifiers: [Int32],
+    class func runningProcesses(withIdentifiers identifiers: [Int32],
         completionHandler: @escaping ((_ identifierToProcessInfo: [Int32: ProcessInfo]?, _ error: NSError?) -> Void))
     {
         if identifiers.isEmpty {
-            let error = NSError.errorWithDescription("No identifiers specified")
+            let error = NSError.makeError(description: "No identifiers specified")
             completionHandler(nil, error)
             return
         }
@@ -71,7 +71,7 @@ class ProcessFilter {
         // args: Command & Arguments
         // = Means don't display header for this column
         
-        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+        _ = WCLTaskRunner.runTaskUntilFinished(withCommandPath: commandPath,
                                                                   withArguments: arguments as [NSString],
                                                                   inDirectoryPath: nil)
         { (standardOutput, standardError, error) -> Void in
@@ -98,19 +98,19 @@ class ProcessFilter {
                 return
             }
             
-            let processInfos = processesFromOutput(standardOutput)
+            let processInfos = makeProcessInfos(output: standardOutput)
             completionHandler(processInfos, nil)
         }
     }
 
     // MARK: Private
 
-    class func processesFromOutput(_ output: String) -> [Int32: ProcessInfo] {
+    class func makeProcessInfos(output: String) -> [Int32: ProcessInfo] {
 
         var identifierToProcessInfo = [Int32: ProcessInfo]()
         let lines = output.components(separatedBy: "\n")
         for line in lines {
-            if let processInfo = processFromLine(line) {
+            if let processInfo = makeProcessInfo(line: line) {
                 identifierToProcessInfo[processInfo.identifier] = processInfo
             }
         }
@@ -118,7 +118,7 @@ class ProcessFilter {
         return identifierToProcessInfo
     }
     
-    private class func processFromLine(_ line: String) -> ProcessInfo? {
+    private class func makeProcessInfo(line: String) -> ProcessInfo? {
         if line.characters.count < 35 {
             return nil
         }

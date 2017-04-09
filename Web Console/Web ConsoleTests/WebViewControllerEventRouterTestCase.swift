@@ -28,11 +28,11 @@ class WebViewControllerEventRouter: NSObject {
         self.didRunCommandPathHandlers = [DidRunCommandPathHandler]()
     }
     
-    func addDidReadFromStandardInputHandler(_ handler: @escaping DidReadFromStandardInputHandler) {
+    func addDidReadFromStandardInputHandler(handler: @escaping DidReadFromStandardInputHandler) {
         didReadFromStandardInputHandlers.append(handler)
     }
 
-    func addDidRunCommandPathHandlers(_ handler: @escaping DidRunCommandPathHandler) {
+    func addDidRunCommandPathHandlers(handler: @escaping DidRunCommandPathHandler) {
         didRunCommandPathHandlers.append(handler)
     }
     

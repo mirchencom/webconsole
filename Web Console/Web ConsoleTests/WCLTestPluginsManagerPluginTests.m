@@ -33,7 +33,7 @@
 
 - (void)testPlugin
 {
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginForName:kTestPrintPluginName];
     
     XCTAssertNotNil(plugin, @"The WCLPlugin should not be nil.");
     

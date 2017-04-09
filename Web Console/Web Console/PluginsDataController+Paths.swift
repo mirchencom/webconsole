@@ -7,7 +7,7 @@
 //
 
 extension PluginsDataController {
-    class func pathsForPluginsAtPath(_ path: String) -> [String] {
+    class func pathsForPlugins(atPath path: String) -> [String] {
         var pluginPaths = [String]()
         if let pathContents = try? FileManager.default.contentsOfDirectory(atPath: path) {
             let fileExtension = ".\(pluginFileExtension)"
@@ -16,7 +16,7 @@ extension PluginsDataController {
                 pluginPredicate.evaluate(with: $0)
             }
             for pluginPathComponent in pluginPathComponents {
-                let pluginPath = path.stringByAppendingPathComponent(pluginPathComponent)
+                let pluginPath = path.appendingPathComponent(pluginPathComponent)
                 pluginPaths.append(pluginPath)
             }
         }
@@ -24,19 +24,19 @@ extension PluginsDataController {
         return pluginPaths
     }
     
-    class func pluginsAtPluginPaths(_ pluginPaths: [String]) -> [Plugin] {
+    class func plugins(atPluginPaths pluginPaths: [String]) -> [Plugin] {
         var plugins = [Plugin]()
         for pluginPath in pluginPaths {
-            if let plugin = Plugin.pluginWithPath(pluginPath) {
+            if let plugin = Plugin.makePlugin(path: pluginPath) {
                 plugins.append(plugin)
             }
         }
         return plugins
     }
     
-    func pluginsAtPluginsPath(_ path: String) -> [Plugin] {
-        let pluginPaths = type(of: self).pathsForPluginsAtPath(path)
-        let plugins = type(of: self).pluginsAtPluginPaths(pluginPaths)
+    func plugins(atPath path: String) -> [Plugin] {
+        let pluginPaths = type(of: self).pathsForPlugins(atPath: path)
+        let plugins = type(of: self).plugins(atPluginPaths: pluginPaths)
         return plugins
     }
 

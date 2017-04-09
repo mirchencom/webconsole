@@ -73,7 +73,7 @@ static void *WCLFileExtensionContext;
     NSString *identifier = [self.fileExtensionPluginDictionary objectForKey:kFileExtensionPluginIdentifierKey];
 
     if (identifier) {
-        _selectedPlugin = [[PluginsManager sharedInstance] pluginWithIdentifier:identifier];
+        _selectedPlugin = [[PluginsManager sharedInstance] pluginForName:identifier];
     }
     
     if (!_selectedPlugin) {
@@ -181,7 +181,7 @@ static void *WCLFileExtensionContext;
     return _fileExtensionPluginDictionary;
 }
 
-+ (void)setfileExtensionToPluginDictionary:(NSDictionary *)fileExtensionToPluginDictionary
++ (void)setFileExtensionToPluginDictionary:(NSDictionary *)fileExtensionToPluginDictionary
 {
     [[UserDefaultsManager standardUserDefaults] setValue:fileExtensionToPluginDictionary forKey:kFileExtensionToPluginKey];
 }
@@ -228,7 +228,7 @@ static void *WCLFileExtensionContext;
         
         [fileExtensionToPluginDictionary setValue:self.fileExtensionPluginDictionary forKey:self.suffix];
         
-        [[self class] setfileExtensionToPluginDictionary:fileExtensionToPluginDictionary];
+        [[self class] setFileExtensionToPluginDictionary:fileExtensionToPluginDictionary];
 
         return;
     }

@@ -8,6 +8,8 @@
 
 #import "WCLApplicationTerminationHelper.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLApplicationTerminationHelper (Tests)
 + (NSArray *)splitWebWindowControllersWithTasks;
 @end
+NS_ASSUME_NONNULL_END

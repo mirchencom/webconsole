@@ -13,7 +13,7 @@ extension TaskResultsCollector: WCLTaskRunnerDelegate {
     
     func taskDidFinish(_ task: Process) {
         assert(!task.isRunning)
-        let error = errorForTask(task)
+        let error = makeError(for: task)
         completionHandler(standardOutput, standardError, error)
     }
 
@@ -57,20 +57,20 @@ class TaskResultsCollector: NSObject {
         standardError? += text
     }
     
-    fileprivate func errorForTask(_ task: Process) -> NSError? {
+    fileprivate func makeError(for task: Process) -> NSError? {
         assert(!task.isRunning)
         if task.terminationStatus == 0 && task.terminationReason == .exit {
             return nil
         }
         
         if task.terminationReason == .uncaughtSignal {
-            return NSError.taskTerminatedUncaughtSignalError(task.launchPath,
+            return NSError.makeTaskTerminatedUncaughtSignalError(launchPath: task.launchPath,
                 arguments: task.arguments,
                 directoryPath: task.currentDirectoryPath,
                 standardError: standardError)
         }
         
-        return NSError.taskTerminatedNonzeroExitCode(task.launchPath, exitCode:
+        return NSError.makeTaskTerminatedNonzeroExitCodeError(launchPath: task.launchPath, exitCode:
             task.terminationStatus,
             arguments: task.arguments,
             directoryPath: task.currentDirectoryPath,
@@ -84,20 +84,20 @@ extension WCLTaskRunner {
     typealias TaskResult = (_ standardOutput: String?, _ standardError: String?, _ error: NSError?) -> Void
     
 
-    class func runTaskUntilFinishedWithCommandPath(_ commandPath: String,
+    class func runTaskUntilFinished(withCommandPath commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         completionHandler: @escaping WCLTaskRunner.TaskResult) -> Process
     {
         let timeout = 20.0
-        return runTaskUntilFinishedWithCommandPath(commandPath,
+        return runTaskUntilFinished(withCommandPath: commandPath,
             withArguments: arguments,
             inDirectoryPath: directoryPath,
             timeout: timeout,
             completionHandler: completionHandler)
     }
 
-    class func runTaskUntilFinishedWithCommandPath(_ commandPath: String,
+    class func runTaskUntilFinished(withCommandPath commandPath: String,
         withArguments arguments: [AnyObject]?,
         inDirectoryPath directoryPath: String?,
         timeout: TimeInterval,

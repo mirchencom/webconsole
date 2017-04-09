@@ -21,13 +21,13 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     lazy var duplicatePluginController = DuplicatePluginController()
     let duplicatePluginDestinationDirectoryURL: URL
     
-    init(_ paths: [String], duplicatePluginDestinationDirectoryURL: URL) {
+    init(paths: [String], duplicatePluginDestinationDirectoryURL: URL) {
         self.pluginDirectoryManagers = [PluginsDirectoryManager]()
         self.pluginPathToPluginDictionary = [String : Plugin]()
         self.duplicatePluginDestinationDirectoryURL = duplicatePluginDestinationDirectoryURL
         
         for path in paths {
-            let plugins = self.pluginsAtPluginsPath(path)
+            let plugins = self.plugins(atPath: path)
             for plugin in plugins {
                 pluginPathToPluginDictionary[plugin.bundle.bundlePath] = plugin
             }
@@ -51,18 +51,18 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPath pluginPath: String)
     {
-        if let oldPlugin = pluginAtPluginPath(pluginPath) {
-            if let newPlugin = Plugin.pluginWithPath(pluginPath) {
+        if let oldPlugin = plugin(atPluginPath: pluginPath) {
+            if let newPlugin = Plugin.makePlugin(path: pluginPath) {
                 // If there is an existing plugin and a new plugin, remove the old plugin and add the new plugin
-                if !oldPlugin.isEqualToPlugin(newPlugin) {
-                    removePlugin(oldPlugin)
-                    addPlugin(newPlugin)
+                if !oldPlugin.isEqual(to: newPlugin) {
+                    remove(oldPlugin)
+                    add(newPlugin)
                 }
             }
         } else {
             // If there is only a new plugin, add it
-            if let newPlugin = Plugin.pluginWithPath(pluginPath) {
-                addPlugin(newPlugin)
+            if let newPlugin = Plugin.makePlugin(path: pluginPath) {
+                add(newPlugin)
             }
         }
     }
@@ -70,38 +70,38 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
     func pluginsDirectoryManager(_ pluginsDirectoryManager: PluginsDirectoryManager,
         pluginInfoDictionaryWasRemovedAtPluginPath pluginPath: String)
     {
-        if let oldPlugin = pluginAtPluginPath(pluginPath) {
-            removePlugin(oldPlugin)
+        if let oldPlugin = plugin(atPluginPath: pluginPath) {
+            remove(oldPlugin)
         }
     }
 
     
     // MARK: Add & Remove Helpers
     
-    func addPlugin(_ plugin: Plugin) {
+    func add(_ plugin: Plugin) {
         let pluginPath = plugin.bundle.bundlePath
         pluginPathToPluginDictionary[pluginPath] = plugin
         delegate?.pluginsDataController(self, didAddPlugin: plugin)
     }
     
-    func removePlugin(_ plugin: Plugin) {
+    func remove(_ plugin: Plugin) {
         let pluginPath = plugin.bundle.bundlePath
         pluginPathToPluginDictionary.removeValue(forKey: pluginPath)
         delegate?.pluginsDataController(self, didRemovePlugin: plugin)
     }
     
-    func pluginAtPluginPath(_ pluginPath: String) -> Plugin? {
+    func plugin(atPluginPath pluginPath: String) -> Plugin? {
         return pluginPathToPluginDictionary[pluginPath]
     }
 
 
     // MARK: Duplicate and Remove
 
-    func movePluginToTrash(_ plugin: Plugin) {
+    func moveToTrash(_ plugin: Plugin) {
         assert(plugin.editable, "The plugin should be editable")
-        removePlugin(plugin)
+        remove(plugin)
         let pluginPath = plugin.bundle.bundlePath
-        let pluginDirectoryPath = pluginPath.stringByDeletingLastPathComponent
+        let pluginDirectoryPath = pluginPath.deletingLastPathComponent
         let pluginDirectoryName = pluginPath.lastPathComponent
         NSWorkspace.shared().performFileOperation(NSWorkspaceRecycleOperation,
             source: pluginDirectoryPath,
@@ -112,26 +112,26 @@ class PluginsDataController: PluginsDirectoryManagerDelegate {
         assert(!exists, "The file should not exist")
     }
     
-    func duplicatePlugin(_ plugin: Plugin, handler: ((_ plugin: Plugin?, _ error: NSError?) -> Void)?) {
+    func duplicate(_ plugin: Plugin, handler: ((_ plugin: Plugin?, _ error: NSError?) -> Void)?) {
 
         do {
-            try type(of: self).createDirectoryIfMissing(duplicatePluginDestinationDirectoryURL)
+            try type(of: self).createDirectoryIfMissing(at: duplicatePluginDestinationDirectoryURL)
         } catch let error as NSError {
             handler?(nil, error)
             return
         }
 
-        duplicatePluginController.duplicatePlugin(plugin,
-            toDirectoryAtURL: duplicatePluginDestinationDirectoryURL)
+        duplicatePluginController.duplicate(plugin,
+            to: duplicatePluginDestinationDirectoryURL)
         { (plugin, error) -> Void in
             if let plugin = plugin {
-                self.addPlugin(plugin)
+                self.add(plugin)
             }
             handler?(plugin, error)
         }
     }
 
-    class func createDirectoryIfMissing(_ directoryURL: URL) throws {
+    class func createDirectoryIfMissing(at directoryURL: URL) throws {
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: directoryURL.path, isDirectory: &isDir)
         if (exists && isDir.boolValue) {

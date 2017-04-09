@@ -30,7 +30,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         UserDefaultsManager.standardUserDefaults().set(UUIDString, forKey: defaultNewPluginIdentifierKey)
 
         let defaultNewPlugin = PluginsManager.sharedInstance.defaultNewPlugin
-        let initialDefaultNewPlugin: Plugin! = PluginsManager.sharedInstance.pluginWithName(initialDefaultNewPluginName)
+        let initialDefaultNewPlugin: Plugin! = PluginsManager.sharedInstance.plugin(forName: initialDefaultNewPluginName)
         XCTAssertEqual(defaultNewPlugin, initialDefaultNewPlugin, "The plugins should be equal")
         
         let identifier = UserDefaultsManager.standardUserDefaults().string(forKey: defaultNewPluginIdentifierKey)
@@ -52,10 +52,10 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
         let defaultNewPlugin = PluginsManager.sharedInstance.defaultNewPlugin
         XCTAssertEqual(defaultNewPlugin, createdPlugin, "The default new WCLPlugin should be the WCLPlugin.")
         
-        movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
+        moveToTrashAndCleanUpWithConfirmation(createdPlugin)
         
         let defaultNewPluginTwo = PluginsManager.sharedInstance.defaultNewPlugin
-        let initialDefaultNewPlugin: Plugin! = PluginsManager.sharedInstance.pluginWithName(initialDefaultNewPluginName)
+        let initialDefaultNewPlugin: Plugin! = PluginsManager.sharedInstance.plugin(forName: initialDefaultNewPluginName)
         XCTAssertEqual(defaultNewPluginTwo, initialDefaultNewPlugin, "The plugins should be equal")
 
         let defaultNewPluginIdentifierTwo = UserDefaultsManager.standardUserDefaults().string(forKey: defaultNewPluginIdentifierKey)
@@ -78,7 +78,7 @@ class PluginsManagerDefaultNewPluginTests: PluginsManagerTestCase {
 
         let bundlePath = createdPluginTwo.bundle.bundlePath
         let pluginFolderName = bundlePath.lastPathComponent
-        XCTAssertEqual(DuplicatePluginController.pluginFilenameFromName(createdPluginTwo.name), pluginFolderName, "The folder name should equal the plugin's name")
+        XCTAssertEqual(DuplicatePluginController.pluginFilename(fromName: createdPluginTwo.name), pluginFolderName, "The folder name should equal the plugin's name")
         
         let longName: String = createdPlugin.name
         XCTAssertTrue(longName.hasPrefix(createdPlugin.name), "The new WCLPlugin's name should start with the WCLPlugin's name.")

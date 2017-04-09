@@ -10,7 +10,9 @@
 
 @class WCLAppleScriptPluginWrapper;
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLWebViewController (AppleScript)
-@property (nonatomic, strong, readonly, nonnull) WCLAppleScriptPluginWrapper *pluginWrapper;
-@property (nonatomic, strong, readonly, nonnull) NSString *pluginName;
+@property (nonatomic, strong, readonly) WCLAppleScriptPluginWrapper *pluginWrapper;
+@property (nonatomic, strong, readonly) NSString *pluginName;
 @end
+NS_ASSUME_NONNULL_END

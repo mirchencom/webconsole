@@ -45,11 +45,11 @@ class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
     
     // MARK: Handlers
     
-    func addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler(_ handler: @escaping (_ path: String) -> Void) {
+    func add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler handler: @escaping (_ path: String) -> Void) {
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.append(handler)
     }
     
-    func addPluginInfoDictionaryWasRemovedAtPluginPathHandler(_ handler: @escaping (_ path: String) -> Void) {
+    func add(pluginInfoDictionaryWasRemovedAtPluginPathHandler handler: @escaping (_ path: String) -> Void) {
         pluginInfoDictionaryWasRemovedAtPluginPathHandlers.append(handler)
     }
     
@@ -59,37 +59,37 @@ extension PluginsDirectoryManagerTests {
     
     // MARK: Move Helpers
     
-    func movePluginAtPathWithConfirmation(_ pluginPath: String, destinationPluginPath: String) {
+    func movePluginWithConfirmation(atPluginPath pluginPath: String, destinationPluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == pluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == pluginPath) {
                 removeExpectation.fulfill()
             }
         })
         
         let createExpectation = expectation(description: "Info dictionary was created")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == destinationPluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == destinationPluginPath) {
                 createExpectation.fulfill()
             }
         })
         
-        SubprocessFileSystemModifier.moveItemAtPath(pluginPath, toPath: destinationPluginPath)
+        SubprocessFileSystemModifier.moveItem(atPath: pluginPath, toPath: destinationPluginPath)
         
         // Wait for expectations
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
-    func movePluginAtPathWithConfirmation(_ pluginPath: String, toUnwatchedDestinationPluginPath destinationPluginPath: String) {
+    func movePluginWithConfirmation(atPluginPath pluginPath: String, toUnwatchedDestinationPluginPath destinationPluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == pluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == pluginPath) {
                 removeExpectation.fulfill()
             }
         })
         
         let moveExpectation = expectation(description: "Move finished")
-        SubprocessFileSystemModifier.moveItemAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+        SubprocessFileSystemModifier.moveItem(atPath: pluginPath, toPath: destinationPluginPath, handler: {
             moveExpectation.fulfill()
         })
         
@@ -101,23 +101,23 @@ extension PluginsDirectoryManagerTests {
 
     // MARK: Copy Helpers
     
-    func copyPluginAtPathWithConfirmation(_ pluginPath: String, destinationPluginPath: String) {
+    func copyPluginWithConfirmation(atPluginPath pluginPath: String, destinationPluginPath: String) {
         let createExpectation = expectation(description: "Info dictionary was created or modified")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == destinationPluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == destinationPluginPath) {
                 createExpectation.fulfill()
             }
         })
 
         let copyExpectation = expectation(description: "Copy finished")
-        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+        SubprocessFileSystemModifier.copyDirectory(atPath: pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
         })
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func copyPluginAtPath(_ pluginPath: String, destinationPluginPath: String) {
+    func copyPlugin(atPluginPath pluginPath: String, toPluginPath destinationPluginPath: String) {
         let copyExpectation = expectation(description: "Copy finished")
-        SubprocessFileSystemModifier.copyDirectoryAtPath(pluginPath, toPath: destinationPluginPath, handler: {
+        SubprocessFileSystemModifier.copyDirectory(atPath: pluginPath, toPath: destinationPluginPath, handler: {
             copyExpectation.fulfill()
         })
         waitForExpectations(timeout: defaultTimeout, handler: nil)
@@ -127,17 +127,17 @@ extension PluginsDirectoryManagerTests {
 
     // MARK: Remove Helpers
     
-    func removePluginAtPathWithConfirmation(_ pluginPath: String) {
+    func removePluginWithConfirmation(atPluginPath pluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
             self.pluginsDirectoryManager.delegate = nil // Ignore subsequent remove events
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == pluginPath) {
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == pluginPath) {
                 removeExpectation.fulfill()
             }
         })
 
         let deleteExpectation = expectation(description: "Delete finished")
-        SubprocessFileSystemModifier.removeDirectoryAtPath(pluginPath, handler: {
+        SubprocessFileSystemModifier.removeDirectory(atPath: pluginPath, handler: {
             deleteExpectation.fulfill()
         })
         waitForExpectations(timeout: defaultTimeout, handler: nil)
@@ -154,7 +154,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         pluginsDirectoryManager = PluginsDirectoryManager(pluginsDirectoryURL: pluginsDirectoryURL)
         pluginsDirectoryEventManager = PluginsDirectoryEventManager()
         pluginsDirectoryManager.delegate = pluginsDirectoryEventManager
-        pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPluginURL(pluginURL).path
+        pluginInfoDictionaryPath = Plugin.urlForInfoDictionary(forPluginAt: pluginURL).path
     }
     
     override func tearDown() {
@@ -170,30 +170,30 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testMovePlugin() {
         // Move the plugin
         let movedPluginFilename = testPluginDirectoryName
-        let movedPluginPath = pluginPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(movedPluginFilename)
-        movePluginAtPathWithConfirmation(pluginPath, destinationPluginPath: movedPluginPath)
+        let movedPluginPath = pluginPath.deletingLastPathComponent.appendingPathComponent(movedPluginFilename)
+        movePluginWithConfirmation(atPluginPath: pluginPath, destinationPluginPath: movedPluginPath)
         
         // Clean up
         // Copy the plugin back to it's original path so the tearDown delete of the temporary plugin succeeds
-        movePluginAtPathWithConfirmation(movedPluginPath, destinationPluginPath: pluginPath)
+        movePluginWithConfirmation(atPluginPath: movedPluginPath, destinationPluginPath: pluginPath)
     }
     
     func testCopyAndRemovePlugin() {
         let copiedPluginFilename = testPluginDirectoryName
-        let copiedPluginPath = pluginPath.stringByDeletingLastPathComponent.stringByAppendingPathComponent(copiedPluginFilename)
-        copyPluginAtPathWithConfirmation(pluginPath, destinationPluginPath: copiedPluginPath)
+        let copiedPluginPath = pluginPath.deletingLastPathComponent.appendingPathComponent(copiedPluginFilename)
+        copyPluginWithConfirmation(atPluginPath: pluginPath, destinationPluginPath: copiedPluginPath)
         
         // Clean up
-        removePluginAtPathWithConfirmation(copiedPluginPath)
+        removePluginWithConfirmation(atPluginPath: copiedPluginPath)
     }
 
     func testCopyToUnwatchedDirectory() {
         let pluginFilename = pluginPath.lastPathComponent
-        let copiedPluginPath = temporaryDirectoryPath.stringByAppendingPathComponent(pluginFilename)
-        copyPluginAtPath(pluginPath, destinationPluginPath: copiedPluginPath)
+        let copiedPluginPath = temporaryDirectoryPath.appendingPathComponent(pluginFilename)
+        copyPlugin(atPluginPath: pluginPath, toPluginPath: copiedPluginPath)
         
         do {
-            try removeTemporaryItemAtPath(copiedPluginPath)
+            try removeTemporaryItem(atPath: copiedPluginPath)
         } catch {
             XCTAssertTrue(false, "The remove should suceed")
         }
@@ -202,15 +202,15 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     func testCopyFromUnwatchedDirectory() {
         // Move the plugin to unwatched directory
         let pluginFilename = pluginPath.lastPathComponent
-        let movedPluginPath = temporaryDirectoryPath.stringByAppendingPathComponent(pluginFilename)
-        movePluginAtPathWithConfirmation(pluginPath, toUnwatchedDestinationPluginPath: movedPluginPath)
+        let movedPluginPath = temporaryDirectoryPath.appendingPathComponent(pluginFilename)
+        movePluginWithConfirmation(atPluginPath: pluginPath, toUnwatchedDestinationPluginPath: movedPluginPath)
 
         // Copy back to original location
-        copyPluginAtPathWithConfirmation(movedPluginPath, destinationPluginPath: pluginPath)
+        copyPluginWithConfirmation(atPluginPath: movedPluginPath, destinationPluginPath: pluginPath)
 
         // Cleanup
         do {
-            try removeTemporaryItemAtPath(movedPluginPath)
+            try removeTemporaryItem(atPath: movedPluginPath)
         } catch {
             XCTAssertTrue(false, "The remove should suceed")
         }
@@ -221,28 +221,28 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
     
     func testMoveInfoDictionary() {
 
-        let infoDictionaryDirectory: String! = pluginInfoDictionaryPath.stringByDeletingLastPathComponent
+        let infoDictionaryDirectory: String! = pluginInfoDictionaryPath.deletingLastPathComponent
         let renamedInfoDictionaryFilename = testDirectoryName
-        let renamedInfoDictionaryPath = infoDictionaryDirectory.stringByAppendingPathComponent(renamedInfoDictionaryFilename)
+        let renamedInfoDictionaryPath = infoDictionaryDirectory.appendingPathComponent(renamedInfoDictionaryFilename)
         
         // Move
         let expectation = self.expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.pluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == self.pluginPath) {
                 expectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.moveItemAtPath(pluginInfoDictionaryPath, toPath: renamedInfoDictionaryPath)
+        SubprocessFileSystemModifier.moveItem(atPath: pluginInfoDictionaryPath, toPath: renamedInfoDictionaryPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
         
         // Move back
         let expectationTwo = self.expectation(description: "Info dictionary was created or modified")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.pluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == self.pluginPath) {
                 expectationTwo.fulfill()
             }
         })
-        SubprocessFileSystemModifier.moveItemAtPath(renamedInfoDictionaryPath, toPath: pluginInfoDictionaryPath)
+        SubprocessFileSystemModifier.moveItem(atPath: renamedInfoDictionaryPath, toPath: pluginInfoDictionaryPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
@@ -258,22 +258,22 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         
         // Remove the info dictionary
         let expectation = self.expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.pluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == self.pluginPath) {
                 expectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.removeFileAtPath(pluginInfoDictionaryPath)
+        SubprocessFileSystemModifier.removeFile(atPath: pluginInfoDictionaryPath)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
 
         // Add back the info dictionary
         let expectationTwo = self.expectation(description: "Info dictionary was created or modified")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.pluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == self.pluginPath) {
                 expectationTwo.fulfill()
             }
         })
-        SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: infoDictionaryContents)
+        SubprocessFileSystemModifier.writeToFile(atPath: pluginInfoDictionaryPath, contents: infoDictionaryContents)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
@@ -290,22 +290,22 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         
         // Remove the info dictionary
         let expectation = self.expectation(description: "Info dictionary was created or modified")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.pluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == self.pluginPath) {
                 expectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: testFileContents)
+        SubprocessFileSystemModifier.writeToFile(atPath: pluginInfoDictionaryPath, contents: testFileContents)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
         
         // Remove the info dictionary
         let expectationTwo = self.expectation(description: "Info dictionary was created or modified")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler({ (path) -> Void in
-            if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.pluginPath) {
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { (path) -> Void in
+            if (type(of: self).resolve(temporaryDirectoryPath: path as NSString) == self.pluginPath) {
                 expectationTwo.fulfill()
             }
         })
-        SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: infoDictionaryContents)
+        SubprocessFileSystemModifier.writeToFile(atPath: pluginInfoDictionaryPath, contents: infoDictionaryContents)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 }

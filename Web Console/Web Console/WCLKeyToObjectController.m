@@ -128,7 +128,7 @@ static void *WCLKeyToObjectControllerContext;
 
 #pragma mark Accessing Plugins
 
-- (id)objectWithKey:(NSString *)key
+- (id)objectForKey:(NSString *)key
 {
     return self.keyToObjectDictionary[key];
 }

@@ -31,7 +31,7 @@
 - (void)testRunPlugin
 {
     WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestHelloWorldPluginName];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginForName:kTestHelloWorldPluginName];
     [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:nil];
     
     NSArray *splitWebWindowControllers = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] splitWebWindowControllersForPlugin:plugin];
@@ -51,7 +51,7 @@
     NSString *informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:@[]];
     XCTAssertNil(informativeText, @"The informative text should be nil for an empty NSArray.");
     
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestPrintPluginName];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginForName:kTestPrintPluginName];
     NSArray *commandPaths = @[[plugin commandPath]];
     informativeText = [WCLUserInterfaceTextHelper informativeTextForCloseWindowForCommands:commandPaths];
     [[self class] testInformativeText:informativeText forCommandPaths:commandPaths];
@@ -220,7 +220,7 @@
 - (void)testPluginTaskEnvironmentDictionary
 {
     WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestTestEnvironmentPluginName];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginForName:kTestTestEnvironmentPluginName];
     XCTestExpectation *expectation = [self expectationWithDescription:@"Running task"];
     [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:^(BOOL success) {
         [expectation fulfill];

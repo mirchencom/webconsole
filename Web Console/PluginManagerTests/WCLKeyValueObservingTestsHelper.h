@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLKeyValueObservingTestsHelper : NSObject
 + (void)observeObject:(id)object
            forKeyPath:(NSString *)keyPath
               options:(NSKeyValueObservingOptions)options
       completionBlock:(void (^)(NSDictionary *change))completionBlock;
 @end
+NS_ASSUME_NONNULL_END

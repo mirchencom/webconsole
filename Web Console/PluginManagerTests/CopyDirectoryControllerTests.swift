@@ -32,7 +32,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         let copyExpectation = expectation(description: "Copy")
         
         var copiedPluginURL: URL!
-        copyDirectoryController.copyItemAtURL(pluginURL, completionHandler: { (URL, error) -> Void in
+        copyDirectoryController.copyItem(at: pluginURL, completionHandler: { (URL, error) -> Void in
             XCTAssertNotNil(URL, "The URL should not be nil")
             XCTAssertNil(error, "The error should be nil")
             
@@ -59,8 +59,8 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         XCTAssertTrue(exists, "The item should exist")
         XCTAssertTrue(isDir.boolValue, "The item should be a directory")
 
-        let pluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(pluginURL)
-        let copiedPluginInfoDictionaryURL = Plugin.infoDictionaryURLForPluginURL(copiedPluginURL)
+        let pluginInfoDictionaryURL = Plugin.urlForInfoDictionary(forPluginAt: pluginURL)
+        let copiedPluginInfoDictionaryURL = Plugin.urlForInfoDictionary(forPluginAt: copiedPluginURL)
         
         do {
             let pluginInfoDictionaryContents: String! = try String(contentsOf: pluginInfoDictionaryURL, encoding: String.Encoding.utf8)
@@ -72,7 +72,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         
         // Cleanup
         do {
-            try removeTemporaryItemAtURL(copiedPluginURL)
+            try removeTemporaryItem(at: copiedPluginURL)
         } catch {
             XCTAssertTrue(false, "The remove should succeed")
         }
@@ -80,7 +80,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
 
     func testCleanUpOnInit() {
         let copyExpectation = expectation(description: "Copy")
-        copyDirectoryController.copyItemAtURL(pluginURL, completionHandler: { (URL, error) -> Void in
+        copyDirectoryController.copyItem(at: pluginURL, completionHandler: { (URL, error) -> Void in
             XCTAssertNotNil(URL, "The URL should not be nil")
             XCTAssertNil(error, "The error should be nil")
 
@@ -126,7 +126,7 @@ class CopyDirectoryControllerTests: TemporaryPluginsTestCase {
         }
 
         // Clean Up
-        let recoveredFilesPath = Directory.trash.path().stringByAppendingPathComponent(copyDirectoryControllerTwo.trashDirectoryName)
+        let recoveredFilesPath = Directory.trash.path().appendingPathComponent(copyDirectoryControllerTwo.trashDirectoryName)
         var isDir: ObjCBool = false
         let exists = FileManager.default.fileExists(atPath: recoveredFilesPath, isDirectory: &isDir)
         XCTAssertTrue(exists, "The item should exist")

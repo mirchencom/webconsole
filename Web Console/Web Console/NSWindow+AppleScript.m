@@ -51,16 +51,16 @@
 
 #pragma mark - WCLPluginView
 
-- (void)loadHTML:(nonnull NSString *)HTML
-         baseURL:(nullable NSURL *)baseURL
-completionHandler:(nullable void (^)(BOOL success))completionHandler
+- (void)loadHTML:(NSString *)HTML
+         baseURL:(NSURL *)baseURL
+completionHandler:(void (^)(BOOL success))completionHandler
 {
     [[self splitWebWindowController] loadHTML:HTML
                                       baseURL:baseURL
                             completionHandler:completionHandler];
 }
 
-- (nullable NSString *)doJavaScript:(nonnull NSString *)javaScript
+- (NSString *)doJavaScript:(nonnull NSString *)javaScript
 {
     return [[self splitWebWindowController] doJavaScript:javaScript];
 }

@@ -10,33 +10,33 @@ import Cocoa
 
 class SubprocessFileSystemModifier {
 
-    // MARK: createFileAtPath
-    class func createFileAtPath(_ path: String) {
-        createFileAtPath(path, handler: nil)
+    // MARK: createFile
+    class func createFile(atPath path: String) {
+        createFile(atPath: path, handler: nil)
     }
-    class func createFileAtPath(_ path: String, handler: ((Void) -> Void)?) {
+    class func createFile(atPath path: String, handler: ((Void) -> Void)?) {
         let task = Process()
         task.launchPath = "/usr/bin/touch"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
-    // MARK: createDirectoryAtPath
-    class func createDirectoryAtPath(_ path: String) {
-        createDirectoryAtPath(path, handler: nil)
+    // MARK: createDirectory
+    class func createDirectory(atPath path: String) {
+        createDirectory(atPath: path, handler: nil)
     }
-    class func createDirectoryAtPath(_ path: String, handler: ((Void) -> Void)?) {
+    class func createDirectory(atPath path: String, handler: ((Void) -> Void)?) {
         let task = Process()
         task.launchPath = "/bin/mkdir"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
-    // MARK: removeFileAtPath
-    class func removeFileAtPath(_ path: String) {
-        removeFileAtPath(path, handler: nil)
+    // MARK: removeFile
+    class func removeFile(atPath path: String) {
+        removeFile(atPath: path, handler: nil)
     }
-    class func removeFileAtPath(_ path: String, handler: ((Void) -> Void)?) {
+    class func removeFile(atPath path: String, handler: ((Void) -> Void)?) {
         let pathAsNSString: NSString = path as NSString
         if pathAsNSString.range(of: "*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")
@@ -45,14 +45,14 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/bin/rm"
         task.arguments = [path]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
     
-    // MARK: removeDirectoryAtPath
-    class func removeDirectoryAtPath(_ path: String) {
-        removeDirectoryAtPath(path, handler: nil)
+    // MARK: removeDirectory
+    class func removeDirectory(atPath path: String) {
+        removeDirectory(atPath: path, handler: nil)
     }
-    class func removeDirectoryAtPath(_ path: String, handler: ((Void) -> Void)?) {
+    class func removeDirectory(atPath path: String, handler: ((Void) -> Void)?) {
         let pathAsNSString: NSString = path as NSString
         if pathAsNSString.range(of: "*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")
@@ -65,14 +65,14 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/bin/rm"
         task.arguments = ["-r", path]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
-    // MARK: copyDirectoryAtPath
-    class func copyDirectoryAtPath(_ path: String, toPath destinationPath: String) {
-        copyDirectoryAtPath(path, toPath: destinationPath, handler: nil)
+    // MARK: copyDirectory
+    class func copyDirectory(atPath path: String, toPath destinationPath: String) {
+        copyDirectory(atPath: path, toPath: destinationPath, handler: nil)
     }
-    class func copyDirectoryAtPath(_ path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
+    class func copyDirectory(atPath path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
         let pathAsNSString: NSString = path as NSString
         if pathAsNSString.range(of: "*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")
@@ -103,23 +103,23 @@ class SubprocessFileSystemModifier {
         let task = Process()
         task.launchPath = "/bin/cp"
         task.arguments = ["-R", path, destinationPath]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
     
-    // MARK: moveItemAtPath
-    class func moveItemAtPath(_ path: String, toPath destinationPath: String) {
-        moveItemAtPath(path, toPath: destinationPath, handler: nil)
+    // MARK: moveItem
+    class func moveItem(atPath path: String, toPath destinationPath: String) {
+        moveItem(atPath: path, toPath: destinationPath, handler: nil)
     }
-    class func moveItemAtPath(_ path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
+    class func moveItem(atPath path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
         let task = Process()
         task.launchPath = "/bin/mv"
         task.arguments = [path, destinationPath]
-        SubprocessFileSystemModifier.runTask(task, handler: handler)
+        SubprocessFileSystemModifier.run(task, handler: handler)
     }
 
     // MARK: Helpers
 
-    class func runTask(_ task: Process, handler: ((Void) -> Void)?) {
+    class func run(_ task: Process, handler: ((Void) -> Void)?) {
         task.standardOutput = Pipe()
         (task.standardOutput! as AnyObject).fileHandleForReading.readabilityHandler = { (file: FileHandle!) -> Void in
             let data = file.availableData
@@ -146,7 +146,7 @@ class SubprocessFileSystemModifier {
         task.launch()
     }
 
-    class func writeToFileAtPath(_ path: String, contents: String) {
+    class func writeToFile(atPath path: String, contents: String) {
         let echoTask = Process()
         echoTask.launchPath = "/bin/echo"
         echoTask.arguments = [contents]

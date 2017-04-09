@@ -17,7 +17,7 @@
 {
     self = [super init];
     if (self) {
-        _pluginsController = [[MultiCollectionController alloc] init:plugins key:kPluginNameKey];
+        _pluginsController = [[MultiCollectionController alloc] initWithObjects:plugins key:kPluginNameKey];
     }
     return self;
 }
@@ -40,7 +40,7 @@
     }
 
     if (!plugin) {
-        plugin = [self pluginWithName:kInitialDefaultNewPluginName];
+        plugin = [self pluginForName:kInitialDefaultNewPluginName];
     }
     
     _defaultNewPlugin = plugin;
@@ -78,7 +78,7 @@
     return nil;
 }
 
-- (Plugin *)pluginWithName:(NSString *)name
+- (Plugin *)pluginForName:(NSString *)name
 {
     NSAssert(NO, @"Implemented in superclass");
     return nil;

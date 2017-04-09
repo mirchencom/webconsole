@@ -49,8 +49,8 @@ let testPluginInfoDictionaryFilename = "Info.plist"
 
 // MARK: Directories & Files
 
-let testPluginDirectoryName = DuplicatePluginController.pluginFilenameFromName(testDirectoryName)
-let testPluginDirectoryNameTwo = DuplicatePluginController.pluginFilenameFromName(testDirectoryNameTwo)
+let testPluginDirectoryName = DuplicatePluginController.pluginFilename(fromName: testDirectoryName)
+let testPluginDirectoryNameTwo = DuplicatePluginController.pluginFilename(fromName: testDirectoryNameTwo)
 let testDirectoryName = "test"
 let testDirectoryNameTwo = "test2"
 let testDirectoryNameThree = "test3"

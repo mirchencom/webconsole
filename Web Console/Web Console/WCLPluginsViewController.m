@@ -110,7 +110,7 @@
 
 - (IBAction)addPlugin:(id)sender
 {
-    [[PluginsManager sharedInstance] newPlugin:nil];
+    [[PluginsManager sharedInstance] newPluginWithHandler:nil];
     
     // TODO: Select the added plugin?
     // Simple re-implement of NSDictionaryController add because using the add: method waits for the next run loop before updating the table view.
@@ -122,7 +122,7 @@
     NSArray *plugins = [self.pluginsArrayController selectedObjects];
 
     for (Plugin *plugin in plugins) {
-        [[PluginsManager sharedInstance] newPluginFromPlugin:plugin handler:nil];
+        [[PluginsManager sharedInstance] duplicate:plugin handler:nil];
     }
 
     [self.tableView editColumn:0 row:[self.tableView selectedRow] withEvent:nil select:YES];
@@ -153,7 +153,7 @@
         NSArray *plugins = [self.pluginsArrayController selectedObjects];
         
         for (Plugin *plugin in plugins) {
-            [[PluginsManager sharedInstance] movePluginToTrash:plugin];
+            [[PluginsManager sharedInstance] moveToTrash:plugin];
         }
     }];
 }

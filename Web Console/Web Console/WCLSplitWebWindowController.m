@@ -207,7 +207,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 - (void)readFromStandardInput:(nonnull NSString *)text
 {
-    return [self.splitWebViewController readFromStandardInput:text];
+    return [self.splitWebViewController readFromStandardInputWithText:text];
 }
 
 - (void)runPlugin:(nonnull Plugin *)plugin
@@ -217,7 +217,7 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 {
     [self.window setTitle:plugin.name];
 
-    [self.splitWebViewController runPlugin:plugin
+    [self.splitWebViewController runWithPlugin:plugin
                              withArguments:arguments
                            inDirectoryPath:directoryPath
                          completionHandler:completionHandler];
@@ -280,17 +280,17 @@ completionHandler:(nullable void (^)(BOOL success))completionHandler
 
 #pragma mark - SplitWebViewControllerDelegate
 
-- (NSWindow *)windowForSplitWebViewController:(SplitWebViewController *)splitWebViewController
+- (NSWindow *)windowFor:(SplitWebViewController *)splitWebViewController
 {
     return self.window;
 }
 
-- (BOOL)windowIsVisibleForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController
+- (BOOL)windowIsVisibleFor:(SplitWebViewController * __nonnull)splitWebViewController
 {
     return self.window.isVisible;
 }
 
-- (Plugin * __nullable)logPluginForSplitWebViewController:(SplitWebViewController * __nonnull)splitWebViewController
+- (Plugin * __nullable)logPluginFor:(SplitWebViewController * __nonnull)splitWebViewController
 {
     return self.logPlugin;
 }

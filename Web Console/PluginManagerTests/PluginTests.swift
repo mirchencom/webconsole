@@ -12,8 +12,8 @@ import XCTest
 
 class PluginTests: PluginsManagerTestCase {
 
-    func infoDictionaryContentsForPluginWithConfirmation(_ plugin: Plugin) -> String {
-        let pluginInfoDictionaryPath = Plugin.infoDictionaryURLForPlugin(plugin).path
+    func contentsOfInfoDictionaryWithConfirmation(for plugin: Plugin) -> String {
+        let pluginInfoDictionaryPath = Plugin.urlForInfoDictionary(for: plugin).path
         var infoDictionaryContents: String!
         do {
             infoDictionaryContents = try String(contentsOfFile: pluginInfoDictionaryPath, encoding: String.Encoding.utf8)
@@ -25,26 +25,26 @@ class PluginTests: PluginsManagerTestCase {
     }
     
     func testEditPluginProperties() {
-        let contents = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contents = contentsOfInfoDictionaryWithConfirmation(for: plugin)
 
         plugin.name = testPluginNameTwo
-        let contentsTwo = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contentsTwo = contentsOfInfoDictionaryWithConfirmation(for: plugin)
         XCTAssertNotEqual(contents, contentsTwo, "The contents should not be equal")
 
         plugin.command = testPluginCommandTwo
-        let contentsThree = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contentsThree = contentsOfInfoDictionaryWithConfirmation(for: plugin)
         XCTAssertNotEqual(contentsTwo, contentsThree, "The contents should not be equal")
 
         let uuid = UUID()
         let uuidString = uuid.uuidString
         plugin.identifier = uuidString
-        let contentsFour = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contentsFour = contentsOfInfoDictionaryWithConfirmation(for: plugin)
         XCTAssertNotEqual(contentsThree, contentsFour, "The contents should not be equal")
 
         plugin.suffixes = testPluginSuffixesTwo
-        let contentsFive = infoDictionaryContentsForPluginWithConfirmation(plugin)
+        let contentsFive = contentsOfInfoDictionaryWithConfirmation(for: plugin)
         XCTAssertNotEqual(contentsFour, contentsFive, "The contents should not be equal")
-        let newPlugin: Plugin! = Plugin.pluginWithURL(pluginURL)
+        let newPlugin: Plugin! = Plugin.makePlugin(url: pluginURL)
 
         XCTAssertEqual(plugin.name, newPlugin.name, "The names should be equal")
         XCTAssertEqual(plugin.command!, newPlugin.command!, "The commands should be equal")
@@ -135,7 +135,7 @@ class PluginTests: PluginsManagerTestCase {
         }
         XCTAssertNotNil(error, "The error should not be nil.")
         // Delete
-        movePluginToTrashAndCleanUpWithConfirmation(createdPlugin)
+        moveToTrashAndCleanUpWithConfirmation(createdPlugin)
         // Test that the new name is now valid
         error = nil;
         do {
@@ -196,12 +196,12 @@ class PluginTests: PluginsManagerTestCase {
     }
 
     func testEquality() {
-        let samePlugin: Plugin! = Plugin.pluginWithURL(pluginURL)
+        let samePlugin: Plugin = Plugin.makePlugin(url: pluginURL)!
         XCTAssertNotEqual(plugin, samePlugin, "The plugins should not be equal")
-        XCTAssertTrue(plugin.isEqualToPlugin(samePlugin), "The plugins should be equal")
+        XCTAssertTrue(plugin.isEqual(toOther: samePlugin), "The plugins should be equal")
         
         // Duplicate the plugins folder, this should not cause a second plugin to be added to the plugin manager since the copy originated from the same process
-        let destinationPluginFilename = DuplicatePluginController.pluginFilenameFromName(plugin.identifier)
+        let destinationPluginFilename = DuplicatePluginController.pluginFilename(fromName: plugin.identifier)
         let destinationPluginURL: URL! = pluginURL.deletingLastPathComponent().appendingPathComponent(destinationPluginFilename)
         do {
             try FileManager.default.copyItem(at: pluginURL as URL, to: destinationPluginURL)
@@ -209,10 +209,10 @@ class PluginTests: PluginsManagerTestCase {
             XCTAssertTrue(false, "The copy should succeed")
         }
 
-        let newPlugin: Plugin! = Plugin.pluginWithURL(destinationPluginURL)
+        let newPlugin: Plugin! = Plugin.makePlugin(url: destinationPluginURL)
         XCTAssertNotEqual(plugin, newPlugin, "The plugins should not be equal")
         // This fails because the bundle URL and commandPath are different
-        XCTAssertFalse(plugin.isEqualToPlugin(newPlugin), "The plugins should be equal")
+        XCTAssertFalse(plugin.isEqual(to: newPlugin), "The plugins should be equal")
 
         // TODO: It would be nice to test modifying properties, but there isn't a way to do that because with two separate plugin directories the command paths and info dictionary URLs will be different
     }
@@ -225,9 +225,9 @@ class DuplicatePluginNameValidationTests: XCTestCase {
     class PluginNameMockPluginsManager: PluginsManager {
         var pluginNames = [testPluginName]
         
-        override func pluginWithName(_ name: String) -> Plugin? {
+        override func plugin(forName name: String) -> Plugin? {
             if pluginNames.contains(name) {
-                let plugin = super.pluginWithName(testPluginName)
+                let plugin = super.plugin(forName: testPluginName)
                 assert(plugin != nil, "The plugin should not be nil")
                 return plugin
             }
@@ -235,7 +235,7 @@ class DuplicatePluginNameValidationTests: XCTestCase {
         }
 
         func pluginWithTestPluginNameTwo() -> Plugin {
-            return super.pluginWithName(testPluginNameTwo)!
+            return super.plugin(forName: testPluginNameTwo)!
         }
     }
     

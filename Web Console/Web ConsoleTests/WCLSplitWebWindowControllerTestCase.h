@@ -19,30 +19,39 @@
 
 @class SplitWebViewController;
 
+
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowController (Tests)
 - (void)terminateTasksAndCloseWindow;
-@property (nonatomic, readonly, nonnull) SplitWebViewController *splitWebViewController;
-- (nonnull NSArray *)commandsRequiringConfirmation;
-- (nonnull NSArray *)commandsNotRequiringConfirmation;
+@property (nonatomic, readonly) SplitWebViewController *splitWebViewController;
+- ( NSArray *)commandsRequiringConfirmation;
+- ( NSArray *)commandsNotRequiringConfirmation;
 @end
+NS_ASSUME_NONNULL_END
 
+
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowController (DefaultWebView)
-@property (nonatomic, readonly, nonnull) WebView *defaultWebView;
+@property (nonatomic, readonly) WebView *defaultWebView;
 @end
+NS_ASSUME_NONNULL_END
 
+
+NS_ASSUME_NONNULL_BEGIN
 @interface WCLSplitWebWindowControllerTestCase : WCLTestPluginManagerTestCase
-+ (nonnull Plugin *)defaultPlugin;
-+ (nonnull Plugin *)otherPlugin;
-- (nonnull WCLSplitWebWindowController *)makeSplitWebWindowControllerRunningHelloWorldForPlugin:(nonnull Plugin *)plugin;
-- (nonnull WCLSplitWebWindowController *)makeSplitWebWindowControllerForPlugin:(nonnull Plugin *)plugin;
-- (nonnull WCLSplitWebWindowController *)makeSplitWebWindowController;
-- (nonnull WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin;
-- (nonnull NSTask *)taskRunningCommandPath:(nonnull NSString *)commandPath;
-- (nonnull WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(nonnull NSString *)commandPath;
-- (nonnull WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(nonnull NSString *)commandPath
-                                                                               task:(NSTask * _Nullable * _Nullable)task;
-- (nonnull WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(nonnull NSString *)commandPath
-                                                                             plugin:(nullable Plugin *)plugin
-                                                                               task:(NSTask * _Nullable * _Nullable)task;
++ (Plugin *)defaultPlugin;
++ (Plugin *)otherPlugin;
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerRunningHelloWorldForPlugin:(Plugin *)plugin;
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerForPlugin:(Plugin *)plugin;
+- (WCLSplitWebWindowController *)makeSplitWebWindowController;
+- (WCLSplitWebWindowController *)makeSplitWebWindowControllerForOtherPlugin;
+- (NSTask *)taskRunningCommandPath:(NSString *)commandPath;
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath;
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
+                                                                       task:(NSTask * _Nullable * _Nullable)task;
+- (WCLSplitWebWindowController *)splitWebWindowControllerRunningCommandPath:(NSString *)commandPath
+                                                                     plugin:(nullable Plugin *)plugin
+                                                                       task:(NSTask * _Nullable * _Nullable)task;
 + (void)blockUntilAllTasksRunAndFinish;
 @end
+NS_ASSUME_NONNULL_END

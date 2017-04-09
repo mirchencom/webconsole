@@ -14,13 +14,13 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
     
     func testInterruptTask() {
         
-        let commandPath = pathForResource(testDataShellScriptCatName,
+        let commandPath = path(forResource: testDataShellScriptCatName,
             ofType: testDataShellScriptExtension,
             inDirectory: testDataSubdirectory)!
         
         let expectation = self.expectation(description: "Task finished")
 
-        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+        _ = WCLTaskRunner.runTaskUntilFinished(withCommandPath: commandPath,
             withArguments: nil,
             inDirectoryPath: nil,
             timeout: 0.0)
@@ -44,13 +44,13 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
     
     func testStandardOutput() {
         
-        let commandPath = pathForResource(testDataHelloWorld,
+        let commandPath = path(forResource: testDataHelloWorld,
             ofType: testDataRubyFileExtension,
             inDirectory: testDataSubdirectory)!
         
         let expectation = self.expectation(description: "Task finished")
         
-        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath(commandPath,
+        _ = WCLTaskRunner.runTaskUntilFinished(withCommandPath: commandPath,
             withArguments: nil,
             inDirectoryPath: nil)
         { (standardOutput, standardError, error) -> Void in
@@ -70,13 +70,13 @@ class WCLTaskRunnerTaskResultTests: XCTestCase {
 
     func testStandardLongFile() {
         
-        let testDataPath = pathForResource(testDataTextPSOutput,
+        let testDataPath = path(forResource: testDataTextPSOutput,
             ofType: testDataTextExtension,
             inDirectory: testDataSubdirectory)!
         
         let expectation = self.expectation(description: "Task finished")
         
-        _ = WCLTaskRunner.runTaskUntilFinishedWithCommandPath("/bin/cat",
+        _ = WCLTaskRunner.runTaskUntilFinished(withCommandPath: "/bin/cat",
             withArguments: [testDataPath as AnyObject],
             inDirectoryPath: nil)
             { (standardOutput, standardError, error) -> Void in

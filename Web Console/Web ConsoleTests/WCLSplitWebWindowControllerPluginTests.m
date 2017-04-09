@@ -152,7 +152,7 @@
 
 - (void)testOrderedWindows
 {
-    Plugin *plugin = [[PluginsManager sharedInstance] pluginWithName:kTestHelloWorldPluginName];
+    Plugin *plugin = [[PluginsManager sharedInstance] pluginForName:kTestHelloWorldPluginName];
     WCLSplitWebWindowController *splitWebWindowController = [[WCLSplitWebWindowsController sharedSplitWebWindowsController] addedSplitWebWindowController];
     [splitWebWindowController runPlugin:plugin withArguments:nil inDirectoryPath:nil completionHandler:nil];
     

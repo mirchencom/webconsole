@@ -48,11 +48,11 @@ class PluginDataEventManager: PluginsDataControllerDelegate {
     
     // MARK: Handlers
     
-    func addPluginWasAddedHandler(_ handler: @escaping (_ plugin: Plugin) -> Void) {
+    func add(pluginWasAddedHandler handler: @escaping (_ plugin: Plugin) -> Void) {
         pluginWasAddedHandlers.append(handler)
     }
     
-    func addPluginWasRemovedHandler(_ handler: @escaping (_ plugin: Plugin) -> Void) {
+    func add(pluginWasRemovedHandler handler: @escaping (_ plugin: Plugin) -> Void) {
         pluginWasRemovedHandlers.append(handler)
     }
     

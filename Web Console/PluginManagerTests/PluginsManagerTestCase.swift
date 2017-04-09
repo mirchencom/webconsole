@@ -18,12 +18,12 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         super.setUp()
         
         // Create the plugin manager
-        let pluginsManager = PluginsManager([pluginsDirectoryPath],
+        let pluginsManager = PluginsManager(paths: [pluginsDirectoryPath],
             duplicatePluginDestinationDirectoryURL: duplicatePluginDestinationDirectoryURL)
         PluginsManager.setOverrideSharedInstance(pluginsManager)
 
         // Set the plugin
-        plugin = pluginsManager.pluginWithName(testPluginName)
+        plugin = pluginsManager.plugin(forName: testPluginName)
         plugin.editable = true
         XCTAssertNotNil(plugin, "The temporary plugin should not be nil")
 
@@ -53,10 +53,10 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         return createdPlugin
     }
  
-    func newPluginFromPluginWithConfirmation(_ plugin: Plugin) -> Plugin {
+    func duplicateWithConfirmation(_ plugin: Plugin) -> Plugin {
         var createdPlugin: Plugin!
         let createdPluginExpectation = expectation(description: "Create new plugin")
-        PluginsManager.sharedInstance.newPluginFromPlugin(plugin) { (newPlugin, error) -> Void in
+        PluginsManager.sharedInstance.duplicate(plugin) { (newPlugin, error) -> Void in
             XCTAssertNil(error, "The error should be nil")
             createdPlugin = newPlugin
             createdPluginExpectation.fulfill()
@@ -65,15 +65,15 @@ class PluginsManagerTestCase: TemporaryPluginsTestCase {
         return createdPlugin
     }
     
-    func movePluginToTrashAndCleanUpWithConfirmation(_ plugin: Plugin) {
+    func moveToTrashAndCleanUpWithConfirmation(_ plugin: Plugin) {
         // Confirm that a matching directory does not exist in the trash
         let trashedPluginDirectoryName = plugin.bundle.bundlePath.lastPathComponent
-        let trashedPluginPath = Directory.trash.path().stringByAppendingPathComponent(trashedPluginDirectoryName)
+        let trashedPluginPath = Directory.trash.path().appendingPathComponent(trashedPluginDirectoryName)
         let beforeExists = FileManager.default.fileExists(atPath: trashedPluginPath)
         XCTAssertTrue(!beforeExists, "The item should exist")
         
         // Trash the plugin
-        PluginsManager.sharedInstance.movePluginToTrash(plugin)
+        PluginsManager.sharedInstance.moveToTrash(plugin)
         
         // Confirm that the directory does exist in the trash now
         var isDir: ObjCBool = false
