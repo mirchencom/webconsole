@@ -88,17 +88,17 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
                 fileWasCreatedOrModifiedExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.createFileAtPath(path)
+        SubprocessFileSystemModifier.createFile(atPath: path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func createDirectoryAtPathWithConfirmation(path: String) {
+    func createDirectoryWithConfirmation(atPath: path: String) {
         let directoryWasCreatedOrModifiedExpectation = expectation(description: "Directory was created")
         directoryWatcherEventManager?.addDirectoryWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasCreatedOrModifiedExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.createDirectoryAtPath(path)
+        SubprocessFileSystemModifier.createDirectory(atPath: path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
@@ -110,7 +110,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
                 fileWasModifiedExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.writeToFileAtPath(path, contents: testFileContents)
+        SubprocessFileSystemModifier.writeToFile(atPath: path, contents: testFileContents)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
@@ -184,7 +184,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         let testFilePath = testDirectoryPath.appendingPathComponent(testFilename)
 
         // Test Create Directory
-        createDirectoryAtPathWithConfirmation(testDirectoryPath)
+        createDirectoryWithConfirmation(atPath: testDirectoryPath)
         
         // Test Create File
         createFileWithConfirmation(atPath: testFilePath)
@@ -199,7 +199,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         removeDirectoryWithConfirmation(atPath: testDirectoryPath)
 
         // Test Create Directory Again
-        createDirectoryAtPathWithConfirmation(testDirectoryPath)
+        createDirectoryWithConfirmation(atPath: testDirectoryPath)
         
         // Clean up
 
@@ -211,7 +211,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         let testDirectoryPath = temporaryDirectoryURL.path.appendingPathComponent(testDirectoryName)
             
         // Test Create
-        createDirectoryAtPathWithConfirmation(testDirectoryPath)
+        createDirectoryWithConfirmation(atPath: testDirectoryPath)
 
         // Test Move
         let testDirectoryPathTwo = testDirectoryPath.deletingLastPathComponent.appendingPathComponent(testDirectoryNameTwo)
@@ -231,7 +231,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         let testFilePath = testDirectoryPath.appendingPathComponent(testFilename)
 
         // Test Create Directory
-        createDirectoryAtPathWithConfirmation(testDirectoryPath)
+        createDirectoryWithConfirmation(atPath: testDirectoryPath)
         
         // Test Create File
         createFileWithConfirmation(atPath: testFilePath)
@@ -260,7 +260,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         let testDirectoryPath = temporaryDirectoryURL.path.appendingPathComponent(testDirectoryName)
             
         // Test Create Directory
-        createDirectoryAtPathWithConfirmation(testDirectoryPath)
+        createDirectoryWithConfirmation(atPath: testDirectoryPath)
 
         // Remove Directory
         removeDirectoryWithConfirmation(atPath: testDirectoryPath)
@@ -282,7 +282,7 @@ class WCLDirectoryWatcherDirectoryTests: WCLDirectoryWatcherTestCase {
         removeFileWithConfirmation(atPath: testDirectoryPath)
         
         // Test Create Directory
-        createDirectoryAtPathWithConfirmation(testDirectoryPath)
+        createDirectoryWithConfirmation(atPath: testDirectoryPath)
         
         // Remove Directory
         removeDirectoryWithConfirmation(atPath: testDirectoryPath)
@@ -362,7 +362,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         FileManager.default.createFile(atPath: testFilePathTwo, contents: contentsData, attributes: nil)
         
         // Create file
-        SubprocessFileSystemModifier.createFileAtPath(testFilePath)
+        SubprocessFileSystemModifier.createFile(atPath: testFilePath)
         
         // Wait for expectation
         waitForExpectations(timeout: defaultTimeout, handler: nil)
@@ -416,7 +416,7 @@ class WCLDirectoryWatcherFileTests: WCLDirectoryWatcherTestCase {
         }
             
         // Create file
-        SubprocessFileSystemModifier.createFileAtPath(testFilePath)
+        SubprocessFileSystemModifier.createFile(atPath: testFilePath)
             
         // Wait for expectation
         waitForExpectations(timeout: defaultTimeout, handler: nil)

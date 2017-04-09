@@ -273,7 +273,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
                 expectationTwo.fulfill()
             }
         })
-        SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: infoDictionaryContents)
+        SubprocessFileSystemModifier.writeToFile(atPath: pluginInfoDictionaryPath, contents: infoDictionaryContents)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 
@@ -295,7 +295,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
                 expectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: testFileContents)
+        SubprocessFileSystemModifier.writeToFile(atPath: pluginInfoDictionaryPath, contents: testFileContents)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
         
         // Remove the info dictionary
@@ -305,7 +305,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
                 expectationTwo.fulfill()
             }
         })
-        SubprocessFileSystemModifier.writeToFileAtPath(pluginInfoDictionaryPath, contents: infoDictionaryContents)
+        SubprocessFileSystemModifier.writeToFile(atPath: pluginInfoDictionaryPath, contents: infoDictionaryContents)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 }

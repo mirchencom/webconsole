@@ -11,10 +11,10 @@ import Cocoa
 class SubprocessFileSystemModifier {
 
     // MARK: createFile
-    class func createFileAtPath(path: String) {
-        createFileAtPath(path, handler: nil)
+    class func createFile(atPath path: String) {
+        createFile(atPath: path, handler: nil)
     }
-    class func createFileAtPath(path: String, handler: ((Void) -> Void)?) {
+    class func createFile(atPath path: String, handler: ((Void) -> Void)?) {
         let task = Process()
         task.launchPath = "/usr/bin/touch"
         task.arguments = [path]
@@ -22,10 +22,10 @@ class SubprocessFileSystemModifier {
     }
 
     // MARK: createDirectory
-    class func createDirectoryAtPath(path: String) {
-        createDirectoryAtPath(path, handler: nil)
+    class func createDirectory(atPath path: String) {
+        createDirectory(atPath: path, handler: nil)
     }
-    class func createDirectoryAtPath(path: String, handler: ((Void) -> Void)?) {
+    class func createDirectory(atPath path: String, handler: ((Void) -> Void)?) {
         let task = Process()
         task.launchPath = "/bin/mkdir"
         task.arguments = [path]
@@ -33,10 +33,10 @@ class SubprocessFileSystemModifier {
     }
 
     // MARK: removeFile
-    class func removeFileAtPath(path: String) {
+    class func removeFile(atPath path: String) {
         removeFileAtPath(path, handler: nil)
     }
-    class func removeFileAtPath(path: String, handler: ((Void) -> Void)?) {
+    class func removeFile(atPath path: String, handler: ((Void) -> Void)?) {
         let pathAsNSString: NSString = path as NSString
         if pathAsNSString.range(of: "*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")
@@ -146,7 +146,7 @@ class SubprocessFileSystemModifier {
         task.launch()
     }
 
-    class func writeToFileAtPath(path: String, contents: String) {
+    class func writeToFile(atPath path: String, contents: String) {
         let echoTask = Process()
         echoTask.launchPath = "/bin/echo"
         echoTask.arguments = [contents]

@@ -130,7 +130,7 @@ extension PluginsDataControllerEventTestCase {
             }
         })
         
-        SubprocessFileSystemModifier.writeToFileAtPath(infoDictionaryPath, contents: newInfoDictionaryContents)
+        SubprocessFileSystemModifier.writeToFile(atPath: infoDictionaryPath, contents: newInfoDictionaryContents)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
 }
