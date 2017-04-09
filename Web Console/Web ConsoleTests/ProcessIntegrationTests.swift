@@ -129,7 +129,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // TODO: Migrate to `killProcessInfo` when a better implementation
         // of `killProcessInfo` exists. Right now, the completion handler of
         // `killProcessInfo` can fire before the process has been terminated!
-        waitForTermination(of: tasks)
+        wait(forTerminationOf: tasks)
         
         // Confirm the processes have been removed from the `ProcessManager`
         
@@ -262,7 +262,7 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // TODO: Migrate to `killProcessInfo` when a better implementation
         // of `killProcessInfo` exists. Really the completion handler of 
         // `killProcessInfo` not fire until the process has been terminated.
-        waitForTermination(of: [task])
+        wait(forTerminationOf: [task])
         
         // Confirm the process has been removed from the `ProcessManager`
 
