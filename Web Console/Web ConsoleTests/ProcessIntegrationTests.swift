@@ -254,8 +254,6 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         
         let killProcessExpectation = expectation(description: "Kill process")
         ProcessKiller.kill([runningProcessInfo]) { success in
-            NSLog("runningProcessInfo = \(runningProcessInfo)")
-            
             XCTAssertTrue(success)
             killProcessExpectation.fulfill()
         }
@@ -270,8 +268,6 @@ class ProcessIntegrationTests: ProcessManagerTestCase {
         // Confirm the process has been removed from the `ProcessManager`
 
         let processInfosTwo = processManager.processInfos()
-        NSLog("processInfosTwo = \(processInfosTwo)")
-        
         XCTAssertEqual(processInfosTwo.count, 0)
         XCTAssertNil(processManager.processInfo(forIdentifier: task.processIdentifier))
 
