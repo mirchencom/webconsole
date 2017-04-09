@@ -49,7 +49,7 @@ class PluginsDirectoryEventManager: PluginsDirectoryManagerDelegate {
         pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandlers.append(handler)
     }
     
-    func addPluginInfoDictionaryWasRemovedAtPluginPathHandler(handler: @escaping (_ path: String) -> Void) {
+    func add(pluginInfoDictionaryWasRemovedAtPluginPathHandler handler: @escaping (_ path: String) -> Void) {
         pluginInfoDictionaryWasRemovedAtPluginPathHandlers.append(handler)
     }
     
@@ -61,7 +61,7 @@ extension PluginsDirectoryManagerTests {
     
     func movePluginAtPathWithConfirmation(pluginPath: String, destinationPluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == pluginPath) {
                 removeExpectation.fulfill()
             }
@@ -82,7 +82,7 @@ extension PluginsDirectoryManagerTests {
 
     func movePluginAtPathWithConfirmation(pluginPath: String, toUnwatchedDestinationPluginPath destinationPluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == pluginPath) {
                 removeExpectation.fulfill()
             }
@@ -129,7 +129,7 @@ extension PluginsDirectoryManagerTests {
     
     func removePluginAtPathWithConfirmation(pluginPath: String) {
         let removeExpectation = expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
             self.pluginsDirectoryManager.delegate = nil // Ignore subsequent remove events
             if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == pluginPath) {
                 removeExpectation.fulfill()
@@ -227,7 +227,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         
         // Move
         let expectation = self.expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.pluginPath) {
                 expectation.fulfill()
             }
@@ -258,7 +258,7 @@ class PluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         
         // Remove the info dictionary
         let expectation = self.expectation(description: "Info dictionary was removed")
-        pluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ (path) -> Void in
+        pluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { (path) -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(path as NSString) == self.pluginPath) {
                 expectation.fulfill()
             }

@@ -48,7 +48,7 @@ class FilesAndPluginsDirectoryEventManager: PluginsDirectoryEventManager, FilesA
         super.init()
     }
 
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String) {
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, fileWasCreatedOrModifiedAtPath path: String) {
         assert(fileWasCreatedOrModifiedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (fileWasCreatedOrModifiedAtPathHandlers.count > 0) {
@@ -57,7 +57,7 @@ class FilesAndPluginsDirectoryEventManager: PluginsDirectoryEventManager, FilesA
         }
     }
     
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String) {
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, directoryWasCreatedOrModifiedAtPath path: String) {
         assert(directoryWasCreatedOrModifiedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (directoryWasCreatedOrModifiedAtPathHandlers.count > 0) {
@@ -66,7 +66,7 @@ class FilesAndPluginsDirectoryEventManager: PluginsDirectoryEventManager, FilesA
         }
     }
     
-    func testPluginsDirectoryManager(filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, itemWasRemovedAtPath path: String) {
+    func testPluginsDirectoryManager(_ filesAndPluginsDirectoryManager: FilesAndPluginsDirectoryManager, itemWasRemovedAtPath path: String) {
         assert(itemWasRemovedAtPathHandlers.count > 0, "There should be at least one handler")
         
         if (itemWasRemovedAtPathHandlers.count > 0) {
@@ -95,7 +95,7 @@ extension FilesAndPluginsDirectoryManagerTests {
     
     func createPluginInfoDictionaryWasRemovedExpectation(atPluginPath path: String) {
         let pluginInfoDictionaryWasRemovedExpectation = expectation(description: "Plugin info dictionary was removed")
-        fileAndPluginsDirectoryEventManager.addPluginInfoDictionaryWasRemovedAtPluginPathHandler({ returnedPath -> Void in
+        fileAndPluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 pluginInfoDictionaryWasRemovedExpectation.fulfill()
             }
