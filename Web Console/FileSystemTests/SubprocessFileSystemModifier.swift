@@ -70,7 +70,7 @@ class SubprocessFileSystemModifier {
 
     // MARK: copyDirectory
     class func copyDirectory(atPath path: String, toPath destinationPath: String) {
-        copyDirectoryAtPath(path, toPath: destinationPath, handler: nil)
+        copyDirectory(atPath: path, toPath: destinationPath, handler: nil)
     }
     class func copyDirectory(atPath path: String, toPath destinationPath: String, handler: ((Void) -> Void)?) {
         let pathAsNSString: NSString = path as NSString
@@ -119,7 +119,7 @@ class SubprocessFileSystemModifier {
 
     // MARK: Helpers
 
-    class func run(task: Process, handler: ((Void) -> Void)?) {
+    class func run(_ task: Process, handler: ((Void) -> Void)?) {
         task.standardOutput = Pipe()
         (task.standardOutput! as AnyObject).fileHandleForReading.readabilityHandler = { (file: FileHandle!) -> Void in
             let data = file.availableData
