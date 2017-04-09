@@ -137,7 +137,7 @@ extension PluginsDirectoryManagerTests {
         })
 
         let deleteExpectation = expectation(description: "Delete finished")
-        SubprocessFileSystemModifier.removeDirectoryAtPath(pluginPath, handler: {
+        SubprocessFileSystemModifier.removeDirectory(atPath: pluginPath, handler: {
             deleteExpectation.fulfill()
         })
         waitForExpectations(timeout: defaultTimeout, handler: nil)

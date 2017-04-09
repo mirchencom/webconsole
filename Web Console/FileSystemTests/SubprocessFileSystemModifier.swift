@@ -49,10 +49,10 @@ class SubprocessFileSystemModifier {
     }
     
     // MARK: removeDirectory
-    class func removeDirectoryAtPath(path: String) {
-        removeDirectoryAtPath(path, handler: nil)
+    class func removeDirectory(atPath path: String) {
+        removeDirectory(atPath: path, handler: nil)
     }
-    class func removeDirectoryAtPath(path: String, handler: ((Void) -> Void)?) {
+    class func removeDirectory(atPath path: String, handler: ((Void) -> Void)?) {
         let pathAsNSString: NSString = path as NSString
         if pathAsNSString.range(of: "*").location != NSNotFound {
             assert(false, "The path should not contain a wildcard")

@@ -157,7 +157,7 @@ extension FilesAndPluginsDirectoryManagerTests {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.removeDirectoryAtPath(path)
+        SubprocessFileSystemModifier.removeDirectory(atPath: path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     

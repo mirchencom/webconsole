@@ -81,7 +81,7 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
     }
 
     // MARK: Create
-    func createFileWithConfirmation(atPath: path: String) {
+    func createFileWithConfirmation(atPath path: String) {
         let fileWasCreatedOrModifiedExpectation = expectation(description: "File was created")
         directoryWatcherEventManager?.addFileWasCreatedOrModifiedAtPathHandler({ returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
@@ -125,14 +125,14 @@ class WCLDirectoryWatcherTestCase: TemporaryDirectoryTestCase {
         SubprocessFileSystemModifier.removeFileAtPath(path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
-    func removeDirectoryWithConfirmation(atPath: path: String) {
+    func removeDirectoryWithConfirmation(atPath path: String) {
         let directoryWasRemovedExpectation = expectation(description: "Directory was removed")
         directoryWatcherEventManager?.addItemWasRemovedAtPathHandler({ returnedPath -> Void in
             if (type(of: self).resolveTemporaryDirectoryPath(returnedPath as NSString) == path) {
                 directoryWasRemovedExpectation.fulfill()
             }
         })
-        SubprocessFileSystemModifier.removeDirectoryAtPath(path)
+        SubprocessFileSystemModifier.removeDirectory(atPath: path)
         waitForExpectations(timeout: defaultTimeout, handler: nil)
     }
     
