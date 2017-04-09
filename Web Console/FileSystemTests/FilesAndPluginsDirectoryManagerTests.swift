@@ -93,7 +93,7 @@ extension FilesAndPluginsDirectoryManagerTests {
 
     // MARK: Expectation Helpers
     
-    func createPluginInfoDictionaryWasRemovedExpectation(atPluginPath path: String) {
+    func createPluginInfoDictionaryWasRemovedExpectation(forPluginPath path: String) {
         let pluginInfoDictionaryWasRemovedExpectation = expectation(description: "Plugin info dictionary was removed")
         fileAndPluginsDirectoryEventManager.add(pluginInfoDictionaryWasRemovedAtPluginPathHandler: { returnedPath -> Void in
             if (type(of: self).resolve(temporaryDirectoryPath: returnedPath as NSString) == path) {
@@ -102,7 +102,7 @@ extension FilesAndPluginsDirectoryManagerTests {
         })
     }
     
-    func createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath path: String) {
+    func createPluginInfoDictionaryWasCreatedOrModifiedExpectation(forPluginPath path: String) {
         let pluginInfoDictionaryWasCreatedOrModifiedExpectation = expectation(description: "Plugin info dictionary was created or modified")
         fileAndPluginsDirectoryEventManager.add(pluginInfoDictionaryWasCreatedOrModifiedAtPluginPathHandler: { returnedPath -> Void in
             if (type(of: self).resolve(temporaryDirectoryPath: returnedPath as NSString) == path) {
@@ -277,7 +277,7 @@ extension FilesAndPluginsDirectoryManagerTests {
                 createDirectoryWithConfirmation(atPath: testPluginResourcesDirectoryPath)
                 createFileWithConfirmation(atPath: testPluginResourcesFilePath)
                 createFileWithConfirmation(atPath: testPluginContentsFilePath)
-                createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath: testPluginDirectoryPath)
+                createPluginInfoDictionaryWasCreatedOrModifiedExpectation(forPluginPath: testPluginDirectoryPath)
                 createFileWithConfirmation(atPath: testInfoDictionaryFilePath)
             }
         } else {
@@ -289,17 +289,17 @@ extension FilesAndPluginsDirectoryManagerTests {
                     XCTAssertTrue(false, "Removing the directory should succeed. \(error)")
                 }
             } else {
-                createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+                createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
                 removeFileWithConfirmation(atPath: testInfoDictionaryFilePath)
 
                 removeFileWithConfirmation(atPath: testPluginResourcesFilePath)
                 removeDirectoryWithConfirmation(atPath: testPluginResourcesDirectoryPath)
                 removeFileWithConfirmation(atPath: testPluginContentsFilePath)
 
-                createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+                createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
                 removeDirectoryWithConfirmation(atPath: testPluginContentsDirectoryPath)
                 
-                createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+                createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
                 removeDirectoryWithConfirmation(atPath: testPluginDirectoryPath)
             }
         }
@@ -357,13 +357,13 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
         // Create an info dictionary in the contents directory, this should cause a callback
         let testInfoDictionaryFilePath = testPluginContentsDirectoryPath.appendingPathComponent(testPluginInfoDictionaryFilename)
-        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(forPluginPath: testPluginDirectoryPath)
         createFileWithConfirmation(atPath: testInfoDictionaryFilePath)
         
         // Clean up
         
         // Remove the info dictionary in the contents directory, this should cause a callback
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         removeFileWithConfirmation(atPath: testInfoDictionaryFilePath)
 
         // Remove the file in the resource directory, this should not cause a callback
@@ -377,7 +377,7 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
         // Remove the contents directory, this should cause a callback
         // because this could be the delete after move of a valid plugin's contents directory
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         removeDirectoryWithConfirmation(atPath: testPluginContentsDirectoryPath)
         
         // Remove the file in the plugins directory, this should not cause a callback
@@ -386,7 +386,7 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         
         // Remove the directory in the plugins directory, this should cause a callback
         // because this could be the delete after move of a valid plugin
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         removeDirectoryWithConfirmation(atPath: testPluginDirectoryPath)
     }
 
@@ -407,7 +407,7 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         
         // Remove the invalid contents directory in the plugins path, this should cause a callback
         // because this could be the delete after move of a valid plugin
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testInvalidPluginContentsDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testInvalidPluginContentsDirectoryPath)
         removeDirectoryWithConfirmation(atPath: testInvalidPluginContentsDirectoryPath)
     }
 
@@ -425,12 +425,12 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         
         // Remove the contents directory, this should cause a callback
         // because this could be the delete after move of a valid plugin's contents directory
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         removeFileWithConfirmation(atPath: testPluginContentsFilePath)
     
         // Remove the directory in the plugins directory, this should cause a callback
         // because this could be the delete after move of a valid plugin
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         removeDirectoryWithConfirmation(atPath: testPluginDirectoryPath)
     }
 
@@ -450,17 +450,17 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         // Clean up
 
         // Create a directory for the info dictionary, this should cause a callback
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         removeDirectoryWithConfirmation(atPath: testPluginInfoDictionaryDirectoryPath)
         
         // Remove the contents directory, this should cause a callback
         // because this could be the delete after move of a valid plugin's contents directory
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         removeDirectoryWithConfirmation(atPath: testPluginContentsDirectoryPath)
         
         // Remove the directory in the plugins directory, this should cause a callback
         // because this could be the delete after move of a valid plugin
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         removeDirectoryWithConfirmation(atPath: testPluginDirectoryPath)
     }
 
@@ -485,11 +485,11 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         let testPluginContentsDirectoryPath = testPluginDirectoryPath.appendingPathComponent(testPluginContentsDirectoryName)
         let testRenamedPluginContentsDirectoryPath = testPluginDirectoryPath.appendingPathComponent(testDirectoryName)
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testPluginContentsDirectoryPath, destinationPath: testRenamedPluginContentsDirectoryPath)
         
         // Clean up
-        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(forPluginPath: testPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testRenamedPluginContentsDirectoryPath, destinationPath: testPluginContentsDirectoryPath)
 
         removeValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
@@ -500,13 +500,13 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
 
         let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         let testRenamedPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryNameTwo)
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
-        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath: testRenamedPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(forPluginPath: testRenamedPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testPluginDirectoryPath, destinationPath: testRenamedPluginDirectoryPath)
         
         // Clean up
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testRenamedPluginDirectoryPath)
-        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testRenamedPluginDirectoryPath)
+        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(forPluginPath: testPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testRenamedPluginDirectoryPath, destinationPath: testPluginDirectoryPath)
 
         removeValidPluginHierarchyAtPathWithConfirmation(pluginsDirectoryPath)
@@ -518,11 +518,11 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         // Move from unwatched directory
         let testPluginDirectoryPath = temporaryDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         let testMovedPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
-        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath: testMovedPluginDirectoryPath)
+        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(forPluginPath: testMovedPluginDirectoryPath)
         moveDirectoryAtUnwatchedPathWithConfirmation(testPluginDirectoryPath, destinationPath: testMovedPluginDirectoryPath)
 
         // Move to unwatched directory
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testMovedPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testMovedPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testMovedPluginDirectoryPath, toUnwatchedDestinationPath: testPluginDirectoryPath)
 
         // Clean up
@@ -585,11 +585,11 @@ class FilesAndPluginsDirectoryManagerTests: TemporaryPluginsTestCase {
         let testPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(testPluginDirectoryName)
         let movedPluginDirectoryFilename = testPluginDirectoryName.deletingPathExtension
         let movedPluginDirectoryPath = pluginsDirectoryPath.appendingPathComponent(movedPluginDirectoryFilename)
-        createPluginInfoDictionaryWasRemovedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasRemovedExpectation(forPluginPath: testPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(testPluginDirectoryPath, destinationPath: movedPluginDirectoryPath)
 
         // Move the directory back, re-adding the file extension, this should cause a callback
-        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(atPluginPath: testPluginDirectoryPath)
+        createPluginInfoDictionaryWasCreatedOrModifiedExpectation(forPluginPath: testPluginDirectoryPath)
         moveDirectoryAtPathWithConfirmation(movedPluginDirectoryPath, destinationPath: testPluginDirectoryPath)
 
         // Clean up
