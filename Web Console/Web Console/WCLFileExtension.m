@@ -73,7 +73,7 @@ static void *WCLFileExtensionContext;
     NSString *identifier = [self.fileExtensionPluginDictionary objectForKey:kFileExtensionPluginIdentifierKey];
 
     if (identifier) {
-        _selectedPlugin = [[PluginsManager sharedInstance] pluginFor:identifier];
+        _selectedPlugin = [[PluginsManager sharedInstance] pluginForName:identifier];
     }
     
     if (!_selectedPlugin) {

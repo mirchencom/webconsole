@@ -65,7 +65,7 @@
     
     if ([value isKindOfClass:[NSString class]]) {
         NSString *pluginName = (NSString *)value;
-        return [[PluginsManager sharedInstance] pluginFor:pluginName];
+        return [[PluginsManager sharedInstance] pluginForName:pluginName];
     }
 
     return nil;

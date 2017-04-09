@@ -78,7 +78,7 @@
     return nil;
 }
 
-- (Plugin *)pluginWithName:(NSString *)name
+- (Plugin *)pluginForName:(NSString *)name
 {
     NSAssert(NO, @"Implemented in superclass");
     return nil;

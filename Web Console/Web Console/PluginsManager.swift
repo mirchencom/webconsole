@@ -50,7 +50,7 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
         return pluginsController.object(forKey: name) as? Plugin
     }
     
-    func pluginWithIdentifier(identifier: String) -> Plugin? {
+    func plugin(withIdentifier: String) -> Plugin? {
         guard let allPlugins = plugins() as? [Plugin] else {
             return nil
         }
@@ -122,12 +122,12 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     // MARK: Shared Resources
 
     func sharedResourcesPath() -> String? {
-        let plugin = self.plugin(for: sharedResourcesPluginName)
+        let plugin = self.plugin(forName: sharedResourcesPluginName)
         return plugin?.resourcePath
     }
 
     func sharedResourcesURL() -> URL? {
-        let plugin = self.plugin(for: sharedResourcesPluginName)
+        let plugin = self.plugin(forName: sharedResourcesPluginName)
         return plugin?.resourceURL as URL?
     }
 }

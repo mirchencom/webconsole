@@ -66,7 +66,7 @@
 
 + (BOOL)isUniqueName:(NSString *)name forPlugin:(WCLPlugin *)plugin
 {
-    Plugin *existingPlugin = [self.pluginsManager pluginFor:name];
+    Plugin *existingPlugin = [self.pluginsManager pluginForName:name];
     
     if (!existingPlugin) {
         return YES;
