@@ -127,7 +127,7 @@ class SplitWebViewController: NSSplitViewController {
         }
         
         if logWebViewController.plugin == nil {
-            if let logPlugin = delegate?.logplugin(forName: self) {
+            if let logPlugin = delegate?.logPlugin(for: self) {
                 logWebViewController.run(logPlugin,
                     withArguments: nil,
                     inDirectoryPath: nil,

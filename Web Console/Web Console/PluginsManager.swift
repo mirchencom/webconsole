@@ -46,11 +46,11 @@ class PluginsManager: WCLPluginsManager, PluginsDataControllerDelegate {
     
     // MARK: Accessing Plugins
     
-    func plugin(for name: String) -> Plugin? {
+    func plugin(forName name: String) -> Plugin? {
         return pluginsController.object(forKey: name) as? Plugin
     }
     
-    func plugin(withIdentifier: String) -> Plugin? {
+    func plugin(withIdentifier identifier: String) -> Plugin? {
         guard let allPlugins = plugins() as? [Plugin] else {
             return nil
         }

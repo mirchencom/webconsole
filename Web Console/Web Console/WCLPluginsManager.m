@@ -40,7 +40,7 @@
     }
 
     if (!plugin) {
-        plugin = [self pluginWithName:kInitialDefaultNewPluginName];
+        plugin = [self pluginForName:kInitialDefaultNewPluginName];
     }
     
     _defaultNewPlugin = plugin;
