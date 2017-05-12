@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum FileSystemError: Error {
-    case fileExistsForDirectoryError
-}
-
 enum RunCommandPathErrorCode: Int {
     case unknown = 100, unexecutable, exception
 }
