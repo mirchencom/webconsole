@@ -80,6 +80,7 @@
 		45B8148318161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B8148218161A360006AA05 /* WCLSplitWebWindowControllerTestsHelper.m */; };
 		45B814861816297C0006AA05 /* WCLTaskTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B814851816297C0006AA05 /* WCLTaskTestsHelper.m */; };
 		45BE8A591A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */; };
+		45CE43FB1EC54D1A003E6013 /* Plugin+OrderedWindows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CE43FA1EC54D1A003E6013 /* Plugin+OrderedWindows.swift */; };
 		45D150981C26053600E2A6D5 /* NSError+WCLTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */; };
 		45D150991C26231F00E2A6D5 /* NSError+WCLTaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */; };
 		45D1509B1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1509A1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift */; };
@@ -276,6 +277,7 @@
 		45BE8A581A8858A000B2C5E8 /* WCLTestPluginManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLTestPluginManagerTestCase.m; sourceTree = "<group>"; };
 		45BE8A5A1A8858B300B2C5E8 /* WCLTestPluginManagerTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCLTestPluginManagerTestCase.h; sourceTree = "<group>"; };
 		45C3E8CA1BEED7B1000EDB16 /* WCLApplicationTerminationHelper+Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WCLApplicationTerminationHelper+Tests.h"; sourceTree = "<group>"; };
+		45CE43FA1EC54D1A003E6013 /* Plugin+OrderedWindows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Plugin+OrderedWindows.swift"; sourceTree = "<group>"; };
 		45D150971C26053600E2A6D5 /* NSError+WCLTaskRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+WCLTaskRunner.swift"; sourceTree = "<group>"; };
 		45D1509A1C27288F00E2A6D5 /* WCLTaskRunner+TaskResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WCLTaskRunner+TaskResult.swift"; sourceTree = "<group>"; };
 		45D1509C1C2728C400E2A6D5 /* WCLTaskRunnerTaskResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCLTaskRunnerTaskResultTests.swift; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 				456241101A8991A70047F085 /* WCLAppleScriptPluginWrapper.h */,
 				456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */,
 				456782FD1EBFBDC600C9EC4A /* PluginManager+Initialization.swift */,
+				45CE43FA1EC54D1A003E6013 /* Plugin+OrderedWindows.swift */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45CE43FB1EC54D1A003E6013 /* Plugin+OrderedWindows.swift in Sources */,
 				45B0FF401B75805A008EC6EC /* SplitWebViewController.swift in Sources */,
 				45F6F87E1C0A981D005A81C9 /* NSError+Errors.swift in Sources */,
 				4530B0DC1736E2A6000A52E2 /* main.m in Sources */,
