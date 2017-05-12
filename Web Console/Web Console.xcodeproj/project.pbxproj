@@ -38,7 +38,7 @@
 		4562410F1A88683C0047F085 /* WCLSplitWebWindowControllerPluginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4562410E1A88683C0047F085 /* WCLSplitWebWindowControllerPluginTests.m */; };
 		456241121A8991A70047F085 /* WCLAppleScriptPluginWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */; };
 		45649300191C657800BA048E /* IRB.wcplugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 456492FE191C656D00BA048E /* IRB.wcplugin */; };
-		456782FE1EBFBDC600C9EC4A /* PluginManager+Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456782FD1EBFBDC600C9EC4A /* PluginManager+Initialization.swift */; };
+		456782FE1EBFBDC600C9EC4A /* PluginsManager+Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456782FD1EBFBDC600C9EC4A /* PluginsManager+Initialization.swift */; };
 		45729EC41A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */; };
 		4574725817DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4574725717DCCD8500AFD1D9 /* WCLApplicationTerminationHelper.m */; };
 		4578EAF21C224D300033FC86 /* TaskRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4578EAF11C224D300033FC86 /* TaskRunner.swift */; };
@@ -206,7 +206,7 @@
 		456241101A8991A70047F085 /* WCLAppleScriptPluginWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCLAppleScriptPluginWrapper.h; sourceTree = "<group>"; };
 		456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLAppleScriptPluginWrapper.m; sourceTree = "<group>"; };
 		456492FE191C656D00BA048E /* IRB.wcplugin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = IRB.wcplugin; sourceTree = "<group>"; };
-		456782FD1EBFBDC600C9EC4A /* PluginManager+Initialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PluginManager+Initialization.swift"; sourceTree = "<group>"; };
+		456782FD1EBFBDC600C9EC4A /* PluginsManager+Initialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PluginsManager+Initialization.swift"; sourceTree = "<group>"; };
 		45729EB81A89A270001ECC4C /* PreferencesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PreferencesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45729EBB1A89A270001ECC4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45729EC31A89A2BF001ECC4C /* WCLPreferencesWindowControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCLPreferencesWindowControllerTests.m; sourceTree = "<group>"; };
@@ -598,7 +598,7 @@
 				453AD8AE188235CC0039A3A9 /* WCLTaskRunner.m */,
 				456241101A8991A70047F085 /* WCLAppleScriptPluginWrapper.h */,
 				456241111A8991A70047F085 /* WCLAppleScriptPluginWrapper.m */,
-				456782FD1EBFBDC600C9EC4A /* PluginManager+Initialization.swift */,
+				456782FD1EBFBDC600C9EC4A /* PluginsManager+Initialization.swift */,
 				45CE43FA1EC54D1A003E6013 /* Plugin+OrderedWindows.swift */,
 			);
 			name = Plugins;
@@ -880,7 +880,7 @@
 				4596C0701793151A005FC51A /* NSApplication+AppleScript.m in Sources */,
 				45914E471A87E4E600E4BEFA /* WCLFileExtensionsController.m in Sources */,
 				45B375C3179B3CA7002BCEF6 /* NSTask+Termination.m in Sources */,
-				456782FE1EBFBDC600C9EC4A /* PluginManager+Initialization.swift in Sources */,
+				456782FE1EBFBDC600C9EC4A /* PluginsManager+Initialization.swift in Sources */,
 				456241121A8991A70047F085 /* WCLAppleScriptPluginWrapper.m in Sources */,
 				45B4FE471BB233B2007CB801 /* String+Paths.swift in Sources */,
 				45B375C6179B7517002BCEF6 /* WCLUserInterfaceTextHelper.m in Sources */,

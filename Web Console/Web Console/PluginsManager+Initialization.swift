@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension PluginManager {
+extension PluginsManager {
 
     class func setOverrideSharedInstance(_ pluginsManager: PluginsManager?) {
         Singleton.overrideSharedInstance = pluginsManager
@@ -29,6 +29,11 @@ extension PluginManager {
 
     
     convenience override init() {
-        self.init(paths: [Directory.builtInPlugins.path(), Directory.applicationSupportPlugins.path()], duplicatePluginDestinationDirectoryURL: Directory.applicationSupportPlugins.URL())
+        self.init(paths: [Directory.builtInPlugins.path(),
+                          Directory.applicationSupportPlugins.path()],
+                  duplicatePluginDestinationDirectoryURL: Directory.applicationSupportPlugins.URL()
+            copyTempDirectoryURL: Directory.caches.URL()
+            builtInPluginsPath: Directory.builtInPlugins.path(),
+            applicationSupportPluginsPath: Directory.applicationSupportPlugins.path())
     }
 }
