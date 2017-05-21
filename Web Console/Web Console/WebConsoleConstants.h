@@ -32,7 +32,6 @@
 #pragma mark - Plugins
 
 #define kPlugInExtension @"wcplugin"
-#define kPluginNameKey @"name"
 #define kLogPluginName @"Log"
 
 

@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Roben Kleene. All rights reserved.
 //
 
-let pluginNameKey = kPluginNameKey
 let applicationName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
 let pluginsDirectoryPathComponent = "PlugIns"
 let debugModeEnabledKey = kDebugModeEnabledKey
