@@ -18,7 +18,6 @@
 #define kFileExtensionToPluginKey @"WCLFileExtensionToPlugin"
 #define kFileExtensionEnabledKey @"enabled"
 #define kFileExtensionPluginIdentifierKey @"pluginIdentifier"
-#define kDefaultNewPluginIdentifierKey @"WCLDefaultNewPluginIdentifier"
 #define kDefaultPreferencesSelectedTabKey @"WCLPreferencesSelectedTab"
 #define kDebugModeEnabledKey @"WCLDebugModeEnabled"
 
