@@ -33,6 +33,27 @@
     return valid;
 }
 
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    NSString *name;
+    if ([*ioValue isKindOfClass:[NSString class]]) {
+        name = *ioValue;
+    }
+    
+    BOOL valid = [self nameIsValid:name];
+    if (!valid && outError) {
+        NSString *errorMessage = @"The plugin name must be unique, and can only contain alphanumeric characters, spaces, hyphens and underscores.";
+        NSString *errorString = NSLocalizedString(errorMessage, @"Invalid plugin name error.");
+        
+        NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: errorString};
+        *outError = [[NSError alloc] initWithDomain:kErrorDomain
+                                               code:kErrorCodeInvalidPlugin
+                                           userInfo:userInfoDict];
+    }
+    
+    return valid;
+}
+
 #pragma mark Name Public
 
 + (BOOL)nameContainsOnlyValidCharacters:(NSString *)name
