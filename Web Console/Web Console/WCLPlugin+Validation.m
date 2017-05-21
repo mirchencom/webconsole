@@ -10,6 +10,29 @@
 
 @implementation WCLPlugin (Validation)
 
+#pragma mark Validation
+
+- (BOOL)validateExtensions:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    NSArray *extensions;
+    if ([*ioValue isKindOfClass:[NSArray class]]) {
+        extensions = *ioValue;
+    }
+    
+    BOOL valid = [self extensionsAreValid:extensions];
+    if (!valid && outError) {
+        NSString *errorMessage = @"The file extensions must be unique, and can only contain alphanumeric characters.";
+        NSString *errorString = NSLocalizedString(errorMessage, @"Invalid file extensions error.");
+        
+        NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: errorString};
+        *outError = [[NSError alloc] initWithDomain:kErrorDomain
+                                               code:kErrorCodeInvalidPlugin
+                                           userInfo:userInfoDict];
+    }
+    
+    return valid;
+}
+
 #pragma mark Name Public
 
 + (BOOL)nameContainsOnlyValidCharacters:(NSString *)name
@@ -40,8 +63,6 @@
     return nil;
 }
 
-
-
 + (NSCharacterSet *)nameAllowedCharacterSet
 {
     NSMutableCharacterSet *allowedCharacterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@"_- "];
@@ -49,7 +70,6 @@
 
     return allowedCharacterSet;
 }
-
 
 #pragma mark File Extensions Public
 
