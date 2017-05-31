@@ -14,7 +14,6 @@ let showLogMenuItemTitle = "Show Log"
 let hideLogMenuItemTitle = "Hide Log"
 
 let defaultFileExtensionEnabled = false
-let initialDefaultNewPluginName = "HTML"
 let logErrorPrefix = "ERROR "
 let logMessagePrefix = "MESSAGE "
 
